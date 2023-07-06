@@ -6,7 +6,7 @@
         </button>
 
         <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
-        <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
+        <router-link class="nav-link gh" to="/Signup"><i class="fa fa-sign-in"></i></router-link>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
