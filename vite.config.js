@@ -5,8 +5,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  define: {
-    // global: {},
-  }
+  plugins: [
+    vue()
+  ],
+  define: process.env.NODE_ENV === 'development' ? { global: 'window' } : {}
 })
