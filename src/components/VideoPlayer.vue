@@ -26,10 +26,13 @@
     mounted() {
       this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
-      this.whereYouAt = this.player.currentTime();
-      console.log(this.whereYouAt);
-      this.player.fluid(true);
-      
+      this.duration = this.player.on('timeupdate', function() {
+        console.log(this.currentTime())
+        if(Math.round(this.currentTime())== 5) {
+          this.pause();
+          alert("Log In Start Learning")
+        }
+      })
       });
 
     },
