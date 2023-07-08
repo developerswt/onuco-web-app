@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card" style="width: 100%;">
-                        <!-- <video style="width: 100%;" class="card-image-top" controls><source src="../assets/images/preview.mp4" type="video/mp4"></video> -->
-                        <video-player :options="videoOptions" v-if="videoOptions.sources[0].src !== '' " />
+                        <!-- <video style="width: 100%;" v-if="videoOptions.sources[0].src !== '' " class="card-image-top" controls><source src="../assets/images/preview.mp4" type="video/mp4"></video> -->
+                        <video-player :options="videoOptions"  />
                     </div>   
                     <!-- <button @click="clickButton()">click</button>             -->
                 </div>
@@ -217,7 +217,7 @@ export default {
                 sources: [
                     {  
                         src:
-                            "",
+                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
                             type: "video/mp4"
                     },
                 ],
@@ -258,7 +258,7 @@ export default {
             console.log(response);
           // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
             this.responseFromS3 = await response.Body.transformToString("base64");
-            this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
+            //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
             console.log(this.videoOptions);
             this.imageFromS3 = "data:image/jpeg;base64,"+this.responseFromS3;
             console.log(this.responseFromS3);

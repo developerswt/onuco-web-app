@@ -1,17 +1,13 @@
 <template>
-    <div class="pt-5 mb-5">
-       
-    </div>
+    <div class="pt-5 mt-5">
 
-    <div class="mb-5 pt-5">
-      
     </div>
    
     <!-- <video v-if="imageFromS3" width="320" duration="" id="video" height="240" controls allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
       <source :src="imageFromS3" type="video/mp4">
     </video> -->
    
-    <video-player :options="videoOptions" id="myVid" v-if="videoOptions.sources[0].src !== '' " />
+    <video-player :options="videoOptions" id="myVid" />
     <img :src="imageFromS3" alt="logo" style="width: 50%; height: 30%;">
     </template>
   <script>
@@ -51,7 +47,7 @@ export default {
                 sources: [
                     {  
                         src:
-                            "",
+                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
                             type: "video/mp4"
                     },
                 ],
@@ -86,8 +82,8 @@ export default {
       const response = await this.client.send(command);
       console.log(response);
       this.responseFromS3 = await response.Body.transformToString("base64");
-      this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
-      console.log(this.videoOptions);
+      //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
+      //console.log(this.videoOptions);
       this.imageFromS3 = "data:image/jpeg;base64,"+this.responseFromS3;
       console.log(this.responseFromS3);
     } catch (err) {
