@@ -34,17 +34,17 @@
   </template>
   
   <script>
-import CognitoAuth from '../cognito/cognito'
+//import CognitoAuth from '../cognito/cognito'
 
     export default {
       name: "ConfirmView",
       data() {
         return {
-          cognitoAuth: new CognitoAuth(),
+  //        cognitoAuth: new CognitoAuth(),
           username: "",
           confirmcode: "",
           error: null,
-          loading: false
+    //      loading: false
         };
       },
       methods: {
@@ -55,21 +55,21 @@ import CognitoAuth from '../cognito/cognito'
                 UserPoolId: "ap-south-1:51e1baa7-14e4-457b-a492-9bbf99abb706",
                 ClientId: "1jpk9cqb31k6p3flhljucf9j7g"
             }
-        this.cognitoAuth.configure(config)
-          this.loading = true;
-          this.cognitoAuth.confirmRegistration(
-            this.username,
-            this.confirmcode,
-            (err, result) => {
-              console.log(err);
-              if (result == "SUCCESS") {
-                console.log("Successfully Verified");
-                this.$router.replace("/Login");
-              } else {
-                this.error = err;
-              }
-            }
-          );
+        // this.cognitoAuth.configure(config)
+        //   this.loading = true;
+        //   this.cognitoAuth.confirmRegistration(
+        //     this.username,
+        //     this.confirmcode,
+        //     (err, result) => {
+        //       console.log(err);
+        //       if (result == "SUCCESS") {
+        //         console.log("Successfully Verified");
+        //         this.$router.replace("/Login");
+        //       } else {
+        //         this.error = err;
+        //       }
+        //     }
+        //   );
         }
       }
     };

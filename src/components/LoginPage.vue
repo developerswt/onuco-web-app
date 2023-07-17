@@ -48,13 +48,13 @@
 </template>
 
 <script>
-import CognitoAuth from '../cognito/cognito'
+//import CognitoAuth from '../cognito/cognito'
 
 export default {
     name: 'LoginPage',
     data() {
         return {
-            cognitoAuth: new CognitoAuth(),
+            //cognitoAuth: new CognitoAuth(),
             showPassword: false,
             username: '',
             pass: '',
@@ -63,26 +63,26 @@ export default {
     },
     methods: {
         login() {
-            let config = {
+        let config = {
           region: "ap-south-1",
           IdentityPoolId: "ap-south-1_qKCtKeFRz",
           UserPoolId: "ap-south-1:51e1baa7-14e4-457b-a492-9bbf99abb706",
           ClientId: "1jpk9cqb31k6p3flhljucf9j7g"
       }
-      this.cognitoAuth.configure(config)
-      this.loading = true;
-      this.cognitoAuth.authenticate(
-        this.username,
-        this.pass,
-        (err, result) => {
-          if (err.statusCode !== 200) {
-            console.log(err);
-            this.error = err;
-          } else {
-            this.$router.replace("/profile");
-          }
-        }
-      );
+    //   this.cognitoAuth.configure(config)
+      
+    //   this.cognitoAuth.authenticate(
+    //     this.username,
+    //     this.pass,
+    //     (err, result) => {
+    //       if (err.statusCode !== 200) {
+    //         console.log(err);
+    //         this.error = err;
+    //       } else {
+    //         this.$router.replace("/profile");
+    //       }
+    //     }
+    //   );
     }
     }
     

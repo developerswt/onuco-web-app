@@ -26,5 +26,18 @@
         }
       });
     </script>
+    <script type="text/javascript">
+      player.on("pause", function(){
+       if (!player.seeking() && player.paused()) {
+         $("#my_overlay").fadeIn();
+       }
+   });
+   player.on("playing", function(){
+      $("#my_overlay").fadeOut(); player.play();
+   });
+   $("#my_overlay").click(function() {
+      $("#myoverlay").fadeOut(); player.play();
+   });
+    </script>
   </body>
 </html>

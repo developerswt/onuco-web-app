@@ -68,13 +68,13 @@
 
 
 <script>
-import CognitoAuth from '../cognito/cognito'
+//mport CognitoAuth from '../cognito/cognito'
 
 export default {
     name: 'SignUpPage',
     data() {
         return {
-            cognitoAuth: new CognitoAuth(),
+  //          cognitoAuth: new CognitoAuth(),
             showPassword: false,
             username: '',
             pass: '',
@@ -89,36 +89,36 @@ export default {
         }
     },
     methods: {
-        authenticate() {
-            // const file = document.querySelector('input[type=file]').files[0];
-            //     this.picture = file;
-                // console.log(file);
-            let config = {
-                region: "ap-south-1",
-                IdentityPoolId:"ap-south-1_qKCtKeFRz", 
-                UserPoolId: "ap-south-1:51e1baa7-14e4-457b-a492-9bbf99abb706",
-                ClientId: "1jpk9cqb31k6p3flhljucf9j7g"
-            }
-            this.cognitoAuth.configure(config)
-                this.cognitoAuth.signup(
-                    this.username,
-                    this.pass,
-                    this.name,
-                    this.picture,
-                    this.email,
-                    this.gender,
-                    this.birthdate,
-                    this.phone_number,
-                    this.address,
-                    (err, result) => {
-                        if (err) {
-                            this.error = err;
-                        } else {
-                            this.$router.replace({ path: "/Confirm" });
-                        }
-                    }
-                );
-            },
+        // authenticate() {
+        //     // const file = document.querySelector('input[type=file]').files[0];
+        //     //     this.picture = file;
+        //         // console.log(file);
+        //     let config = {
+        //         region: "ap-south-1",
+        //         IdentityPoolId:"ap-south-1_qKCtKeFRz", 
+        //         UserPoolId: "ap-south-1:51e1baa7-14e4-457b-a492-9bbf99abb706",
+        //         ClientId: "1jpk9cqb31k6p3flhljucf9j7g"
+        //     }
+        //     this.cognitoAuth.configure(config)
+        //         this.cognitoAuth.signup(
+        //             this.username,
+        //             this.pass,
+        //             this.name,
+        //             this.picture,
+        //             this.email,
+        //             this.gender,
+        //             this.birthdate,
+        //             this.phone_number,
+        //             this.address,
+        //             (err, result) => {
+        //                 if (err) {
+        //                     this.error = err;
+        //                 } else {
+        //                     this.$router.replace({ path: "/Confirm" });
+        //                 }
+        //             }
+        //         );
+        //     },
             
         }
     }

@@ -1,18 +1,21 @@
 <template>
-    <div class="pt-5 mt-5">
+  <div class="pt-5 mt-5">
 
-    </div>
-   
+  </div>
+
+    
+    <!-- <video-player :options="videoOptions" id="video_background" /> 
+     -->
     <!-- <video v-if="imageFromS3" width="320" duration="" id="video" height="240" controls allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
       <source :src="imageFromS3" type="video/mp4">
     </video> -->
    
-    <video-player :options="videoOptions" id="myVid" />
-    <img :src="imageFromS3" alt="logo" style="width: 50%; height: 30%;">
-    </template>
-  <script>
-  import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-  import VideoPlayer from '../components/VideoPlayer.vue';
+  <video-player :options="videoOptions" id="myVid" />
+  <!-- <img :src="imageFromS3" alt="logo" style="width: 50%; height: 30%;"> -->
+</template>
+<script>
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import VideoPlayer from '../components/VideoPlayer.vue';
 
 export default {
   name: "ReadingFile",
@@ -107,6 +110,8 @@ export default {
     
     };
 </script>
-<style>
+
+<style scoped>
 
 </style>
+
