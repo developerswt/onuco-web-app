@@ -66,7 +66,7 @@
 
 <script>
 export default {
-    name: 'ScienceBsc'
+    name: 'BachelorofScience'
 }
 </script>
 
