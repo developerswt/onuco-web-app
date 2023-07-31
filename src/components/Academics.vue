@@ -7,8 +7,8 @@
     </div>   
     <div class="mb container">
         <div class="row pt-4">
-            <div class="box1">
-                <router-link to="/Engineering" style="text-decoration: none;">
+            <div class="box1" v-for="item in academia" :key="item.id">
+                <router-link v-bind:to="{ name:'Engineering', params:{name: item.academiaName}}" style="color: white;"> 
                 <div class="box">
                     <img src="../assets/images/book.png" class="icon">
                     <div class="card-img-top">
@@ -20,10 +20,10 @@
                         </div>
                     </div>
                 </div>
-                <p class="ty">Engineering</p>
+                <p class="ty">{{ item.name }}</p>
                 </router-link>
             </div>
-            <div class="box1">
+            <!-- <div class="box1">
                 <router-link to="/Engineering" style="text-decoration: none;">
                 <div class="box">
                     <img src="../assets/images/book.png" class="icon">
@@ -118,14 +118,31 @@
                 </div>
                 <p class="ty">Masters</p>
                 </router-link>
-            </div>    
+            </div>     -->
         </div>
     </div> 
 </template>
 
 <script>
+import axios from 'axios';
+
+
 export default {
-    name: 'AcademicsView'
+    name: 'AcademicsView',
+    data() {
+        return {
+            academia: []
+        }
+    },
+    async created() {
+        try {
+            const res = await axios.get(`https://localhost:7233/api/Academia/`);
+            this.academia = res.data;
+            console.log(this.academia);
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }
 </script>
 

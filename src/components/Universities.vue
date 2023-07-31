@@ -3,20 +3,20 @@
         <h2><b>University</b> Courses</h2>
         <div class="mb">
             <div class="row pt-4">
-                <div class="box">
-                    <router-link to="/CollegeDetails" style="text-decoration: none;">
+                <div class="box" v-for="semester in university" :key="semester.id">
+                    <router-link v-bind:to="{ name:'CollegeDetails', params:{name: semester.universityName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3">
                                 <img src="../assets/images/university.png">
                             </div>
                             <div class="col-md-9 pt-2">
-                                <h5>VTU</h5>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
+                                <h5>{{ semester.name }}</h5>
+                                <p>{{ semester.description }}</p>
                             </div>
                         </div>
                     </router-link>    
                 </div>
-                <div class="box">
+                <!-- <div class="box">
                     <router-link to="/CollegeDetails" style="text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     </router-link>    
-                </div>
+                </div> -->
             </div>
         </div>
         <Offer />
@@ -129,12 +129,27 @@
 
 <script>
 import Offer from './Offer.vue'
+import axios from 'axios';
 
 export default {
     name: 'Universities',
     components: {
         Offer
-    }
+    },
+    data() {
+        return {
+            university: []
+        }
+    },
+    async created() {
+        try {
+            const result = await axios.get(`https://localhost:7233/api/University/GetBranchListByName/` + this.$route.params.name);
+            this.university = result.data;
+            console.log(this.university);
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }
 </script>
 

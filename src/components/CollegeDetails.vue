@@ -5,24 +5,24 @@
             <p>VTU is one of the largest Technological Universities in India with 24 years of Tradition of excellence in Engineering & Technical Education, Research and Innovations. It came into existence in the year 1998 to cater the needs of Indian industries for trained technical manpower with practical experience and sound theoretical knowledge.</p>
         </div>
         <div class="container pt-4">
-            <div class="row">
+            <div class="row" v-for="sem in semester" :key="sem.id">
                 <div class="col-sm-12">
                     <div class="card">
                         <h5 class="card-header">
-                            <div data-toggle="collapse" href="#collapse-example" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
+                            <div data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
                                 <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
-                                    1st Semester
+                                    {{ sem.name }}
                                     <!-- <p style="font-size: 11px; word-break: break-all;">It is a long established fact that a reader will be distracted by the readable content of a page... when looking at its layout.</p> -->
                                 
                                 
                             </div>
                         </h5>
-                        <div id="collapse-example" class="collapse show" aria-labelledby="heading-example">
+                        <div :id="'collapse-example' + sem.id " class="collapse show" aria-labelledby="heading-example">
                             <div class="card-body">
                                 <div class="row kl">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" v-for="cou in course" :key="cou.id">
                                         <router-link to="/SemesterDetails">
-                                        <div class="card">
+                                        <div class="card" v-if="sem.id === cou.semesterId">
                                             <div class="card-title">
                                                 <div class="row">
                                                     <div class="col-md-12 mn">
@@ -33,8 +33,9 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-                                                    
+                                                        <p><b>{{ cou.description }}</b></p>
+                                                        <p>{{ cou.actualPrice }}</p>
+                                                        <p>{{ cou.discountedPrice }}</p>
                                                         <img src="../assets/images/video.png" class="video">
                                                     </div>
                                                 </div>
@@ -52,7 +53,7 @@
                                         </div>
                                         </router-link>
                                     </div>
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-title">
                                                 <div class="row">
@@ -111,14 +112,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>        
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <h5 class="card-header">
@@ -441,20 +442,39 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <Offer />
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Offer from './Offer.vue'
  
 export default {
     name: 'CollegeDetails',
     components: {
         Offer
-    }
+    },
+    data() {
+        return {
+            semester: [],
+            course: []
+        }
+    },
+    async created() {
+        try {
+            const res = await axios.get(`https://localhost:7233/api/Semester/GetUniversityListByName/` + this.$route.params.name);
+            this.semester = res.data;
+            console.log(this.semester);
+            const result = await axios.get(`https://localhost:7233/api/Course`);
+            this.course = result.data;
+            console.log(this.course)
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }
 </script>
 

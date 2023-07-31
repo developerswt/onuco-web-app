@@ -19,6 +19,7 @@ import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
 import ReadingFile from './components/ReadingFile.vue';
+import RazorPay from './components/RazorPay.vue';
 
 const routes = [
  
@@ -47,7 +48,7 @@ const routes = [
     },
   },
   {
-    path: "/Engineering",
+    path: "/Academia/:name",
     name: "Engineering",
     component: Engineering,
     meta: {
@@ -127,7 +128,7 @@ const routes = [
     },
   },
   {
-    path: "/CollegeDetails",
+    path: "/CollegeDetails/:name",
     name: "CollegeDetails",
     component: CollegeDetails,
     meta: {
@@ -159,7 +160,7 @@ const routes = [
     },
   },
   {
-    path: "/Universities",
+    path: "/Universities/:name",
     name: "Universities",
     component: Universities,
     meta: {
@@ -181,21 +182,57 @@ const routes = [
     meta: {
         title: 'ReadingFile Page',
     },
+  },
+  {
+    path: "/RazorPay",
+    name: "RazorPay",
+    component: RazorPay,
+    meta: {
+        title: 'Amount Payment Page',
+    },
   }
 
 
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-    scrollBehavior() {
-      document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
-    }
+	history: createWebHistory(),
+	routes,
+	// scrollBehavior() {
+	// 	document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+	// }
+	scrollBehavior(to) {
+		if (to.hash) {
+			return {
+				el: to.hash,
+				behavior: 'smooth',
+
+			}
+		} else {
+			return { 
+				top: 0 
+			}
+		}
+	}
 });
 
 router.beforeEach((to, from, next) => {
-	document.title = `${to.meta.title}`;
+	//document.title = `${to.meta.title}`;
+	//document.title = `${to.meta.title}`;
+    //document.title = `${to.params.name}`;
+    const title = to.meta.title
+
+    //Take the title from the parameters
+    const titleFromParams = to.params.name;
+    // If the route has a title, set it as the page title of the document/page
+    if (title) {
+      document.title = title
+    }
+    // If we have a title from the params, extend the title with the title
+    // from our params
+    if (titleFromParams) {
+      document.title = `${titleFromParams} - ${document.title}`;
+    }
 	next();
 });
 

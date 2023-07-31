@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+
     <title>Unoco Application</title>
   </head>
   <body>
@@ -26,18 +28,6 @@
         }
       });
     </script>
-    <script type="text/javascript">
-      player.on("pause", function(){
-       if (!player.seeking() && player.paused()) {
-         $("#my_overlay").fadeIn();
-       }
-   });
-   player.on("playing", function(){
-      $("#my_overlay").fadeOut(); player.play();
-   });
-   $("#my_overlay").click(function() {
-      $("#myoverlay").fadeOut(); player.play();
-   });
-    </script>
+    
   </body>
 </html>

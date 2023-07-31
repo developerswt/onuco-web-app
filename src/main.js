@@ -9,7 +9,6 @@ import 'video.js/dist/video-js.css'
 
 
 
-
 // createApp(App).use(ElementPlus).mount('#app')
 const app = createApp(App);
 app.use(router);

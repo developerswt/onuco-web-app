@@ -241,7 +241,7 @@ export default {
             }),
         };
     }, 
-    async created(){
+    async created() {
         console.log("Hi");
         const command = new GetObjectCommand({
             Bucket: "onuco-s3",
