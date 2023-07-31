@@ -19,7 +19,14 @@ import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
 import ReadingFile from './components/ReadingFile.vue';
+<<<<<<< HEAD
 import RazorPay from './components/RazorPay.vue';
+=======
+import Errorone from './components/Errorone.vue';
+import Errortwo from './components/Errortwo.vue';
+import Faq from './components/Faq.vue';
+
+>>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
 
 const routes = [
  
@@ -40,6 +47,23 @@ const routes = [
     },
   },
   {
+    path: "/errorone",
+    name: "Errorone",
+    component: Errorone,
+    meta: {
+        title: '',
+    },
+  },
+
+  {
+    path: "/errortwo",
+    name: "Errortwo",
+    component: Errortwo,
+    meta: {
+        title: '',
+    },
+  },
+  {
     path: "/Signup",
     name: "SignUpPage",
     component: SignUpPage,
@@ -48,7 +72,11 @@ const routes = [
     },
   },
   {
+<<<<<<< HEAD
     path: "/Academia/:name",
+=======
+    path: "/branches",
+>>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
     name: "Engineering",
     component: Engineering,
     meta: {
@@ -72,7 +100,7 @@ const routes = [
     },
   },
   {
-    path: "/Science",
+    path: "/Branches",
     name: "ScienceBsc",
     component: ScienceBsc,
     meta: {
@@ -80,7 +108,7 @@ const routes = [
     },
   },
   {
-    path: "/Masters",
+    path:"/Branches",
     name: "Masters",
     component: Masters,
     meta: {
@@ -88,7 +116,7 @@ const routes = [
     },
   },
   {
-    path: "/ComputerScience",
+    path: "/University",
     name: "ComputerScience",
     component: ComputerScience,
     meta: {
@@ -128,7 +156,11 @@ const routes = [
     },
   },
   {
+<<<<<<< HEAD
     path: "/CollegeDetails/:name",
+=======
+    path: "/Semester",
+>>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
     name: "CollegeDetails",
     component: CollegeDetails,
     meta: {
@@ -173,6 +205,14 @@ const routes = [
     component: Instructor,
     meta: {
         title: 'Instructor Page',
+    },
+  },
+  {
+    path: "/Faq",
+    name: "Faq",
+    component: Faq,
+    meta: {
+        title: 'Faq Page',
     },
   },
   {

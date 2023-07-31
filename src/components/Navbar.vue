@@ -1,9 +1,13 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top" style="background: #EFF5FC 0% 0% no-repeat padding-box; opacity: 1;">
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
-        </button>
+        <div class="container-fluid">
+          
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
+            </button>
 
         <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
         <router-link class="nav-link gh" to="/Signup"><i class="fa fa-sign-in"></i></router-link>
@@ -51,66 +55,94 @@ export default {
     width: 100px;
     height: 35px;
 }
+
 nav {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
+
 li {
     font-family: "Times New Roman", Times, serif;
     font-size: 20px;
-    
+
 }
-.Navbar {
+
+.navbar {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
+    padding: 20px;
+
 }
+
 .nav-link {
-    color: rgb(44, 0, 126);
-}
-li > a {
-   position: relative;
-   color: #595959;
-   text-decoration: none;
+    color: #707070;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 16px;
 }
 
-li > a:hover {
-   color: #595959;
+li>a {
+    position: relative;
+    color: #595959;
+    text-decoration: none;
 }
 
-li > a:before {
-   content: "";
-   position: absolute;
-   width: 100%;
-   height: 2px;
-   bottom: 0;
-   left: 0;
-   background-color: #595959;
-   visibility: hidden;
-   -webkit-transform: scaleX(0);
-       transform: scaleX(0);
-      -webkit-transition: all 0.3s ease-in-out 0s;
-      transition: all 0.3s ease-in-out 0s;
+li>a:hover {
+    color: #595959;
 }
 
-li > a:hover:before {
-   visibility: visible;
-   -webkit-transform: scaleX(1);
-   transform: scaleX(1);
+li>a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #595959;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
 }
+
+li>a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
 .gh {
     font-size: 30px;
     display: none;
 }
+
 .gh1 {
     display: block;
 }
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 768px) {
     .gh {
         display: block;
     }
+
     .gh1 {
         display: none;
     }
+    .search-bar{
+        justify-content: space-between;
+        margin-right:0 !important;
+
+    }
     
+    .parent_blocks{
+justify-content: center;
+    }
+   
+}
+@media (min-width: 768px) and (max-width: 992.92px) {
+    .search-bar{
+        justify-content: space-between;
+    margin-right: 0 !important;
+    }
 }
 /* .search-bar {
    
@@ -162,28 +194,32 @@ li > a:hover:before {
 .search-bar button i {
     width: 25px;
     outline: none;
-   
+
 }
+
 .search-bar {
-   background: rgba(255, 255, 255, 0.2);
-   display: flex;
-   align-items: center;
-   border-radius: 50px;
-   border: 1px solid black;
-   padding: 0px 2px;
-   backdrop-filter: blur(4px) saturate(180%);
+    background: #FFFFFF7D 0% 0% no-repeat padding-box;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #D4D4D4;
+    padding: 10px;
+    /* backdrop-filter: blur(4px) saturate(180%); */
+    margin-right: 20px;
 }
+
 .search-bar input {
     background: transparent;
-    flex: 1;
+
     border: 0;
     outline: none;
-    padding: 5px 25px;
-    font-size: 20px;
-    color: rgb(44, 0, 126);
+
+    font-size: 14px;
+    color: #D4D4D4;
 }
+
 .search-bar button {
-    border: 0;    
+    border: 0;
     border-radius: 50%;
     width: 35px;
     height: 35px;
@@ -191,11 +227,16 @@ li > a:hover:before {
     background: #58629b;
     cursor: pointer;
 }
+
 .search-bar button i {
     width: 25px;
     color: #fff;
     position: relative;
     left: -10px;
     bottom: 30%;
+}
+.container-fluid{
+    max-width: 1350px;
+    margin:0 auto;
 }
 </style>
