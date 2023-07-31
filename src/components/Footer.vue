@@ -2,7 +2,7 @@
     <div class="container-fluid footer">
         <div class="row">
             <div class="col-md-6">
-                <img src="../assets/images/logo1.png" class="footer-logo">
+                <img src="../assets/images/UNUCO_LOGO.png" class="footer-logo">
                 <p>@ 2023 onuco.com All rights reserved.</p>
             </div>
             <div class="col-md-6 social-link">
@@ -10,7 +10,7 @@
                 <p>Email: name@example.com Call: 9845098450</p>
                 <p>Connect with Us:
                     <i class="fa fa-facebook"></i>&nbsp;
-                    <i class="fa fa-twitter"></i>&nbsp;
+                    <i class="fas fa-twitter"></i>&nbsp;
                     <i class="fa fa-google"></i>
                 </p>
             </div>
@@ -37,9 +37,8 @@ export default {
 }
 .footer-logo {
     margin-top: 10%;
-    width: 30%;
-    height: 30%;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+   
+    background:transparent 0% 0% no-repeat padding-box;
 }
 .footer .col-md-6 {
     text-align: left;

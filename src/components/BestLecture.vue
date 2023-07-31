@@ -1,13 +1,14 @@
 <template>
-    <div class="category-test pt-4 ">
-        <h4>
-            Best Lecturers
-            <a href="#">View All</a>
-        </h4>
+    <div class="category-test mt-4 ">
+        <h4 class="academic_head_text">
+
+<span id="aca_text">Best</span>Lecturers
+<router-link to="#">See all</router-link>
+</h4>
     </div>   
-    <div class="container">
+    <div class="container-fluid">
         <div class="row pt-5">
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <div class="user-follower">
                         <img src="../assets/images/user.png" class="user-icon">
@@ -26,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <div class="user-follower">
                         <img src="../assets/images/user.png" class="user-icon">
@@ -45,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <div class="user-follower">
                         <img src="../assets/images/user.png" class="user-icon">
@@ -64,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <div class="user-follower">
                         <img src="../assets/images/user.png" class="user-icon">
@@ -103,7 +104,7 @@ export default {
     float: right;
     color: #0d4b7e;
     font-size: 17px;
-    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
 }
 /* .user-icon {
     width: 30%;
@@ -175,6 +176,37 @@ export default {
 }
 .card {
     margin-bottom: 12%;
+}
+
+.academic_head_text {
+    color: #006acd;
+    padding-left:20px;
+
+}
+
+
+#aca_text {
+    color: #006acd;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .academic_head_text{
+        font-size: 18px;
+        padding-left:0 !important;
+
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 991.92px) {
+    .academic_head_text{
+        font-size: 20px ;
+    }
+    .card{
+        margin-bottom:50px;
+    }
+   
 }
 </style>
 
