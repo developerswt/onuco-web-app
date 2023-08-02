@@ -1,0 +1,45 @@
+{
+  "auth": {
+    "onucowebappf6f34234": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_onucowebappf6f34234_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "onucowebappf6f34234"
+        }
+      ]
+    },
+    "AMPLIFY_auth_onucowebappf6f34234_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "onucowebappf6f34234"
+        }
+      ]
+    },
+    "AMPLIFY_auth_onucowebappf6f34234_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "onucowebappf6f34234"
+        }
+      ]
+    },
+    "AMPLIFY_auth_onucowebappf6f34234_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "onucowebappf6f34234"
+        }
+      ]
+    }
+  }
+}

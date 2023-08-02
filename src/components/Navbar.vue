@@ -9,37 +9,46 @@
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
-        <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
-        <router-link class="nav-link gh" to="/Signup"><i class="fa fa-sign-in"></i></router-link>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/">Home</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/Courses">Courses</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/Announcement">Announcement</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
-                </li>
-            </ul>
-            <form class="search-bar">
-                <input class="text" type="search" placeholder="Search" aria-label="Search">
-                <button class="" type="submit"><i class="fa fa-search"></i></button>
-            </form>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item gh1">
-                    <router-link class="nav-link" to="/Login">Log in</router-link>
-                </li>
-                <li class="nav-item gh1">
-                    <router-link class="nav-link" to="/Signup">Sign up</router-link>
-                </li>
-            </ul>
+            <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
+            <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/">Home</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/Courses">Courses</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
+                    </li>
+
+
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <form class="search-bar">
+                        <input class="text" type="search" placeholder="Search" aria-label="Search">
+                        <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
+                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
+                    </form>
+                  
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/Login">Login <span style="padding-left:10px;">/</span></router-link>
+
+                    </li>
+              
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </nav>
 </template>
 

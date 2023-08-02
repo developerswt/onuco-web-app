@@ -1,355 +1,94 @@
 <template>
-<<<<<<< HEAD
     <div class="container-fluid jk">
-        <div class="container">
-            <h3>Visvesvaraya Technological University (VTU)</h3>
-            <p>VTU is one of the largest Technological Universities in India with 24 years of Tradition of excellence in Engineering & Technical Education, Research and Innovations. It came into existence in the year 1998 to cater the needs of Indian industries for trained technical manpower with practical experience and sound theoretical knowledge.</p>
-        </div>
-        <div class="container pt-4">
-            <div class="row" v-for="sem in semester" :key="sem.id">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h5 class="card-header">
-                            <div data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
-                                    {{ sem.name }}
-                                    <!-- <p style="font-size: 11px; word-break: break-all;">It is a long established fact that a reader will be distracted by the readable content of a page... when looking at its layout.</p> -->
-                                
-                                
-=======
-    <div class=" container-fluid jk">
-        <div class=" parent_block  pt-4">
-
-            <h4 class="academic_head_text">
-                <span id="aca_text">Available</span>Semesters ({{ semesterData.length }})
-            </h4>
-            <h3>{{ universityName }}</h3>
-            <p>{{ universityName }} is one of the largest Technological Universities in India with 24 years of Tradition of
-                excellence in
-                Engineering & Technical Education, Research and Innovations. It came into existence in the year 1998 to
-                cater the needs of Indian industries for trained technical manpower with practical experience and sound
-                theoretical knowledge.</p>
-     
-
-
-        <div class="container-fluid pt-4">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h5 class="card-header">
-                            <div data-toggle="collapse" href="#collapse-example" aria-expanded="true"
-                                aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
-                                1st Semester
-
->>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
-                            </div>
-                        </h5>
-                        <div :id="'collapse-example' + sem.id " class="collapse show" aria-labelledby="heading-example">
-                            <div class="card-body">
-                                <div class="row kl">
-                                    <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                        <router-link to="/SemesterDetails">
-<<<<<<< HEAD
-                                        <div class="card" v-if="sem.id === cou.semesterId">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                                    
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>{{ cou.description }}</b></p>
-                                                        <p>{{ cou.actualPrice }}</p>
-                                                        <p>{{ cou.discountedPrice }}</p>
-                                                        <img src="../assets/images/video.png" class="video">
-=======
-                                            <div class="card">
-                                                <div class="card-title">
-                                                    <div class="row">
-                                                        <div class="col-md-12 mn">
-                                                            <p><b>Math 1 (NEP
-                                                                    Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240
-                                                                    hrs</small></p>
-
-                                                            <img src="../assets/images/share.png" class="icon">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12 mn">
-                                                            <p><b>Subject Description</b></p>
-
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
->>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12 mn1">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-half-full"></i>
-                                                            <i class="fa fa-star-o"></i>
-
-                                                            <p>(23 reviews)</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </router-link>
-                                    </div>
-                                    <!-- <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP
-                                                                Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240
-                                                                hrs</small></p>
-
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-
-                                                        <img src="../assets/images/video.png" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn1">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-full"></i>
-                                                        <i class="fa fa-star-o"></i>
-
-                                                        <p>(23 reviews)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP
-                                                                Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240
-                                                                hrs</small></p>
-
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-
-                                                        <img src="../assets/images/video.png" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn1">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-full"></i>
-<<<<<<< HEAD
-                                                        <i class="fa fa-star-o"></i>                                                                    
-                                                    
-                                                        <p>(23 reviews)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                </div>        
-                            </div>
+        <h4 class="academic_head_text">
+            <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
+        </h4>
+        <p>{{ university.description }}</p>
+        <div class="pt-3">
+            <div class="row" v-for="sem in semester" :key="sem.id" style="padding: 0% 1% 0% 1%;">
+                <div class="card">
+                    <h5 class="card-header">
+                        <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                            <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
+                                <h4>{{ sem.name }}</h4>
+                                <p style="font-size: 14px;">{{ sem.description }}</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h5 class="card-header">
-                            <div data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
-                                2st Semester
-                            </div>
-                        </h5>
-                        <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
-                            <div class="card-body">
-                                <div class="row kl">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                                    
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
+                    </h5>
+                    <!-- <h5 class="card-header">
+                        <a class="collapsed d-block" style="text-decoration: none;" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed">
+                            <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
+                                <h4>{{ sem.name }}</h4>
+                                <p style="font-size: 14px;">{{ sem.description }}</p>
+                        </a>
+                    </h5> -->
+                    <div :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
+                        <div class="card-body">
+                            <div class="row kl">
+                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
+                                    <router-link to="">
+                                    <div class="card" v-if="sem.id === cou.semesterId">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-md-12 mn">
+                                                    <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
+                                                
+                                                    <img src="../assets/images/share.png" class="icon">
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-                                                    
-                                                        <img src="../assets/images/video.png" class="video">
-                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mn">
+                                                    <p><b>{{ cou.description }}</b></p>
+                                                    <p>{{ cou.actualPrice }}</p>
+                                                    <p>{{ cou.discountedPrice }}</p>
+                                                    <img src="../assets/images/video.png" class="video">
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn1">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-full"></i>
-                                                        <i class="fa fa-star-o"></i>                                                                    
-                                                    
-                                                        <p>(23 reviews)</p>
-                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mn1">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-full"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <p>(23 reviews)</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                                    
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-                                                    
-                                                        <img src="../assets/images/video.png" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn1">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-full"></i>
-                                                        <i class="fa fa-star-o"></i>                                                                    
-                                                    
-                                                        <p>(23 reviews)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                                    
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn">
-                                                        <p><b>Subject Description</b></p>
-                                                    
-                                                        <img src="../assets/images/video.png" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 mn1">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-full"></i>
-                                                        <i class="fa fa-star-o"></i>                                                                    
-                                                    
-=======
-                                                        <i class="fa fa-star-o"></i>
-
->>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
-                                                        <p>(23 reviews)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div v-for="item in semesterData" :key="item.id">
-                    <router-link to="" style="text-decoration: none;">
-                        <div class="card m-2" style="width: 16rem;">
-                            <div class="card-body">
-                                <p class="ty">{{ item.name }}</p>
-                                <p class="ty">{{ item.description }}</p>
-                            </div>
-                        </div>
-                    </router-link>
-                </div>
-            </div> -->
         </div>
     </div>
-    </div>
+    
+                    
     <Offer />
 </template>
 
 <script>
-<<<<<<< HEAD
 import axios from 'axios'
-=======
-import axios from 'axios';
->>>>>>> b1bc560dfdf687c64e6804fda7b4b1e3be8b68fe
 import Offer from './Offer.vue'
 
 export default {
     name: 'CollegeDetails',
-    data() {
-        return {
-            semesterData: {
-                name: '',
-                description: ''
-            },
-            universityName: '',
-        }
-    },
-    mounted() {
-
-        this.getdata();
-        this.universityName = this.$route.query.branches_Name;
-        console.log(this.universityName);
-    },
-    methods: {
-        getdata() {
-            axios.get('https://localhost:7233/api/Semester/Semester/' + this.$route.query.university_id)
-                .then(response => {
-                    this.semesterData = response.data;
-                    console.log(this.semesterData);
-
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-        }
-    },
     components: {
-        Offer
+        Offer,
     },
     data() {
         return {
             semester: [],
-            course: []
+            course: [],
+            university: []
         }
     },
     async created() {
         try {
+            const universe = await axios.get(`https://localhost:7233/api/University/GetUniversityGroupByName/` + this.$route.params.name);
+            this.university = universe.data;
+            console.log(this.university)
             const res = await axios.get(`https://localhost:7233/api/Semester/GetUniversityListByName/` + this.$route.params.name);
             this.semester = res.data;
             console.log(this.semester);
@@ -364,12 +103,26 @@ export default {
 </script>
 
 <style scoped>
+.academic_head_text {
+    color: #006acd;
+    padding: 0px 60px 0px 0px;
+
+
+}
+
+
+#aca_text {
+    color: #006acd;
+    font-weight: bold;
+
+}
 .kj .action {
     float: right;
-    font-size: 20px;
+    font-size: 30px;
     width: 1.2em;
     color: darkblue;
     opacity: 1;
+    margin-top: 17px;
 }
 
 .kj {
@@ -386,15 +139,21 @@ export default {
 }
 
 .jk {
-    padding-top: 5%;
+    padding: 7% 10% 5% 11%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .jk {
-        padding-top: 22%;
+        padding: 27% 2% 0% 2%;
     }
+}
+@media only screen and (max-width: 1024px) and (min-width: 650px) {
+    .jk {
+        padding: 14% 2% 0% 2%;
+    }
+}
+@media only screen and (max-width: 600px) and (min-width: 100px) {
     .academic_head_text {
         font-size: 18px;
         padding: 0 !important;
@@ -403,12 +162,6 @@ export default {
     }
     .container-fluid {
         padding: 100px 20px 20px 20px;
-    }
-}
-
-@media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
-        padding-top: 10%;
     }
 }
 
@@ -473,7 +226,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding: 25px 0px 25px 0px;
+    padding: 25px 0px 2px 0px;
 
 
 }
@@ -484,4 +237,5 @@ export default {
     font-weight: bold;
     padding-right: 10px;
 
-}</style>
+}
+</style>
