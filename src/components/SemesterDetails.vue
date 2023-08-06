@@ -1,6 +1,6 @@
 <template>
-    <div class="container-fluid jk" v-for="item in book" :key="item.id">
-        <h3>{{ item.Semester }}</h3>
+    <div class="container-fluid jk">
+        <h3>{{ this.book.semester }}</h3>
         <div class="pt-3" style="padding: 0px 10px 0px;">
             <div class="row">
                 <div class="col-md-6">
@@ -11,12 +11,12 @@
                     <!-- <button @click="clickButton()">click</button>             -->
                 </div>
                 <div class="col-md-6">
-                    <h2>{{ item.Title }}</h2>
-                    <p>{{ item.Description }}</p>
+                    <h2>{{ this.book.title }}</h2>
+                    <p>{{ this.book.description }}</p>
                     <div class="card mn">
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Math 1 (NEP Series) <br> {{ item.InstructorName }}</p>
+                                <p>Math 1 (NEP Series) <br> {{ this.book.instructorName }}</p>
                                             
                                 <div class="">
                                     <el-rate v-model="value"  clearable /><br>
@@ -27,8 +27,8 @@
                     </div>
                     <div class="">
                         <img src="../assets/images/video1.png" style="width: 20px; height: 20px;">&nbsp;
-                        <span><span>{{ item.videoDemand }}</span></span>
-                        <p>{{ item.modules }}</p>
+                        <span><span>{{ this.book.videoDemand }}</span></span>
+                        <p>{{ this.book.module }}</p>
                     </div>
                     <div class="">
                         <button class="btn btn-dark w-100">Enroll Now</button>
@@ -39,7 +39,7 @@
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
-                    <div class="row" v-for="topic in item.Chapters" :key="topic.id">
+                    <div class="row" v-for="topic in this.book.chapters" :key="topic.id">
                         <div class="col-sm-12">
                             <div class="card">
                                 <h5 class="card-header">
@@ -52,14 +52,14 @@
                                 <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
                                     <div class="card-body">
                                         <div class="row kl">
-                                            <div class="col-sm-12" v-for="lesson in topic.values" :key="lesson.id">
+                                            <div class="col-sm-12" v-for="lessons in topic.values" :key="lessons.cid">
                                                 <div class="card">
                                                     <div class="row">
                                                         <div class="col-sm-2">
-                                                            <p> {{ lesson.id }} </p>
+                                                            <p> {{ lessons.cid }} </p>
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p>{{ lesson.Lession }}<br>{{ lesson.Time }}</p>
+                                                            <p>{{ lessons.lesson }}<br>{{ lessons.time }}</p>
                                                             
                                                         </div>
                                                         <div class="col-sm-3">
@@ -77,12 +77,12 @@
                                     
                 </el-tab-pane>
                 <el-tab-pane label="Description " name="second">
-                    <div class="" v-html="item.CourseDescription"></div>
+                    <div class="" v-html="this.book.courseDescription"></div>
                 </el-tab-pane>
                 <el-tab-pane label="Question Bank" name="third">
-                    <div class="" v-html="item.QuestionBank"></div>
+                    <div class="" v-html="this.book.questionBank"></div>
                 </el-tab-pane>
-                <el-tab-pane label="Quiz" name="fourth"><div class="" v-html="item.Quiz"></div></el-tab-pane>
+                <el-tab-pane label="Quiz" name="fourth"><div class="" v-html="this.book.quiz"></div></el-tab-pane>
             </el-tabs>
         </div>
         <div class="pt-5 related-topic">
@@ -241,14 +241,14 @@ export default {
             }),
         };
     }, 
-    async created() {
+    async created(){
         console.log("Hi");
         const command = new GetObjectCommand({
             Bucket: "onuco-s3",
             Key: "diabetes1.mp4"
         });
         try {
-            const res = await axios.get("http://localhost:5000/SemesterDetails");
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
@@ -273,7 +273,7 @@ export default {
 <style scoped>
 
 .jk {
-    padding-top: 5%;
+    padding-top: 7%;
 }
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .jk {
@@ -287,6 +287,7 @@ export default {
 }
 .mn {
     border: none;
+    background-color: #EFF5FC;
 }
 .mn p {
     float: left;
