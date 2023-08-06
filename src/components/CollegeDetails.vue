@@ -3,7 +3,7 @@
         <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
         </h4>
-        <p>{{ university.description }}</p>
+        <!-- <p>{{ university.description }}</p> -->
         <div class="pt-3">
             <div class="row" v-for="sem in semester" :key="sem.id" style="padding: 0% 1% 0% 1%;">
                 <div class="card">
@@ -86,13 +86,13 @@ export default {
     },
     async created() {
         try {
-            const universe = await axios.get(`https://localhost:7233/api/University/GetUniversityGroupByName/` + this.$route.params.name);
-            this.university = universe.data;
-            console.log(this.university)
-            const res = await axios.get(`https://localhost:7233/api/Semester/GetUniversityListByName/` + this.$route.params.name);
+            // const universe = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetUniversityGroupByName/` + this.$route.params.name, { 'headers': { 'Authorization': JWT tokern }});
+            // this.university = universe.data;
+            // console.log(this.university)
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Semester/GetSemesterListByName/` + this.$route.params.name);
             this.semester = res.data;
             console.log(this.semester);
-            const result = await axios.get(`https://localhost:7233/api/Course`);
+            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Course`);
             this.course = result.data;
             console.log(this.course)
         } catch (error) {
