@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-onucowebapp-dev-174900-authRole",
+      "UnauthRoleArn": "arn:aws:iam::454745128608:role/amplify-onucowebapp-dev-174900-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::454745128608:role/amplify-onucowebapp-dev-174900-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-onucowebapp-dev-174900-deployment",
+      "UnauthRoleName": "amplify-onucowebapp-dev-174900-unauthRole",
+      "StackName": "amplify-onucowebapp-dev-174900",
+      "StackId": "arn:aws:cloudformation:ap-south-1:454745128608:stack/amplify-onucowebapp-dev-174900/9b414440-3065-11ee-a05c-06897b4c7710",
+      "AmplifyAppId": "d2xvbimwrc3cfg"
+    },
+    "categories": {
+      "auth": {
+        "onucowebappf6f34234": {
+          "userPoolId": "ap-south-1_iPglB2nd5",
+          "userPoolName": "onuco-userpool",
+          "webClientId": "frkqld5sne42ro78rusgcit99",
+          "nativeClientId": "frkqld5sne42ro78rusgcit99"
+        }
+      }
+    }
+  }
+}

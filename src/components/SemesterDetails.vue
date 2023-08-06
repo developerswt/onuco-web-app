@@ -1,20 +1,22 @@
 <template>
-    <div class="container-fluid jk">
-        <h3>1st semester</h3>
+    <div class="container-fluid jk" v-for="item in book" :key="item.id">
+        <h3>{{ item.Semester }}</h3>
         <div class="pt-3" style="padding: 0px 10px 0px;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card" style="width: 100%;">
-                        <video style="width: 100%;" class="card-image-top" controls><source src="../assets/images/preview.mp4" type="video/mp4"></video>
-                    </div>               
+                        <!-- <video style="width: 100%;" v-if="videoOptions.sources[0].src !== '' " class="card-image-top" controls><source src="../assets/images/preview.mp4" type="video/mp4"></video> -->
+                        <video-player :options="videoOptions"  />
+                    </div>   
+                    <!-- <button @click="clickButton()">click</button>             -->
                 </div>
                 <div class="col-md-6">
-                    <h2>How to Create an Online Course: The Official Online Course</h2>
-                    <p>Use our recommended best practices to plan, produce, and publish a well-designed, high quality Online course</p>
+                    <h2>{{ item.Title }}</h2>
+                    <p>{{ item.Description }}</p>
                     <div class="card mn">
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Math 1 (NEP Series) <br> Dr. Ashoka P R</p>
+                                <p>Math 1 (NEP Series) <br> {{ item.InstructorName }}</p>
                                             
                                 <div class="">
                                     <el-rate v-model="value"  clearable /><br>
@@ -25,8 +27,8 @@
                     </div>
                     <div class="">
                         <img src="../assets/images/video1.png" style="width: 20px; height: 20px;">&nbsp;
-                        <span><span>1hr 28min</span> of on-demand video</span>
-                        <p>8 Modules</p>
+                        <span><span>{{ item.videoDemand }}</span></span>
+                        <p>{{ item.modules }}</p>
                     </div>
                     <div class="">
                         <button class="btn btn-dark w-100">Enroll Now</button>
@@ -37,61 +39,28 @@
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
-                    <div class="row">
+                    <div class="row" v-for="topic in item.Chapters" :key="topic.id">
                         <div class="col-sm-12">
                             <div class="card">
                                 <h5 class="card-header">
                                     <div data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
                                         <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
-                                        Topic 1
+                                        {{ topic.heading }}
                                     </div>
                                 </h5>
+                                 
                                 <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
                                     <div class="card-body">
                                         <div class="row kl">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-12" v-for="lesson in topic.values" :key="lesson.id">
                                                 <div class="card">
                                                     <div class="row">
                                                         <div class="col-sm-2">
-                                                            <p> 01. </p>
+                                                            <p> {{ lesson.id }} </p>
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p>Introduction of subject<br>03:13 min</p>
+                                                            <p>{{ lesson.Lession }}<br>{{ lesson.Time }}</p>
                                                             
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 02. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Basic Details<br>22:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 03. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Advanced methods<br>45:13 min</p>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <img src="../assets/images/video.png" class="video">
@@ -105,234 +74,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <h5 class="card-header">
-                                    <div data-toggle="collapse" href="#collapse-example2" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
-                                        Topic 2
-                                    </div>
-                                </h5>
-                                <div id="collapse-example2" class="collapse show" aria-labelledby="heading-example">
-                                    <div class="card-body">
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 01. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Introduction of subject<br>03:13 min</p>
-                                                            
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 02. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Basic Details<br>22:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 03. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Advanced methods<br>45:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <h5 class="card-header">
-                                    <div data-toggle="collapse" href="#collapse-example3" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
-                                        Topic 3
-                                    </div>
-                                </h5>
-                                <div id="collapse-example3" class="collapse show" aria-labelledby="heading-example">
-                                    <div class="card-body">
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 01. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Introduction of subject<br>03:13 min</p>
-                                                            
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 02. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Basic Details<br>22:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 03. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Advanced methods<br>45:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <h5 class="card-header">
-                                    <div data-toggle="collapse" href="#collapse-example4" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
-                                        Topic 4
-                                    </div>
-                                </h5>
-                                <div id="collapse-example4" class="collapse show" aria-labelledby="heading-example">
-                                    <div class="card-body">
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 01. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Introduction of subject<br>03:13 min</p>
-                                                            
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 02. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Basic Details<br>22:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row kl">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
-                                                            <p> 03. </p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p>Advanced methods<br>45:13 min</p>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                
+                                    
                 </el-tab-pane>
                 <el-tab-pane label="Description " name="second">
-                    <ul>
-                        <li>How to create an online course using Udemy’s recommended course creation process</li>
-                        <li>How to access and use tools and resources available to you as an Udemy instructor</li>
-                        <li>Use the Marketplace Insights tool to identify in-demand topics to validate or refine your course topic</li>
-                        <li>Learn how to define your ideal learners for your course</li>
-                        <li>Determine and write clear learning objectives</li>
-                        <li>Create practical activities and assessments to drive an engaging and high-quality course</li>
-                        <li>Create a well-structured course outline</li>
-                        <li>Produce your course content following best practices for recording and editing your videos</li>
-                        <li>Write a compelling course landing page that attracts the right learners to your course</li>
-                        <li>Launch your course successfully</li>
-                        <li>Use your instructor dashboard to manage and evolve your course, and to grow your audience on Udemy</li>
-                    </ul>
+                    <div class="" v-html="item.CourseDescription"></div>
                 </el-tab-pane>
                 <el-tab-pane label="Question Bank" name="third">
-                    <ul>
-                        <li>You’ve signed up or are interested in signing up to become a Udemy instructor</li>
-                        <li>You have an idea of the course topic you’re interested in teaching</li>
-                        <li>You’re passionate and excited about sharing your knowledge with others</li>
-                    </ul>
+                    <div class="" v-html="item.QuestionBank"></div>
                 </el-tab-pane>
-                <el-tab-pane label="Quiz" name="fourth">Example Quiz</el-tab-pane>
+                <el-tab-pane label="Quiz" name="fourth"><div class="" v-html="item.Quiz"></div></el-tab-pane>
             </el-tabs>
         </div>
         <div class="pt-5 related-topic">
@@ -444,11 +194,79 @@
 </template>
 
 <script>
+import VideoPlayer from '../components/VideoPlayer.vue';
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import axios from "axios"
 
 export default {
     name: 'SemesterDetails',
+    components: {
+        VideoPlayer
+    },
+    data() {
+        return {
+            book: [],
+            videoOptions: {
+                playbackRates: [0.5, 1, 1.5, 2],
+                autoplay: false,
+                audiotrack: true,
+                controls: true,
+                width: 100,
+                preload: "auto",
+                poster: "http://127.0.0.1:5173/assets/images/1.png",
+                sources: [
+                    {  
+                        src:
+                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
+                            type: "video/mp4"
+                    },
+                ],
+                displayCurrentQuality: true,
+                controlBar: {
+                    skipButtons: {
+                        forward: 5,
+                        backward: 10,
+                        muteToggle: false
+                    }
+                },
+            },
+            responseFromS3: '',
+            imageFromS3: '',
+            client : new S3Client({
+                region: "ap-south-1",
+                credentials: {
+                    accessKeyId: "AKIAWTYHL72QB7Z2NM4X",
+                    secretAccessKey: "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",
+                } 
+            }),
+        };
+    }, 
+    async created() {
+        console.log("Hi");
+        const command = new GetObjectCommand({
+            Bucket: "onuco-s3",
+            Key: "diabetes1.mp4"
+        });
+        try {
+            const res = await axios.get("http://localhost:5000/SemesterDetails");
+            this.book = res.data; 
+            // this.book.chapters = JSON.parse(this.book.Chapters);
+            // console.log(this.booh.chapters)
+            console.log(this.book); 
+            console.log(this.client);
+            const response = await this.client.send(command);
+            console.log(response);
+          // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
+            this.responseFromS3 = await response.Body.transformToString("base64");
+            //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
+            console.log(this.videoOptions);
+            this.imageFromS3 = "data:image/jpeg;base64,"+this.responseFromS3;
+            console.log(this.responseFromS3);
+        } catch (err) {
+            console.error(err);
+        }
+    },
     
-
 }
 </script>
 
