@@ -1,18 +1,6 @@
-<script>
-  import { Authenticator } from "@aws-amplify/ui-vue";
-
+<script setup>
  
-  
-  // Auth.currentSession().then(res=>{
-  //   var accessToken = res.getAccessToken().getJwtToken();
-  //   console.log("Access Token :", accessToken);
-  //   var kToken = res.accessToken.payload['cognito:groups'];
-  //   console.log("JWT Token :", kToken);
-  //   var idToken = res.idToken.jwtToken;
-  //   console.log("IdToken :", idToken);
-  // });
-    
-  const formFields = {
+const formFields = {
   signUp: {
     phone_number: {
       dialCode: '+91'
@@ -42,7 +30,7 @@
 </script>
 
 <template>
-    <authenticator :login-mechanisms="['email']" :form-fields="formFields" :social-providers="['facebook', 'google']" class="pt-3" style="margin-bottom: 6%;">
+    <authenticator :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']" class="pt-3" style="margin-bottom: 6%;">
       <template v-slot:header>
         <div style="padding: var(--amplify-space-large); text-align: center">
           <img

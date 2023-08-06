@@ -40,7 +40,7 @@ export default {
     },
     async created() {
         try {
-            const res = await axios.get(`https://localhost:7233/api/Academia/`);
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
         } catch (error) {

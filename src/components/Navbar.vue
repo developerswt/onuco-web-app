@@ -37,9 +37,19 @@
                         <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
                     </form>
                   
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/Login">Login <span style="padding-left:10px;">/</span></router-link>
-
+                    <li class="nav-item dropdown active" v-if="isLoggedIn">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hi {{ this.userInfo.name }} 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link class="dropdown-item" to="">Orders</router-link>
+                            <router-link class="dropdown-item" to="/UpdatedProfile">Profile</router-link>
+                            <router-link class="dropdown-item" to="" @click="logout">Logout</router-link>
+                            <router-link class="dropdown-item" to=""></router-link>
+                        </div>
+                    </li>
+                    <li class="nav-item" v-else>
+                        <router-link to="/Login" class="nav-link">Login</router-link>
                     </li>
               
                     <li class="nav-item">
@@ -53,9 +63,33 @@
 </template>
 
 <script>
+import { Auth } from 'aws-amplify';
+
 
 export default {
     name: "NavbarView",
+    data() {
+        return {
+            userInfo: JSON.parse(localStorage.getItem('username')),
+            // userAttributes: null,
+        }
+    },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        }
+    },
+    methods: {
+        async logout() {
+            try {
+                await Auth.signOut();
+                this.$store.commit('isLoggedIn', false);
+                this.$router.push("/Login");
+            } catch (error) {
+                alert(error.message);
+            }
+        },
+    },
 }
 </script>
 

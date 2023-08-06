@@ -4,7 +4,7 @@
         <div class="mb">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
-                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchesName}}" style="color: white;">
+                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3">
                                 <img src="../assets/images/book1.png">
@@ -38,10 +38,10 @@ export default {
     },
     async created() {
         try {
-            const res = await axios.get(`https://localhost:7233/api/Academia/GetAcademiaGroupByName/` + this.$route.params.name);
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://localhost:7233/api/Branches/GetBranchListByName/` + this.$route.params.name);
+            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
