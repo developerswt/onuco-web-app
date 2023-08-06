@@ -14,6 +14,47 @@ import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
 import Faq from './components/Faq.vue';
+import store from './store/store'
+import { Hub } from "@aws-amplify/core"
+import { Auth } from "@aws-amplify/auth"
+
+
+let user;
+
+getUser().then((user) => {
+    if (user) {
+        router.push({path: '/'});
+    }
+});
+
+function getUser() {
+    return Auth.currentAuthenticatedUser().then((data) => {
+        if (data && data.signInUserSession) {
+            store.commit('setUser', data);
+            return data;
+        }
+    }).catch(() => {
+        store.commit('setUser', null);
+        return null;
+    });
+}
+
+Hub.listen("auth", async (data) => {
+    // if (data.payload.event === 'signOut'){
+    //     user = null;
+    //     store.commit('setUser', null);
+    //     router.push({path: '/SignIn'});
+    // } else
+    if (data.payload.event === 'signIn') {
+        user = await getUser();
+        router.push({path: '/'});
+        store.commit('isLoggedIn', true);
+        localStorage.setItem('username', JSON.stringify(user.attributes));
+
+    }
+});
+
+
 const routes = [
  
   {
@@ -162,24 +203,38 @@ const router = createRouter({
 	}
 });
 
-router.beforeEach((to, from, next) => {
-	//document.title = `${to.meta.title}`;
-	//document.title = `${to.meta.title}`;
-    //document.title = `${to.params.name}`;
-    const title = to.meta.title
+// router.beforeEach((to, from, next) => {
+// 	//document.title = `${to.meta.title}`;
+// 	//document.title = `${to.meta.title}`;
+//     //document.title = `${to.params.name}`;
+//     const title = to.meta.title
 
-    //Take the title from the parameters
-    const titleFromParams = to.params.name;
-    // If the route has a title, set it as the page title of the document/page
-    if (title) {
-      document.title = title
-    }
-    // If we have a title from the params, extend the title with the title
-    // from our params
-    if (titleFromParams) {
-      document.title = `${titleFromParams} - ${document.title}`;
-    }
-	next();
+//     //Take the title from the parameters
+//     const titleFromParams = to.params.name;
+//     // If the route has a title, set it as the page title of the document/page
+//     if (title) {
+//       document.title = title
+//     }
+//     // If we have a title from the params, extend the title with the title
+//     // from our params
+//     if (titleFromParams) {
+//       document.title = `${titleFromParams} - ${document.title}`;
+//     }
+// 	next();
+// });
+
+router.beforeResolve(async (to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      user = await getUser();
+      if (!user) {
+          return next({
+              path: '/login'
+          });
+      }
+      return next()
+  }
+  return next()
 });
+
 
 export default router;

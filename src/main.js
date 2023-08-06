@@ -4,6 +4,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
+import store from './store/store'
 import config from './config/index'
 import 'video.js/dist/video-js.css'
 import AmplifyVue from '@aws-amplify/ui-vue';
@@ -19,6 +20,7 @@ Auth.configure(awsconfig);
 const app = createApp(App);
 app.use(router);
 app.use(config);
+app.use(store);
 app.use(AmplifyVue);
 app.use(ElementPlus);
 app.mount('#app');

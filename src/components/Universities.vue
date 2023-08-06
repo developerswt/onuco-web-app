@@ -41,7 +41,7 @@ export default {
     },
     async created() {
         try {
-            const result = await axios.get(`https://localhost:7233/api/University/GetBranchListByName/` + this.$route.params.name);
+            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetBranchListByName/` + this.$route.params.name);
             this.university = result.data;
             console.log(this.university);
         } catch (error) {
