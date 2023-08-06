@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import LoginPage from "./components/LoginPage.vue";
-import SignUpPage from "./components/SignUpPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
 import SemesterDetails from './components/SemesterDetails.vue';
@@ -90,14 +89,7 @@ const routes = [
         title: '',
     },
   },
-  {
-    path: "/Signup",
-    name: "SignUpPage",
-    component: SignUpPage,
-    meta: {
-        title: 'Sign Up And Start Learning',
-    },
-  },
+  
   {
     path: "/Academia/:name",
     name: "Branches",

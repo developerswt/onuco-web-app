@@ -213,7 +213,7 @@ export default {
                 controls: true,
                 width: 100,
                 preload: "auto",
-                poster: "http://127.0.0.1:5173/assets/images/1.png",
+                poster: "http://127.0.0.1:5174/assets/images/1.png",
                 sources: [
                     {  
                         src:

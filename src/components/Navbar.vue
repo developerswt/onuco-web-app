@@ -29,13 +29,12 @@
 
 
                 </ul>
-
+                <form class="search-bar">
+                    <input class="text" type="search" placeholder="Search" aria-label="Search">
+                    <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
+                    <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
+                </form>
                 <ul class="navbar-nav ml-auto">
-                    <form class="search-bar">
-                        <input class="text" type="search" placeholder="Search" aria-label="Search">
-                        <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
-                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                    </form>
                   
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,11 +48,7 @@
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login</router-link>
-                    </li>
-              
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
+                        <router-link to="/Login" class="nav-link">Login/SignUp</router-link>
                     </li>
                 </ul>
             </div>
