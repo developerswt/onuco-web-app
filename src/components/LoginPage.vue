@@ -34,9 +34,9 @@ const formFields = {
       <template v-slot:header>
         <div style="padding: var(--amplify-space-large); text-align: center">
           <img
-            class="amplify-image pt-5"
+            class="amplify-image" style="margin-top: 18%;"
             alt="Amplify logo"
-            src="http://127.0.0.1:5173/assets/images/logo.png"
+            src="../assets/images/logo.png"
           />
         </div>
       </template>
