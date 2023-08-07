@@ -20,7 +20,7 @@ const formFields = {
     picture: {
       placeholder: 'Choose Your File Here',
       isRequired: true,
-      type: 'file',
+      type: 'string',
       label: 'Picture:',
     },
   },
