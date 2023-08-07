@@ -10,7 +10,7 @@
             </button>
 
             <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
-            <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
+            <router-link class="nav-link gh" to="/Login"><i class="fa fa-sign-in"></i></router-link>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
@@ -21,10 +21,10 @@
                         <router-link class="nav-link" to="/Courses">Courses</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
+                        <router-link class="nav-link" to="/">Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
+                        <router-link class="nav-link" to="/">Contact Us</router-link>
                     </li>
 
 

@@ -105,7 +105,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                    
+                                    <el-rate v-model="value"  clearable ></el-rate>                                                                    
                                         
                                     <p>Dr. Ashoka P R</p>
                                 </div>
@@ -130,7 +130,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                 
+                                    <el-rate v-model="value"  clearable ></el-rate>
+                                                                                                         
                                         
                                     <p>Dr. Ashoka P A</p>
                                 </div>
@@ -155,7 +156,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                               
+                                    <el-rate v-model="value"  clearable ></el-rate>                                              
                                         
                                     <p>Dr. Ashoka P R</p>
                                 </div>
@@ -180,7 +181,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                   
+                                    <el-rate v-model="value"  clearable ></el-rate>                                                                   
                                         
                                     <p>Dr. Ashoka P R</p>
                                 </div>
