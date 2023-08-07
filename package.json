@@ -24,7 +24,7 @@
     "videojs-max-quality-selector": "^0.9.1",
     "videojs-overlay": "^3.1.0",
     "videojs-quality-picker": "^0.0.3",
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "vue-router": "^4.2.2",
     "vue3-carousel": "^0.3.1",
     "vuex": "^4.1.0",
@@ -35,25 +35,6 @@
     "@vitejs/plugin-vue": "^4.1.0",
     "video.js": "^8.3.0",
     "vite": "^4.3.9"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+  }
+  
 }

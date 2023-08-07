@@ -6,10 +6,7 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  optimizeDeps: {
-    // Add the remap for the "vue" package
-    include: ['vue'],
-  },
+  
   define: process.env.NODE_ENV === 'development' ? { global: 'window' } : {},
   base: './',
   

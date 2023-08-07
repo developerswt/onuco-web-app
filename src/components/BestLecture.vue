@@ -41,7 +41,7 @@
                         <div class="card-text">Data Management Systems & Visualization software development..</div>
                         <div class="mn">
                             <p>(23 Reviews)</p>
-                            <el-rate v-model="value2" :colors="colors" />
+                            <el-rate v-model="value2" :colors="colors" ></el-rate>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="card-text">Data Management Systems & Visualization software development..</div>
                         <div class="mn">
                             <p>(23 Reviews)</p>
-                            <el-rate v-model="value2" :colors="colors" />
+                            <el-rate v-model="value2" :colors="colors" ></el-rate>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <div class="card-text">Data Management Systems & Visualization software development..</div>
                         <div class="mn">
                             <p>(23 Reviews)</p>
-                            <el-rate v-model="value2" :colors="colors" />
+                            <el-rate v-model="value2" :colors="colors" ></el-rate>
                         </div>
                     </div>
                 </div>
