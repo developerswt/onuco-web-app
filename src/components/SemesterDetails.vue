@@ -197,7 +197,7 @@
 <script>
 import VideoPlayer from '../components/VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import axios from "axios"
+import axios from "axios";
 
 export default {
     name: 'SemesterDetails',

@@ -16,8 +16,6 @@
   
 <script>
 import videojs from 'video.js';
-// import "@silvermine/videojs-quality-selector/dist/css/quality-selector.css";
-// import "@silvermine/videojs-quality-selector";
 import "videojs-max-quality-selector";
 import "videojs-contrib-quality-levels";
 
@@ -41,15 +39,9 @@ export default {
   },
   
   mounted() {
-    // if (!videojs.getPlugin('qualityLevels')) {
-    //   videojs.registerPlugin('qualityLevels', qualityLevels);
-    // }
-    // if (!videojs.getPlugin('videojsqualityselector')) {
-    //   videojs.registerPlugin('videojsqualityselector', videojsqualityselector);
-    // }
     
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
-      // this.player.controlBar.addChild('QualitySelector');
+      
 
     this.player.on('timeupdate', function() {
         console.log(this.currentTime())
