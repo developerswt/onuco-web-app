@@ -4,7 +4,6 @@ import LoginPage from "./components/LoginPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
 import SemesterDetails from './components/SemesterDetails.vue';
-import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
@@ -27,7 +26,7 @@ getUser().then((user) => {
 });
 
 function getUser() {
-    return Auth.currentAuthenticatedUser().then((data) => {
+    return  Auth.currentAuthenticatedUser().then((data) => {
         if (data && data.signInUserSession) {
             store.commit('setUser', data);
             return data;
@@ -120,14 +119,6 @@ const routes = [
     component: SemesterDetails,
     meta: {
         title: 'Semaster details Page',
-    },
-  },
-  {
-    path: "/FileUpload",
-    name: "FileUpload",
-    component: FileUpload,
-    meta: {
-        title: 'File Upload Page',
     },
   },
   {

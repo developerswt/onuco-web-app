@@ -1,4 +1,5 @@
 <script setup>
+import { Authenticator } from "@aws-amplify/ui-vue";
  
 const formFields = {
   signUp: {

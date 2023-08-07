@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Offer from './Offer.vue'
 import axios from 'axios';
 
 export default {
@@ -35,6 +36,9 @@ export default {
             branches: [],
             academia: []
         }
+    },
+    components: {
+        Offer
     },
     async created() {
         try {
