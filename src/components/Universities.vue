@@ -29,6 +29,7 @@
 import Offer from './Offer.vue'
 import axios from 'axios';
 
+
 export default {
     name: 'Universities',
     components: {
