@@ -16,8 +16,7 @@
   
 <script>
 import videojs from 'video.js';
-import "videojs-max-quality-selector";
-import "videojs-contrib-quality-levels";
+
 
 export default {
   name: 'VideoPlayer',
