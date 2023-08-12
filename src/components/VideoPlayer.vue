@@ -1,15 +1,17 @@
 <template>
+
   <div class="customePlyr">
-    <video ref="videoPlayer" class="video-js vjs-default-button vjs-big-play-centered"></video>
+    <video ref="videoPlayer" class="video-js vjs-layout-small "></video>
     <div class="overlaysWrap">
       <div class="overlay-item">
         <p class="vo-question">
           Please subscribe to watch full video
         </p>
-      </div>
-      <div class="btnStyle">
+        <div class="btnStyle">
           <router-link to="/RazorPay"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
         </div>
+      </div>
+      
     </div>
 </div> 
 </template>
@@ -124,18 +126,19 @@ export default {
   position: relative;
 }
 .overlay-item {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    top: 50%;
-    text-align: center;
-}
-.btnStyle{
   position: relative;
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: center; */
     top: 50%;
+    left: 50%;
     text-align: center;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    /* justify-content: space-between; */
 }
+.vo-question{
+  font-size: 15px;
+}
+
 
 </style>

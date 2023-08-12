@@ -1,15 +1,16 @@
 <template>
     <div class="container-fluid jk">
-        <h2><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
-        <div class="mb">
+        <div class="parent_block pt-4">
+            <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
+        <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
                     <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/book1.png">
                             </div>
-                            <div class="col-md-9 pt-2">
+                            <div class="col-md-9 col-9 col-sm-9 pt-2">
                                 <h5>{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
                             </div>
@@ -18,6 +19,8 @@
                 </div>
             </div>
         </div>
+        </div>
+     
     </div>            
 
 
@@ -27,9 +30,15 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
+import Offer from './Offer.vue'
 
 export default {
     name: 'BranchesView',
+    components: {
+
+Offer
+},
     data() {
         return {
             branches: [],
@@ -50,7 +59,9 @@ export default {
     }
 }    
 
+
 </script>
+
 <!-- <style scoped>
 .jk {
     padding: 7% 0% 6% 12%;
@@ -173,43 +184,48 @@ export default {
 </style> -->
 <style scoped>
 .jk {
-    padding: 8% 10% 5% 11%;
+    padding-top:100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-@media only screen and (max-width: 600px) and (min-width: 100px) {
-    .jk {
-        padding: 27% 2% 0% 2%;
+@media only screen and (max-width: 768px) and (min-width: 100px) {
+
+    .parent_blocks{
+        justify-content: center !important;
+
     }
+    .box{
+        width:250px !important;
+    }
+    #available_text{
+        font-size: 18px;
+    }
+    
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
-        padding: 14% 2% 0% 2%;
+  
+    #available_text{
+        font-size: 20px;
     }
 }
-.mb .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
-}
+
 .box {
-    top: 168px;
-    left: 697px;
-    height: 120px;
-    /* UI Properties */
-    width: 23%;
+    
+    height: 95px;
+    width: 305px;
     box-shadow: 0px 0px 6px #000000;
     border-radius: 40px 40px 80px 40px;
     border: 1px solid #FFFFFF;
     cursor: pointer;
     margin-bottom: 1%;
+    margin: 20px;
+    padding:15px;
+
     
 }
-.box .row {
-    padding: 12px 10px;
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 
@@ -231,32 +247,8 @@ export default {
     color: #000000;
     opacity: 0.49;
 }
-@media screen and (max-width: 600px) {
-    .box .col-md-3 {
-        float: left;
-        width: 25%;
-    }
-    .box .col-md-9 {
-        float: right;
-        width: 75%;
-    }
-    .box {
-        width: 100%;
-        margin-bottom: 5%;
-    }
-}
-@media only screen and (min-width: 600px) and (max-width: 912px) {
-    .box {
-        width: 47%;
-        margin-bottom: 3%;
-    }
-}
-@media only screen and (min-width: 950px) and (max-width: 1024px) {
-    .box {
-        width: 45%;
-        margin-bottom: 3%;
-    }
-}
+
+
 h2 {
     font: normal normal 600 22px/30px Segoe UI;
     letter-spacing: 0px;
@@ -274,5 +266,10 @@ h2 {
     color: #006acd;
     font-weight: bold;
 
+}
+.parent_blocks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
 }
 </style>

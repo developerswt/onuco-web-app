@@ -175,7 +175,7 @@ export default {
         margin-bottom: 3%;
 }
 .card {
-    margin-bottom: 12%;
+    margin-bottom: 20%;
 }
 
 .academic_head_text {

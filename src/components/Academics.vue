@@ -1,18 +1,25 @@
 <template>
-    <div class="category-test pt-5 pb-4 ">
+    <div class="category-test pt-5 pb-5 ">
         <h4 class="academic_head_text">
+       
             <span id="aca_text">Available</span>Academics
             <router-link to="/Courses" >See all</router-link>
         </h4>
-    </div>   
-    <div class="mb container">
-        <div class="row">
-            <div class="box1" v-for="item in academia" :key="item.id">
+    </div>
+    <div class="mb">
+      
+         
+       
+          
+
+        <div class="parent_blocks">
+        <div  v-for="item in academia" :key="item.id">
+            <div class="box1">
                 <router-link v-bind:to="{ name:'Branches', params:{name: item.academiaName}}" style="color: white;text-decoration: none;"> 
                 <div class="box">
                     <img src="../assets/images/book.png" class="icon">
                     <div class="top">
-                        <span class="wr">05</span>
+                        <span class="wr">05{{ item.count }}</span>
                     </div>
                     <div class="card-body">
                         <div class="card-title">
@@ -24,15 +31,27 @@
                 </router-link>
             </div>
         </div>
+         
+        
     </div> 
+            
+
+            
+
+
+       
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
+import router from '../router';
+
 
 
 export default {
     name: 'AcademicsView',
+   
     data() {
         return {
             academia: []
@@ -49,6 +68,8 @@ export default {
     }
 }   
 </script>
+
+
 
 <style scoped>
 .category-test a {
@@ -81,6 +102,21 @@ export default {
     left: 15%;
 }
 
+/* .mb h2 {
+    font-family: serif;
+} */
+
+/* .mb .box {
+    width: 13%;
+    cursor: pointer;
+    height: auto; 
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg,lightblue 20%, blue, 20%, darkblue 100%);
+    transition: 0.3s;
+} */
 
 .mb .box1 {
     width: 13%;
@@ -94,6 +130,7 @@ export default {
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
+    /* background: rgb(2,0,36); */
     background: transparent radial-gradient(closest-side at 77% 22%, #FFFFFF 0%, #FAFAFA 0%, #F6F6F6 0%, #0077FF 100%) 0% 0% no-repeat padding-box;
     transition: 0.3s;
 }
@@ -154,12 +191,7 @@ export default {
         border: none;
     }
 }
-@media only screen and (min-width: 100px) and (max-width: 450px) {
-    .mb .box1 {
-        width: 35%;
-        margin-bottom: 55px;
-    }
-}
+
 @media (min-width: 768px) and (max-width: 991.92px) {
     .academic_head_text{
         font-size: 20px ;
@@ -175,18 +207,19 @@ export default {
     display: inline-block;
 }
 
-.top .wr {
+.wr {
+    position: relative;
+    left: 28px;
+    top: -87px;
+    /* font-size: 24px;
+    color: white; */
     text-align: left;
     font: normal normal normal 41px/54px Segoe UI;
     letter-spacing: 0px;
     color: #FFFFFF;
-    
+    opacity: 1;
 }
-.top {
-    position: relative;
-    top: -85px;
-    left: 28px;
-}
+
 .ty {
     margin-top: -70px;
     font-size: 14px;
@@ -213,7 +246,7 @@ router-link {
     top: -22px;
 }
 
-/* @media screen and (min-width: 100px) and (max-width: 450px) {
+@media screen and (min-width: 100px) and (max-width: 450px) {
     .wr {
         position: relative;
         left: 35px;
@@ -235,7 +268,7 @@ router-link {
         left: 48px;
         top: -87px;
     }
-} */
+}
 
    .academic_head_text{
     color:#006acd;

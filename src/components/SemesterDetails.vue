@@ -1,36 +1,58 @@
 <template>
     <div class="container-fluid jk">
-        <h3>{{ this.book.semester }}</h3>
-        <div class="pt-3" style="padding: 0px 10px 0px;">
+        <div class="parent_block pt-4">
+        <h3 id="semester_text">{{ this.book.semester }}</h3>
+        <div class="pt-3">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="card" style="width: 100%;">
+                <div class="col-md-6 col-12 col-sm-12">
+                  
                         <!-- <video style="width: 100%;" v-if="videoOptions.sources[0].src !== '' " class="card-image-top" controls><source src="../assets/images/preview.mp4" type="video/mp4"></video> -->
-                        <video-player :options="videoOptions"  />
-                    </div>   
+                        <div class="div" style="padding:5px;">
+                            <video-player :options="videoOptions" />
+                        </div>
+                    
+             
                     <!-- <button @click="clickButton()">click</button>             -->
                 </div>
                 <div class="col-md-6">
-                    <h2>{{ this.book.title }}</h2>
-                    <p>{{ this.book.description }}</p>
+                    <h2 id="book_title">{{ this.book.title }}</h2>
+                    <p id="book_description">{{ this.book.description }}</p>
                     <div class="card mn">
                         <div class="row">
-                            <div class="col-md-6">
-                                <p>Math 1 (NEP Series) <br> {{ this.book.instructorName }}</p>
-                                            
-                                <div class="">
-                                    <el-rate v-model="value"  clearable /><br>
-                                    <span>(23 Reviews)</span>
+                            <div class="col-md-6 col-6 col-sm-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mb-0">Math 1 (NEP Series)</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        {{ this.book.instructorName }}
+                                    </div>
                                 </div>
+                          
+                                            
+                                
+                            </div>
+                            <div class="col-md-6 col-6 col-sm-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <el-rate v-model="value"  clearable /><br>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="" style="float:right;">
+                                       <p style="padding-right:10px;">(23 Reviews)</p> 
+                                    </div>
+                                    </div>
+                                </div>
+                               
                             </div>
                         </div>    
                     </div>
-                    <div class="">
+                    <div class="mt-5">
                         <img src="../assets/images/video1.png" style="width: 20px; height: 20px;">&nbsp;
                         <span><span>{{ this.book.videoDemand }}</span></span>
                         <p>{{ this.book.module }}</p>
                     </div>
-                    <div class="">
+                    <div class="mt-4">
                         <button class="btn btn-dark w-100">Enroll Now</button>
                     </div>
                 </div>
@@ -86,110 +108,250 @@
             </el-tabs>
         </div>
         <div class="pt-5 related-topic">
-            <h3>Related topic</h3>
+            <h3 id="relate_text">Related topic</h3>
             <div class="row pt-3 mb-4">
-                <div class="col-md-3">
+                
+              
+               
+                <div class="col-md-5 col-lg-3">
                     <div class="card">
                         <div class="card-title">
                             <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Artificial Intelligence</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                    <img src="../assets/images/share.png" class="icon">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Subject Description</b></p>
-                                    <img src="../assets/images/video.png" class="video">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                    
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p class="mb-0"><b>Math 1 (NEP Series)</b></p>
+                                                </div>
+                                                <div class="col-lg-12">
+
+                                                    <small>18CS81 240 hrs</small>
+                                                </div>
+                                            </div>
                                         
-                                    <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/share.png" class="icon">
+                                        </div>
+                                    </div>
+                               
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9">
+                                            <p><b>Subject Description</b></p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/video.png" class="video">
+                                        </div>
+                                    </div>
+                                 
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn2">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                                            <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-5 col-sm-5">
+                                            <el-rate v-model="value"  clearable />    
+                                        </div>
+                                    </div>
+                                                                                                
+                                        
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5 col-lg-3">
                     <div class="card">
                         <div class="card-title">
                             <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>UX Designer</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                    <img src="../assets/images/share.png" class="icon">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Subject Description</b></p>
-                                    <img src="../assets/images/video.png" class="video">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                 
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p class="mb-0"><b>Artificial Intelligence</b></p>
+                                                </div>
+                                                <div class="col-lg-12">
+
+                                                    <small>18CS81 240 hrs</small>
+                                                </div>
+                                            </div>
                                         
-                                    <p>Dr. Ashoka P A</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/share.png" class="icon">
+                                        </div>
+                                    </div>
+                               
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9">
+                                            <p><b>Subject Description</b></p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/video.png" class="video">
+                                        </div>
+                                    </div>
+                                 
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn2">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                                            <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-5 col-sm-5">
+                                            <el-rate v-model="value"  clearable />    
+                                        </div>
+                                    </div>
+                                                                                                
+                                        
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5 col-lg-3">
                     <div class="card">
                         <div class="card-title">
                             <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Web Development</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                    <img src="../assets/images/share.png" class="icon">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Subject Description</b></p>
-                                    <img src="../assets/images/video.png" class="video">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                               
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p class="mb-0"><b>Web Developement</b></p>
+                                                </div>
+                                                <div class="col-lg-12">
+
+                                                    <small>18CS81 240 hrs</small>
+                                                </div>
+                                            </div>
                                         
-                                    <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/share.png" class="icon">
+                                        </div>
+                                    </div>
+                               
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9">
+                                            <p><b>Subject Description</b></p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/video.png" class="video">
+                                        </div>
+                                    </div>
+                                 
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn2">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                                            <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-5 col-sm-5">
+                                            <el-rate v-model="value"  clearable />    
+                                        </div>
+                                    </div>
+                                                                                                
+                                        
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5 col-lg-3">
                     <div class="card">
                         <div class="card-title">
                             <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                    <img src="../assets/images/share.png" class="icon">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn1">
-                                    <p><b>Subject Description</b></p>
-                                    <img src="../assets/images/video.png" class="video">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mn2">
-                                    <el-rate v-model="value"  clearable />                                                                   
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p class="mb-0"><b>UX Designer</b></p>
+                                                </div>
+                                                <div class="col-lg-12">
+
+                                                    <small>18CS81 240 hrs</small>
+                                                </div>
+                                            </div>
                                         
-                                    <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/share.png" class="icon">
+                                        </div>
+                                    </div>
+                               
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn1">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9">
+                                            <p><b>Subject Description</b></p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                            <img src="../assets/images/video.png" class="video">
+                                        </div>
+                                    </div>
+                                 
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mn2">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                                            <p>Dr. Ashoka P R</p>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-5 col-sm-5">
+                                            <el-rate v-model="value"  clearable />    
+                                        </div>
+                                    </div>
+                                                                                                
+                                        
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                
+            
             </div>
         </div>
+        </div>
+        <Offer />
     </div>
 </template>
 
@@ -197,11 +359,12 @@
 import VideoPlayer from '../components/VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import axios from "axios"
-
+import Offer from './Offer.vue'
 export default {
     name: 'SemesterDetails',
     components: {
-        VideoPlayer
+        VideoPlayer,
+        Offer,
     },
     data() {
         return {
@@ -273,17 +436,64 @@ export default {
 <style scoped>
 
 .jk {
-    padding-top: 7%;
+    padding-top:100px;
+    background: #EFF5FC 0% 0% no-repeat padding-box;
+    opacity: 1;
 }
+
 @media only screen and (max-width: 600px) and (min-width: 100px) {
-    .jk {
-        padding-top: 22%;
-    }
+   #semester_text{
+    font-size: 18px;
+   }
+   #book_title{
+    font-size: 18px;
+    margin-top:20px;
+   }
+   #book_description{
+    font-size: 15px;
+    margin-top:20px;
+   }
+   .related-topic{
+    padding:0 !important;
+   }
+   #relate_text{
+    font-size: 18px;
+   }
+   .related-topic .card{
+    margin:10px;
+
+   }
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
-        padding-top: 10%;
-    }
+    #semester_text{
+    font-size: 20px;
+   }
+   #semester_text{
+    font-size: 18px;
+   }
+   #book_title{
+    font-size: 18px;
+    margin-top:20px;
+   }
+   #book_description{
+    font-size: 15px;
+    margin-top:20px;
+   }
+   .related-topic{
+    padding:0 !important;
+   }
+   #relate_text{
+    font-size: 18px;
+   }
+   .related-topic .card{
+    margin:10px;
+
+   }
+   .mn1 p{
+    font-size: 14px;
+    margin-top:10px;
+  
+   }
 }
 .mn {
     border: none;
@@ -396,4 +606,10 @@ export default {
     height: 25px;
     margin-left: 55px;
 }
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 5%;
+}
+
 </style>

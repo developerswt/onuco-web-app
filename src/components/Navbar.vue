@@ -49,7 +49,7 @@
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login</router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/</span></router-link>
                     </li>
               
                     <li class="nav-item">
@@ -178,6 +178,10 @@ li>a:hover:before {
     
     .parent_blocks{
 justify-content: center;
+    }
+    .nav-link{
+        font-size: 15px;
+
     }
    
 }
