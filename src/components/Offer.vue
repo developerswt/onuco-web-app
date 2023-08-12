@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="add">
                             <img src="../assets/images/add2.png">
                         </div>
@@ -144,7 +144,6 @@ export default {
 .add img {
     position: relative;
     bottom: 30px;
-    left: 60px;
 }
 
 @media screen and (max-width: 912px) {
@@ -184,5 +183,6 @@ h2 {
 }
 .add{
     margin-top:30px;
+    text-align: right;
 }
 </style>
