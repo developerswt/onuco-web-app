@@ -52,7 +52,7 @@
                         <span><span>{{ this.book.videoDemand }}</span></span>
                         <p>{{ this.book.module }}</p>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-3">
                         <button class="btn btn-dark w-100">Enroll Now</button>
                     </div>
                 </div>
