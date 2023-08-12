@@ -210,27 +210,37 @@ export default {
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
-                audiotrack: true,
                 controls: true,
                 width: 100,
-                preload: "auto",
-                poster: "http://127.0.0.1:5174/assets/images/1.png",
+                techOrder: ['html5'],
+                preload: "metadata",
                 sources: [
                     {  
-                        src:
-                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
-                            type: "video/mp4"
-                    },
+                        src:"https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                            //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                            withCredentials: false,
+                    }
                 ],
-                displayCurrentQuality: true,
+                html5: {
+                    nativeVideoTracks: false,
+                    nativeAudioTracks: false,
+                    nativeTextTracks: false,
+                vhs: {
+                    overrideNative: true,
+                }
+              },
                 controlBar: {
                     skipButtons: {
                         forward: 5,
                         backward: 10,
                         muteToggle: false
-                    }
+                    },
                 },
+                plugins: {
+
+                }
             },
+
             responseFromS3: '',
             imageFromS3: '',
             client : new S3Client({

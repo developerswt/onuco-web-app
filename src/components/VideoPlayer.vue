@@ -16,7 +16,9 @@
   
 <script>
 import videojs from 'video.js';
-
+import "videojs-overlay";
+import qualityLevels  from "videojs-contrib-quality-levels";
+import videojsqualityselector from 'videojs-hls-quality-selector';
 
 export default {
   name: 'VideoPlayer',
@@ -27,31 +29,37 @@ export default {
       default() {
         return {};
       }
-    }
+    },
+    limit: null
   },
   data() {
     return {
       player: null,
       whereYouAt: null,
+      duration: null,
       ready: false,
     }
   },
   
   mounted() {
-    
+    videojs.registerPlugin('qualityLevels',qualityLevels);
+    videojs.registerPlugin('hlsQualitySelector',videojsqualityselector);
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       
 
     this.player.on('timeupdate', function() {
         console.log(this.currentTime())
-        if(Math.round(this.currentTime())== 5) {
+        if(Math.round(this.currentTime())== 7) {
           this.pause();
             var parent = this.el().parentNode;
 		        var closeBtn = parent.querySelector('.overlaysWrap');
             closeBtn.style.visibility='visible';
             this.player.controls= false; 
         }
-      })
+      });
+      this.player.qualityLevels();
+        this.player.hlsQualitySelector({ displayCurrentQuality: true });
+        console.log(this.player);
       
       // this.player.hlsQualitySelector = hlsQualitySelector;
       // this.player.hlsQualitySelector();      
@@ -94,6 +102,14 @@ export default {
     padding-top: 56.25%;
     
 
+}
+.vjs-text-track-display {
+    position: absolute;
+    bottom: 3em;
+    left: 0;
+    right: 0;
+    top: 0;
+    pointer-events: none;
 }
 .overlaysWrap{
     visibility: hidden;

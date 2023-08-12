@@ -15,6 +15,7 @@ import Faq from './components/Faq.vue';
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
+import Picture from './components/Picture.vue';
 
 
 let user;
@@ -47,8 +48,6 @@ Hub.listen("auth", async (data) => {
         user = await getUser();
         router.push({path: '/'});
         store.commit('isLoggedIn', true);
-        localStorage.setItem('username', JSON.stringify(user.attributes));
-
     }
 });
 
@@ -159,6 +158,14 @@ const routes = [
     component: RazorPay,
     meta: {
         title: 'Amount Payment Page',
+    },
+  },
+  {
+    path: "/Picture",
+    name: "Picture",
+    component: Picture,
+    meta: {
+        title: 'Upload Image Page',
     },
   }
 
