@@ -1,18 +1,21 @@
 <template>
+
   <div class="customePlyr">
-    <video ref="videoPlayer" class="video-js vjs-default-button vjs-big-play-centered"></video>
+    <video ref="videoPlayer" class="video-js vjs-default-button vjs-big-play-centered vjs-layout-small"></video>
     <div class="overlaysWrap">
       <div class="overlay-item">
         <p class="vo-question">
           Please subscribe to watch full video
         </p>
-      </div>
-      <div class="btnStyle">
-          <router-link to="/RazorPay"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
+        <div class="btnStyle">
+          <router-link to="/Login"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
         </div>
+      </div>
+      
     </div>
 </div> 
 </template>
+      
   
 <script>
 import videojs from 'video.js';
@@ -49,7 +52,7 @@ export default {
 
     this.player.on('timeupdate', function() {
         console.log(this.currentTime())
-        if(Math.round(this.currentTime())== 7) {
+        if(Math.round(this.currentTime())== 120) {
           this.pause();
             var parent = this.el().parentNode;
 		        var closeBtn = parent.querySelector('.overlaysWrap');
@@ -94,7 +97,7 @@ export default {
 };
   </script>
 
-  <style scoped>
+<style scoped>
 .video-js {
     position: relative !important;
     width: 100% !important;
@@ -102,14 +105,6 @@ export default {
     padding-top: 56.25%;
     
 
-}
-.vjs-text-track-display {
-    position: absolute;
-    bottom: 3em;
-    left: 0;
-    right: 0;
-    top: 0;
-    pointer-events: none;
 }
 .overlaysWrap{
     visibility: hidden;
@@ -131,18 +126,19 @@ export default {
   position: relative;
 }
 .overlay-item {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    top: 50%;
-    text-align: center;
-}
-.btnStyle{
   position: relative;
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: center; */
     top: 50%;
+    left: 50%;
     text-align: center;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    /* justify-content: space-between; */
 }
+.vo-question{
+  font-size: 15px;
+}
+
 
 </style>
