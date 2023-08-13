@@ -10,7 +10,7 @@
             </button>
 
             <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
-            <router-link class="nav-link gh" to="/Login"><i class="fa fa-sign-in"></i></router-link>
+            <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
@@ -21,20 +21,21 @@
                         <router-link class="nav-link" to="/Courses">Courses</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/">Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/">Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
                     </li>
 
 
                 </ul>
-                <form class="search-bar">
-                    <input class="text" type="search" placeholder="Search" aria-label="Search">
-                    <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
-                    <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                </form>
+
                 <ul class="navbar-nav ml-auto">
+                    <form class="search-bar">
+                        <input class="text" type="search" placeholder="Search" aria-label="Search">
+                        <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
+                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
+                    </form>
                   
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,8 +49,12 @@
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login/SignUp</router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:0px;">/ Sign Up</span></router-link>
                     </li>
+              
+                    <!-- <li class="nav-item">
+                        <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -65,7 +70,8 @@ export default {
     name: "NavbarView",
     data() {
         return {
-            // userAttributes: null,
+            // userInfo: JSON.parse(localStorage.getItem('username')),
+            // // userAttributes: null,
         }
     },
     computed: {
@@ -180,6 +186,10 @@ li>a:hover:before {
     
     .parent_blocks{
 justify-content: center;
+    }
+    .nav-link{
+        font-size: 15px;
+
     }
    
 }

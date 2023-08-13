@@ -34,21 +34,21 @@ export default {
                         custom: true,
                         validate: this.customSignUpValidation
                     },
-                    // name: {
-                    //     placeholder: 'Enter Your Name Here',
-                    //     isRequired: true,
-                    //     label: 'Name:',
-                    //     required: true,
-                    //     custom: true,
-                    //     validate: this.customSignUpValidation
-                    // },
-                    // birthdate: {
-                    //     isRequired: true,
-                    //     label: 'Birth Date:',
-                    //     required: true,
-                    //     custom: true,
-                    //     validate: this.customSignUpValidation
-                    // },
+                    name: {
+                        placeholder: 'Enter Your Name Here',
+                        isRequired: true,
+                        label: 'Name:',
+                        required: true,
+                        custom: true,
+                        validate: this.customSignUpValidation
+                    },
+                    birthdate: {
+                        isRequired: true,
+                        label: 'Birth Date:',
+                        required: true,
+                        custom: true,
+                        validate: this.customSignUpValidation
+                    },
                     phone_number: {
                         placeholder: 'Enter Your Phone_Number Here',
                         isRequired: true,
@@ -58,30 +58,30 @@ export default {
                         custom: true,
                         validate: this.customSignUpValidation
                     },
-                    // address: {
-                    //     placeholder: 'Enter Your Address Here',
-                    //     isRequired: true,
-                    //     label: 'Address:',
-                    //     required: true,
-                    //     custom: true,
-                    //     validate: this.customSignUpValidation
-                    // },
-                    // gender: {
-                    //     placeholder: 'Enter Your Gender Here',
-                    //     label: 'Gender',
-                    //     type: 'text',
-                    //     required: true,
-                    //     custom: true,
-                    //     validate: this.customSignUpValidation
-                    // },
-                    // picture: {
-                    //     placeholder: 'Enter Your Picture Here',
-                    //     label: 'Picture',
-                    //     type: 'text',
-                    //     required: true,
-                    //     custom: true,
-                    //     validate: this.customSignUpValidation
-                    // },
+                    address: {
+                        placeholder: 'Enter Your Address Here',
+                        isRequired: true,
+                        label: 'Address:',
+                        required: true,
+                        custom: true,
+                        validate: this.customSignUpValidation
+                    },
+                    gender: {
+                        placeholder: 'Enter Your Gender Here',
+                        label: 'Gender',
+                        type: 'text',
+                        required: true,
+                        custom: true,
+                        validate: this.customSignUpValidation
+                    },
+                    picture: {
+                        placeholder: 'Enter Your Picture Here',
+                        label: 'Picture',
+                        type: 'text',
+                        required: true,
+                        custom: true,
+                        validate: this.customSignUpValidation
+                    },
                 },
             },    
             // authConfig: {

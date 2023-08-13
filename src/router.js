@@ -80,8 +80,8 @@ const routes = [
   },
 
   {
-    path: "/errortwo",
-    name: "Errortwo",
+    path: "/:pathMatch(.*)*",
+    name: "PageNotFound",
     component: Errortwo,
     meta: {
         title: '',
