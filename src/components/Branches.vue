@@ -8,8 +8,10 @@
                     <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
+                            <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/book1.png">
                             </div>
+                            <div class="col-md-9 col-9 col-sm-9 pt-2">
                             <div class="col-md-9 col-9 col-sm-9 pt-2">
                                 <h5>{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
@@ -23,6 +25,10 @@
      
     </div>            
 
+        </div>
+     
+    </div>            
+
 
     
     <Offer />
@@ -32,9 +38,15 @@
 import axios from 'axios';
 import router from '../router';
 import Offer from './Offer.vue'
+import router from '../router';
+import Offer from './Offer.vue'
 
 export default {
     name: 'BranchesView',
+    components: {
+
+Offer
+},
     components: {
 
 Offer
@@ -60,7 +72,9 @@ Offer
 }    
 
 
+
 </script>
+
 
 <!-- <style scoped>
 .jk {
@@ -185,6 +199,7 @@ Offer
 <style scoped>
 .jk {
     padding-top:100px;
+    padding-top:100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -199,17 +214,36 @@ Offer
     }
     #available_text{
         font-size: 18px;
+@media only screen and (max-width: 768px) and (min-width: 100px) {
+
+    .parent_blocks{
+        justify-content: center !important;
+
     }
+    .box{
+        width:250px !important;
+    }
+    #available_text{
+        font-size: 18px;
+    }
+    
     
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
   
     #available_text{
         font-size: 20px;
+  
+    #available_text{
+        font-size: 20px;
     }
 }
 
+
 .box {
+    
+    height: 95px;
+    width: 305px;
     
     height: 95px;
     width: 305px;
@@ -221,8 +255,14 @@ Offer
     margin: 20px;
     padding:15px;
 
+    margin: 20px;
+    padding:15px;
+
     
 }
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
@@ -247,6 +287,8 @@ Offer
     color: #000000;
     opacity: 0.49;
 }
+
+
 
 
 h2 {

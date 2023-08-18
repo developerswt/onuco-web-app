@@ -9,19 +9,26 @@
             <div class="">
                 <div class="row">
                     <div class="col-md-7 col-lg-7">
+                    <div class="col-md-7 col-lg-7">
                         <div class="box mt-3">
                             <h2>Refer A Friend</h2>
                             <p>Get 20% OFF on all Courses</p>
                             <div class="offer_inside_block">
                               
+                            <div class="offer_inside_block">
+                              
                                     <p>Offers Ends on<br>June 30 2023</p>
+                           
+                               
                            
                                
                                     <button class="btn btn-primary">Refer now</button>
                                
+                               
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-5">
                     <div class="col-md-5">
                         <div class="add">
                             <img src="../assets/images/add2.png">
@@ -54,11 +61,14 @@ export default {
 
 .box {
   
+  
     background-color: #FF9900;
     margin-bottom: 3%;
     background: #FF9900 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
+    
+    padding:15px;
     
     padding:15px;
     text-align: left;
@@ -86,6 +96,7 @@ export default {
     text-align: right;
 }
 
+@media screen and (max-width: 768px) {
 @media screen and (max-width: 768px) {
     .box {
        
@@ -116,6 +127,7 @@ export default {
     }
     .offer_block{
         padding:20px 20px 20px 20px !important;
+        padding:20px 20px 20px 20px !important;
     }
     .box h2{
         font-size: 18px;
@@ -129,9 +141,12 @@ export default {
 .add img {
     position: relative;
    
+   
 }
 
 @media screen and (max-width: 912px) {
+    .add{
+        text-align: center !important;
     .add{
         text-align: center !important;
     }
@@ -167,6 +182,13 @@ h2 {
    
 }
 .add{
+    
+    text-align: right;
+}
+.offer_inside_block{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     
     text-align: right;
 }

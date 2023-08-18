@@ -8,8 +8,13 @@
         <div class="pt-3">
             <div class="row" v-for="sem in semester" :key="sem.id" >
                 <div class="card" id="main_card">
+            <div class="row" v-for="sem in semester" :key="sem.id" >
+                <div class="card" id="main_card">
                     <h5 class="card-header">
                         <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                            <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
+                                <h4 id="sem_text">{{ sem.name }}</h4>
+                                <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
@@ -25,9 +30,11 @@
                     <div :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
                         <div class="card-body">
                             <div class="">
+                            <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
                                     <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
+                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
@@ -83,6 +90,15 @@
                                     </router-link>
                                 </div>
                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+       
+    </div>
                             </div>
                         </div>
                     </div>
@@ -164,6 +180,30 @@ export default {
 #sem_icon{
     color:#0077FF;
 }
+.parent_blocks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+}
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 5%;
+}
+#main_card{
+    margin:20px;
+}
+#sem_text{
+    color:#707070;
+    
+}
+#sem_description{
+    color:#777777;
+    
+}
+#sem_icon{
+    color:#0077FF;
+}
 #aca_text {
     color: #006acd;
     font-weight: bold;
@@ -175,6 +215,7 @@ export default {
     width: 1.2em;
     color: darkblue;
     opacity: 1;
+    
     
 }
 
@@ -192,9 +233,17 @@ export default {
 }
 .jk {
     padding-top:100px ;
+    padding-top:100px ;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
+#sem_text{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    #sem_description{
+        font-size: 11px;
+    }
 #sem_text{
         font-size: 15px;
         font-weight: bold;
@@ -220,6 +269,8 @@ export default {
     #review_text{
         font-size: 13px;
     }
+  
+    
   
     
 }
@@ -249,6 +300,7 @@ export default {
         font-size: 12px;
     }
     
+    
 }
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .academic_head_text {
@@ -257,6 +309,7 @@ export default {
 
 
     }
+   
    
 }
 
@@ -345,5 +398,6 @@ color:black;
     padding-right: 10px;
 
 }
+
 
 </style>

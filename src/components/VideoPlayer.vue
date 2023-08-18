@@ -1,13 +1,14 @@
 <template>
 
   <div class="customePlyr">
-    <video ref="videoPlayer" class="video-js vjs-layout-small "></video>
+    <video ref="videoPlayer" class="video-js vjs-default-button vjs-big-play-centered"></video>
     <div class="overlaysWrap">
       <div class="overlay-item">
         <p class="vo-question">
           Please subscribe to watch full video
         </p>
-        <div class="btnStyle">
+      </div>
+      <div class="btnStyle">
           <router-link to="/RazorPay"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
         </div>
       </div>
@@ -15,13 +16,13 @@
     </div>
 </div> 
 </template>
+      
   
 <script>
 import videojs from 'video.js';
-// import "@silvermine/videojs-quality-selector/dist/css/quality-selector.css";
-// import "@silvermine/videojs-quality-selector";
-import "videojs-max-quality-selector";
-import "videojs-contrib-quality-levels";
+import "videojs-overlay";
+import qualityLevels  from "videojs-contrib-quality-levels";
+import videojsqualityselector from 'videojs-hls-quality-selector';
 
 export default {
   name: 'VideoPlayer',
@@ -32,37 +33,37 @@ export default {
       default() {
         return {};
       }
-    }
+    },
+    limit: null
   },
   data() {
     return {
       player: null,
       whereYouAt: null,
+      duration: null,
       ready: false,
     }
   },
   
   mounted() {
-    // if (!videojs.getPlugin('qualityLevels')) {
-    //   videojs.registerPlugin('qualityLevels', qualityLevels);
-    // }
-    // if (!videojs.getPlugin('videojsqualityselector')) {
-    //   videojs.registerPlugin('videojsqualityselector', videojsqualityselector);
-    // }
-    
+    videojs.registerPlugin('qualityLevels',qualityLevels);
+    videojs.registerPlugin('hlsQualitySelector',videojsqualityselector);
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
-      // this.player.controlBar.addChild('QualitySelector');
+      
 
     this.player.on('timeupdate', function() {
         console.log(this.currentTime())
-        if(Math.round(this.currentTime())== 5) {
+        if(Math.round(this.currentTime())== 120) {
           this.pause();
             var parent = this.el().parentNode;
 		        var closeBtn = parent.querySelector('.overlaysWrap');
             closeBtn.style.visibility='visible';
             this.player.controls= false; 
         }
-      })
+      });
+      this.player.qualityLevels();
+        this.player.hlsQualitySelector({ displayCurrentQuality: true });
+        console.log(this.player);
       
       // this.player.hlsQualitySelector = hlsQualitySelector;
       // this.player.hlsQualitySelector();      
@@ -97,7 +98,7 @@ export default {
 };
   </script>
 
-  <style scoped>
+<style scoped>
 .video-js {
     position: relative !important;
     width: 100% !important;

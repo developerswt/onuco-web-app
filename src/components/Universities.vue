@@ -5,13 +5,16 @@
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
         <div class="parent_blocks">
+        <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="college in university" :key="college.id">
                     <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
+                            <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/book1.png">
                             </div>
+                            <div class="col-md-9 col-9 col-sm-9">
                             <div class="col-md-9 col-9 col-sm-9">
                                 <h5>{{ college.name }}</h5>
                                 <p>{{ college.description.slice(0,75) }}</p>
@@ -22,7 +25,11 @@
             </div>
         </div>
         </div>
+        </div>
     
+     
+    </div>
+    <Offer />
      
     </div>
     <Offer />
@@ -57,9 +64,26 @@ export default {
 <style scoped>
 .jk {
     padding-top:100px;
+    padding-top:100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
+@media only screen and (max-width: 768px) and (min-width: 100px) {
+    .academic_head_text{
+        font-size: 18px;
+
+    }
+    .parent_blocks{
+        justify-content: center !important;
+
+    }
+    .box {
+        width: 250px !important; 
+        margin-bottom: 5%;
+      
+    }
+    .box h5,.box p{
+        padding-left:10px;
 @media only screen and (max-width: 768px) and (min-width: 100px) {
     .academic_head_text{
         font-size: 18px;
@@ -95,11 +119,30 @@ export default {
     }
     .box h5,.box p{
         padding-left:10px;
+    .box {
+        width: 250px !important; 
+        margin-bottom: 5%;
+      
+    }
+    .academic_head_text{
+        font-size: 18px;
+
+    }
+    .box {
+        width: 250px !important; 
+        margin-bottom: 5%;
+      
+    }
+    .box h5,.box p{
+        padding-left:10px;
     }
 }
 
 
+
 .box {
+    
+    width: 350px;
     
     width: 350px;
     height: 109px;
@@ -109,8 +152,11 @@ export default {
     cursor: pointer;
   margin:15px;
   padding:15px;
+  margin:15px;
+  padding:15px;
     
 }
+
 
 .box img {
     padding: 5px 0px 75px 10px;
@@ -139,6 +185,9 @@ export default {
 
 
 
+
+
+
 @media only screen and (min-width: 600px) and (max-width: 912px) {
     .box {
         width: 47%;
@@ -164,6 +213,17 @@ export default {
     color: #006acd;
     font-weight: bold;
 
+}
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 5%;
+}
+
+.parent_blocks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
 }
 .parent_block {
     max-width: 1300px;

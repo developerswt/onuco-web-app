@@ -9,7 +9,7 @@ import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 
 export default {
-  name: "AppView",
+  name: "App",
   components: {
     Navbar,
     Footer

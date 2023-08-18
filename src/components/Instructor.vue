@@ -11,7 +11,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img src="../assets/images/Mask Group 1.png" class="img-fluid">
+                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid">
                                         </div>
 
                                     </div>
@@ -357,7 +357,7 @@
                             </h2>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -376,7 +376,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -395,7 +395,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -414,7 +414,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -434,7 +434,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -455,7 +455,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -474,7 +474,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -493,7 +493,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">

@@ -1,11 +1,9 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import LoginPage from "./components/LoginPage.vue";
-import SignUpPage from "./components/SignUpPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
 import SemesterDetails from './components/SemesterDetails.vue';
-import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
@@ -17,6 +15,7 @@ import Faq from './components/Faq.vue';
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
+import Picture from './components/Picture.vue';
 
 
 let user;
@@ -28,7 +27,7 @@ getUser().then((user) => {
 });
 
 function getUser() {
-    return Auth.currentAuthenticatedUser().then((data) => {
+    return  Auth.currentAuthenticatedUser().then((data) => {
         if (data && data.signInUserSession) {
             store.commit('setUser', data);
             return data;
@@ -51,8 +50,6 @@ Hub.listen("auth", async (data) => {
         console.log('Signed in and remembered device');
         router.push({path: '/'});
         store.commit('isLoggedIn', true);
-        localStorage.setItem('username', JSON.stringify(user.attributes));
-
     }
 });
 
@@ -85,21 +82,14 @@ const routes = [
   },
 
   {
-    path: "/errortwo",
-    name: "Errortwo",
+    path: "/:pathMatch(.*)*",
+    name: "PageNotFound",
     component: Errortwo,
     meta: {
         title: '',
     },
   },
-  {
-    path: "/Signup",
-    name: "SignUpPage",
-    component: SignUpPage,
-    meta: {
-        title: 'Sign Up And Start Learning',
-    },
-  },
+  
   {
     path: "/Academia/:name",
     name: "Branches",
@@ -130,14 +120,6 @@ const routes = [
     component: SemesterDetails,
     meta: {
         title: 'Semaster details Page',
-    },
-  },
-  {
-    path: "/FileUpload",
-    name: "FileUpload",
-    component: FileUpload,
-    meta: {
-        title: 'File Upload Page',
     },
   },
   {
@@ -178,6 +160,14 @@ const routes = [
     component: RazorPay,
     meta: {
         title: 'Amount Payment Page',
+    },
+  },
+  {
+    path: "/Picture",
+    name: "Picture",
+    component: Picture,
+    meta: {
+        title: 'Upload Image Page',
     },
   }
 
