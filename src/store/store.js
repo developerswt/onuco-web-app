@@ -100,6 +100,9 @@ export default createStore ({
         setToken(state, token) {
             state.token = token;
         },
+        clearUser(state) {
+            state.user = '';
+        }
         
     },
 

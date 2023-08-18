@@ -24,7 +24,7 @@
                         <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact">Contact Us</router-link>
                     </li>
 
 

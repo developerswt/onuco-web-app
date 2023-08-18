@@ -16,6 +16,10 @@ import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
 import Picture from './components/Picture.vue';
+import GetSupport from './components/GetSupport.vue';
+import Privacy from './components/Privacy.vue';
+import TermsCondition from './components/TermsCondition.vue';
+
 
 
 let user;
@@ -46,7 +50,16 @@ Hub.listen("auth", async (data) => {
     // } else
     if (data.payload.event === 'signIn') {
         user = await getUser();
-        router.push({path: '/'});
+        const previousRoute = localStorage.getItem('previousRoute');
+        if (previousRoute) {
+        // Clear the stored previous route from local storage
+          localStorage.removeItem('previousRoute');
+          router.push(previousRoute);
+        } else {
+        // If no previous route is stored, navigate to a default route
+          router.push('/');
+        }
+        // router.push({path: '/'});
         store.commit('isLoggedIn', true);
     }
 });
@@ -109,7 +122,7 @@ const routes = [
     name: "CollegeDetails",
     component: CollegeDetails,
     meta: {
-        title: 'College Semaster details Page',
+        title: 'College Semaster Details Page',
     },
   },
   {
@@ -117,7 +130,7 @@ const routes = [
     name: "SemesterDetails",
     component: SemesterDetails,
     meta: {
-        title: 'Semaster details Page',
+        title: 'Semaster Details Page',
     },
   },
   {
@@ -125,7 +138,7 @@ const routes = [
     name: "Universities",
     component: Universities,
     meta: {
-        title: 'Universities Upload Page',
+        title: 'Universities Details Page',
     },
   },
   {
@@ -167,6 +180,30 @@ const routes = [
     meta: {
         title: 'Upload Image Page',
     },
+  },
+  {
+    path: "/Contact",
+    name: "GetSupport",
+    component: GetSupport,
+    meta: {
+        title: 'Contact Us Page',
+    },
+  },
+  {
+    path: "/Privacy",
+    name: "Privacy",
+    component: Privacy,
+    meta: {
+        title: 'Privacy Page',
+    },
+  },
+  {
+    path: "/Terms",
+    name: "TermsCondition",
+    component: TermsCondition,
+    meta: {
+        title: 'TermsCondition Page',
+    },
   }
 
 
@@ -193,25 +230,30 @@ const router = createRouter({
 	}
 });
 
-// router.beforeEach((to, from, next) => {
-// 	//document.title = `${to.meta.title}`;
-// 	//document.title = `${to.meta.title}`;
-//     //document.title = `${to.params.name}`;
-//     const title = to.meta.title
+router.beforeEach((to, from, next) => {
+	//document.title = `${to.meta.title}`;
+	//document.title = `${to.meta.title}`;
+    //document.title = `${to.params.name}`;
 
-//     //Take the title from the parameters
-//     const titleFromParams = to.params.name;
-//     // If the route has a title, set it as the page title of the document/page
-//     if (title) {
-//       document.title = title
-//     }
-//     // If we have a title from the params, extend the title with the title
-//     // from our params
-//     if (titleFromParams) {
-//       document.title = `${titleFromParams} - ${document.title}`;
-//     }
-// 	next();
-// });
+    if (to.name !== 'SignIn' && to.name !== 'SignUp') {
+      localStorage.setItem('previousRoute', from.fullPath);
+    }
+
+    const title = to.meta.title
+
+    //Take the title from the parameters
+    const titleFromParams = to.params.name;
+    // If the route has a title, set it as the page title of the document/page
+    if (title) {
+      document.title = title
+    }
+    // If we have a title from the params, extend the title with the title
+    // from our params
+    if (titleFromParams) {
+      document.title = `${titleFromParams} - ${document.title}`;
+    }
+	next();
+});
 
 router.beforeResolve(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {

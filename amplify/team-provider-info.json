@@ -36,12 +36,7 @@
     },
     "categories": {
       "auth": {
-        "onucowebappf6f34234": {
-          "userPoolId": "ap-south-1_iPglB2nd5",
-          "userPoolName": "onuco-userpool",
-          "webClientId": "frkqld5sne42ro78rusgcit99",
-          "nativeClientId": "frkqld5sne42ro78rusgcit99"
-        }
+        "onucowebapp26291d4f": {}
       }
     }
   }

@@ -1,45 +1,31 @@
 {
   "auth": {
-    "onucowebappf6f34234": {
+    "onucowebapp26291d4f": {
       "customAuth": false,
       "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito",
-      "serviceType": "imported"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_auth_onucowebappf6f34234_nativeClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "onucowebappf6f34234"
-        }
-      ]
-    },
-    "AMPLIFY_auth_onucowebappf6f34234_userPoolId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "onucowebappf6f34234"
-        }
-      ]
-    },
-    "AMPLIFY_auth_onucowebappf6f34234_userPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "onucowebappf6f34234"
-        }
-      ]
-    },
-    "AMPLIFY_auth_onucowebappf6f34234_webClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "onucowebappf6f34234"
-        }
-      ]
+      "service": "Cognito"
     }
   }
 }
