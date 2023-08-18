@@ -1,5 +1,5 @@
 <template>
-    <div class="category-test mt-5 ">
+    <div class="category-test pt-5">
 
         <h4 class="academic_head_text">
 
@@ -135,126 +135,8 @@
             </div>
         </div>
     </div>
-    <!-- <div class="container">
-        <div class="row pt-4">
-            <div class="col-md-3">
-                <div class="card" style="width: 100%; height: 100%;">
-                    <img class="card-img-top" src="../assets/images/java.jpg" alt="Card image cap">
-                    <div class="">
-                        <img src="../assets/images/offer.png" class="offer">
-                        <font class="offer-details"><b>20 % OFF</b></font>
-                    </div>
-                    <div class="star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">JAVA Language</h5>
-                        <p class="card-text">This course covers the basics of Java, Class, Files, error handling, data types, object, and other core Java concepts.</p>
-                        <div class="row text-left">
-                            <div class="col-md-4">
-                                <p><b>&#8377;1999</b>
-                                &#8377;<del>2099</del></p>
-                            </div>
-                            <div class="col-md-7">
-                                <a href="#" class="btn btn-primary">Buy Now</a>
-                            </div>
-                        </div>        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 100%; height: 100%;">
-                    <img class="card-img-top" src="../assets/images/java.jpg" alt="Card image cap">
-                    <div class="">
-                        <img src="../assets/images/offer.png" class="offer">
-                        <font class="offer-details"><b>20 % OFF</b></font>
-                    </div>
-                    <div class="star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Python Language</h5>
-                        <p class="card-text">This course covers the basics of Java, Class, Files, error handling, data types, object, and other core Java concepts.</p>
-                        <div class="row text-left">
-                            <div class="col-md-4">
-                                <p><b>&#8377;1999</b>
-                                &#8377;<del>2099</del></p>
-                            </div>
-                            <div class="col-md-7">
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
-                            </div>
-                        </div>        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 100%; height: 100%;">
-                    <img class="card-img-top" src="../assets/images/java.jpg" alt="Card image cap">
-                    <div class="">
-                        <img src="../assets/images/offer.png" class="offer">
-                        <font class="offer-details"><b>20 % OFF</b></font>
-                    </div>
-                    <div class="star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">CSS3 Language</h5>
-                        <p class="card-text">This course covers the basics of Java, Class, Files, error handling, data types, object, and other core Java concepts.</p>
-                        <div class="row text-left">
-                            <div class="col-md-4">
-                                <p><b>&#8377;1999</b>
-                                &#8377;<del>2099</del></p>
-                            </div>
-                            <div class="col-md-7">
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
-                            </div>
-                        </div>       
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 100%; height: 100%;">
-                    <img class="card-img-top" src="../assets/images/java.jpg" alt="Card image cap">
-                    <div class="">
-                        <img src="../assets/images/offer.png" class="offer">
-                        <font class="offer-details"><b>20 % OFF</b></font>
-                    </div>
-                    <div class="star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">JavaScript Language</h5>
-                        <p class="card-text">This course covers the basics of Java, Class, Files, error handling, data types, object, and other core Java concepts.</p>
-                        <div class="row text-left">
-                            <div class="col-md-4">
-                                <p><b>&#8377;1999</b>
-                                &#8377;<del>2099</del></p>
-                            </div>
-                            <div class="col-md-7">
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
-                            </div>
-                        </div>        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>    -->
+
+   
 </template>
 
 <script>
@@ -444,6 +326,7 @@ export default {
 .academic_head_text {
     color: #006acd;
     padding-left:20px;
+    font-size: 20px;
 
 }
 

@@ -121,6 +121,7 @@ h4 {
 }
 .instructor_head_text{
 padding: 40px 0px 20px 25px;
+font-size: 20px;
 
 }
 #Meet_text,#course_text{
@@ -178,6 +179,7 @@ padding: 40px 0px 20px 25px;
   font-weight: bold;
   color:#828282;
   font-family: 'Noto Sans', sans-serif;
+  font-size: 18px;
 
 }
 #sub_text{

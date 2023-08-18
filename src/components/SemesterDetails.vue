@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <div class="parent_block pt-4">
+        <div class="container pt-4">
         <h3 id="semester_text">{{ this.book.semester }}</h3>
         <div class="pt-3">
             <div class="row">
@@ -47,13 +47,13 @@
                             </div>
                         </div>    
                     </div>
-                    <div class="mt-5">
+                    <div class="">
                         <img src="../assets/images/video1.png" style="width: 20px; height: 20px;">&nbsp;
                         <span><span>{{ this.book.videoDemand }}</span></span>
                         <p>{{ this.book.module }}</p>
                     </div>
                     <div class="mt-3">
-                        <router-link to="/RazorPay"><button class="btn btn-dark w-100">Enroll Now</button></router-link>
+                        <button class="btn btn-dark w-100">Enroll Now</button>
                     </div>
                 </div>
             </div>
@@ -61,16 +61,17 @@
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
-                    <div class="row" v-for="(topic, index) in this.book.chapters" :key="topic.id">
+                    <div class="row" v-for="topic in this.book.chapters" :key="topic.id">
                         <div class="col-lg-6">
                             <div class="card">
                                 <h5 class="card-header">
-                                    <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
-                                        <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
+                                    <div data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
+                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
                                         {{ topic.heading }}
                                     </div>
                                 </h5>
-                                <div :id="'collapse-example' + index" class="collapse" aria-labelledby="heading-collapsed">
+                                 
+                                <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
                                     <div class="card-body">
                                         <div class="row kl">
                                             <div class="col-sm-12" v-for="lessons in topic.values" :key="lessons.cid">
@@ -91,7 +92,7 @@
                                             </div>    
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,17 +109,17 @@
         </div>
         <div class="pt-5 related-topic">
             <h3 id="relate_text">Related topic</h3>
-            <div class="row pt-3 mb-4">
+            <div class="row pt-3 mb-5">
                 
               
                
                 <div class="col-md-5 col-lg-3">
-                    <div class="card">
+                    <div class="card" id="semester_card">
                         <div class="card-title">
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>Math 1 (NEP Series)</b></p>
@@ -130,7 +131,7 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -171,12 +172,12 @@
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-3">
-                    <div class="card">
+                    <div class="card" id="semester_card">
                         <div class="card-title">
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>Artificial Intelligence</b></p>
@@ -188,7 +189,7 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -229,12 +230,12 @@
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-3">
-                    <div class="card">
+                    <div class="card" id="semester_card">
                         <div class="card-title">
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>Web Developement</b></p>
@@ -246,7 +247,7 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -287,12 +288,12 @@
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-3">
-                    <div class="card">
+                    <div class="card" id="semester_card">
                         <div class="card-title">
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>UX Designer</b></p>
@@ -304,7 +305,7 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -316,7 +317,7 @@
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8 col-9 col-sm-9">
-                                            <p><b>Subject Description</b></p>
+                                            <p class=""><b>Subject Description</b></p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/video.png" class="video">
@@ -354,16 +355,16 @@
     </div>
 </template>
 
-
 <script>
 import VideoPlayer from '../components/VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import axios from "axios";
-
+import axios from "axios"
+import Offer from './Offer.vue'
 export default {
     name: 'SemesterDetails',
     components: {
-        VideoPlayer
+        VideoPlayer,
+        Offer,
     },
     data() {
         return {
@@ -371,37 +372,27 @@ export default {
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
+                audiotrack: true,
                 controls: true,
                 width: 100,
-                techOrder: ['html5'],
-                preload: "metadata",
+                preload: "auto",
+                poster: "http://127.0.0.1:5173/assets/images/1.png",
                 sources: [
                     {  
-                        src:"https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
-                            //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
-                            withCredentials: false,
-                    }
+                        src:
+                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
+                            type: "video/mp4"
+                    },
                 ],
-                html5: {
-                    nativeVideoTracks: false,
-                    nativeAudioTracks: false,
-                    nativeTextTracks: false,
-                vhs: {
-                    overrideNative: true,
-                }
-              },
+                displayCurrentQuality: true,
                 controlBar: {
                     skipButtons: {
                         forward: 5,
                         backward: 10,
                         muteToggle: false
-                    },
+                    }
                 },
-                plugins: {
-
-                }
             },
-
             responseFromS3: '',
             imageFromS3: '',
             client : new S3Client({
@@ -413,11 +404,6 @@ export default {
             }),
         };
     }, 
-    computed: {
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        }
-    },    
     async created(){
         console.log("Hi");
         const command = new GetObjectCommand({
@@ -453,6 +439,13 @@ export default {
     padding-top:100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
+}
+#semester_text{
+    font-size: 20px;
+}
+#semester_card{
+    background: #FBAEBB;
+background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
@@ -513,6 +506,11 @@ export default {
     border: none;
     background-color: #EFF5FC;
 }
+.mn1 p{
+    font-size: 14px;
+    margin-top:15px;
+  
+   }
 .mn p {
     float: left;
 }
@@ -549,34 +547,27 @@ export default {
 
 }
 .kj .action {
-    float: right;
-    font-size: 20px;
-    width: 1.2em;
-    color: darkblue;
-    opacity: 1;
-    
+  float: right;
+  font-size: 20px;  
+  width: 1.2em;
+  color: black;
 }
-
-.kj {
-    cursor: pointer;
-    border-bottom: none;
-    color: black;
-    opacity: 1;
+.kj{
+  cursor: pointer;
+  border-bottom: none;
+  color: black;
 }
 
 
 
 .kj:not(.collapsed) .rotate-icon {
-    transform: rotate(90deg);
+  transform: rotate(180deg);
 }
-
 .video {
     width: 40px;
-    height: 40px;
+padding-top:10px;
 }
-.kl .card {
-    padding: 10px 10px 0px;
-}
+
 .kl .col-sm-7 {
     text-align: center;
 }
@@ -602,7 +593,7 @@ export default {
     padding-left: 11px;
 }
 .related-topic .card{
-    padding: 10px 10px 0px;
+    padding: 10px;
     /* background-color: #8B8989; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: black;
@@ -610,6 +601,7 @@ export default {
 }
 .mn1 p {
     float: left;
+    margin-top:0;
 }
 .mn1 img {
     float: right;
@@ -630,11 +622,7 @@ export default {
     margin: 0 auto;
     padding-top: 5%;
 }
-.video {
-    width: 40px;
-padding-top:10px;
-}
-.kl .card {
-    padding: 10px;
+#relate_text{
+font-size: 20px;
 }
 </style>

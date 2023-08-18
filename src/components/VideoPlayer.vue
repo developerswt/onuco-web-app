@@ -1,82 +1,103 @@
 <template>
-  <div>
-    <div  v-if="showPoster" class="poster-overlay">
+
+  <div class="customePlyr">
+    <video ref="videoPlayer" class="video-js vjs-layout-small "></video>
+    <div class="overlaysWrap">
       <div class="overlay-item">
         <p class="vo-question">
           Please subscribe to watch full video
         </p>
-        <div class="btnStyle" v-if="isLoggedIn">
-          <router-link to="/Razorpay"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
-        </div>
-        <div class="btnStyle" v-else>
-          <router-link to="/Login"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
+        <div class="btnStyle">
+          <router-link to="/RazorPay"><button class="btn subscribeBtn" >SUBSCRIBE</button></router-link>
         </div>
       </div>
       
     </div>
-    <video ref="videoPlayer" class="video-js .vjs-progress-control vjs-default-button vjs-big-play-centered vjs-layout-small" v-else></video>
-  </div>
+</div> 
 </template>
-
+  
 <script>
 import videojs from 'video.js';
+// import "@silvermine/videojs-quality-selector/dist/css/quality-selector.css";
+// import "@silvermine/videojs-quality-selector";
+import "videojs-max-quality-selector";
+import "videojs-contrib-quality-levels";
 
 export default {
   name: 'VideoPlayer',
+  emits: ["playerReady"],
   props: {
     options: {
       type: Object,
       default() {
         return {};
       }
-    },
+    }
   },
   data() {
     return {
-      showPoster: false,
       player: null,
-      progressControl: null,
-      isPaused: false,
-      isHidden: false
-
+      whereYouAt: null,
+      ready: false,
     }
   },
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.IsLoggedIn;
-    }
-  }, 
+  
   mounted() {
+    // if (!videojs.getPlugin('qualityLevels')) {
+    //   videojs.registerPlugin('qualityLevels', qualityLevels);
+    // }
+    // if (!videojs.getPlugin('videojsqualityselector')) {
+    //   videojs.registerPlugin('videojsqualityselector', videojsqualityselector);
+    // }
+    
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
-      this.player.log('onPlayerReady', this);
-      this.player.controlBar.progressControl.disable();
-    });
+      // this.player.controlBar.addChild('QualitySelector');
 
-    this.player.on('timeupdate', () => {
-      console.log(this.player.currentTime());
-      if (this.player.currentTime() >= 18 && !this.showPoster) {
-          this.showPoster = true;
-          this.player.pause();
-      }
+    this.player.on('timeupdate', function() {
+        console.log(this.currentTime())
+        if(Math.round(this.currentTime())== 5) {
+          this.pause();
+            var parent = this.el().parentNode;
+		        var closeBtn = parent.querySelector('.overlaysWrap');
+            closeBtn.style.visibility='visible';
+            this.player.controls= false; 
+        }
+      })
+      
+      // this.player.hlsQualitySelector = hlsQualitySelector;
+      // this.player.hlsQualitySelector();      
+      // this.player.hlsQualitySelector = videojsqualityselector;
+      // this.player.hlsQualitySelector({
+      //       displayCurrentQuality: true,
+      // });
+  
+      this.player.log('onPlayerReady', this);
     });
-    this.player.on('ended', () => {
-      if (this.showPoster) {
-        this.showPoster = false;
-      }
-    });
+    
   },
-  beforeDestroy() {
+
+  methods: {
+    getCurrentTime() {
+      return this.player.getCurrentTime();
+    },
+    playerReady(status) {
+      this.$emit("playerReady", status);
+    },
+    showOverlay() {
+    },
+    
+  },
+  beforeUnmount() {
     if (this.player) {
       this.player.dispose();
     }
-  }
-}
-</script>
+  },
 
 
-<style scoped>
-/* Add your custom styles here */
+};
+  </script>
 
+  <style scoped>
 .video-js {
     position: relative !important;
     width: 100% !important;
@@ -85,23 +106,8 @@ export default {
     
 
 }
-.poster-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-
-.overlaysWrap {
-    /* visibility: hidden; */
-    /* pointer-events: none; */
+.overlaysWrap{
+    visibility: hidden;
     position: absolute;
     top: 0;
     color: #FFF;
@@ -115,13 +121,12 @@ export default {
 .subscribeBtn {
   color: #ffff;
   background-color: red;
-  font-size: 15px;
 }
-.customePlyr {
+.customePlyr{
   position: relative;
 }
 .overlay-item {
-  position: absolute;
+  position: relative;
     display: block;
     /* justify-content: center; */
     top: 50%;
@@ -134,8 +139,6 @@ export default {
 .vo-question{
   font-size: 15px;
 }
-
-
 
 
 </style>

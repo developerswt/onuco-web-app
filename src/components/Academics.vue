@@ -1,30 +1,28 @@
 <template>
-    <div class="category-test pt-5 pb-5 ">
+    <div class="category-test pt-5 ">
         <h4 class="academic_head_text">
        
             <span id="aca_text">Available</span>Academics
             <router-link to="/Courses" >See all</router-link>
         </h4>
+             
     </div>
+  
     <div class="mb">
       
          
        
-       
+          
 
         <div class="parent_blocks">
         <div  v-for="item in academia" :key="item.id">
             <div class="box1">
                 <router-link v-bind:to="{ name:'Branches', params:{name: item.academiaName}}" style="color: white;text-decoration: none;"> 
                 <div class="box">
-                    
                     <img src="../assets/images/book.png" class="icon">
                     <div class="top">
-                        <span class="wr">04</span>
+                        <span class="wr">05{{ item.count }}</span>
                     </div>
-                    <!-- <div class="top" v-for="(group, id) in groupedItems" :key="id">
-                        <span class="wr" v-if="item.id == id">{{ group.length }}</span>
-                    </div> -->
                     <div class="card-body">
                         <div class="card-title">
                             <p class="ty1">COURSES</p>
@@ -38,13 +36,8 @@
          
         
     </div> 
-            
-
-            
-
-
-       
-    </div>
+   
+</div>
 </template>
 
 <script>
@@ -58,20 +51,7 @@ export default {
    
     data() {
         return {
-            academia: [],
-            branches: []
-        }
-    },
-    computed: {
-        groupedItems() {
-            const grouped = {};
-            this.branches.forEach(item => {
-                if (!grouped[item.academyId]) {
-                    grouped[item.academyId] = [];
-                }
-                grouped[item.academyId].push(item);
-            });
-            return grouped;
+            academia: []
         }
     },
     async created() {
@@ -79,9 +59,6 @@ export default {
             const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches`);
-            this.branches = result.data;
-            console.log(this.branches);
         } catch (error) {
             console.log(error);
         }
@@ -202,6 +179,7 @@ export default {
         justify-content: center !important;
 
     }
+ 
 }
 
 @media only screen and (max-width: 912px) {
@@ -269,7 +247,7 @@ router-link {
 @media screen and (min-width: 100px) and (max-width: 450px) {
     .wr {
         position: relative;
-        left: 35px;
+      
         top: -87px;
     }
 }
@@ -277,7 +255,7 @@ router-link {
 @media screen and (min-width: 650px) and (max-width: 912px) {
     .wr {
         position: relative;
-        left: 63px;
+      
         top: -87px;
     }
 }
@@ -285,7 +263,7 @@ router-link {
 @media screen and (min-width: 450px) and (max-width: 650px) {
     .wr {
         position: relative;
-        left: 48px;
+        left: 30px;
         top: -87px;
     }
 }
@@ -293,6 +271,7 @@ router-link {
    .academic_head_text{
     color:#006acd;
     padding-left:20px;
+    font-size: 20px;
 
    }
 
@@ -305,7 +284,8 @@ router-link {
 .parent_blocks{
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content:space-between;
+    margin:30px 0px 30px 0px;
 }
 </style>
 
