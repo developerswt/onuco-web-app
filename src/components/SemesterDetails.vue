@@ -61,17 +61,16 @@
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
-                    <div class="row" v-for="topic in this.book.chapters" :key="topic.id">
+                    <div class="row" v-for="(topic, index) in this.book.chapters" :key="topic.id">
                         <div class="col-lg-6">
                             <div class="card">
                                 <h5 class="card-header">
-                                    <div data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
+                                    <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                                        <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                         {{ topic.heading }}
                                     </div>
                                 </h5>
-                                 
-                                <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
+                                <div :id="'collapse-example' + index" class="collapse" aria-labelledby="heading-collapsed">
                                     <div class="card-body">
                                         <div class="row kl">
                                             <div class="col-sm-12" v-for="lessons in topic.values" :key="lessons.cid">
@@ -92,7 +91,7 @@
                                             </div>    
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -414,6 +413,11 @@ export default {
             }),
         };
     }, 
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        }
+    },    
     async created(){
         console.log("Hi");
         const command = new GetObjectCommand({
@@ -545,22 +549,27 @@ export default {
 
 }
 .kj .action {
-  float: right;
-  font-size: 20px;  
-  width: 1.2em;
-  color: black;
+    float: right;
+    font-size: 20px;
+    width: 1.2em;
+    color: darkblue;
+    opacity: 1;
+    
 }
-.kj{
-  cursor: pointer;
-  border-bottom: none;
-  color: black;
+
+.kj {
+    cursor: pointer;
+    border-bottom: none;
+    color: black;
+    opacity: 1;
 }
 
 
 
 .kj:not(.collapsed) .rotate-icon {
-  transform: rotate(180deg);
+    transform: rotate(90deg);
 }
+
 .video {
     width: 40px;
     height: 40px;

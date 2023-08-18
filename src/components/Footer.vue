@@ -6,7 +6,7 @@
                 <p>@ 2023 onuco.com All rights reserved.</p>
             </div>
             <div class="col-md-6 social-link">
-                <p>Communities | Courses | Trainers | FAQs | Blog | Privacy | Terms of Service</p>
+                <p>Communities | Courses | Trainers | FAQs | Blog |<router-link to="/Privacy" style="color: white; text-decoration: none;"> Privacy </router-link> | <router-link to="/Terms" style="color: white; text-decoration: none;"> Terms of Service</router-link></p>
                 <p>Email: name@example.com Call: 9845098450</p>
                 <p>Connect with Us:
                     <i class="fa fa-facebook"></i>&nbsp;

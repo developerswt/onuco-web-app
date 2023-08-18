@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid jk">
-
-        <div class="error_parent_block">
+        <div class="error_parent_block pt-5">
             <div class="row">
                 <div class="col-lg-12">
                     <h2 id="top_text"> 404 </h2>
@@ -30,6 +29,10 @@
 </script>
 
 <style scoped>
+.jk {
+    background-color: #EFF5FC;
+    margin-top: 80px;
+}
 #below_text {
 
     font-size: 30px;
@@ -47,9 +50,9 @@
     margin-bottom: 0;
 }
 
-.error_parent_block {
-    margin-top: 150px;
-}
+/* .error_parent_block {
+    margin-top: 70px;
+} */
 .error_image_block{
     text-align: center;
     margin:70px;
