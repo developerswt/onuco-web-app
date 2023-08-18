@@ -1,11 +1,11 @@
 <template>
     <Carousel />
-    <!-- <Carouseltwo /> -->
+    <Carouseltwo />
   
  
 
     <div class="container-fluid jk">
-        <div class="container">
+        <div class="container" id="home_container">
             <Academics />
         <TopRatedCourses />
         <BestLecture />
@@ -14,7 +14,7 @@
     </div>
     <Offer />
     <div class="container-fluid content">
-        <div class="container">
+        <div class="container" >
             <div class="Opt-in">
                 <h4>Opt-in for Onuco Content</h4>
                 <form>
@@ -36,7 +36,7 @@ import Carousel from "./Carousel.vue"
 import TopRatedCourses from "./TopRatedCourses.vue"
 import BestLecture from "./BestLecture.vue"
 import Offer from './Offer.vue'
-// import Carouseltwo from './Carouseltwo.vue'
+import Carouseltwo from './Carouseltwo.vue'
 
 
 export default {
@@ -47,7 +47,7 @@ export default {
         TopRatedCourses,
         BestLecture,
         Offer,
-        // Carouseltwo
+        Carouseltwo
        
     }
 }
@@ -70,6 +70,7 @@ export default {
         width:auto !important;
         font-size: 15px !important;
     }
+
 }
 .content {
     top: 1582px;

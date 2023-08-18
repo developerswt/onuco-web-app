@@ -171,7 +171,7 @@ export default {
         margin-bottom: 55px;
     }
     .academic_head_text{
-        font-size: 18px;
+        font-size: 18px !important;
         padding-left:0 !important;
 
     }

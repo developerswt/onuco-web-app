@@ -19,10 +19,10 @@
               <div class="col-lg-12">
                 <div class="merged_block">
                   <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 col-6 col-sm-6">
                       <input type="text" id="carousel_input" placeholder="Your@email address">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-6 col-sm-6">
                       <button id="carousel_button">Free Sign up</button>
                     </div>
                   </div>
@@ -54,9 +54,6 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-
-
 </template>
 
 <script>
@@ -214,4 +211,110 @@ export default {
 
 }
 
-</style>
+@media (max-width:600px) {
+
+  .child_class,
+  .child_class_one {
+    height: 250px;
+  }
+
+  .parent_class {
+    margin-top: 30px;
+    padding: 20px;
+    margin-bottom: 0;
+  }
+
+  .carousel-control-prev {
+    display: none;
+
+  }
+
+  .carousel-control-next {
+
+    display: none;
+  }
+
+  .carousel-item img {
+    display: none;
+
+  }
+
+  .merged_block {
+    margin-top: 20px;
+
+  }
+
+  .right_carousel_block h4 {
+    font-size: 18px;
+  }
+
+  .right_carousel_block p {
+    font-size: 15px;
+  }
+
+  #carousel_button {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+
+@media (max-width:1024px) {
+
+  .child_class,
+  .child_class_one {
+    height: 250px;
+  }
+
+  .parent_class {
+    margin-top: 30px;
+    padding: 20px;
+    margin-bottom: 0;
+  }
+
+  .carousel-control-prev {
+    display: none;
+
+  }
+
+  .carousel-control-next {
+
+    display: none;
+  }
+
+  .carousel-item img {
+    display: none;
+
+  }
+
+  .merged_block {
+    margin-top: 20px;
+
+  }
+
+  .right_carousel_block h4 {
+    font-size: 18px;
+  }
+
+  .right_carousel_block p {
+    font-size: 15px;
+  }
+
+  #carousel_button {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+#carouselExampleControls {
+  display: none;
+}
+
+
+@media (max-width:1024px) {
+  #carouselExampleControls {
+    display: block;
+  }
+}</style>

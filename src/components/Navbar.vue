@@ -288,4 +288,12 @@ justify-content: center;
     max-width: 1350px;
     margin:0 auto;
 }
+
+@media only screen and (min-width: 992px) and (max-width: 1400px) {
+    .nav-link{
+        font-size: 15px;
+    }
+}
+
+
 </style>

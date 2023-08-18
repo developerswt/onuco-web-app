@@ -193,6 +193,7 @@ h1 {
   position: relative;
   perspective: 1000px;
   transform-style: preserve-3d;
+  margin-top:40px;
 }
 
 #slider label {
@@ -328,4 +329,21 @@ h1 {
 #carousel_input::placeholder {
   color: white !important;
 }
+
+@media (max-width: 600px) {
+ 
+  #slider{
+    display: none;
+
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  #slider{
+    margin-top:40px;
+
+  }
+}
+
+
 </style>

@@ -74,17 +74,17 @@
                                 <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
                                     <div class="card-body">
                                         <div class="row kl">
-                                            <div class="col-sm-12" v-for="lessons in topic.values" :key="lessons.cid">
-                                                <div class="card">
+                                            <div class="col-lg-12" v-for="lessons in topic.values" :key="lessons.cid">
+                                                <div class="card" id="tab_card">
                                                     <div class="row">
-                                                        <div class="col-sm-2 col-lg-2 col-md-1">
+                                                        <div class="col-sm-1 col-1 col-lg-2 col-md-1">
                                                             <p style="padding-top:10px;"> {{ lessons.cid }} </p>
                                                         </div>
-                                                        <div class="col-sm-12 col-lg-7 col-md-8">
-                                                            <p class="mb-0">{{ lessons.lesson }}<br>{{ lessons.time }}</p>
+                                                        <div class="col-sm-7  col-7 col-lg-7 col-md-8">
+                                                            <p class="mb-0" id="lesson_text">{{ lessons.lesson }}<br>{{ lessons.time }}</p>
                                                             
                                                         </div>
-                                                        <div class="col-sm-12 col-lg-3 text-center col-md-3">
+                                                        <div class="col-sm-3 col-3 col-lg-3 text-right col-md-3">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
@@ -434,6 +434,9 @@ export default {
 </script>
 
 <style scoped>
+#tab_card{
+    padding:10px;
+}
 
 .jk {
     padding-top:100px;
@@ -443,7 +446,7 @@ export default {
 #semester_text{
     font-size: 20px;
 }
-#semester_card{
+#semester_card,#tab_card{
     background: #FBAEBB;
 background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
 }
@@ -469,6 +472,12 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
    .related-topic .card{
     margin:10px;
 
+   }
+   .video{
+    text-align: right;
+   }
+   #lesson_text{
+    font-size:15px;
    }
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
@@ -500,6 +509,9 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
     font-size: 14px;
     margin-top:10px;
   
+   }
+   #lesson_text{
+    font-size:15px;
    }
 }
 .mn {
@@ -574,21 +586,7 @@ padding-top:10px;
 .kl .col-sm-3 {
     text-align: right;
 }
-@media screen and (max-width: 600px) {
-    .kl .col-sm-2 {
-        float: left;
-        width: 19%;
-    }
-    .kl .col-sm-3 {
-        float: right;
-        width: 20%;
-    }
-    .kl .col-sm-7 {
-        text-align: left;
-        width: 61%;
-        font-size: 16px;
-    }
-}
+
 .related-topic {
     padding-left: 11px;
 }
