@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
-        <div class="container-fluid">
+        <div class="container">
           
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -83,6 +83,8 @@ export default {
         async logout() {
             try {
                 await Auth.signOut();
+                await Auth.forgetDevice();
+                console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
                 this.$router.push("/Login");
             } catch (error) {

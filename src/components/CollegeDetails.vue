@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <div class="parent_block pt-4">
+        <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
         </h4>
@@ -31,27 +31,51 @@
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
-                                                <div class="col-md-12 mn">
-                                                    <p><b>Math 1 (NEP Series)</b><br><small>18CS81&nbsp;&nbsp;&nbsp;&nbsp;240 hrs</small></p>
-                                                
-                                                    <img src="../assets/images/share.png" class="icon">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
+                                                                </div>
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                   
+                                                        </div>
+                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/share.png" class="icon">
+                                                        </div>
+                                                    </div>  
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12 mn">
-                                                    <p><b>{{ cou.description }}</b></p>
-                                                    <p>{{ cou.actualPrice }}</p>
-                                                    <p>{{ cou.discountedPrice }}</p>
-                                                    <img src="../assets/images/video.png" class="video">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
+                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
+                                                        </div>
+                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/video.png" class="video">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12 mn1">
-                                                    <i class="fa fa-star"></i>
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-half-full"></i>
                                                     <i class="fa fa-star-o"></i>
-                                                    <p>(23 reviews)</p>
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +136,7 @@ export default {
 .academic_head_text {
     color: #006acd;
     padding: 0px 60px 0px 0px;
-
+    font-size: 20px;
 
 }
 
@@ -185,6 +209,17 @@ export default {
     #sem_description{
         font-size: 15px;
     }
+    #sub_text,#code_text{
+        font-size:13px;
+        color:black;
+    }
+                                                           
+    #desc_text{
+        font-size: 13px;
+    }
+    #review_text{
+        font-size: 13px;
+    }
   
     
 }
@@ -201,6 +236,17 @@ export default {
         padding: 0 !important;
 
 
+    }
+    #sub_text,#code_text{
+        font-size:13px;
+        color:black;
+    }
+                                                           
+    #desc_text{
+        font-size: 13px;
+    }
+    #review_text{
+        font-size: 12px;
     }
     
 }
@@ -231,6 +277,11 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
 box-shadow: 0px 0px 9px #000000A1;
 border: 1px solid #FFFFFF;
 
+
+
+}
+#sem_card p{
+color:black;
 }
 .card-header,.card-body{
     background: #EFF5FC;
@@ -247,9 +298,7 @@ border: 1px solid #FFFFFF;
 }
 
 .video {
-    width: 70px;
-    height: 70px;
-
+    width: 50px;
 }
 
 .kl .card {
@@ -259,9 +308,6 @@ border: 1px solid #FFFFFF;
     color: black;
     cursor: pointer;
     /* background: radial-gradient(to right, darkblue, lightgray, blue); */
-    
-    
-
 }
 
 .mn p {

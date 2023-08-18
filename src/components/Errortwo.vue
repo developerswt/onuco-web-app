@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid jk">
+    <div class="container jk">
 
         <div class="error_parent_block">
             <div class="row">

@@ -1,11 +1,13 @@
 <template>
-    <div class="category-test pt-5 pb-5 ">
+    <div class="category-test pt-5 ">
         <h4 class="academic_head_text">
        
             <span id="aca_text">Available</span>Academics
             <router-link to="/Courses" >See all</router-link>
         </h4>
+             
     </div>
+  
     <div class="mb">
       
          
@@ -34,13 +36,8 @@
          
         
     </div> 
-            
-
-            
-
-
-       
-    </div>
+   
+</div>
 </template>
 
 <script>
@@ -182,6 +179,7 @@ export default {
         justify-content: center !important;
 
     }
+ 
 }
 
 @media only screen and (max-width: 912px) {
@@ -249,7 +247,7 @@ router-link {
 @media screen and (min-width: 100px) and (max-width: 450px) {
     .wr {
         position: relative;
-        left: 35px;
+      
         top: -87px;
     }
 }
@@ -257,7 +255,7 @@ router-link {
 @media screen and (min-width: 650px) and (max-width: 912px) {
     .wr {
         position: relative;
-        left: 63px;
+      
         top: -87px;
     }
 }
@@ -265,7 +263,7 @@ router-link {
 @media screen and (min-width: 450px) and (max-width: 650px) {
     .wr {
         position: relative;
-        left: 48px;
+        left: 30px;
         top: -87px;
     }
 }
@@ -273,6 +271,7 @@ router-link {
    .academic_head_text{
     color:#006acd;
     padding-left:20px;
+    font-size: 20px;
 
    }
 
@@ -285,7 +284,8 @@ router-link {
 .parent_blocks{
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content:space-between;
+    margin:30px 0px 30px 0px;
 }
 </style>
 

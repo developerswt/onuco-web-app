@@ -36,7 +36,7 @@ const formFields = {
           <img
             class="amplify-image pt-5"
             alt="Amplify logo"
-            src="http://127.0.0.1:5173/assets/images/logo.png"
+            src="../assets/images/logo.png"
           />
         </div>
       </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="jk">
-        <div class=" pt-5">
+        <div class="container pt-5">
             <div class="form_class">
                 <div class="">
                     <h3 style="font-size: 20px;color:#006acd;">Sign up and start learning</h3>

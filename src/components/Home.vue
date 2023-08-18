@@ -1,7 +1,11 @@
 <template>
     <Carousel />
+    <!-- <Carouseltwo /> -->
+  
+ 
+
     <div class="container-fluid jk">
-        <div class="acdemic_block">
+        <div class="container">
             <Academics />
         <TopRatedCourses />
         <BestLecture />
@@ -32,6 +36,8 @@ import Carousel from "./Carousel.vue"
 import TopRatedCourses from "./TopRatedCourses.vue"
 import BestLecture from "./BestLecture.vue"
 import Offer from './Offer.vue'
+// import Carouseltwo from './Carouseltwo.vue'
+
 
 export default {
     name: 'HomeView',
@@ -40,7 +46,9 @@ export default {
         Academics,
         TopRatedCourses,
         BestLecture,
-        Offer
+        Offer,
+        // Carouseltwo
+       
     }
 }
 </script>
