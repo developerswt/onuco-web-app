@@ -61,30 +61,30 @@
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
-                    <div class="row" v-for="topic in this.book.chapters" :key="topic.id">
+                    <div class="row" v-for="(topic, index) in this.book.chapters" :key="topic.id">
                         <div class="col-lg-6">
-                            <div class="card">
+                            <div class="card" >
                                 <h5 class="card-header">
-                                    <div data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block kj">
-                                        <span class="action"><i class="fa fa-angle-down rotate-icon"></i></span>
+                                    <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                                        <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                         {{ topic.heading }}
                                     </div>
                                 </h5>
                                  
-                                <div id="collapse-example1" class="collapse show" aria-labelledby="heading-example">
+                                <div :id="'collapse-example' + index" class="collapse" aria-labelledby="heading-collapsed"> 
                                     <div class="card-body">
                                         <div class="row kl">
-                                            <div class="col-sm-12" v-for="lessons in topic.values" :key="lessons.cid">
-                                                <div class="card">
+                                            <div class="col-lg-12" v-for="lessons in topic.values" :key="lessons.cid">
+                                                <div class="card" id="tab_card">
                                                     <div class="row">
-                                                        <div class="col-sm-2 col-lg-2 col-md-1">
+                                                        <div class="col-1 col-sm-1  col-lg-2 col-md-1">
                                                             <p style="padding-top:10px;"> {{ lessons.cid }} </p>
                                                         </div>
-                                                        <div class="col-sm-12 col-lg-7 col-md-8">
-                                                            <p class="mb-0">{{ lessons.lesson }}<br>{{ lessons.time }}</p>
+                                                        <div class="col-6 col-sm-6 col-lg-7 col-md-8">
+                                                            <p class="mb-0" id="lesson_text">{{ lessons.lesson }}<br>{{ lessons.time }}</p>
                                                             
                                                         </div>
-                                                        <div class="col-sm-12 col-lg-3 text-center col-md-3">
+                                                        <div class="col-3 col-sm-3 col-lg-3 text-center col-md-3">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
@@ -119,19 +119,19 @@
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-10 col-9 col-sm-9 ">
                                             <div class="row">
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-12 col-12 col-sm-12">
                                                     <p class="mb-0"><b>Math 1 (NEP Series)</b></p>
                                                 </div>
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-12 col-12 col-sm-12">
 
                                                     <small>18CS81 240 hrs</small>
                                                 </div>
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-2 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8 col-9 col-sm-9">
-                                            <p><b>Subject Description</b></p>
+                                            <p id="subject_text"><b>Subject Description</b></p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/video.png" class="video">
@@ -156,10 +156,10 @@
                             <div class="row">
                                 <div class="col-lg-12 mn2">
                                     <div class="row">
-                                        <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                                        <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                                             <p>Dr. Ashoka P R</p>
                                         </div>
-                                        <div class="col-lg-5 col-md-5 col-5 col-sm-5">
+                                        <div class="col-lg-5 col-md-5 col-12 col-sm-12">
                                             <el-rate v-model="value"  clearable />    
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-10 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>Artificial Intelligence</b></p>
@@ -189,7 +189,7 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-2 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
@@ -201,7 +201,7 @@
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8 col-9 col-sm-9">
-                                            <p><b>Subject Description</b></p>
+                                            <p id="subject_text"><b>Subject Description</b></p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/video.png" class="video">
@@ -235,7 +235,7 @@
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-10 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>Web Developement</b></p>
@@ -247,26 +247,23 @@
                                             </div>
                                         
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-2 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
-                               
-                                   
+        
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8 col-9 col-sm-9">
-                                            <p><b>Subject Description</b></p>
+                                            <p id="subject_text"> <b>Subject Description</b></p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/video.png" class="video">
                                         </div>
                                     </div>
-                                 
-                                
                                 </div>
                             </div>
                             <div class="row">
@@ -279,9 +276,6 @@
                                             <el-rate v-model="value"  clearable />    
                                         </div>
                                     </div>
-                                                                                                
-                                        
-                                   
                                 </div>
                             </div>
                         </div>
@@ -293,7 +287,7 @@
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
-                                        <div class="col-lg-10 col-md-8 col-9 col-sm-9 ">
+                                        <div class="col-lg-10 col-md-10 col-9 col-sm-9 ">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <p class="mb-0"><b>UX Designer</b></p>
@@ -303,28 +297,23 @@
                                                     <small>18CS81 240 hrs</small>
                                                 </div>
                                             </div>
-                                        
                                         </div>
-                                        <div class="col-lg-2 col-md-4 col-3 col-sm-3">
+                                        <div class="col-lg-2 col-md-2 col-3 col-sm-3">
                                             <img src="../assets/images/share.png" class="icon">
                                         </div>
                                     </div>
-                               
-                                   
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 mn1">
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8 col-9 col-sm-9">
-                                            <p class=""><b>Subject Description</b></p>
+                                            <p class="" id="subject_text"><b>Subject Description</b></p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-3 col-sm-3">
                                             <img src="../assets/images/video.png" class="video">
                                         </div>
                                     </div>
-                                 
-                                
                                 </div>
                             </div>
                             <div class="row">
@@ -337,17 +326,11 @@
                                             <el-rate v-model="value"  clearable />    
                                         </div>
                                     </div>
-                                                                                                
-                                        
-                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                
-            
             </div>
         </div>
         </div>
@@ -372,26 +355,35 @@ export default {
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
-                audiotrack: true,
                 controls: true,
                 width: 100,
-                preload: "auto",
-                poster: "http://127.0.0.1:5173/assets/images/1.png",
+                techOrder: ['html5'],
+                preload: "metadata",
                 sources: [
                     {  
-                        src:
-                            "https://d1ezh61feed07z.cloudfront.net/CAD_PROJECTION_OF_LINES_PROBLEM_1_RR.mp4",
-                            type: "video/mp4"
-                    },
+                        src:"https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                            //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                            withCredentials: false,
+                    }
                 ],
-                displayCurrentQuality: true,
+                html5: {
+                    nativeVideoTracks: false,
+                    nativeAudioTracks: false,
+                    nativeTextTracks: false,
+                vhs: {
+                    overrideNative: true,
+                }
+              },
                 controlBar: {
                     skipButtons: {
                         forward: 5,
                         backward: 10,
                         muteToggle: false
-                    }
+                    },
                 },
+                plugins: {
+
+                }
             },
             responseFromS3: '',
             imageFromS3: '',
@@ -460,11 +452,10 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
     font-size: 15px;
     margin-top:20px;
    }
-   .related-topic{
-    padding:0 !important;
-   }
+
    #relate_text{
     font-size: 18px;
+    padding-left:12px;
    }
    .related-topic .card{
     margin:10px;
@@ -491,6 +482,7 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
    }
    #relate_text{
     font-size: 18px;
+
    }
    .related-topic .card{
     margin:10px;
@@ -544,51 +536,45 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
     border: 1px solid black;
     margin-top: 2%;
     width: 100%;
+    
 
 }
 .kj .action {
-  float: right;
-  font-size: 20px;  
-  width: 1.2em;
-  color: black;
+    float: right;
+    font-size: 20px;
+    width: 1.2em;
+    color: darkblue;
+    opacity: 1;
+    
 }
-.kj{
-  cursor: pointer;
-  border-bottom: none;
-  color: black;
+
+.kj {
+    cursor: pointer;
+    border-bottom: none;
+    color: black;
+    opacity: 1;
 }
 
 
 
 .kj:not(.collapsed) .rotate-icon {
-  transform: rotate(180deg);
+    transform: rotate(90deg);
 }
+
+#tab_card{
+    background: #FBAEBB;
+background: radial-gradient(at left top, #FBAEBB, #B6DEF5); 
+padding:15px;
+}
+
+
+
 .video {
     width: 40px;
 padding-top:10px;
 }
 
-.kl .col-sm-7 {
-    text-align: center;
-}
-.kl .col-sm-3 {
-    text-align: right;
-}
-@media screen and (max-width: 600px) {
-    .kl .col-sm-2 {
-        float: left;
-        width: 19%;
-    }
-    .kl .col-sm-3 {
-        float: right;
-        width: 20%;
-    }
-    .kl .col-sm-7 {
-        text-align: left;
-        width: 61%;
-        font-size: 16px;
-    }
-}
+
 .related-topic {
     padding-left: 11px;
 }
@@ -624,5 +610,37 @@ padding-top:10px;
 }
 #relate_text{
 font-size: 20px;
+}
+#subject_text{
+        padding-top:15px;
+    }
+
+@media (max-width: 600px) {
+    #lesson_text{
+        font-size: 15px;
+    }
+    #subject_text{
+        padding-top:15px;
+    }
+    .related-topic{
+        padding-left:0;
+
+    }
+}
+@media (max-width: 1024px) {
+    #lesson_text{
+        font-size: 18px;
+    }
+    #subject_text{
+        padding-top:15px;
+    }
+    .related-topic{
+        padding-left:0;
+
+    }
+    #relate_text{
+        padding-left:12px;
+
+    }
 }
 </style>

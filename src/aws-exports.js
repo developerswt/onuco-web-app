@@ -3,42 +3,48 @@
 
 const awsmobile = {
     "aws_project_region": "ap-south-1",
-    "aws_cognito_identity_pool_id": "ap-south-1:ebd00c46-6842-4fdf-bd0f-df2059586414",
     "aws_cognito_region": "ap-south-1",
-    "aws_user_pools_id": "ap-south-1_UZtYUjSLh",
-    "aws_user_pools_web_client_id": "21pl350kvj63fvs4mor1f79af",
+    "aws_user_pools_id": "ap-south-1_iPglB2nd5",
+    "aws_user_pools_web_client_id": "3gu6ajbr3irftjaa210bei16j5",
     "oauth": {
-        "domain": "default-onucoapp.auth.ap-south-1.amazoncognito.com",
         "scope": [
-            "phone",
             "email",
             "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
+            "phone"
         ],
-        "redirectSignIn": "http://localhost:5173/",
-        "redirectSignOut": "http://localhost:5173/Login/",
-        "responseType": "code"
+        "redirectSignIn": "https://onuco-web.s3-website.ap-south-1.amazonaws.com/",
+        "redirectSignOut": "https://onuco-web.s3-website.ap-south-1.amazonaws.com/Login",
+        "responseType": "token"
     },
     "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_username_attributes": [
-        "EMAIL",
-        "PHONE_NUMBER"
-    ],
-    "aws_cognito_social_providers": [],
-    "aws_cognito_signup_attributes": [
         "EMAIL"
+    ],
+    "aws_cognito_social_providers": [
+        "GOOGLE"
+    ],
+    "aws_cognito_signup_attributes": [
+        "NAME",
+        "PICTURE",
+        "EMAIL",
+        "GENDER",
+        "BIRTHDATE",
+        "PHONE_NUMBER",
+        "ADDRESS"
     ],
     "aws_cognito_mfa_configuration": "OFF",
-    "aws_cognito_mfa_types": [
-        "SMS"
-    ],
+    "aws_cognito_mfa_types": [],
     "aws_cognito_password_protection_settings": {
         "passwordPolicyMinLength": 8,
-        "passwordPolicyCharacters": []
+        "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+        ]
     },
     "aws_cognito_verification_mechanisms": [
-        "EMAIL"
+        "PHONE_NUMBER"
     ]
 };
 
