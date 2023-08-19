@@ -48,7 +48,7 @@
 }
 
 .error_parent_block {
-    margin-top: 150px;
+    margin-top: 85px;
 }
 .error_image_block{
     text-align: center;
@@ -58,8 +58,11 @@
     margin:40px;
 }
 .button_block .btn{
-    width:10%;
+    width:20%;
   padding:10px;
+}
+#top_text{
+    margin-top: 100px;
 }
 
 @media (min-width: 320px) and (max-width: 575.98px){
@@ -73,10 +76,13 @@
         margin-bottom:30px;
     }
     .button_block .btn{
-        width:100%;
+        width:auto;
     }
     .error_image_block{
         margin:20px;
+    }
+    #top_text{
+        margin-top:30px;
     }
 }
 

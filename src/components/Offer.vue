@@ -175,4 +175,18 @@ h2 {
     align-items: center;
     justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+    #offer_block{
+        padding:0px 0px 70px 15px;
+    }   
+    
+}
+@media (max-width: 1024px) {
+    #offer_block{
+        padding:0px 0px 70px 0px;
+    }   
+   
+    
+}
 </style>
