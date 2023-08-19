@@ -1,9 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import LoginPage from "./components/LoginPage.vue";
+import SignUpPage from "./components/SignUpPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
 import SemesterDetails from './components/SemesterDetails.vue';
+import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
@@ -15,11 +17,6 @@ import Faq from './components/Faq.vue';
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
-import Picture from './components/Picture.vue';
-import GetSupport from './components/GetSupport.vue';
-import Privacy from './components/Privacy.vue';
-import TermsCondition from './components/TermsCondition.vue';
-
 
 
 let user;
@@ -31,7 +28,7 @@ getUser().then((user) => {
 });
 
 function getUser() {
-    return  Auth.currentAuthenticatedUser().then((data) => {
+    return Auth.currentAuthenticatedUser().then((data) => {
         if (data && data.signInUserSession) {
             store.commit('setUser', data);
             return data;
@@ -50,17 +47,12 @@ Hub.listen("auth", async (data) => {
     // } else
     if (data.payload.event === 'signIn') {
         user = await getUser();
-        const previousRoute = localStorage.getItem('previousRoute');
-        if (previousRoute) {
-        // Clear the stored previous route from local storage
-          localStorage.removeItem('previousRoute');
-          router.push(previousRoute);
-        } else {
-        // If no previous route is stored, navigate to a default route
-          router.push('/');
-        }
-        // router.push({path: '/'});
+        await Auth.rememberDevice();
+        console.log('Signed in and remembered device');
+        router.push({path: '/'});
         store.commit('isLoggedIn', true);
+        localStorage.setItem('username', JSON.stringify(user.attributes));
+
     }
 });
 
@@ -93,14 +85,21 @@ const routes = [
   },
 
   {
-    path: "/:pathMatch(.*)*",
-    name: "PageNotFound",
+    path: "/errortwo",
+    name: "Errortwo",
     component: Errortwo,
     meta: {
         title: '',
     },
   },
-  
+  {
+    path: "/Signup",
+    name: "SignUpPage",
+    component: SignUpPage,
+    meta: {
+        title: 'Sign Up And Start Learning',
+    },
+  },
   {
     path: "/Academia/:name",
     name: "Branches",
@@ -122,7 +121,7 @@ const routes = [
     name: "CollegeDetails",
     component: CollegeDetails,
     meta: {
-        title: 'College Semaster Details Page',
+        title: 'College Semaster details Page',
     },
   },
   {
@@ -130,7 +129,15 @@ const routes = [
     name: "SemesterDetails",
     component: SemesterDetails,
     meta: {
-        title: 'Semaster Details Page',
+        title: 'Semaster details Page',
+    },
+  },
+  {
+    path: "/FileUpload",
+    name: "FileUpload",
+    component: FileUpload,
+    meta: {
+        title: 'File Upload Page',
     },
   },
   {
@@ -138,7 +145,7 @@ const routes = [
     name: "Universities",
     component: Universities,
     meta: {
-        title: 'Universities Details Page',
+        title: 'Universities Upload Page',
     },
   },
   {
@@ -172,38 +179,6 @@ const routes = [
     meta: {
         title: 'Amount Payment Page',
     },
-  },
-  {
-    path: "/Picture",
-    name: "Picture",
-    component: Picture,
-    meta: {
-        title: 'Upload Image Page',
-    },
-  },
-  {
-    path: "/Contact",
-    name: "GetSupport",
-    component: GetSupport,
-    meta: {
-        title: 'Contact Us Page',
-    },
-  },
-  {
-    path: "/Privacy",
-    name: "Privacy",
-    component: Privacy,
-    meta: {
-        title: 'Privacy Page',
-    },
-  },
-  {
-    path: "/Terms",
-    name: "TermsCondition",
-    component: TermsCondition,
-    meta: {
-        title: 'TermsCondition Page',
-    },
   }
 
 
@@ -230,30 +205,25 @@ const router = createRouter({
 	}
 });
 
-router.beforeEach((to, from, next) => {
-	//document.title = `${to.meta.title}`;
-	//document.title = `${to.meta.title}`;
-    //document.title = `${to.params.name}`;
+// router.beforeEach((to, from, next) => {
+// 	//document.title = `${to.meta.title}`;
+// 	//document.title = `${to.meta.title}`;
+//     //document.title = `${to.params.name}`;
+//     const title = to.meta.title
 
-    if (to.name !== 'SignIn' && to.name !== 'SignUp') {
-      localStorage.setItem('previousRoute', from.fullPath);
-    }
-
-    const title = to.meta.title
-
-    //Take the title from the parameters
-    const titleFromParams = to.params.name;
-    // If the route has a title, set it as the page title of the document/page
-    if (title) {
-      document.title = title
-    }
-    // If we have a title from the params, extend the title with the title
-    // from our params
-    if (titleFromParams) {
-      document.title = `${titleFromParams} - ${document.title}`;
-    }
-	next();
-});
+//     //Take the title from the parameters
+//     const titleFromParams = to.params.name;
+//     // If the route has a title, set it as the page title of the document/page
+//     if (title) {
+//       document.title = title
+//     }
+//     // If we have a title from the params, extend the title with the title
+//     // from our params
+//     if (titleFromParams) {
+//       document.title = `${titleFromParams} - ${document.title}`;
+//     }
+// 	next();
+// });
 
 router.beforeResolve(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {

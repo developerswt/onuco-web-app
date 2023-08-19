@@ -21,23 +21,5 @@
         }
       }
     }
-  },
-  "onucoapp": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-onucowebapp-onucoapp-113813-authRole",
-      "UnauthRoleArn": "arn:aws:iam::454745128608:role/amplify-onucowebapp-onucoapp-113813-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::454745128608:role/amplify-onucowebapp-onucoapp-113813-authRole",
-      "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-onucowebapp-onucoapp-113813-deployment",
-      "UnauthRoleName": "amplify-onucowebapp-onucoapp-113813-unauthRole",
-      "StackName": "amplify-onucowebapp-onucoapp-113813",
-      "StackId": "arn:aws:cloudformation:ap-south-1:454745128608:stack/amplify-onucowebapp-onucoapp-113813/f7905960-35b1-11ee-90f9-0aeff1a16484",
-      "AmplifyAppId": "d2xvbimwrc3cfg"
-    },
-    "categories": {
-      "auth": {
-        "onucowebapp26291d4f": {}
-      }
-    }
   }
 }

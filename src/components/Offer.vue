@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid" >
-        <div class="offer_block">
+        <div class="container" id="offer_block">
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Refer</span>And Learn Free
@@ -150,6 +150,7 @@ h2 {
 
 .academic_head_text {
     color: #006acd;
+    font-size: 20px;
 
 }
 
@@ -160,10 +161,9 @@ h2 {
     padding-right: 10px;
 }
 
-.offer_block {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 50px 0px 150px 15px;
+#offer_block {
+   
+    padding: 0px 0px 150px 15px;
    
 }
 .add{

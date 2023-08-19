@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid jk">
+    <div class="container jk">
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>
@@ -11,7 +11,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid">
+                                            <img src="../assets/images/Mask Group 1.png" class="img-fluid">
                                         </div>
 
                                     </div>
@@ -74,19 +74,19 @@
             <section id="Course_section">
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
                 <div class="row">
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
-                            <div class="card">
+                            <div class="card" id="instructor_card">
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col-md-12 ">
 
                                             <div class="card_top_text">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-10">
                                                         <p><b>Math 1 (NEP Series)</b></p>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-2">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -96,18 +96,18 @@
                                                         <p id="small_text">240
                                                             hrs</p>
                                                     </div>
-                                                    <div class="col-lg-8 col-9 col-sm-9">
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
                                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
-                                                    <div class="col-lg-4 col-3 col-sm-3">
+                                                    <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons"><i class="fa fa-star"></i><i
+                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                                             (23
@@ -121,20 +121,19 @@
                             </div>
                         </router-link>
                     </div>
-
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
-                            <div class="card">
+                            <div class="card" id="instructor_card">
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col-md-12 ">
 
                                             <div class="card_top_text">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-10">
                                                         <p><b>Math 1 (NEP Series)</b></p>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-2">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -144,18 +143,18 @@
                                                         <p id="small_text">240
                                                             hrs</p>
                                                     </div>
-                                                    <div class="col-lg-8 col-9 col-sm-9">
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
                                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
-                                                    <div class="col-lg-4 col-3 col-sm-3">
+                                                    <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons"><i class="fa fa-star"></i><i
+                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                                             (23
@@ -169,24 +168,27 @@
                             </div>
                         </router-link>
                     </div>
+                    
                 </div>
             </section>
             <section id="non_course_section">
                 <h5 class="course_text"><span id="course_text">Non-Academic Courses</span> (10)</h5>
                 <div class="row">
-                    <div class="col-md-6 col-lg-3">
+                    
+
+                    <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
-                            <div class="card">
+                            <div class="card" id="instructor_card">
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col-md-12 ">
 
                                             <div class="card_top_text">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-10">
                                                         <p><b>Math 1 (NEP Series)</b></p>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-2">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -196,18 +198,18 @@
                                                         <p id="small_text">240
                                                             hrs</p>
                                                     </div>
-                                                    <div class="col-lg-8 col-9 col-sm-9">
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
                                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
-                                                    <div class="col-lg-4 col-3 col-sm-3">
+                                                    <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons"><i class="fa fa-star"></i><i
+                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                                             (23
@@ -221,20 +223,19 @@
                             </div>
                         </router-link>
                     </div>
-
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
-                            <div class="card">
+                            <div class="card" id="instructor_card">
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col-md-12 ">
 
                                             <div class="card_top_text">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-10">
                                                         <p><b>Math 1 (NEP Series)</b></p>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-2">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -244,18 +245,18 @@
                                                         <p id="small_text">240
                                                             hrs</p>
                                                     </div>
-                                                    <div class="col-lg-8 col-9 col-sm-9">
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
                                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
-                                                    <div class="col-lg-4 col-3 col-sm-3">
+                                                    <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
                                                             <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons"><i class="fa fa-star"></i><i
+                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                                             (23
@@ -356,7 +357,7 @@
                             </h2>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -375,7 +376,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -394,7 +395,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -413,7 +414,7 @@
                             </div>
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -433,7 +434,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -454,7 +455,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -473,7 +474,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -492,7 +493,7 @@
 
                             <div class="row" id="row_block">
                                 <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
+                                    <img src="../assets/images/maskGroup 29.png" class="img-fluid" />
                                 </div>
                                 <div class="col-lg-10 col-9 col-sm-9 col-md-9">
                                     <div class="row">
@@ -662,8 +663,9 @@
 
         
         </div>
-        <Offer />
+      
     </div>
+    <Offer />
 </template>
 
 <script>
@@ -683,6 +685,12 @@ export default {
     padding-top: 5%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
+}
+#instructor_card{
+    background: #FBAEBB;
+    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+    box-shadow: 0px 0px 9px #000000A1;
+    border: 1px solid #FFFFFF;
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
@@ -825,16 +833,12 @@ export default {
 }
 
 .card {
-    border: 1px solid black;
-    /* background: rgb(2,0,36);
-    background: linear-gradient(180deg,lightblue 5%, blue, 20%, darkblue 100%);  */
+  
     margin-bottom: 4%;
     margin-top: 20px;
     width: 100%;
     color: black;
-    background: transparent radial-gradient(closest-side at 77% 22%, #FFFFFF 0%, #FAFAFA 0%, #F6F6F6 0%, lightgray 100%) 0% 0% no-repeat padding-box;
-    box-shadow: 0px 0px 6px #000000CC;
-    mix-blend-mode: luminosity;
+   
     padding: 10px;
 
 }
@@ -919,7 +923,7 @@ export default {
 #Course_section,
 #non_course_section,
 #tab_block {
-    margin-top: 30px;
+    margin: 30px 0px 20px 15px;
 }
 
 .el-tabs__content,
@@ -1010,4 +1014,8 @@ export default {
     #education_text{
         font-size:18px;
     }
-}</style>
+}
+.course_text{
+    font-size: 20px;
+}
+</style>

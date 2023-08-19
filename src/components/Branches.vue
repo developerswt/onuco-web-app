@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <div class="parent_block pt-4">
+        <div class="container pt-4">
             <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
         <div class="parent_blocks">
             <div class="row pt-4">
@@ -271,5 +271,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content:flex-start;
+}
+#available_text{
+font-size: 20px;
 }
 </style>

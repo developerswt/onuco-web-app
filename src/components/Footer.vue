@@ -1,20 +1,23 @@
 <template>
     <div class="container-fluid footer">
-        <div class="row">
-            <div class="col-md-6">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-5">
                 <img src="../assets/images/UNUCO_LOGO.png" class="footer-logo">
-                <p>@ 2023 onuco.com All rights reserved.</p>
+                <p style="color:white;">@ 2023 onuco.com All rights reserved.</p>
             </div>
-            <div class="col-md-6 social-link">
-                <p>Communities | Courses | Trainers | FAQs | Blog |<router-link to="/Privacy" style="color: white; text-decoration: none;"> Privacy </router-link> | <router-link to="/Terms" style="color: white; text-decoration: none;"> Terms of Service</router-link></p>
+            <div class="col-md-7 social-link">
+                <p>Communities | Courses | Trainers | FAQs | Blog | Privacy | Terms of Service</p>
                 <p>Email: name@example.com Call: 9845098450</p>
                 <p>Connect with Us:
-                    <i class="fa fa-facebook"></i>&nbsp;
-                    <i class="fas fa-twitter"></i>&nbsp;
-                    <i class="fa fa-google"></i>
+                    <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>&nbsp;
+                    <i class="fa-brands fa-twitter" style="color: #ffffff;"></i>&nbsp;
+                    <i class="fa-brands fa-google" style="color: #ffffff;"></i>
                 </p>
             </div>
         </div>
+        </div>
+   
     </div>
 </template>
 

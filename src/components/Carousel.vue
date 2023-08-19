@@ -2,17 +2,48 @@
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-
-        <img class="img-fluid" src="../assets/images/1.png" alt="First slide">
-
-
+        <div class="parent_class">
+          <div class="child_class">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="right_carousel_block">
+                  <h4>One App Many Benifits</h4>
+                  <p>An Affordable learning platform <br> for better academic results</p>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="image_class">
+                  <img src="../assets/images/mg25.png" class="img-fluid">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="merged_block">
+                  <div class="row">
+                    <div class="col-lg-8 col-6 col-sm-6">
+                      <input type="text" id="carousel_input" placeholder="Your@email address">
+                    </div>
+                    <div class="col-lg-4 col-6 col-sm-6">
+                      <button id="carousel_button">Free Sign up</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="carousel-item">
-        <img class="img-fluid" src="../assets/images/2.png" alt="Second slide">
+        <div class="parent_class">
+          <div class="child_class_one">
+            <div class="right_carousel_block">
+              <h4>Refer a Friend</h4>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="carousel-item">
-        <img class="img-fluid" src="../assets/images/3.jpg" alt="Third slide">
-      </div>
+
+
+
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -58,15 +89,17 @@ export default {
     width: 100%;
   }
 }
-@media (min-width : 768px) and (min-width : 991.92px)  {
-  .carousel-item img{
+
+@media (min-width : 768px) and (min-width : 991.92px) {
+  .carousel-item img {
     width: 100%;
     height: 350px;
   }
-  .carousel-item{
+
+  .carousel-item {
     height: auto !important;
   }
-  
+
 }
 
 .carousel {
@@ -78,8 +111,8 @@ export default {
   width: 100%;
   height: 350px;
   object-fit: contain;
-  padding: 20px;
-
+  padding: 10px;
+  margin-top: -112px;
 }
 
 @media screen and (max-width: 768px) {
@@ -97,6 +130,191 @@ export default {
 
   height: 350px;
   width: 100%;
-  background: white;
 
+
+}
+
+.parent_class {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+.child_class {
+  padding: 20px;
+  margin: 0 auto;
+  background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  height: 227px;
+}
+
+.child_class_one {
+  padding: 20px;
+  margin: 0 auto;
+  background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  height: 227px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right_carousel_block {
+  padding: 10px;
+  color: white;
+}
+
+#carousel_input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 0px 0px 10px;
+
+}
+
+#carousel_button {
+  height: 45px;
+  padding: 0px 50px 0px 50px;
+  background: white;
+  color: #0066CC;
+  border-radius: 22px;
+  float: right;
+}
+
+.merged_block {
+  border: 1px solid white;
+  border-radius: 30px;
+  padding: 4px;
+  margin-top: -118px;
+}
+
+#carousel_input::placeholder {
+  color: white !important;
+}
+
+.carousel-control-prev-icon {
+  background: url('../assets/images/left-arrow.png');
+  background-position: center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.carousel-control-next-icon {
+  background: url('../assets/images/right-arrow.png');
+  background-position: center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+
+}
+
+@media (max-width:600px) {
+
+  .child_class,
+  .child_class_one {
+    height: 250px;
+  }
+
+  .parent_class {
+    margin-top: 30px;
+    padding: 20px;
+    margin-bottom: 0;
+  }
+
+  .carousel-control-prev {
+    display: none;
+
+  }
+
+  .carousel-control-next {
+
+    display: none;
+  }
+
+  .carousel-item img {
+    display: none;
+
+  }
+
+  .merged_block {
+    margin-top: 20px;
+
+  }
+
+  .right_carousel_block h4 {
+    font-size: 18px;
+  }
+
+  .right_carousel_block p {
+    font-size: 15px;
+  }
+
+  #carousel_button {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+
+@media (max-width:1024px) {
+
+  .child_class,
+  .child_class_one {
+    height: 250px;
+  }
+
+  .parent_class {
+    margin-top: 30px;
+    padding: 20px;
+    margin-bottom: 0;
+  }
+
+  .carousel-control-prev {
+    display: none;
+
+  }
+
+  .carousel-control-next {
+
+    display: none;
+  }
+
+  .carousel-item img {
+    display: none;
+
+  }
+
+  .merged_block {
+    margin-top: 20px;
+
+  }
+
+  .right_carousel_block h4 {
+    font-size: 18px;
+  }
+
+  .right_carousel_block p {
+    font-size: 15px;
+  }
+
+  #carousel_button {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+#carouselExampleControls {
+  display: none;
+}
+
+
+@media (max-width:1024px) {
+  #carouselExampleControls {
+    display: block;
+  }
 }</style>

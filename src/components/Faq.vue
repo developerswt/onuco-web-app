@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <div class="parent_block">
+        <div class="container">
             <img src="../assets/images/FAQs-amico.png" class="img-fluid">
 
 

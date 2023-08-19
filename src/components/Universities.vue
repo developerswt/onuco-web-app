@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid jk">
+    <div class="container jk">
         <div class="parent_block pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
@@ -154,6 +154,7 @@ export default {
 .academic_head_text {
     color: #006acd;
     padding: 0px 60px 0px 0px;
+    font-size: 20px;
 
 
 }

@@ -1,12 +1,12 @@
-// import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate'
 import { createStore } from 'vuex'
 
 export default createStore ({
-    // plugins: [
-    //     createPersistedState({
-    //         storage: window.sessionStorage,
-    //     })
-    // ],
+    plugins: [
+        createPersistedState({
+            storage: window.sessionStorage,
+        })
+    ],
     state: {
         cart: [],
         webinar: '',
@@ -100,9 +100,6 @@ export default createStore ({
         setToken(state, token) {
             state.token = token;
         },
-        clearUser(state) {
-            state.user = '';
-        }
         
     },
 
