@@ -14,6 +14,7 @@ import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
 import Faq from './components/Faq.vue';
+import Search from './components/Search.vue'
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
@@ -83,7 +84,14 @@ const routes = [
         title: '',
     },
   },
-
+  {
+    path: "/search",
+    name: "Search",
+    component: Search,
+    meta: {
+        title: '',
+    },
+  },
   {
     path: "/errortwo",
     name: "Errortwo",

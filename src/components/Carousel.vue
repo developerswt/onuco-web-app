@@ -256,6 +256,10 @@ export default {
     padding: 10px;
     font-size: 12px;
   }
+  .carousel{
+    margin-top:70px !important;
+
+  }
 }
 
 
@@ -304,6 +308,10 @@ export default {
   #carousel_button {
     padding: 10px;
     font-size: 12px;
+  }
+  .carousel{
+    margin-top:70px !important;
+
   }
 }
 

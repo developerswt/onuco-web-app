@@ -1,10 +1,13 @@
 <template>
-    <div class="category-test pt-5 pb-3">
-        <h4 class="academic_head_text">
+    <div class="category-test pt-3">
+        <div class="container">
+            <h4 class="academic_head_text">
 
-            <span id="aca_text">Best</span>Lecturers
-            <router-link to="#">See all</router-link>
-        </h4>
+<span id="aca_text">Best</span>Lecturers
+<router-link to="#">See all</router-link>
+</h4>
+        </div>
+    
     </div>
 
         <div class="container-fluid">
@@ -108,6 +111,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
+    padding-right:20px;
 }
 
 /* .user-icon {
@@ -138,7 +142,7 @@ export default {
 .user-following p {
     position: relative;
     top: -30px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
     width: 100%;
     line-height: 2%;
@@ -193,7 +197,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     font-size: 20px;
 
 }
@@ -207,7 +211,7 @@ export default {
 
 @media (max-width: 768px) {
     .academic_head_text {
-        font-size: 18px;
+        font-size: 18px !important;
         padding-left: 0 !important;
 
     }

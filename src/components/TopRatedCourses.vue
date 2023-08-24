@@ -1,11 +1,14 @@
 <template>
-    <div class="category-test pt-5">
+    <div class="category-test pt-3">
+        <div class="container">
+            <h4 class="academic_head_text">
 
-        <h4 class="academic_head_text">
+<span id="aca_text">Top</span>Rated Academics
+<router-link to="#">See all</router-link>
+</h4>
+        </div>
 
-            <span id="aca_text">Top</span>Rated Academics
-            <router-link to="#">See all</router-link>
-        </h4>
+     
     </div>
     <div class="container-fluid mb">
         <div class="row mt-5">
@@ -157,6 +160,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
+    padding-right:20px;
 }
 
 /* .box .offer {
@@ -230,8 +234,7 @@ export default {
 }
 
 .box {
-    top: 168px;
-    left: 697px;
+ 
     height: auto;
     /* UI Properties */
     width: 24%;
@@ -264,7 +267,7 @@ export default {
         top: -200px;
     }
     .academic_head_text{
-        font-size: 18px;
+        font-size: 18px !important;
         padding-left:0 !important;
 
     }
@@ -297,8 +300,8 @@ export default {
 }
 
 .price a {
-    width: 50%;
-    margin-left: 10%;
+    width: 60%;
+    float:right;
 
 }
 
@@ -325,7 +328,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding-left:20px;
+    /* padding-left:20px; */
     font-size: 20px;
 
 }

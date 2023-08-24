@@ -6,7 +6,7 @@
                 <span id="aca_text">Refer</span>And Learn Free
 
             </h4>
-            <div class="">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-lg-7">
                         <div class="box mt-3">
@@ -151,6 +151,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
+    padding-left:20px;
 
 }
 
@@ -174,5 +175,19 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    #offer_block{
+        padding:0px 0px 70px 15px;
+    }   
+    
+}
+@media (max-width: 1024px) {
+    #offer_block{
+        padding:0px 0px 70px 0px;
+    }   
+   
+    
 }
 </style>

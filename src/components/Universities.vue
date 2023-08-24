@@ -129,8 +129,8 @@ export default {
 }
 .box p {
     font: normal normal 300 12px/14px Segoe UI;
-    
-    text-align: left;
+        font-weight:bold;
+    text-align: left;   
     
     letter-spacing: 0px;
     color: #000000;
