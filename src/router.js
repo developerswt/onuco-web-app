@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import LoginPage from "./components/LoginPage.vue";
-import SignUpPage from "./components/SignUpPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
 import SemesterDetails from './components/SemesterDetails.vue';
@@ -18,7 +17,9 @@ import Search from './components/Search.vue'
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
-
+import Privacy from "./components/Privacy.vue"
+import TermsCondition from "./components/TermsCondition.vue"
+import GetSupport from "./components/GetSupport.vue"
 
 let user;
 
@@ -48,11 +49,12 @@ Hub.listen("auth", async (data) => {
     // } else
     if (data.payload.event === 'signIn') {
         user = await getUser();
-        await Auth.rememberDevice();
-        console.log('Signed in and remembered device');
-        router.push({path: '/'});
+        // await Auth.rememberDevice();
+        // console.log('Signed in and remembered device');
+        router.go(-1);
+        // router.push({path: '/'});
         store.commit('isLoggedIn', true);
-        localStorage.setItem('username', JSON.stringify(user.attributes));
+        // localStorage.setItem('username', JSON.stringify(user.attributes));
 
     }
 });
@@ -93,21 +95,14 @@ const routes = [
     },
   },
   {
-    path: "/errortwo",
-    name: "Errortwo",
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
     component: Errortwo,
     meta: {
         title: '',
     },
   },
-  {
-    path: "/Signup",
-    name: "SignUpPage",
-    component: SignUpPage,
-    meta: {
-        title: 'Sign Up And Start Learning',
-    },
-  },
+  
   {
     path: "/Academia/:name",
     name: "Branches",
@@ -187,7 +182,32 @@ const routes = [
     meta: {
         title: 'Amount Payment Page',
     },
-  }
+  },
+  {
+    path: "/Privacy",
+    name: "Privacy",
+    component: Privacy,
+    meta: {
+        title: 'Privacy Page',
+    },
+  },
+  {
+    path: "/Terms",
+    name: "TermsCondition",
+    component: TermsCondition,
+    meta: {
+        title: 'Terms Condition Page',
+    },
+  },
+  {
+    path: "/Contact",
+    name: "GetSupport",
+    component: GetSupport,
+    meta: {
+        title: 'ContactUs Page',
+    },
+  },
+  
 
 
 ];
@@ -213,25 +233,25 @@ const router = createRouter({
 	}
 });
 
-// router.beforeEach((to, from, next) => {
-// 	//document.title = `${to.meta.title}`;
-// 	//document.title = `${to.meta.title}`;
-//     //document.title = `${to.params.name}`;
-//     const title = to.meta.title
+router.beforeEach((to, from, next) => {
+	//document.title = `${to.meta.title}`;
+	//document.title = `${to.meta.title}`;
+    //document.title = `${to.params.name}`;
+    const title = to.meta.title
 
-//     //Take the title from the parameters
-//     const titleFromParams = to.params.name;
-//     // If the route has a title, set it as the page title of the document/page
-//     if (title) {
-//       document.title = title
-//     }
-//     // If we have a title from the params, extend the title with the title
-//     // from our params
-//     if (titleFromParams) {
-//       document.title = `${titleFromParams} - ${document.title}`;
-//     }
-// 	next();
-// });
+    //Take the title from the parameters
+    const titleFromParams = to.params.name;
+    // If the route has a title, set it as the page title of the document/page
+    if (title) {
+      document.title = title
+    }
+    // If we have a title from the params, extend the title with the title
+    // from our params
+    if (titleFromParams) {
+      document.title = `${titleFromParams} - ${document.title}`;
+    }
+	next();
+});
 
 router.beforeResolve(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -240,7 +260,7 @@ router.beforeResolve(async (to, from, next) => {
           return next({
               path: '/login'
           });
-      }
+      } 
       return next()
   }
   return next()

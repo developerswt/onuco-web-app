@@ -24,7 +24,7 @@
                         <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact">Contact Us</router-link>
                     </li>
                  
 
@@ -39,22 +39,21 @@
                   
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.userInfo.name }} 
+                            Hi {{ this.isuser.attributes.name }} 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="">Orders</router-link>
-                            <router-link class="dropdown-item" to="/UpdatedProfile">Profile</router-link>
+                            <router-link class="dropdown-item" to="/Picture">Profile</router-link>
                             <router-link class="dropdown-item" to="" @click="logout">Logout</router-link>
                             <router-link class="dropdown-item" to=""></router-link>
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/</span></router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign Up</span></router-link>
                     </li>
               
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -70,21 +69,29 @@ export default {
     name: "NavbarView",
     data() {
         return {
-            userInfo: JSON.parse(localStorage.getItem('username')),
+            // userInfo: JSON.parse(localStorage.getItem('username')),
             // userAttributes: null,
         }
     },
     computed: {
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
+        },
+        isuser() {
+          console.log(this.$store.state.user);
+          return this.$store.state.user;
+        },
+        istoken() {
+          console.log(this.$store.state.token);
+          return this.$store.state.token;
         }
     },
     methods: {
         async logout() {
             try {
                 await Auth.signOut();
-                await Auth.forgetDevice();
-                console.log('Signed out and forgot device');
+                // await Auth.forgetDevice();
+                // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
                 this.$router.push("/Login");
             } catch (error) {
