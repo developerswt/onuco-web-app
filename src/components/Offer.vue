@@ -110,8 +110,9 @@ export default {
         font-size: 15px;
     }
     .academic_head_text{
-        font-size: 18px;
-        padding-left:0 !important;
+        font-size: 15px;
+       
+        
 
     }
     .offer_block{

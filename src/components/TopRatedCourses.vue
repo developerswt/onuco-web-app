@@ -267,9 +267,13 @@ export default {
         top: -200px;
     }
     .academic_head_text{
-        font-size: 18px !important;
-        padding-left:0 !important;
+        font-size: 15px !important;
+    padding-left: 0 !important;
 
+    }
+    .category-test h4 a{
+        padding-right: 0;
+    font-size: 15px !important;
     }
 }
 

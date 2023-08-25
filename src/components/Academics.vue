@@ -121,7 +121,7 @@ export default {
 .mb .box1 {
 
     width: 122px;
-    height: 118px;
+  
     cursor: pointer;
     height: 140px;
     border: 1px solid #ccc;
@@ -169,8 +169,9 @@ export default {
 
 @media screen and (max-width: 598.98px) {
     .mb .box1 {
-        /* width: 48%; */
-        margin-bottom: 55px;
+        width: 90%;
+        margin: 30px 0px 30px 0px;
+        height:115px !important;
     }
 
     .academic_head_text {
@@ -178,7 +179,9 @@ export default {
         padding-left: 0 !important;
 
     }
-
+    .ty1{
+        top:-73px !important;
+    }
     .category-test h4 a{
         padding-right:0;
         font-size: 15px !important;
@@ -187,6 +190,11 @@ export default {
         justify-content: center !important;
 
     }
+    .ty{
+        margin-top: -100px !important;
+  
+    }
+    
 
 }
 

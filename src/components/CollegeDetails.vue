@@ -18,7 +18,7 @@
                             </div>
                         </h5>
                        
-                        <div :id="'collapse-example' + sem.id" class="collapse show" aria-labelledby="heading-collapsed">
+                        <div :id="'collapse-example' + sem.id" class="collapse" :class="{ 'show': sem.id === 1 }" aria-labelledby="heading-collapsed">
                             <div class="card-body">
                                 <div class="">
                                     <div class="row kl">

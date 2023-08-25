@@ -12,14 +12,14 @@
 
                 <form class="search-bar">
                     <div class="row">
-                        <div class="col-lg-6 col-8 col-sm-8">
+                        <div class="col-lg-6 col-8 col-sm-8 col-md-9">
                             <div class="child_class">
                                 <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
                                 <input class="text" type="search" placeholder="Search" aria-label="Search">
                             </div>
 
                         </div>
-                        <div class="col-lg-6 col-4 col-sm-4">
+                        <div class="col-lg-6 col-4 col-sm-4 col-md-3">
                             <button id="search_button">Search</button>
                         </div>
                     </div>
@@ -36,11 +36,11 @@
 
 
                                 <div class="row">
-                                    <div class="col-lg-8 col-12 col-sm-12">
+                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
                                             techniques...</p>
                                     </div>
-                                    <div class="col-lg-4 col-12 col-sm-12">
+                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
                                             <label for="label-select" id="sort_label"> Sort by:</label>
 
@@ -59,26 +59,26 @@
 
                                 <div class="tab_inner_block">
                                     <div class="row no-gutters">
-                                        <div class="col-lg-3">
-                                            <img src="../assets/images/java.jpg" class="img-fluid" />
+                                        <div class="col-lg-3 col-md-3" >
+                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
                                                 <div class="row">
-                                                    <div class="col-lg-8 col-12 col-sm-12">
+                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                         <p id="title_text" class="mb-1">VTU</p>
                                                         <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
                                                         <div class="inner_child">
                                                             <div class="row">
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-5">
                                                                     <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
                                                                 </div>
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-3">
                                                                     <p id="duration_text" class="mb-2"><img
                                                                             src="../assets/images/Icon ionic-ios-timer@2x.png">3h
                                                                         32min</p>
                                                                 </div>
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-3">
                                                                     <p id="module_text" class="mb-2"><img
                                                                             src="../assets/images/Icon map-school@2x.png">8
                                                                         modules</p>
@@ -88,8 +88,9 @@
                                                         <p id="desc_text">Data Management Systems & Visualization software
                                                             developme...</p>
                                                     </div>
-                                                    <div class="col-lg-4 text-right col-12 col-sm-12">
-                                                        <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
+                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                        <div class="right_block">
+                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
                                                             &#8377;947</p>
                                                         <button id="buy_button">Buy now</button>
                                                         <div class="icon_blck">
@@ -99,55 +100,8 @@
                                                             <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                             <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab_inner_block">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-3">
-                                            <img src="../assets/images/java.jpg" class="img-fluid" />
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="results_inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <p id="title_text" class="mb-1">VTU</p>
-                                                        <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
-                                                        <div class="inner_child">
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon ionic-ios-timer@2x.png">3h
-                                                                        32min</p>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon map-school@2x.png">8
-                                                                        modules</p>
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                        <p id="desc_text">Data Management Systems & Visualization software
-                                                            developme...</p>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                                            &#8377;947</p>
-                                                        <button id="buy_button">Buy now</button>
-                                                        <div class="icon_blck">
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,26 +110,26 @@
                                 </div>
                                 <div class="tab_inner_block">
                                     <div class="row no-gutters">
-                                        <div class="col-lg-3">
-                                            <img src="../assets/images/java.jpg" class="img-fluid" />
+                                        <div class="col-lg-3 col-md-3" >
+                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
                                                 <div class="row">
-                                                    <div class="col-lg-8">
+                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                         <p id="title_text" class="mb-1">VTU</p>
                                                         <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
                                                         <div class="inner_child">
                                                             <div class="row">
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-5">
                                                                     <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
                                                                 </div>
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-3">
                                                                     <p id="duration_text" class="mb-2"><img
                                                                             src="../assets/images/Icon ionic-ios-timer@2x.png">3h
                                                                         32min</p>
                                                                 </div>
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 col-md-3">
                                                                     <p id="module_text" class="mb-2"><img
                                                                             src="../assets/images/Icon map-school@2x.png">8
                                                                         modules</p>
@@ -185,8 +139,9 @@
                                                         <p id="desc_text">Data Management Systems & Visualization software
                                                             developme...</p>
                                                     </div>
-                                                    <div class="col-lg-4 text-right">
-                                                        <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
+                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                        <div class="right_block">
+                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
                                                             &#8377;947</p>
                                                         <button id="buy_button">Buy now</button>
                                                         <div class="icon_blck">
@@ -196,15 +151,67 @@
                                                             <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                             <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                         </div>
+                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                  
                                 </div>
+                                <div class="tab_inner_block">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-3 col-md-3" >
+                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
+                                        </div>
+                                        <div class="col-lg-9 col-md-9">
+                                            <div class="results_inner_block">
+                                                <div class="row">
+                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                        <p id="title_text" class="mb-1">VTU</p>
+                                                        <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
+                                                        <div class="inner_child">
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-md-5">
+                                                                    <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <p id="duration_text" class="mb-2"><img
+                                                                            src="../assets/images/Icon ionic-ios-timer@2x.png">3h
+                                                                        32min</p>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <p id="module_text" class="mb-2"><img
+                                                                            src="../assets/images/Icon map-school@2x.png">8
+                                                                        modules</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p id="desc_text">Data Management Systems & Visualization software
+                                                            developme...</p>
+                                                    </div>
+                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                        <div class="right_block">
+                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
+                                                            &#8377;947</p>
+                                                        <button id="buy_button">Buy now</button>
+                                                        <div class="icon_blck">
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                        </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                               
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">Config</el-tab-pane>
                             <el-tab-pane label="Author" name="third">Role</el-tab-pane>
@@ -408,6 +415,66 @@ export default {
     .select_block{
         justify-content: flex-start !important;
     }
+
+    .right_block{
+        text-align: left;
+    }
+    #sub_text{
+        font-size: 18px;
+
+    }
+    .icon_blck{
+        margin-top:15px;
+
+    }
+    .icon_blck i{
+        margin:5px;
+    }
 }
 
+@media (max-width: 1024px) {
+    .academic_head_text{
+        
+    padding-top: 25px;
+    font-size: 15px;
+    }
+    .child_class{
+        display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+    }
+    #search_button{
+        width:100%;
+        height: 100%;
+        font-size: 15px;
+    }
+   
+    #sub_text{
+        font-size: 16px;
+    }
+    .icon_blck{
+        margin-top:15px;
+
+    }    .icon_blck i{
+        margin:5px;
+    }
+    #buy_button{
+        width: 100px;
+    height: 40px;
+    font-size: 15px;
+    padding: 0;
+    }
+    #desc_text{
+        font-size: 14px;
+    }
+    #prof_text{
+        font-size: 14px;
+    }
+    #sub_image{
+        height:100% !important;
+        width:100% !important;
+        object-fit: cover;
+    }
+}
 </style>
