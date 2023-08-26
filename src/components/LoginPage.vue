@@ -1,6 +1,18 @@
 <script>
 import { Authenticator } from '@aws-amplify/ui-vue';
 import { Auth } from 'aws-amplify';
+import { I18n } from 'aws-amplify';
+
+I18n.putVocabulariesForLanguage('en', {
+  'Sign In': 'Login', // Tab header
+  'Sign in': 'Log in', // Button label,
+  'Create Account': 'Register', // Tab header
+  'Create a new account': 'New User', // Header text
+  'Sign in to your account': 'Welcome Back!',
+  Username: 'Enter your username', // Username label
+  Password: '', // Password label
+  'Forgot your password?': 'Reset Password',
+});
 
 export default {
   components: {
@@ -8,6 +20,16 @@ export default {
   },
   data() {
       return {
+        theme: {
+            name: 'pretty-princess',
+            tokens: {
+                colors: {
+                    background: {
+                        primary: { value: 'hotpink'}
+                    }
+                }
+            }
+        },
           formFields: {
               signIn: {
                   username: {
@@ -130,8 +152,9 @@ export default {
 
 
 <template>
-    <authenticator :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']" class="pt-3" style="margin-bottom: 6%;">
-      <template v-slot:header>
+    <authenticator class="custom-sign-in pt-3" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;">
+        
+        <template v-slot:header>
         <div style="padding: var(--amplify-space-large); text-align: center">
           <img
             class="amplify-image pt-5"
@@ -140,11 +163,14 @@ export default {
           />
         </div>
       </template>
-      <template v-slot="{ user, signOut }">
-        <h1>Hello {{ user.username }}!</h1>
-        <button @click="signOut">Sign Out</button>
-      </template>
+        
+        <template v-slot="{ user, signOut }">
+            <h1>Hello {{ user.username }}!</h1>
+            <button @click="signOut">Sign Out</button>
+        </template>
+  
     </authenticator>
+    
   </template>
   
 
@@ -152,9 +178,28 @@ export default {
 .amplify-button[data-variation='primary'] {
   background: linear-gradient(
     to right,
-    var(--amplify-colors-green-80),
-    var(--amplify-colors-orange-40)
+    var(var(--amplify-colors-background-tertiary)),
+    
   );
   
+}
+authenticator {
+    --background-color: lightblue;
+}
+[data-amplify-authenticator] [data-amplify-router] {
+    /* background-color: var(--amplify-components-authenticator-router-background-color); */
+    box-shadow: var(--amplify-components-authenticator-router-box-shadow);
+    border-color: var(--amplify-components-authenticator-router-border-color);
+    border-width: var(--amplify-components-authenticator-router-border-width);
+    border-style: var(--amplify-components-authenticator-router-border-style);
+}
+.amplify-divider--label:after {
+    content: attr(data-label);
+    position: absolute;
+    transform: translateY(-50%);
+    font-size: var(--amplify-components-divider-label-font-size);
+    padding-inline: var(--amplify-components-divider-label-padding-inline);
+    /* background-color: var(--amplify-components-divider-label-background-color); */
+    color: black;
 }
 </style>

@@ -1,43 +1,32 @@
 <template>
     <div class="category-test pt-5 ">
         <h4 class="academic_head_text">
-       
             <span id="aca_text">Available</span>Academics
             <router-link to="/Courses" >See all</router-link>
         </h4>
-             
     </div>
-  
     <div class="mb">
-      
-         
-       
-          
-
         <div class="parent_blocks">
-        <div  v-for="item in academia" :key="item.id">
-            <div class="box1">
-                <router-link v-bind:to="{ name:'Branches', params:{name: item.academiaName}}" style="color: white;text-decoration: none;"> 
-                <div class="box">
-                    <img src="../assets/images/book.png" class="icon">
-                    <div class="top">
-                        <span class="wr">05{{ item.count }}</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">
-                            <p class="ty1">COURSES</p>
+            <div  v-for="item in academia" :key="item.id">
+                <div class="box1">
+                    <router-link v-bind:to="{ name:'Branches', params:{name: item.academiaName}}" style="color: white;text-decoration: none;"> 
+                    <div class="box">
+                        <img src="../assets/images/book.png" class="icon">
+                        <div class="top">
+                            <span class="wr">05</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <p class="ty1">COURSES</p>
+                            </div>
                         </div>
                     </div>
+                    <p class="ty">{{ item.name }}</p>
+                    </router-link>
                 </div>
-                <p class="ty">{{ item.name }}</p>
-                </router-link>
             </div>
-        </div>
-         
-        
-    </div> 
-   
-</div>
+        </div> 
+    </div>
 </template>
 
 <script>
@@ -51,12 +40,27 @@ export default {
    
     data() {
         return {
-            academia: []
+            academia: [],
+            isuser: localStorage.getItem("username")        
         }
     },
+    computed: {
+        authorizationHeader() {
+            if (this.isLoggedIn) {
+                return `Bearer ${this.isuser}`;
+            } else {
+                return ''; // Set your dummy value here
+            }
+        },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+
+    },
     async created() {
+        const headers = { 'Authorization':  this.authorizationHeader };     
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`);
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`, { headers } );
             this.academia = res.data;
             console.log(this.academia);
         } catch (error) {
@@ -158,16 +162,16 @@ export default {
     height: 28rem;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
     .mb .box1 {
-        /* width:48%; */
-        margin-bottom: 55px;
+        width: 90%;
+        margin-bottom: 58px;
     }
 }
 
 @media screen and (max-width: 620px) {
     .mb .box1 {
-        /* width: 48%; */
+        width: 80%;
         margin-bottom: 55px;
     }
     .academic_head_text{
