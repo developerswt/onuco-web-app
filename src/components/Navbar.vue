@@ -93,6 +93,8 @@ export default {
                 // await Auth.forgetDevice();
                 // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
+                this.$store.dispatch('logout')
+                localStorage.removeItem("username");
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);

@@ -46,6 +46,11 @@ export default {
 
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
+    },
+  },
   mounted() {
     videojs.registerPlugin('qualityLevels',qualityLevels);
     videojs.registerPlugin('hlsQualitySelector',videojsqualityselector);

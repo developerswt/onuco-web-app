@@ -12,6 +12,7 @@ import ReadingFile from './components/ReadingFile.vue';
 import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
+import Picture from './components/Picture.vue';
 import Faq from './components/Faq.vue';
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
@@ -53,7 +54,8 @@ Hub.listen("auth", async (data) => {
         router.go(-1);
         // router.push({path: '/'});
         store.commit('isLoggedIn', true);
-        // localStorage.setItem('username', JSON.stringify(user.attributes));
+       
+        localStorage.setItem('username', user.signInUserSession.idToken.jwtToken);
 
     }
 });
@@ -197,6 +199,14 @@ const routes = [
     component: GetSupport,
     meta: {
         title: 'ContactUs Page',
+    },
+  },
+  {
+    path: "/Picture",
+    name: "Picture",
+    component: Picture,
+    meta: {
+        title: 'Picture Page',
     },
   },
   

@@ -9,7 +9,12 @@
             <div class="row" v-for="sem in semester" :key="sem.id" >
                 <div class="card" id="main_card">
                     <h5 class="card-header">
-                        <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                        <div class="d-block kj" data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" v-if="sem.id==1">
+                            <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
+                                <h4 id="sem_text">{{ sem.name }}</h4>
+                                <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
+                        </div>
+                        <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
@@ -22,7 +27,71 @@
                                 <p style="font-size: 14px;">{{ sem.description }}</p>
                         </a>
                     </h5> -->
-                    <div :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
+                    <div v-if="sem.id==1" id="collapse-example1" class="collapse show" aria-labelledby="heading-collapse">
+                        <div class="card-body">
+                            <div class="">
+                            <div class="row kl">
+                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
+                                    <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
+                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
+                                                                </div>
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                   
+                                                        </div>
+                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/share.png" class="icon">
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
+                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
+                                                        </div>
+                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/video.png" class="video">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-full"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </router-link>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
                         <div class="card-body">
                             <div class="">
                             <div class="row kl">
@@ -110,11 +179,25 @@ export default {
         return {
             semester: [],
             course: [],
-            university: []
+            university: [],
+            isuser: localStorage.getItem("username") 
         }
+    },
+    computer: {
+        authorizationHeader() {
+            if (this.isLoggedIn) {
+                return `Bearer ${this.isuser}`;
+            } else {
+                return ''; // Set your dummy value here
+            }
+        },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
     },
     // { 'headers': { 'Authorization': JWT tokern }}
     async created() {
+        const headers = { 'Authorization':  this.authorizationHeader };  
         try {
             const universe = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetUniversityGroupByName/` + this.$route.params.name);
             this.university = universe.data;
@@ -122,7 +205,7 @@ export default {
             const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Semester/GetSemesterListByName/` + this.$route.params.name);
             this.semester = res.data;
             console.log(this.semester);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Course`);
+            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Course`, { headers } );
             this.course = result.data;
             console.log(this.course)
         } catch (error) {
@@ -190,6 +273,17 @@ export default {
 .kj:not(.collapsed) .rotate-icon {
     transform: rotate(90deg);
 }
+.kj1 .action {
+    float: right;
+    font-size: 30px;
+    width: 1.2em;
+    color: darkblue;
+    opacity: 1;
+    
+}
+
+
+
 .jk {
     padding-top:100px ;
     background: #EFF5FC 0% 0% no-repeat padding-box;
