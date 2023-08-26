@@ -84,7 +84,7 @@ export default {
 
     }
     .box {
-        width: 250px !important; 
+        width: 300px !important; 
         margin-bottom: 5%;
       
     }
@@ -94,7 +94,7 @@ export default {
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
     .box {
-        width: 250px !important; 
+        width: 300px !important; 
         margin-bottom: 5%;
       
     }
@@ -143,8 +143,8 @@ export default {
 }
 .box p {
     font: normal normal 300 12px/14px Segoe UI;
-    
-    text-align: left;
+        font-weight:bold;
+    text-align: left;   
     
     letter-spacing: 0px;
     color: #000000;
@@ -155,13 +155,13 @@ export default {
 
 @media only screen and (min-width: 600px) and (max-width: 912px) {
     .box {
-        width: 47%;
+        width: 300px !important;
         margin-bottom: 3%;
     }
 }
 @media only screen and (min-width: 950px) and (max-width: 1024px) {
     .box {
-        width: 45%;
+        width: 300px !important;
         margin-bottom: 3%;
     }
 }

@@ -1,10 +1,13 @@
 <template>
-    <div class="category-test pt-5 pb-3">
-        <h4 class="academic_head_text">
+    <div class="category-test pt-3">
+        <div class="container">
+            <h4 class="academic_head_text">
 
-            <span id="aca_text">Best</span>Lecturers
-            <router-link to="#">See all</router-link>
-        </h4>
+<span id="aca_text">Best</span>Lecturers
+<router-link to="#">See all</router-link>
+</h4>
+        </div>
+    
     </div>
 
         <div class="container-fluid">
@@ -20,7 +23,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">Data Management Systems & Visualization software development..</div>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam corrupti esse blanditiis ipsum, sed eum iusto culpa dignissimos molestiae dolor dolores aperiam, omnis fugiat et impedit? Molestiae expedita totam, odio culpa inventore a excepturi praesentium, itaque consequatur vel delectus esse vero eum veniam nihil perspiciatis neque rerum sapiente nisi corporis?</div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -39,7 +42,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">Data Management Systems & Visualization software development..</div>
+                            <div class="card-text">..</div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -108,6 +111,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
+    padding-right:20px;
 }
 
 /* .user-icon {
@@ -138,7 +142,7 @@ export default {
 .user-following p {
     position: relative;
     top: -30px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
     width: 100%;
     line-height: 2%;
@@ -193,7 +197,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     font-size: 20px;
 
 }
@@ -206,14 +210,19 @@ export default {
 }
 
 @media (max-width: 768px) {
-    .academic_head_text {
-        font-size: 18px;
-        padding-left: 0 !important;
-
-    }
+ 
     .card-body
     {
         margin-top:0 !important;
+    }
+    .academic_head_text{
+        font-size: 15px !important;
+    padding-left: 0 !important;
+
+    }
+    .category-test h4 a{
+        padding-right: 0;
+    font-size: 15px !important;
     }
 
 }
@@ -227,5 +236,13 @@ export default {
         margin-bottom: 50px;
     }
 
-}</style>
+}
+.card-text{
+    overflow-y: scroll;
+    height:75px;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+</style>
 

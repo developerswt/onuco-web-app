@@ -48,7 +48,7 @@
 }
 
 .error_parent_block {
-    margin-top: 85px;
+    margin-top: 70px;
 }
 .error_image_block{
     text-align: center;

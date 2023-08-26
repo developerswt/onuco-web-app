@@ -4,7 +4,7 @@
   
  
 
-    <div class="container-fluid jk">
+    <div class="container-fluid jk pt-5">
         <div class="container" id="home_container">
             <Academics />
         <TopRatedCourses />
@@ -70,6 +70,11 @@ export default {
         width:auto !important;
         font-size: 15px !important;
     }
+    #home_container{
+        margin-top:0 !important;
+
+    }
+
 
 }
 .content {
@@ -147,5 +152,19 @@ export default {
 .acdemic_block{
     max-width:1300px;
     margin:0 auto;
+}
+
+#home_container{
+    margin-top:100px;
+}
+
+@media (max-width: 1024px) {
+    #home_container{
+        margin-top:0 !important;
+
+    }
+    .jk{
+    padding-top: 0 !important;
+}
 }
 </style>
