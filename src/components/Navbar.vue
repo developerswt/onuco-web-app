@@ -26,7 +26,7 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/Contact">Contact Us</router-link>
                     </li>
-
+                 
 
                 </ul>
 
@@ -107,7 +107,7 @@ export default {
 <style scoped>
 .logo {
     width: 100px;
-    height: 35px;
+    height: 42px;
 }
 
 nav {
@@ -121,9 +121,9 @@ li {
 }
 
 .navbar {
-    background: #EFF5FC 0% 0% no-repeat padding-box;
+    background: #E4F0FE 0% 0% no-repeat padding-box;
     opacity: 1;
-    padding: 20px;
+
 
 }
 

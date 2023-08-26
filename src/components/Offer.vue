@@ -6,7 +6,7 @@
                 <span id="aca_text">Refer</span>And Learn Free
 
             </h4>
-            <div class="">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-lg-7">
                         <div class="box mt-3">
@@ -110,8 +110,9 @@ export default {
         font-size: 15px;
     }
     .academic_head_text{
-        font-size: 18px;
-        padding-left:0 !important;
+        font-size: 15px;
+       
+        
 
     }
     .offer_block{
@@ -151,6 +152,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
+    padding-left:20px;
 
 }
 

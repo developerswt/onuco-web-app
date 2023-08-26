@@ -159,10 +159,10 @@
             </div>
         </div>
         </div>
-       
+
     </div>
-    
-                    
+
+
     <Offer />
 </template>
 
@@ -223,42 +223,49 @@ export default {
 
 }
 
-.parent_blocks{
+.parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content: flex-start;
 }
+
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
     padding-top: 5%;
 }
-#main_card{
-    margin:20px;
+
+#main_card {
+    margin: 20px;
 }
-#sem_text{
-    color:#707070;
-    
+
+#sem_text {
+    color: #707070;
+
 }
-#sem_description{
-    color:#777777;
-    
+
+#sem_description {
+    color: #777777;
+
 }
-#sem_icon{
-    color:#0077FF;
+
+#sem_icon {
+    color: #0077FF;
 }
+
 #aca_text {
     color: #006acd;
     font-weight: bold;
 
 }
+
 .kj .action {
     float: right;
     font-size: 30px;
     width: 1.2em;
     color: darkblue;
     opacity: 1;
-    
+
 }
 
 .kj {
@@ -285,65 +292,78 @@ export default {
 
 
 .jk {
-    padding-top:100px ;
+    padding-top: 100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-#sem_text{
-        font-size: 15px;
-        font-weight: bold;
-    }
-    #sem_description{
-        font-size: 11px;
-    }
-@media only screen and (max-width: 600px) and (min-width: 100px) {
-    #sem_text{
-        font-size: 18px;
-    }
-    #sem_description{
-        font-size: 15px;
-    }
-    #sub_text,#code_text{
-        font-size:13px;
-        color:black;
-    }
-                                                           
-    #desc_text{
-        font-size: 13px;
-    }
-    #review_text{
-        font-size: 13px;
-    }
-  
-    
+
+#sem_text {
+    font-size: 15px;
+    font-weight: bold;
 }
-@media only screen and (max-width: 1024px) and (min-width: 600px) {
-    #sem_text{
+
+#sem_description {
+    font-size: 11px;
+}
+
+@media only screen and (max-width: 600px) and (min-width: 100px) {
+    #sem_text {
         font-size: 18px;
     }
-    #sem_description{
+
+    #sem_description {
         font-size: 15px;
     }
-  
+
+    #sub_text,
+    #code_text {
+        font-size: 13px;
+        color: black;
+    }
+
+    #desc_text {
+        font-size: 13px;
+    }
+
+    #review_text {
+        font-size: 13px;
+    }
+
+
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 600px) {
+    #sem_text {
+        font-size: 18px;
+    }
+
+    #sem_description {
+        font-size: 15px;
+    }
+
     .academic_head_text {
         font-size: 18px;
         padding: 0 !important;
 
 
     }
-    #sub_text,#code_text{
-        font-size:13px;
-        color:black;
+
+    #sub_text,
+    #code_text {
+        font-size: 13px;
+        color: black;
     }
-                                                           
-    #desc_text{
+
+    #desc_text {
         font-size: 13px;
     }
-    #review_text{
+
+    #review_text {
         font-size: 12px;
     }
-    
+
 }
+
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .academic_head_text {
         font-size: 18px;
@@ -351,7 +371,7 @@ export default {
 
 
     }
-   
+
 }
 
 .card {
@@ -361,27 +381,31 @@ export default {
     border-radius: 10px;
 }
 
-#sem_card{
-/*
+#sem_card {
+    /*
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=fbaebb&c2=b6def5&gt=r&gd=dtl
 */
-background: #FBAEBB;
-background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
-box-shadow: 0px 0px 9px #000000A1;
-border: 1px solid #FFFFFF;
+    background: #FBAEBB;
+    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+    box-shadow: 0px 0px 9px #000000A1;
+    border: 1px solid #FFFFFF;
 
 
 
 }
-#sem_card p{
-color:black;
+
+#sem_card p {
+    color: black;
 }
-.card-header,.card-body{
+
+.card-header,
+.card-body {
     background: #EFF5FC;
 }
-.card-header{
-    height:65px;
+
+.card-header {
+    height: 65px;
 }
 
 .icon {
@@ -438,6 +462,4 @@ color:black;
     font-weight: bold;
     padding-right: 10px;
 
-}
-
-</style>
+}</style>

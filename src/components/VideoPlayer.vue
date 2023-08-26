@@ -24,7 +24,7 @@
 import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels  from "videojs-contrib-quality-levels";
-import videojsqualityselector from 'videojs-hls-quality-selector';
+
 
 
 export default {
@@ -151,7 +151,13 @@ export default {
   font-size: 15px;
 }
 
+@media (min-width: 768px)  and (max-width: 1024px) {
+  .video-js{
+    height:80vh !important;
+  }
+  
 .gh {
   pointer-events: none;
+}
 }
 </style>

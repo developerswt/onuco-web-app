@@ -2,6 +2,7 @@
     <div class="container-fluid jk">
         <div class="container pt-4">
         <h3 id="semester_text">{{ this.book.semester }}</h3>
+        
         <div class="pt-3">
             <div class="row">
                 <div class="col-md-6 col-12 col-sm-12">
@@ -59,6 +60,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="pt-4 topic-card">
             <el-tabs class="demo-tabs" @tab-click="handleClick">
                 <el-tab-pane label="Chapters" name="first" class="rt">
@@ -570,6 +572,11 @@ background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
     opacity: 1;
 }
 
+#tab_card{
+    background: #FBAEBB;
+background: radial-gradient(at left top, #FBAEBB, #B6DEF5); 
+padding:15px;
+}
 
 
 .kj:not(.collapsed) .rotate-icon {

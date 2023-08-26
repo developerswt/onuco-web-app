@@ -209,10 +209,13 @@ Offer
 
     }
     .box{
-        width:250px !important;
+        width:100% !important;
     }
     #available_text{
-        font-size: 18px;
+        font-size: 16px !important;
+    }
+    .jk{
+        padding-top:65px;
     }
     
 }
@@ -221,12 +224,15 @@ Offer
     #available_text{
         font-size: 20px;
     }
+    .box{
+        width:300px !important;
+    }
 }
 
 .box {
     
-    height: 95px;
-    width: 305px;
+    height: 105px;
+    width: 300px;
     box-shadow: 0px 0px 6px #000000;
     border-radius: 40px 40px 80px 40px;
     border: 1px solid #FFFFFF;
