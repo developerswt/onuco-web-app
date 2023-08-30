@@ -15,6 +15,7 @@ import Errortwo from './components/Errortwo.vue';
 import Picture from './components/Picture.vue';
 import Faq from './components/Faq.vue';
 import Search from './components/Search.vue'
+import Searchresults from './components/Searchresults.vue'
 import store from './store/store'
 import { Hub } from "@aws-amplify/core"
 import { Auth } from "@aws-amplify/auth"
@@ -96,6 +97,15 @@ const routes = [
         title: '',
     },
   },
+  {
+    path: "/searchresults",
+    name: "Searchresults",
+    component: Searchresults,
+    meta: {
+        title: '',
+    },
+  },
+
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",

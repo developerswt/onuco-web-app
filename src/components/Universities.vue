@@ -10,7 +10,7 @@
                     <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
-                                <img src="../assets/images/book1.png">
+                                <img src="../assets/images/university.png">
                             </div>
                             <div class="col-md-9 col-9 col-sm-9">
                                 <h5>{{ college.name }}</h5>
@@ -76,7 +76,8 @@ export default {
 }
 @media only screen and (max-width: 768px) and (min-width: 100px) {
     .academic_head_text{
-        font-size: 18px;
+        font-size: 16px !important;
+        padding:0 !important;
 
     }
     .parent_blocks{
@@ -84,12 +85,20 @@ export default {
 
     }
     .box {
-        width: 300px !important; 
+     
+        height: 109px !important;
+    width: 307px !important;
+    background-size: contain !important;
+ 
+    
         margin-bottom: 5%;
       
     }
     .box h5,.box p{
         padding-left:10px;
+    }
+    .jk{
+        padding-top: 65px !important;
     }
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
@@ -114,15 +123,17 @@ export default {
 
 
 .box {
-    
-    width: 350px;
-    height: 109px;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 70px 40px;
-    border: 1px solid #FFFFFF;
+    height:115px;
+    width:335px;
     cursor: pointer;
-  margin:15px;
-  padding:15px;
+    margin-bottom: 1%;
+    margin: 10px;
+    padding:20px;
+    
+    background: url('../assets/images/Path 4814@2x.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     
 }
 

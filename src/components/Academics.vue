@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" id="academy_container">
         <div class="category-test pt-3 ">
             
 
@@ -19,7 +19,8 @@
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
                             <div class="top">
-                                <span class="wr">05{{ item.count }}</span>
+                                <span class="wr">{{ item.id in groupedItems ? '0' + groupedItems[item.id].length : '00'
+                                }}</span>
                             </div>
                             <div class="card-body">
                                 <div class="card-title">
@@ -54,7 +55,8 @@ export default {
     data() {
         return {
             academia: [],
-            isuser: localStorage.getItem("username")        
+            branches: [],
+            isuser: localStorage.getItem("username")
         }
     },
     computed: {
@@ -62,26 +64,38 @@ export default {
             if (this.isLoggedIn) {
                 return `Bearer ${this.isuser}`;
             } else {
-                return ''; // Set your dummy value here
+                return 'DummyValue'; // Set your dummy value here
             }
         },
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
-       
+        groupedItems() {
+            const grouped = {};
+            this.branches.forEach(item => {
+                if (!grouped[item.academyId]) {
+                    grouped[item.academyId] = [];
+                }
+                grouped[item.academyId].push(item);
+            });
+            return grouped;
+        }
 
     },
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };     
+        const headers = { 'Authorization': this.authorizationHeader };
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`, { headers } );
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`, { headers });
             this.academia = res.data;
             console.log(this.academia);
+            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches`, { headers });
+            this.branches = result.data;
+            console.log(this.branches);
         } catch (error) {
             console.log(error);
         }
     }
-}   
+} 
 </script>
 
 
@@ -139,13 +153,17 @@ export default {
     width: 122px;
   
     cursor: pointer;
-    height: 140px;
+    height: 120px;
     border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
     /* background: rgb(2,0,36); */
-    background: transparent radial-gradient(closest-side at 77% 22%, #FFFFFF 0%, #FAFAFA 0%, #F6F6F6 0%, #0077FF 100%) 0% 0% no-repeat padding-box;
+    background: #F6F6F6;
+    background: #F6F6F6;
+background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
+
+
     transition: 0.3s;
 }
 
@@ -175,10 +193,10 @@ export default {
     height: 28rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1000px) {
     .mb .box1 {
-        width: 90%;
-        margin-bottom: 58px;
+        /* width:48%; */
+        margin-bottom: 55px;
     }
   
 }
@@ -187,7 +205,6 @@ export default {
     .mb .box1 {
         width: 90%;
         margin: 30px 0px 30px 0px;
-        height:115px !important;
     }
 
     .academic_head_text {
@@ -195,9 +212,7 @@ export default {
         padding-left: 0 !important;
 
     }
-    .ty1{
-        top:-73px !important;
-    }
+
     .category-test h4 a{
         padding-right:0;
         font-size: 15px !important;
@@ -207,7 +222,7 @@ export default {
 
     }
     .ty{
-        margin-top: -100px !important;
+        margin-top: -78px;
   
     }
     
@@ -266,7 +281,7 @@ export default {
 }
 
 .ty {
-    margin-top: -70px;
+    margin-top: -94px;
     font-size: 14px;
     color: black;
     text-align: center;
@@ -277,7 +292,7 @@ export default {
     font-size: 14px;
     color: white;
     position: relative;
-    top: -59px;
+    top: -76px;
     text-align: center;
 }
 
@@ -317,7 +332,7 @@ router-link {
 
 .academic_head_text {
     color: #006acd;
-    padding-left: 20px;
+
     font-size: 20px;
 
 }
@@ -334,5 +349,11 @@ router-link {
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 30px 0px 30px 0px;
-}</style>
+}
+
+#academy_container{
+    padding:15px 0px 15px 0px;
+}
+
+</style>
 

@@ -3,15 +3,15 @@
         <div class="container">
             <h4 class="academic_head_text">
 
-<span id="aca_text">Top</span>Rated Academics
-<router-link to="#">See all</router-link>
-</h4>
+                <span id="aca_text">Top</span>Rated Courses
+                <router-link to="#">See all</router-link>
+            </h4>
         </div>
 
-     
+
     </div>
     <div class="container-fluid mb">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="box">
                 <router-link to="/Universities" style="text-decoration: none;">
                     <div class="wer">
@@ -138,8 +138,6 @@
             </div>
         </div>
     </div>
-
-   
 </template>
 
 <script>
@@ -160,7 +158,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-    padding-right:20px;
+    padding-right: 20px;
 }
 
 /* .box .offer {
@@ -234,7 +232,7 @@ export default {
 }
 
 .box {
- 
+
     height: auto;
     /* UI Properties */
     width: 24%;
@@ -259,21 +257,23 @@ export default {
 
     .box .offer {
         position: absolute;
-    top: -13px;
+        top: -13px;
     }
 
     .offer-details {
         position: relative;
         top: -200px;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         font-size: 15px !important;
-    padding-left: 0 !important;
+        padding-left: 0 !important;
 
     }
-    .category-test h4 a{
+
+    .category-test h4 a {
         padding-right: 0;
-    font-size: 15px !important;
+        font-size: 15px !important;
     }
 }
 
@@ -290,11 +290,12 @@ export default {
         margin-bottom: 3%;
     }
 }
+
 @media (min-width: 768px) and (max-width: 991.92px) {
-    .academic_head_text{
-        font-size: 20px ;
+    .academic_head_text {
+        font-size: 20px;
     }
-    
+
 }
 
 .price p {
@@ -305,7 +306,7 @@ export default {
 
 .price a {
     width: 60%;
-    float:right;
+    float: right;
 
 }
 
@@ -343,6 +344,5 @@ export default {
     font-weight: bold;
     padding-right: 10px;
 }
-
 </style>
 

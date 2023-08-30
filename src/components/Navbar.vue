@@ -2,31 +2,32 @@
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
         <div class="container">
-          
+
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
-            <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
+            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
             <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
 
+           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/">Home</router-link>
+                    <li class="nav-item active">
+                        <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Courses">Courses</router-link>
+                        <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contact">Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                     </li>
-                 
+
 
                 </ul>
 
@@ -36,10 +37,11 @@
                         <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
                         <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
                     </form>
-                  
+
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.attributes.name }} 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Picture">Profile</router-link>
@@ -48,9 +50,10 @@
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign Up</span></router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
+                                Up</span></router-link>
                     </li>
-              
+
                     <!-- <li class="nav-item">
                         <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
                     </li> -->
@@ -78,12 +81,12 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-          console.log(this.$store.state.user);
-          return this.$store.state.user;
+            console.log(this.$store.state.user);
+            return this.$store.state.user;
         },
         istoken() {
-          console.log(this.$store.state.token);
-          return this.$store.state.token;
+            console.log(this.$store.state.token);
+            return this.$store.state.token;
         }
     },
     methods: {
@@ -100,6 +103,15 @@ export default {
                 alert(error.message);
             }
         },
+
+        setActive(index) {
+            if (this.activeIndex !== null) {
+                this.navItems[this.activeIndex].active = false;
+            }
+            this.activeIndex = index;
+            this.navItems[this.activeIndex].active = true;
+        }
+
     },
 }
 </script>
@@ -181,27 +193,31 @@ li>a:hover:before {
     .gh1 {
         display: none;
     }
-    .search-bar{
+
+    .search-bar {
         justify-content: space-between;
-        margin-right:0 !important;
+        margin-right: 0 !important;
 
     }
-    
-    .parent_blocks{
-justify-content: center;
+
+    .parent_blocks {
+        justify-content: center;
     }
-    .nav-link{
+
+    .nav-link {
         font-size: 15px;
 
     }
-   
+
 }
+
 @media (min-width: 768px) and (max-width: 992.92px) {
-    .search-bar{
+    .search-bar {
         justify-content: space-between;
-    margin-right: 0 !important;
+        margin-right: 0 !important;
     }
 }
+
 /* .search-bar {
    
     background: rgba(255, 255, 255, 0.2);
@@ -293,16 +309,22 @@ justify-content: center;
     left: -10px;
     bottom: 30%;
 }
-.container-fluid{
+
+.container-fluid {
     max-width: 1350px;
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1400px) {
-    .nav-link{
+    .nav-link {
         font-size: 15px;
     }
 }
 
+
+
+.router-link-exact-active {
+        border-bottom: 3px solid blue;
+    }
 
 </style>

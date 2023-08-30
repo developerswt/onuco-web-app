@@ -109,15 +109,17 @@ export default {
 
 .box {
     
-    height: 95px;
-    width: 305px;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 80px 40px;
-    border: 1px solid #FFFFFF;
+    height:115px;
+    width:360px;
     cursor: pointer;
-    margin-bottom: 0%;
-    margin: 20px;
-    padding:15px;
+    margin-bottom: 1%;
+    margin: 10px;
+    padding:20px;
+    
+    background: url('../assets/images/Path 4814@2x.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     
 }

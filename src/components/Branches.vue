@@ -209,7 +209,10 @@ Offer
 
     }
     .box{
-        width:100% !important;
+        height: 109px !important;
+    width: 307px !important;
+    background-size: contain !important;
+ 
     }
     #available_text{
         font-size: 16px !important;
@@ -231,15 +234,17 @@ Offer
 
 .box {
     
-    height: 105px;
-    width: 300px;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 80px 40px;
-    border: 1px solid #FFFFFF;
+    height:115px;
+    width:335px;
     cursor: pointer;
     margin-bottom: 1%;
-    margin: 20px;
-    padding:15px;
+    margin: 10px;
+    padding:20px;
+    
+    background: url('../assets/images/Path 4814@2x.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     
 }
