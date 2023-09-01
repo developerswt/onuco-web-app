@@ -29,14 +29,41 @@
                  
 
                 </ul>
+                <ul class="navbar-nav ml-auto" style="width: 200px;" v-if="showSearchBox">
+                    <el-row class="demo-autocomplete">
+                        <el-col :span="26">
+                            <el-autocomplete
+                                v-model="searchTerm"
+                                :fetch-suggestions="querySearch"
+                                :trigger-on-focus="false"
+                                value-key="semester"
+                                class="inline-input w-100"
+                                clearable
+                                @select="handleSelect"
+                            
+                                placeholder="Search..."
+                            >
+                            <template #append>
+                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                </el-icon>
+                            </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
+                </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    <form class="search-bar">
-                        <input class="text" type="search" placeholder="Search" aria-label="Search">
-                        <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
-                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                    </form>
-                  
+                    <!-- <form class="search-bar" v-if="showSearchBox">
+                        <input class="text" type="search" v-model="searchTerm" @input="handleInput" placeholder="Search" aria-label="Search" style="cursor: pointer;">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc; cursor: pointer;" @click="submit"></i>
+                        <ul v-if="showSuggestions" class="suggestion-dropdown">
+                            <li v-for="(suggestion, index) in filteredSuggestions" :key="index" @click="selectSuggestion(displayValue(suggestion))">
+                                {{ displayValue(suggestion) }}
+                            </li>
+                        </ul>
+                    </form> -->
+                            
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi {{ this.isuser.attributes.name }} 
@@ -51,9 +78,7 @@
                         <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign Up</span></router-link>
                     </li>
               
-                    <!-- <li class="nav-item">
-                        <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
-                    </li> -->
+                    
                 </ul>
             </div>
         </div>
@@ -63,14 +88,20 @@
 
 <script>
 import { Auth } from 'aws-amplify';
-
+import axios from 'axios';
 
 export default {
     name: "NavbarView",
+    props: {
+        showSearchBox: Boolean,
+    },
     data() {
         return {
-            // userInfo: JSON.parse(localStorage.getItem('username')),
-            // userAttributes: null,
+            searchTerm: null,
+            suggestions: [],
+            showSuggestions: false,
+            dataarray: [],
+             
         }
     },
     computed: {
@@ -87,6 +118,29 @@ export default {
         }
     },
     methods: {
+        handleKeyEnter(item){
+            this.$router.push({ path: '/search', query: { data: item } });
+            
+        },
+        handleSelect (item){
+            console.log(item);
+        // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
+            
+        },
+        querySearch(queryString,cb) {
+            console.log(queryString)
+            let results = queryString ? this.createFilter(queryString) : this.dataarray;
+            console.log(results);
+            cb(results);
+        },
+        createFilter(queryString) {
+                console.log("queryString",queryString)
+                axios.get("https://localhost:7233/api/Coursedetails/search?semester=" + this.searchTerm)
+		.then((res) => (this.dataarray = res.data));
+                console.log(this.dataarray);
+                return this.dataarray;
+            
+        },
         async logout() {
             try {
                 await Auth.signOut();
@@ -94,14 +148,15 @@ export default {
                 // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
                 this.$store.dispatch('logout')
-                localStorage.removeItem("username");
+                localStorage.removeItem("username")
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }
         },
     },
-}
+
+}    
 </script>
 
 <style scoped>
@@ -256,14 +311,14 @@ justify-content: center;
 }
 
 .search-bar {
-    background: #FFFFFF7D 0% 0% no-repeat padding-box;
+    background-color: #FFFFFF7D 0% 0% no-repeat padding-box;
     display: flex;
     align-items: center;
     border-radius: 5px;
-    border: 1px solid #D4D4D4;
+    border: 1px solid blue;
     padding: 10px;
     /* backdrop-filter: blur(4px) saturate(180%); */
-    margin-right: 20px;
+    
 }
 
 .search-bar input {
@@ -273,7 +328,7 @@ justify-content: center;
     outline: none;
 
     font-size: 14px;
-    color: #D4D4D4;
+    color: black;
 }
 
 .search-bar button {
@@ -302,6 +357,22 @@ justify-content: center;
     .nav-link{
         font-size: 15px;
     }
+}
+.search-bar {
+  position: relative; /* Create a positioning context */
+}
+
+
+.navbar-autocomplete {
+  display: flex;
+  align-items: center;
+}
+
+.autocomplete-input {
+  width: 200px; /* Adjust the width as needed */
+}
+.demo-autocomplete .autocomplete-input {
+    background-color: blue;
 }
 
 

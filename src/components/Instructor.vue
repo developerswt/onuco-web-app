@@ -272,26 +272,16 @@
                     </div>
                 </div>
             </section>
-            <section id="tab_block">
+            <section id="tab_block" v-for="facult in faculty" :key="facult.id">
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                     <el-tab-pane label="OBJECTIVES" name="first">
-
-                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> OBJECTIVES</h2>
-
-                        <p class="Sub_paragraph"><span id="Sub_text">Present Address:</span> Professor and Head, Information
-                            Science Engg. Dept., MS Ramaiah Institute of Technology, Vidya Soudha, Bangalore -560054,
-                            Karnataka, India.</p>
-                        <p class="Sub_paragraph"><span id="Sub_text">Home Address:</span> # 014, C1 Block, Sumadhura Arcade
-                            Apt., Sirsi Main Road, Hoodi Post, Bangalore - 560017</p>
-                        <p class="Sub_paragraph"><span id="Sub_text">Phone:</span> (+91)-80-5260xxxx/ 5260xxxx /2360xxxx
-                            Ext:
-                            150 Mobile : +91-998063xxxx</p>
-                        <p class="Sub_paragraph"><span id="Sub_text">Email:</span> vijayexm@edu.edu , vijayexm@yahoo.co.in
-                        </p>
-                        <p class="Sub_paragraph"><span id="Sub_text">Home Page:</span>edu.edu,
-                            linkedin.com/in/vijaya-beekanahalli-9Ssasewb</p>
-
-
+                        <div class="" v-html="facult.objective"></div>
+                    </el-tab-pane>
+                    <el-tab-pane label="CONTACT" name="second">
+                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Contact</h2>
+                        <p style="padding-left: 25px;"><span id="Sub_text">Contact Us:</span>{{ facult.contact }}</p>
+                    </el-tab-pane>
+                    <el-tab-pane label="EDUCATION" name="third">
                         <div class="education_block">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> EDUCATION
                             </h2>
@@ -351,7 +341,8 @@
                                 </div>
                             </div>
                         </div>
-
+                    </el-tab-pane>
+                    <el-tab-pane label="EXPERIENCE" name="fourth">
                         <div class="experience_block">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> EXPERIENCE
                             </h2>
@@ -512,151 +503,80 @@
 
                             </div>
                         </div>
-                        <div class="research_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> RESEARCH </h2>
-
-                            <div class="research_inner_block">
-                                <h4 id="education_text"> Preamble:</h4>
-                                <p>
-                                    Development of technology in the domain of Communication Systems, Information and
-                                    Computing that has given the way for integrated system design and development.
-                                    Similarly, Rapid advances in modern high speed networks and wireless/Mobile networks,
-                                    with the support of Internet growth, have produced tremendous research and commercial
-                                    opportunities in the area of mobile multimedia Networks, ubiquitous and pervasive
-                                    computing systems.
-                                </p>
-                                <p>
-
-                                    Differentiated service or service subject to quality of service requirements and
-                                    mobility of end users/terminals need software and/or hardware support at both
-                                    intermediate and end systems, i.e., Routers, Mobile switching centers (MSC), base
-                                    station (BS), Mobile terminals, etc. The increasing demand for such services has led to
-                                    many new research challenges such as resource management for quality of service (QoS),
-                                    admission control, location management, routing and mobile computing for mobile
-                                    multimedia networking.
-                                </p>
-                                <p>
-                                    My research interests include Resources management, Mobility management, Connectivity
-                                    management and Dynamic routing in Mobile Adhoc and sensor networks and the applications
-                                    of Computational Intelligence to tackle and solve some of the problems, that leads to
-                                    optimization, function approximation and classification.
-                                    One of the area is briefly discussed as a short introduction to our work. The most
-                                    important challenges in Mobile Adhoc and Sensor Networks (WSNs) is to improve the
-                                    operational efficiency and reliable data delivery in a highly resource constrained
-                                    environment with dynamic and unpredictable behavior of network parameters and
-                                    applications requirement.
-                                </p>
-                                <p>
-                                    Swarm Computing, Game theoretic approach and dynamic Clustering with Computational
-                                    Intelligence (heuristics) techniques are used for modeling, analyzing and designing of
-                                    such networks. The work involves, the adoption of computational intelligence technique
-                                    for the design and development of adaptive and dynamic algorithms, and systems. Also
-                                    some of the works related to Protocol Engineering (Conformance testing and Test sequence
-                                    generation) is carried out.
-                                </p>
-                                <p>
-                                    Conformance testing for communication protocols is to test whether a protocol under
-                                    test, conforms to the specifications laid down during the design phase. One of several
-                                    works include, ''An optimal test sequence generation using Multiple Unique Input/Output
-                                    sequences (MUIOS)''. Here, the test sequence generation problem using MUIOS is viewed as
-                                    an asymmetric traveling sales person problem. This problem
-                                </p>
-                            </div>
-                        </div>
-                        <div class="research_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> RESEARCH </h2>
-                            <div class="research_inner_block">
-                                <h4 id="education_text">Preamble:</h4>
-                                <p>1. Contributor for the technical report submitted to Govt. of Telecom. for the Topic:
-                                    DESIGN AND PLANNING SMART CITIES WITH IoT/ICT http://www.tec.gov.in/technical-reports/
-                                </p>
-
-                                <p>2. Naresh E., Vijaya Kumar B.P., Ayesha, Shankar S.P. (2020) Impact of Machine Learning
-                                    in Bioinformatics Research. In: Statistical Modeling and Machine Learning Principles for
-                                    Bioinformatics Techniques, Tools, and Applications. Algorithms for Intelligent Systems.
-                                    Springer, Singapore. https://doi.org/10.1007/978-981-15-2445-5_4.
-                                    https://link.springer.com/chapter/10.1007/978-981-15-2445-5_4 </p>
-
-                                <p>3. Book Title: Handbook of Research on Deep Learning Innovations and Trends Release date
-                                    - April' 2019 ch.8 - A Survey on Deep Learning Techniques Used for Quality Process
-                                    https://www.igi-global.com/chapter/a-survey-on-deep-learning-techniques-used-for-qualityprocess/227848
-                                </p>
-
-                                <p>4. Book Title: Handbook of Research on Deep Learning Innovations and Trends Release
-                                    date-April' 2019ch.15 - Anomaly Detection Using Deep Learning with Modular Networks
-                                    https://www.igi-global.com/chapter/anomaly-detection-using-deep-learning-with-modularnetworks/227857
-                                </p>
-
-                                <p>5. A Survey on Artificial Intelligence Techniques Used in BioMetric Systems, C. N.
-                                    Patill, E. Naresh, B. P. Vijay Kumar, and Prashanth Kambli, Intelligent Systems Advances
-                                    in Biometric Systems, Soft Computing, Image Processing and Data Analytics.
-                                    http://www.appleacademicpress.com/intelligent-systems-advances-in-biometricsystems-
-                                    soft-computing-image-processing-and-data-analytics/9781771888004 </p>
-
-
-                                <p>6. Naresh E, Vijaya Kumar B P, Aishwarya H and Jeevan, "Software Engineering in IoT"
-                                    Copyright © 2019, IGI Global, DOI: 10.4018/978-1-5225-6070-8.ch008, 2019. https://
-                                    www.igi-global.com/chapter/software-engineering-in-internet-of-things/210712 </p>
-
-                                <p>7. Shantala Devi Patil, B.P. Vijayakumar and Kiran Kumari Patil, Fractal PKC-Based Key
-                                    Management Scheme for Wireless Sensor Networks Recent Developments: Intelligent
-                                    Computing, Communication and Devices AISC, volume 555 pp 121-128, Springer Print ISBN
-                                    978-981-10-3778-8 Online ISBN 978-981-10-3779-5, 2017. </p>
-
-                                <p>8.Vijaya Kumar B.P. And Sunil Kumar Manvi, “Proceedings of the National Conference on
-                                    Computer Networks” (NCCN-09), February, 2009.</p>
-
-                                <p>9. Vijaya Kumar B.P., Dilip Kumar S.M, Sriram, “Mobile Computing”, Published by Universal
-                                    Education Trust for Kuvempu university, 2005. </p>
-
-                                <p>10. Dasarathy B, Vijay Kumar B.P. and Sanjeev Kunte, “Emerging Trends in Human Machine.
-                                    Interfaces (ICHMI-2004)”, Tata Mcgraw Hill, 2004, Proceedings of the International
-                                    Con-ference on Human Machine Interfaces, (ICHMI' 2004), Indian Institute of Science,
-                                    Bangalore, 2004. </p>
-
-                            </div>
-                        </div>
-
-
+    
                     </el-tab-pane>
-                    <el-tab-pane label="CONTACT" name="second">Config</el-tab-pane>
-                    <el-tab-pane label="EDUCATION" name="third">Role</el-tab-pane>
-                    <el-tab-pane label="EXPERIENCE" name="fourth">Task</el-tab-pane>
-                    <el-tab-pane label="RESEARCH" name="fiveth">Role</el-tab-pane>
-                    <el-tab-pane label="PUBLICATIONS" name="sixth">Task</el-tab-pane>
+                    <el-tab-pane label="RESEARCH" name="fifth">
+                        <div class="" v-html="facult.research"></div>
+                    </el-tab-pane>
+                    <el-tab-pane label="PUBLICATIONS" name="sixth">
+                        <div class="experience_block" v-for="publication in facult.publication" :key="publication.id">
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> {{ publication.heading }}
+                            </h2>
+                            <div class="row" id="row_block" v-for="publicationdetails in publication.values" :key="publicationdetails.id">
+                                
+                                <div class="div">
+                                
+                                    <p><span id="education_text">Author: </span>{{ publicationdetails.author }}.</p>
+                                        
+                                    <p><span id="education_text">Price: </span>{{ publicationdetails.price }}</p>
+                                    
+                                    <div>
+                                        <span id="education_text">Description: </span><br>
+                                        <p class="pt-3" v-html="publicationdetails.description"></p> 
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>    
+                    </el-tab-pane>
                     <el-tab-pane label="ADVISORY" name="seventh">Task</el-tab-pane>
-                    <el-tab-pane label="SKILLS" name="eight">Role</el-tab-pane>
-                    <el-tab-pane label="CONTRIBUTIONS" name="nine">Task</el-tab-pane>
-                    <el-tab-pane label="PROJECTS" name="ten">Role</el-tab-pane>
-                    <el-tab-pane label="RESEARCH" name="elven">
-                        <h2>Research</h2>
-                        <p>Development of technology in the domain of Communication Systems, Information and Computing that
-                            has given the way for integrated system design and development. Similarly, Rapid advances in
-                            modern high speed networks and wireless/Mobile networks, with the support of Internet growth,
-                            have produced tremendous research and commercial opportunities in the area of mobile multimedia
-                            Networks, ubiquitous and pervasive<br>computing systems. Differentiated service or service
-                            subject to quality of service requirements and mobility of end users/terminals need software
-                            and/or hardware support at both intermediate and end systems, i.e., Routers, Mobile switching
-                            centers (MSC), base station (BS), Mobile terminals, etc. The increasing demand for such services
-                            has led to many new research challenges such as resource management for quality of service
-                            (QoS), admission control, location management, routing and mobile computing for mobile
-                            multimedia networking.<br><br> My research interests include Resources management, Mobility
-                            management, Connectivity management and Dynamic routing in Mobile Adhoc and sensor networks and
-                            the applications of Computational Intelligence to tackle and solve some of the problems, that
-                            leads to optimization, function approximation and classification. One of the area is briefly
-                            discussed as a short introduction to our work. The most important challenges in Mobile Adhoc and
-                            Sensor Networks (WSNs) is to improve the operational efficiency and reliable data delivery in a
-                            highly resource constrained environment with dynamic and unpredictable behavior of network
-                            parameters and applications requirement. Swarm Computing, Game theoretic approach and dynamic
-                            Clustering with Computational Intelligence (heuristics) techniques are used for modeling,
-                            analyzing and designing of such networks. The work involves, the adoption of computational
-                            intelligence technique for the design and development of adaptive and dynamic algorithms, and
-                            systems. Also some of the works related to Protocol Engineering (Conformance testing and Test
-                            sequence generation) is carried out. Conformance testing for communication protocols is to test
-                            whether a protocol under test, conforms to the specifications laid down during the design phase.
-                            One of several works include, ''An optimal test sequence generation using Multiple Unique
-                            Input/Output sequences (MUIOS)''. Here, the test sequence generation problem using MUIOS is
-                            viewed as an asymmetric traveling sales person problem. This problem</p>
+                    <el-tab-pane label="SKILLS" name="eight">
+                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Skills</h2>
+                        <p style="padding-left: 25px;"><span id="Sub_text">Skill:</span>{{ facult.skill }}</p>
+                    </el-tab-pane>
+                    <el-tab-pane label="CONTRIBUTIONS" name="nine">
+                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Contributions</h2>
+                        
+                        <div class="" style="padding-left: 25px;" v-html="facult.contribution"></div>
+                    </el-tab-pane>
+                    <el-tab-pane label="PROJECTS" name="ten">
+                        <div class="experience_block" v-for="project in facult.project" :key="project.id">
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> {{ project.heading }}
+                            </h2>
+                            <div class="row" id="row_block" v-for="projectdetails in project.values" :key="projectdetails.id">
+                                
+                                <div class="div">
+                                    <p><span id="education_text">Environment: </span></p>
+                                    
+                                    <div class="" v-for="skills in projectdetails.environment" :key="skills.id">
+                                        <li>{{ skills }}.</li>
+                                    </div>
+
+                                    <p class="pt-3"><span id="education_text">Role: </span> {{ projectdetails.role }} </p>
+
+                                    <p><span id="education_text">From Duration: </span> {{ projectdetails.fromDuration }} </p>
+
+                                    <p><span id="education_text">To Duration: </span>{{ projectdetails.toDuration }} </p>
+                                    
+                                    
+                                </div>
+                            </div>    
+                        </div>  
+                    </el-tab-pane>
+                    <el-tab-pane label="FacultyDescription" name="eleven">
+                        <div class="research_block">
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Faculty Description </h2>
+                            <div class="research_inner_block">
+                                <p v-html="facult.facultyDescription"></p>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Duties And Responsibilities" name="twleve">
+                        <div class="research_block">
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Duties And Responsibilities </h2>
+                            <div class="research_inner_block">
+                                <p v-html="facult.dutiesAndResponsibilities"></p>
+                            </div>
+                        </div>
                     </el-tab-pane>
                 </el-tabs>
             </section>
@@ -669,12 +589,32 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Offer from './Offer.vue'
 export default {
     name: 'InstructorView',
     components: {
-       
-        Offer
+       Offer
+    },
+    data() {
+        return {
+            faculty: [],
+            activeName: 'first',
+        }
+    },
+    methods: {
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+    },
+    async created() {   
+        try {
+            const res = await axios.get(`https://localhost:7233/api/Faculty`);
+            this.faculty = res.data;
+            console.log(this.faculty);
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 </script>
@@ -851,7 +791,7 @@ export default {
     text-align: right;
 }
 
-.Object_text {
+::v-deep .Object_text {
     color: #006acd;
     font-weight: bold;
     font-size: 20px;
@@ -860,16 +800,18 @@ export default {
     margin-top: 20px;
 }
 
-#Sub_text {
+::v-deep #Sub_text {
     color: #9E9E9E;
     padding-right: 20px;
 }
 
-.Sub_paragraph {
+::v-deep .Sub_paragraph {
     color: #61646B;
 
 }
-
+::v-deep .Objective_left_side {
+    text-align: right;
+}
 .round_class {
     height: 20px;
     width: 20px;
@@ -889,19 +831,25 @@ export default {
     /* bottom: 10px; */
 
 }
+::v-deep #row_block {
+    padding-left: 25px;
+}
 
 .row_class {
     display: flex;
     margin-top: 12px;
+    padding-left: 25px;
 }
 
-#education_text {
-    color: #61646B;
+::v-deep #education_text {
+    color: #61646b;
     font-family: 'Noto Sans', sans-serif;
-
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
 }
-
+::v-deep .research_inner_block {
+    padding-left: 25px;
+}
 .row_class i {
     padding: 4px 0px 0px 10px;
 }
@@ -935,10 +883,26 @@ export default {
     padding-left: 20px;
 }
 
+
 .ptext {
     margin-bottom: 15px;
 }
-
+@media screen and (max-width: 912px) {
+    .Objective_left_side {
+        text-align: left;
+    }
+}
+@media only screen and (min-width: 760px) and (max-width: 912px) {
+    .Objective_left_side {
+        text-align: right;
+        width: 25%;
+        float: left;
+    }
+    .Objective_right_side {
+        float: right;
+        width: 75%;
+    }
+}
 @media screen and (max-width:767.98px) {
     #prof_text {
         font-size: 15px;
@@ -959,6 +923,7 @@ export default {
     .Object_text {
         font-size: 18px;
     }
+
 
     #education_text,
     #institute_text {

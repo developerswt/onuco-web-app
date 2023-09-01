@@ -186,12 +186,17 @@ export default {
 authenticator {
     --background-color: lightblue;
 }
-[data-amplify-authenticator] [data-amplify-router] {
-    /* background-color: var(--amplify-components-authenticator-router-background-color); */
-    box-shadow: var(--amplify-components-authenticator-router-box-shadow);
-    border-color: var(--amplify-components-authenticator-router-border-color);
-    border-width: var(--amplify-components-authenticator-router-border-width);
-    border-style: var(--amplify-components-authenticator-router-border-style);
+[data-amplify-authenticator] {
+  --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
+  --amplify-colors-background-secondary: var(--amplify-colors-neutral-100);
+  --amplify-colors-brand-primary-10: var(--amplify-colors-teal-100);
+  --amplify-colors-brand-primary-80: var(--amplify-colors-teal-40);
+  --amplify-colors-brand-primary-90: var(--amplify-colors-teal-20);
+  --amplify-colors-brand-primary-100: var(--amplify-colors-teal-10);
+  --amplify-colors-font-interactive: var(--amplify-colors-white);
+  --amplify-components-tabs-item-active-color: var(--amplify-colors-white);
+  --amplify-components-tabs-item-focus-color: var(--amplify-colors-white);
+  --amplify-components-tabs-item-hover-color: var(--amplify-colors-orange);
 }
 .amplify-divider--label:after {
     content: attr(data-label);
@@ -201,5 +206,8 @@ authenticator {
     padding-inline: var(--amplify-components-divider-label-padding-inline);
     /* background-color: var(--amplify-components-divider-label-background-color); */
     color: black;
+}
+.amplify-input .amplify-field-group__control {
+    background-color: gray !important;
 }
 </style>

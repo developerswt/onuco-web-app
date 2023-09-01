@@ -30,7 +30,7 @@
 
 <script>
 import Offer from './Offer.vue'
-import axios from 'axios';
+import AxiosInstance from '../config/axiosInstance'
 
 export default {
     name: 'Universities',
@@ -40,25 +40,11 @@ export default {
     data() {
         return {
             university: [],
-            isuser: localStorage.getItem("username") 
         }
     },
-    computer: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return ''; // Set your dummy value here
-            }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };  
         try {
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetBranchListByName/` + this.$route.params.name, { headers } );
+            const result = await AxiosInstance.get(`/University/GetBranchListByName/` + this.$route.params.name);
             this.university = result.data;
             console.log(this.university);
         } catch (error) {

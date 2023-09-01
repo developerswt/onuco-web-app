@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import AxiosInstance  from '../config/axiosInstance';
 import router from '../router';
 import Offer from './Offer.vue'
 
@@ -43,28 +43,14 @@ Offer
         return {
             branches: [],
             academia: [],
-            isuser: localStorage.getItem("username") 
         }
     },
-    computer: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return ''; // Set your dummy value here
-            }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };  
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/GetAcademiaByName/` + this.$route.params.name,  { headers } );
+            const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches/GetBranchListByName/` + this.$route.params.name, { headers } );
+            const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {

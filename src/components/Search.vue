@@ -5,22 +5,22 @@
                 <div class="search_text">
                     <h4 class="academic_head_text">
 
-                        <span id="aca_text">Search</span>Results for "Maths"
+                        <span id="aca_text">Search</span>Results for "{{ searchQuery }}"
 
                     </h4>
                 </div>
 
-                <form class="search-bar">
+                <form class="search-bar" @submit.prevent="search">
                     <div class="row">
                         <div class="col-lg-6 col-8 col-sm-8 col-md-9">
                             <div class="child_class">
                                 <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                                <input class="text" type="search" placeholder="Search" aria-label="Search">
+                                <input class="text" type="search" v-model="searchQuery" placeholder="Search">
                             </div>
 
                         </div>
                         <div class="col-lg-6 col-4 col-sm-4 col-md-3">
-                            <button id="search_button">Search</button>
+                            <button id="search_button" type="submit">Search</button>
                         </div>
                     </div>
 
@@ -56,37 +56,34 @@
                                     </div>
 
                                 </div>
-
-                                <div class="tab_inner_block">
-                                    <div class="row no-gutters">
+                                <div class="" v-if="searchResults.length > 0">
+                                <div class="tab_inner_block"  v-for="(result, index) in searchResults" :key="index">
+                                    <div class="row no-gutters" >
                                         <div class="col-lg-3 col-md-3" >
-                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
+                                            <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
                                         </div>
                                         <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                        <p id="title_text" class="mb-1">VTU</p>
+                                                        <p id="title_text" class="mb-1">{{ result.title.slice(0,58) }}</p>
                                                         <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
                                                         <div class="inner_child">
                                                             <div class="row">
                                                                 <div class="col-lg-3 col-md-5">
-                                                                    <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
+                                                                    <p id="prof_text" class="mb-2">{{ result.instructorName }}</p>
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3">
                                                                     <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon ionic-ios-timer@2x.png">3h
-                                                                        32min</p>
+                                                                            src="../assets/images/Iconionic-ios-timer@2x.png">{{result.videoDemand.slice(0,9)}}</p>
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3">
                                                                     <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon map-school@2x.png">8
-                                                                        modules</p>
+                                                                            src="../assets/images/Iconmap-school@2x.png">{{ result.modules }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <p id="desc_text">Data Management Systems & Visualization software
-                                                            developme...</p>
+                                                        <!-- <p id="desc_text">{{ result.description }}...</p> -->
                                                     </div>
                                                     <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
                                                         <div class="right_block">
@@ -107,111 +104,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>   
                                 </div>
-                                <div class="tab_inner_block">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-3 col-md-3" >
-                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
-                                        </div>
-                                        <div class="col-lg-9 col-md-9">
-                                            <div class="results_inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                        <p id="title_text" class="mb-1">VTU</p>
-                                                        <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
-                                                        <div class="inner_child">
-                                                            <div class="row">
-                                                                <div class="col-lg-3 col-md-5">
-                                                                    <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon ionic-ios-timer@2x.png">3h
-                                                                        32min</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon map-school@2x.png">8
-                                                                        modules</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p id="desc_text">Data Management Systems & Visualization software
-                                                            developme...</p>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
-                                                        <div class="right_block">
-                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                                            &#8377;947</p>
-                                                        <button id="buy_button">Buy now</button>
-                                                        <div class="icon_blck">
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                        </div>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab_inner_block">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-3 col-md-3" >
-                                            <img src="../assets/images/java.jpg" class="img-fluid" id="sub_image" />
-                                        </div>
-                                        <div class="col-lg-9 col-md-9">
-                                            <div class="results_inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                        <p id="title_text" class="mb-1">VTU</p>
-                                                        <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
-                                                        <div class="inner_child">
-                                                            <div class="row">
-                                                                <div class="col-lg-3 col-md-5">
-                                                                    <p id="prof_text" class="mb-2">Dr.Adhyan San</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon ionic-ios-timer@2x.png">3h
-                                                                        32min</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Icon map-school@2x.png">8
-                                                                        modules</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p id="desc_text">Data Management Systems & Visualization software
-                                                            developme...</p>
-                                                    </div>
-                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
-                                                        <div class="right_block">
-                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                                            &#8377;947</p>
-                                                        <button id="buy_button">Buy now</button>
-                                                        <div class="icon_blck">
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                        </div>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                               
+                                <div class="no_result_found" v-else>
+                                    <h4>No Results Found</h4>
                                 </div>
                                 
-                               
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">Config</el-tab-pane>
                             <el-tab-pane label="Author" name="third">Role</el-tab-pane>
@@ -230,14 +129,54 @@
 
 <script>
 import Offer from './Offer.vue';
+import axios from 'axios';
 
 
 export default {
+    name: 'SearchView',
     components: {
-
         Offer,
-        
     },
+    data() {
+        return {
+            searchQuery: this.$route.query.data,
+            searchResults: [],
+            activeName: 'first',
+        }    
+    },
+    // created() {
+    //     const queryValue = this.$route.query.data;
+    //     if (queryValue) {
+    //         this.searchQuery = queryValue;
+    //     }
+    // },    
+    methods: {
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+        async search() {
+            try {
+                const response = await fetch(`https://localhost:7233/api/Coursedetails/search?semester=${this.searchQuery}`);
+                const data = await response.json();
+
+                // Assuming your API returns an array of objects with a "name" property
+                this.searchResults = data;
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+            }
+        },
+    },
+    async created() {
+        try {
+            const response = await fetch(`https://localhost:7233/api/Coursedetails/search?semester=${this.searchQuery}`);
+            const data = await response.json();
+
+                // Assuming your API returns an array of objects with a "name" property
+            this.searchResults = data;
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        }
+    },    
 }
 </script>
 
@@ -284,7 +223,7 @@ export default {
     border: 0;
     outline: none;
     font-size: 14px;
-    color: #D4D4D4;
+    color: black;
     padding-left: 15px;
 }
 
@@ -477,4 +416,10 @@ export default {
         object-fit: cover;
     }
 }
+.no_result_found {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 </style>
