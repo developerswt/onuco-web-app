@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from '../config/axiosInstance'
 import router from '../router';
 
 
@@ -72,9 +72,12 @@ export default {
 
     },
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };     
+        // const headers = { 
+        //     Authorization:  this.authorizationHeader,
+        //     "Content-type": "application/json"
+        // };     
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`, { headers } );
+            const res = await axiosInstance.get(`/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
         } catch (error) {

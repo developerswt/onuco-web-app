@@ -342,7 +342,7 @@
 <script>
 import VideoPlayer from '../components/VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import axios from "axios"
+import AxiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue'
 export default {
     name: 'SemesterDetails',
@@ -352,7 +352,6 @@ export default {
     },
     data() {
         return {
-            isuser: localStorage.getItem("username") ,
             book: [],
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
@@ -398,18 +397,6 @@ export default {
             }),
         };
     },
-    computer: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return ''; // Set your dummy value here
-            }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
     async created(){
         console.log("Hi");
         const command = new GetObjectCommand({
@@ -418,7 +405,7 @@ export default {
         });
         const headers = { 'Authorization':  this.authorizationHeader };  
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/` + this.$route.query.id, { headers } );
+            const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)

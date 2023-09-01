@@ -30,12 +30,37 @@
 </template>
 
 <script>
-import axios from 'axios';
+//import axiosInstance from '../config/axiosInstance'
+import axios from 'axios'
 
 export default {
     name: 'PictureView',
+    data() {
+        return {
+            isuser: localStorage.getItem("username") 
+        }
+    },
+    computed: {
+        authorizationHeader() {
+            if (this.isLoggedIn) {
+                return `Bearer ${this.isuser}`;
+            } else {
+                return ''; // Set your dummy value here
+            }
+        },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+       
+
+    },
     methods: {
         async uploadFile() {
+            const headers = { 
+                Authorization:  this.authorizationHeader,
+                'Content-Type': 'multipart/form-data'
+            };
+
             const fileInput = this.$refs.fileInput;
 
             if (!fileInput.files.length) {
@@ -43,24 +68,23 @@ export default {
             }
 
             const file = fileInput.files[0];
-
+        
             const formData = new FormData();
             formData.append('file', file);
 
             try {
                 const response = await axios.post('https://localhost:7078/api/UploadFiles/upload', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+                    headers
                 });
-        
+
                 console.log('File uploaded successfully!', response);
             } catch (error) {
-            console.error('Error uploading file:', error);
+                console.error('Error uploading file:', error);
+            }
         }
     }
-  }
 }
+
 </script>
 
 <style scoped>

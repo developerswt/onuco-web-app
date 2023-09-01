@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import AxiosInstance  from '../config/axiosInstance';
 import Offer from './Offer.vue'
 
 export default {
@@ -180,32 +180,17 @@ export default {
             semester: [],
             course: [],
             university: [],
-            isuser: localStorage.getItem("username") 
         }
     },
-    computer: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return ''; // Set your dummy value here
-            }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
-    // { 'headers': { 'Authorization': JWT tokern }}
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };  
         try {
-            const universe = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetUniversityGroupByName/` + this.$route.params.name);
+            const universe = await AxiosInstance.get(`/University/GetUniversityGroupByName/` + this.$route.params.name);
             this.university = universe.data;
             console.log(this.university)
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Semester/GetSemesterListByName/` + this.$route.params.name);
+            const res = await AxiosInstance.get(`/Semester/GetSemesterListByName/` + this.$route.params.name);
             this.semester = res.data;
             console.log(this.semester);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Course`, { headers } );
+            const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
             console.log(this.course)
         } catch (error) {

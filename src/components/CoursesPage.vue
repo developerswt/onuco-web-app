@@ -32,7 +32,7 @@
 
 <script>
 import Offer from './Offer.vue'
-import axios from 'axios'
+import axiosInstance from '../config/axiosInstance'
 
 export default {
     name: 'CoursesPage',
@@ -43,28 +43,14 @@ export default {
         return {
             academia: [],
             branches: [],
-            isuser: localStorage.getItem("username") 
         }
     },
-    computer: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return 'DummyValue'; // Set your dummy value here
-            }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
     async created() {
-        const headers = { 'Authorization':  this.authorizationHeader };
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia`, { headers } );
+            const res = await axiosInstance.get(`/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches`, { headers } );
+            const result = await axiosInstance.get(`/Branches/` );
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {

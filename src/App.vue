@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <Navbar :showSearchBox="showSearchBox"  />
   <router-view :key="$route.fullPath" />
   <Footer />
 </template>
@@ -13,7 +13,12 @@ export default {
   components: {
     Navbar,
     Footer
-  }
+  },
+  computed: {
+    showSearchBox() {
+      return this.$route.path !== '/search'; // Hide search box on Search page
+    },
+  },
 }
 </script>
 

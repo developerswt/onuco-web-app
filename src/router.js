@@ -55,8 +55,10 @@ Hub.listen("auth", async (data) => {
         router.go(-1);
         // router.push({path: '/'});
         store.commit('isLoggedIn', true);
+        localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
+        
        
-        localStorage.setItem('username', user.signInUserSession.idToken.jwtToken);
+        
 
     }
 });
@@ -90,6 +92,7 @@ const routes = [
   },
   {
     path: "/search",
+    // path: "/search/:query",
     name: "Search",
     component: Search,
     meta: {
