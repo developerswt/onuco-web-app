@@ -76,11 +76,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
-                            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                                <el-tab-pane label="Subject" name="first">
+                            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" >
+                                <el-tab-pane label="Subject" name="first" >
                                     <div class="row">
                                         <div class="col-lg-5">
-                                            <div id="accordion">
+                                            <div id="accordion" >
                                                 <div class="card">
                                                     <div class="card-header" id="headingOne" data-toggle="collapse"
                                                         data-target="#collapseOne" aria-expanded="true"
@@ -129,10 +129,10 @@
                                                                     <div class="col-lg-7">
                                                                         <p id="intro_text">Introduction of Subject</p>
                                                                         <div class="row">
-                                                                            <div class="col-lg-5">
+                                                                            <div class="col-lg-6">
                                                                                 <p id="duration_text_one">01:02 / 03:05</p>
                                                                             </div>
-                                                                            <div class="col-lg-7">
+                                                                            <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
                                                                                     <div class="progress-bar"
@@ -168,10 +168,10 @@
                                                                     <div class="col-lg-7">
                                                                         <p id="intro_text">Introduction of Subject</p>
                                                                         <div class="row">
-                                                                            <div class="col-lg-5">
+                                                                            <div class="col-lg-6">
                                                                                 <p id="duration_text_one">01:02 / 03:05</p>
                                                                             </div>
-                                                                            <div class="col-lg-7">
+                                                                            <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
                                                                                     <div class="progress-bar"
@@ -484,11 +484,7 @@ Offer
     justify-content: end;
 }
 
-#duration_text {
-  
-    color: #4894E1;
-    font-size: 14px;
-}
+
 
 .card-body {
     padding: 5px;
