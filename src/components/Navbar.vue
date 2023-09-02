@@ -30,7 +30,7 @@
 
 
                 </ul>
-                <ul class="navbar-nav ml-auto" style="width: 200px;" v-if="showSearchBox">
+                <!-- <ul class="navbar-nav ml-auto" >
                     <el-row class="demo-autocomplete">
                         <el-col :span="26">
                             <el-autocomplete
@@ -52,7 +52,7 @@
                             </el-autocomplete>
                         </el-col>
                     </el-row>
-                </ul>
+                </ul> -->
 
                 <ul class="navbar-nav ml-auto">
                     <!-- <form class="search-bar" v-if="showSearchBox">
@@ -64,6 +64,27 @@
                             </li>
                         </ul>
                     </form> -->
+                    <el-row class="demo-autocomplete" style="width: 250px; margin-right: 25px; margin-top: 1%;" v-if="showSearchBox">
+                        <el-col :span="26">
+                            <el-autocomplete
+                                v-model="searchTerm"
+                                :fetch-suggestions="querySearch"
+                                :trigger-on-focus="false"
+                                value-key="semester"
+                                class="inline-input w-100"
+                                clearable
+                                @select="handleSelect"
+                            
+                                placeholder="Search..."
+                            >
+                            <template #append>
+                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                </el-icon>
+                            </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
                             
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

@@ -49,6 +49,7 @@ import router from '../router';
 
 
 
+
 export default {
     name: 'AcademicsView',
 
@@ -91,7 +92,7 @@ export default {
             const res = await axiosInstance.get(`/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches`, { headers });
+            const result = await axiosInstance.get(`/Branches`);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {

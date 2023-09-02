@@ -25,7 +25,9 @@
                                         <span id="aca_text">{{ this.book.title }} </span>
 
                                     </h4>
-                                    <p id="professor_text"> {{ this.book.instructorName }}</p>
+                                    <div class="" >
+                                    <p id="professor_text" v-for="instructor in this.book.instructorName" :key="instructor.id"> {{ instructor.name }}</p>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-8 col-md-3">
                                             <p id="duration_text" class="mb-2"><img
@@ -52,8 +54,8 @@
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                 </div>
                                 <p id="review_text">(23 Reviews)</p>
-                                <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                    &#8377;947 <button id="search_button">buy now</button></p>
+                                <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
+                                    &#8377;{{ this.book.discountedPrice }} <button id="search_button">buy now</button></p>
 
                             </div>
                         </div>
@@ -69,7 +71,7 @@
                 <h4 class="academic_head_text_one">
                     <span id="aca_text">Course </span>Description
                 </h4>
-                <p id="course_text">{{ this.book.description }}</p>
+                <p id="course_text" v-html="this.book.description"></p>
 
 
                 <div class="row">
@@ -78,34 +80,33 @@
                             <div class="pt-4 topic-card">
                                 <el-tabs class="demo-tabs" @tab-click="handleClick">
                                     <el-tab-pane label="Chapters" name="first" class="rt">
-                                        <div class="row" v-for="(topic, index) in this.book.chapters" :key="topic.id">
+                                        <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="card">
+                                                <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
                                                     <div class="card-header"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <button class="btn btn-link">
                                                                     {{ topic.heading }}
-
                                                                 </button>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="action"><i
-                                                                        class="fa fa-chevron-right rotate-icon"
-                                                                        id="sem_icon"></i></div>
-                                                            </div>
+                                                                    class="fa fa-chevron-right rotate-icon"
+                                                                    id="sem_icon"></i></div>
+                                                                </div>
                                                         </div>
                                                     </div>
 
                                                     <div :id="'collapse-example' + index" class="collapse"
                                                         aria-labelledby="heading-collapsed">
-                                                        <div class="card-body" v-for="lessons in topic.values" :key="lessons.cid">
+                                                        <div class="card-body" v-for="lessons in topic.values" :key="lessons.id">
                                                             <div class="row">
-                                                                <div class="col-lg-6" >
+                                                                <div class="col-lg-6">
                                                                     <div class="accordion_block_one">
                                                                         <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
-                                                                        <p id="check_text"> Chapter-1</p>
+                                                                        <p id="check_text"> {{ lessons.heading }}</p>
                                                                     </div>
 
                                                                 </div>
@@ -117,17 +118,17 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="chapters_block">
+                                                            <div class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
                                                                 <div class="row">
                                                                     <div class="col-lg-1">
                                                                         <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
                                                                     </div>
                                                                     <div class="col-lg-7">
-                                                                        <p id="intro_text">{{ lessons.lesson }}</p>
+                                                                        <p id="intro_text">{{ subject.lession }}</p>
                                                                         <div class="row">
                                                                             <div class="col-lg-6">
-                                                                                <p id="duration_text_one">{{ lessons.time }}
+                                                                                <p id="duration_text_one">{{ subject.time }}
                                                                                 </p>
                                                                             </div>
                                                                             <div class="col-lg-6">
@@ -149,7 +150,7 @@
                                                                     <div class="col-lg-4">
                                                                         <div class="inside_block">
 
-                                                                            <img src="../assets/images/Group1318@2x.png"
+                                                                            <img src="../assets/images/Group1318@2x.png" 
                                                                                 class="img-fluid">
 
 
@@ -164,6 +165,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <video-player :options="videoOptions" />
                                             </div>
                                         </div>
 
@@ -185,6 +189,7 @@
             </div>
         </div>
         <Offer />
+        {{ this.book.videoUrl }}
     </div>
 </template>
 
@@ -211,7 +216,8 @@ export default {
                 preload: "metadata",
                 sources: [
                     {
-                        src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                        src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                        type: 'application/x-mpegURL',
                         //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
                         withCredentials: false,
                     }
@@ -256,6 +262,8 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
+            
+            this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
             console.log(this.book);
@@ -272,7 +280,6 @@ export default {
             console.error(err);
         }
     },
-
 }
 </script>
 
@@ -286,6 +293,8 @@ export default {
 .first_block {
     background: #E5EFF9 0% 0% no-repeat padding-box;
     color: #0066CC;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 
