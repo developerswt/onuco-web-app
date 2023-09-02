@@ -1,20 +1,33 @@
 <template>
     <Carousel />
     <Carouseltwo />
-  
- 
+
+
 
     <div class="container-fluid jk pt-5">
-        <div class="container" id="home_container">
-            <Academics />
-        <TopRatedCourses />
-        <BestLecture />
+        <div class="container-fluid" id="first_container">
+            <div class="container" id="home_container">
+                <Academics />
+            </div>
         </div>
-       
+        <div class="container-fluid" id="second_container">
+            <div class="container">
+                <TopRatedCourses />
+                
+            </div>
+        </div>
+
+        <div class="container-fluid" id="third_container">
+            <div class="container">
+                <BestLecture />
+            </div>
+        </div>
+
+
     </div>
     <Offer />
     <div class="container-fluid content">
-        <div class="container" >
+        <div class="container">
             <div class="Opt-in">
                 <h4>Opt-in for Onuco Content</h4>
                 <form>
@@ -48,7 +61,7 @@ export default {
         BestLecture,
         Offer,
         Carouseltwo
-       
+
     }
 }
 </script>
@@ -62,21 +75,36 @@ export default {
 
 @media screen and (max-width: 600px) {
     .Opt-in input[type=text] {
-        width:55% !important;
+        width: 55% !important;
         font-size: 15px !important;
 
     }
-    .Opt-in input[type=submit]{
-        width:auto !important;
+
+    .Opt-in input[type=submit] {
+        width: auto !important;
         font-size: 15px !important;
     }
-    #home_container{
-        margin-top:0 !important;
+
+    #home_container {
+        margin-top: 0 !important;
 
     }
+    #first_container,#second_container,
+#third_container{
+    
+    padding-left:0 !important;
+    padding-right:0 !important;
+
+}
+
+ 
+
+
+
 
 
 }
+
 .content {
     top: 1582px;
     left: 0px;
@@ -118,7 +146,7 @@ export default {
     color: #FFFFFF;
     text-transform: uppercase;
     opacity: 1;
-    width:150px;
+    width: 150px;
 }
 
 .topnav .search-container button:hover {
@@ -149,22 +177,38 @@ export default {
     }
 } */
 
-.acdemic_block{
-    max-width:1300px;
-    margin:0 auto;
+.acdemic_block {
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-#home_container{
-    margin-top:100px;
+#home_container {
+    margin-top: 75px;
 }
 
 @media (max-width: 1024px) {
-    #home_container{
-        margin-top:0 !important;
+    #home_container {
+        margin-top: 0 !important;
 
     }
-    .jk{
-    padding-top: 0 !important;
+
+    .jk {
+        padding-top: 0 !important;
+    }
 }
+
+#first_container{
+    background: #DDEDFB;
+   
+}
+
+#second_container{
+    background:#EFF5FC;
+}
+
+#third_container
+
+{
+    background:#DDEDFB;
 }
 </style>

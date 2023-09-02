@@ -313,7 +313,14 @@ export default {
     #review_text {
         font-size: 13px;
     }
+    .academic_head_text{
+        font-size: 16px !important;
+        padding:0 !important;
 
+    }
+    .jk{
+        padding-top: 65px !important;
+    }
 
 }
 

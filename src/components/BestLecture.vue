@@ -95,7 +95,8 @@
 
 <script>
 export default {
-    name: 'BestLecture'
+    name: 'BestLecture',
+    
 }
 </script>
 
@@ -242,7 +243,7 @@ export default {
     height:75px;
 }
 ::-webkit-scrollbar {
-    display: none;
+    display: none !important;
 }
 </style>
 

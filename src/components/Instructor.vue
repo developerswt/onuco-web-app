@@ -589,7 +589,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue'
 export default {
     name: 'InstructorView',
@@ -609,7 +609,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://localhost:7233/api/Faculty`);
+            const res = await axiosInstance.get(`/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {

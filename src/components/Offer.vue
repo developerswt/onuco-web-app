@@ -165,7 +165,7 @@ h2 {
 
 #offer_block {
    
-    padding: 0px 0px 150px 15px;
+    padding: 20px 0px 150px 15px;
    
 }
 .add{
@@ -180,13 +180,13 @@ h2 {
 
 @media (max-width: 600px) {
     #offer_block{
-        padding:0px 0px 70px 15px;
+        padding:20px 0px 70px 15px;
     }   
     
 }
 @media (max-width: 1024px) {
     #offer_block{
-        padding:0px 0px 70px 0px;
+        padding:20px 0px 70px 0px;
     }   
    
     
