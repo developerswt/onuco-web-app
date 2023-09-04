@@ -20,10 +20,10 @@
                                         <p class="rating_icons"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                 class="fa fa-star-o"></i> (23 reviews) </p>
-                                        <div class="social-icons">
-                                            <a href="#" class="fa fa-facebook"></a>
-                                            <a href="#" class="fa fa-twitter"></a>
-                                            <a href="#" class="fa fa-linkedin"></a>
+                                        <div class="social-icons" v-for="social in faculty" :key="social.id">
+                                            <a :href="social.youTube" class="fa fa-youtube-play"></a>
+                                            <a :href="social.twitter" class="fa fa-twitter"></a>
+                                            <a :href="social.linkedin" class="fa fa-linkedin"></a>
 
                                         </div>
                                     </div>
@@ -278,231 +278,14 @@
                         <div class="" v-html="facult.objective"></div>
                     </el-tab-pane>
                     <el-tab-pane label="CONTACT" name="second">
-                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Contact</h2>
+                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contact</h2>
                         <p style="padding-left: 25px;"><span id="Sub_text">Contact Us:</span>{{ facult.contact }}</p>
                     </el-tab-pane>
                     <el-tab-pane label="EDUCATION" name="third">
-                        <div class="education_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> EDUCATION
-                            </h2>
-
-                            <div class="row_class">
-                                <p>2003</p>
-                                <i class="fa fa-circle" style="color: #ffa500;"></i>
-                                <div class="line_class">
-                                </div>
-                                <div class="div">
-                                    <p id="education_text" class="mb-0">INDIAN INSTITUTE OF SCIENCE, BANGALORE, INDIA</p>
-                                    <br>
-                                    <p><span id="education_text">Ph.D </span>in Electrical Communication Engineering Dept.
-                                        <br>
-                                        <span id="education_text">CGPA: </span>7/8 (Research Training Programme)
-                                    </p>
-                                    <div class="ptext">
-                                        <span id="education_text">Advisor: </span>Prof. P. Venkataram, Professor, Chief
-                                        Program Executive, Protocol Engineering and Technology (PET) Unit, Electrical
-                                        Communication Engineering Dept., Indian Institute of Science,
-                                        Bangalore-560 012, INDIA.
-
-                                    </div>
-
-                                    <p><span id="education_text">Thesis: </span>Some of the Neural Network Applications in
-                                        Mobile Networks. </p>
-                                </div>
-
-                            </div>
-
-                            <div class="row_class">
-                                <p>1992</p>
-                                <i class="fa fa-circle" style="color: #ffa500;"></i>
-                                <div class="line_class">
-                                </div>
-                                <div class="div">
-                                    <p id="education_text" class="mb-0">INDIAN INSTITUTE OF TECHNOLOGY (University of
-                                        Roorkee), UP, INDIA
-                                    </p>
-                                    <p class="mt-0">M. Tech in Computer science and Technology with honors, (75.75%)</p>
-                                    <p><span id="education_text">Advisor: </span>Prof. A. K. Sarje and Prof. R. Thapar,
-                                        Professor, EC Dept., IIT (UOR), Roorkee Thesis: Communication Protocol
-                                        specification, verification and synthesis.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row_class">
-                                <p>1987</p>
-                                <i class="fa fa-circle" style="color: #ffa500;"></i>
-
-                                <div class="div">
-                                    <p id="education_text" class="mb-0">MYSORE UNIVERSITY, MYSORE, KARNATAKA, INDIA</p>
-                                    <p class="mt-0">Bachelor of Engineering in Electronics and Communication Engg., with
-                                        Distinction.</p>
-
-                                </div>
-                            </div>
-                        </div>
+                        <div class="" v-html="facult.education"></div>
                     </el-tab-pane>
                     <el-tab-pane label="EXPERIENCE" name="fourth">
-                        <div class="experience_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> EXPERIENCE
-                            </h2>
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p id="education_text" class="mb-0">Lecturer</p>
-                                    <p class="mt-0 mb-0" id="institute_text">Adichunchanagiri Institute of Technology Mysore
-                                        University</p>
-                                    <p id="sub_text" class="mt-0">Chikmagalore, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p class="mb-0" id="education_text">Assistant Professor </p>
-                                    <p class="mt-0 mb-0" id="institute_text">Jawaharlal Nehru National College of
-                                        Engineering</p>
-                                    <p class="mt-0" id="sub_text">Shimoga, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p class="mb-0" id="education_text">Professor </p>
-                                    <p class="mt-0 mb-0" id="institute_text">Jawaharlal Nehru National College of
-                                        Engineering</p>
-                                    <p class="mt-0" id="sub_text">Shimoga, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p class="mb-0" id="education_text">Professor Head</p>
-                                    <p class="mt-0 mb-0" id="institute_text">Jawaharlal Nehru National College of
-                                        Engineering</p>
-                                    <p class="mt-0" id="sub_text">Shimoga, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p class="mb-0" id="education_text">Professor Head</p>
-                                    <p class="mt-0 mb-0" id="institute_text"> REVA Institute of Technology and Management
-                                    </p>
-                                    <p class="mt-0" id="sub_text">Bangalore, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-
-
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 ">
-                                    <p class="mb-0" id="education_text">Professor and Chief R&D Coordinator </p>
-                                    <p class="mt-0 mb-0" id="institute_text"> M S Ramaiah Institute of Technology </p>
-                                    <p class="mt-0" id="sub_text">Bangalore, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
-
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                    <p class="mb-0" id="education_text">Professor and Chief R&D Coordinator </p>
-                                    <p class="mt-0 mb-0" id="institute_text"> M S Ramaiah Institute of Technology </p>
-                                    <p class="mt-0" id="sub_text">Bangalore, Karnataka, India.</p>
-                                </div>
-                                <div class="col-lg-6 text-center">
-                                    <p id="sub_text">1987-1993 6yrs 02</p>
-                                </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                            <div class="row" id="row_block">
-                                <div class="col-lg-1 col-3 col-sm-3 col-md-2">
-                                    <img src="../assets/images/maskGroup29.png" class="img-fluid" />
-                                </div>
-                                <div class="col-lg-10 col-9 col-sm-9 col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <p class="mb-0" id="education_text">Professor and Head, Industry Interaction
-                                                Coordinator
-                                            </p>
-                                            <p class="mt-0 mb-0" id="institute_text">M S Ramaiah Institute of Technology</p>
-                                            <p class="mt-0" id="sub_text">Bangalore, Karnataka, India.</p>
-                                        </div>
-                                        <div class="col-lg-6 text-center">
-                                            <p id="sub_text">1987-1993 6yrs 02</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <div class="" v-html="facult.experience"></div>
     
                     </el-tab-pane>
                     <el-tab-pane label="RESEARCH" name="fifth">
@@ -530,11 +313,11 @@
                     </el-tab-pane>
                     <el-tab-pane label="ADVISORY" name="seventh">Task</el-tab-pane>
                     <el-tab-pane label="SKILLS" name="eight">
-                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Skills</h2>
+                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Skills</h2>
                         <p style="padding-left: 25px;"><span id="Sub_text">Skill:</span>{{ facult.skill }}</p>
                     </el-tab-pane>
                     <el-tab-pane label="CONTRIBUTIONS" name="nine">
-                        <h2 class="Object_text"><img src="http://127.0.0.1:5173/assets/images/g2.png" class="img-fluid" /> Contributions</h2>
+                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contributions</h2>
                         
                         <div class="" style="padding-left: 25px;" v-html="facult.contribution"></div>
                     </el-tab-pane>
@@ -609,7 +392,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axiosInstance.get(`/Faculty`);
+            const res = await axiosInstance.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
@@ -683,7 +466,7 @@ export default {
     color: white;
 }
 
-.social-icons .fa-facebook {
+.social-icons .fa-youtube-play {
     background: blue;
     color: white;
 }
@@ -821,7 +604,7 @@ export default {
 
 }
 
-.line_class {
+::v-deep .line_class {
     width: 2px;
     height: auto;
     background: #0177FB;
@@ -835,7 +618,7 @@ export default {
     padding-left: 25px;
 }
 
-.row_class {
+::v-deep .row_class {
     display: flex;
     margin-top: 12px;
     padding-left: 25px;
@@ -888,17 +671,17 @@ export default {
     margin-bottom: 15px;
 }
 @media screen and (max-width: 912px) {
-    .Objective_left_side {
+    ::v-deep .Objective_left_side {
         text-align: left;
     }
 }
 @media only screen and (min-width: 760px) and (max-width: 912px) {
-    .Objective_left_side {
+    ::v-deep .Objective_left_side {
         text-align: right;
         width: 25%;
         float: left;
     }
-    .Objective_right_side {
+    ::v-deep .Objective_right_side {
         float: right;
         width: 75%;
     }

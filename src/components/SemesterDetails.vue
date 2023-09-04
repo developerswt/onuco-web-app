@@ -78,20 +78,20 @@
                     <div class="col-lg-12">
                         <section id="tab_block">
                             <div class="pt-4 topic-card">
-                                <el-tabs class="demo-tabs" @tab-click="handleClick">
+                                <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Chapters" name="first" class="rt">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
-                                                    <div class="card-header"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
-                                                        <div class="row">
+                                                    <div class="card-header kj"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
+                                                        <div class="row" style="cursor: pointer;">
                                                             <div class="col-lg-6">
-                                                                <button class="btn btn-link">
+                                                                <!-- <button class="btn btn-link"> -->
                                                                     {{ topic.heading }}
-                                                                </button>
+                                                                <!-- </button> -->
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="action"><i
+                                                                <div class="action" ><i
                                                                     class="fa fa-chevron-right rotate-icon"
                                                                     id="sem_icon"></i></div>
                                                                 </div>
@@ -188,14 +188,13 @@
                 </div>
             </div>
         </div>
+        
         <Offer />
-        {{ this.book.videoUrl }}
     </div>
 </template>
 
 <script>
 import VideoPlayer from '../components/VideoPlayer.vue';
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import AxiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue'
 export default {
@@ -206,6 +205,7 @@ export default {
     },
     data() {
         return {
+            activeName: 'first',
             book: [],
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
@@ -221,6 +221,7 @@ export default {
                         //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
                         withCredentials: false,
                     }
+                    
                 ],
                 html5: {
                     nativeVideoTracks: false,
@@ -241,45 +242,29 @@ export default {
 
                 }
             },
-            responseFromS3: '',
-            imageFromS3: '',
-            client: new S3Client({
-                region: "ap-south-1",
-                credentials: {
-                    accessKeyId: "AKIAWTYHL72QB7Z2NM4X",
-                    secretAccessKey: "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",
-                }
-            }),
         };
     },
     async created(){
-        console.log("Hi");
-        const command = new GetObjectCommand({
-            Bucket: "onuco-s3",
-            Key: "diabetes1.mp4"
-        });
-        const headers = { 'Authorization': this.authorizationHeader };
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
             
             this.videoOptions.sources[0].src = this.book.videoUrl;
+            console.log(this.videoOptions.sources[0].src);
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
             console.log(this.book);
-            console.log(this.client);
-            const response = await this.client.send(command);
-            console.log(response);
-            // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
-            this.responseFromS3 = await response.Body.transformToString("base64");
-            //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
             console.log(this.videoOptions);
-            this.imageFromS3 = "data:image/jpeg;base64," + this.responseFromS3;
-            console.log(this.responseFromS3);
+            
         } catch (err) {
             console.error(err);
         }
     },
+    methods: {
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+    }
 }
 </script>
 
@@ -412,11 +397,24 @@ export default {
     font-weight: lighter;
 }
 
-.action {
-    text-align: right;
-    padding-top: 5px;
+.kj .action {
+    float: right;
+    opacity: 1;
+
 }
 
+.kj {
+    cursor: pointer;
+    border-bottom: none;
+    color: black;
+    opacity: 1;
+}
+
+
+
+.kj:not(.collapsed) .rotate-icon {
+    transform: rotate(90deg);
+}
 .action i {
     color: #0066CC;
 }

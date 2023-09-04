@@ -52,6 +52,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.options);
     videojs.registerPlugin('qualityLevels',qualityLevels);
     videojs.registerPlugin('hlsQualitySelector',videojsqualityselector);
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
