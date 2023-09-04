@@ -4,7 +4,7 @@
         <div class="error_parent_block">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 id="top_text"> 404 </h2>
+                    <h2 id="top_text">404</h2>
                 </div>
                 <div class="col-lg-12">
                     <h2 id="below_text">Page Not Found</h2>
@@ -15,7 +15,7 @@
                     <div class="error_image_block">
                         <img src="../assets/images/error1.png" class="img-fluid">
                         <div class="button_block">
-                            <router-link to="/"><button class="btn btn-primary">Back to Homepage</button></router-link>
+                            <button class="btn btn-primary">Back to Homepage</button>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
 }
 
 .error_parent_block {
-    margin-top: 150px;
+    margin-top: 70px;
 }
 .error_image_block{
     text-align: center;
@@ -58,8 +58,11 @@
     margin:40px;
 }
 .button_block .btn{
-   
+    width:20%;
   padding:10px;
+}
+#top_text{
+    margin-top: 100px;
 }
 
 @media (min-width: 320px) and (max-width: 575.98px){
@@ -73,10 +76,13 @@
         margin-bottom:30px;
     }
     .button_block .btn{
-        width:100%;
+        width:auto;
     }
     .error_image_block{
         margin:20px;
+    }
+    #top_text{
+        margin-top:30px;
     }
 }
 

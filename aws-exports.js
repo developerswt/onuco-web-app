@@ -5,24 +5,12 @@ const awsmobile = {
     "aws_project_region": "ap-south-1",
     "aws_cognito_region": "ap-south-1",
     "aws_user_pools_id": "ap-south-1_iPglB2nd5",
-    "aws_user_pools_web_client_id": "3gu6ajbr3irftjaa210bei16j5",
-    "oauth": {
-        "scope": [
-            "email",
-            "openid",
-            "phone"
-        ],
-        "redirectSignIn": "https://onuco-web.s3-website.ap-south-1.amazonaws.com/",
-        "redirectSignOut": "https://onuco-web.s3-website.ap-south-1.amazonaws.com/Login",
-        "responseType": "token"
-    },
-    "federationTarget": "COGNITO_USER_POOLS",
+    "aws_user_pools_web_client_id": "frkqld5sne42ro78rusgcit99",
+    "oauth": {},
     "aws_cognito_username_attributes": [
         "EMAIL"
     ],
-    "aws_cognito_social_providers": [
-        "GOOGLE"
-    ],
+    "aws_cognito_social_providers": [],
     "aws_cognito_signup_attributes": [
         "NAME",
         "PICTURE",

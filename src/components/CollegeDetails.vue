@@ -8,13 +8,13 @@
         <div class="pt-3">
             <div class="row" v-for="sem in semester" :key="sem.id" >
                 <div class="card" id="main_card">
-            <div class="row" v-for="sem in semester" :key="sem.id" >
-                <div class="card" id="main_card">
                     <h5 class="card-header">
-                        <div class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                        <div class="d-block kj" data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" v-if="sem.id==1">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
+                        </div>
+                        <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
@@ -27,14 +27,76 @@
                                 <p style="font-size: 14px;">{{ sem.description }}</p>
                         </a>
                     </h5> -->
-                    <div :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
+                    <div v-if="sem.id==1" id="collapse-example1" class="collapse show" aria-labelledby="heading-collapse">
                         <div class="card-body">
-                            <div class="">
                             <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
                                     <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
+                                                                </div>
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                   
+                                                        </div>
+                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/share.png" class="icon">
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
+                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
+                                                        </div>
+                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/video.png" class="video">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-full"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </router-link>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
+                        <div class="card-body">
+                            <div class="">
+                            <div class="row kl">
+                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
+                                    <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
@@ -97,24 +159,15 @@
             </div>
         </div>
         </div>
-       
+
     </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-       
-    </div>
-    
-                    
+
+
     <Offer />
 </template>
 
 <script>
-import axios from 'axios'
+import AxiosInstance  from '../config/axiosInstance';
 import Offer from './Offer.vue'
 
 export default {
@@ -126,19 +179,18 @@ export default {
         return {
             semester: [],
             course: [],
-            university: []
+            university: [],
         }
     },
-    // { 'headers': { 'Authorization': JWT tokern }}
     async created() {
         try {
-            const universe = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/University/GetUniversityGroupByName/` + this.$route.params.name);
+            const universe = await AxiosInstance.get(`/University/GetUniversityGroupByName/` + this.$route.params.name);
             this.university = universe.data;
             console.log(this.university)
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Semester/GetSemesterListByName/` + this.$route.params.name);
+            const res = await AxiosInstance.get(`/Semester/GetSemesterListByName/` + this.$route.params.name);
             this.semester = res.data;
             console.log(this.semester);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Course`);
+            const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
             console.log(this.course)
         } catch (error) {
@@ -151,72 +203,53 @@ export default {
 <style scoped>
 .academic_head_text {
     color: #006acd;
-    padding: 0px 60px 0px 0px;
     font-size: 20px;
 
 }
 
-.parent_blocks{
+.parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content: flex-start;
 }
+
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
     padding-top: 5%;
 }
-#main_card{
-    margin:20px;
+
+#main_card {
+    margin: 20px;
 }
-#sem_text{
-    color:#707070;
-    
+
+#sem_text {
+    color: #707070;
+
 }
-#sem_description{
-    color:#777777;
-    
+
+#sem_description {
+    color: #777777;
+
 }
-#sem_icon{
-    color:#0077FF;
+
+#sem_icon {
+    color: #0077FF;
 }
-.parent_blocks{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:flex-start;
-}
-.parent_block {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding-top: 5%;
-}
-#main_card{
-    margin:20px;
-}
-#sem_text{
-    color:#707070;
-    
-}
-#sem_description{
-    color:#777777;
-    
-}
-#sem_icon{
-    color:#0077FF;
-}
+
 #aca_text {
     color: #006acd;
     font-weight: bold;
 
 }
+
 .kj .action {
     float: right;
     font-size: 30px;
     width: 1.2em;
     color: darkblue;
     opacity: 1;
-    
-    
+
 }
 
 .kj {
@@ -231,77 +264,97 @@ export default {
 .kj:not(.collapsed) .rotate-icon {
     transform: rotate(90deg);
 }
+.kj1 .action {
+    float: right;
+    font-size: 30px;
+    width: 1.2em;
+    color: darkblue;
+    opacity: 1;
+    
+}
+
+
+
 .jk {
-    padding-top:100px ;
-    padding-top:100px ;
+    padding-top: 70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-#sem_text{
-        font-size: 15px;
-        font-weight: bold;
-    }
-    #sem_description{
-        font-size: 11px;
-    }
-#sem_text{
-        font-size: 15px;
-        font-weight: bold;
-    }
-    #sem_description{
-        font-size: 11px;
-    }
-@media only screen and (max-width: 600px) and (min-width: 100px) {
-    #sem_text{
-        font-size: 18px;
-    }
-    #sem_description{
-        font-size: 15px;
-    }
-    #sub_text,#code_text{
-        font-size:13px;
-        color:black;
-    }
-                                                           
-    #desc_text{
-        font-size: 13px;
-    }
-    #review_text{
-        font-size: 13px;
-    }
-  
-    
-  
-    
+
+#sem_text {
+    font-size: 15px;
+    font-weight: bold;
 }
-@media only screen and (max-width: 1024px) and (min-width: 600px) {
-    #sem_text{
+
+#sem_description {
+    font-size: 11px;
+}
+
+@media only screen and (max-width: 600px) and (min-width: 100px) {
+    #sem_text {
         font-size: 18px;
     }
-    #sem_description{
+
+    #sem_description {
         font-size: 15px;
     }
-  
+
+    #sub_text,
+    #code_text {
+        font-size: 13px;
+        color: black;
+    }
+
+    #desc_text {
+        font-size: 13px;
+    }
+
+    #review_text {
+        font-size: 13px;
+    }
+    .academic_head_text{
+        font-size: 16px !important;
+        padding:0 !important;
+
+    }
+    .jk{
+        padding-top: 65px !important;
+    }
+
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 600px) {
+    #sem_text {
+        font-size: 18px;
+    }
+
+    #sem_description {
+        font-size: 15px;
+    }
+
     .academic_head_text {
         font-size: 18px;
         padding: 0 !important;
 
 
     }
-    #sub_text,#code_text{
-        font-size:13px;
-        color:black;
+
+    #sub_text,
+    #code_text {
+        font-size: 13px;
+        color: black;
     }
-                                                           
-    #desc_text{
+
+    #desc_text {
         font-size: 13px;
     }
-    #review_text{
+
+    #review_text {
         font-size: 12px;
     }
-    
-    
+
 }
+
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .academic_head_text {
         font-size: 18px;
@@ -309,8 +362,7 @@ export default {
 
 
     }
-   
-   
+
 }
 
 .card {
@@ -320,27 +372,31 @@ export default {
     border-radius: 10px;
 }
 
-#sem_card{
-/*
+#sem_card {
+    /*
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=fbaebb&c2=b6def5&gt=r&gd=dtl
 */
-background: #FBAEBB;
-background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
-box-shadow: 0px 0px 9px #000000A1;
-border: 1px solid #FFFFFF;
+    background: #FBAEBB;
+    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+    box-shadow: 0px 0px 9px #000000A1;
+    border: 1px solid #FFFFFF;
 
 
 
 }
-#sem_card p{
-color:black;
+
+#sem_card p {
+    color: black;
 }
-.card-header,.card-body{
+
+.card-header,
+.card-body {
     background: #EFF5FC;
 }
-.card-header{
-    height:65px;
+
+.card-header {
+    height: 65px;
 }
 
 .icon {
@@ -386,9 +442,6 @@ color:black;
 
 .academic_head_text {
     color: #006acd;
-    padding: 25px 0px 2px 0px;
-
-
 }
 
 
@@ -397,7 +450,4 @@ color:black;
     font-weight: bold;
     padding-right: 10px;
 
-}
-
-
-</style>
+}</style>

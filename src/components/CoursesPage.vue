@@ -1,220 +1,134 @@
 <template>
     <div class="container-fluid jk">
-        <h2><b>Engineering</b> Courses</h2>
-        <div class="mb">
-            <div class="row pt-4">
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
+        <div class="container pt-4" v-for="academi in academia" :key="academi.id">
+            <h2 id="available_text" v-if="getSecondArrayLength(academi.id) != 0"><b>Available</b> {{ academi.name }} Courses
+                ({{ getSecondArrayLength(academi.id) }})</h2>
+
+            <div class="parent_blocks">
+                {{ this.branches.name }}
+                <div class="row pt-4">
+                    <div class="" v-for="branch in branches" :key="branch.id">
+                        <div class="box" v-if="academi.id == branch.academyId">
+                            <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                                style="color: white;">
+                                <div class="row">
+                                    <div class="col-md-3 col-3 col-sm-3">
+                                        <div class="course_block">
+                                            <img src="../assets/images/book1.png">
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="col-md-9 col-9 col-sm-9 pt-2">
+                                        <div class="course_block_one">
+                                            <h5>{{ branch.name }}</h5>
+                                        <p>{{ branch.description }}</p>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </router-link>
                         </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
-                </div>
-                <div class="box">
-                    <router-link to="/Universities" style="text-decoration: none;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <h5>Computer Science</h5>
-                                <p>Computer Science</p>
-                            </div>
-                        </div>
-                    </router-link>    
+                    </div>
                 </div>
             </div>
         </div>
-        <Offer />
-    </div> 
+
+    </div>
+    <Offer />
 </template>
 
 <script>
 import Offer from './Offer.vue'
+import axiosInstance from '../config/axiosInstance'
 
 export default {
     name: 'CoursesPage',
     components: {
         Offer
+    },
+    data() {
+        return {
+            academia: [],
+            branches: [],
+        }
+    },
+    async created() {
+        try {
+            const res = await axiosInstance.get(`/Academia/`);
+            this.academia = res.data;
+            console.log(this.academia);
+            const result = await axiosInstance.get(`/Branches/`);
+            this.branches = result.data;
+            console.log(this.branches);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    methods: {
+        getSecondArrayLength(id) {
+            const filteredItems = this.branches.filter(item => item.academyId === id);
+            return filteredItems.length;
+        }
     }
 }
 </script>
 
 <style scoped>
 .jk {
-    padding-top: 7%;
+    padding-top: 100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-@media only screen and (max-width: 600px) and (min-width: 100px) {
-    .jk {
-        padding-top: 22%;
+
+@media only screen and (max-width: 768px) and (min-width: 100px) {
+
+    .parent_blocks {
+        justify-content: center !important;
+
     }
+
+    .box {
+        width: 300px !important;
+        background-size: contain !important;
+    }
+
+    #available_text {
+        font-size: 18px !important;
+    }
+
+    .jk {
+        padding-top: 65px !important;
+    }
+
 }
+
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
-        padding-top: 10%;
+
+    #available_text {
+        font-size: 20px;
     }
 }
-.mb .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
-}
+
 .box {
-    top: 168px;
-    left: 697px;
-    height: 95px;
-    /* UI Properties */
-    width: 24%;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 80px 40px;
-    border: 1px solid #FFFFFF;
+
+    height: 115px;
+    width: 360px;
     cursor: pointer;
     margin-bottom: 1%;
-    
+    margin: 10px;
+    padding: 20px;
+
+    background: url('../assets/images/Path 4814@2x.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
 }
-.box .row {
-    padding: 12px 10px;
+
+.parent_block {
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 
@@ -227,44 +141,48 @@ export default {
     color: #0066CC;
     opacity: 1;
 }
+
 .box p {
     font-size: 14px;
-    line-height: 35%;
+
     text-align: left;
-    
+
     letter-spacing: 0px;
     color: #000000;
     opacity: 0.49;
 }
-@media screen and (max-width: 600px) {
-    .box .col-md-3 {
-        float: left;
-        width: 25%;
-    }
-    .box .col-md-9 {
-        float: right;
-        width: 75%;
-    }
-    .box {
-        width: 100%;
-        margin-bottom: 5%;
-    }
-}
-@media only screen and (min-width: 600px) and (max-width: 912px) {
-    .box {
-        width: 47%;
-        margin-bottom: 3%;
-    }
-}
-@media only screen and (min-width: 950px) and (max-width: 1024px) {
-    .box {
-        width: 45%;
-        margin-bottom: 3%;
-    }
-}
+
+
 h2 {
     font: normal normal 600 22px/30px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
 }
-</style>
+
+.academic_head_text {
+    color: #006acd;
+    padding: 0px 60px 0px 0px;
+
+
+}
+
+
+#aca_text {
+    color: #006acd;
+    font-weight: bold;
+
+}
+
+.parent_blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+#available_text {
+    font-size: 20px;
+}</style>
+
+
+
+

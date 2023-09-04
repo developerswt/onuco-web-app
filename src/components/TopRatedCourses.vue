@@ -1,14 +1,17 @@
 <template>
-    <div class="category-test pt-5">
+    <div class="category-test pt-3">
+        <div class="container">
+            <h4 class="academic_head_text">
 
-        <h4 class="academic_head_text">
+                <span id="aca_text">Top</span>Rated Courses
+                <router-link to="#">See all</router-link>
+            </h4>
+        </div>
 
-            <span id="aca_text">Top</span>Rated Academics
-            <router-link to="#">See all</router-link>
-        </h4>
+
     </div>
     <div class="container-fluid mb">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="box">
                 <router-link to="/Universities" style="text-decoration: none;">
                     <div class="wer">
@@ -135,8 +138,6 @@
             </div>
         </div>
     </div>
-
-   
 </template>
 
 <script>
@@ -157,6 +158,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
+  
 }
 
 /* .box .offer {
@@ -230,8 +232,7 @@ export default {
 }
 
 .box {
-    top: 168px;
-    left: 697px;
+
     height: auto;
     /* UI Properties */
     width: 24%;
@@ -256,17 +257,23 @@ export default {
 
     .box .offer {
         position: absolute;
-    top: -13px;
+        top: -13px;
     }
 
     .offer-details {
         position: relative;
         top: -200px;
     }
-    .academic_head_text{
-        font-size: 18px;
-        padding-left:0 !important;
 
+    .academic_head_text {
+        font-size: 15px !important;
+        padding-left: 0 !important;
+
+    }
+
+    .category-test h4 a {
+        padding-right: 0;
+        font-size: 15px !important;
     }
 }
 
@@ -283,11 +290,12 @@ export default {
         margin-bottom: 3%;
     }
 }
+
 @media (min-width: 768px) and (max-width: 991.92px) {
-    .academic_head_text{
-        font-size: 20px ;
+    .academic_head_text {
+        font-size: 20px;
     }
-    
+
 }
 
 .price p {
@@ -297,8 +305,8 @@ export default {
 }
 
 .price a {
-    width: 50%;
-    margin-left: 10%;
+    width: 60%;
+    float: right;
 
 }
 
@@ -325,7 +333,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding-left:20px;
+    /* padding-left:20px; */
     font-size: 20px;
 
 }
@@ -336,6 +344,5 @@ export default {
     font-weight: bold;
     padding-right: 10px;
 }
-
 </style>
 

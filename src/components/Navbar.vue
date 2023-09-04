@@ -2,59 +2,107 @@
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
         <div class="container">
-          
+
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
-            <router-link class="navbar-brand " to="/"><img src="../assets/images/logo1.png" class="logo"></router-link>
+            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
             <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
 
+           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/">Home</router-link>
+                    <li class="nav-item active">
+                        <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Courses">Courses</router-link>
+                        <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contactus">Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                     </li>
 
 
                 </ul>
+                <!-- <ul class="navbar-nav ml-auto" >
+                    <el-row class="demo-autocomplete">
+                        <el-col :span="26">
+                            <el-autocomplete
+                                v-model="searchTerm"
+                                :fetch-suggestions="querySearch"
+                                :trigger-on-focus="false"
+                                value-key="semester"
+                                class="inline-input w-100"
+                                clearable
+                                @select="handleSelect"
+                            
+                                placeholder="Search..."
+                            >
+                            <template #append>
+                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                </el-icon>
+                            </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
+                </ul> -->
 
                 <ul class="navbar-nav ml-auto">
-                    <form class="search-bar">
-                        <input class="text" type="search" placeholder="Search" aria-label="Search">
-                        <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
-                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                    </form>
-                  
+                    <!-- <form class="search-bar" v-if="showSearchBox">
+                        <input class="text" type="search" v-model="searchTerm" @input="handleInput" placeholder="Search" aria-label="Search" style="cursor: pointer;">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc; cursor: pointer;" @click="submit"></i>
+                        <ul v-if="showSuggestions" class="suggestion-dropdown">
+                            <li v-for="(suggestion, index) in filteredSuggestions" :key="index" @click="selectSuggestion(displayValue(suggestion))">
+                                {{ displayValue(suggestion) }}
+                            </li>
+                        </ul>
+                    </form> -->
+                    <el-row class="demo-autocomplete" style="width: 250px; margin-right: 25px; margin-top: 1%;" v-if="showSearchBox">
+                        <el-col :span="26">
+                            <el-autocomplete
+                                v-model="searchTerm"
+                                :fetch-suggestions="querySearch"
+                                :trigger-on-focus="false"
+                                value-key="semester"
+                                class="inline-input w-100"
+                                clearable
+                                @select="handleSelect"
+                            
+                                placeholder="Search..."
+                            >
+                            <template #append>
+                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                </el-icon>
+                            </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
+                            
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.attributes.name }} 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <!-- <router-link class="dropdown-item" to="">Orders</router-link> -->
                             <router-link class="dropdown-item" to="/Picture">Profile</router-link>
                             <router-link class="dropdown-item" to="" @click="logout">Logout</router-link>
                             <router-link class="dropdown-item" to=""></router-link>
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/</span></router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
+                                Up</span></router-link>
                     </li>
               
-                    <!-- <li class="nav-item">
-                        <router-link class="nav-link" to="/Signup">  Sign Up</router-link>
-                    </li> -->
+                    
                 </ul>
             </div>
         </div>
@@ -64,14 +112,20 @@
 
 <script>
 import { Auth } from 'aws-amplify';
-
+import axios from 'axios';
 
 export default {
     name: "NavbarView",
+    props: {
+        showSearchBox: Boolean,
+    },
     data() {
         return {
-            // userInfo: JSON.parse(localStorage.getItem('username')),
-            // // userAttributes: null,
+            searchTerm: null,
+            suggestions: [],
+            showSuggestions: false,
+            dataarray: [],
+             
         }
     },
     computed: {
@@ -88,25 +142,60 @@ export default {
         }
     },
     methods: {
+        handleKeyEnter(item){
+            this.$router.push({ path: '/search', query: { data: item } });
+            
+        },
+        handleSelect (item){
+            console.log(item);
+        // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
+            
+        },
+        querySearch(queryString,cb) {
+            console.log(queryString)
+            let results = queryString ? this.createFilter(queryString) : this.dataarray;
+            console.log(results);
+            cb(results);
+        },
+        createFilter(queryString) {
+                console.log("queryString",queryString)
+                axios.get("https://localhost:7233/api/Coursedetails/search?semester=" + this.searchTerm)
+		.then((res) => (this.dataarray = res.data));
+                console.log(this.dataarray);
+                return this.dataarray;
+            
+        },
         async logout() {
             try {
                 await Auth.signOut();
-                await Auth.forgetDevice();
-                console.log('Signed out and forgot device');
+                // await Auth.forgetDevice();
+                // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
+                this.$store.dispatch('logout')
+                localStorage.removeItem("username")
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }
         },
+
+        setActive(index) {
+            if (this.activeIndex !== null) {
+                this.navItems[this.activeIndex].active = false;
+            }
+            this.activeIndex = index;
+            this.navItems[this.activeIndex].active = true;
+        }
+
     },
-}
+
+}    
 </script>
 
 <style scoped>
 .logo {
     width: 100px;
-    height: 35px;
+    height: 42px;
 }
 
 nav {
@@ -120,9 +209,9 @@ li {
 }
 
 .navbar {
-    background: #EFF5FC 0% 0% no-repeat padding-box;
+    background: #E4F0FE 0% 0% no-repeat padding-box;
     opacity: 1;
-    padding: 20px;
+
 
 }
 
@@ -180,31 +269,31 @@ li>a:hover:before {
     .gh1 {
         display: none;
     }
-    .search-bar{
+
+    .search-bar {
         justify-content: space-between;
-        margin-right:0 !important;
+        margin-right: 0 !important;
 
     }
-    
-    .parent_blocks{
-justify-content: center;
+
+    .parent_blocks {
+        justify-content: center;
     }
-    .nav-link{
+
+    .nav-link {
         font-size: 15px;
 
     }
-    .nav-link{
-        font-size: 15px;
 
-    }
-   
 }
+
 @media (min-width: 768px) and (max-width: 992.92px) {
-    .search-bar{
+    .search-bar {
         justify-content: space-between;
-    margin-right: 0 !important;
+        margin-right: 0 !important;
     }
 }
+
 /* .search-bar {
    
     background: rgba(255, 255, 255, 0.2);
@@ -259,14 +348,14 @@ justify-content: center;
 }
 
 .search-bar {
-    background: #FFFFFF7D 0% 0% no-repeat padding-box;
+    background-color: #FFFFFF7D 0% 0% no-repeat padding-box;
     display: flex;
     align-items: center;
     border-radius: 5px;
-    border: 1px solid #D4D4D4;
+    border: 1px solid blue;
     padding: 10px;
     /* backdrop-filter: blur(4px) saturate(180%); */
-    margin-right: 20px;
+    
 }
 
 .search-bar input {
@@ -276,7 +365,7 @@ justify-content: center;
     outline: none;
 
     font-size: 14px;
-    color: #D4D4D4;
+    color: black;
 }
 
 .search-bar button {
@@ -296,16 +385,37 @@ justify-content: center;
     left: -10px;
     bottom: 30%;
 }
-.container-fluid{
+
+.container-fluid {
     max-width: 1350px;
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1400px) {
-    .nav-link{
+    .nav-link {
         font-size: 15px;
     }
 }
+.search-bar {
+  position: relative; /* Create a positioning context */
+}
+
+
+.navbar-autocomplete {
+  display: flex;
+  align-items: center;
+}
+
+.autocomplete-input {
+  width: 200px; /* Adjust the width as needed */
+}
+.demo-autocomplete .autocomplete-input {
+    background-color: blue;
+}
+
+.router-link-exact-active {
+        border-bottom: 2px solid blue;
+    }
 
 
 </style>

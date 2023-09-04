@@ -8,10 +8,8 @@
                     <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
-                            <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/book1.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9 pt-2">
                             <div class="col-md-9 col-9 col-sm-9 pt-2">
                                 <h5>{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
@@ -25,19 +23,13 @@
      
     </div>            
 
-        </div>
-     
-    </div>            
-
 
     
     <Offer />
 </template>
 
 <script>
-import axios from 'axios';
-import router from '../router';
-import Offer from './Offer.vue'
+import AxiosInstance  from '../config/axiosInstance';
 import router from '../router';
 import Offer from './Offer.vue'
 
@@ -47,22 +39,18 @@ export default {
 
 Offer
 },
-    components: {
-
-Offer
-},
     data() {
         return {
             branches: [],
-            academia: []
+            academia: [],
         }
     },
     async created() {
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/GetAcademiaByName/` + this.$route.params.name);
+            const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches/GetBranchListByName/` + this.$route.params.name);
+            const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
@@ -72,9 +60,7 @@ Offer
 }    
 
 
-
 </script>
-
 
 <!-- <style scoped>
 .jk {
@@ -198,8 +184,7 @@ Offer
 </style> -->
 <style scoped>
 .jk {
-    padding-top:100px;
-    padding-top:100px;
+    padding-top:70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -210,59 +195,45 @@ Offer
 
     }
     .box{
-        width:250px !important;
+        height: 109px !important;
+    width: 307px !important;
+    background-size: contain !important;
+ 
     }
     #available_text{
-        font-size: 18px;
-@media only screen and (max-width: 768px) and (min-width: 100px) {
-
-    .parent_blocks{
-        justify-content: center !important;
-
+        font-size: 16px !important;
     }
-    .box{
-        width:250px !important;
+    .jk{
+        padding-top:65px;
     }
-    #available_text{
-        font-size: 18px;
-    }
-    
     
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
   
     #available_text{
         font-size: 20px;
-  
-    #available_text{
-        font-size: 20px;
+    }
+    .box{
+        width:300px !important;
     }
 }
 
-
 .box {
     
-    height: 95px;
-    width: 305px;
-    
-    height: 95px;
-    width: 305px;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 80px 40px;
-    border: 1px solid #FFFFFF;
+    height:115px;
+    width:335px;
     cursor: pointer;
     margin-bottom: 1%;
-    margin: 20px;
-    padding:15px;
-
-    margin: 20px;
-    padding:15px;
+    margin: 10px;
+    padding:20px;
+    
+    background: url('../assets/images/Path 4814@2x.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     
 }
-.parent_block {
-    max-width: 1300px;
-    margin: 0 auto;
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
@@ -287,8 +258,6 @@ Offer
     color: #000000;
     opacity: 0.49;
 }
-
-
 
 
 h2 {

@@ -1,15 +1,22 @@
 <template>
     <div class="container-fluid jk">
         <div class="container">
-            <img src="../assets/images/FAQs-amico.png" class="img-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="faq_image_block">
+                        <img src="../assets/images/FAQs-amico.png" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+          
 
 
         </div>
         <div class="accordion_block">
 
             <div class="">
-                <div class="card">
-                    <h5 class="card-header">
+                <div class="card" id="faq_card">
+                    <h5 class="card-header" id="faq_card_header">
                         <div data-toggle="collapse" href="#collapse-example2" aria-expanded="true"
                             aria-controls="collapse-example" id="heading-example" class="d-block kj">
 
@@ -26,8 +33,8 @@
 
                     </div>
                 </div>
-                <div class="card">
-                    <h5 class="card-header">
+                <div class="card" id="faq_card">
+                    <h5 class="card-header" id="faq_card_header">
                         <div data-toggle="collapse" href="#collapse-example" aria-expanded="false"
                             aria-controls="collapse-example" id="heading-example" class="d-block kj">
 
@@ -73,5 +80,17 @@ export default {
 
 .action {
     float: right;
+}
+.faq_image_block{
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom:50px;
+}
+
+#faq_card{
+    margin:20px;
+}
+#faq_card_header{
+    background: #EFF5FC;
 }
 </style>

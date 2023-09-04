@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <Navbar :showSearchBox="showSearchBox"  />
   <router-view :key="$route.fullPath" />
   <Footer />
 </template>
@@ -9,11 +9,16 @@ import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 
 export default {
-  name: "App",
+  name: "AppView",
   components: {
     Navbar,
     Footer
-  }
+  },
+  computed: {
+    showSearchBox() {
+      return this.$route.path !== '/search'; // Hide search box on Search page
+    },
+  },
 }
 </script>
 

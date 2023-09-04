@@ -1,69 +1,76 @@
 <template>
-    <div class="category-test pt-5 ">
-        <h4 class="academic_head_text">
-       
-       
-            <span id="aca_text">Available</span>Academics
-            <router-link to="/Courses" >See all</router-link>
-        </h4>
-             
-    </div>
-  
-    <div class="mb">
-      
-         
-       
-          
+    <div class="container" id="academy_container">
+        <div class="category-test pt-3 ">
+            
 
-        <div class="parent_blocks">
-        <div  v-for="item in academia" :key="item.id">
-            <div class="box1">
-                <router-link v-bind:to="{ name:'Branches', params:{name: item.academiaName}}" style="color: white;text-decoration: none;"> 
-                <div class="box">
-                    
-                    <img src="../assets/images/book.png" class="icon">
-                    <div class="top">
-                        <span class="wr">05{{ item.count }}</span>
-                    </div>
-                    <!-- <div class="top" v-for="(group, id) in groupedItems" :key="id">
-                        <span class="wr" v-if="item.id == id">{{ group.length }}</span>
-                    </div> -->
-                    <div class="card-body">
-                        <div class="card-title">
-                            <p class="ty1">COURSES</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="ty">{{ item.name }}</p>
-                </router-link>
-            </div>
+            <h4 class="academic_head_text">
+
+                <span id="aca_text">Available</span>Academics
+                <router-link to="/Courses">See all</router-link>
+            </h4>
+
         </div>
-         
-        
-    </div> 
-   
-</div>
+        <div class="mb">
+        <div class="parent_blocks">
+            <div v-for="item in academia" :key="item.id">
+                <div class="box1">
+                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academiaName } }"
+                        style="color: white;text-decoration: none;">
+                        <div class="box">
+                            <img src="../assets/images/book.png" class="icon">
+                            <div class="top">
+                                <span class="wr">{{ item.id in groupedItems ? '0' + groupedItems[item.id].length : '00'
+                                }}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <p class="ty1">COURSES</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="ty">{{ item.name }}</p>
+                    </router-link>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    </div>
+
+
+    
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from '../config/axiosInstance'
 import router from '../router';
 
-import router from '../router';
 
 
 
 export default {
     name: 'AcademicsView',
-   
-   
+
     data() {
         return {
             academia: [],
-            branches: []
+            branches: [],
+            isuser: localStorage.getItem("username")
         }
     },
     computed: {
+        authorizationHeader() {
+            if (this.isLoggedIn) {
+                return `Bearer ${this.isuser}`;
+            } else {
+                return 'DummyValue'; // Set your dummy value here
+            }
+        },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
         groupedItems() {
             const grouped = {};
             this.branches.forEach(item => {
@@ -74,23 +81,26 @@ export default {
             });
             return grouped;
         }
+
     },
     async created() {
+        // const headers = { 
+        //     Authorization:  this.authorizationHeader,
+        //     "Content-type": "application/json"
+        // };     
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Academia/`);
+            const res = await axiosInstance.get(`/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Branches`);
+            const result = await axiosInstance.get(`/Branches`);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
             console.log(error);
         }
     }
-}   
+} 
 </script>
-
-
 
 
 
@@ -104,6 +114,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
+    padding-right:20px;
 }
 
 .kkj img {
@@ -140,37 +151,23 @@ export default {
     background: linear-gradient(180deg,lightblue 20%, blue, 20%, darkblue 100%);
     transition: 0.3s;
 } */
-/* .mb h2 {
-    font-family: serif;
-} */
-
-/* .mb .box {
-    width: 13%;
-    cursor: pointer;
-    height: auto; 
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    margin-bottom: 10px;
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg,lightblue 20%, blue, 20%, darkblue 100%);
-    transition: 0.3s;
-} */
 
 .mb .box1 {
-    width: 13%;
-    top: 479px;
-    left: 118px;
-    width: 130px;
-    height: 118px;
+
+    width: 122px;
+  
     cursor: pointer;
-    height: 140px;
+    height: 120px;
     border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
     /* background: rgb(2,0,36); */
-    /* background: rgb(2,0,36); */
-    background: transparent radial-gradient(closest-side at 77% 22%, #FFFFFF 0%, #FAFAFA 0%, #F6F6F6 0%, #0077FF 100%) 0% 0% no-repeat padding-box;
+    background: #F6F6F6;
+    background: #F6F6F6;
+background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
+
+
     transition: 0.3s;
 }
 
@@ -205,23 +202,35 @@ export default {
         /* width:48%; */
         margin-bottom: 55px;
     }
+  
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 598.98px) {
     .mb .box1 {
-        /* width: 48%; */
-        margin-bottom: 55px;
+        width: 90%;
+        margin: 30px 0px 30px 0px;
     }
-    .academic_head_text{
-        font-size: 18px !important;
-        padding-left:0 !important;
+
+    .academic_head_text {
+        font-size: 15px !important;
+        padding-left: 0 !important;
 
     }
-    .parent_blocks{
+
+    .category-test h4 a{
+        padding-right:0;
+        font-size: 15px !important;
+    }
+    .parent_blocks {
         justify-content: center !important;
 
     }
- 
+    .ty{
+        margin-top: -78px;
+  
+    }
+    
+
 }
 
 @media only screen and (max-width: 912px) {
@@ -232,13 +241,27 @@ export default {
     }
 }
 
-
 @media (min-width: 768px) and (max-width: 991.92px) {
-    .academic_head_text{
-        font-size: 20px ;
+    .academic_head_text {
+        font-size: 20px;
     }
-    
+  
+
 }
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .academic_head_text {
+        font-size: 18px !important;
+        padding-left:0 !important;
+    }
+   
+    #home_container{
+        margin-top:0 ;
+
+    }
+
+}
+
 .dot {
     height: 70px;
     width: 70px;
@@ -254,23 +277,15 @@ export default {
     top: -87px;
     /* font-size: 24px;
     color: white; */
-.wr {
-    position: relative;
-    left: 28px;
-    top: -87px;
-    /* font-size: 24px;
-    color: white; */
     text-align: left;
     font: normal normal normal 41px/54px Segoe UI;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
-    opacity: 1;
 }
 
-
 .ty {
-    margin-top: -70px;
+    margin-top: -94px;
     font-size: 14px;
     color: black;
     text-align: center;
@@ -281,7 +296,7 @@ export default {
     font-size: 14px;
     color: white;
     position: relative;
-    top: -59px;
+    top: -76px;
     text-align: center;
 }
 
@@ -296,10 +311,9 @@ router-link {
 }
 
 @media screen and (min-width: 100px) and (max-width: 450px) {
-@media screen and (min-width: 100px) and (max-width: 450px) {
     .wr {
         position: relative;
-      
+
         top: -87px;
     }
 }
@@ -307,7 +321,7 @@ router-link {
 @media screen and (min-width: 650px) and (max-width: 912px) {
     .wr {
         position: relative;
-      
+
         top: -87px;
     }
 }
@@ -319,26 +333,31 @@ router-link {
         top: -87px;
     }
 }
-}
 
-   .academic_head_text{
-    color:#006acd;
-    padding-left:20px;
+.academic_head_text {
+    color: #006acd;
+    padding-left: 20px;
     font-size: 20px;
 
-   }
+}
 
 
-   #aca_text{
-    color:#006acd;
+#aca_text {
+    color: #006acd;
     font-weight: bold;
-    padding-right:10px;
-   }
-.parent_blocks{
+    padding-right: 10px;
+}
+
+.parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-between;
-    margin:30px 0px 30px 0px;
+    justify-content: space-between;
+    margin: 30px 0px 30px 0px;
 }
+
+#academy_container{
+    padding:15px 0px 15px 0px;
+}
+
 </style>
 

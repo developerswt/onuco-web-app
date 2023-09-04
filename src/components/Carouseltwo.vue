@@ -1,349 +1,303 @@
 <template>
-  <div>
-    <section id="slider">
-      <input type="radio" name="sliderImg" id="s1">
-      <input type="radio" name="sliderImg" id="s2">
-      <input type="radio" name="sliderImg" id="s3" checked>
-      <input type="radio" name="sliderImg" id="s4">
-      <input type="radio" name="sliderImg" id="s5">
-      <label for="s1" id="slide1">
-        <div class="div_one" style="height:100%;width:100%;">
-          <div class="child_class">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="right_carousel_block">
-                  <h4>One App Many Benifits</h4>
-                  <p>An Affordable learning platform <br> for better academic results</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="image_class">
-                  <img src="../assets/images/mg25.png" class="img-fluid">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="merged_block">
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <input type="text" id="carousel_input" placeholder="Your@email address">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="carousel_button">Free Sign up</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </label>
-      <label for="s2" id="slide2">
-        <div class="div_one" style="height:100%;width:100%;">
-          <div class="child_class">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="right_carousel_block">
-                  <h4>One App Many Benifits</h4>
-                  <p>An Affordable learning platform <br> for better academic results</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="image_class">
-                  <img src="../assets/images/mg25.png" class="img-fluid">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="merged_block">
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <input type="text" id="carousel_input" placeholder="Your@email address">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="carousel_button">Free Sign up</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </label>
-      <label for="s3" id="slide3">
-        <div class="div_one" style="height:100%;width:100%;">
-          <div class="child_class">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="right_carousel_block">
-                  <h4>One App Many Benifits</h4>
-                  <p>An Affordable learning platform <br> for better academic results</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="image_class">
-                  <img src="../assets/images/mg25.png" class="img-fluid">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="merged_block">
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <input type="text" id="carousel_input" placeholder="Your@email address">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="carousel_button">Free Sign up</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </label>
-      <label for="s4" id="slide4">
-        <div class="div_one" style="height:100%;width:100%;">
-          <div class="child_class">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="right_carousel_block">
-                  <h4>One App Many Benifits</h4>
-                  <p>An Affordable learning platform <br> for better academic results</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="image_class">
-                  <img src="../assets/images/mg25.png" class="img-fluid">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="merged_block">
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <input type="text" id="carousel_input" placeholder="Your@email address">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="carousel_button">Free Sign up</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </label>
-      <label for="s5" id="slide5">
-        <div class="div_one">
-          <div class="child_class_one">
-            <div class="right_carousel_block">
-              <h4>Refer a Friend</h4>
-            </div>
-          </div>
-        </div>
-        
-      </label>
-      
-
-    </section>
-  </div>
+	<div>
+		<figure class="icon-cards mt-3">
+			<div class="icon-cards__content">
+				<div class="icon-cards__item d-flex align-items-center justify-content-center">
+					<div class="child_class" data-v-e19d716d="">
+						<div class="row" data-v-e19d716d="">
+							<div class="col-lg-8" data-v-e19d716d="">
+								<div class="right_carousel_block" data-v-e19d716d="">
+									<h4 data-v-e19d716d="">One App Many Benifits</h4>
+									<p data-v-e19d716d="">An Affordable learning platform <br data-v-e19d716d=""> for better
+										academic results</p>
+								</div>
+							</div>
+							<div class="col-lg-4" data-v-e19d716d=""></div>
+							<div class="col-lg-12" data-v-e19d716d="">
+								<div class="merged_block" data-v-e19d716d="">
+									<div class="row" data-v-e19d716d="">
+										<div class="col-lg-8" data-v-e19d716d=""><input type="text" id="carousel_input"
+												placeholder="Your@email address" data-v-e19d716d=""></div>
+										<div class="col-lg-4" data-v-e19d716d=""><button id="carousel_button"
+												data-v-e19d716d="">Free Sign up</button></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="icon-cards__item d-flex align-items-center justify-content-center">
+					<div class="child_class_one" data-v-e19d716d="">
+						<p>Refer a Friend</p>
+					</div>
+				</div>
+				<div class="icon-cards__item d-flex align-items-center justify-content-center">
+					<div class="child_class_two">
+						<p>Contact Us</p>
+					</div>
+				</div>		
+			</div>
+		</figure>
+	</div>
 </template>
-
+  
 <script>
 export default {
-  data() {
-    return {
-      slides: [],
-      currentIndex: 0
-    };
-  },
-  methods: {
-    showSlide(index) {
-      this.slides[index].checked = true;
-    },
-    autoScroll() {
-      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-      this.showSlide(this.currentIndex);
-    }
-  },
-  mounted() {
-    this.slides = this.$el.querySelectorAll('[type="radio"]');
-    setInterval(this.autoScroll, 3000);
-  }
-};
+
+}
 </script>
-
+  
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
+.icon-cards {
+	position: relative;
+	width: 60vw;
+	height: 40vw;
+	max-width: 700px;
+	max-height: 250px;
+	margin: 0 auto;
+	color: white;
+	perspective: 1000px;
+	transform-origin: center;
+	top: 100px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 42px;
-  font-family: monospace;
-  margin: 30px;
+.icon-cards__content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transform-origin: center;
+	transform-style: preserve-3d;
+	transform: translateZ(-30vw) rotateY(0);
+	animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
-[type=radio] {
-  display: none;
+.icon-cards__content.step-animation {
+	animation: carousel 8s infinite steps(1) forwards;
 }
 
-#slider {
-  height: 35vw;
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  margin-top:40px;
+.icon-cards__item {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height:250px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+	border-radius: 6px;
+	transform-origin: center;
 }
 
-#slider label {
-  margin: auto;
-  width: 60%;
-  height: 100%;
-  border-radius: 4px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  cursor: pointer;
-  transition: transform 0.4s ease;
+.icon-cards__item:nth-child(1) {
+
+	transform: rotateY(0) translateZ(35vw);
 }
 
-#s1:checked~#slide1,
-#s2:checked~#slide2,
-#s3:checked~#slide3,
-#s4:checked~#slide4,
-#s5:checked~#slide5 {
-  /* box-shadow: 0 13px 25px 0 rgba(0, 0, 0, .3), 0 11px 7px 0 rgba(0, 0, 0, .19); */
-  transform: translate3d(0, 0, 0);
+.icon-cards__item:nth-child(2) {
+
+	transform: rotateY(120deg) translateZ(35vw);
 }
 
-#s1:checked~#slide2,
-#s2:checked~#slide3,
-#s3:checked~#slide4,
-#s4:checked~#slide5,
-#s5:checked~#slide1 {
-  /* box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .3), 0 2px 2px 0 rgba(0, 0, 0, .2); */
-  transform: translate3d(15%, 0, -100px);
+.icon-cards__item:nth-child(3) {
+
+	transform: rotateY(240deg) translateZ(35vw);
 }
 
-#s1:checked~#slide3,
-#s2:checked~#slide4,
-#s3:checked~#slide5,
-#s4:checked~#slide1,
-#s5:checked~#slide2 {
-  /* box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37); */
-  transform: translate3d(30%, 0, -200px);
+@keyframes carousel {
+
+	0%,
+	17.5% {
+		transform: translateZ(-35vw) rotateY(0);
+	}
+
+	27.5%,
+	45% {
+		transform: translateZ(-35vw) rotateY(-120deg);
+	}
+
+	55%,
+	72.5% {
+		transform: translateZ(-35vw) rotateY(-240deg);
+	}
+
+	82.5%,
+	100% {
+		transform: translateZ(-35vw) rotateY(-360deg);
+	}
 }
 
-
-#s1:checked~#slide4,
-#s2:checked~#slide5,
-#s3:checked~#slide1,
-#s4:checked~#slide2,
-#s5:checked~#slide3 {
-  /* box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37); */
-  transform: translate3d(-30%, 0, -200px);
+html,
+body {
+	height: 100%;
 }
 
-#s1:checked~#slide5,
-#s2:checked~#slide1,
-#s3:checked~#slide2,
-#s4:checked~#slide3,
-#s5:checked~#slide4 {
-  /* box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .3), 0 2px 2px 0 rgba(0, 0, 0, .2); */
-  transform: translate3d(-15%, 0, -100px);
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: #110f15;
 }
 
+.checkbox {
+	position: relative;
+	margin-top: 2rem;
+	font-size: 0.9rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #f47956;
+	transition: color 0.3s ease;
+	user-select: none;
+}
 
+.checkbox:hover {
+	color: #f7a95a;
+}
 
+.checkbox__checkbox {
+	position: relative;
+	top: 0;
+	width: 1.0625rem;
+	height: 1.0625rem;
+	background: white;
+	border: 1px solid currentColor;
+	border-radius: 4px;
+	vertical-align: middle;
+	transition: background 0.1s ease;
+	cursor: pointer;
+}
+
+.checkbox__checkbox::after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 5px;
+	width: 5px;
+	height: 11px;
+	opacity: 0;
+	transform: rotate(45deg) scale(0);
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	transition: all 0.3s ease;
+	transition-delay: 0.15s;
+}
+
+.checkbox__label {
+	margin-left: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.checkbox>input:checked~.checkbox__checkbox {
+	border-color: transparent;
+	background: #f47956;
+	animation: jelly 0.6s ease;
+}
+
+.checkbox>input:checked~.checkbox__checkbox:after {
+	opacity: 1;
+	transform: rotate(45deg) scale(1);
+}
+
+@keyframes jelly {
+	from {
+		transform: scale(1, 1);
+	}
+
+	30% {
+		transform: scale(1.25, 0.75);
+	}
+
+	40% {
+		transform: scale(0.75, 1.25);
+	}
+
+	50% {
+		transform: scale(1.15, 0.85);
+	}
+
+	65% {
+		transform: scale(0.95, 1.05);
+	}
+
+	75% {
+		transform: scale(1.05, 0.95);
+	}
+
+	to {
+		transform: scale(1, 1);
+	}
+}
 
 .child_class {
-  padding: 20px;
-  margin: 0 auto;
-  background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
-  border-radius: 8px;
-  height: 235px;
+	padding: 20px;
+	margin: 0 auto;
+	background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
+	border-radius: 8px;
+	height:250px;
+}
+.child_class_one{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #ff00cc;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+color:white;
+height:250px;
+width:100%;
+border-radius: 8px;
+}
+
+.child_class_two{
+	background: #000428;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+color:white;
+height:250px;
+width:100%;
+border-radius: 8px;
+display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.merged_block[data-v-e19d716d] {
+	border: 1px solid white;
+	border-radius: 30px;
+	padding: 4px;
 }
 
 
+#carousel_input[data-v-e19d716d] {
 
-.right_carousel_block {
-  padding: 10px;
-  color: white;
-}
-
-#carousel_input {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  padding: 10px 0px 0px 10px;
-
-}
-
-#carousel_button {
-  height: 45px;
-  padding: 0px 50px 0px 50px;
-  background: white;
-  color: #0066CC;
-  border-radius: 22px;
-  float: right;
-}
-
-.merged_block {
-  border: 1px solid white;
-  border-radius: 30px;
-  padding: 4px;
-  margin-top: -118px;
-}
-
-.div_one {
-  height: 100%;
-  width: 100%;
-  /* background-color: red; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  margin-top:30px;
-}
-.child_class_one {
-  padding: 20px;
-  margin: 0 auto;
-  background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
-  border-radius: 8px;
-  height: 235px;
-  width:100%;
-  display: flex;
-    align-items: center;
-    justify-content: center;
- 
-}
-.image_class img {
-  width: 100%;
-  height: 350px;
-  object-fit: contain;
-  padding: 10px;
-  margin-top: -124px;
-}
-#carousel_input::placeholder {
-  color: white !important;
-}
-
-@media (max-width: 600px) {
- 
-  #slider{
-    display: none;
-
-  }
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1400px) {
-  #slider{
-    margin-top:40px;
-
-  }
+	width: 100%;
+	border: none;
+	outline: none;
+	background: transparent;
+	padding: 10px 0px 0px 10px;
 }
 
 
+#carousel_button[data-v-e19d716d] {
+	height: 45px;
+	padding: 0px 50px 0px 50px;
+	background: white;
+	color: #0066CC;
+	border-radius: 22px;
+	float: right;
+
+}
+
+@media(max-width: 1024px){
+	.icon-cards {
+		display: none;
+	}
+}
+#carousel_input::placeholder{
+	color:white;
+}
+.right_carousel_block{
+	margin-top:20px;
+}
 </style>
