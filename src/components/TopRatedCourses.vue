@@ -158,7 +158,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-    padding-right: 20px;
+  
 }
 
 /* .box .offer {

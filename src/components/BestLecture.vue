@@ -112,7 +112,7 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-    padding-right:20px;
+  
 }
 
 /* .user-icon {
@@ -243,7 +243,16 @@ export default {
     height:75px;
 }
 ::-webkit-scrollbar {
-    display: none !important;
+    width: 0.5em; /* Adjust this to change the width of the scrollbar track */
+}
+
+/* Firefox */
+* {
+    scrollbar-width: none; /* "thin" or "none" depending on your preference */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide the thumb on webkit-based browsers */
 }
 </style>
 

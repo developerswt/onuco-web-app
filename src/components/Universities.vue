@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top:100px;
+    padding-top:70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

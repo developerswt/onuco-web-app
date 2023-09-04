@@ -62,6 +62,11 @@
 .error_parent_block {
     padding-top: 150px;
 }
+@media screen and (max-width: 1024px) {
+    .error_parent_block {
+        padding-top: 90px;
+    }
+}
 #group_image {
     background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
     background-size: cover !important;
