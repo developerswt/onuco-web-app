@@ -23,7 +23,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam corrupti esse blanditiis ipsum, sed eum iusto culpa dignissimos molestiae dolor dolores aperiam, omnis fugiat et impedit? Molestiae expedita totam, odio culpa inventore a excepturi praesentium, itaque consequatur vel delectus esse vero eum veniam nihil perspiciatis neque rerum sapiente nisi corporis?</div>
+                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; text-decoration: none; color: black;">Lorem ipsum ....</router-link></div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -42,7 +42,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">..</div>
+                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -61,7 +61,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">Data Management Systems & Visualization software development..</div>
+                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -80,7 +80,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text">Data Management Systems & Visualization software development..</div>
+                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -241,7 +241,9 @@ export default {
 .card-text{
     overflow-y: scroll;
     height:75px;
+    color: black;
 }
+
 ::-webkit-scrollbar {
     width: 0.5em; /* Adjust this to change the width of the scrollbar track */
 }

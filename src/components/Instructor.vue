@@ -326,12 +326,13 @@
                     </el-tab-pane>
                     <el-tab-pane label="PUBLICATIONS" name="sixth">
                         <div class="experience_block" v-for="publication in facult.publication" :key="publication.id">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> {{ publication.heading }}
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Publication
                             </h2>
+
                             <div class="row" id="row_block" v-for="publicationdetails in publication.values" :key="publicationdetails.id">
                                 
                                 <div class="div">
-                                
+                                    <p><span id="education_text">{{ publication.heading }}</span></p>
                                     <p><span id="education_text">Author: </span>{{ publicationdetails.author }}.</p>
                                         
                                     <p><span id="education_text">Price: </span>{{ publicationdetails.price }}</p>
@@ -356,11 +357,12 @@
                     </el-tab-pane>
                     <el-tab-pane label="PROJECTS" name="ten">
                         <div class="experience_block" v-for="project in facult.project" :key="project.id">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> {{ project.heading }}
+                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Project
                             </h2>
                             <div class="row" id="row_block" v-for="projectdetails in project.values" :key="projectdetails.id">
                                 
                                 <div class="div">
+                                    <!-- <p><span id="education_text">{{ project.heading }}</span></p> -->
                                     <p><span id="education_text">Environment: </span></p>
                                     
                                     <div class="" v-for="skills in projectdetails.environment" :key="skills.id">
@@ -403,7 +405,7 @@
       
     </div>
     <Offer />
-    <Offer />
+    
 </template>
 
 <script>
@@ -568,7 +570,10 @@ export default {
 
 
 }
-
+::v-deep .fa-circle {
+    margin-bottom: 10px;
+}
+::v-deep .row_class i[data-v-54dfdb7f]
 .kl .card {
     padding: 10px 10px 0px;
     /* background-color: #8B8989; */
@@ -661,6 +666,7 @@ export default {
     position: relative;
     top: 18px;
     left: -8px;
+    margin-bottom: 18px;
     /* bottom: 10px; */
 
 }
@@ -764,13 +770,13 @@ export default {
 
     .instructor_head_text,
     .course_text,
-    .Object_text {
+    ::v-deep .Object_text {
         font-size: 15px !important;
     }
 
 
 
-    #education_text,
+    ::v-deep #education_text,
     #institute_text {
         font-size: 14px;
         margin-bottom: 0px;
@@ -798,7 +804,7 @@ export default {
 
     .Sub_paragraph,
     .research_inner_block p,
-    .professor-details_text {
+    ::v-deep .professor-details_text {
         font-size: 14px;
     }
 
@@ -814,7 +820,7 @@ text-align: left !important;
 
 @media (min-width: 768px) and (max-width: 992px) {
 
-    .Object_text {
+    ::v-deep .Object_text {
         font-size: 18px;
     }
     #sub_text{
@@ -823,7 +829,7 @@ text-align: left !important;
     #row_block{
         margin-top:15px;
     }
-    #education_text{
+    ::v-deep #education_text{
         font-size:18px;
     }
 }

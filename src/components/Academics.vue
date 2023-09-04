@@ -336,7 +336,8 @@ router-link {
 
 .academic_head_text {
     color: #006acd;
-
+    padding-left: 10px;
+    
     font-size: 20px;
 
 }
