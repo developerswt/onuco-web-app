@@ -64,21 +64,25 @@
                             </li>
                         </ul>
                     </form> -->
-                    <el-row class="demo-autocomplete" style="width: 250px; margin-right: 25px; margin-top: 1%;" v-if="showSearchBox">
+                    <el-row class="demo-autocomplete" style="width: 200px;  margin-right: 25px; " v-if="showSearchBox">
                         <el-col :span="26">
                             <el-autocomplete
                                 v-model="searchTerm"
                                 :fetch-suggestions="querySearch"
                                 :trigger-on-focus="false"
-                                value-key="semester"
-                                class="inline-input w-100"
-                                clearable
+                                value-key="title"
+                                size="large"
+                                style="background-color: color: blue;"
+                                class="inline-input w-100  search"
+                                
                                 @select="handleSelect"
                             
                                 placeholder="Search..."
                             >
-                            <template #append>
-                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                            <template #suffix>
+                                <el-icon v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer" @click="clearInput"><CircleClose /></el-icon>
+
+                                <el-icon style="position: absolute; right: 10px; cursor: pointer; color: blue; font-weight: bold;">
                                     <Search @click="handleKeyEnter(searchTerm)" />
                                 </el-icon>
                             </template>
@@ -159,7 +163,7 @@ export default {
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
-                axios.get("https://localhost:7233/api/Coursedetails/search?semester=" + this.searchTerm)
+                axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchTerm)
 		.then((res) => (this.dataarray = res.data));
                 console.log(this.dataarray);
                 return this.dataarray;
@@ -185,6 +189,9 @@ export default {
             }
             this.activeIndex = index;
             this.navItems[this.activeIndex].active = true;
+        },
+        clearInput() {
+            this.searchTerm = '';
         }
 
     },
@@ -412,6 +419,11 @@ li>a:hover:before {
 .demo-autocomplete .autocomplete-input {
     background-color: blue;
 }
-
-
+.el-autocomplete__input {
+  height: 600px; /* Adjust the height as needed */
+  background-color: lightblue;
+}
+.search {
+    color: blue;
+}
 </style>

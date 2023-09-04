@@ -2,7 +2,7 @@
     <div>
         <section id="search_block">
             <div class="container">
-                <div class="search_text">
+                <div class="search_text mb-3">
                     <h4 class="academic_head_text">
 
                         <span id="aca_text">Search</span>Results for "{{ searchQuery }}"
@@ -10,7 +10,7 @@
                     </h4>
                 </div>
 
-                <form class="search-bar" @submit.prevent="search">
+                <!-- <form class="search-bar" @submit.prevent="search">
                     <div class="row">
                         <div class="col-lg-6 col-8 col-sm-8 col-md-9">
                             <div class="child_class">
@@ -24,10 +24,36 @@
                         </div>
                     </div>
 
-                    <!-- <button class="" type="submit"><i class="fa fa-search"></i></button> -->
+                    <button class="" type="submit"><i class="fa fa-search"></i></button>
 
 
-                </form>
+                </form> -->
+
+                <el-autocomplete
+                    v-model="searchQuery"
+                    :fetch-suggestions="querySearch"
+                    :trigger-on-focus="false"
+                    value-key="title"
+                    size="large"
+                    class="inline-input w-100"
+                    
+                    @select="handleSelect"
+                    placeholder="Search..."
+                >
+                    <template #prefix>
+                        <el-icon style="vertical-align: middle;float: right; width: 1rem; height: 2rem; cursor: pointer; color: blue; font-weight: bold;">
+                            <Search />
+                        </el-icon>
+                    </template>
+                    <template #suffix>
+                                              
+                        <el-icon v-if="searchQuery !== ''" style="position: absolute;right: 143px; cursor: pointer" @click="clearInput"><CircleClose /></el-icon>
+                            
+                        <el-button style="height: 36px; background: #0177FB 0% 0% no-repeat padding-box; color: white; cursor: pointer; width: 130px; float: right; position: absolute; right: 2px;" @click="search()">
+                            <span style="font-size: 16px;"> SEARCH </span>
+                        </el-button>
+                    </template>
+                </el-autocomplete>
 
                 <div class="tab_block">
                     <section id="tab_block">
@@ -57,25 +83,26 @@
 
                                 </div>
                                 <div class="" v-if="searchResults.length > 0">
-                                <div class="tab_inner_block"  v-for="(result, index) in searchResults" :key="index">
+                                <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
                                     <div class="row no-gutters" >
                                         <div class="col-lg-3 col-md-3" >
                                             <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
                                         </div>
                                         <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
+                                                <router-link v-bind:to="'/SemesterDetails?id='+ result.id" style="text-decoration: none;">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                        <p id="title_text" class="mb-1">{{ result.title.slice(0,58) }}</p>
-                                                        <p id="sub_text" class="mb-1">Mathematics and its formulas</p>
+                                                        <p id="title_text" class="mb-1">{{ result.title }}</p>
+                                                        <p id="sub_text" class="mb-1"></p>
                                                         <div class="inner_child">
                                                             <div class="row">
-                                                                <div class="col-lg-3 col-md-5">
-                                                                    <p id="prof_text" class="mb-2">{{ result.instructorName }}</p>
+                                                                <div class="col-lg-5 col-md-5">
+                                                                    <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3">
                                                                     <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Iconionic-ios-timer@2x.png">{{result.videoDemand.slice(0,9)}}</p>
+                                                                            src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3">
                                                                     <p id="module_text" class="mb-2"><img
@@ -83,12 +110,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- <p id="desc_text">{{ result.description }}...</p> -->
+                                                        <p id="desc_text" >
+                                                            <span class="desc" v-html="result.description.slice(0,58)"></span></p>
                                                     </div>
                                                     <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
                                                         <div class="right_block">
-                                                            <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                                            &#8377;947</p>
+                                                            <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
+                                                            &#8377;{{ result.discountedPrice }}</p>
                                                         <button id="buy_button">Buy now</button>
                                                         <div class="icon_blck">
                                                             <i class="fa-solid fa-star" style="color: #ff9900;"></i>
@@ -101,6 +129,7 @@
                                                        
                                                     </div>
                                                 </div>
+                                                </router-link>
                                             </div>
                                         </div>
                                     </div>
@@ -156,19 +185,41 @@ export default {
         },
         async search() {
             try {
-                const response = await fetch(`https://localhost:7233/api/Coursedetails/search?semester=${this.searchQuery}`);
+                const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=${this.searchQuery}`);
                 const data = await response.json();
-
+                
                 // Assuming your API returns an array of objects with a "name" property
                 this.searchResults = data;
             } catch (error) {
                 console.error('Error fetching search results:', error);
             }
         },
+        handleSelect (item){
+            console.log(item);
+        // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
+            
+        },
+        querySearch(queryString,cb) {
+            console.log(queryString)
+            let results = queryString ? this.createFilter(queryString) : this.dataarray;
+            console.log(results);
+            cb(results);
+        },
+        createFilter(queryString) {
+                console.log("queryString",queryString)
+                axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchQuery)
+		.then((res) => (this.dataarray = res.data));
+                console.log(this.dataarray);
+                return this.dataarray;
+            
+        },
+        clearInput() {
+            this.searchQuery = '';
+        }
     },
     async created() {
         try {
-            const response = await fetch(`https://localhost:7233/api/Coursedetails/search?semester=${this.searchQuery}`);
+            const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=${this.searchQuery}`);
             const data = await response.json();
 
                 // Assuming your API returns an array of objects with a "name" property
@@ -295,9 +346,14 @@ export default {
     margin-right: 7px;
 }
 
-#desc_text {
+::v-deep #desc_text {
     font-size: 16px;
     color: #666666;
+    list-style-type: none;
+}
+::v-deep .desc ul li{
+    list-style-type: none;
+    margin-left: -40px;
 }
 
 #strike_text {
