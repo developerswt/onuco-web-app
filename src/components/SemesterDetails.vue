@@ -168,6 +168,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="video_block" v-if="videoOptions.sources.length>0">
+                                                <div class="video_block" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" />
                                                 </div>
                                         
@@ -227,6 +228,12 @@ export default {
                     //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
                     //     withCredentials: false,
                     // }
+                    // {
+                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                    //     type: 'application/x-mpegURL',
+                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                    //     withCredentials: false,
+                    // }
                     
                 ],
                 html5: {
@@ -271,8 +278,16 @@ export default {
             this.book = res.data; 
             
             // this.videoOptions.sources[0].src = this.book.videoUrl;
+            // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
+            this.videoOptions.sources = [
+                    {
+                        src: this.book.videoUrl,
+                        type: 'application/x-mpegURL',
+                        withCredentials: false,
+                    }
+            ]
             this.videoOptions.sources = [
                     {
                         src: this.book.videoUrl,
