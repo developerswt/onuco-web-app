@@ -166,7 +166,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="video_block">
+                                                <div class="video_block" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" />
                                                 </div>
                                         
@@ -218,12 +218,12 @@ export default {
                 techOrder: ['html5'],
                 preload: "metadata",
                 sources: [
-                    {
-                        src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-                        type: 'application/x-mpegURL',
-                        //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
-                        withCredentials: false,
-                    }
+                    // {
+                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                    //     type: 'application/x-mpegURL',
+                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                    //     withCredentials: false,
+                    // }
                     
                 ],
                 html5: {
@@ -267,19 +267,26 @@ export default {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
             
-            this.videoOptions.sources[0].src = this.book.videoUrl;
+            // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
+            this.videoOptions.sources = [
+                    {
+                        src: this.book.videoUrl,
+                        type: 'application/x-mpegURL',
+                        withCredentials: false,
+                    }
+            ]
             console.log(this.book);
-            console.log(this.client);
+            console.log(this.videoOptions);
             const response = await this.client.send(command);
             console.log(response);
             // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
             this.responseFromS3 = await response.Body.transformToString("base64");
             //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
-            console.log(this.videoOptions);
+            // console.log(this.videoOptions);
             this.imageFromS3 = "data:image/jpeg;base64," + this.responseFromS3;
-            console.log(this.responseFromS3);
+            // console.log(this.responseFromS3);
         } catch (err) {
             console.error(err);
         }
