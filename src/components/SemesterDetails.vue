@@ -168,7 +168,6 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="video_block" v-if="videoOptions.sources.length>0">
-                                                <div class="video_block" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" />
                                                 </div>
                                         
