@@ -149,7 +149,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
-    padding-left:20px;
+    padding-left:15px;
 
 }
 

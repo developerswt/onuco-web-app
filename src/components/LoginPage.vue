@@ -152,6 +152,7 @@ export default {
 
 
 <template>
+    <div class="login_class">
     <authenticator class="custom-sign-in pt-3" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;">
         
         <template v-slot:header>
@@ -170,7 +171,7 @@ export default {
         </template>
   
     </authenticator>
-    
+    </div>
   </template>
   
 
@@ -209,5 +210,10 @@ authenticator {
 }
 .amplify-input .amplify-field-group__control {
     background-color: gray !important;
+}
+@media screen and (max-width: 600px) {
+    .login_class {
+        padding: 15px;
+    }
 }
 </style>

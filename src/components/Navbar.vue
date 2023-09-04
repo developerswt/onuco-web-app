@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
-        <div class="container">
+        
 
         <div class="container">
 
@@ -11,7 +11,7 @@
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
-            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
+            
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
             <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
 
@@ -22,81 +22,25 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active">
                         <router-link class="nav-link" to="/" exact>Home</router-link>
-                    <li class="nav-item active">
-                        <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
+                        
                         <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
+                        
                         <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
+                        
                         <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                     </li>
 
 
                 </ul>
-                <!-- <ul class="navbar-nav ml-auto" >
-                    <el-row class="demo-autocomplete">
-                        <el-col :span="26">
-                            <el-autocomplete
-                                v-model="searchTerm"
-                                :fetch-suggestions="querySearch"
-                                :trigger-on-focus="false"
-                                value-key="semester"
-                                class="inline-input w-100"
-                                clearable
-                                @select="handleSelect"
-                            
-                                placeholder="Search..."
-                            >
-                            <template #append>
-                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
-                                    <Search @click="handleKeyEnter(searchTerm)" />
-                                </el-icon>
-                            </template>
-                            </el-autocomplete>
-                        </el-col>
-                    </el-row>
-                </ul> -->
-                <!-- <ul class="navbar-nav ml-auto" >
-                    <el-row class="demo-autocomplete">
-                        <el-col :span="26">
-                            <el-autocomplete
-                                v-model="searchTerm"
-                                :fetch-suggestions="querySearch"
-                                :trigger-on-focus="false"
-                                value-key="semester"
-                                class="inline-input w-100"
-                                clearable
-                                @select="handleSelect"
-                            
-                                placeholder="Search..."
-                            >
-                            <template #append>
-                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
-                                    <Search @click="handleKeyEnter(searchTerm)" />
-                                </el-icon>
-                            </template>
-                            </el-autocomplete>
-                        </el-col>
-                    </el-row>
-                </ul> -->
+                
 
                 <ul class="navbar-nav ml-auto">
-                    <!-- <form class="search-bar" v-if="showSearchBox">
-                        <input class="text" type="search" v-model="searchTerm" @input="handleInput" placeholder="Search" aria-label="Search" style="cursor: pointer;">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #0066cc; cursor: pointer;" @click="submit"></i>
-                        <ul v-if="showSuggestions" class="suggestion-dropdown">
-                            <li v-for="(suggestion, index) in filteredSuggestions" :key="index" @click="selectSuggestion(displayValue(suggestion))">
-                                {{ displayValue(suggestion) }}
-                            </li>
-                        </ul>
-                    </form> -->
                     <el-row class="demo-autocomplete" style="width: 200px;  margin-right: 25px; " v-if="showSearchBox">
                         <el-col :span="26">
                             <el-autocomplete
@@ -127,19 +71,13 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi {{ this.isuser.attributes.name }}
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Picture">Profile</router-link>
                             <router-link class="dropdown-item" to="" @click="logout">Logout</router-link>
-                            <router-link class="dropdown-item" to=""></router-link>
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
-                                Up</span></router-link>
                         <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
                                 Up</span></router-link>
                     </li>
@@ -155,7 +93,7 @@
 
 <script>
 import { Auth } from 'aws-amplify';
-import axios from 'axios';
+
 import axios from 'axios';
 
 export default {
@@ -250,7 +188,7 @@ export default {
 
 }    
 
-}    
+    
 </script>
 
 <style scoped>
@@ -310,11 +248,11 @@ li>a:before {
     transition: all 0.3s ease-in-out 0s;
 }
 
-li>a:hover:before {
+/* li>a:hover:before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
-}
+} */
 
 .gh {
     font-size: 30px;
@@ -334,7 +272,7 @@ li>a:hover:before {
         display: none;
     }
 
-    .search-bar {
+    
 
     .search-bar {
         justify-content: space-between;
@@ -346,11 +284,9 @@ li>a:hover:before {
     .parent_blocks {
         justify-content: center;
 
-    .parent_blocks {
-        justify-content: center;
     }
 
-    .nav-link {
+    
 
     .nav-link {
         font-size: 15px;
@@ -362,7 +298,7 @@ li>a:hover:before {
 
 
 @media (min-width: 768px) and (max-width: 992.92px) {
-    .search-bar {
+    
     .search-bar {
         justify-content: space-between;
         margin-right: 0 !important;
@@ -467,7 +403,7 @@ li>a:hover:before {
     bottom: 30%;
 }
 
-.container-fluid {
+
 
 .container-fluid {
     max-width: 1350px;
