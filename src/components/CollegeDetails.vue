@@ -203,7 +203,6 @@ export default {
 <style scoped>
 .academic_head_text {
     color: #006acd;
-    padding: 0px 60px 0px 0px;
     font-size: 20px;
 
 }
@@ -277,7 +276,7 @@ export default {
 
 
 .jk {
-    padding-top: 100px;
+    padding-top: 70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -443,9 +442,6 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    padding: 25px 0px 2px 0px;
-
-
 }
 
 

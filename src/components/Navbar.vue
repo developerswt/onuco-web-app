@@ -3,6 +3,8 @@
 
         <div class="container">
 
+        <div class="container">
+
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,26 +12,57 @@
             </button>
 
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
+            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
             <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
+
+           
 
            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active">
                         <router-link class="nav-link" to="/" exact>Home</router-link>
+                    <li class="nav-item active">
+                        <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
                         <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                         <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                     </li>
 
 
                 </ul>
+                <!-- <ul class="navbar-nav ml-auto" >
+                    <el-row class="demo-autocomplete">
+                        <el-col :span="26">
+                            <el-autocomplete
+                                v-model="searchTerm"
+                                :fetch-suggestions="querySearch"
+                                :trigger-on-focus="false"
+                                value-key="semester"
+                                class="inline-input w-100"
+                                clearable
+                                @select="handleSelect"
+                            
+                                placeholder="Search..."
+                            >
+                            <template #append>
+                                <el-icon style="vertical-align: middle;float: right; cursor: pointer; color: blue; font-weight: bold;">
+                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                </el-icon>
+                            </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
+                </ul> -->
                 <!-- <ul class="navbar-nav ml-auto" >
                     <el-row class="demo-autocomplete">
                         <el-col :span="26">
@@ -94,6 +127,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi {{ this.isuser.attributes.name }}
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Picture">Profile</router-link>
@@ -104,8 +140,11 @@
                     <li class="nav-item" v-else>
                         <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
                                 Up</span></router-link>
+                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
+                                Up</span></router-link>
                     </li>
               
+                    
                     
                 </ul>
             </div>
@@ -117,14 +156,23 @@
 <script>
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
+import axios from 'axios';
 
 export default {
     name: "NavbarView",
     props: {
         showSearchBox: Boolean,
     },
+    props: {
+        showSearchBox: Boolean,
+    },
     data() {
         return {
+            searchTerm: null,
+            suggestions: [],
+            showSuggestions: false,
+            dataarray: [],
+             
             searchTerm: null,
             suggestions: [],
             showSuggestions: false,
@@ -174,7 +222,11 @@ export default {
                 await Auth.signOut();
                 // await Auth.forgetDevice();
                 // console.log('Signed out and forgot device');
+                // await Auth.forgetDevice();
+                // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
+                this.$store.dispatch('logout')
+                localStorage.removeItem("username")
                 this.$store.dispatch('logout')
                 localStorage.removeItem("username")
                 this.$router.push("/Login");
@@ -197,11 +249,14 @@ export default {
     },
 
 }    
+
+}    
 </script>
 
 <style scoped>
 .logo {
     width: 100px;
+    height: 42px;
     height: 42px;
 }
 
@@ -217,7 +272,9 @@ li {
 
 .navbar {
     background: #E4F0FE 0% 0% no-repeat padding-box;
+    background: #E4F0FE 0% 0% no-repeat padding-box;
     opacity: 1;
+
 
 
 }
@@ -278,28 +335,41 @@ li>a:hover:before {
     }
 
     .search-bar {
+
+    .search-bar {
         justify-content: space-between;
+        margin-right: 0 !important;
         margin-right: 0 !important;
 
     }
 
     .parent_blocks {
         justify-content: center;
+
+    .parent_blocks {
+        justify-content: center;
     }
+
+    .nav-link {
 
     .nav-link {
         font-size: 15px;
 
     }
 
+
 }
+
 
 @media (min-width: 768px) and (max-width: 992.92px) {
     .search-bar {
+    .search-bar {
         justify-content: space-between;
+        margin-right: 0 !important;
         margin-right: 0 !important;
     }
 }
+
 
 /* .search-bar {
    
@@ -356,12 +426,15 @@ li>a:hover:before {
 
 .search-bar {
     background-color: #FFFFFF7D 0% 0% no-repeat padding-box;
+    background-color: #FFFFFF7D 0% 0% no-repeat padding-box;
     display: flex;
     align-items: center;
     border-radius: 5px;
     border: 1px solid blue;
+    border: 1px solid blue;
     padding: 10px;
     /* backdrop-filter: blur(4px) saturate(180%); */
+    
     
 }
 
@@ -372,6 +445,7 @@ li>a:hover:before {
     outline: none;
 
     font-size: 14px;
+    color: black;
     color: black;
 }
 
@@ -392,6 +466,8 @@ li>a:hover:before {
     left: -10px;
     bottom: 30%;
 }
+
+.container-fluid {
 
 .container-fluid {
     max-width: 1350px;
@@ -426,4 +502,10 @@ li>a:hover:before {
 .search {
     color: blue;
 }
+
+.router-link-exact-active {
+        border-bottom: 2px solid blue;
+    }
+
+
 </style>

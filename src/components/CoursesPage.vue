@@ -8,15 +8,22 @@
             <div class="row pt-4">
                 <div class="" v-for="branch in branches" :key="branch.id">
                 <div class="box" v-if="academi.id == branch.academyId">
-                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
+                            <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                                style="color: white;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
+                                        <div class="course_block">
                                 <img src="../assets/images/book1.png">
                             </div>
+                                    
+                                    </div>
                             <div class="col-md-9 col-9 col-sm-9 pt-2">
+                                        <div class="course_block_one">
                                 <h5>{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
                             </div>
+                                       
+                                    </div>
                         </div>
                     </router-link>    
                 </div>
@@ -27,7 +34,6 @@
      
     </div>            
     <Offer />
-    
 </template>
 
 <script>
@@ -50,7 +56,7 @@ export default {
             const res = await axiosInstance.get(`/Academia/`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axiosInstance.get(`/Branches/` );
+            const result = await axiosInstance.get(`/Branches/`);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
@@ -68,39 +74,48 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top:100px;
+    padding-top: 100px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
+
 @media only screen and (max-width: 768px) and (min-width: 100px) {
 
-    .parent_blocks{
+    .parent_blocks {
         justify-content: center !important;
 
     }
-    .box{
-        width:250px !important;
+
+    .box {
+        width: 300px !important;
+        background-size: contain !important;
     }
-    #available_text{
-        font-size: 18px;
+
+    #available_text {
+        font-size: 18px !important;
+    }
+
+    .jk {
+        padding-top: 65px !important;
     }
     
 }
+
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
   
-    #available_text{
+    #available_text {
         font-size: 20px;
     }
 }
 
 .box {
     
-    height:115px;
-    width:360px;
+    height: 115px;
+    width: 360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:20px;
+    padding: 20px;
     
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
@@ -109,6 +124,7 @@ export default {
 
     
 }
+
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
@@ -124,6 +140,7 @@ export default {
     color: #0066CC;
     opacity: 1;
 }
+
 .box p {
     font-size: 14px;
     
@@ -140,6 +157,7 @@ h2 {
     letter-spacing: 0px;
     color: #0066CC;
 }
+
 .academic_head_text {
     color: #006acd;
     padding: 0px 60px 0px 0px;
@@ -153,15 +171,16 @@ h2 {
     font-weight: bold;
 
 }
-.parent_blocks{
+
+.parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content: flex-start;
 }
-#available_text{
+
+#available_text {
 font-size: 20px;
-}
-</style>
+}</style>
 
 
 
