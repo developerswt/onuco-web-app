@@ -6,12 +6,13 @@
                     <div class="search_inner_block">
                         <div class="row">
                             <div class="col-lg-12">
+                                <!-- <Breadcrumbs /> -->
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
                                         <li class="breadcrumb-item"><a href="#">VTU</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Maths</a></li>
-                                        <li class="breadcrumb-item"><a href="#">{{ this.book.semester }}</a></li>
+                                        <li class="breadcrumb-item"><a href="#">{{ this.book.title }}</a></li>
+                                        <li class="breadcrumb-item"><a href="#"></a></li>
 
                                     </ol>
                                 </nav>
@@ -78,7 +79,7 @@
                     <div class="col-lg-12">
                         <section id="tab_block">
                             <div class="pt-4 topic-card">
-                                <el-tabs class="demo-tabs" @tab-click="handleClick">
+                                <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Chapters" name="first" class="rt">
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -150,7 +151,7 @@
                                                                         <div class="inside_block">
 
                                                                             <img src="../assets/images/Group1318@2x.png" 
-                                                                                class="img-fluid">
+                                                                                class="img-fluid" @click="switchVideo(subject.url)" style="cursor: pointer;">
 
 
                                                                             <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
@@ -166,7 +167,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="video_block">
+                                                <div class="video_block" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" />
                                                 </div>
                                         
@@ -196,6 +197,7 @@
 </template>
 
 <script>
+import Breadcrumbs from '../components/Breadcrumbs.vue';
 import VideoPlayer from '../components/VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import AxiosInstance from '../config/axiosInstance'
@@ -205,6 +207,7 @@ export default {
     components: {
         VideoPlayer,
         Offer,
+        Breadcrumbs
     },
     data() {
         return {
@@ -218,12 +221,18 @@ export default {
                 techOrder: ['html5'],
                 preload: "metadata",
                 sources: [
-                    {
-                        src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-                        type: 'application/x-mpegURL',
-                        //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
-                        withCredentials: false,
-                    }
+                    // {
+                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                    //     type: 'application/x-mpegURL',
+                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                    //     withCredentials: false,
+                    // }
+                    // {
+                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                    //     type: 'application/x-mpegURL',
+                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
+                    //     withCredentials: false,
+                    // }
                     
                 ],
                 html5: {
@@ -267,23 +276,40 @@ export default {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
             this.book = res.data; 
             
-            this.videoOptions.sources[0].src = this.book.videoUrl;
+            // this.videoOptions.sources[0].src = this.book.videoUrl;
+            // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
+            this.videoOptions.sources = [
+                    {
+                        src: this.book.videoUrl,
+                        type: 'application/x-mpegURL',
+                        withCredentials: false,
+                    }
+            ]
+            this.videoOptions.sources = [
+                    {
+                        src: this.book.videoUrl,
+                        type: 'application/x-mpegURL',
+                        withCredentials: false,
+                    }
+            ]
             console.log(this.book);
-            console.log(this.client);
-            const response = await this.client.send(command);
-            console.log(response);
-            // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
-            this.responseFromS3 = await response.Body.transformToString("base64");
-            //this.videoOptions.sources[0].src = "data:video/mp4;base64,"+this.responseFromS3;
             console.log(this.videoOptions);
-            this.imageFromS3 = "data:image/jpeg;base64," + this.responseFromS3;
-            console.log(this.responseFromS3);
         } catch (err) {
             console.error(err);
         }
     },
+    methods: {
+        switchVideo(video) {
+            this.videoOptions.sources = video;
+            console.log(video)
+            // this.$refs.videoPlayer.load();
+        },
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+    }
 }
 </script>
 
