@@ -105,7 +105,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://localhost:7233/api/Faculty`);
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {

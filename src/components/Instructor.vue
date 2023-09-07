@@ -418,7 +418,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://localhost:7233/api/Faculty/` + this.$route.query.id);
+            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.query.id);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
@@ -452,11 +452,17 @@ export default {
     .jk {
         padding-top: 22%;
     }
+    ::v-deep #sub_text{
+        text-align: left;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
     .jk {
         padding-top: 10%;
+    }
+    ::v-deep #sub_text{
+        text-align: left;
     }
 }
 
