@@ -559,7 +559,7 @@ export default {
 
 }
 ::v-deep .fa-circle {
-    margin-bottom: 10px;
+    margin: 7px;
 }
 ::v-deep .row_class i[data-v-54dfdb7f]
 .kl .card {
