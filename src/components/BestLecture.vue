@@ -12,7 +12,7 @@
 
         <div class="container-fluid">
             <div class="row pt-5">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
                     <div class="card">
                         <div class="user-follower">
                             <img src="../assets/images/user.png" class="user-icon">
@@ -22,8 +22,8 @@
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; text-decoration: none; color: black;">Lorem ipsum ....</router-link></div>
+                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-text"><router-link v-bind:to="'/Instructor?id='+ facult.id" style="cursor: pointer; text-decoration: none; color: black;">{{ facult.facultyDescription.slice(1,45) }} ....</router-link></div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
@@ -31,26 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="user-follower">
-                            <img src="../assets/images/user.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
+                <!-- <div class="col-md-6 col-lg-3">
                     <div class="card">
                         <div class="user-follower">
                             <img src="../assets/images/user.png" class="user-icon">
@@ -88,15 +69,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="user-follower">
+                            <img src="../assets/images/user.png" class="user-icon">
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title">Dr. Adhyan San</div>
+                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
+                            <div class="mn">
+                                <p>(23 Reviews)</p>
+                                <el-rate v-model="value2" :colors="colors" />
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
  
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'BestLecture',
-    
+    data() {
+        return {
+            faculty: []
+        }
+    },
+    async created() {   
+        try {
+            const res = await axios.get(`https://localhost:7233/api/Faculty`);
+            this.faculty = res.data;
+            console.log(this.faculty);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 </script>
 

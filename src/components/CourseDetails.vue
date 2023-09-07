@@ -6,8 +6,8 @@
                     <div class="search_inner_block">
                         <div class="row">
                             <div class="col-lg-12">
-                                <!-- <Breadcrumbs /> -->
-                                <nav aria-label="breadcrumb">
+                                <Breadcrumbs />
+                                <!-- <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                                         <li class="breadcrumb-item"><a href="#">VTU</a></li>
@@ -15,7 +15,7 @@
                                         <li class="breadcrumb-item"><a href="#"></a></li>
 
                                     </ol>
-                                </nav>
+                                </nav> -->
                             </div>
                         </div>
                         <div class="row">
@@ -168,7 +168,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="video_block" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" />
+                                                    <video-player :options="videoOptions" ref="videoPlayerRef" />
                                                 </div>
                                         
                                             </div>
@@ -197,8 +197,8 @@
 </template>
 
 <script>
-import Breadcrumbs from '../components/Breadcrumbs.vue';
-import VideoPlayer from '../components/VideoPlayer.vue';
+import Breadcrumbs from './Breadcrumbs.vue';
+import VideoPlayer from './VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import AxiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue'
@@ -287,13 +287,7 @@ export default {
                         withCredentials: false,
                     }
             ]
-            this.videoOptions.sources = [
-                    {
-                        src: this.book.videoUrl,
-                        type: 'application/x-mpegURL',
-                        withCredentials: false,
-                    }
-            ]
+           
             console.log(this.book);
             console.log(this.videoOptions);
         } catch (err) {
@@ -301,10 +295,31 @@ export default {
         }
     },
     methods: {
-        switchVideo(video) {
-            this.videoOptions.sources = video;
-            console.log(video)
-            // this.$refs.videoPlayer.load();
+        async switchVideo(newVideoUrl) {
+            this.videoOptions.sources = [
+                {
+                    src: newVideoUrl,
+                    type: 'application/x-mpegURL',
+                    withCredentials: false
+                }
+            ];
+            console.log(this.videoOptions.sources);
+            this.videoOptions.autoplay = true;
+            
+            if (this.$refs.videoPlayerRef) {
+                this.$refs.videoPlayerRef.player.src(this.videoOptions.sources);
+                this.$refs.videoPlayerRef.player.load();
+            }
+
+            // Play the updated video
+            if (this.$refs.videoPlayerRef && this.$refs.videoPlayerRef.player) {
+                this.$refs.videoPlayerRef.player.play();
+            }
+            // Access the VideoPlayer component and play the video
+            // if (this.$refs.videoPlayerRef) {
+            //     this.$refs.videoPlayerRef.player.play();
+            // }
+            
         },
         handleClick(tab, event) {
             console.log(tab, event);

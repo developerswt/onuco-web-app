@@ -3,7 +3,7 @@ import Home from "./components/Home.vue";
 import LoginPage from "./components/LoginPage.vue";
 import Branches from "./components/Branches.vue";
 import CollegeDetails from './components/CollegeDetails.vue';
-import SemesterDetails from './components/SemesterDetails.vue';
+import CourseDetails from '././components/CourseDetails.vue';
 import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
@@ -22,6 +22,7 @@ import { Auth } from "@aws-amplify/auth"
 import Privacy from "./components/Privacy.vue"
 import TermsCondition from "./components/TermsCondition.vue"
 import GetSupport from "./components/GetSupport.vue"
+
 
 let user;
 
@@ -73,6 +74,7 @@ const routes = [
     component: Home,
     meta: {
         title: 'Unoco Application',
+        breadcrumb: 'Home'
     },
   },
   {
@@ -124,6 +126,7 @@ const routes = [
     component: Branches,
     meta: {
         title: 'Branches Details Page',
+        breadcrumb: route => route.params.id
     },
   },
   {
@@ -132,6 +135,7 @@ const routes = [
     component: CoursesPage,
     meta: {
         title: 'Courses Page',
+        breadcrumb: 'Courses'
     },
   },
   {
@@ -140,14 +144,16 @@ const routes = [
     component: CollegeDetails,
     meta: {
         title: 'College Semaster details Page',
+        breadcrumb: route => route.params.id
     },
   },
   {
-    path: "/SemesterDetails",
-    name: "SemesterDetails",
-    component: SemesterDetails,
+    path: "/CourseDetails",
+    name: "CourseDetails",
+    component: CourseDetails,
     meta: {
         title: 'Semaster details Page',
+        breadcrumb: route => route.params.id
     },
   },
   {
@@ -164,6 +170,7 @@ const routes = [
     component: Universities,
     meta: {
         title: 'Universities Upload Page',
+        breadcrumb: route => route.params.id
     },
   },
   {
@@ -172,6 +179,7 @@ const routes = [
     component: Instructor,
     meta: {
         title: 'Instructor Page',
+        breadcrumb: 'Instructor'
     },
   },
   {

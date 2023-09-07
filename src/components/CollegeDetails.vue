@@ -32,7 +32,7 @@
                             <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                    <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
+                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
@@ -96,7 +96,7 @@
                             <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                    <router-link v-bind:to="'/SemesterDetails?id='+ cou.id">
+                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">

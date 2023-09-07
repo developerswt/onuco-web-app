@@ -51,9 +51,9 @@
                                 size="large"
                                 style="background-color: color: blue;"
                                 class="inline-input w-100  search"
-                                
+                                debounce
                                 @select="handleSelect"
-                            
+                                
                                 placeholder="Search..."
                             >
                             <template #suffix>
@@ -133,10 +133,18 @@ export default {
     },
     methods: {
         handleKeyEnter(item){
-            this.$router.push({ path: '/search', query: { data: item } });
-            
+            if(item.length>=2)
+            {
+                this.$router.push({ path: '/search', query: { data: item } });
+            }    
+            console.log(item)
         },
-        handleSelect (item){
+        handleSelect(item){
+            if(item.title.length>=2) 
+            {
+                this.$router.push({ path: '/search', query: { data: item.title } });
+                console.log(item);
+            }    
             console.log(item);
         // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
             

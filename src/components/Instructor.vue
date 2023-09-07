@@ -17,14 +17,14 @@
 
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
-                                        <h5 id="prof_text">Dr. Vijaya Kumar B.P</h5>
+                                        <h5 id="prof_text">{{ this.faculty.name }}</h5>
                                         <p class="rating_icons"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                 class="fa fa-star-o"></i> (23 reviews) </p>
-                                        <div class="social-icons" v-for="social in faculty" :key="social.id">
-                                            <a :href="social.youTube" class="fa fa-youtube-play"></a>
-                                            <a :href="social.twitter" class="fa fa-twitter"></a>
-                                            <a :href="social.linkedin" class="fa fa-linkedin"></a>
+                                        <div class="social-icons">
+                                            <a :href="this.faculty.youTube" class="fa fa-youtube-play"></a>
+                                            <a :href="this.faculty.twitter" class="fa fa-twitter"></a>
+                                            <a :href="this.faculty.linkedin" class="fa fa-linkedin"></a>
 
                                         </div>
                                     </div>
@@ -55,19 +55,7 @@
                     </div>
                     <div class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="professor-details_text">VIJAY KUMAR B. P. Received the Ph. D degree in Electrical
-                                Communication Engg., Department
-                                from Indian Institute of Science (IISc), Bangalore in 2003, M.Tech degree in Computer
-                                Science and Technology from Indian Institute of Technology, Roorkee (IITR), with honors in
-                                1992 and Bachelor’s degree in Electronics and Communications from Mysore University with
-                                Distinction in the year 1987. With a proven success record of boosting leadership actions
-                                over 33 years of extensive teaching and research experience including 25 years of
-                                administrative experience. He is currently a professor and Head R & D, Industry Interaction
-                                coordinator, Information Science and Engg., Dept., M S Ramaiah Institute of Technology,
-                                Bangalore, Karnataka, India, where he is involved in research and teaching UG and PG
-                                students, and his major area of research are Computational Intelligence (Machine Learning)
-                                applications in Mobile, IoT, Sensor networks, Big data, Cognitive Computing applications and
-                                Software Quality Engineering.</p>
+                            <p class="professor-details_text" v-html="this.faculty.facultyDescription"></p>
                         </div>
                     </div>
                 </div>
@@ -305,27 +293,27 @@
                 </div>
             </section>
             
-            <section id="tab_block" v-for="facult in faculty" :key="facult.id">
+            <section id="tab_block">
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                     <el-tab-pane label="OBJECTIVES" name="first">
-                        <div class="" v-html="facult.objective"></div>
+                        <div class="" v-html="this.faculty.objective"></div>
                     </el-tab-pane>
                     <el-tab-pane label="CONTACT" name="second">
                         <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contact</h2>
-                        <p style="padding-left: 25px;"><span id="Sub_text">Contact Us:</span>{{ facult.contact }}</p>
+                        <p style="padding-left: 25px;"><span id="Sub_text">Contact Us:</span>{{ this.faculty.contact }}</p>
                     </el-tab-pane>
                     <el-tab-pane label="EDUCATION" name="third">
-                        <div class="" v-html="facult.education"></div>
+                        <div class="" v-html="this.faculty.education"></div>
                     </el-tab-pane>
                     <el-tab-pane label="EXPERIENCE" name="fourth">
-                        <div class="" v-html="facult.experience"></div>
+                        <div class="" v-html="this.faculty.experience"></div>
     
                     </el-tab-pane>
                     <el-tab-pane label="RESEARCH" name="fifth">
-                        <div class="" v-html="facult.research"></div>
+                        <div class="" v-html="this.faculty.research"></div>
                     </el-tab-pane>
                     <el-tab-pane label="PUBLICATIONS" name="sixth">
-                        <div class="experience_block" v-for="publication in facult.publication" :key="publication.id">
+                        <div class="experience_block" v-for="publication in this.faculty.publication" :key="publication.id">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Publication
                             </h2>
 
@@ -348,15 +336,15 @@
                     <el-tab-pane label="ADVISORY" name="seventh"></el-tab-pane>
                     <el-tab-pane label="SKILLS" name="eight">
                         <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Skills</h2>
-                        <p style="padding-left: 25px;"><span id="Sub_text">Skill:</span>{{ facult.skill }}</p>
+                        <p style="padding-left: 25px;"><span id="Sub_text">Skill:</span>{{ this.faculty.skill }}</p>
                     </el-tab-pane>
                     <el-tab-pane label="CONTRIBUTIONS" name="nine">
                         <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contributions</h2>
                         
-                        <div class="" style="padding-left: 25px;" v-html="facult.contribution"></div>
+                        <div class="" style="padding-left: 25px;" v-html="this.faculty.contribution"></div>
                     </el-tab-pane>
                     <el-tab-pane label="PROJECTS" name="ten">
-                        <div class="experience_block" v-for="project in facult.project" :key="project.id">
+                        <div class="experience_block" v-for="project in this.faculty.project" :key="project.id">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Project
                             </h2>
                             <div class="row" id="row_block" v-for="projectdetails in project.values" :key="projectdetails.id">
@@ -384,7 +372,7 @@
                         <div class="research_block">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Faculty Description </h2>
                             <div class="research_inner_block">
-                                <p v-html="facult.facultyDescription"></p>
+                                <p v-html="this.faculty.facultyDescription"></p>
                             </div>
                         </div>
                     </el-tab-pane>
@@ -392,7 +380,7 @@
                         <div class="research_block">
                             <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Duties And Responsibilities </h2>
                             <div class="research_inner_block">
-                                <p v-html="facult.dutiesAndResponsibilities"></p>
+                                <p v-html="this.faculty.dutiesAndResponsibilities"></p>
                             </div>
                         </div>
                     </el-tab-pane>
@@ -409,7 +397,7 @@
 </template>
 
 <script>
-import axiosInstance from '../config/axiosInstance'
+import axios from 'axios'
 
 import Offer from './Offer.vue'
 export default {
@@ -430,7 +418,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axiosInstance.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty`);
+            const res = await axios.get(`https://localhost:7233/api/Faculty/` + this.$route.query.id);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
