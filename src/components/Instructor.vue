@@ -652,8 +652,8 @@ export default {
     height: auto;
     background: #0177FB;
     position: relative;
-    top: 18px;
-    left: -8px;
+    top: 23px;
+    left: -16px;
     margin-bottom: 18px;
     /* bottom: 10px; */
 
@@ -667,7 +667,7 @@ export default {
 
 ::v-deep .row_class {
     display: flex;
-    margin-top: 12px;
+    margin-top: -3px;
     padding-left: 25px;
     padding-left: 25px;
 }
