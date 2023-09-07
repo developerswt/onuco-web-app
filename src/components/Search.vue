@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
-                                                <router-link v-bind:to="'/SemesterDetails?id='+ result.id" style="text-decoration: none;">
+                                                <router-link v-bind:to="'/CourseDetails?id='+ result.id" style="text-decoration: none;">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                         <p id="title_text" class="mb-1">{{ result.title }}</p>
