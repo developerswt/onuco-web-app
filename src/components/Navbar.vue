@@ -23,6 +23,9 @@
                     <li class="nav-item active">
                         <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
+                    <li class="nav-item ">
+                        <router-link class="nav-link" to="/Mylearnings" exact>My learning</router-link>
+                    </li>
                     <li class="nav-item">
                         
                         <router-link class="nav-link" to="/Courses" exact>Courses</router-link>

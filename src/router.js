@@ -22,6 +22,7 @@ import { Auth } from "@aws-amplify/auth"
 import Privacy from "./components/Privacy.vue"
 import TermsCondition from "./components/TermsCondition.vue"
 import GetSupport from "./components/GetSupport.vue"
+import Mylearnings from "./components/Mylearnings.vue"
 
 
 let user;
@@ -75,6 +76,14 @@ const routes = [
     meta: {
         title: 'Unoco Application',
         breadcrumb: 'Home'
+    },
+  },
+  {
+    path: "/Mylearnings",
+    name: "Mylearnings",
+    component: Mylearnings,
+    meta: {
+        title: 'Unoco Application',
     },
   },
   {

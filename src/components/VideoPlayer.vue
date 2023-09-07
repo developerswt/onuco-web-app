@@ -154,7 +154,7 @@ export default {
 
 @media (min-width: 768px)  and (max-width: 1024px) {
   .video-js{
-    height:80vh !important;
+    height:40vh !important;
   }
   
 .gh {
