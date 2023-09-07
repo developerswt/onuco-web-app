@@ -52,7 +52,7 @@
                                 :trigger-on-focus="false"
                                 value-key="title"
                                 size="large"
-                                style="background-color: color: blue;"
+                                style="background-color: color: blue; font-size: 12px;"
                                 class="inline-input w-100  search"
                                 debounce
                                 @select="handleSelect"
@@ -370,6 +370,9 @@ li>a:before {
     outline: none;
 
 }
+.el-input__inner::placeholder {
+    font-size: 12px !important;
+}
 
 .search-bar {
     background-color: #FFFFFF7D 0% 0% no-repeat padding-box;
@@ -442,9 +445,8 @@ li>a:before {
 .demo-autocomplete .autocomplete-input {
     background-color: blue;
 }
-.el-autocomplete__input {
-  height: 600px; /* Adjust the height as needed */
-  background-color: lightblue;
+.el-autocomplete .el-input__inner {
+  font-size: 12px;
 }
 .search {
     color: blue;
