@@ -26,8 +26,9 @@
                                         <span id="aca_text">{{ this.book.title }} </span>
 
                                     </h4>
-                                    <div class="" >
-                                    <p id="professor_text" v-for="instructor in this.book.instructorName" :key="instructor.id"> {{ instructor.name }}</p>
+                                    <div class="">
+                                        <p id="professor_text" v-for="instructor in this.book.instructorName"
+                                            :key="instructor.id"> {{ instructor.name }}</p>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
@@ -82,9 +83,18 @@
                                 <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Chapters" name="first" class="rt">
                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
-                                                    <div class="card-header"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
+                                            <div class="col-lg-6" id="video_block_one">
+                                                <div class="" v-if="videoOptions.sources.length > 0">
+                                                    <video-player :options="videoOptions" />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="card" v-for="(topic, index) in this.book.subject"
+                                                    :key="topic.id">
+                                                    <div class="card-header" data-toggle="collapse"
+                                                        :href="'#collapse-example' + index" aria-expanded="true"
+                                                        aria-controls="collapse-example" id="heading-example">
                                                         <div class="row">
                                                             <div class="col-lg-6 col-6 col-sm-6">
                                                                 <button class="btn btn-link">
@@ -93,16 +103,19 @@
                                                             </div>
                                                             <div class="col-lg-6 col-6 col-sm-6">
                                                                 <div class="action"><i
-                                                                    class="fa fa-chevron-right rotate-icon"
-                                                                    id="sem_icon"></i></div>
-                                                                </div>
+                                                                        class="fa fa-chevron-right rotate-icon"
+                                                                        id="sem_icon"></i></div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
-                                                    <div :id="'collapse-example' + index" class="collapse" :class="{ 'show': index === 0 }" aria-labelledby="heading-collapsed">
-                                                        <div class="card-body" v-for="lessons in topic.values" :key="lessons.id">
+                                                    <div :id="'collapse-example' + index" class="collapse"
+                                                        :class="{ 'show': index === 0 }"
+                                                        aria-labelledby="heading-collapsed">
+                                                        <div class="card-body" v-for="lessons in topic.values"
+                                                            :key="lessons.id">
                                                             <div class="row">
-                                                                <div class="col-lg-6 col-6 col-sm-6 " >
+                                                                <div class="col-lg-6 col-6 col-sm-6 ">
                                                                     <div class="accordion_block_one">
                                                                         <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
@@ -118,13 +131,14 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
+                                                            <div class="chapters_block"
+                                                                v-for="(subject, index) in lessons.values" :key="index.id">
                                                                 <div class="row">
-                                                                    <div class="col-lg-1 col-1 col-sm-1">
+                                                                    <div class="col-lg-1 col-1 col-sm-1 col-md-1">
                                                                         <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
                                                                     </div>
-                                                                    <div class="col-lg-7 col-10 col-sm-10">
+                                                                    <div class="col-lg-7 col-10 col-sm-10 col-md-7">
                                                                         <p id="intro_text">{{ subject.lession }}</p>
                                                                         <div class="row">
                                                                             <div class="col-lg-6 col-6 col-sm-6">
@@ -147,11 +161,13 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-lg-4 col-12 col-sm-12">
+                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-3">
                                                                         <div class="inside_block">
 
-                                                                            <img src="../assets/images/Group1318@2x.png" 
-                                                                                class="img-fluid" @click="switchVideo(subject.url)" style="cursor: pointer;">
+                                                                            <img src="../assets/images/Group1318@2x.png"
+                                                                                class="img-fluid"
+                                                                                @click="switchVideo(subject.url)"
+                                                                                style="cursor: pointer;">
 
 
                                                                             <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
@@ -161,16 +177,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="video_block" v-if="videoOptions.sources.length>0">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="video_block" v-if="videoOptions.sources.length > 0">
                                                     <video-player :options="videoOptions" />
                                                 </div>
-                                        
+
                                             </div>
                                         </div>
 
@@ -192,7 +208,7 @@
             </div>
         </div>
         <Offer />
-        
+
     </div>
 </template>
 
@@ -233,7 +249,7 @@ export default {
                     //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
                     //     withCredentials: false,
                     // }
-                    
+
                 ],
                 html5: {
                     nativeVideoTracks: false,
@@ -265,7 +281,7 @@ export default {
             }),
         };
     },
-    async created(){
+    async created() {
         console.log("Hi");
         const command = new GetObjectCommand({
             Bucket: "onuco-s3",
@@ -274,25 +290,25 @@ export default {
         const headers = { 'Authorization': this.authorizationHeader };
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
-            this.book = res.data; 
-            
+            this.book = res.data;
+
             // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
             // console.log(this.booh.chapters)
             this.videoOptions.sources = [
-                    {
-                        src: this.book.videoUrl,
-                        type: 'application/x-mpegURL',
-                        withCredentials: false,
-                    }
+                {
+                    src: this.book.videoUrl,
+                    type: 'application/x-mpegURL',
+                    withCredentials: false,
+                }
             ]
             this.videoOptions.sources = [
-                    {
-                        src: this.book.videoUrl,
-                        type: 'application/x-mpegURL',
-                        withCredentials: false,
-                    }
+                {
+                    src: this.book.videoUrl,
+                    type: 'application/x-mpegURL',
+                    withCredentials: false,
+                }
             ]
             console.log(this.book);
             console.log(this.videoOptions);
@@ -429,9 +445,9 @@ export default {
 
 #search_container {
     background: #EFF5FC 0% 0% no-repeat padding-box;
-    padding-left:0;
-    padding-right:0;
- 
+    padding-left: 0;
+    padding-right: 0;
+
 }
 
 .search_inner_block {
@@ -527,111 +543,149 @@ export default {
     margin-bottom: 40px;
 
 }
-#inner_container{
-    padding-left:38px;
+
+#inner_container {
+    padding-left: 38px;
 }
 
 
 @media (max-width:598.98px) {
-    #aca_text{
+    #aca_text {
         font-size: 15px;
     }
-    #professor_text{
+
+    #professor_text {
         font-size: 15px;
     }
-    #duration_text,#module_text{
+
+    #duration_text,
+    #module_text {
         font-size: 14px;
     }
-    .icon_blck{
+
+    .icon_blck {
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
     }
-    .icon_blck i{
-        margin:4px;
+
+    .icon_blck i {
+        margin: 4px;
     }
-    #review_text{
+
+    #review_text {
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
     }
-    #amount_text{
+
+    #amount_text {
         font-size: 15px;
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
 
     }
-    .academic_head_text_one{
+
+    .academic_head_text_one {
         font-size: 16px;
     }
 
-  #course_text {
-    padding:0;
+    #course_text {
+        padding: 0;
 
-  }
-  .action{
-    padding: 5px 10px 10px 10px;
-  }
-  .card-header{
-    height:40px;
-    padding:0;
-  }
-  .video_block{
-    margin-top:20px;
-  }
-  .inside_block{
-    margin-left: 0;
-    justify-content: end;
-  }
-  #inner_container{
-    padding-left:15px;
-  }
+    }
+
+    .action {
+        padding: 5px 10px 10px 10px;
+    }
+
+    .card-header {
+        height: 40px;
+        padding: 0;
+    }
+
+    .video_block {
+        display: none !important;
+
+    }
+
+    #video_block_one {
+        display: block !important;
+        margin: 0px 10px 15px 10px;
+    }
+
+    .inside_block {
+        margin-left: 0;
+        justify-content: end;
+    }
+
+    #inner_container {
+        padding-left: 15px;
+    }
 }
 
 
 @media (max-width:1024px) {
-    #aca_text{
+    #aca_text {
         font-size: 15px;
     }
-    #professor_text{
+
+    #professor_text {
         font-size: 15px;
     }
-    #duration_text,#module_text{
+
+    #duration_text,
+    #module_text {
         font-size: 14px;
     }
-  
-    .icon_blck i{
-        margin:4px;
+
+    .icon_blck i {
+        margin: 4px;
     }
-  
-    #amount_text{
+
+    #amount_text {
         font-size: 15px;
-   
+
 
     }
-    .academic_head_text_one{
+
+    .academic_head_text_one {
         font-size: 16px;
     }
 
-  #course_text {
-    padding:0;
+    #course_text {
+        padding: 0;
 
-  }
-  .action{
-    padding: 5px 10px 10px 10px;
-  }
-  .card-header{
-    height:40px;
-    padding:0;
-  }
-  .video_block{
-    margin-top:20px;
-  }
-  .inside_block{
-    margin-left: 0;
-    justify-content: end;
-  }
-  #inner_container{
-    padding-left:15px;
-  }
+    }
+
+    .action {
+        padding: 5px 10px 10px 10px;
+    }
+
+    .card-header {
+        height: 40px;
+        padding: 0;
+    }
+
+    .video_block {
+        margin-top: 20px;
+    }
+
+    .inside_block {
+        margin-left: 0;
+        justify-content: end;
+    }
+
+    #inner_container {
+        padding-left: 15px;
+    }
+
 }
 
-</style>
+#video_block_one {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #video_block_one {
+        display: none;
+    }
+}</style>
