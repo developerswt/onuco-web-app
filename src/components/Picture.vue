@@ -12,7 +12,8 @@
                             <h5>{{ isuser.attributes.name }}</h5>
                             <h5>{{ this.updatedAttribute.gender }}</h5>
                             <h5>{{ this.updatedAttribute.birthdate }}</h5>
-                            <h5>{{ isuser.attributes.email }}</h5>
+                            <h5 v-if="isuser.attributes.email">{{ isuser.attributes.email }}</h5>
+                            <h5 v-else>{{ isuser.attributes.phone_number }}</h5>
                             <h5>{{ this.updatedAttribute.address }}</h5>
                         </div>
                     </div>
@@ -23,9 +24,13 @@
                             <form @submit.prevent="uploadImage">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="form-group">
+                                        <div class="form-group" v-if="isuser.attributes.email">
                                             <label for="email"><b>UserName:</b></label>
-                                            <input type="email" id="email" name="email" :value="isuser.attributes.email" readonly>
+                                            <input type="email"  id="email" name="email" :value="isuser.attributes.email" readonly>
+                                        </div>
+                                        <div class="form-group" v-else>
+                                            <label for="phone"><b>UserName:</b></label>
+                                            <input type="text"  id="phone" name="phone" :value="isuser.attributes.phone_number" readonly>
                                         </div>
                                     </div>
                                     <!-- <div class="col-sm-6">
@@ -66,7 +71,7 @@
                                         <input type="file" id="myfile" name="myfile" @change="handleFileChange" required>
                                     </div>    
                                 </div>
-                                <div class="row">
+                                <div class="row kl">
                                     <div class="col-sm-2">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -122,20 +127,6 @@ export default {
         },
 
     },
-    async created() {
-        const headers = { 
-            Authorization:  this.authorizationHeader,
-            'Content-Type': 'multipart/form-data'
-        };
-        try {
-            const res = await axios.get('https://localhost:7078/api/UploadFiles/profile', {
-                headers });
-            this.updatedAttribute = res.data;
-            console.log(this.updatedAttribute);    
-        } catch (error) {
-            console.log(error);
-        }    
-    },
     methods: {
         async update() {
             const headers = { 
@@ -143,24 +134,13 @@ export default {
                 'Content-Type': 'multipart/form-data'
             };
             try {
-                const res = await axios.get('https://localhost:7078/api/UploadFiles/profile', {
+                const res = await axios.get('https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/UploadS3Files/profile', {
                     headers });
                 this.updatedAttribute = res.data;
                 console.log(this.updatedAttribute);    
             } catch (error) {
                 console.log(error);
             }  
-        },
-        watchLocalStorage() {
-            window.addEventListener('storage', (event) => {
-                if (event.key === 'updatedGender') {
-                    this.updatedGender = event.newValue;
-                } else if (event.key === 'updatedBirthdate') {
-                    this.updatedBirthdate = event.newValue;
-                } else if (event.key === 'updatedAddress') {
-                    this.updatedAddress = event.newValue;
-                }
-            });
         },
         close() {
             this.gender = '';
@@ -212,13 +192,13 @@ export default {
             formData.append('File', this.selectedFile);
 
             try {
-                const response = await axios.post('https://localhost:7078/api/UploadFiles/upload', formData, {
+                const response = await axios.post('https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/UploadS3Files/upload', formData, {
                     headers 
                 });
 
                 // Handle the API response as needed
                 console.log('Response from API:', response.data);
-        
+                await this.update();
                 // Clear form fields or show success message
                 // localStorage.setItem('updatedGender', this.gender);
                 // localStorage.setItem('updatedBirthdate', this.birthdate);
@@ -228,7 +208,7 @@ export default {
                 this.address = '';
                 this.selectedFile = null;
                 this.$refs.fileInput.value = ''; // Clear the file input
-                alert('Profile updated successfully!');
+                
             } catch (error) {
                 // Handle errors
                 console.error('Error:', error);
@@ -337,5 +317,11 @@ h5 {
     .hj {
         width: 100%;
     }
+}
+.kl .col-sm-2 {
+    float: left;
+}
+.kl .col-sm-3 {
+    float: right;
 }
 </style>

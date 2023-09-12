@@ -8,14 +8,14 @@
                             <div class="col-lg-12">
                                 <!-- <Breadcrumbs /> -->
                                 <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb" >
+                                    <!-- <ol class="breadcrumb" >
                                         <li class="breadcrumb-item"><router-link to="/" style="text-decoration: none;">Home</router-link></li>
-                                        <li class="breadcrumb-item"><router-link :to="'/Academia/' + this.book.brachRouteName" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
-                                        <li class="breadcrumb-item"><router-link :to="'/Universities/' + this.book.universityRouteName" style="text-decoration: none;">{{ this.book.university }}</router-link></li>
-                                        <li class="breadcrumb-item"><router-link :to="'/CollegeDetails/' + this.book.collegeDetailsRouteName" style="text-decoration: none;">{{ this.book.collegeDetails }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link to="/Academia/" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link to="/Universities/"  style="text-decoration: none;">{{ this.book.university }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link to="/CollegeDetails/" style="text-decoration: none;">{{ this.book.collegeDetails }}</router-link></li>
                                         <li class="breadcrumb-item"><router-link  style="text-decoration: none;">Math 1 (NEP Series)</router-link></li>
 
-                                    </ol>
+                                    </ol> -->
                                 </nav>
                             </div>
                         </div>
@@ -296,7 +296,7 @@ export default {
         });
         const headers = { 'Authorization': this.authorizationHeader };
         try {
-            const res = await axios.get(`https://localhost:7233/api/Coursedetails?` + "id=" + this.$route.query.id);
+            const res = await AxiosInstance.get(`/Coursedetails?` + "id=" + this.$route.query.id);
             this.book = res.data; 
             const result = await axios.get('https://localhost:7233/api/StateManagement');
             this.watchTimeDatas = result.data;
