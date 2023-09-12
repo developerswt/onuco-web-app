@@ -53,11 +53,18 @@ export default {
     },
     async created() {
         try {
-            const res = await axiosInstance.get(`/Academia/`);
-            this.academia = res.data;
+            const academiaResponse = await axiosInstance.get(`/Academia/`);
+            this.academia = academiaResponse.data;
+            
+            const branchesResponse = await axiosInstance.get(`/Branches/`);
+            this.branches = branchesResponse.data;
+            
+            // Filter academia based on branches data
+            this.academia = this.academia.filter(academi => {
+                return this.branches.some(branch => branch.academyId === academi.id);
+            });
+
             console.log(this.academia);
-            const result = await axiosInstance.get(`/Branches/`);
-            this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
             console.log(error);

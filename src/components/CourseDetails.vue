@@ -8,14 +8,14 @@
                             <div class="col-lg-12">
                                 <!-- <Breadcrumbs /> -->
                                 <nav aria-label="breadcrumb">
-                                    <!-- <ol class="breadcrumb" >
+                                    <ol class="breadcrumb" >
                                         <li class="breadcrumb-item"><router-link to="/" style="text-decoration: none;">Home</router-link></li>
-                                        <li class="breadcrumb-item"><router-link to="/Academia/" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
-                                        <li class="breadcrumb-item"><router-link to="/Universities/"  style="text-decoration: none;">{{ this.book.university }}</router-link></li>
-                                        <li class="breadcrumb-item"><router-link to="/CollegeDetails/" style="text-decoration: none;">{{ this.book.collegeDetails }}</router-link></li>
-                                        <li class="breadcrumb-item"><router-link  style="text-decoration: none;">Math 1 (NEP Series)</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/Academia/' + this.book.brachRouteName" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/Universities/' + this.book.universityRouteName"  style="text-decoration: none;">{{ this.book.university }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/CollegeDetails/' + this.book.collegeDetailsRouteName" style="text-decoration: none;">{{ this.book.collegeDetails }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link to="" style="text-decoration: none;">{{ this.book.title }}</router-link></li>
 
-                                    </ol> -->
+                                    </ol>
                                 </nav>
                             </div>
                         </div>
@@ -83,7 +83,13 @@
                                 <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Chapters" name="first" class="rt">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6" id="video_block_one">
+                                                <div class="" v-if="videoOptions.sources.length > 0">
+                                                    <video-player :options="videoOptions" />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
                                                 <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
                                                     <div class="card-header"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                                                         <div class="row">
@@ -298,7 +304,7 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails?` + "id=" + this.$route.query.id);
             this.book = res.data; 
-            const result = await axios.get('https://localhost:7233/api/StateManagement');
+            const result = await axios.get('https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/StateManagement');
             this.watchTimeDatas = result.data;
             console.log(this.watchTimeDatas);
             // this.videoOptions.sources[0].src = this.book.videoUrl;
@@ -355,6 +361,7 @@ export default {
 </script>
 
 <style scoped>
+
 .jk {
     padding-top: 68px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -470,9 +477,9 @@ export default {
 
 #search_container {
     background: #EFF5FC 0% 0% no-repeat padding-box;
-    padding-left:0;
-    padding-right:0;
- 
+    padding-left: 0;
+    padding-right: 0;
+
 }
 
 .search_inner_block {
@@ -568,111 +575,149 @@ export default {
     margin-bottom: 40px;
 
 }
-#inner_container{
-    padding-left:38px;
+
+#inner_container {
+    padding-left: 38px;
 }
 
 
 @media (max-width:598.98px) {
-    #aca_text{
+    #aca_text {
         font-size: 15px;
     }
-    #professor_text{
+
+    #professor_text {
         font-size: 15px;
     }
-    #duration_text,#module_text{
+
+    #duration_text,
+    #module_text {
         font-size: 14px;
     }
-    .icon_blck{
+
+    .icon_blck {
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
     }
-    .icon_blck i{
-        margin:4px;
+
+    .icon_blck i {
+        margin: 4px;
     }
-    #review_text{
+
+    #review_text {
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
     }
-    #amount_text{
+
+    #amount_text {
         font-size: 15px;
         text-align: left;
-        padding-left:10px;
+        padding-left: 10px;
 
     }
-    .academic_head_text_one{
+
+    .academic_head_text_one {
         font-size: 16px;
     }
 
-  #course_text {
-    padding:0;
+    #course_text {
+        padding: 0;
 
-  }
-  .action{
-    padding: 5px 10px 10px 10px;
-  }
-  .card-header{
-    height:40px;
-    padding:0;
-  }
-  .video_block{
-    margin-top:20px;
-  }
-  .inside_block{
-    margin-left: 0;
-    justify-content: end;
-  }
-  #inner_container{
-    padding-left:15px;
-  }
+    }
+
+    .action {
+        padding: 5px 10px 10px 10px;
+    }
+
+    .card-header {
+        height: 40px;
+        padding: 0;
+    }
+
+    .video_block {
+        display: none !important;
+
+    }
+
+    #video_block_one {
+        display: block !important;
+        margin: 0px 10px 15px 10px;
+    }
+
+    .inside_block {
+        margin-left: 0;
+        justify-content: end;
+    }
+
+    #inner_container {
+        padding-left: 15px;
+    }
 }
 
 
 @media (max-width:1024px) {
-    #aca_text{
+    #aca_text {
         font-size: 15px;
     }
-    #professor_text{
+
+    #professor_text {
         font-size: 15px;
     }
-    #duration_text,#module_text{
+
+    #duration_text,
+    #module_text {
         font-size: 14px;
     }
-  
-    .icon_blck i{
-        margin:4px;
+
+    .icon_blck i {
+        margin: 4px;
     }
-  
-    #amount_text{
+
+    #amount_text {
         font-size: 15px;
-   
+
 
     }
-    .academic_head_text_one{
+
+    .academic_head_text_one {
         font-size: 16px;
     }
 
-  #course_text {
-    padding:0;
+    #course_text {
+        padding: 0;
 
-  }
-  .action{
-    padding: 5px 10px 10px 10px;
-  }
-  .card-header{
-    height:40px;
-    padding:0;
-  }
-  .video_block{
-    margin-top:20px;
-  }
-  .inside_block{
-    margin-left: 0;
-    justify-content: end;
-  }
-  #inner_container{
-    padding-left:15px;
-  }
+    }
+
+    .action {
+        padding: 5px 10px 10px 10px;
+    }
+
+    .card-header {
+        height: 40px;
+        padding: 0;
+    }
+
+    .video_block {
+        margin-top: 20px;
+    }
+
+    .inside_block {
+        margin-left: 0;
+        justify-content: end;
+    }
+
+    #inner_container {
+        padding-left: 15px;
+    }
+
 }
 
-</style>
+#video_block_one {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #video_block_one {
+        display: none;
+    }
+}</style>
