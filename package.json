@@ -17,6 +17,7 @@
     "aws-amplify": "^5.3.6",
     "aws-sdk": "^2.1399.0",
     "axios": "^1.4.0",
+    "caniuse-lite": "^1.0.30001529",
     "element-plus": "^2.3.6",
     "json-server": "^0.17.3",
     "unplugin-vue-components": "^0.25.1",

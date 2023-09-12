@@ -13,6 +13,7 @@
         <div class="container-fluid">
             <div class="row pt-5">
                 <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
+                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                     <div class="card">
                         <div class="user-follower">
                             <img src="../assets/images/user.png" class="user-icon">
@@ -23,13 +24,14 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"><router-link v-bind:to="'/Instructor?id='+ facult.id" style="cursor: pointer; text-decoration: none; color: black;">{{ facult.facultyDescription.slice(1,45) }} ....</router-link></div>
+                            <div class="card-text">{{ facult.description.slice(0,45) }} ....</div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
                 <!-- <div class="col-md-6 col-lg-3">
                     <div class="card">
@@ -105,7 +107,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty`);
+            const res = await axios.get(`https://localhost:7233/api/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {

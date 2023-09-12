@@ -1,4 +1,5 @@
 <template>
+  
   <div>
     <div  v-if="showPoster" class="poster-overlay">
       <div class="overlay-item">
@@ -14,18 +15,20 @@
       </div>
       
     </div>
-    <video ref="videoPlayer" class="video-js  vjs-big-play-centered vjs-layout-small" v-else></video>
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered "  v-else></video>
     
     
   </div>
+
 </template>
 
+
 <script>
+import axios from 'axios';
 import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels  from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
-
 
 export default {
   name: 'VideoPlayer',
@@ -61,6 +64,7 @@ export default {
       this.player.qualityLevels();
         this.player.hlsQualitySelector({ displayCurrentQuality: true });
         console.log(this.player);
+        this.player.on('pause', this.pauseVideo);
     });
 
     this.player.on('timeupdate', () => {
@@ -68,7 +72,7 @@ export default {
       if (this.player.currentTime() >= 18 && !this.showPoster) {
           this.showPoster = true;
           this.player.pause();
-      }
+      } 
     });
     this.player.on('ended', () => {
       if (this.showPoster) {
@@ -85,24 +89,61 @@ export default {
       
     }
   },
-  
+  methods: {
+    // sendWatchTimeToBackend(watchTime) {
+    //   const data = [{
+    //     UserId: '0d779166-7391-4042-9bf6-634046e7142a',
+    //     videoId: 1,
+    //     CourseId: 1,
+    //     WatchTime: watchTime,
+    //   }];
+    //   axios.post('http://localhost:5000/StateManagement', data, {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+    // },
+    sendWatchTimeToBackend() {
+      try {
+        const userId = '0d779166-7391-4042-9bf6-634046e7142a'; 
+        const courseId = 1; 
+        const videoId = 4; 
+        const watchTime = 90; 
+
+        const requestBody = {
+          UserId: userId,
+          CourseId: courseId,
+          WatchTimeData: [
+            {
+              videoId: videoId,
+              WatchTime: watchTime,
+            },
+          ],
+        };
+
+        const response = axios.post('http://localhost:5000/StateManagement', requestBody);
+        console.log('Update successful:', response.data);
+      } catch (error) {
+        console.error('Update failed:', error);
+      }
+    },
+    pauseVideo() {
+      this.player.pause();
+      this.sendWatchTimeToBackend(this.player.currentTime());
+      localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
+
+    },
+  }
  
 }
 </script>
 
-
 <style scoped>
-/* Add your custom styles here */
-
 .video-js {
-    position: relative !important;
     width: 100% !important;
-    height: auto !important;
-    padding-top: 56.25%;
     
-
+  height: 300px;
 }
-
 .poster-overlay {
   position: absolute;
   top: 0;
@@ -161,4 +202,5 @@ export default {
   pointer-events: none;
 }
 }
+
 </style>

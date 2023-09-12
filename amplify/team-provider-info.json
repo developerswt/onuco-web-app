@@ -13,12 +13,7 @@
     },
     "categories": {
       "auth": {
-        "onucowebappf6f34234": {
-          "userPoolId": "ap-south-1_iPglB2nd5",
-          "userPoolName": "onuco-userpool",
-          "webClientId": "frkqld5sne42ro78rusgcit99",
-          "nativeClientId": "frkqld5sne42ro78rusgcit99"
-        }
+        "onucowebappf6f34234": {}
       }
     }
   },
@@ -44,11 +39,19 @@
     },
     "categories": {
       "auth": {
-        "onucowebappf6f34234": {
-          "userPoolId": "ap-south-1_iPglB2nd5",
-          "userPoolName": "onuco-userpool",
-          "webClientId": "3gu6ajbr3irftjaa210bei16j5",
-          "nativeClientId": "3gu6ajbr3irftjaa210bei16j5"
+        "onucowebappf6f34234": {},
+        "onucowebapp37b10d3b": {},
+        "onucowebappdf46a28f": {},
+        "onucowebapp8285c217": {},
+        "onucowebapp972e2bb2": {},
+        "onucowebapp2cd66596": {},
+        "onucowebapp58c8a863": {},
+        "onucowebappb5710574": {},
+        "onucowebapp528b9e28": {
+          "userPoolId": "ap-south-1_jR8SWapW2",
+          "userPoolName": "onuco-pool",
+          "webClientId": "7g6q97lg23q4j6tj6j0p7bvig",
+          "nativeClientId": "7g6q97lg23q4j6tj6j0p7bvig"
         }
       }
     }

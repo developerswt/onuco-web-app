@@ -24,11 +24,11 @@
                         <router-link class="nav-link" to="/" exact>Home</router-link>
                     </li>
                     <li class="nav-item ">
-                        <router-link class="nav-link" to="/Mylearnings" exact>My learning</router-link>
+                        <router-link class="nav-link" to="/Mylearnings" exact>My Learning</router-link>
                     </li>
                     <li class="nav-item">
                         
-                        <router-link class="nav-link" to="/Courses" exact>Courses</router-link>
+                        <router-link  class="nav-link" id="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
                     <li class="nav-item">
                         
@@ -44,8 +44,8 @@
                 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row class="demo-autocomplete" style="width: 200px;  margin-right: 25px; " v-if="showSearchBox">
-                        <el-col :span="26">
+                    <el-row class="demo-autocomplete" style="width: 250px;  margin-right: 25px; " v-if="showSearchBox">
+                        <el-col :span="23">
                             <el-autocomplete
                                 v-model="searchTerm"
                                 :fetch-suggestions="querySearch"
@@ -53,17 +53,20 @@
                                 value-key="title"
                                 size="large"
                                 style="background-color: color: blue; font-size: 12px;"
-                                class="inline-input w-100  search"
+                                class=" w-100  search"
                                 debounce
                                 @select="handleSelect"
-                                
+                                clearable
                                 placeholder="Search..."
                             >
                             <template #suffix>
-                                <el-icon v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer" @click="clearInput"><CircleClose /></el-icon>
+                                <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
+                                <!-- <el-icon class="el-input__icon" @click="handleIconClick">
+        <edit />
+      </el-icon> -->
 
-                                <el-icon style="position: absolute; right: 10px; cursor: pointer; color: blue; font-weight: bold;">
-                                    <Search @click="handleKeyEnter(searchTerm)" />
+                                <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)" style="color: blue;cursor: pointer;">
+                                    <Search  />
                                 </el-icon>
                             </template>
                             </el-autocomplete>
@@ -81,7 +84,7 @@
                         </div>
                     </li>
                     <li class="nav-item" v-else>
-                        <router-link to="/Login" class="nav-link">Login <span style="padding-left:10px;">/ Sign
+                        <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
               
@@ -104,16 +107,12 @@ export default {
     props: {
         showSearchBox: Boolean,
     },
-    props: {
-        showSearchBox: Boolean,
-    },
     data() {
         return {
             searchTerm: null,
             suggestions: [],
             showSuggestions: false,
             dataarray: [],
-             
             searchTerm: null,
             suggestions: [],
             showSuggestions: false,
@@ -157,6 +156,7 @@ export default {
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
             console.log(results);
             cb(results);
+                
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
@@ -176,21 +176,20 @@ export default {
                 this.$store.commit('isLoggedIn', false);
                 this.$store.dispatch('logout')
                 localStorage.removeItem("username")
-                this.$store.dispatch('logout')
-                localStorage.removeItem("username")
+                
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }
         },
 
-        setActive(index) {
-            if (this.activeIndex !== null) {
-                this.navItems[this.activeIndex].active = false;
-            }
-            this.activeIndex = index;
-            this.navItems[this.activeIndex].active = true;
-        },
+        // setActive(index) {
+        //     if (this.activeIndex !== null) {
+        //         this.navItems[this.activeIndex].active = false;
+        //     }
+        //     this.activeIndex = index;
+        //     this.navItems[this.activeIndex].active = true;
+        // },
         clearInput() {
             this.searchTerm = '';
         }
@@ -455,6 +454,8 @@ li>a:before {
 .router-link-exact-active {
         border-bottom: 2px solid blue;
     }
-
+.highlight {  
+    border-bottom: 2px solid blue;
+}
 
 </style>
