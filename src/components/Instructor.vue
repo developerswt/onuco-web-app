@@ -762,5 +762,14 @@ text-align: left !important;
 .course_text{
     font-size: 20px;
 }
+
+
+@media (max-width: 600px) {
+    #sub_text{
+        text-align: left;
+    }
+    
+}
+
 </style>
 
