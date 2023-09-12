@@ -28,6 +28,11 @@ import UpdatedProfile from "./components/UpdatedProfile.vue"
 
 let user;
 
+// getUser().then((user) => {
+//     if (user) {
+//         router.push({path: '/'});
+//     }
+// });
 
 function getUser() {
     return Auth.currentAuthenticatedUser().then((data) => {
