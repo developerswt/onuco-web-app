@@ -110,7 +110,7 @@ export default {
 
 .box {
     height:115px;
-    width:335px;
+    width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
