@@ -1,38 +1,39 @@
 <template>
     <div class="container-fluid jk">
         <div class="container pt-4" v-for="academi in academia" :key="academi.id">
-            <h2 id="available_text" v-if="getSecondArrayLength(academi.id) != 0"><b>Available</b> {{ academi.name }} Courses ({{ getSecondArrayLength(academi.id) }})</h2>
-            
-        <div class="parent_blocks">
-            {{ this.branches.name }}
-            <div class="row pt-4">
-                <div class="" v-for="branch in branches" :key="branch.id">
-                <div class="box" v-if="academi.id == branch.academyId">
+            <h2 id="available_text" v-if="getSecondArrayLength(academi.id) != 0"><b>Available</b> {{ academi.name }} Courses
+                ({{ getSecondArrayLength(academi.id) }})</h2>
+
+            <div class="parent_blocks">
+                <!-- {{ this.branches.name }} -->
+                <div class="row pt-4">
+                    <div class="" v-for="branch in branches" :key="branch.id">
+                        <div class="box" v-if="academi.id == branch.academyId">
                             <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
                                 style="color: white;">
-                        <div class="row">
-                            <div class="col-md-3 col-3 col-sm-3">
+                                <div class="row">
+                                    <div class="col-md-3 col-3 col-sm-3">
                                         <div class="course_block">
-                                <img src="../assets/images/book1.png">
-                            </div>
-                                    
+                                            <img src="../assets/images/book1.png">
+                                        </div>
+
                                     </div>
-                            <div class="col-md-9 col-9 col-sm-9 pt-2">
+                                    <div class="col-md-9 col-9 col-sm-9 pt-2">
                                         <div class="course_block_one">
-                                <h5>{{ branch.name }}</h5>
-                                <p>{{ branch.description }}</p>
-                            </div>
-                                       
+                                            <h5>{{ branch.name }}</h5>
+                                            <p>{{ branch.description }}</p>
+                                        </div>
+
                                     </div>
+                                </div>
+                            </router-link>
                         </div>
-                    </router-link>    
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-     
-    </div>            
+
+    </div>
     <Offer />
 </template>
 
@@ -53,11 +54,18 @@ export default {
     },
     async created() {
         try {
-            const res = await axiosInstance.get(`/Academia/`);
-            this.academia = res.data;
+            const academiaResponse = await axiosInstance.get(`/Academia/`);
+            this.academia = academiaResponse.data;
+            
+            const branchesResponse = await axiosInstance.get(`/Branches/`);
+            this.branches = branchesResponse.data;
+            
+            // Filter academia based on branches data
+            this.academia = this.academia.filter(academi => {
+                return this.branches.some(branch => branch.academyId === academi.id);
+            });
+
             console.log(this.academia);
-            const result = await axiosInstance.get(`/Branches/`);
-            this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
             console.log(error);
@@ -98,31 +106,31 @@ export default {
     .jk {
         padding-top: 65px !important;
     }
-    
+
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-  
+
     #available_text {
         font-size: 20px;
     }
 }
 
 .box {
-    
+
     height: 115px;
     width: 360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
     padding: 20px;
-    
+
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 
-    
+
 }
 
 .parent_block {
@@ -143,9 +151,9 @@ export default {
 
 .box p {
     font-size: 14px;
-    
+
     text-align: left;
-    
+
     letter-spacing: 0px;
     color: #000000;
     opacity: 0.49;
@@ -179,8 +187,9 @@ h2 {
 }
 
 #available_text {
-font-size: 20px;
-}</style>
+    font-size: 20px;
+}
+</style>
 
 
 
