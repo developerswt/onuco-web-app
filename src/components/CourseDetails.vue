@@ -6,16 +6,17 @@
                     <div class="search_inner_block">
                         <div class="row">
                             <div class="col-lg-12">
-                                <Breadcrumbs />
-                                <!-- <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">VTU</a></li>
-                                        <li class="breadcrumb-item"><a href="#">{{ this.book.title }}</a></li>
-                                        <li class="breadcrumb-item"><a href="#"></a></li>
+                                <!-- <Breadcrumbs /> -->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb" >
+                                        <li class="breadcrumb-item"><router-link to="/" style="text-decoration: none;">Home</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/Academia/' + this.book.brachRouteName" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/Universities/' + this.book.universityRouteName" style="text-decoration: none;">{{ this.book.university }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link :to="'/CollegeDetails/' + this.book.collegeDetailsRouteName" style="text-decoration: none;">{{ this.book.collegeDetails }}</router-link></li>
+                                        <li class="breadcrumb-item"><router-link  style="text-decoration: none;">Math 1 (NEP Series)</router-link></li>
 
                                     </ol>
-                                </nav> -->
+                                </nav>
                             </div>
                         </div>
                         <div class="row">
@@ -131,17 +132,24 @@
                                                                                 <p id="duration_text_one">{{ subject.time }}
                                                                                 </p>
                                                                             </div>
-                                                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                                                <div class="progress_block">
-                                                                                    <div class="progress">
-                                                                                        <div class="progress-bar"
-                                                                                            role="progressbar"
-                                                                                            aria-valuenow="0"
-                                                                                            aria-valuemin="0"
-                                                                                            aria-valuemax="100"></div>
+                                                                            <div class="col-lg-6 col-6 col-sm-6" v-for="video in watchTimeDatas" :key="video.id">
+                                                                                <div class="" v-for="watch in video.watchTimeData" :key="watch.id">
+                                                                                   
+                                                                                    <div class="progress_block">
+                                                                                        
+                                                                                        <div class="" v-if="subject.id == watch.videoId">
+                                                                                        
+                                                                                        <!-- <div class="progress">
+                                                                                            <div class="progress-bar"
+                                                                                                role="progressbar"
+                                                                                                aria-valuenow="0"
+                                                                                                aria-valuemin="0"
+                                                                                                aria-valuemax="100"></div>
+                                                                                            </div> -->
+                                                                                            <progress id="file" :value="watch.watchTime" max="100"> {{ watch.watchTime }}% </progress>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
 
                                                                         </div>
@@ -155,7 +163,7 @@
 
 
                                                                             <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
-                                                                                class="img-fluid">
+                                                                                class="img-fluid" >
 
                                                                         </div>
                                                                     </div>
@@ -168,7 +176,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="video_block" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" ref="videoPlayerRef" />
+                                                        <video-player :options="videoOptions" ref="videoPlayerRef" />
                                                 </div>
                                         
                                             </div>
@@ -197,6 +205,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Breadcrumbs from './Breadcrumbs.vue';
 import VideoPlayer from './VideoPlayer.vue';
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -211,6 +220,7 @@ export default {
     },
     data() {
         return {
+            watchTimeDatas: [],
             activeName: 'first',
             book: [],
             videoOptions: {
@@ -265,6 +275,19 @@ export default {
             }),
         };
     },
+    computed: {
+        videoType() {
+            if (typeof this.videoOptions.sources.src === 'string') {
+                if(this.videoOptions.sources.src.endsWith('.mp4')) {
+                    return 'video/mp4'; // MP4 Format
+                } else if(this.videoOptions.sources.src.endsWith('.m3u8')) {
+                    return 'application/x-mpegURL';  // HLS Format
+                }    
+            } else {
+                return '';
+            }
+        }
+    },
     async created(){
         console.log("Hi");
         const command = new GetObjectCommand({
@@ -273,9 +296,11 @@ export default {
         });
         const headers = { 'Authorization': this.authorizationHeader };
         try {
-            const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.query.id);
+            const res = await axios.get(`https://localhost:7233/api/Coursedetails?` + "id=" + this.$route.query.id);
             this.book = res.data; 
-            
+            const result = await axios.get('https://localhost:7233/api/StateManagement');
+            this.watchTimeDatas = result.data;
+            console.log(this.watchTimeDatas);
             // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.videoOptions.sources[0].src = this.book.videoUrl;
             // this.book.chapters = JSON.parse(this.book.Chapters);
@@ -283,7 +308,7 @@ export default {
             this.videoOptions.sources = [
                     {
                         src: this.book.videoUrl,
-                        type: 'application/x-mpegURL',
+                        type: this.videoType,
                         withCredentials: false,
                     }
             ]
@@ -299,7 +324,7 @@ export default {
             this.videoOptions.sources = [
                 {
                     src: newVideoUrl,
-                    type: 'application/x-mpegURL',
+                    type: this.videoType,
                     withCredentials: false
                 }
             ];
@@ -309,6 +334,7 @@ export default {
             if (this.$refs.videoPlayerRef) {
                 this.$refs.videoPlayerRef.player.src(this.videoOptions.sources);
                 this.$refs.videoPlayerRef.player.load();
+                
             }
 
             // Play the updated video

@@ -22,9 +22,9 @@
                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                 class="fa fa-star-o"></i> (23 reviews) </p>
                                         <div class="social-icons">
-                                            <a :href="this.faculty.youTube" class="fa fa-youtube-play"></a>
-                                            <a :href="this.faculty.twitter" class="fa fa-twitter"></a>
-                                            <a :href="this.faculty.linkedin" class="fa fa-linkedin"></a>
+                                            <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
+                                            <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
+                                            <a :href="this.faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
 
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="professor-details_text" v-html="this.faculty.facultyDescription"></p>
+                            <p class="professor-details_text" v-html="this.faculty.description"></p>
                         </div>
                     </div>
                 </div>
@@ -292,98 +292,13 @@
                     </div>
                 </div>
             </section>
-            
+           
             <section id="tab_block">
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                    <el-tab-pane label="OBJECTIVES" name="first">
-                        <div class="" v-html="this.faculty.objective"></div>
+                    <el-tab-pane :label="att.heading" v-for="att in this.faculty.attributue" :name="att.heading" :key="att.heading">
+                        <div class="" v-html="att.values"></div>
                     </el-tab-pane>
-                    <el-tab-pane label="CONTACT" name="second">
-                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contact</h2>
-                        <p style="padding-left: 25px;"><span id="Sub_text">Contact Us:</span>{{ this.faculty.contact }}</p>
-                    </el-tab-pane>
-                    <el-tab-pane label="EDUCATION" name="third">
-                        <div class="" v-html="this.faculty.education"></div>
-                    </el-tab-pane>
-                    <el-tab-pane label="EXPERIENCE" name="fourth">
-                        <div class="" v-html="this.faculty.experience"></div>
-    
-                    </el-tab-pane>
-                    <el-tab-pane label="RESEARCH" name="fifth">
-                        <div class="" v-html="this.faculty.research"></div>
-                    </el-tab-pane>
-                    <el-tab-pane label="PUBLICATIONS" name="sixth">
-                        <div class="experience_block" v-for="publication in this.faculty.publication" :key="publication.id">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Publication
-                            </h2>
-
-                            <div class="row" id="row_block" v-for="publicationdetails in publication.values" :key="publicationdetails.id">
-                                
-                                <div class="div">
-                                    <p><span id="education_text">{{ publication.heading }}</span></p>
-                                    <p><span id="education_text">Author: </span>{{ publicationdetails.author }}.</p>
-                                        
-                                    <p><span id="education_text">Price: </span>{{ publicationdetails.price }}</p>
-                                    
-                                    <div>
-                                        <span id="education_text">Description: </span><br>
-                                        <p class="pt-3" v-html="publicationdetails.description"></p> 
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>    
-                    </el-tab-pane>
-                    <el-tab-pane label="ADVISORY" name="seventh"></el-tab-pane>
-                    <el-tab-pane label="SKILLS" name="eight">
-                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Skills</h2>
-                        <p style="padding-left: 25px;"><span id="Sub_text">Skill:</span>{{ this.faculty.skill }}</p>
-                    </el-tab-pane>
-                    <el-tab-pane label="CONTRIBUTIONS" name="nine">
-                        <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Contributions</h2>
-                        
-                        <div class="" style="padding-left: 25px;" v-html="this.faculty.contribution"></div>
-                    </el-tab-pane>
-                    <el-tab-pane label="PROJECTS" name="ten">
-                        <div class="experience_block" v-for="project in this.faculty.project" :key="project.id">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Project
-                            </h2>
-                            <div class="row" id="row_block" v-for="projectdetails in project.values" :key="projectdetails.id">
-                                
-                                <div class="div">
-                                    <!-- <p><span id="education_text">{{ project.heading }}</span></p> -->
-                                    <p><span id="education_text">Environment: </span></p>
-                                    
-                                    <div class="" v-for="skills in projectdetails.environment" :key="skills.id">
-                                        <li>{{ skills }}.</li>
-                                    </div>
-
-                                    <p class="pt-3"><span id="education_text">Role: </span> {{ projectdetails.role }} </p>
-
-                                    <p><span id="education_text">From Duration: </span> {{ projectdetails.fromDuration }} </p>
-
-                                    <p><span id="education_text">To Duration: </span>{{ projectdetails.toDuration }} </p>
-                                    
-                                    
-                                </div>
-                            </div>    
-                        </div>  
-                    </el-tab-pane>
-                    <el-tab-pane label="FacultyDescription" name="eleven">
-                        <div class="research_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Faculty Description </h2>
-                            <div class="research_inner_block">
-                                <p v-html="this.faculty.facultyDescription"></p>
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Duties And Responsibilities" name="twleve">
-                        <div class="research_block">
-                            <h2 class="Object_text"><img src="../assets/images/g2.png" class="img-fluid" /> Duties And Responsibilities </h2>
-                            <div class="research_inner_block">
-                                <p v-html="this.faculty.dutiesAndResponsibilities"></p>
-                            </div>
-                        </div>
-                    </el-tab-pane>
+                    
                 </el-tabs>
             </section>
 
@@ -409,6 +324,11 @@ export default {
         return {
             faculty: [],
             activeName: 'first',
+            attribute: [
+                { key: "Name", value: "Arun" },
+                { key: "Age", value: 30 },
+                { key: "Location", value: "India" },
+            ],
         }
     },
     methods: {
@@ -418,7 +338,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.query.id);
+            const res = await axios.get(`https://localhost:7233/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
@@ -430,6 +350,7 @@ export default {
 
 
 <style scoped>
+
 .jk {
     padding-top: 5%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -558,7 +479,9 @@ export default {
     float: right;
     color: white;
 }
-
+::v-deep .advisory {
+    padding-left: 23px;
+}
 .video {
     width: 50px;
 
@@ -626,7 +549,16 @@ export default {
     font-family: 'Noto Sans', sans-serif;
     margin-top: 20px;
 }
-
+::v-deep .advisory_heading {
+    color: black;
+    font-size: 17px;
+    margin-bottom: 0px;
+    font-family: 'Noto Sans', sans-serif;
+    margin-top: 20px;
+}
+::v-deep .advisory p {
+    font-size: 16px;
+}
 
 ::v-deep #Sub_text {
     color: #9E9E9E;
@@ -664,13 +596,13 @@ export default {
     /* bottom: 10px; */
 
 }
-::v-deep #row_block {
-    padding-left: 25px;
-}
-::v-deep #row_block {
-    padding-left: 25px;
-}
 
+::v-deep #row_block {
+    padding-left: 25px;
+}
+::v-deep .details {
+    padding-left: 25px;
+}
 ::v-deep .row_class {
     display: flex;
     margin-top: -3px;
@@ -692,7 +624,7 @@ export default {
 ::v-deep .research_inner_block {
     padding-left: 25px;
 }
-.row_class i {
+::v-deep .row_class i {
     padding: 4px 0px 0px 10px;
 }
 
@@ -792,7 +724,7 @@ export default {
 
     }
 
-    #row_block {
+    ::v-deep #row_block {
         margin-top: 15px;
     }
 

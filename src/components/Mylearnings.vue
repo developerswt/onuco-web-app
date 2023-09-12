@@ -174,7 +174,17 @@
 
 <script>
 export default {
-    name: 'Mylearnings'
+    name: 'Mylearnings',
+    data() {
+        return {
+            activeName: 'first',
+        }
+    },
+    methods: {
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+    }
 }
 </script>
 

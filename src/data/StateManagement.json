@@ -1,0 +1,72 @@
+[
+  {
+    "UserId": "0d779166-7391-4042-9bf6-634046e7142a",
+    "CourseId": 1,
+    "WatchTimeData": [
+      {
+        "videoId": 1,
+        "WatchTime": 10
+      },
+      {
+        "videoId": 2,
+        "WatchTime": 10
+      },
+      {
+        "videoId": 3,
+        "WatchTime": 10
+      },
+      {
+        "videoId": 4,
+        "WatchTime": 80
+      },
+      {
+        "videoId": 5,
+        "WatchTime": 10
+      },
+      {
+        "videoId": 6,
+        "WatchTime": 60
+      },
+            {
+        "videoId": 7,
+        "WatchTime": 10
+      },
+            {
+        "videoId": 8,
+        "WatchTime": 10
+      },
+            {
+        "videoId": 9,
+        "WatchTime": 10
+      },
+            {
+        "videoId": 10,
+        "WatchTime": 80
+      },
+            {
+        "videoId": 11,
+        "WatchTime": 10
+      },
+            {
+        "videoId": 12,
+        "WatchTime": 10
+      },
+      {
+        "videoId": 13,
+        "WatchTime": 10
+      },
+            {
+        "videoId": 14,
+        "WatchTime": 10
+      }
+
+
+
+
+
+
+
+
+    ]
+  }
+]

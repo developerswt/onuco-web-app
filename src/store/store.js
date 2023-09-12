@@ -14,7 +14,8 @@ export default createStore ({
         updateProfile: '',
         IsLoggedIn: false,
         user: null,
-        token: null
+        token: null,
+        // isCourseActive: false,
     },
     
     mutations: {
@@ -28,6 +29,9 @@ export default createStore ({
         setToken(state, token) {
             state.token = token;
         },
+        // setIsAboutActive(state, isActive) {
+        //     state.isCourseActive = isActive;
+        // },
         
     },
 

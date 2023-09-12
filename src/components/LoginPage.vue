@@ -47,63 +47,64 @@ export default {
                       custom: true,
                       validate: this.customSignUpValidation
                   },
-                  email: {
-                      placeholder: 'Enter Your Email Here',
-                      isRequired: true,
-                      label: 'Email:',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  name: {
-                      placeholder: 'Enter Your Name Here',
-                      isRequired: true,
-                      label: 'Name:',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  birthdate: {
-                      isRequired: true,
-                      label: 'Birth Date:',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  phone_number: {
-                      placeholder: 'Enter Your Phone_Number Here',
-                      isRequired: true,
-                      label: 'Phone Number:',
-                      required: true,
-                      dialCode: '+91',
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  address: {
-                      placeholder: 'Enter Your Address Here',
-                      isRequired: true,
-                      label: 'Address:',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  gender: {
-                      placeholder: 'Enter Your Gender Here',
-                      label: 'Gender',
-                      type: 'text',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-                  picture: {
-                      placeholder: 'Enter Your Picture Here',
-                      label: 'Picture',
-                      type: 'text',
-                      required: true,
-                      custom: true,
-                      validate: this.customSignUpValidation
-                  },
-              },
+                }    
+            //       email: {
+            //           placeholder: 'Enter Your Email Here',
+            //           isRequired: true,
+            //           label: 'Email:',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       name: {
+            //           placeholder: 'Enter Your Name Here',
+            //           isRequired: true,
+            //           label: 'Name:',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       birthdate: {
+            //           isRequired: true,
+            //           label: 'Birth Date:',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       phone_number: {
+            //           placeholder: 'Enter Your Phone_Number Here',
+            //           isRequired: true,
+            //           label: 'Phone Number:',
+            //           required: true,
+            //           dialCode: '+91',
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       address: {
+            //           placeholder: 'Enter Your Address Here',
+            //           isRequired: true,
+            //           label: 'Address:',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       gender: {
+            //           placeholder: 'Enter Your Gender Here',
+            //           label: 'Gender',
+            //           type: 'text',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //       picture: {
+            //           placeholder: 'Enter Your Picture Here',
+            //           label: 'Picture',
+            //           type: 'text',
+            //           required: true,
+            //           custom: true,
+            //           validate: this.customSignUpValidation
+            //       },
+            //   },
           },    
           // authConfig: {
           //   signUpConfig: {
@@ -153,7 +154,7 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in pt-3" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;">
+    <authenticator class="custom-sign-in pt-3" :sign-up-attributes="['name',]" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;">
         
         <template v-slot:header>
         <div style="padding: var(--amplify-space-large); text-align: center">

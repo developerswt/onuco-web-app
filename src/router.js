@@ -23,6 +23,7 @@ import Privacy from "./components/Privacy.vue"
 import TermsCondition from "./components/TermsCondition.vue"
 import GetSupport from "./components/GetSupport.vue"
 import Mylearnings from "./components/Mylearnings.vue"
+import UpdatedProfile from "./components/UpdatedProfile.vue"
 
 
 let user;
@@ -183,7 +184,7 @@ const routes = [
     },
   },
   {
-    path: "/Instructor",
+    path: "/Instructor/:name",
     name: "Instructor",
     component: Instructor,
     meta: {
@@ -243,6 +244,14 @@ const routes = [
     path: "/Picture",
     name: "Picture",
     component: Picture,
+    meta: {
+        title: 'Picture Page',
+    },
+  },
+  {
+    path: "/UpdatedProfile",
+    name: "UpdatedProfile",
+    component: UpdatedProfile,
     meta: {
         title: 'Picture Page',
     },
