@@ -221,10 +221,7 @@ background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0
         padding-right:0;
         font-size: 15px !important;
     }
-    .parent_blocks {
-        justify-content: center !important;
-
-    }
+  
     .ty{
         margin-top: -78px;
   

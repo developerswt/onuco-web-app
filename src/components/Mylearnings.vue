@@ -7,162 +7,170 @@
                     <div class="col-lg-12">
                         <div>
                             <div class="purple_block">
-
+                                <p id="new_text">NEW</p>
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <p>Math 1(NEP Series)</p>
-                                        <p>123 Hrs Video Course</p>
-                                        <p>2 Quiz and 3 Question Banks</p>
+                                        <div class="right_block">
+                                            <p id="subject_text">Math 1(NEP Series)</p>
+                                            <p class="mb-0">123 Hrs Video Course</p>
+                                            <p>2 Quiz and 3 Question Banks</p>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 text-right">
-                                        <p>5 Modules <span>32 Topics</span></p>
+                                    <div class="col-lg-6">
+                                        <div class="left_block">
+                                            <p>5 Modules <span id="span_text">32 Topics</span></p>
 
-                                        <button id="course_button">Start Course <i class="fa-solid fa-play"
-                                                style="color: #ffffff;"></i></button>
+                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
+                                                    style="color: #ffffff;"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <section id="tab_section">
-                    <div class="pt-4 topic-card">
-                        <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
-                            <el-tab-pane label="MY COURSES " name="first" class="rt">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">MY COURSES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">LIVE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">COMPLETED</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="">
+                            <div class="row mt-3">
+                                <div class="col-lg-6">
+                                    <h4 class="academic_head_text">
+
+                                        <span id="aca_text">interested</span> Courses
+
+                                    </h4>
+                                </div>
+                                <div class="col-lg-6 text-right">
+                                    <router-link to="#">See all</router-link>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="notify_block">
+
+                                        <p> <i class="fa-solid fa-triangle-exclamation" style="color: #ff9900;"></i>Please
+                                            subscribe the subjects to
+                                            get more details...</p>
+                                        <button id="course_list_button">Course List</button>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
-                                <div class="">
-                                    <div class="" data-toggle="collapse" :href="'#collapse-example' + index"
-                                        aria-expanded="true" aria-controls="collapse-example" id="heading-example">
+                            <div class="inner_block">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <div id="asset_image">
+                                            <img src="../assets/images/book1.png" class="img-fluid">
+                                        </div>
 
                                     </div>
-
-                                    <div aria-labelledby="heading-collapsed">
-                                        <div class="">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <h4 class="academic_head_text">
-
-                                                        <span id="aca_text">interested</span> Courses
-
-                                                    </h4>
-                                                </div>
-                                                <div class="col-lg-6 text-right">
-                                                    <router-link to="#">See all</router-link>
+                                    <div class="col-lg-8">
+                                        <p class="mb-0" id="text_one">Computer Science</p>
+                                        <p id="text_two">stacks</p>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="progress_block">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
-                                            <div class="inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-1">
-                                                        <div id="asset_image">
-                                                            <img src="../assets/images/book1.png" class="img-fluid">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <p class="mb-0 mt-3">Computer Science</p>
-                                                        <p>stacks</p>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="progress_block">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar" role="progressbar"
-                                                                            aria-valuenow="0" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <p>22h 33m left</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                
-                                            <div class="inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-1">
-                                                        <div id="asset_image">
-                                                            <img src="../assets/images/book1.png" class="img-fluid">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <p class="mb-0 mt-3">Computer Science</p>
-                                                        <p>stacks</p>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="progress_block">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar" role="progressbar"
-                                                                            aria-valuenow="0" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <p>22h 33m left</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                
-                                            <div class="inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-1">
-                                                        <div id="asset_image">
-                                                            <img src="../assets/images/book1.png" class="img-fluid">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <p class="mb-0 mt-3">Computer Science</p>
-                                                        <p>stacks</p>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="progress_block">
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar" role="progressbar"
-                                                                            aria-valuenow="0" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <p>22h 33m left</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="col-lg-4">
+                                                <p id="text_three">22h 33m left</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="inner_block">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <div id="asset_image">
+                                            <img src="../assets/images/book1.png" class="img-fluid">
+                                        </div>
 
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="mb-0" id="text_one">Computer Science</p>
+                                        <p id="text_two">stacks</p>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="progress_block">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <p id="text_three">22h 33m left</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inner_block">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <div id="asset_image">
+                                            <img src="../assets/images/book1.png" class="img-fluid">
+                                        </div>
 
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="mb-0" id="text_one">Computer Science</p>
+                                        <p id="text_two">stacks</p>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="progress_block">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <p id="text_three">22h 33m left</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-
-                            </el-tab-pane>
-                            <el-tab-pane label="LIVE" name="second">
-                                <div class="rt"></div>
-                            </el-tab-pane>
-                            <el-tab-pane label="COMPLETED" name="third">
-                                <div class="rt"></div>
-                            </el-tab-pane>
-
-                        </el-tabs>
+                        </div>
                     </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <p>Live content</p>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <p>completed</p>
+                    </div>
+                </div>
                 </section>
+
+
+               
             </div>
         </div>
 
@@ -184,15 +192,13 @@ export default {
 }
 
 .purple_block {
-    background: #ff00cc;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #333399, #ff00cc);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: transparent url('../assets/images/Untitled.png') 30% 0% no-repeat padding-box !important;
+    background-size: cover !important;
     padding: 15px;
     color: white;
     border-radius: 10px;
+    height: 193px;
+    mix-blend-mode: normal;
 
 }
 
@@ -221,7 +227,7 @@ export default {
     border-radius: 47px 10px 10px 10px;
     padding: 15px;
     margin: 10px;
-
+    height: 80px;
 
 }
 
@@ -229,7 +235,7 @@ export default {
 #course_button {
     width: 139px;
     height: 32px;
-    background: #00C0E8 0% 0% no-repeat padding-box;
+    background: #0066CC 0% 0% no-repeat padding-box;
     border: 1px solid #3AC2FD;
     border-radius: 16px;
     opacity: 1;
@@ -237,8 +243,9 @@ export default {
     text-transform: uppercase;
     /* bottom: 0; */
     position: absolute;
-    bottom: 0;
+    bottom: -11px;
     right: 12px;
+    color: White;
 }
 
 #course_button i {
@@ -247,7 +254,7 @@ export default {
 }
 
 #tab_section {
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 #tab-first {
@@ -256,10 +263,95 @@ export default {
 
 .progress {
     height: 5px;
-    margin-top: 7px;
     background: #FF9900;
+    margin-top: 7px;
+}
+
+#asset_image img {
+    width: 30px;
+}
+
+
+.left_block {
+    text-align: right;
+
+}
+
+#subject_text {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#span_text {
+    padding-left: 20px;
+}
+
+#new_text {
+    position: relative;
+    left: -5px;
+    top: -12px;
+}
+
+.el-tabs__nav .is-top {
+    background: #EEF4FB !important;
+    background: linear-gradient(to top, #EEF4FB 0%, #AED4FF 84%) !important;
+
 }
 
 #asset_image {
-    padding: 20px 10px 10px 10px;
-}</style>
+    text-align: center;
+}
+
+#text_two,
+#text_three {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.notify_block {
+    background: #FFEAD5;
+    height: 54px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin: 20px 0px 20px 0px;
+}
+
+.notify_block p {
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #3B3B3B;
+}
+
+#course_list_button {
+
+    border: 1px solid #0177FB;
+    border-radius: 10px;
+    opacity: 1;
+    font-size: 12px;
+    float: right;
+    background: transparent;
+    color: #0177FB;
+}
+
+.el-tabs__item {
+    font-weight: bold !important;
+}
+
+.notify_block i {
+    font-size: 30px;
+    padding-right: 20px;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    background: transparent linear-gradient(180deg, #EEF4FB 0%, #AED4FF 100%) 0% 0% no-repeat padding-box !important;
+    border:none;
+    color:#0066CC !important;
+    font-weight: 600;
+}
+.nav-tabs .nav-link{
+    color: #474747 !important;;
+}
+</style>
