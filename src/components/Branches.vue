@@ -50,6 +50,7 @@ Offer
             const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
             console.log(this.academia);
+        
             const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
             console.log(this.branches);

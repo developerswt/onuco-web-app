@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
 
-        
+
 
         <div class="container">
 
@@ -11,13 +11,13 @@
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
-            
+
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
             <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
 
-           
 
-           
+
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active">
@@ -27,52 +27,44 @@
                         <router-link class="nav-link" to="/Mylearnings" exact>My Learning</router-link>
                     </li>
                     <li class="nav-item">
-                        
-                        <router-link  class="nav-link" id="nav-link" to="/Courses" exact>Courses</router-link>
+
+                        <router-link class="nav-link" id="nav-link" to="/Courses" exact>Courses</router-link>
                     </li>
+                  
                     <li class="nav-item">
-                        
+
                         <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
                     </li>
                     <li class="nav-item">
-                        
+
                         <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
                     </li>
 
 
                 </ul>
-                
+
 
                 <ul class="navbar-nav ml-auto">
                     <el-row class="demo-autocomplete" style="width: 250px;  margin-right: 25px; " v-if="showSearchBox">
                         <el-col :span="23">
-                            <el-autocomplete
-                                v-model="searchTerm"
-                                :fetch-suggestions="querySearch"
-                                :trigger-on-focus="false"
-                                value-key="title"
-                                size="large"
-                                style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search"
-                                debounce
-                                @select="handleSelect"
-                                clearable
-                                placeholder="Search..."
-                            >
-                            <template #suffix>
-                                <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
-                                <!-- <el-icon class="el-input__icon" @click="handleIconClick">
+                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                                value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
+                                class=" w-100  search" debounce @select="handleSelect" clearable placeholder="Search...">
+                                <template #suffix>
+                                    <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
+                                    <!-- <el-icon class="el-input__icon" @click="handleIconClick">
         <edit />
       </el-icon> -->
 
-                                <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)" style="color: blue;cursor: pointer;">
-                                    <Search  />
-                                </el-icon>
-                            </template>
+                                    <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
+                                        style="color: blue;cursor: pointer;">
+                                        <Search />
+                                    </el-icon>
+                                </template>
                             </el-autocomplete>
                         </el-col>
                     </el-row>
-                            
+
                     <li class="nav-item dropdown active" v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,9 +79,9 @@
                         <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
-              
-                    
-                    
+
+
+
                 </ul>
             </div>
         </div>
@@ -117,7 +109,8 @@ export default {
             suggestions: [],
             showSuggestions: false,
             dataarray: [],
-             
+          
+
         }
     },
     computed: {
@@ -134,37 +127,35 @@ export default {
         }
     },
     methods: {
-        handleKeyEnter(item){
-            if(item.length>=2)
-            {
+        handleKeyEnter(item) {
+            if (item.length >= 2) {
                 this.$router.push({ path: '/search', query: { data: item } });
-            }    
+            }
             console.log(item)
         },
-        handleSelect(item){
-            if(item.title.length>=2) 
-            {
+        handleSelect(item) {
+            if (item.title.length >= 2) {
                 this.$router.push({ path: '/search', query: { data: item.title } });
                 console.log(item);
-            }    
+            }
             console.log(item);
-        // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
-            
+            // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
+
         },
-        querySearch(queryString,cb) {
+        querySearch(queryString, cb) {
             console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
             console.log(results);
             cb(results);
-                
+
         },
         createFilter(queryString) {
-                console.log("queryString",queryString)
-                axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchTerm)
-		.then((res) => (this.dataarray = res.data));
-                console.log(this.dataarray);
-                return this.dataarray;
-            
+            console.log("queryString", queryString)
+            axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchTerm)
+                .then((res) => (this.dataarray = res.data));
+            console.log(this.dataarray);
+            return this.dataarray;
+
         },
         async logout() {
             try {
@@ -176,7 +167,7 @@ export default {
                 this.$store.commit('isLoggedIn', false);
                 this.$store.dispatch('logout')
                 localStorage.removeItem("username")
-                
+
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
@@ -196,9 +187,9 @@ export default {
 
     },
 
-}    
+}
 
-    
+
 </script>
 
 <style scoped>
@@ -282,7 +273,7 @@ li>a:before {
         display: none;
     }
 
-    
+
 
     .search-bar {
         justify-content: space-between;
@@ -296,7 +287,7 @@ li>a:before {
 
     }
 
-    
+
 
     .nav-link {
         font-size: 15px;
@@ -308,7 +299,7 @@ li>a:before {
 
 
 @media (min-width: 768px) and (max-width: 992.92px) {
-    
+
     .search-bar {
         justify-content: space-between;
         margin-right: 0 !important;
@@ -369,6 +360,7 @@ li>a:before {
     outline: none;
 
 }
+
 .el-input__inner::placeholder {
     font-size: 12px !important;
 }
@@ -383,8 +375,8 @@ li>a:before {
     border: 1px solid blue;
     padding: 10px;
     /* backdrop-filter: blur(4px) saturate(180%); */
-    
-    
+
+
 }
 
 .search-bar input {
@@ -428,34 +420,36 @@ li>a:before {
         font-size: 15px;
     }
 }
+
 .search-bar {
-  position: relative; /* Create a positioning context */
+    position: relative;
+    /* Create a positioning context */
 }
 
 
 .navbar-autocomplete {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .autocomplete-input {
-  width: 200px; /* Adjust the width as needed */
+    width: 200px;
+    /* Adjust the width as needed */
 }
+
 .demo-autocomplete .autocomplete-input {
     background-color: blue;
 }
+
 .el-autocomplete .el-input__inner {
-  font-size: 12px;
+    font-size: 12px;
 }
+
 .search {
     color: blue;
 }
 
 .router-link-exact-active {
-        border-bottom: 2px solid blue;
-    }
-.highlight {  
     border-bottom: 2px solid blue;
 }
-
 </style>
