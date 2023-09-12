@@ -127,6 +127,20 @@ export default {
         },
 
     },
+    async created() {
+        const headers = { 
+            Authorization:  this.authorizationHeader,
+            'Content-Type': 'multipart/form-data'
+        };
+        try {
+            const res = await axios.get('https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/UploadS3Files/profile', {
+                headers });
+            this.updatedAttribute = res.data;
+            console.log(this.updatedAttribute);    
+        } catch (error) {
+            console.log(error);
+        }    
+    },
     methods: {
         async update() {
             const headers = { 
@@ -318,10 +332,10 @@ h5 {
         width: 100%;
     }
 }
-.kl .col-sm-2 {
+.col-sm-2 {
     float: left;
 }
-.kl .col-sm-3 {
+.col-sm-3 {
     float: right;
 }
 </style>

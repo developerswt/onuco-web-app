@@ -54,6 +54,7 @@ export default {
       return this.$store.state.IsLoggedIn;
     },
   },
+  
   mounted() {
     console.log(this.options);
     videojs.registerPlugin('qualityLevels',qualityLevels);
