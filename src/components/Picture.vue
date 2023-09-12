@@ -76,7 +76,7 @@
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-secondary">Close</button>
+                                        <button type="button" class="btn btn-secondary" @click="close">Close</button>
                                     </div>
                                 </div>
                             </form>    
