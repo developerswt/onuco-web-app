@@ -228,6 +228,7 @@ export default {
     padding: 15px;
     margin: 10px;
     height: 80px;
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
 
 }
 
@@ -306,6 +307,10 @@ export default {
 #text_three {
     font-size: 12px;
     margin-bottom: 0;
+}
+#text_one{
+    color:#0066CC;
+    font-weight: bold;
 }
 
 .notify_block {
