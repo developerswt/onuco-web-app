@@ -3,6 +3,7 @@ import store from '../store/store'
 
 const instance = axios.create({
   baseURL: 'https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api',
+ // https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api
 });
 
 instance.interceptors.request.use(config => {

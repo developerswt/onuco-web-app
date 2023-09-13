@@ -151,7 +151,7 @@ export default {
         },
         createFilter(queryString) {
             console.log("queryString", queryString)
-            axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchTerm)
+            axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=" + this.searchTerm)
                 .then((res) => (this.dataarray = res.data));
             console.log(this.dataarray);
             return this.dataarray;

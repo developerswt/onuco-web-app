@@ -185,7 +185,7 @@ export default {
         },
         async search() {
             try {
-                const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=${this.searchQuery}`);
+                const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
                 const data = await response.json();
                 
                 // Assuming your API returns an array of objects with a "name" property
@@ -207,7 +207,7 @@ export default {
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
-                axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=" + this.searchQuery)
+                axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`)
 		.then((res) => (this.dataarray = res.data));
                 console.log(this.dataarray);
                 return this.dataarray;
@@ -219,7 +219,7 @@ export default {
     },
     async created() {
         try {
-            const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/search?semester=${this.searchQuery}`);
+            const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
             const data = await response.json();
 
                 // Assuming your API returns an array of objects with a "name" property

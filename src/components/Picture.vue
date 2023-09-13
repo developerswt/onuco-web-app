@@ -71,13 +71,12 @@
                                         <input type="file" id="myfile" name="myfile" @change="handleFileChange" required>
                                     </div>    
                                 </div>
-                                <div class="row kl">
-                                    <div class="col-sm-2">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="row kl justify-content-center">
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-primary" style="float: left;">Submit</button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-secondary" @click="close" >Close</button>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <button type="button" class="btn btn-secondary" @click="close">Close</button>
-                                    </div>
+                                    
                                 </div>
                             </form>    
                         </div>
@@ -101,6 +100,7 @@ export default {
     },
     data() {
         return {
+            isSubmitDisabled: true,
             updatedAttribute: [],
             isuser: localStorage.getItem("username"),
             name: '',
@@ -142,6 +142,25 @@ export default {
         }    
     },
     methods: {
+        checkInputFields() {
+            // Check if gender, address, and birthdate are not empty
+            const isGenderEmpty = !this.gender;
+            const isAddressEmpty = !this.address;
+            const isBirthdateEmpty = !this.birthdate;
+
+            // Enable/disable the "Submit" button based on whether these fields are non-empty
+            this.isSubmitDisabled = isGenderEmpty || isAddressEmpty || isBirthdateEmpty;
+        },
+
+        // ... your other methods ...
+
+        // Call the checkInputFields method whenever an input field changes
+        handleFileChange() {
+            // ... your existing code ...
+
+            // Call checkInputFields to update the button state
+            this.checkInputFields();
+        },
         async update() {
             const headers = { 
                 Authorization:  this.authorizationHeader,
@@ -157,11 +176,10 @@ export default {
             }  
         },
         close() {
-            this.gender = '';
-            this.birthdate = '';
-            this.address = '';
-            this.selectedFile = null;
-            this.$refs.fileInput.value = '';
+           
+            if (window.confirm('Are you sure you want to close')) {
+                this.$router.push('/');  
+            }
         },
         // async uploadFile() {
         //     const headers = { 
