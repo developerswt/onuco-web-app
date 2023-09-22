@@ -28,7 +28,7 @@
                         </a>
                     </h5> -->
                     <div v-if="sem.id==1" id="collapse-example1" class="collapse show" aria-labelledby="heading-collapse">
-                        <div class="card-body">
+                        <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
-                        <div class="card-body">
+                        <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
                                 <div class="col-md-4" v-for="cou in course" :key="cou.id">
@@ -105,7 +105,7 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="sub_text" class="mb-0"><b>{{ cou.name }}</b></p>
+                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
                                                                     <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
@@ -220,7 +220,7 @@ export default {
 }
 
 #main_card {
-    margin: 20px;
+    margin: 8px;
 }
 
 #sem_text {
@@ -397,6 +397,7 @@ export default {
 
 .card-header {
     height: 65px;
+    border-bottom:none;
 }
 
 .icon {

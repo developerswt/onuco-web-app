@@ -4,16 +4,16 @@
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
-        <div class="parent_blocks">
-            <div class="row pt-4">
+        <div class=" parent_blocks" >
+            <div class="row pt-4"  >
                 <div class="box" v-for="college in university" :key="college.id">
-                    <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="color: white; text-decoration: none;">
+                    <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="text-decoration: none;" >
                         <div class="row">
-                            <div class="col-md-3 col-3 col-sm-3">
+                            <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
                                 <img src="../assets/images/university.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9">
-                                <h5>{{ college.name }}</h5>
+                            <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 10px;">
+                                <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
                                 <p>{{ college.description.slice(0,75) }}</p>
                             </div>
                         </div>
@@ -52,6 +52,10 @@ export default {
         }
     },
 }
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+
 </script>
 
 <style scoped>
@@ -75,7 +79,7 @@ export default {
         height: 109px !important;
     width: 307px !important;
     background-size: contain !important;
- 
+
     
         margin-bottom: 5%;
       
@@ -109,17 +113,17 @@ export default {
 
 
 .box {
-    height:115px;
-    width:360px;
+    height:100px;
+    width:354px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:20px;
-    
+    padding:18px;
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    
     
 }
 
@@ -186,5 +190,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content:flex-start;
+}
+.col-md-3{
+    padding-left: 12px;
+   
+}
+.col-md-9{
+    padding-right: 5px;
+    padding-left: 1px;
 }
 </style>

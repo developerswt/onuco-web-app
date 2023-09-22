@@ -1,10 +1,11 @@
 <template>
-    <div class="container-fluid footer" style="position: fixed; bottom: -100%;">
+    <div class="" style="padding-bottom: 150px;">
+    <div class="container-fluid footer">
         <div class="container">
             <div class="row">
             <div class="col-md-5">
                 <img src="../assets/images/UNUCO_LOGO.png" class="footer-logo">
-                <p style="color:white;">© 2023 onuco.com All rights reserved.</p>
+                <p style="color:white;">@ 2023 onuco.com All rights reserved.</p>
             </div>
             <div class="col-md-7 social-link">
                 <p>Communities | Courses | Trainers | FAQs | Blog |<router-link style="text-decoration: none; color: white;" to="/Privacy"> Privacy </router-link> | <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms of Service </router-link></p>
@@ -19,6 +20,7 @@
         </div>
    
     </div>
+</div>
 </template>
 
 
@@ -31,10 +33,11 @@ export default {
 
 <style scoped>
 .footer {
-    top: 1582px;
+    position: fixed;
+    bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 100%;
+    height:auto;
     background: #0066CC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -63,6 +66,12 @@ export default {
     .footer .social-link p {
         text-align: left;
         color: white;
+    }
+}
+
+@media screen and (max-width: 912px) {
+    .footer{
+        height: 155px;
     }
 }
 </style>

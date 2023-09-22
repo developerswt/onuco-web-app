@@ -20,7 +20,7 @@
                                     </div>
                                     <div class="col-md-9 col-9 col-sm-9 pt-2">
                                         <div class="course_block_one">
-                                            <h5>{{ branch.name }}</h5>
+                                            <h5 :title="branch.name">{{ branch.name }}</h5>
                                             <p>{{ branch.description }}</p>
                                         </div>
 
