@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<figure class="icon-cards mt-3">
+		<!-- <figure class="icon-cards mt-3">
 			<div class="icon-cards__content">
 				<div class="icon-cards__item d-flex align-items-center justify-content-center">
 					<div class="child_class" data-v-e19d716d="">
@@ -37,7 +37,7 @@
 					</div>
 				</div>		
 			</div>
-		</figure>
+		</figure> -->
 	</div>
 </template>
   

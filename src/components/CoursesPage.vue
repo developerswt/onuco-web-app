@@ -10,7 +10,7 @@
                     <div class="" v-for="branch in branches" :key="branch.id">
                         <div class="box" v-if="academi.id == branch.academyId">
                             <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
-                                style="color: white;">
+                                style="color: white;text-decoration: none;">
                                 <div class="row">
                                     <div class="col-md-3 col-3 col-sm-3">
                                         <div class="course_block">

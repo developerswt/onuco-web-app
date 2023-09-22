@@ -16,7 +16,7 @@
                     <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                     <div class="card">
                         <div class="user-follower">
-                            <img src="../assets/images/user.png" class="user-icon">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
@@ -92,11 +92,13 @@
                 </div> -->
             </div>
         </div>
- 
+        
 </template>
 
 <script>
 import axios from 'axios'
+import 'owl.carousel/dist/assets/owl.carousel.css'; // Import Owl Carousel CSS
+import 'owl.carousel'; // Import Owl Carousel JavaScript
 
 export default {
     name: 'BestLecture',
@@ -113,7 +115,27 @@ export default {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    mounted() {
+    // Initialize Owl Carousel
+    $('.owl-carousel').owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 3
+        },
+        1024: {
+          items: 5
+        }
+      }
+    });
+  }
+
 }
 </script>
 
@@ -135,10 +157,10 @@ export default {
 /* .user-icon {
     width: 30%;
     height: 30%;
-    position: relative;
-    top: -35px;
-}
-.follower {
+   
+    
+} */
+/* .follower {
     position: relative;
     top: -110px;
     line-height: 90%;
@@ -147,8 +169,10 @@ export default {
     font-size: 14px;
 } */
 .user-follower img {
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
+    padding-left: 11%;
+    padding-top: 5%;
 }
 
 .user-follower {
@@ -164,10 +188,17 @@ export default {
     text-align: right;
     width: 100%;
     line-height: 2%;
+    color: #707070;
 }
 
 .card-title {
-    color: black;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal 600 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
 
 }
 
@@ -196,13 +227,21 @@ export default {
 }
 
 .mn p {
-    float: left;
-    font-size: 14px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    text-align: left;
+    font: normal normal normal 14px/18px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    margin: 0%;
+    opacity: 1;
 }
 
 .mn .el-rate {
     float: right;
-    margin-top: -3%;
+    margin-top: -14%;
+    margin-left: 7%;
 }
 
 .col-md-3 {
@@ -211,6 +250,10 @@ export default {
 
 .card {
     margin-bottom: 20%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 4px;
+    opacity: 1;
 }
 
 .academic_head_text {
@@ -256,9 +299,16 @@ export default {
 
 }
 .card-text{
-    overflow-y: scroll;
-    height:75px;
-    color: black;
+    /* overflow-y: scroll; */
+    /* height:75px; */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-aeaeae);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #AEAEAE;
+    opacity: 1;
 }
 
 ::-webkit-scrollbar {

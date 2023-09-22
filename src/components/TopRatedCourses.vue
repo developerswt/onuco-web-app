@@ -200,19 +200,19 @@ export default {
     font-size: 12px;
 } */
 
-.box .card-text {
+/* .box .card-text {
     font-size: 16px;
     font-family: 'Times New Roman', Times, serif;
     color: black;
-}
-
+} */
+/* 
 .box .card-title {
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     color: black;
     margin-top: -20px;
-}
+} */
 
 .box .star {
     color: orange;
@@ -236,10 +236,14 @@ export default {
     height: auto;
     /* UI Properties */
     width: 24%;
-    border: 1px solid #FFFFFF;
+    /* border: 1px solid #FFFFFF; */
     cursor: pointer;
-    border: 1px solid black;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 4px;
+    opacity: 1;
     margin-bottom: 3%;
+    
 
 }
 
@@ -343,6 +347,25 @@ export default {
     color: #006acd;
     font-weight: bold;
     padding-right: 10px;
+}
+.box .card-text {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
+}
+.box .card-title {
+    margin-top: -20px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal 600 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
 }
 </style>
 

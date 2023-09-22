@@ -71,123 +71,206 @@
             </div>
             <div class="container" id="inner_container">
                 <h4 class="academic_head_text_one">
-                    <span id="aca_text">Course </span>Description
+                    <b id="aca_text">Course</b>Description
                 </h4>
                 <p id="course_text" v-html="this.book.description"></p>
-
-
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
                             <div class="pt-4 topic-card">
                                 <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
-                                    <el-tab-pane label="Chapters" name="first" class="rt">
-                                        <div class="row">
-                                            <div class="col-lg-6" id="video_block_one">
-                                                <div class="" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
+                                    <el-tab-pane label="Subject" name="first" class="rt">
+                                        <div class="row box">
+                                            <div class="col-sm-6">
                                                 <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
-                                                    <div class="card-header"  data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                                <button class="btn btn-link">
-                                                                    {{ topic.heading }}
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                                <div class="action"><i
-                                                                    class="fa fa-chevron-right rotate-icon"
-                                                                    id="sem_icon"></i></div>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div :id="'collapse-example' + index" class="collapse" :class="{ 'show': index === 0 }" aria-labelledby="heading-collapsed">
-                                                        <div class="card-body" v-for="lessons in topic.values" :key="lessons.id">
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-6 col-sm-6 " >
-                                                                    <div class="accordion_block_one">
-                                                                        <i class="fa-solid fa-check"
-                                                                            style="color: #08ab44;"></i>
-                                                                        <p id="check_text"> {{ lessons.heading }}</p>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                                    <div class="accordion_block_two">
-                                                                        <p id="duration_text">40m 13s</p>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
+                                                    <div class="accordion-item">
+                                                        <h5 class="card-header">
+                                                            <div class="d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" v-if="index==0">
                                                                 <div class="row">
-                                                                    <div class="col-lg-1 col-1 col-sm-1">
-                                                                        <i class="fa-solid fa-check"
-                                                                            style="color: #08ab44;"></i>
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <button class="btn btn-link" style="text-decoration: none; border: none;">
+                                                                            {{ topic.heading }}
+                                                                        </button>
                                                                     </div>
-                                                                    <div class="col-lg-7 col-10 col-sm-10">
-                                                                        <p id="intro_text">{{ subject.lession }}</p>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                                                <p id="duration_text_one">{{ subject.time }}
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="col-lg-6 col-6 col-sm-6" v-for="video in watchTimeDatas" :key="video.id">
-                                                                                <div class="" v-for="watch in video.watchTimeData" :key="watch.id">
-                                                                                   
-                                                                                    <div class="progress_block">
-                                                                                        
-                                                                                        <div class="" v-if="subject.id == watch.videoId">
-                                                                                        
-                                                                                        <!-- <div class="progress">
-                                                                                            <div class="progress-bar"
-                                                                                                role="progressbar"
-                                                                                                aria-valuenow="0"
-                                                                                                aria-valuemin="0"
-                                                                                                aria-valuemax="100"></div>
-                                                                                            </div> -->
-                                                                                            <progress id="file" :value="watch.watchTime" max="100"> {{ watch.watchTime }}% </progress>
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <div class="action"><i
+                                                                            class="fa fa-chevron-right rotate-icon"
+                                                                            id="sem_icon"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <button class="btn btn-link" style="text-decoration: none; border: none;">
+                                                                            {{ topic.heading }}
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <div class="action"><i
+                                                                            class="fa fa-chevron-right rotate-icon"
+                                                                            id="sem_icon"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </h5>
+                                                        <div :id="'collapse-example' + index" v-if="index===0" class="collapse show" aria-labelledby="heading-collapsed">
+                                                            <div class="cards_body_color" v-for="lessons in topic.values" :key="lessons.id">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-6 col-sm-6 " >
+                                                                        <div class="accordion_block_one">
+                                                                            <i class="fa" aria-hidden="true"
+                                                                                :class="{
+                                                                                    'fa-circle-o': !hasAnySubjectComplete(lessons.values),
+                                                                                    'fa-check': hasAnySubjectComplete(lessons.values),
+                                                                                }"
+                                                                                style="margin-right: 10px;"
+                                                                            ></i>
+                                                                            <p id="check_text"> {{ lessons.heading }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <div class="accordion_block_two">
+                                                                            <p id="duration_text">40m 13s</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div :class="{ 'playing-subject': playingSubject === subject }" class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
+                                                                    <div class="row sub" :class="{ 'playing-subject': playingSubject === subject }">
+                                                                        <div class="col-lg-1 col-1 col-sm-1">
+                                                                            <i class="fa" aria-hidden="true"
+                                                                                :class="{
+                                                                                    'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                    'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                    'fa-circle': playingSubject === subject
+                                                                                }"
+                                                                                style="margin-top: 6px;"
+                                                                            ></i>
+                                                                        </div>
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
+                                                                            <p id="intro_text">{{ subject.lession }}</p>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                                                    <p id="duration_text_one">{{ subject.time }}</p>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                                                    <div v-for="video in watchTimeDatas" :key="video.id">
+                                                                                        <div v-for="watch in video.WatchTimeData" :key="watch.id">
+                                                                                            <div class="progress_block" v-if="subject.id === watch.videoId">
+                                                                                                <progress class="progress" :value="watch.WatchTime" max="100">
+                                                                                                    {{ watch.WatchTime }}%
+                                                                                                </progress>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </div>
-                                                                    </div>
+                                                                        <div class="col-lg-4 col-12 col-sm-12">
+                                                                            <div class="inside_block">
+                                                                                <div class="" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">    
+                                                                                    <img src="../assets/images/Group1318@2x.png" 
+                                                                                        class="img-fluid" >
+                                                                                </div>
 
-                                                                    <div class="col-lg-4 col-12 col-sm-12">
-                                                                        <div class="inside_block">
-
-                                                                            <img src="../assets/images/Group1318@2x.png" 
-                                                                                class="img-fluid" @click="switchVideo(subject.url)" style="cursor: pointer;">
-
-
-                                                                            <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
-                                                                                class="img-fluid" >
-
+                                                                                <i class="fa" aria-hidden="true"
+                                                                                    :class="{
+                                                                                        'fa-bookmark-o': isProgressBarEmpty(subject.id),
+                                                                                        'fa-bookmark': isProgressBarComplete(subject.id),
+                                                                                        'fa-bookmark': isProgressBarStarted(subject.id),
+                                                                                    }"
+                                                                                    style=" font-size: 26px;"
+                                                                                ></i>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
+                                                        </div>
+                                                        <div :id="'collapse-example' + index" v-else class="collapse" aria-labelledby="heading-collapsed">
+                                                            <div class="cards_body_color" v-for="lessons in topic.values" :key="lessons.id">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-6 col-sm-6 " >
+                                                                        <div class="accordion_block_one">
+                                                                            <i class="fa" aria-hidden="true"
+                                                                                :class="{
+                                                                                    'fa-circle-o': !hasAnySubjectComplete(lessons.values),
+                                                                                    'fa-check': hasAnySubjectComplete(lessons.values),
+                                                                                }"
+                                                                                style="margin-right: 10px;"
+                                                                            ></i>
+                                                                            <p id="check_text"> {{ lessons.heading }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                                        <div class="accordion_block_two">
+                                                                            <p id="duration_text">40m 13s</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div :class="{ 'playing-subject': playingSubject === subject }" class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
+                                                                    <div class="row sub" :class="{ 'playing-subject': playingSubject === subject }">
+                                                                        <div class="col-lg-1 col-1 col-sm-1">
+                                                                            <i class="fa" aria-hidden="true"
+                                                                                :class="{
+                                                                                    'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                    'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                    'fa-circle': playingSubject === subject
+                                                                                }"
+                                                                                style="margin-top: 6px;"
+                                                                            ></i>
+                                                                        </div>
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
+                                                                            <p id="intro_text">{{ subject.lession }}</p>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                                                    <p id="duration_text_one">{{ subject.time }}</p>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                                                    <div v-for="video in watchTimeDatas" :key="video.id">
+                                                                                        <div v-for="watch in video.WatchTimeData" :key="watch.id">
+                                                                                            <div class="progress_block" v-if="subject.id === watch.videoId">
+                                                                                                <progress class="progress" :value="watch.WatchTime" max="100">
+                                                                                                    {{ watch.WatchTime }}%
+                                                                                                </progress>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-12 col-sm-12">
+                                                                            <div class="inside_block">
+                                                                                <div class="" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">    
+                                                                                    <img src="../assets/images/Group1318@2x.png" 
+                                                                                        class="img-fluid" >
+                                                                                </div>
+
+                                                                                <i class="fa" aria-hidden="true"
+                                                                                    :class="{
+                                                                                        'fa-bookmark-o': isProgressBarEmpty(subject.id),
+                                                                                        'fa-bookmark': isProgressBarComplete(subject.id),
+                                                                                        'fa-bookmark': isProgressBarStarted(subject.id),
+                                                                                    }"
+                                                                                    style=" font-size: 26px;"
+                                                                                ></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="video_block" v-if="videoOptions.sources.length>0">
-                                                        <video-player :options="videoOptions" ref="videoPlayerRef" />
+                                            </div>            
+                                            <div class="col-sm-6">
+                                                <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
                                                 </div>
-                                        
                                             </div>
                                         </div>
-
                                     </el-tab-pane>
                                     <el-tab-pane label="Description " name="second">
                                         <div class="" v-html="this.book.courseDescription"></div>
@@ -201,31 +284,31 @@
                                 </el-tabs>
                             </div>
                         </section>
-                    </div>
+                    </div>                
                 </div>
             </div>
-        </div>
-        <Offer />
-        
-    </div>
+        </div>        
+    </div>        
 </template>
 
 <script>
 import axios from 'axios';
-import Breadcrumbs from './Breadcrumbs.vue';
 import VideoPlayer from './VideoPlayer.vue';
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import AxiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue'
+//import AxiosInstance from '../config/axiosInstance'
+
 export default {
     name: 'SemesterDetails',
     components: {
         VideoPlayer,
         Offer,
-        Breadcrumbs
+        // Breadcrumbs
     },
     data() {
         return {
+            userIsSubscribed: false,
+            courseDetails: null,
+            playingSubject: null,
             watchTimeDatas: [],
             activeName: 'first',
             book: [],
@@ -237,18 +320,7 @@ export default {
                 techOrder: ['html5'],
                 preload: "metadata",
                 sources: [
-                    // {
-                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-                    //     type: 'application/x-mpegURL',
-                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
-                    //     withCredentials: false,
-                    // }
-                    // {
-                    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-                    //     type: 'application/x-mpegURL',
-                    //     //https://vz-b4f1e97e-483.b-cdn.net/65c65840-de66-4c27-afd0-a3b5a904b768/playlist.m3u8
-                    //     withCredentials: false,
-                    // }
+                    
                     
                 ],
                 html5: {
@@ -270,18 +342,14 @@ export default {
 
                 }
             },
-            responseFromS3: '',
-            imageFromS3: '',
-            client: new S3Client({
-                region: "ap-south-1",
-                credentials: {
-                    accessKeyId: "AKIAWTYHL72QB7Z2NM4X",
-                    secretAccessKey: "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",
-                }
-            }),
-        };
+
+        }
     },
     computed: {
+        isuser() {
+            console.log(this.$store.state.user);
+            return this.$store.state.user;
+        },
         videoType() {
             if (typeof this.videoOptions.sources.src === 'string') {
                 if(this.videoOptions.sources.src.endsWith('.mp4')) {
@@ -294,29 +362,126 @@ export default {
             }
         }
     },
+    methods: {
+        hasAnySubjectComplete(subjects) {
+            return subjects.every(subject => this.hasCompleteWatchTime(subject.id));
+        },
+        hasCompleteWatchTime(subjectId) {
+                // Check if any watch time data for the given subjectId has a WatchTime of 100
+            return this.watchTimeDatas.every(video => {
+                const watchData = video.WatchTimeData.find(watch => watch.videoId === subjectId);
+                return watchData && watchData.WatchTime === 100;
+            });
+        },
+        getCurrentUserCognitoId() {
+            const jwtToken = localStorage.getItem('username');
+            if (!jwtToken) {
+                // Handle the case where the token is not found in local storage
+                return null;
+            }
+            try {
+                // Decode the JWT token (assuming it's in the format "header.payload.signature")
+                const [, payload] = jwtToken.split('.');
+                const decodedPayload = JSON.parse(atob(payload));
+
+                // Extract the sub ID
+                const subId = decodedPayload.sub;
+
+                return subId;
+            } catch (error) {
+                console.error('Error decoding JWT token:', error);
+                return null;
+            }
+        },
+        async switchVideo(newVideoUrl, subject) {
+            if (this.$refs.videoPlayerRef.player) {
+                const player = this.$refs.videoPlayerRef.player;
+        
+                // Pause the current video (if it's playing)
+                player.pause();
+        
+                // Reset the current time
+                player.currentTime(0);
+
+                // Change the video source to the new URL
+                this.videoOptions.sources = [
+                {
+                    src: newVideoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                },
+            ];
+ 
+            this.playingSubject = subject;
+                // Hide the poster image if it's displayed
+            this.$refs.videoPlayerRef.showPoster = false;
+
+                // Load the new video source
+            player.src(this.videoOptions.sources);
+        
+                // Listen for the 'loadedmetadata' event before playing
+            player.one('loadedmetadata', async () => {
+                    // Play the new video
+                    await player.play();
+            });
+
+            // Preload the new video source
+                player.load();
+            }
+        },
+        updateChapterProgress(chapterIndex, newProgress) {
+            this.lessons[chapterIndex].progress = newProgress;
+        },
+        isProgressBarStarted(videoId) {
+            // Check if there is watch time data for the given videoId
+            return this.watchTimeDatas.some(video => {
+                const watchData = video.WatchTimeData.find(watch => watch.videoId === videoId);
+                return watchData && watchData.WatchTime > 0;
+            });
+        },
+        isProgressBarComplete(videoId) {
+            // Check if the watch time for the given videoId is 100%
+            return this.watchTimeDatas.some(video => video.WatchTimeData.some(watch => watch.videoId === videoId && watch.WatchTime === 100));
+        },
+        isProgressBarEmpty(videoId) {
+            // Check if there is no watch time data for the given videoId or all watch times are 0
+            return !this.watchTimeDatas.some(video =>
+                video.WatchTimeData.some(watch => watch.videoId === videoId && watch.WatchTime > 0)
+            );
+        },
+        shouldShowCircleIcon(subjectId) {
+            // Return true if the video source has changed, otherwise return false
+            return this.videoChanged;
+        },
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+    },
     async created(){
-        console.log("Hi");
-        const command = new GetObjectCommand({
-            Bucket: "onuco-s3",
-            Key: "diabetes1.mp4"
-        });
-        const headers = { 'Authorization': this.authorizationHeader };
         try {
-            const res = await AxiosInstance.get(`/Coursedetails?` + "id=" + this.$route.query.id);
+            const res = await axios.get(`http://localhost:5000/SemesterDetails?` + "id=" + this.$route.query.id);
             this.book = res.data; 
-            const result = await axios.get('https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/StateManagement');
+            const result = await axios.get('http://localhost:5000/StateManagement');
             this.watchTimeDatas = result.data;
             console.log(this.watchTimeDatas);
-            // this.videoOptions.sources[0].src = this.book.videoUrl;
-            // this.videoOptions.sources[0].src = this.book.videoUrl;
-            // this.book.chapters = JSON.parse(this.book.Chapters);
-            // console.log(this.booh.chapters)
+            // const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
+            // this.courseDetails = subscription.data;
+            // console.log(this.courseDetails);
+            // const currentUserSubId = this.getCurrentUserCognitoId();
+            // console.log(this.courseDetails.userCognitoId);
+            // if (currentUserSubId === null && this.courseDetails.cognitoUserId === null) {
+            //     this.userIsSubscribed = false;
+            // } else if (currentUserSubId === this.courseDetails.userCognitoId) {
+            //     this.userIsSubscribed = true;
+            // } else {
+            //     this.userIsSubscribed = false;
+            // }
             this.videoOptions.sources = [
-                    {
-                        src: this.book.videoUrl,
-                        type: this.videoType,
-                        withCredentials: false,
-                    }
+                {
+                    src: this.book.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }
             ]
            
             console.log(this.book);
@@ -325,43 +490,10 @@ export default {
             console.error(err);
         }
     },
-    methods: {
-        async switchVideo(newVideoUrl) {
-            this.videoOptions.sources = [
-                {
-                    src: newVideoUrl,
-                    type: this.videoType,
-                    withCredentials: false
-                }
-            ];
-            console.log(this.videoOptions.sources);
-            this.videoOptions.autoplay = true;
-            
-            if (this.$refs.videoPlayerRef) {
-                this.$refs.videoPlayerRef.player.src(this.videoOptions.sources);
-                this.$refs.videoPlayerRef.player.load();
-                
-            }
-
-            // Play the updated video
-            if (this.$refs.videoPlayerRef && this.$refs.videoPlayerRef.player) {
-                this.$refs.videoPlayerRef.player.play();
-            }
-            // Access the VideoPlayer component and play the video
-            // if (this.$refs.videoPlayerRef) {
-            //     this.$refs.videoPlayerRef.player.play();
-            // }
-            
-        },
-        handleClick(tab, event) {
-            console.log(tab, event);
-        },
-    }
 }
 </script>
 
 <style scoped>
-
 .jk {
     padding-top: 68px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -372,11 +504,8 @@ export default {
     background: #E5EFF9 0% 0% no-repeat padding-box;
     color: #0066CC;
     padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding-right: 2px !important;
 }
-
-
-
 .breadcrumb {
     background: transparent;
 }
@@ -389,7 +518,11 @@ export default {
     content: ">";
     color: #0066CC;
 }
-
+ol {
+    margin-top: 0;
+    margin-left: -17px;
+    margin-bottom: 1rem;
+}
 #duration_text img {
     width: 27px;
     margin-right: 7px;
@@ -405,19 +538,20 @@ export default {
 }
 
 .search_right_block {
-    padding-left: 14px;
+    padding-left: 0px;
 }
 
-.academic_head_text {
+/* .academic_head_text {
     color: #006acd;
     font-size: 22px;
 
-}
+} */
 
 .academic_head_text_one {
     color: #006acd;
     font-size: 22px;
     margin-top: 20px;
+    margin-left: 9px;
 }
 
 
@@ -436,6 +570,7 @@ export default {
 #module_text {
     color: #707070;
     font-size: 16px;
+    padding-right: 10px;
 }
 
 .icon_blck {
@@ -491,7 +626,52 @@ export default {
     font-size: 16px;
     font-weight: lighter;
 }
+.el-tabs {
+    --el-tabs-header-height: 40px;
+    padding-left: 13px;
+}
+.action #sem_icon {
+    float: right;
+    font-size: 20px;
+    width: 6px;
+    height: 13px;
+    color: #0066CC;
+    opacity: 1;
+    margin-top: 5px;
+    margin-right: 3px;
+    cursor: pointer;
+    
 
+}
+.kj {
+    cursor: poniter;
+}
+
+.kj:not(.collapsed) .rotate-icon {
+    transform: rotate(90deg);
+}
+
+.btn-link {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal 600 14px/19px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    opacity: 1;
+}
+/* .sem_icon {
+    width: 6px;
+    height: 13px;
+    border: 2px solid #0066CC;
+    opacity: 1;
+} */
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    .box {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+} 
 .action {
     text-align: right;
     padding-top: 5px;
@@ -501,9 +681,9 @@ export default {
     color: #0066CC;
 }
 
-.card-header:not(.collapsed) .action i {
+/* .card-header:not(.collapsed) .action i {
     transform: rotate(90deg);
-}
+} */
 
 #check_text {
     font-size: 16px;
@@ -516,6 +696,8 @@ export default {
     display: flex;
     align-items: center;
     padding: 10px;
+    padding-left: 29px;
+    margin-right: 19px;
 }
 
 .accordion_block_two {
@@ -566,8 +748,7 @@ export default {
     height: 30px;
     margin: 5px;
 }
-
-.card-body {
+.cards_body_color {
     background: #E5EFF9;
 }
 
@@ -634,15 +815,9 @@ export default {
         padding: 0;
     }
 
-    .video_block {
-        display: none !important;
+   
 
-    }
-
-    #video_block_one {
-        display: block !important;
-        margin: 0px 10px 15px 10px;
-    }
+    
 
     .inside_block {
         margin-left: 0;
@@ -698,7 +873,7 @@ export default {
     }
 
     .video_block {
-        margin-top: 20px;
+        margin-top: 0px;
     }
 
     .inside_block {
@@ -712,12 +887,85 @@ export default {
 
 }
 
-#video_block_one {
-    display: none;
+
+
+progress {
+  border: none;
+  width: 171px;
+  height: 10px;
+  background: #fff;
+  margin-left: -34px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    #video_block_one {
-        display: none;
+progress {
+  color: #FF9924;
+}
+
+progress::-webkit-progress-value {
+  background: #FF9924;
+}
+
+progress::-moz-progress-bar {
+  background: lightcolor;
+}
+.playing-subject {
+    background: #FFFFFF;
+    padding-top: 10px;
+    margin-bottom: 15px;
+    
+}
+.chapters_block .playing-subject  {
+    border-left: 3px solid orange;
+    margin-left: -20px;
+    margin-top: -10px;
+    margin-bottom: -16px;
+}
+.sub {
+    padding-left: 33px;
+}
+
+.fa-circle {
+  color: #FF9900; 
+}
+.fa-circle-o {
+   color: #0066CC;
+}
+.fa-check {
+    color:  #08AB44;
+}
+.fa-bookmark-o {
+    color: #0066CC;
+}
+.fa-bookmark {
+    color: #0066CC;
+}
+@media only screen and (min-width: 768px) and (max-width: 998px) {
+    .accordion_block_one {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        padding-left: 9px;
+        margin-right: 19px;
+}
+    .sub {
+        padding-left: 2px !important;
     }
-}</style>
+    
+}
+@media screen and (min-width: 100px) and (max-width: 400px) {
+    .accordion_block_one {
+        display: flex;
+       
+        padding: 10px;
+        padding-left: 6px;
+        margin-right: 9px;
+    }
+    .sub {
+        padding-left: 0px !important;
+    }
+    .progress {
+        margin-left: -34px;
+        width: 136px;
+    }
+}
+</style>
