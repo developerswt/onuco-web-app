@@ -105,7 +105,7 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
+                                                                    <p id="sub_text" class="mb-0"><b>{{ cou.name }}</b></p>
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
                                                                     <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>

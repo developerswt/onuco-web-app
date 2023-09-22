@@ -20,24 +20,24 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active">
-                        <router-link class="nav-link" to="/" exact>Home</router-link>
+                    <li class="nav-item" :class="{ 'active': isActive('/') }">
+                        <router-link class="nav-link" to="/" >Home</router-link>
                     </li>
-                    <li class="nav-item ">
-                        <router-link class="nav-link" to="/Mylearnings" exact>My Learning</router-link>
+                    <li class="nav-item " :class="{ 'active': isActive('/Mylearnings') }">
+                        <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ 'active': isActive('/Courses') }">
 
-                        <router-link class="nav-link" id="nav-link" to="/Courses" exact>Courses</router-link>
+                        <router-link class="nav-link"  to="/Courses" >Courses</router-link>
                     </li>
                   
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ 'active': isActive('/Announcement') }">
 
-                        <router-link class="nav-link" to="/Announcement" exact>Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement" >Announcement</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ 'active': isActive('/Contact') }">
 
-                        <router-link class="nav-link" to="/Contact" exact>Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact" >Contact Us</router-link>
                     </li>
 
 
@@ -65,17 +65,19 @@
                         </el-col>
                     </el-row>
 
-                    <li class="nav-item dropdown active" v-if="isLoggedIn">
+                    <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Picture">Profile</router-link>
-                            <router-link class="dropdown-item" to="" @click="logout">Logout</router-link>
+                            <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
+                            <router-link class="dropdown-item" to=""><i class="fa fa-bell" aria-hidden="true"></i> Notification</router-link>
+                            <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link>
+                            <router-link class="dropdown-item" to="" @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
                     </li>
-                    <li class="nav-item" v-else>
+                    <li class="nav-item" v-else :class="{ 'active': isActive('/Login') }">
                         <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
@@ -173,6 +175,10 @@ export default {
                 alert(error.message);
             }
         },
+        isActive(route) {
+            return this.$route.path === route;
+        },
+  
 
         // setActive(index) {
         //     if (this.activeIndex !== null) {
@@ -449,7 +455,12 @@ li>a:before {
     color: blue;
 }
 
-.router-link-exact-active {
+/* .router-link-exact-active {
     border-bottom: 2px solid blue;
+    bottom: -15px;
+} */
+.nav-item.active {
+  border-bottom: 2px solid blue; /* Add the border for the active link */
+  margin-bottom: -16px; /* Add margin for the active link */
 }
 </style>

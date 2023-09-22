@@ -1,10 +1,10 @@
 <template>
-    <div class="container-fluid footer">
+    <div class="container-fluid footer" style="position: fixed; bottom: -100%;">
         <div class="container">
             <div class="row">
             <div class="col-md-5">
                 <img src="../assets/images/UNUCO_LOGO.png" class="footer-logo">
-                <p style="color:white;">@ 2023 onuco.com All rights reserved.</p>
+                <p style="color:white;">© 2023 onuco.com All rights reserved.</p>
             </div>
             <div class="col-md-7 social-link">
                 <p>Communities | Courses | Trainers | FAQs | Blog |<router-link style="text-decoration: none; color: white;" to="/Privacy"> Privacy </router-link> | <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms of Service </router-link></p>

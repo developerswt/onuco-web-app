@@ -7,7 +7,7 @@
         <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="college in university" :key="college.id">
-                    <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="color: white;">
+                    <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="color: white; text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/university.png">

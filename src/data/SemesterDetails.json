@@ -1,96 +1,352 @@
-[
-  {
-    "id": 1,
-    "Semester": "1st Semester",
-    "Title": "How to Create an Online Course: The Official Online Course",
-    "Description": "Use our recommended best practices to plan, produce, and publish a well-designed, high quality Online course",
-    "InstructorName": "Dr. Ashoka P R",
-    "videoDemand": "1hr 28min of on-demand video",
-    "Modules": "8 Modules",
-    "Chapters": [
-      {
-          "heading": "Topic 1",
+{
+  "id": 1,
+  "title": "Math 1 (NEP Series)",
+  "courseRouteName": "Math1-Nep-Series",
+  "university": "Computer-Science",
+  "universityRouteName": "computer-science",
+  "branchName": "Engineering",
+  "brachRouteName": "engineering",
+  "collegeDetails": "VTU",
+  "collegeDetailsRouteName": "vtu",
+  "instructorName": [
+    {
+      "id": "1",
+      "name": "Dr.Vijaya Kumar B. P"
+    },
+    {
+      "id": "2",
+      "name": "Guruprasad B R"
+    }
+  ],
+  "videoDemand": "1hr 28min",
+  "modules": "8 Modules",
+  "actualPrice": 1999,
+  "discountedPrice": 499,
+  "courseDescription": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,",
+  "videoUrl": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8",
+  "subject": [
+    {
+      "heading": "Module1",
+      "values": [
+        {
+          "heading": "Chapter1",
+          "chapterTime": "40m 13s",
+          "progress": 0,
           "values": [
             {
               "id": 1,
-              "Lession": "Introduction of subject",
-              "Time": "03:13 min" 
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
             },
             {
               "id": 2,
-              "Lession": "Basic Details",
-              "Time": "22:13 min" 
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
             },
             {
               "id": 3,
-              "Lession": "Advanced methods",
-              "Time": "45:13 min" 
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
             }
           ]
-      },
-      {
-        "heading": "Topic 2",
-        "values": [
-          {
-            "id": 1,
-            "Lession": "Introduction of subject",
-            "Time": "03:13 min" 
-          },
-          {
-            "id": 2,
-            "Lession": "Basic Details",
-            "Time": "22:13 min" 
-          },
-          {
-            "id": 3,
-            "Lession": "Advanced methods",
-            "Time": "45:13 min" 
-          }
-        ]
-      },
-      {
-        "heading": "Topic 3",
-        "values": [
-          {
-            "id": 1,
-            "Lession": "Introduction of subject",
-            "Time": "03:13 min" 
-          },
-          {
-            "id": 2,
-            "Lession": "Basic Details",
-            "Time": "22:13 min" 
-          },
-          {
-            "id": 3,
-            "Lession": "Advanced methods",
-            "Time": "45:13 min" 
-          }
-        ]
-      },
-      {
-        "heading": "Topic 4",
-        "values": [
-          {
-            "id": 1,
-            "Lession": "Introduction of subject",
-            "Time": "03:13 min" 
-          },
-          {
-            "id": 2,
-            "Lession": "Basic Details",
-            "Time": "22:13 min" 
-          },
-          {
-            "id": 3,
-            "Lession": "Advanced methods",
-            "Time": "45:13 min" 
-          }
-        ]
-      }
-    ],
-    "CourseDescription": "<ul><li>How to create an online course using Udemy’s recommended course creation process</li><li>How to access and use tools and resources available to you as an Udemy instructor</li><li>Use the Marketplace Insights tool to identify in-demand topics to validate or refine your course topic</li><li>Learn how to define your ideal learners for your course</li><li>Determine and write clear learning objectives</li><li>Create practical activities and assessments to drive an engaging and high-quality course</li><li>Create a well-structured course outline</li><li>Produce your course content following best practices for recording and editing your videos</li><li>Write a compelling course landing page that attracts the right learners to your course</li><li>Launch your course successfully</li><li>Use your instructor dashboard to manage and evolve your course, and to grow your audience on Udemy</li></ul>",
-    "QuestionBank": "<ul><li>You’ve signed up or are interested in signing up to become a Udemy instructor</li><li>You have an idea of the course topic you’re interested in teaching</li><li>You’re passionate and excited about sharing your knowledge with others</li></ul>",
-    "Quiz": "Example Quiz"
-  }
-]
+        },
+        {
+          "heading": "Chapter2",
+          "progress": 0,
+          "chapterTime": "40m 13s",
+          "values": [
+            {
+              "id": 4,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 5,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 6,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter3",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 7,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 8,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 9,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Module2",
+      "values": [
+        {
+          "heading": "Chapter1",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 10,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 11,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 12,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter2",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 13,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 14,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 15,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter3",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 16,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 17,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 18,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Module3",
+      "values": [
+        {
+          "heading": "Chapter1",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 19,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 20,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 21,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter2",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 22,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 23,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 24,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter3",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 25,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 26,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 27,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Module4",
+      "values": [
+        {
+          "heading": "Chapter1",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 28,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 29,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 30,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter2",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 31,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 32,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 33,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        },
+        {
+          "heading": "Chapter3",
+          "chapterTime": "40m 13s",
+          "progress": 0,
+          "values": [
+            {
+              "id": 34,
+              "lession": "Introduction of subject",
+              "time": "03:13 min",
+              "url": "https://stream.skillmeridiandev.tech/ade_21cs33_biasing.m3u8"
+            },
+            {
+              "id": 35,
+              "lession": "Basic Details",
+              "time": "22:13 min",
+              "url": "https://stream.skillmeridiandev.tech/22caed13-23_t2_projections-of-lamina_p47_rr.m3u8"
+            },
+            {
+              "id": 36,
+              "lession": "Advanced methods",
+              "time": "45:13 min",
+              "url": "https://stream.skillmeridiandev.tech/cad_projection_of_lines_problem_1_rr.m3u8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "description": "<ul><li>How to create an online course using Udemy’s recommended course creation process</li><li>How to access and use tools and resources available to you as an Udemy instructor</li><li>Use the Marketplace Insights tool to identify in-demand topics to validate or refine your course topic</li><li>Learn how to define your ideal learners for your course</li><li>Determine and write clear learning objectives</li><li>Create practical activities and assessments to drive an engaging and high-quality course</li><li>Create a well-structured course outline</li><li>Produce your course content following best practices for recording and editing your videos</li><li>Write a compelling course landing page that attracts the right learners to your course</li><li>Launch your course successfully</li><li>Use your instructor dashboard to manage and evolve your course, and to grow your audience on Udemy</li></ul>",
+  "questionBank": "<ul><li>You’ve signed up or are interested in signing up to become a Udemy instructor</li><li>You have an idea of the course topic you’re interested in teaching</li><li>You’re passionate and excited about sharing your knowledge with others</li></ul>",
+  "quiz": "Example Quiz"
+}

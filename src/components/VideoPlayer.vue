@@ -1,6 +1,11 @@
 <template>
-  
-  <div>
+  <div v-if="isSubscribed">
+    
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered "></video>
+    
+    
+  </div>
+  <div v-else>
     <div  v-if="showPoster" class="poster-overlay">
       <div class="overlay-item">
         <p class="vo-question">
@@ -15,7 +20,7 @@
       </div>
       
     </div>
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered "  v-else></video>
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered  "  v-else></video>
     
     
   </div>
@@ -40,6 +45,7 @@ export default {
       }
     },
     limitTime: Number,
+    isSubscribed: Boolean,
   },
   data() {
     return {
@@ -67,10 +73,10 @@ export default {
         console.log(this.player);
         this.player.on('pause', this.pauseVideo);
     });
-
+    this.initVideoPlayer();
     this.player.on('timeupdate', () => {
       console.log(this.player.currentTime());
-      if (this.player.currentTime() >= 18 && !this.showPoster) {
+      if (this.player.currentTime() >= 8 && !this.showPoster) {
           this.showPoster = true;
           this.player.pause();
       } 
@@ -104,35 +110,101 @@ export default {
     //     }
     //   });
     // },
-    sendWatchTimeToBackend() {
+    async sendWatchTimeToBackend() {
       try {
-        const userId = '0d779166-7391-4042-9bf6-634046e7142a'; 
-        const courseId = 1; 
-        const videoId = 4; 
-        const watchTime = 90; 
-
-        const requestBody = {
-          UserId: userId,
-          CourseId: courseId,
+        // Data to send in the POST request
+        const postData = {
+          id: 1, // Replace with the appropriate ID
+          UserId: "0d779166-7391-4042-9bf6-634046e7142a", // Replace with the User ID
+          CourseId: 1, // Replace with the Course ID
           WatchTimeData: [
             {
-              videoId: videoId,
-              WatchTime: watchTime,
+              videoId: 4,
+              WatchTime: 50,
             },
           ],
         };
 
-        const response = axios.post('http://localhost:5000/StateManagement', requestBody);
+        // Send a POST request to your server
+        const response = await axios.post('http://localhost:5000/StateManagement', postData);
+
         console.log('Update successful:', response.data);
       } catch (error) {
-        console.error('Update failed:', error);
+        console.error('POST request error:', error);
       }
     },
+//     async sendWatchTimeToBackend() {
+//   try {
+//     const userId = "0d779166-7391-4042-9bf6-634046e7142a";
+//     const courseId = 1;
+//     const videoIdToUpdate = 4; // Specify the videoId you want to update
+//     const newWatchTime = 20; // Specify the new WatchTime value
+
+//     // Find the index of the object in the WatchTimeData array with the matching videoId
+//     const watchTimeDataIndex = yourJsonData.findIndex((item) => item.WatchTimeData.some((entry) => entry.videoId === videoIdToUpdate));
+
+//     if (watchTimeDataIndex !== -1) {
+//       // Update the WatchTime for the specified videoId
+//       yourJsonData[watchTimeDataIndex].WatchTimeData.forEach((entry) => {
+//         if (entry.videoId === videoIdToUpdate) {
+//           entry.WatchTime = newWatchTime;
+//         }
+//       });
+
+//       // Construct the updated data
+//       const updatedData = {
+//         UserId: userId,
+//         CourseId: courseId,
+//         WatchTimeData: yourJsonData[watchTimeDataIndex].WatchTimeData,
+//       };
+
+//       // Send a PUT request to update the data on the server
+//       const response = await axios.put(`http://localhost:5000/StateManagement/${userId}/${courseId}`, updatedData);
+
+//       console.log('Update successful:', response.data);
+//     } else {
+//       console.error('VideoId not found in WatchTimeData.');
+//     }
+//   } catch (error) {
+//     console.error('Update failed:', error.response ? error.response.data : error.message);
+//   }
+// },
+
     pauseVideo() {
       this.player.pause();
-      this.sendWatchTimeToBackend(this.player.currentTime());
+      this.sendWatchTimeToBackend();
       localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
 
+    },
+    initVideoPlayer() {
+      // Initialize the video player here
+      // ...
+
+      // Check the subscription status and enable/disable the progress bar accordingly
+      if (this.isSubscribed) {
+        // Enable the progress bar
+        this.enableProgressBar();
+      } else {
+        // Disable the progress bar
+        this.disableProgressBar();
+      }
+
+      // Start or pause the video based on subscription status
+      if (this.isSubscribed) {
+        this.player.play();
+      } else {
+        this.player.pause();
+      }
+    },
+
+    enableProgressBar() {
+      // Enable the progress bar
+      this.player.controlBar.progressControl.enable();
+    },
+
+    disableProgressBar() {
+      // Disable the progress bar
+      this.player.controlBar.progressControl.disable();
     },
   }
  

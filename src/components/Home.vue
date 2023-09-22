@@ -1,10 +1,10 @@
 <template>
     <Carousel />
-    <Carouseltwo />
+    <!-- <Carouseltwo /> -->
 
 
 
-    <div class="container-fluid jk pt-5">
+    <div class="container-fluid jk ">
         <div class="container-fluid" id="first_container">
             <div class="container" id="home_container">
                 <Academics />
@@ -49,7 +49,7 @@ import Carousel from "./Carousel.vue"
 import TopRatedCourses from "./TopRatedCourses.vue"
 import BestLecture from "./BestLecture.vue"
 import Offer from './Offer.vue'
-import Carouseltwo from './Carouseltwo.vue'
+// import Carouseltwo from './Carouseltwo.vue'
 
 
 export default {
@@ -60,7 +60,7 @@ export default {
         TopRatedCourses,
         BestLecture,
         Offer,
-        Carouseltwo
+        // Carouseltwo
 
     }
 }

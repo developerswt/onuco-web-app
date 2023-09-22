@@ -5,7 +5,7 @@
         <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
-                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;">
+                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3">
                                 <img src="../assets/images/book1.png">
