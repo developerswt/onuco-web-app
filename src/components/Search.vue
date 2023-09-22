@@ -143,7 +143,7 @@
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">Config</el-tab-pane>
                             <el-tab-pane label="Author" name="third">Role</el-tab-pane>
-                            <el-tab-pane label="Other" name="fourth">Task</el-tab-pane>
+                            <!-- <el-tab-pane label="Other" name="fourth">Task</el-tab-pane> -->
 
 
                         </el-tabs>

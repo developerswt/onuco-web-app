@@ -5,14 +5,15 @@
         <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
-                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white;text-decoration: none;">
+                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;">
                         <div class="row">
-                            <div class="col-md-3 col-3 col-sm-3">
+                            <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                                 <img src="../assets/images/book1.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9 pt-2">
-                                <h5>{{ branch.name }}</h5>
+                            <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 1px;">
+                                <h5  data-placement="top" :title="branch.name" >{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
+                                <p>{{ branch.title }}</p>
                             </div>
                         </div>
                     </router-link>    
@@ -58,8 +59,11 @@ Offer
             console.log(error);
         }
     }
-}    
-
+}
+    
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
 
 </script>
 
@@ -221,13 +225,12 @@ Offer
 
 .box {
     
-    height:115px;
+    height:100px;
     width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:20px;
-    
+    padding:18px;
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
@@ -286,5 +289,13 @@ h2 {
 }
 #available_text{
 font-size: 20px;
+}
+.col-md-3{
+    padding-left: 12px;
+   
+}
+.col-md-9{
+    padding-right: 5px;
+    padding-left: 1px;
 }
 </style>

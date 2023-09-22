@@ -30,8 +30,8 @@
                     </div>
                 </div>
 
-                <section id="tab_section">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- <section id="tab_section">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                 aria-controls="home" aria-selected="true">MY COURSES</a>
@@ -44,9 +44,16 @@
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                                 aria-controls="contact" aria-selected="false">COMPLETED</a>
                         </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    </ul> -->
+                
+                           
+            <div class="tab_block mt-3">
+               <section id="tab_block">
+                        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+                            <el-tab-pane label="MY COURSES" name="first">
+
+                           <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="">
                                 <div class="row mt-3">
                                     <div class="col-lg-6 col-8 col-sm-8 col-md-6">
@@ -74,10 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-                                <div class="inner_block">
+                                  <div class="inner_block">
                                     <div class="row">
                                         <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                             <div id="asset_image">
@@ -159,24 +163,26 @@
                                     </div>
                                 </div>
                              
-                              
+                            </div>
 
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        </el-tab-pane>
+                             
+                             <el-tab-pane label="LIVE" name="third">Live content</el-tab-pane>
+                             <el-tab-pane label="COMPLETED" name="fourth">completed</el-tab-pane>
+                        <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <p>Live content</p>
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <p>completed</p>
-                        </div>
-                    </div>
-                </section>
-
-
-
-            </div>
-        </div>
-
+                        </div> -->
+                   
+                </el-tabs>
+            </section>
+         </div>
+    </div>
+</div>
 
 
 
@@ -188,7 +194,7 @@ export default {
     name: 'Mylearnings',
     data() {
         return {
-            activeName: 'first',
+           activeName: 'first',
         }
     },
     methods: {
