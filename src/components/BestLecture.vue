@@ -4,7 +4,7 @@
             <h4 class="academic_head_text">
 
 <span id="aca_text">Best</span>Lecturers
-<router-link to="#">See all</router-link>
+<router-link to="/BestFaculty">See all</router-link>
 </h4>
         </div>
     
