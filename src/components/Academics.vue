@@ -14,13 +14,14 @@
         <div class="parent_blocks">
             <div v-for="item in academia" :key="item.id">
                 <div class="box1">
-                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academiaName } }"
+                    <router-link v-bind:to="'/Academia?id='+ item.id"
                         style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
                             <div class="top">
-                                <span class="wr">{{ item.id in groupedItems ? '0' + groupedItems[item.id].length : '00'
-                                }}</span>
+                                <!-- <span class="wr">{{ item.id in groupedItems ? '0' + groupedItems[item.id].length : '00'
+                                }}</span> -->
+                                <span class="wr">00</span>
                             </div>
                             <div class="card-body">
                                 <div class="card-title">
@@ -38,7 +39,7 @@
 
     </div>
     </div>
-
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
 
     
 </template>
@@ -46,15 +47,21 @@
 <script>
 import axiosInstance from '../config/axiosInstance'
 import router from '../router';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 
 
 
 export default {
     name: 'AcademicsView',
-
+    components: {
+        Loading
+    },
     data() {
         return {
+            isLoading: false,
             academia: [],
             branches: [],
             isuser: localStorage.getItem("username")
@@ -83,22 +90,46 @@ export default {
         }
 
     },
+    // mounted() {
+    //     this.$gtm.trackView('MyScreenName', this.$route.path);
+    // },
     async created() {
-        // const headers = { 
-        //     Authorization:  this.authorizationHeader,
-        //     "Content-type": "application/json"
-        // };     
+        this.isLoading = true;    
         try {
-            const res = await axiosInstance.get(`/Academia/`);
+            const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
             console.log(this.academia);
-            const result = await axiosInstance.get(`/Branches`);
-            this.branches = result.data;
-            console.log(this.branches);
+            // const result = await axiosInstance.get(`Branches/GetBranchesByAcademiaCount?academyId=1`);
+            // this.branches = result.data;
+            // console.log(this.branches);
         } catch (error) {
             console.log(error);
+            this.isLoading = false;
         }
-    }
+        finally {
+            this.isLoading = false;
+        }
+    },
+    // mounted() {
+    //     console.log(this.$breadcrumbs.value) // you can simply get current breadcrumbs
+        
+    //     // You can reactively change it
+    //     // !! It won't change meta object, or object returned by breadcrumb function
+    //     this.$breadcrumbs.value[0].label = 'New label'
+        
+    //     // if for some reason you need to recalculate breadcrumbs or create crumb for some path u can use these methods
+    //     /**
+    //      * Recalculate breadcrumbs for route
+    //      * @param {object} route
+    //      */
+    //     $breadcrumbs.setBreadcrumbsByRoute(this.$route)
+    //     /**
+    //      * Create breadcrumb object by path
+    //      * @param {string} path  
+    //      * @param {boolean} [isCurrent = false]
+    //      */
+    //     const newCrumb = $breadcrumbs.createBreadcrumb('/Login', true)
+    // }
 } 
 </script>
 

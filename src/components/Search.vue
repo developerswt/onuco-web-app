@@ -153,21 +153,27 @@
         </section>
 
     </div>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
 </template>
 
 <script>
 import Offer from './Offer.vue';
 import axios from 'axios';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 
 export default {
     name: 'SearchView',
     components: {
         Offer,
+        Loading
     },
     data() {
         return {
+            isLoading: false,
             searchQuery: this.$route.query.data,
             searchResults: [],
             activeName: 'first',
@@ -184,14 +190,19 @@ export default {
             console.log(tab, event);
         },
         async search() {
+            this.isLoading = true;
             try {
-                const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
+                const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
                 const data = await response.json();
                 
                 // Assuming your API returns an array of objects with a "name" property
                 this.searchResults = data;
             } catch (error) {
                 console.error('Error fetching search results:', error);
+                this.isLoading = false;
+            }
+            finally {
+                this.isLoading = false;
             }
         },
         handleSelect (item){
@@ -218,6 +229,7 @@ export default {
         }
     },
     async created() {
+        this.isLoading = true;
         try {
             const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
             const data = await response.json();
@@ -226,6 +238,10 @@ export default {
             this.searchResults = data;
         } catch (error) {
             console.error('Error fetching search results:', error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     },    
 }

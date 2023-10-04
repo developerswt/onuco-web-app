@@ -1,20 +1,20 @@
-<template>
+<!-- <template>
   <div class="mb-4 pt-2">
     <el-breadcrumb :separator-icon="ArrowRight">
       <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/Academia/engineering' }">Academia</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/Universities/computer-science' }">University</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/CollegeDetails/vtu' }">CollegeDetails</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '' }">CourseDetails</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '' }">CourseDetails</el-breadcrumb-item> -->
       <!-- <el-breadcrumb-item v-for="item in items" :key="item.path">{{ item.name }}</el-breadcrumb-item> -->
-    </el-breadcrumb>
+    <!-- </el-breadcrumb>
     <router-view />
   </div>  
 </template>
 
 <script lang="ts" setup>
-import { ArrowRight } from '@element-plus/icons-vue'
-
+import { ArrowRight } from '@element-plus/icons-vue' -->
+<!-- 
 // export default {
 //   data() {
 //     return {
@@ -36,7 +36,7 @@ import { ArrowRight } from '@element-plus/icons-vue'
 //     this.getRoute();
 //   }
 // }
-</script>
+</script> -->
 
 
 
@@ -103,3 +103,96 @@ export default {
   },
 };
 </script> -->
+
+
+<!-- <template>
+  <div class="breadcrumbs">
+    <router-link v-for="(breadcrumb, index) in breadcrumbs" :key="index" :to="breadcrumb.to">
+      {{ breadcrumb.text }}
+    </router-link>
+  </div> -->
+  <!-- <AmBreadcrumbs>
+    <template #crumb="{ crumb }">
+        <router-link
+            class="my-custom-crumb"
+            :to="crumb.link"
+        >
+            {{ crumb.label }}
+        </router-link>
+    </template>
+</AmBreadcrumbs> -->
+<!-- </template>
+
+<script>
+export default {
+  name: 'Breadcrumbs',
+  computed: {
+    breadcrumbs() {
+      return this.$breadcrumbs.crumbs;
+    }
+  }
+};
+</script>
+
+<style scoped>
+
+</style>
+ -->
+
+
+ // Breadcrumbs.vue
+
+<!-- Breadcrumbs.vue -->
+
+<!-- Breadcrumbs.vue -->
+
+<!-- <template>
+  <div>
+    <Vue3Breadcrumbs />
+  </div>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+import { useBreadcrumbs } from "vue-3-breadcrumbs";
+
+export default defineComponent({
+  setup() {
+    const { breadcrumbs } = useBreadcrumbs();
+    return {
+      breadcrumbs,
+    };
+  },
+});
+</script> -->
+
+
+<!-- Breadcrumb.vue -->
+<template>
+  <nav class="breadcrumb">
+    <ul>
+      <li v-for="(crumb, index) in breadcrumbs" :key="index">
+        <router-link :to="crumb.path">{{ crumb.name }}</router-link>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+export default {
+  computed: {
+    breadcrumbs() {
+      const matched = this.$route.matched;
+
+      return matched.map((route) => ({
+        name: route.name,
+        path: route.path,
+      }));
+    },
+  },
+};
+</script>
+
+<style>
+/* Add your breadcrumb styling here */
+</style>

@@ -1,11 +1,12 @@
 <template>
     <div class="container-fluid jk">
+        <Breadcrumbs />
         <div class="container pt-4">
             <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
         <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
-                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;">
+                    <!-- <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;"> -->
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                                 <img src="../assets/images/book1.png">
@@ -16,7 +17,7 @@
                                 <p>{{ branch.title }}</p>
                             </div>
                         </div>
-                    </router-link>    
+                    <!-- </router-link>     -->
                 </div>
             </div>
         </div>
@@ -25,7 +26,7 @@
     </div>            
 
 
-    
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
 </template>
 
@@ -33,30 +34,40 @@
 import AxiosInstance  from '../config/axiosInstance';
 import router from '../router';
 import Offer from './Offer.vue'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import Breadcrumbs from './Breadcrumbs.vue';
 
 export default {
     name: 'BranchesView',
     components: {
-
-Offer
-},
+        Offer,
+        Loading,
+        Breadcrumbs
+    },
     data() {
         return {
+            isLoading: false,
             branches: [],
             academia: [],
         }
     },
     async created() {
+        this.isLoading = true;
         try {
-            const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
+            const res = await AxiosInstance.get(`/Academia/` + this.$route.query.id);
             this.academia = res.data;
             console.log(this.academia);
         
-            const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
+            const result = await AxiosInstance.get(`/Branches/Branches/` + this.$route.query.id);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
             console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     }
 }

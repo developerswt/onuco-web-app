@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid jk">
+        <Breadcrumbs />
         <div class="container">
             <div class="learning_block">
 
@@ -190,8 +191,13 @@
 </template>
 
 <script>
+import Breadcrumbs from './Breadcrumbs.vue';
+
 export default {
     name: 'Mylearnings',
+    components: {
+        Breadcrumbs
+    },
     data() {
         return {
            activeName: 'first',
