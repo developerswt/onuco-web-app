@@ -1,4 +1,5 @@
 <template>
+    <Breadcrumbs />
     <div class="container-fluid jk">
 
 <div class="error_parent_block">
@@ -31,8 +32,12 @@
 </template>
 
 <script>
+import Breadcrumbs from './Breadcrumbs.vue';
     export default {
-        name: 'GetSupport'
+        name: 'GetSupport',
+        components: {
+            Breadcrumbs
+        }
     }
 </script>
 

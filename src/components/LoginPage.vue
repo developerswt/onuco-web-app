@@ -217,4 +217,7 @@ authenticator {
         padding: 15px;
     }
 }
+.amplify-button .amplify-button--primary {
+  background-color: blue !important;
+} 
 </style>

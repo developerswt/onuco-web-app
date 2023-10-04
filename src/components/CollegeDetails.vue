@@ -9,16 +9,16 @@
             <div class="row" v-for="sem in semester" :key="sem.id" >
                 <div class="card" id="main_card">
                     <h5 class="card-header">
-                        <div class="d-block kj" data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" v-if="sem.id==1">
+                        <div :class="sem.id ===1 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
                         </div>
-                        <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                        <!-- <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
-                        </div>
+                        </div> -->
                     </h5>
                     <!-- <h5 class="card-header">
                         <a class="collapsed d-block" style="text-decoration: none;" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed">
@@ -27,7 +27,71 @@
                                 <p style="font-size: 14px;">{{ sem.description }}</p>
                         </a>
                     </h5> -->
-                    <div v-if="sem.id==1" id="collapse-example1" class="collapse show" aria-labelledby="heading-collapse">
+                    <div  id="collapse-example1" :class="sem.id===1 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
+                        <div class="card-body pt-0">
+                            <div class="">
+                            <div class="row kl">
+                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
+                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
+                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="sub_text" class="mb-0"><b>{{ cou.name }}</b></p>
+                                                                </div>
+                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                   
+                                                        </div>
+                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/share.png" class="icon">
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
+                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
+                                                        </div>
+                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
+                                                            <img src="../assets/images/video.png" class="video">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-full"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </router-link>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
                         <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
@@ -90,71 +154,7 @@
                             </div>
                             </div>
                         </div>
-                    </div>
-                    <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
-                        <div class="card-body pt-0">
-                            <div class="">
-                            <div class="row kl">
-                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
-                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
-                                        <div class="card-title">
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
-                                                                </div>
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
-                                                                </div>
-                                                            </div>
-                                                          
-                                                   
-                                                        </div>
-                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/share.png" class="icon">
-                                                        </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
-                                                        </div>
-                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/video.png" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn1">
-                                                    <div class="row">
-                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text">(23 reviews)</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </router-link>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -162,27 +162,33 @@
 
     </div>
 
-
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
 </template>
 
 <script>
 import AxiosInstance  from '../config/axiosInstance';
 import Offer from './Offer.vue'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 export default {
     name: 'CollegeDetails',
     components: {
         Offer,
+        Loading
     },
     data() {
         return {
+            isLoading: false,
             semester: [],
             course: [],
             university: [],
         }
     },
     async created() {
+        this.isLoading = true;
         try {
             const universe = await AxiosInstance.get(`/University/GetUniversityGroupByName/` + this.$route.params.name);
             this.university = universe.data;
@@ -195,6 +201,10 @@ export default {
             console.log(this.course)
         } catch (error) {
             console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     },
 }

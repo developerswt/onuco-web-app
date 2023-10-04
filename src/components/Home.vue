@@ -4,27 +4,28 @@
 
 
 
-    <div class="container-fluid jk ">
+    <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid" id="first_container">
             <div class="container" id="home_container">
                 <Academics />
             </div>
         </div>
-        <div class="container-fluid" id="second_container">
-            <div class="container">
-                <TopRatedCourses />
+    <!-- </div>     -->
+    <div class="container-fluid" id="second_container">
+        <div class="container">
+            <TopRatedCourses />
                 
-            </div>
         </div>
-
-        <div class="container-fluid" id="third_container">
-            <div class="container">
-                <BestLecture />
-            </div>
-        </div>
-
-
     </div>
+
+    <div class="container-fluid" id="third_container">
+        <div class="container">
+            <BestLecture />
+        </div>
+    </div>
+
+
+    
     <Offer />
     <div class="container-fluid content">
         <div class="container">
@@ -67,6 +68,13 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid {
+    width: 100%;
+    /* padding-right: 15px; */
+    /* padding-left: 15px; */
+    margin-right: auto;
+    margin-left: auto;
+}
 .jk {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
@@ -198,17 +206,15 @@ export default {
 }
 
 #first_container{
-    background: #DDEDFB;
+    background: #FFFFFF;
    
 }
 
-#second_container{
-    background:#EFF5FC;
-}
+
 
 #third_container
 
 {
-    background:#DDEDFB;
+    background:#FFFFFF;
 }
 </style>

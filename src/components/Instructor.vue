@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid">
+                                            <img :src="this.faculty.imageUrl" class="img-fluid">
                                         </div>
 
                                     </div>
@@ -307,21 +307,27 @@
       
       
     </div>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
     
 </template>
 
 <script>
 import axios from 'axios'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 import Offer from './Offer.vue'
 export default {
     name: 'InstructorView',
     components: {
-       Offer
+       Offer,
+       Loading
     },
     data() {
         return {
+            isLoading: false,
             faculty: [],
             activeName: 'first',
             attribute: [
@@ -337,12 +343,17 @@ export default {
         },
     },
     async created() {   
+        this.isLoading = true;
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
             console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     }
 }
@@ -640,6 +651,11 @@ export default {
 
 .professor_image_block {
     text-align: center;
+}
+.professor_image_block img {
+    width: 100px;
+    height: 95px;
+    margin-left: 22px;
 }
 
 #Course_section,

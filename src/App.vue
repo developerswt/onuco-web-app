@@ -7,12 +7,14 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
+// import Breadcrumbs from './components/Breadcrumbs.vue'
 
 export default {
   name: "AppView",
   components: {
     Navbar,
-    Footer
+    Footer,
+    // Breadcrumbs
   },
   computed: {
     showSearchBox() {

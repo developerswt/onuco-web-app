@@ -1,6 +1,6 @@
 {
   "authSelections": "userPoolOnly",
-  "resourceName": "onucowebapp528b9e28",
+  "resourceName": "onucowebappd923dbf8",
   "serviceType": "imported",
   "region": "ap-south-1",
   "usernameAttributes": [
@@ -19,8 +19,7 @@
   ],
   "mfaConfiguration": "OFF",
   "autoVerifiedAttributes": [
-    "email",
-    "phone_number"
+    "email"
   ],
   "mfaTypes": []
 }

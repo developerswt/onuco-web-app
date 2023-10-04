@@ -49,7 +49,7 @@
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search" debounce @select="handleSelect" clearable placeholder="Search...">
+                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search...">
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
                                     <!-- <el-icon class="el-input__icon" @click="handleIconClick">
@@ -216,8 +216,8 @@ li {
 }
 
 .navbar {
-    background: #E4F0FE 0% 0% no-repeat padding-box;
-    background: #E4F0FE 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    /* background: #E4F0FE 0% 0% no-repeat padding-box; */
     opacity: 1;
 
 

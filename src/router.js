@@ -76,7 +76,7 @@ const routes = [
     component: Home,
     meta: {
         title: 'Unoco Application',
-        breadcrumb: 'Home'
+        // breadcrumb: 'Home'
     },
   },
   {
@@ -85,6 +85,10 @@ const routes = [
     component: Mylearnings,
     meta: {
         title: 'Unoco Application',
+        // breadcrumb: {
+        //   label: 'MyLearnings',
+        //   parent: 'Home' // Here you should use exact string as for name property in "parent" route
+        // }
     },
   },
   {
@@ -93,6 +97,7 @@ const routes = [
     component: LoginPage,
     meta: {
         title: 'Log In And Start Learning',
+        // breadcrumb: 'Login'
     },
   },
   {
@@ -101,6 +106,7 @@ const routes = [
     component: Errorone,
     meta: {
         title: '',
+        // breadcrumb: 'Errorone'
     },
   },
   {
@@ -110,6 +116,7 @@ const routes = [
     component: Search,
     meta: {
         title: '',
+        // breadcrumb: 'Search'
     },
   },
   {
@@ -118,6 +125,7 @@ const routes = [
     component: Searchresults,
     meta: {
         title: '',
+        // breadcrumb: 'Searchresults'
     },
   },
 
@@ -127,16 +135,21 @@ const routes = [
     component: Errortwo,
     meta: {
         title: '',
+        // breadcrumb: 'Errortwo'
     },
   },
   
   {
-    path: "/Academia/:name",
+    // path: "/Academia/:name"
+    path: "/Academia",
     name: "Branches",
     component: Branches,
     meta: {
         title: 'Branches Details Page',
-        breadcrumb: route => route.params.id
+        breadcrumb: {
+            label: 'Branches',
+            parent: 'Home' 
+        }
     },
   },
   {
@@ -145,7 +158,10 @@ const routes = [
     component: CoursesPage,
     meta: {
         title: 'Courses Page',
-        breadcrumb: 'Courses'
+        // breadcrumb: {
+        //   label: 'Courses',
+        //   parent: 'Mylearnings' // Here you should use exact string as for name property in "parent" route
+        // }
     },
   },
   {
@@ -154,7 +170,7 @@ const routes = [
     component: CollegeDetails,
     meta: {
         title: 'College Semaster details Page',
-        breadcrumb: route => route.params.id
+        // breadcrumb: 'CollegeDetails'
     },
   },
   {
@@ -163,7 +179,7 @@ const routes = [
     component: CourseDetails,
     meta: {
         title: 'Semaster details Page',
-        breadcrumb: route => route.params.id
+        // breadcrumb: CourseDetails
     },
   },
   {
@@ -180,7 +196,7 @@ const routes = [
     component: Universities,
     meta: {
         title: 'Universities Upload Page',
-        breadcrumb: route => route.params.id
+        // breadcrumb: route => route.params.id
     },
   },
   {
@@ -189,7 +205,7 @@ const routes = [
     component: Instructor,
     meta: {
         title: 'Instructor Page',
-        breadcrumb: 'Instructor'
+        // breadcrumb: 'Instructor'
     },
   },
   {
@@ -264,6 +280,9 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+  breadcrumbs: {
+    separator: " / ", // Customize the separator
+  },
 	// scrollBehavior() {
 	// 	document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
 	// }
@@ -281,6 +300,7 @@ const router = createRouter({
 		}
 	}
 });
+// router.use(Breadcrumbs);
 
 router.beforeEach((to, from, next) => {
 	//document.title = `${to.meta.title}`;
@@ -299,6 +319,7 @@ router.beforeEach((to, from, next) => {
     if (titleFromParams) {
       document.title = `${titleFromParams} - ${document.title}`;
     }
+    //Vue.$gtm.trackView(to.name, to.path);
 	next();
 });
 
@@ -314,6 +335,7 @@ router.beforeResolve(async (to, from, next) => {
   }
   return next()
 });
+
 
 
 export default router;

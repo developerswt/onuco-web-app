@@ -80,27 +80,12 @@
                             <div class="pt-4 topic-card">
                                 <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Subject" name="first" class="rt">
-                                        <div class="row box">
+                                        <div class="row box mb-5">
                                             <div class="col-sm-6">
                                                 <div class="card" v-for="(topic, index) in this.book.subject" :key="topic.id">
                                                     <div class="accordion-item">
                                                         <h5 class="card-header">
-                                                            <div class="d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" v-if="index==0">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <button class="btn btn-link" style="text-decoration: none; border: none;">
-                                                                            {{ topic.heading }}
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <div class="action"><i
-                                                                            class="fa fa-chevron-right rotate-icon"
-                                                                            id="sem_icon"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
+                                                            <div :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                                         <button class="btn btn-link" style="text-decoration: none; border: none;">
@@ -116,7 +101,7 @@
                                                                 </div>
                                                             </div>
                                                         </h5>
-                                                        <div :id="'collapse-example' + index" v-if="index===0" class="collapse show" aria-labelledby="heading-collapsed">
+                                                        <div :id="'collapse-example' + index"  :class="index === 0 ? 'collapse show' : 'collapse' " aria-labelledby="heading-collapsed">
                                                             <div class="cards_body_color" v-for="lessons in topic.values" :key="lessons.id">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6 " >
@@ -149,7 +134,7 @@
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', subject)" style="cursor: pointer;">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -157,10 +142,10 @@
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
                                                                                     <div v-for="video in watchTimeDatas" :key="video.id">
-                                                                                        <div v-for="watch in video.WatchTimeData" :key="watch.id">
+                                                                                        <div v-for="watch in video.watchTimeData" :key="watch.id">
                                                                                             <div class="progress_block" v-if="subject.id === watch.videoId">
-                                                                                                <progress class="progress" :value="watch.WatchTime" max="100">
-                                                                                                    {{ watch.WatchTime }}%
+                                                                                                <progress class="progress" :value="watch.watchTime" max="100">
+                                                                                                    {{ watch.watchTime }}%
                                                                                                 </progress>
                                                                                             </div>
                                                                                         </div>
@@ -170,9 +155,8 @@
                                                                         </div>
                                                                         <div class="col-lg-4 col-12 col-sm-12">
                                                                             <div class="inside_block">
-                                                                                <div class="" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">    
-                                                                                    <img src="../assets/images/Group1318@2x.png" 
-                                                                                        class="img-fluid" >
+                                                                                <div class="progress-container" @click="switchVideo('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', subject)">
+                                                                                    <el-progress type="circle" :show-text="false" :percentage="70" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
                                                                                 </div>
 
                                                                                 <i class="fa" aria-hidden="true"
@@ -189,79 +173,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div :id="'collapse-example' + index" v-else class="collapse" aria-labelledby="heading-collapsed">
-                                                            <div class="cards_body_color" v-for="lessons in topic.values" :key="lessons.id">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-6 col-sm-6 " >
-                                                                        <div class="accordion_block_one">
-                                                                            <i class="fa" aria-hidden="true"
-                                                                                :class="{
-                                                                                    'fa-circle-o': !hasAnySubjectComplete(lessons.values),
-                                                                                    'fa-check': hasAnySubjectComplete(lessons.values),
-                                                                                }"
-                                                                                style="margin-right: 10px;"
-                                                                            ></i>
-                                                                            <p id="check_text"> {{ lessons.heading }}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <div class="accordion_block_two">
-                                                                            <p id="duration_text">40m 13s</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div :class="{ 'playing-subject': playingSubject === subject }" class="chapters_block" v-for="(subject, index) in lessons.values" :key="index.id">
-                                                                    <div class="row sub" :class="{ 'playing-subject': playingSubject === subject }">
-                                                                        <div class="col-lg-1 col-1 col-sm-1">
-                                                                            <i class="fa" aria-hidden="true"
-                                                                                :class="{
-                                                                                    'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                    'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                    'fa-circle': playingSubject === subject
-                                                                                }"
-                                                                                style="margin-top: 6px;"
-                                                                            ></i>
-                                                                        </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
-                                                                            <p id="intro_text">{{ subject.lession }}</p>
-                                                                            <div class="row">
-                                                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <p id="duration_text_one">{{ subject.time }}</p>
-                                                                                </div>
-                                                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <div v-for="video in watchTimeDatas" :key="video.id">
-                                                                                        <div v-for="watch in video.WatchTimeData" :key="watch.id">
-                                                                                            <div class="progress_block" v-if="subject.id === watch.videoId">
-                                                                                                <progress class="progress" :value="watch.WatchTime" max="100">
-                                                                                                    {{ watch.WatchTime }}%
-                                                                                                </progress>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-12 col-sm-12">
-                                                                            <div class="inside_block">
-                                                                                <div class="" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">    
-                                                                                    <img src="../assets/images/Group1318@2x.png" 
-                                                                                        class="img-fluid" >
-                                                                                </div>
-
-                                                                                <i class="fa" aria-hidden="true"
-                                                                                    :class="{
-                                                                                        'fa-bookmark-o': isProgressBarEmpty(subject.id),
-                                                                                        'fa-bookmark': isProgressBarComplete(subject.id),
-                                                                                        'fa-bookmark': isProgressBarStarted(subject.id),
-                                                                                    }"
-                                                                                    style=" font-size: 26px;"
-                                                                                ></i>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>            
@@ -288,24 +200,30 @@
                 </div>
             </div>
         </div>        
-    </div>        
+    </div>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
 </template>
 
 <script>
 import axios from 'axios';
 import VideoPlayer from './VideoPlayer.vue';
 import Offer from './Offer.vue'
-//import AxiosInstance from '../config/axiosInstance'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
+import AxiosInstance from '../config/axiosInstance'
 
 export default {
     name: 'SemesterDetails',
     components: {
         VideoPlayer,
         Offer,
+        Loading
         // Breadcrumbs
     },
     data() {
         return {
+            isLoading: false,
             userIsSubscribed: false,
             courseDetails: null,
             playingSubject: null,
@@ -319,9 +237,12 @@ export default {
                 width: 100,
                 techOrder: ['html5'],
                 preload: "metadata",
-                sources: [
-                    
-                    
+                sources: [ 
+                    {
+                        src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                        type: application/x-mpegURL,
+                        withCredentials: false,
+                    }
                 ],
                 html5: {
                     nativeVideoTracks: false,
@@ -369,8 +290,8 @@ export default {
         hasCompleteWatchTime(subjectId) {
                 // Check if any watch time data for the given subjectId has a WatchTime of 100
             return this.watchTimeDatas.every(video => {
-                const watchData = video.WatchTimeData.find(watch => watch.videoId === subjectId);
-                return watchData && watchData.WatchTime === 100;
+                const watchData = video.watchTimeData.find(watch => watch.videoId === subjectId);
+                return watchData && watchData.watchTime === 100;
             });
         },
         getCurrentUserCognitoId() {
@@ -435,18 +356,18 @@ export default {
         isProgressBarStarted(videoId) {
             // Check if there is watch time data for the given videoId
             return this.watchTimeDatas.some(video => {
-                const watchData = video.WatchTimeData.find(watch => watch.videoId === videoId);
-                return watchData && watchData.WatchTime > 0;
+                const watchData = video.watchTimeData.find(watch => watch.videoId === videoId);
+                return watchData && watchData.watchTime > 0;
             });
         },
         isProgressBarComplete(videoId) {
             // Check if the watch time for the given videoId is 100%
-            return this.watchTimeDatas.some(video => video.WatchTimeData.some(watch => watch.videoId === videoId && watch.WatchTime === 100));
+            return this.watchTimeDatas.some(video => video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime === 100));
         },
         isProgressBarEmpty(videoId) {
             // Check if there is no watch time data for the given videoId or all watch times are 0
             return !this.watchTimeDatas.some(video =>
-                video.WatchTimeData.some(watch => watch.videoId === videoId && watch.WatchTime > 0)
+                video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime > 0)
             );
         },
         shouldShowCircleIcon(subjectId) {
@@ -458,27 +379,26 @@ export default {
         },
     },
     async created(){
+        this.isLoading = true;
         try {
-            const res = await axios.get(`http://localhost:5000/SemesterDetails?` + "id=" + this.$route.query.id);
+            const res = await AxiosInstance.get(`/Coursedetails?` + "id=" + this.$route.query.id);
             this.book = res.data; 
-            const result = await axios.get('http://localhost:5000/StateManagement');
-            this.watchTimeDatas = result.data;
-            console.log(this.watchTimeDatas);
-            // const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
-            // this.courseDetails = subscription.data;
-            // console.log(this.courseDetails);
+            // const result = await axios.get('http://localhost:5000/StateManagement');
+            // this.watchTimeDatas = result.data;
+            // console.log(this.watchTimeDatas);
+            const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
+            this.courseDetails = subscription.data;
+            console.log(this.courseDetails);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
-            // if (currentUserSubId === null && this.courseDetails.cognitoUserId === null) {
-            //     this.userIsSubscribed = false;
-            // } else if (currentUserSubId === this.courseDetails.userCognitoId) {
-            //     this.userIsSubscribed = true;
-            // } else {
-            //     this.userIsSubscribed = false;
-            // }
+            if (this.courseDetails === true) {
+                this.userIsSubscribed = true;
+            } else {
+                this.userIsSubscribed = false;
+            }
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                    src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
                     type: this.videoType,
                     withCredentials: false,
                 }
@@ -488,12 +408,32 @@ export default {
             console.log(this.videoOptions);
         } catch (err) {
             console.error(err);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     },
 }
 </script>
 
 <style scoped>
+.progress-container {
+    position: relative;
+    width: 30px; /* Set the width and height of the container */
+    height: 30px;
+    margin: 5px;
+    background-image: url('../assets/images/Group1318@2x.png'); /* Replace 'your-image.jpg' with your image URL */
+    background-size: cover;
+}
+.progress-container .el-progress {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.el-progress--circle {
+  margin-right: 35px;
+}    
 .jk {
     padding-top: 68px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -742,7 +682,16 @@ ol {
     justify-content: space-evenly;
     margin-left: 54px;
 }
+.progress-container {
+  position: relative;
+  cursor: pointer;
+}
 
+.progress-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .inside_block img {
 
     height: 30px;

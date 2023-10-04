@@ -9,15 +9,55 @@
         </div>
     
     </div>
-
+        
         <div class="container-fluid">
-            <div class="row pt-5">
-                <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
-                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+            <!-- <div class="row pt-5"> -->
+                <carousel :settings="settings" :breakpoints="breakpoints">
+                    <slide v-for="item in 8" :key="item.id">
+                        <!-- <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;"> -->
                     <div class="card">
                         <div class="user-follower">
                             <img src="../assets/images/MaskGroup1.png" class="user-icon">
                         </div>
+                        
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title">VijayaKumar</div>
+                            <div class="card-text">Hi All Welocome Homenjubuiyufyufyufiyf ....</div>
+                            <div class="mn">
+                                <p>(23 Reviews)</p>
+                                <el-rate v-model="value2" :colors="colors" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </router-link> -->
+                    </slide>
+                    
+
+                    <template #addons>
+                        
+                        <navigation />
+                            <!-- <template #next>
+                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                            <template #prev>
+                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                        </navigation> -->
+                        
+                    </template>
+                </carousel>
+                
+                <!-- <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
+                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                    <div class="card">
+                        <div class="user-follower">
+                            <img :src="facult.imageUrl" class="user-icon">
+                        </div>
+                        
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
                             <p class="text-right"><small>1200 Followers</small></p>
@@ -32,111 +72,76 @@
                         </div>
                     </div>
                     </router-link>
-                </div>
-                <!-- <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="user-follower">
-                            <img src="../assets/images/user.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="user-follower">
-                            <img src="../assets/images/user.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="user-follower">
-                            <img src="../assets/images/user.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"><router-link to="/Instructor" style="cursor: pointer; color: black; text-decoration: none;">Lorem ipsum ....</router-link></div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
-                            </div>
-                        </div>
-                    </div>
                 </div> -->
+               
             </div>
-        </div>
+        <!-- </div> -->
         
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import axios from 'axios'
-import 'owl.carousel/dist/assets/owl.carousel.css'; // Import Owl Carousel CSS
-import 'owl.carousel'; // Import Owl Carousel JavaScript
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
-export default {
+
+export default defineComponent ({
     name: 'BestLecture',
-    data() {
-        return {
-            faculty: []
-        }
+    components: {
+        Carousel,
+        Slide,
+       
+        Navigation,
     },
-    async created() {   
-        try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty/`);
-            this.faculty = res.data;
-            console.log(this.faculty);
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    mounted() {
-    // Initialize Owl Carousel
-    $('.owl-carousel').owlCarousel({
-      loop: true,
-      margin: 10,
-      nav: true,
-      responsive: {
-        0: {
-          items: 1
+    data: () => ({
+        faculty: [],
+   
+        settings: {
+            itemsToShow: 1,
+            snapAlign: 'center',
         },
-        600: {
-          items: 3
+   
+        breakpoints: {
+   
+            900: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            820: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            768:{
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            1024: {
+                itemsToShow: 4,
+                snapAlign: 'start',
+            },
+            600: {
+                itemsToShow: 1,
+                snapAlign: 'center',
+            }
         },
-        1024: {
-          items: 5
-        }
-      }
-    });
-  }
+    }),
+    // async created() {   
+    //     try {
+    //         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
+    //         this.faculty = res.data;
+    //         console.log(this.faculty);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
+    // mounted() {
+    //     this.$gtm.trackView('MyScreenName1', this.$route.path);
+    // },
+    
+  
 
-}
+})
 </script>
 
 
@@ -169,10 +174,10 @@ export default {
     font-size: 14px;
 } */
 .user-follower img {
-    width: 70%;
-    height: 70%;
-    padding-left: 11%;
-    padding-top: 5%;
+    width: 60px;
+    height: 60px;
+    margin-left: 19%;
+    padding-top: 2%;
 }
 
 .user-follower {
@@ -244,6 +249,8 @@ export default {
     margin-left: 7%;
 }
 
+
+
 .col-md-3 {
     margin-bottom: 3%;
 }
@@ -254,6 +261,8 @@ export default {
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
+    width: 89%;
+    margin-top: 5%;
 }
 
 .academic_head_text {
@@ -263,7 +272,11 @@ export default {
 
 }
 
-
+@media only screen and (min-width: 540px) and (max-width: 600px) {
+    .card {
+        width: 50%;
+    }
+}
 #aca_text {
     color: #006acd;
     font-weight: bold;
@@ -322,6 +335,48 @@ export default {
 
 *::-webkit-scrollbar-thumb {
     background-color: transparent; /* Hide the thumb on webkit-based browsers */
+}
+
+.fa-chevron-right{
+    position: absolute;
+    top: 100px;
+    right: 530px;
+    font-size: 14px;
+    outline: none;
+}
+.fa-chevron-left {
+    position: absolute;
+    top: 100px;
+    left: 530px;
+    font-size: 14px;
+    outline: none;
+} 
+
+.carousel__slide {
+	
+    margin-top: 34px;
+}
+.carousel__item {
+  min-height: 200px;
+  width: 100%;
+  background-color: var(--vc-clr-primary);
+  color: var(--vc-clr-white);
+  font-size: 20px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .carousel__slide {
+  padding: 10px;
+} */
+
+.carousel__prev,
+.carousel__next {
+    margin-left: -20px;
+    margin-right: -20px;
+  box-sizing: content-box;
+  border: 89px solid blue;
 }
 </style>
 

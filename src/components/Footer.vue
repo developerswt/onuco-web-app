@@ -1,5 +1,5 @@
 <template>
-    <div class="" style="padding-bottom: 150px;">
+    <!-- <div class="" style="padding-bottom: 150px;"> -->
     <div class="container-fluid footer">
         <div class="container">
             <div class="row">
@@ -20,7 +20,7 @@
         </div>
    
     </div>
-</div>
+<!-- </div> -->
 </template>
 
 
@@ -33,9 +33,9 @@ export default {
 
 <style scoped>
 .footer {
-    position: fixed;
+    /* position: fixed;
     bottom: 0px;
-    left: 0px;
+    left: 0px; */
     width: 100%;
     height:auto;
     background: #0066CC 0% 0% no-repeat padding-box;

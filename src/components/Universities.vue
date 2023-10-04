@@ -25,36 +25,46 @@
     
      
     </div>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
 </template>
 
 <script>
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Offer from './Offer.vue'
 import AxiosInstance from '../config/axiosInstance'
 
 export default {
     name: 'Universities',
     components: {
-        Offer
+        Offer,
+        Loading
     },
     data() {
         return {
+            isLoading: false,
             university: [],
         }
     },
     async created() {
+        this.isLoading = true;
         try {
             const result = await AxiosInstance.get(`/University/GetBranchListByName/` + this.$route.params.name);
             this.university = result.data;
             console.log(this.university);
         } catch (error) {
             console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     },
 }
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
-});
+// $(document).ready(function(){
+//   $('[data-toggle="tooltip"]').tooltip();   
+// });
 
 </script>
 
