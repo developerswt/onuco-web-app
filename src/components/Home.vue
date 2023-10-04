@@ -13,7 +13,7 @@
                 <TopRatedCourses />
             </div>
         </div>
-
+    </div>
     <div class="container-fluid" id="third_container">
         <div class="container">
             <BestLecture />
