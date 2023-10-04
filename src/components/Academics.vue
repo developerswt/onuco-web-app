@@ -6,7 +6,7 @@
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Available</span>Academics
-                <router-link to="/Courses">See all</router-link>
+                <router-link to="/AcademiNew">See all</router-link>
             </h4>
 
         </div>
@@ -189,14 +189,14 @@ export default {
   
     cursor: pointer;
     height: 120px;
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
     /* background: rgb(2,0,36); */
     background: #F6F6F6;
     background: #F6F6F6;
-    background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
+background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
 
 
     transition: 0.3s;
@@ -380,7 +380,7 @@ router-link {
 .parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     margin: 30px 0px 30px 0px;
 }
 

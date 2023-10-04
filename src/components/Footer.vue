@@ -37,7 +37,7 @@ export default {
     bottom: 0px;
     left: 0px; */
     width: 100%;
-    height:auto;
+    height: 100%;
     background: #0066CC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -66,12 +66,6 @@ export default {
     .footer .social-link p {
         text-align: left;
         color: white;
-    }
-}
-
-@media screen and (max-width: 912px) {
-    .footer{
-        height: 155px;
     }
 }
 </style>

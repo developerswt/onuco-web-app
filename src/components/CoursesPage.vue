@@ -12,13 +12,13 @@
                             <!-- <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }" -->
                                 <!-- style="color: white;text-decoration: none;"> -->
                                 <div class="row">
-                                    <div class="col-md-3 col-3 col-sm-3">
-                                        <div class="course_block" style="color: white; position: relative; left: 17px;">
+                                    <div class="col-md-3 col-3 col-sm-3"  style="color: white; position: relative;left: 17px;">
+                                        <div class="course_block">
                                             <img src="../assets/images/book1.png">
                                         </div>
 
                                     </div>
-                                    <div class="col-md-9 col-9 col-sm-9 pt-2">
+                                    <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 4px;">
                                         <div class="course_block_one">
                                             <h5 :title="branch.name">{{ branch.name }}</h5>
                                             <p>{{ branch.description }}</p>
@@ -130,13 +130,12 @@ export default {
 }
 
 .box {
-
-    height: 115px;
-    width: 360px;
+    height:100px;
+    width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding: 20px;
+    padding:18px;
 
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;

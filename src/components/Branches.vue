@@ -11,7 +11,7 @@
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                                 <img src="../assets/images/book1.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 1px;">
+                            <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 0px;">
                                 <h5  data-placement="top" :title="branch.name" >{{ branch.name }}</h5>
                                 <p>{{ branch.description }}</p>
                                 <p>{{ branch.title }}</p>

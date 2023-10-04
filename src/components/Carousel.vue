@@ -96,7 +96,7 @@
       </div>
     </div> 
   </div>  -->
-  <div class="container mt-5 carousel_header">
+  <div class="container-fluid mt-5 carousel_header">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators (optional) -->
       <!-- <ol class="carousel-indicators">
@@ -105,11 +105,11 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol> -->
       
-      <div class="carousel-inner">
+      <div class=" carousel-inner" style="margin-top: -30px;">
         <!-- Slide 1 -->
-        <div class="carousel-item active ">
-          <div class="carousel-card" style="height: 260px;">
-            <div class="row">
+        <div class=" carousel-item active ">
+          <div class=" carousel-card" style="height: 260px;">
+            <div class=" container row">
               <div class="col-lg-8">
                 <div class="right_carousel_block">
                   <h4>One App Many Benifits</h4>
@@ -118,7 +118,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="image_class">
-                  <img src="../assets/images/mg25.png" class="img-fluid">
+                  <img src="../assets/images/g.png" class="img-fluid">
                 </div>
               </div>
               <div class="col-lg-9 search_box">
@@ -189,7 +189,8 @@ export default {
   width: 100%;
   height: 202px;
   /* UI Properties */
-  background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
+  /* background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box; */
+  background-image: url('../assets/images/bg.jpg');
   border-radius: 8px;
   opacity: 1;
 
@@ -199,8 +200,8 @@ export default {
 }
 
 .search_box {
-  margin-top: 20px; 
-  margin-left: 100px;
+  margin-top: 15px; 
+  margin-left: 280px;
 }
 /* .slider_1 h2 {
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 25px/33px var(--unnamed-font-family-segoe-ui);
@@ -225,7 +226,7 @@ export default {
   width: 185px;
   height: 251px;
   padding-left: 10px;
-  margin-left: 30px;
+  margin-left: 100px;
 /* UI Properties */
   /* background: transparent url('../assets/images/mg25.png') 0% 0% no-repeat padding-box; */
   opacity: 1;
@@ -240,8 +241,8 @@ export default {
 }
 
 #carousel_button {
-  height: 45px;
-  padding: 0px 50px 0px 50px;
+  height: 43px;
+  padding: -1px 50px 0px 50px;
   background: white;
   color: #0066CC;
   border-radius: 22px;
@@ -250,8 +251,10 @@ export default {
 .merged_block {
   border: 1px solid white;
   border-radius: 30px;
-  padding: 4px;
+  padding: 0px;
   margin-top: -98px;
+  width: 570px;
+  height: 44px;
  
  
 }
@@ -274,23 +277,25 @@ export default {
   top: 105px;
 }
 .right_carousel_block {
-  text-align: left;
+  text-align: center;
   color: white;
+  margin-left: 200px;
+  margin-bottom: 20px;
 }
 .right_carousel_block h4 {
   font-size: 25px;
   text-align: left;
   position: relative;
-  left: 110px;
-  top: 60px;
+  left: 80px;
+  top: 37px;
 
 }
 .right_carousel_block p {
   font-size: 18px;
   text-align: left;
   position: relative;
-  left: 110px;
-  top: 65px;
+  left: 83px;
+  top: 42px;
 }
 @media screen and (min-width: 100px) and (max-width: 912px) {
   .img-fluid {
@@ -317,7 +322,7 @@ export default {
     top: 60px;
   }
   .right_carousel_block p {
-    font-size: 18px;
+    font-size: 14px;
     text-align: left;
     position: relative;
     left: 75px;
@@ -397,4 +402,8 @@ export default {
     float: right;
   }
 } */
+.container-fluid{
+  padding-left: 0px;
+  padding-right: 0px;
+}
 </style> 

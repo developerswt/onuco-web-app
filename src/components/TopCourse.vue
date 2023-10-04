@@ -1,16 +1,14 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container">
-            <h4 class="academic_head_text">
-
-                <span id="aca_text">Top</span>Rated Courses
-                <router-link to="/TopCourse">See all</router-link>
-            </h4>
+        <div class="container" style="margin-top: 70px;">
+            <h6>Home > Top Rated Courses</h6>
+            <h4 class="academic_head_text pt-4">
+                <span id="aca_text">Top</span>Rated Courses</h4>
         </div>
- </div>
-    <div class="container-fluid mb">
-        <div class="row mt-4">
-            <div class="box">
+    </div>
+    <div class="container mb ">
+        <div class="row ">
+            <div class="box ">
                 <router-link to="/Universities" style="text-decoration: none;">
                     <div class="wer">
                         <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
@@ -148,13 +146,149 @@
  
                 </router-link>
             </div>
+            <div class="box">
+                <router-link to="/Universities" style="text-decoration: none;">
+                    <div class="wer">
+                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
+                        </div>
+                        <div class="offer-details">
+                            <font class="card-image-top"><b>20 % OFF</b></font>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">JAVA Language</h5> -->
+                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
+                        <div class="text-left price" style="float: right;">
+                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                                
+                            </div> <br>
+                           <div class="row">
+                            <div class="col-sm-6  star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="col-sm-6" >
+                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            </div>
+                           </div>
+                        </div>
+ 
+                </router-link>
+            </div>
+            <div class="box">
+                <router-link to="/Universities" style="text-decoration: none;">
+                    <div class="wer">
+                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
+                        </div>
+                        <div class="offer-details">
+                            <font class="card-image-top"><b>20 % OFF</b></font>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">JAVA Language</h5> -->
+                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
+                        <div class="text-left price" style="float: right;">
+                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                                
+                            </div> <br>
+                           <div class="row">
+                            <div class="col-sm-6  star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="col-sm-6" >
+                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            </div>
+                           </div>
+                        </div>
+ 
+                </router-link>
+            </div>
+            <div class="box">
+                <router-link to="/Universities" style="text-decoration: none;">
+                    <div class="wer">
+                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
+                        </div>
+                        <div class="offer-details">
+                            <font class="card-image-top"><b>20 % OFF</b></font>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">JAVA Language</h5> -->
+                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
+                        <div class="text-left price" style="float: right;">
+                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                                
+                            </div> <br>
+                           <div class="row">
+                            <div class="col-sm-6  star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="col-sm-6" >
+                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            </div>
+                           </div>
+                        </div>
+ 
+                </router-link>
+            </div>
+            <div class="box">
+                <router-link to="/Universities" style="text-decoration: none;">
+                    <div class="wer">
+                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
+                        </div>
+                        <div class="offer-details">
+                            <font class="card-image-top"><b>20 % OFF</b></font>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">JAVA Language</h5> -->
+                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
+                        <div class="text-left price" style="float: right;">
+                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                                
+                            </div> <br>
+                           <div class="row">
+                            <div class="col-sm-6  star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="col-sm-6" >
+                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            </div>
+                           </div>
+                        </div>
+ 
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'TopRatedCourses'
+    name: 'TopRatedCourse'
 }
 </script>
 
@@ -242,6 +376,7 @@ export default {
     flex-wrap: wrap;
     margin-left: 0px;
     margin-right: 0px;
+    padding-top: 20px;
 }
 
 .box {
@@ -398,16 +533,38 @@ export default {
 }
 
 .box{
-height: auto;
+height: 392px;
 }
+
 }
 @media only screen and (min-width: 280px) and (max-width: 700px) {
     .btn{ 
-    margin-left: 118px;
+    margin-left: 169px;
     margin-top: -30px;
 
-   
 } 
+.box{
+height: 382px;
 }
+.box .star {
+    color: orange;
+    position: relative;
+    top: 8px;
+    left: -12px;
+    letter-spacing: 2px;
+    display: flex;
+}
+}
+.container{
+    padding-bottom: 20px;
+}
+@media(mix-width: 920px) {
+.container{
+    padding-bottom: 9rem;
+max-width: 0px;
+}
+
+}
+
 </style>
 
