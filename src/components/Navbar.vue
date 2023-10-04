@@ -216,8 +216,8 @@ li {
 }
 
 .navbar {
-    background: #E4F0FE 0% 0% no-repeat padding-box;
-    background: #E4F0FE 0% 0% no-repeat padding-box;
+    background: white 0% 0% no-repeat padding-box;
+    background: white 0% 0% no-repeat padding-box;
     opacity: 1;
 
 

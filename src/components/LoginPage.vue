@@ -154,17 +154,18 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in pt-3" :sign-up-attributes="['name',]" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;">
+    <authenticator class="custom-sign-in pt-3" :sign-up-attributes="['name',]" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;position: relative;
+    bottom:300px; margin-top:70px">
         
-        <template v-slot:header>
-        <div style="padding: var(--amplify-space-large); text-align: center">
+        <!-- <template v-slot:header>
+        <div style="padding: var(--amplify-space-large); text-align: center;">
           <img
             class="amplify-image pt-5"
             alt="Amplify logo"
             src="../assets/images/logo.png"
           />
         </div>
-      </template>
+      </template> -->
         
         <template v-slot="{ user, signOut }">
             <h1>Hello {{ user.username }}!</h1>
@@ -189,8 +190,8 @@ authenticator {
     --background-color: lightblue;
 }
 [data-amplify-authenticator] {
-  --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
-  --amplify-colors-background-secondary: var(--amplify-colors-neutral-100);
+  /* --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
+  --amplify-colors-background-secondary: var(--amplify-colors-neutral-100); */
   --amplify-colors-brand-primary-10: var(--amplify-colors-teal-100);
   --amplify-colors-brand-primary-80: var(--amplify-colors-teal-40);
   --amplify-colors-brand-primary-90: var(--amplify-colors-teal-20);
@@ -210,11 +211,18 @@ authenticator {
     color: black;
 }
 .amplify-input .amplify-field-group__control {
-    background-color: gray !important;
+    background-color: #EFF5FC !important;
 }
 @media screen and (max-width: 600px) {
     .login_class {
         padding: 15px;
     }
+}
+
+.login_class{
+    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
+    background-size: cover !important;
+    position: relative;
+    top:300px
 }
 </style>

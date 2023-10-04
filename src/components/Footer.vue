@@ -1,5 +1,4 @@
 <template>
-    <div class="" style="padding-bottom: 150px;">
     <div class="container-fluid footer">
         <div class="container">
             <div class="row">
@@ -20,7 +19,6 @@
         </div>
    
     </div>
-</div>
 </template>
 
 
@@ -33,11 +31,10 @@ export default {
 
 <style scoped>
 .footer {
-    position: fixed;
-    bottom: 0px;
+    top: 1582px;
     left: 0px;
     width: 100%;
-    height:auto;
+    height: 100%;
     background: #0066CC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -66,12 +63,6 @@ export default {
     .footer .social-link p {
         text-align: left;
         color: white;
-    }
-}
-
-@media screen and (max-width: 912px) {
-    .footer{
-        height: 155px;
     }
 }
 </style>

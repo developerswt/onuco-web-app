@@ -24,7 +24,9 @@ import TermsCondition from "./components/TermsCondition.vue"
 import GetSupport from "./components/GetSupport.vue"
 import Mylearnings from "./components/Mylearnings.vue"
 import UpdatedProfile from "./components/UpdatedProfile.vue"
-
+import TopCourse from "./components/TopCourse.vue"
+import BestFaculty from "./components/BestFaculty.vue"
+import AcademiNew from "./components/AcademiNew.vue"
 
 let user;
 
@@ -256,7 +258,31 @@ const routes = [
         title: 'Picture Page',
     },
   },
-  
+{
+  path:"/TopCourse",
+  name: "TopCourse",
+  component: TopCourse,
+  meta: {
+      title: 'Picture Page',
+  },
+}, 
+{
+  path:"/BestFaculty",
+  name: "BestFaculty",
+  component: BestFaculty,
+  meta: {
+      title: 'Picture Page',
+  },
+},
+
+{
+  path: "/AcademiNew",
+  name: "AcademiNew",
+  component: AcademiNew,
+  meta: {
+      title: 'Privacy Page',
+  },
+},
 
 
 ];

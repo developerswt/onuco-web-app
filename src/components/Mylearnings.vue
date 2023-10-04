@@ -104,6 +104,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
+                                                <button class="bt">Renew</button>
                                             </div>
                                         </div>
                                     </div>
@@ -131,6 +132,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
+                                                <button class="bt">Renew</button>
                                             </div>
                                         </div>
                                     </div>
@@ -158,6 +160,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
+                                                <button class="bt">Renew</button>
                                             </div>
                                         </div>
                                     </div>
@@ -170,15 +173,130 @@
                         </el-tab-pane>
                              
                              <el-tab-pane label="LIVE" name="third">Live content</el-tab-pane>
-                             <el-tab-pane label="COMPLETED" name="fourth">completed</el-tab-pane>
-                        <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <p>Live content</p>
+                             <!-- <el-tab-pane label="COMPLETED" name="fourth">completed</el-tab-pane> -->
+              
+                            <el-tab-pane label="COMPLETED" name="fourth">
+
+                           <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="">
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-8 col-sm-8 col-md-6">
+                                        <h4 class="academic_head_text">
+
+                                            <span id="aca_text">interested</span> Courses
+
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
+                                        <router-link to="#" id="see_text">See all</router-link>
+                                    </div>
+                                </div>
+
+
+                                <!-- <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="notify_block">
+
+                                            <p> <i class="fa-solid fa-triangle-exclamation"
+                                                    style="color: #ff9900;"></i>Please
+                                                subscribe the subjects to
+                                                get more details...</p>
+                                            <button id="course_list_button">Course List</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                  <div class="inner_block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">Computer Science</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">22h 33m left</p>
+                                                </div>
+                                                <button class="bt">Renew</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inner_block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">E & C</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">22h 33m left</p>
+                                                </div>
+                                                <button class="bt">Renew</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inner_block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">Mech</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">22h 33m left</p>
+                                                </div>
+                                                <button class="bt">Renew</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <p>completed</p>
-                        </div> -->
-                   
-                </el-tabs>
+                    </el-tab-pane>
+               </el-tabs>
             </section>
          </div>
     </div>
@@ -242,12 +360,12 @@ export default {
 
 .inner_block {
 
-    box-shadow: 0px 0px 6px #000000CC;
+    /* box-shadow: 0px 0px 6px #000000CC; */
     border-radius: 47px 10px 10px 10px;
     padding: 15px;
     margin: 10px;
     height: 80px;
-    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(225, 234, 250) 0%, rgb(225, 234, 238) 90%);
 
 }
 
@@ -451,6 +569,13 @@ export default {
 .inner_block{
     height: auto;
 }
+}
+.bt{
+    background-color: #0177FB;
+    color: white;
+    position: relative;
+    left: 407px;
+    bottom: 39px;
 }
 
 </style>

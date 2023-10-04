@@ -4,7 +4,7 @@
             <h4 class="academic_head_text">
 
 <span id="aca_text">Best</span>Lecturers
-<router-link to="#">See all</router-link>
+<router-link to="/BestFaculty">See all</router-link>
 </h4>
         </div>
     
@@ -97,8 +97,6 @@
 
 <script>
 import axios from 'axios'
-import 'owl.carousel/dist/assets/owl.carousel.css'; // Import Owl Carousel CSS
-import 'owl.carousel'; // Import Owl Carousel JavaScript
 
 export default {
     name: 'BestLecture',
@@ -116,27 +114,9 @@ export default {
             console.log(error);
         }
     },
-    mounted() {
-    // Initialize Owl Carousel
-    $('.owl-carousel').owlCarousel({
-      loop: true,
-      margin: 10,
-      nav: true,
-      responsive: {
-        0: {
-          items: 1
-        },
-        600: {
-          items: 3
-        },
-        1024: {
-          items: 5
-        }
-      }
-    });
   }
 
-}
+
 </script>
 
 

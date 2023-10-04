@@ -1,8 +1,6 @@
 <template>
     <Carousel />
-    <!-- <Carouseltwo /> -->
-
-
+    <Carouseltwo />
 
     <div class="container-fluid jk ">
         <div class="container-fluid" id="first_container">
@@ -13,7 +11,6 @@
         <div class="container-fluid" id="second_container">
             <div class="container">
                 <TopRatedCourses />
-                
             </div>
         </div>
 
@@ -26,6 +23,7 @@
 
     </div>
     <Offer />
+    
     <div class="container-fluid content">
         <div class="container">
             <div class="Opt-in">
@@ -38,9 +36,12 @@
             </div>
         </div>
     </div>
-    <div class="container pt-4 mb-5">
-        <img src="../assets/images/add.png" style="width: 100%; height: 100%;">
-    </div>
+    <!-- <div class="text-center" >
+        <img src="../assets/images/add.png" style="width: 80%; height: 100%;">
+    </div> -->
+    <div class="text-center ">
+    <img :src="currentImage" class="banner">
+  </div>
 </template>
 
 <script>
@@ -49,7 +50,7 @@ import Carousel from "./Carousel.vue"
 import TopRatedCourses from "./TopRatedCourses.vue"
 import BestLecture from "./BestLecture.vue"
 import Offer from './Offer.vue'
-// import Carouseltwo from './Carouseltwo.vue'
+import Carouseltwo from './Carouseltwo.vue'
 
 
 export default {
@@ -60,15 +61,51 @@ export default {
         TopRatedCourses,
         BestLecture,
         Offer,
-        // Carouseltwo
+        Carouseltwo
 
+    },
+    data() {
+    return {
+      imageSources: [
+         "../assets/images/foodadd.png",
+        "../assets/images/acadd.jpg",
+        "../assets/images/ac2.jpg",
+        "../assets/images/ac4.jpg",
+      ],
+      currentIndex: 0,
+    };
+  },
+  computed: {
+    currentImage() {
+      return this.imageSources[this.currentIndex];
+    },
+  },
+  created() {
+    // Check if the currentIndex is stored in local storage
+    const storedIndex = localStorage.getItem("currentIndex");
+    if (storedIndex !== null) {
+      this.currentIndex = parseInt(storedIndex);
+    } else {
+      // If it's not in local storage, set a random initial index
+      this.currentIndex = Math.floor(Math.random() * this.imageSources.length);
     }
-}
+  },
+  rotateImages() {
+  setInterval(() => {
+    this.currentIndex = (this.currentIndex + 1) % this.imageSources.length;
+    // Store the currentIndex in local storage
+    localStorage.setItem("currentIndex", this.currentIndex.toString());
+  }, 5000); // Change image every 5 seconds
+},
+};
+
+
+
 </script>
 
 <style scoped>
 .jk {
-    background: #EFF5FC 0% 0% no-repeat padding-box;
+    background: white 0% 0% no-repeat padding-box;
     opacity: 1;
 }
 
@@ -97,13 +134,7 @@ export default {
 
 }
 
- 
-
-
-
-
-
-}
+ }
 
 .content {
     top: 1582px;
@@ -183,7 +214,7 @@ export default {
 }
 
 #home_container {
-    margin-top: 75px;
+    margin-top: 0px;
 }
 
 @media (max-width: 1024px) {
@@ -197,18 +228,38 @@ export default {
     }
 }
 
-#first_container{
+/* #first_container{
     background: #DDEDFB;
    
-}
+} */
 
 #second_container{
-    background:#EFF5FC;
+    background: #DDEDFB;
 }
 
-#third_container
+/* #third_container
 
 {
     background:#DDEDFB;
+} */
+
+.banner{
+    width: 80%;
+    height: 180px;
+    padding-bottom: 25px;
+    
+    text-align: center;
+
+
 }
+
+@media screen and (max-width: 912px) {
+
+.banner{
+     margin-top: -6px;
+     height: 250px;
+    }
+
+}
+
 </style>
