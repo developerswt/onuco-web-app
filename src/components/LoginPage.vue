@@ -47,64 +47,63 @@ export default {
                       custom: true,
                       validate: this.customSignUpValidation
                   },
-                }    
-            //       email: {
-            //           placeholder: 'Enter Your Email Here',
-            //           isRequired: true,
-            //           label: 'Email:',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       name: {
-            //           placeholder: 'Enter Your Name Here',
-            //           isRequired: true,
-            //           label: 'Name:',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       birthdate: {
-            //           isRequired: true,
-            //           label: 'Birth Date:',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       phone_number: {
-            //           placeholder: 'Enter Your Phone_Number Here',
-            //           isRequired: true,
-            //           label: 'Phone Number:',
-            //           required: true,
-            //           dialCode: '+91',
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       address: {
-            //           placeholder: 'Enter Your Address Here',
-            //           isRequired: true,
-            //           label: 'Address:',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       gender: {
-            //           placeholder: 'Enter Your Gender Here',
-            //           label: 'Gender',
-            //           type: 'text',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //       picture: {
-            //           placeholder: 'Enter Your Picture Here',
-            //           label: 'Picture',
-            //           type: 'text',
-            //           required: true,
-            //           custom: true,
-            //           validate: this.customSignUpValidation
-            //       },
-            //   },
+                  email: {
+                      placeholder: 'Enter Your Email Here',
+                      isRequired: true,
+                      label: 'Email:',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  name: {
+                      placeholder: 'Enter Your Name Here',
+                      isRequired: true,
+                      label: 'Name:',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  birthdate: {
+                      isRequired: true,
+                      label: 'Birth Date:',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  phone_number: {
+                      placeholder: 'Enter Your Phone_Number Here',
+                      isRequired: true,
+                      label: 'Phone Number:',
+                      required: true,
+                      dialCode: '+91',
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  address: {
+                      placeholder: 'Enter Your Address Here',
+                      isRequired: true,
+                      label: 'Address:',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  gender: {
+                      placeholder: 'Enter Your Gender Here',
+                      label: 'Gender',
+                      type: 'text',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+                  picture: {
+                      placeholder: 'Enter Your Picture Here',
+                      label: 'Picture',
+                      type: 'text',
+                      required: true,
+                      custom: true,
+                      validate: this.customSignUpValidation
+                  },
+              },
           },    
           // authConfig: {
           //   signUpConfig: {
@@ -154,18 +153,17 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in pt-3" :sign-up-attributes="['name',]" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="margin-bottom: 6%; background-color: none;position: relative;
-    bottom:300px; margin-top:70px">
+    <authenticator class="custom-sign-in" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :social-providers="['facebook', 'google']"  style="background-color: none;">
         
-        <!-- <template v-slot:header>
-        <div style="padding: var(--amplify-space-large); text-align: center;">
-          <img
+        <template v-slot:header>
+        <div style="padding: var(--amplify-space-large); text-align: center">
+          <!-- <img
             class="amplify-image pt-5"
             alt="Amplify logo"
             src="../assets/images/logo.png"
-          />
+          /> -->
         </div>
-      </template> -->
+      </template>
         
         <template v-slot="{ user, signOut }">
             <h1>Hello {{ user.username }}!</h1>
@@ -174,6 +172,7 @@ export default {
   
     </authenticator>
     </div>
+    <div class="container-fluid"></div>
   </template>
   
 
@@ -186,12 +185,27 @@ export default {
   );
   
 }
-authenticator {
+.amplify-card {
+  /* background-color: var(--amplify-colors-background-secondary); */
+  box-shadow: 0px 3px 6px #00000029;
+  border: none;
+}
+
+.amplify-heading--6 {
+  color: var(--amplify-colors-brand-secondary-80);
+}
+.amplify-text {
+  color: var(--amplify-colors-neutral-80);
+}
+.amplify-tabs-item {
+    color: #0066CC !important;
+}
+.authenticator {
     --background-color: lightblue;
 }
 [data-amplify-authenticator] {
-  /* --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
-  --amplify-colors-background-secondary: var(--amplify-colors-neutral-100); */
+  --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
+  --amplify-colors-background-secondary: var(--amplify-colors-neutral-100);
   --amplify-colors-brand-primary-10: var(--amplify-colors-teal-100);
   --amplify-colors-brand-primary-80: var(--amplify-colors-teal-40);
   --amplify-colors-brand-primary-90: var(--amplify-colors-teal-20);
@@ -211,18 +225,21 @@ authenticator {
     color: black;
 }
 .amplify-input .amplify-field-group__control {
-    background-color: #EFF5FC !important;
+    background-color: gray !important;
+}
+.login_class {
+    padding-top: 4%;
+    z-index: 1;
 }
 @media screen and (max-width: 600px) {
     .login_class {
         padding: 15px;
     }
 }
+.container-fluid {
+    width: 100%;
+    height: 272px;
+    background-image: url('../assets/images/Group 246.png');
 
-.login_class{
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
-    position: relative;
-    top:300px
 }
 </style>

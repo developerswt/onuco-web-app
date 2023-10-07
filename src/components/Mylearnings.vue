@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs />
+        <!-- <Breadcrumbs /> -->
         <div class="container">
             <div class="learning_block">
 

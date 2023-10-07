@@ -45,7 +45,9 @@
                                     </div>    
                                     <div class="User_details">
                                         <h2>Welcome</h2>
-                                        <h3>User Name !!!</h3>
+                                        <!-- <h3>User Name !!!</h3> -->
+                                        <h3 v-if="!editing">User Name !!!</h3>
+                                        <input v-model="userName" placeholder="User Name" type="text" v-else style="border: 1px solid #DEDEDE; font-size: 14px;color: #707070;">
                                     </div>
                                 </div>
                                 <!-- <div class="col-sm-3 User_details">
@@ -55,7 +57,10 @@
                             </div>    
                         </div>
                         <div class="esdit_profile">
-                            <button class="button button1">Edit Profile</button>
+                            <!-- <button class="button button1">Edit Profile</button> -->
+                            <button class="button button1" style="margin-left: -1.5%;" @click="editProfile" v-if="!editing">EDIT PROFILE</button>
+                            <button class="button button1" style="margin-left: 4%;" @click="saveProfile" v-else>SAVE</button>
+
                         </div>
                     </div>
                 </div>
@@ -65,7 +70,9 @@
                             <div class="card-body">
                                 <h2>User details</h2>
                                 <h3>Email address</h3>
-                                <p>userName@email.com</p>
+                                <!-- <p>userName@email.com</p> -->
+                                <p v-if="!editing">userName@email.com</p>
+                                <input v-model="userEmail" placeholder="userName@email.com" type="text" v-else style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
                     </div>
@@ -116,7 +123,34 @@
 <script>
 
 export default {
-    name: 'UpdatedProfile'
+    name: 'UpdatedProfile',
+    data() {
+        return {
+            editing: false,
+        }
+    },
+    methods: {
+        editProfile() {
+            this.editing = true;
+        },
+        saveProfile() {
+            // Perform any necessary data validation here
+
+            // Save the changes
+            this.editing = false;
+        }
+    },
+    async created() {
+        try {
+            const res = await axios.get('/UploadS3Files/profile');
+            this.updatedAttribute = res.data;
+            console.log(this.updatedAttribute);    
+        } catch (error) {
+            console.log(error);
+        }    
+    },
+
+
 }
 </script>
 

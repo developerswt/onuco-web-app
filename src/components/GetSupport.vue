@@ -1,5 +1,5 @@
 <template>
-    <Breadcrumbs />
+    <!-- <Breadcrumbs /> -->
     <div class="container-fluid jk">
 
 <div class="error_parent_block">

@@ -105,7 +105,7 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol> -->
       
-      <div class=" carousel-inner" style="margin-top: -30px;">
+      <div class=" carousel-inner" style="margin-top: -33px; border-radius: none;">
         <!-- Slide 1 -->
         <div class=" carousel-item active ">
           <div class=" carousel-card" style="height: 260px;">
@@ -334,6 +334,9 @@ export default {
     text-align: center;
     position: relative;
     top: 105px;
+  }
+  .carousel-item {
+    border-radius: 0;
   }
   .slider_3 h3 {
     font-size: 25px;

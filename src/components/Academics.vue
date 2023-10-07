@@ -10,18 +10,15 @@
             </h4>
 
         </div>
-        <div class="mb">
-        <div class="parent_blocks">
-            <div v-for="item in academia" :key="item.id">
+        <carousel :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="item in academia" :key="item.id">
                 <div class="box1">
-                    <router-link v-bind:to="'/Academia?id='+ item.id"
-                        style="color: white;text-decoration: none;">
+                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                    style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
                             <div class="top">
-                                <!-- <span class="wr">{{ item.id in groupedItems ? '0' + groupedItems[item.id].length : '00'
-                                }}</span> -->
-                                <span class="wr">00</span>
+                                <span class="wr">0{{ item.bCount }}</span>
                             </div>
                             <div class="card-body">
                                 <div class="card-title">
@@ -29,15 +26,20 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="ty">{{ item.name }}</p>
+                        <p class="ty">{{ item.academia.name }}</p>
+                        
                     </router-link>
                 </div>
-            </div>
+            </slide>
+                    
 
+            <template #addons>
+                        
+                <navigation />
+                        
+            </template>
+        </carousel>
 
-        </div>
-
-    </div>
     </div>
     <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
 
@@ -45,54 +47,77 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import axiosInstance from '../config/axiosInstance'
 import router from '../router';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
-
-
-
-
-export default {
+export default defineComponent ({
     name: 'AcademicsView',
     components: {
-        Loading
+        Carousel,
+        Slide,
+        Loading,
+        Navigation,
     },
-    data() {
-        return {
-            isLoading: false,
-            academia: [],
-            branches: [],
-            isuser: localStorage.getItem("username")
-        }
-    },
-    computed: {
-        authorizationHeader() {
-            if (this.isLoggedIn) {
-                return `Bearer ${this.isuser}`;
-            } else {
-                return 'DummyValue'; // Set your dummy value here
+    data: () => ({
+        academia: [],
+        isLoading: false,
+   
+        settings: {
+            itemsToShow: 3,
+            snapAlign: 'start',
+        },
+   
+        breakpoints: {
+   
+            900: {
+                itemsToShow: 4,
+                snapAlign: 'start',
+            },
+            820: {
+                itemsToShow: 4,
+                snapAlign: 'start',
+            },
+            768:{
+                itemsToShow: 4,
+                snapAlign: 'start',
+            },
+            1024: {
+                itemsToShow: 7,
+                snapAlign: 'start',
+            },
+            
+            600: {
+                itemsToShow: 3,
+                snapAlign: 'start',
+            },
+            540: {
+                itemsToShow: 3,
+                snapAlign: 'start', 
+            },
+            414: {
+                itemsToShow: 2,
+                snapAlign: 'start',
+            },
+            375: {
+                itemsToShow: 2,
+                snapAlign: 'start',
+            },
+            390: {
+                itemsToShow: 2,
+                snapAlign: 'start',
+            },
+            360: {
+                itemsToShow: 2,
+                snapAlign: 'start',
             }
-        },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-        groupedItems() {
-            const grouped = {};
-            this.branches.forEach(item => {
-                if (!grouped[item.academyId]) {
-                    grouped[item.academyId] = [];
-                }
-                grouped[item.academyId].push(item);
-            });
-            return grouped;
-        }
 
-    },
-    // mounted() {
-    //     this.$gtm.trackView('MyScreenName', this.$route.path);
-    // },
+        },
+    }),
     async created() {
         this.isLoading = true;    
         try {
@@ -110,27 +135,8 @@ export default {
             this.isLoading = false;
         }
     },
-    // mounted() {
-    //     console.log(this.$breadcrumbs.value) // you can simply get current breadcrumbs
-        
-    //     // You can reactively change it
-    //     // !! It won't change meta object, or object returned by breadcrumb function
-    //     this.$breadcrumbs.value[0].label = 'New label'
-        
-    //     // if for some reason you need to recalculate breadcrumbs or create crumb for some path u can use these methods
-    //     /**
-    //      * Recalculate breadcrumbs for route
-    //      * @param {object} route
-    //      */
-    //     $breadcrumbs.setBreadcrumbsByRoute(this.$route)
-    //     /**
-    //      * Create breadcrumb object by path
-    //      * @param {string} path  
-    //      * @param {boolean} [isCurrent = false]
-    //      */
-    //     const newCrumb = $breadcrumbs.createBreadcrumb('/Login', true)
-    // }
-} 
+
+}) 
 </script>
 
 
@@ -183,20 +189,21 @@ export default {
     transition: 0.3s;
 } */
 
-.mb .box1 {
-
-    width: 122px;
-  
+.box1 {
+    /* width: 122px; */
+    width: 118px;
     cursor: pointer;
     height: 120px;
     border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
     /* background: rgb(2,0,36); */
     background: #F6F6F6;
     background: #F6F6F6;
-background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
+    background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
 
 
     transition: 0.3s;
@@ -209,7 +216,7 @@ background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0
     font-family: cursive-serif;
 }
 
-.mb .box1:hover {
+.box1:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
 }
@@ -217,7 +224,7 @@ background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0
 .mb .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
     margin-left: 0px;
     margin-right: 0px;
@@ -229,18 +236,40 @@ background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0
 }
 
 @media screen and (max-width: 1000px) {
-    .mb .box1 {
+    .box1 {
         /* width:48%; */
         margin-bottom: 55px;
     }
   
 }
-
-@media screen and (max-width: 598.98px) {
-    .mb .box1 {
-        width: 90%;
+@media screen and (max-width: 100px) and (max-width: 414px) {
+    .box1 {
+        width: 70%;
         margin: 30px 0px 30px 0px;
     }
+}
+@media screen and (min-width: 450px) and (max-width: 500px) {
+    .box1 {
+        width: 40%;
+        margin: 30px 0px 30px 0px;
+    }
+}
+@media screen and (min-width: 540px) and (max-width: 600px) {
+    .box1 {
+        width: 70%;
+        margin: 30px 0px 30px 0px;
+    }
+    .wr {
+        position: relative;
+        left: -8px;
+        top: -87px;
+    }
+}    
+@media only screen and (max-width: 598.98px) {
+    /* .box1 {
+        width: 40%;
+        margin: 30px 0px 30px 0px;
+    } */
 
     .academic_head_text {
         font-size: 15px !important;
@@ -301,8 +330,8 @@ background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0
 
 .wr {
     position: relative;
-    left: 28px;
-    top: -87px;
+    left: -7%;
+    top: -92px;
     /* font-size: 24px;
     color: white; */
     text-align: left;
@@ -334,8 +363,8 @@ router-link {
 
 .icon {
     position: relative;
-    left: 18%;
-    top: -22px;
+    left: -8%;
+    top: -24px;
 }
 
 @media screen and (min-width: 100px) and (max-width: 450px) {
@@ -354,13 +383,13 @@ router-link {
     }
 }
 
-@media screen and (min-width: 450px) and (max-width: 650px) {
+/* @media screen and (min-width: 450px) and (max-width: 650px) {
     .wr {
         position: relative;
         left: 30px;
         top: -87px;
     }
-}
+} */
 
 .academic_head_text {
     color: #006acd;
@@ -380,7 +409,7 @@ router-link {
 .parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin: 30px 0px 30px 0px;
 }
 

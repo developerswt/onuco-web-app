@@ -7,7 +7,62 @@
                 <span id="aca_text">Available</span>Academics</h4>
         </div>
       </div>
-      <div class="container mb">
+      <div class="mb">
+        <div class="parent_blocks">
+            <div v-for="item in academia" :key="item.id">
+                <div class="box1">
+                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        style="color: white;text-decoration: none;">
+                        <div class="box">
+                            <img src="../assets/images/book.png" class="icon">
+                            <div class="top">
+                                <span class="wr">0{{ item.bCount }}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <p class="ty1">COURSES</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="ty">{{ item.academia.name }}</p>
+                        
+                    </router-link>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+      <!-- <div class="mb">
+        <div class="parent_blocks">
+            <div v-for="item in academia" :key="item.id">
+                <div class="box1">
+                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        style="color: white;text-decoration: none;">
+                        <div class="box">
+                            <img src="../assets/images/book.png" class="icon">
+                            <div class="top">
+                                <span class="wr">0{{ item.bCount }}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <p class="ty1">COURSES</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="ty">{{ item.academia.name }}</p>
+                        {{ item.name }}
+                    </router-link>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div> -->
+      <!-- <div class="container mb">
         <div class="row">
          <div class="parent_blocks col-md-2 col-sm-4">
                 <div class="box1">
@@ -236,15 +291,34 @@
                 </div>
             </div>
             </div>
-        </div>
+        </div> -->
   </div>
 </template>
 <script>
+import axiosInstance from '../config/axiosInstance'
+
 export default {
     name: 'AcademiNewView',
     data() {
         return {
             academia: []
+        }
+    },
+    async created() {
+        this.isLoading = true;    
+        try {
+            const res = await axiosInstance.get(`/Academia`);
+            this.academia = res.data;
+            console.log(this.academia);
+            // const result = await axiosInstance.get(`Branches/GetBranchesByAcademiaCount?academyId=1`);
+            // this.branches = result.data;
+            // console.log(this.branches);
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
         }
     },
 }
@@ -300,217 +374,209 @@ export default {
 
 .mb .box1 {
 
-    width: 122px;
-  
-    cursor: pointer;
-    height: 120px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    border-top-left-radius: 160px 130px;
-    margin: 20px;
-    /* background: rgb(2,0,36); */
-    background: #F6F6F6;
-    background: #F6F6F6;
+/* width: 122px; */
+width: 118px;
+cursor: pointer;
+height: 120px;
+border: 1px solid #ccc;
+border-radius: 25px;
+border-top-left-radius: 160px 130px;
+margin: 20px;
+/* background: rgb(2,0,36); */
+background: #F6F6F6;
+background: #F6F6F6;
 background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
 
-
-    transition: 0.3s;
+margin-bottom: 67%;
+transition: 0.3s;
 }
 
 .mb .card-title {
-    text-align: center;
-    font-size: 20px;
-    color: white;
-    font-family: cursive-serif;
+text-align: center;
+font-size: 20px;
+color: white;
+font-family: cursive-serif;
 }
 
 .mb .box1:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
+transform: scale(1.05);
+box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
 }
 
 .mb .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
+display: flex;
+flex-direction: row;
+/* justify-content: space-between; */
+flex-wrap: wrap;
+margin-left: 0px;
+margin-right: 0px;
 }
 
 .card {
-    width: 28rem;
-    height: 28rem;
+width: 28rem;
+height: 28rem;
 }
 
 @media screen and (max-width: 1000px) {
-    .mb .box1 {
-        /* width:48%; */
-        margin-bottom: 55px;
-    }
-  
+.mb .box1 {
+    /* width:48%; */
+    margin-bottom: 55px;
+}
+
 }
 
 @media screen and (max-width: 598.98px) {
-    .mb .box1 {
-        width: 90%;
-        margin: 30px 0px 30px 0px;
-    }
+.mb .box1 {
+    width: 90%;
+    margin: 30px 0px 30px 0px;
+}
 
-    .academic_head_text {
-        font-size: 15px !important;
-        padding-left: 0 !important;
+.academic_head_text {
+    font-size: 15px !important;
+    padding-left: 0 !important;
 
-    }
+}
 
-    .category-test h4 a{
-        padding-right:0;
-        font-size: 15px !important;
-    }
-  
-    .ty{
-        margin-top: -78px;
-  
-    }
-    
+.category-test h4 a{
+    padding-right:0;
+    font-size: 15px !important;
+}
+
+.ty{
+    margin-top: -78px;
+
+}
+
 
 }
 
 @media only screen and (max-width: 912px) {
-    .card {
-        width: 21rem;
-        height: 28rem;
-        border: none;
-    }
+.card {
+    width: 21rem;
+    height: 28rem;
+    border: none;
+}
 }
 
 @media (min-width: 768px) and (max-width: 991.92px) {
-    .academic_head_text {
-        font-size: 20px;
-    }
-  
+.academic_head_text {
+    font-size: 20px;
+}
+
 
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
-    .academic_head_text {
-        font-size: 18px !important;
-        padding-left:0 !important;
-    }
-   
-    #home_container{
-        margin-top:0 ;
+.academic_head_text {
+    font-size: 18px !important;
+    padding-left:0 !important;
+}
 
-    }
+#home_container{
+    margin-top:0 ;
+
+}
 
 }
 
 .dot {
-    height: 70px;
-    width: 70px;
-    color: white;
-    background-color: orange;
-    border-radius: 50%;
-    display: inline-block;
+height: 70px;
+width: 70px;
+color: white;
+background-color: orange;
+border-radius: 50%;
+display: inline-block;
 }
 
 .wr {
-    position: relative;
-    left: 28px;
-    top: -87px;
-    /* font-size: 24px;
-    color: white; */
-    text-align: left;
-    font: normal normal normal 41px/54px Segoe UI;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-    opacity: 1;
+position: relative;
+left: 28px;
+top: -87px;
+/* font-size: 24px;
+color: white; */
+text-align: left;
+font: normal normal normal 41px/54px Segoe UI;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
 }
 
 .ty {
-    margin-top: -94px;
-    font-size: 14px;
-    color: black;
-    text-align: center;
+margin-top: -94px;
+font-size: 14px;
+color: black;
+text-align: center;
 }
 
 .ty1 {
-    margin-top: 0px;
-    font-size: 12px;
-    color: white;
-    position: relative;
-    top: -76px;
-    text-align: center;
+margin-top: 0px;
+font-size: 14px;
+color: white;
+position: relative;
+top: -76px;
+text-align: center;
 }
 
 router-link {
-    text-decoration: none;
+text-decoration: none;
 }
 
 .icon {
-    position: relative;
-    left: 18%;
-    top: -22px;
+position: relative;
+left: 18%;
+top: -22px;
 }
 
 @media screen and (min-width: 100px) and (max-width: 450px) {
-    .wr {
-        position: relative;
+.wr {
+    position: relative;
 
-        top: -87px;
-    }
+    top: -87px;
+}
 }
 
 @media screen and (min-width: 650px) and (max-width: 912px) {
-    .wr {
-        position: relative;
+.wr {
+    position: relative;
 
-        top: -87px;
-    }
+    top: -87px;
+}
 }
 
 @media screen and (min-width: 450px) and (max-width: 650px) {
-    .wr {
-        position: relative;
-        left: 30px;
-        top: -87px;
-    }
+.wr {
+    position: relative;
+    left: 30px;
+    top: -87px;
+}
 }
 
 .academic_head_text {
-    color: #006acd;
-    padding-left: 10px;
-    
-    font-size: 20px;
+color: #006acd;
+/* padding-left: 10px; */
+
+font-size: 20px;
 
 }
 
 
 #aca_text {
-    color: #006acd;
-    font-weight: bold;
-    padding-right: 10px;
+color: #006acd;
+font-weight: bold;
+padding-right: 10px;
 }
 
 .parent_blocks {
-    display:table-cell;
-    /* flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 30px 0px 30px 0px; */
-    max-width: 138px;
-    padding: 0px;
-}
-@media screen and (min-width: 300px) and (max-width: 650px){
-.parent_blocks{
-
-    margin-left: 22px;
-    margin-right: 12px;
-}
+display: flex;
+flex-wrap: wrap;
+/* justify-content: space-between; */
+margin: 30px 0px 30px 0px;
 }
 
 #academy_container{
-    padding:15px 0px 15px 0px;
+padding:15px 0px 15px 0px;
 }
+
 .num{
     color: white;
     font-size: 35px;

@@ -27,6 +27,8 @@ import UpdatedProfile from "./components/UpdatedProfile.vue"
 import TopCourse from "./components/TopCourse.vue"
 import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
+import UserNotification from "./components/UserNotification.vue"
+
 
 let user;
 
@@ -143,7 +145,7 @@ const routes = [
   
   {
     // path: "/Academia/:name"
-    path: "/Academia",
+    path: "/Academia/:name",
     name: "Branches",
     component: Branches,
     meta: {
@@ -176,7 +178,7 @@ const routes = [
     },
   },
   {
-    path: "/CourseDetails",
+    path: "/CourseDetails/:name",
     name: "CourseDetails",
     component: CourseDetails,
     meta: {
@@ -274,31 +276,39 @@ const routes = [
         title: 'Picture Page',
     },
   },
-{
-  path:"/TopCourse",
-  name: "TopCourse",
-  component: TopCourse,
-  meta: {
-      title: 'Picture Page',
+  {
+    path:"/TopCourse",
+    name: "TopCourse",
+    component: TopCourse,
+    meta: {
+        title: 'Picture Page',
+    },
+  }, 
+  {
+    path:"/BestFaculty",
+    name: "BestFaculty",
+    component: BestFaculty,
+    meta: {
+        title: 'Picture Page',
+    },
   },
-}, 
-{
-  path:"/BestFaculty",
-  name: "BestFaculty",
-  component: BestFaculty,
-  meta: {
-      title: 'Picture Page',
+  {
+    path:"/UserNotification",
+    name: "UserNotification",
+    component: UserNotification,
+    meta: {
+        title: 'Notification Page',
+    },
   },
-},
 
-{
-  path: "/AcademiNew",
-  name: "AcademiNew",
-  component: AcademiNew,
-  meta: {
-      title: 'Privacy Page',
+  {
+    path: "/AcademiNew",
+    name: "AcademiNew",
+    component: AcademiNew,
+    meta: {
+        title: 'Privacy Page',
+    },
   },
-},
 
 
 ];

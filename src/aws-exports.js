@@ -6,11 +6,24 @@ const awsmobile = {
     "aws_cognito_region": "ap-south-1",
     "aws_user_pools_id": "ap-south-1_B1E7wRotL",
     "aws_user_pools_web_client_id": "5v5s5cpgi58obounk00n2md9ab",
-    "oauth": {},
+    "oauth": {
+        "domain": "skillmeridiandev.auth.ap-south-1.amazoncognito.com",
+        "scope": [
+            "email",
+            "openid",
+            "phone"
+        ],
+        "redirectSignIn": "http://localhost:5173",
+        "redirectSignOut": "http://localhost:5173/Login",
+        "responseType": "code"
+    },
+    "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_username_attributes": [
         "EMAIL"
     ],
-    "aws_cognito_social_providers": [],
+    "aws_cognito_social_providers": [
+        "GOOGLE"
+    ],
     "aws_cognito_signup_attributes": [
         "NAME"
     ],
@@ -26,7 +39,8 @@ const awsmobile = {
         ]
     },
     "aws_cognito_verification_mechanisms": [
-        "EMAIL"
+        "EMAIL",
+        "PHONE_NUMBER"
     ]
 };
 

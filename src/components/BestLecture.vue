@@ -9,31 +9,30 @@
         </div>
     
     </div>
-        
         <div class="container-fluid">
             <!-- <div class="row pt-5"> -->
                 <carousel :settings="settings" :breakpoints="breakpoints">
-                    <slide v-for="item in 8" :key="item.id">
-                        <!-- <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;"> -->
+                    <slide v-for="facult in faculty" :key="facult.id">
+                        
+                        <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                     <div class="card">
                         <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
+                            <img :src="facult.imageUrl" class="user-icon">
                         </div>
-                        
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">VijayaKumar</div>
-                            <div class="card-text">Hi All Welocome Homenjubuiyufyufyufiyf ....</div>
+                            <div class="card-title">{{ facult.name }}1</div>
+                            <div class="card-text">{{ facult.description.slice(0,20) }} ....</div>
                             <div class="mn">
                                 <p>(23 Reviews)</p>
                                 <el-rate v-model="value2" :colors="colors" />
                             </div>
                         </div>
                     </div>
-                    <!-- </router-link> -->
+                    </router-link>
                     </slide>
                     
 
@@ -76,7 +75,7 @@
                
             </div>
         <!-- </div> -->
-        
+
 </template>
 
 <script>
@@ -126,15 +125,15 @@ export default defineComponent ({
             }
         },
     }),
-    // async created() {   
-    //     try {
-    //         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
-    //         this.faculty = res.data;
-    //         console.log(this.faculty);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },
+    async created() {   
+        try {
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
+            this.faculty = res.data;
+            console.log(this.faculty);
+        } catch (error) {
+            console.log(error);
+        }
+    },
     // mounted() {
     //     this.$gtm.trackView('MyScreenName1', this.$route.path);
     // },
@@ -178,6 +177,12 @@ export default defineComponent ({
     height: 60px;
     margin-left: 19%;
     padding-top: 2%;
+    background-color:#fff;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 3px solid #FFFFFF;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
 }
 
 .user-follower {
@@ -261,7 +266,7 @@ export default defineComponent ({
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
-    width: 89%;
+    width: 112%;
     margin-top: 5%;
 }
 

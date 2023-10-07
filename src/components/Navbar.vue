@@ -72,7 +72,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
-                            <router-link class="dropdown-item" to=""><i class="fa fa-bell" aria-hidden="true"></i> Notification</router-link>
+                            <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notification</router-link>
                             <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link>
                             <router-link class="dropdown-item" to="" @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
@@ -131,7 +131,7 @@ export default {
     methods: {
         handleKeyEnter(item) {
             if (item.length >= 2) {
-                this.$router.push({ path: '/search', query: { data: item } });
+                this.$router.push({ path: '/search', query: { data: item.title } });
             }
             console.log(item)
         },
@@ -153,7 +153,7 @@ export default {
         },
         createFilter(queryString) {
             console.log("queryString", queryString)
-            axios.get("https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=" + this.searchTerm)
+            axios.get("https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=" + this.searchTerm)
                 .then((res) => (this.dataarray = res.data));
             console.log(this.dataarray);
             return this.dataarray;

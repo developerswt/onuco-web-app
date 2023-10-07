@@ -653,8 +653,15 @@ export default {
     text-align: center;
 }
 .professor_image_block img {
-    width: 100px;
-    height: 95px;
+    background-color:#fff;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 3px solid #FFFFFF;    
+    
+    height:100px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:100px;
     margin-left: 22px;
 }
 

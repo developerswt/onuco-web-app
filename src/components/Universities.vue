@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 10px;">
                                 <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
-                                <p>{{ college.description.slice(0,75) }}</p>
+                                <p v-html="college.description.slice(0,75)"></p>
                             </div>
                         </div>
                     </router-link>    
