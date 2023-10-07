@@ -247,13 +247,13 @@ export default {
   border-radius: 100%;
 }
 .carousel-indicators .active{
-  width: 20px;
-height: 10px;
-/* UI Properties */
+  border-radius: 15px;
+  
+  width: 22px;
+  height: 10px;
 background: #FF9924 0% 0% no-repeat padding-box;
 
-border-radius: 65px;
-opacity: 1;
+
 }
 #carousel_button {
   height: 43px;

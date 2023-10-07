@@ -341,18 +341,21 @@ export default defineComponent ({
 *::-webkit-scrollbar-thumb {
     background-color: transparent; /* Hide the thumb on webkit-based browsers */
 }
-
+.carousel-prev,
+.carousel-next {
+  border: none; /* Remove the border */
+}
 .fa-chevron-right{
     position: absolute;
     /* top: 100px; */
-    right: -27px;
+    right: -21px;
     font-size: 14px;
     outline: none;
 }
 .fa-chevron-left {
     position: absolute;
     /* top: 100px; */
-    left: -10px;
+    left: -1px;
     font-size: 14px;
     outline: none;
 } 

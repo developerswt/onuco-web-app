@@ -395,15 +395,11 @@ export default {
     /* background: #FBAEBB; */
     /* background: radial-gradient(at left top, #FBAEBB, #B6DEF5); */
     /* box-shadow: 0px 0px 9px #000000A1; */
-    /* background: transparent radial-gradient(#EEEAE4 0%, #D3E4F6); */
-    /* border: 1px solid #FFFFFF; */
-    background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 0%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
-    box-shadow: 0px 0px 9px #00000005; 
-    border: 1px solid #F0F6FC;
-    width: 100%;
+    background: #FBAEBB;
+    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+    box-shadow: 0px 0px 9px #000000A1;
+    border: 1px solid #FFFFFF;
     height: 100%;
-    opacity: 1;
-    padding: 8%;
 
 
 }
