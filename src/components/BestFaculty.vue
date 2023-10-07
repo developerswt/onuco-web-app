@@ -9,18 +9,19 @@
 
         <div class="container">
             <div class="row pt-3" style="margin-bottom: -38px;">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
+                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;"> 
                     <div class="card mt-5">
                         <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
+                            <img :src="facult.imageUrl" class="user-icon">
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
+                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-text"> {{ facult.description.slice(0,20) }}...</div>
                             
                             <div class="mn text-left">
                                 <p>
@@ -36,8 +37,11 @@
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
-                <div class="col-md-6 col-lg-3">
+            </div>
+        </div>        
+                <!-- <div class="col-md-6 col-lg-3">
                     <div class="card mt-5">
                         <div class="user-follower">
                             <img src="../assets/images/MaskGroup1.png" class="user-icon">
@@ -223,8 +227,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
         
 </template>
 
@@ -240,7 +244,7 @@ export default {
     },
     async created() {   
         try {
-            const res = await axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Faculty/`);
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
@@ -282,10 +286,16 @@ export default {
     font-size: 14px;
 } */
 .user-follower img {
-    width: 70%;
-    height: 70%;
-    padding-left: 11%;
-    padding-top: 5%;
+    width: 60px;
+    height: 60px;
+    margin-left: 19%;
+    padding-top: 2%;
+    background-color:#fff;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 3px solid #FFFFFF;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
 }
 
 .user-follower {

@@ -3,13 +3,18 @@
         <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
-        </h4>
+        </h4> 
         <p>{{ university.description }}</p>
+        <!-- <div class="container pt-4">
+            <h4 class="academic_head_text">
+            <span id="aca_text"><b>Available</b></span> Semesters (0)
+        </h4>
+        <p>yufutfyufi</p> -->
         <div class="pt-3">
-            <div class="row" v-for="sem in semester" :key="sem.id" >
+            <div class="row" v-for="(sem, index) in semester" :key="index" >
                 <div class="card" id="main_card">
                     <h5 class="card-header">
-                        <div :class="sem.id ===1 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" href="#collapse-example1" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
+                        <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
                                 <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
@@ -27,12 +32,12 @@
                                 <p style="font-size: 14px;">{{ sem.description }}</p>
                         </a>
                     </h5> -->
-                    <div  id="collapse-example1" :class="sem.id===1 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
+                    <div  :id="'collapse-example' + index" :class="index==0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
                         <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
-                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
+                                <div class="col-md-4 mb-5" v-for="cou in course" :key="cou.id">
+                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: cou.courseName}}" style="color: white; text-decoration: none;">
                                     <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
@@ -60,7 +65,7 @@
                                                 <div class="col-lg-12 mn">
                                                     <div class="row">
                                                         <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
+                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,35)"></p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 col-sm-3 col-md-3">
                                                             <img src="../assets/images/video.png" class="video">
@@ -376,8 +381,8 @@ export default {
 }
 
 .card {
-    margin-bottom: 4%;
-    margin-top: 2%;
+    /* margin-bottom: 4%;
+    margin-top: 2%; */
     width: 100%;
     border-radius: 10px;
 }
@@ -387,11 +392,18 @@ export default {
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=fbaebb&c2=b6def5&gt=r&gd=dtl
 */
-    background: #FBAEBB;
-    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
-    box-shadow: 0px 0px 9px #000000A1;
-    border: 1px solid #FFFFFF;
-
+    /* background: #FBAEBB; */
+    /* background: radial-gradient(at left top, #FBAEBB, #B6DEF5); */
+    /* box-shadow: 0px 0px 9px #000000A1; */
+    /* background: transparent radial-gradient(#EEEAE4 0%, #D3E4F6); */
+    /* border: 1px solid #FFFFFF; */
+    background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 0%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 9px #00000005; 
+    border: 1px solid #F0F6FC;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    padding: 8%;
 
 
 }

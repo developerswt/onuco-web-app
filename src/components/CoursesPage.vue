@@ -1,42 +1,42 @@
 <template>
     <div class="container-fluid jk">
-        <div class="container pt-4" v-for="academi in academia" :key="academi.id">
-            <!-- <h2 id="available_text" v-if="getSecondArrayLength(academi.id) != 0"><b>Available</b> {{ academi.name }} Courses
-                ({{ getSecondArrayLength(academi.id) }})</h2> -->
-
-            <div class="parent_blocks">
-                <!-- {{ this.branches.name }} -->
-                <div class="row pt-4">
-                    <div class="" v-for="branch in branches" :key="branch.id">
-                        <div class="box" v-if="academi.id == branch.academyId">
-                            <!-- <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }" -->
-                                <!-- style="color: white;text-decoration: none;"> -->
-                                <div class="row">
-                                    <div class="col-md-3 col-3 col-sm-3"  style="color: white; position: relative;left: 17px;">
-                                        <div class="course_block">
-                                            <img src="../assets/images/book1.png">
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 4px;">
-                                        <div class="course_block_one">
-                                            <h5 :title="branch.name">{{ branch.name }}</h5>
-                                            <p>{{ branch.description }}</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            <!-- </router-link> -->
+      <div class="container pt-4" v-for="academi in academia" :key="academi.id">
+        <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
+        <div>
+          <h2 id="available_text"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
+          {{ academi.id }}
+          <div class="parent_blocks">
+            <div class="row pt-4">
+              <div class="" v-for="branch in branches" :key="branch.id">
+                <div class="box" v-if="academi.academia.id == branch.academiaId">
+                  <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                    style="color: white;text-decoration: none;">
+                    <div class="row">
+                      <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
+                        <div class="course_block">
+                          <img src="../assets/images/book1.png">
                         </div>
+                      </div>
+                      <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 4px;">
+                        <div class="course_block_one">
+                          <h5 :title="branch.name">{{ branch.name }}</h5>
+                          <p>{{ branch.description }}</p>
+                        </div>
+                      </div>
                     </div>
+                  </router-link>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
-</template>
+  </template>
+  
+
 
 <script>
 import Offer from './Offer.vue'
@@ -61,26 +61,23 @@ export default {
         this.isLoading = true;
         try {
             const academiaResponse = await axiosInstance.get(`/Academia`);
-            this.academia = academiaResponse.data;
-            
+            const allAcademia = academiaResponse.data;
+
+            // Filter academia based on the condition that bCount > 0
+            this.academia = allAcademia.filter(academi => academi.bCount > 0);
+
             const branchesResponse = await axiosInstance.get(`/Branches`);
             this.branches = branchesResponse.data;
-            
-            // Filter academia based on branches data
-            // this.academia = this.academia.filter(academi => {
-            //     return this.branches.some(branch => branch.academyId === academi.id);
-            // });
 
             console.log(this.academia);
             console.log(this.branches);
         } catch (error) {
             console.log(error);
-            this.isLoading = false;
-        }
-        finally  { 
+        } finally {
             this.isLoading = false;
         }
     },
+
     // mounted() {
     //     this.$gtm.trackView('MyScreenName3', this.$route.path);
     // },

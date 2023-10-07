@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-lg-9 col-md-9">
                                             <div class="results_inner_block">
-                                                <router-link v-bind:to="'/CourseDetails?id='+ result.id" style="text-decoration: none;">
+                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                         <p id="title_text" class="mb-1">{{ result.title }}</p>
@@ -218,7 +218,7 @@ export default {
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
-                axios.get(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`)
+                axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`)
 		.then((res) => (this.dataarray = res.data));
                 console.log(this.dataarray);
                 return this.dataarray;
@@ -231,7 +231,7 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const response = await fetch(`https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
+            const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=${this.searchQuery}`);
             const data = await response.json();
 
                 // Assuming your API returns an array of objects with a "name" property

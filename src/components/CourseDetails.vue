@@ -134,7 +134,7 @@
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', subject)" style="cursor: pointer;">
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -145,18 +145,25 @@
                                                                                         <div v-for="watch in video.watchTimeData" :key="watch.id">
                                                                                             <div class="progress_block" v-if="subject.id === watch.videoId">
                                                                                                 <progress class="progress" :value="watch.watchTime" max="100">
-                                                                                                    {{ watch.watchTime }}%
+                                                                                                    {{watch.watchTime}}%
                                                                                                 </progress>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                                <!-- <div class="col-lg-6 col-6 col-sm-6">
+                                                                                    <div class="progress_block">
+                                                                                        <progress class="progress" value="75" max="100">
+                                                                                            75%
+                                                                                        </progress>
+                                                                                    </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 col-12 col-sm-12">
                                                                             <div class="inside_block">
-                                                                                <div class="progress-container" @click="switchVideo('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', subject)">
-                                                                                    <el-progress type="circle" :show-text="false" :percentage="70" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                <div class="progress-container" @click="switchVideo(subject.url, subject)">
+                                                                                    <el-progress type="circle" :show-text="false" :percentage="10" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
                                                                                 </div>
 
                                                                                 <i class="fa" aria-hidden="true"
@@ -238,11 +245,7 @@ export default {
                 techOrder: ['html5'],
                 preload: "metadata",
                 sources: [ 
-                    {
-                        src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
-                        type: application/x-mpegURL,
-                        withCredentials: false,
-                    }
+                    
                 ],
                 html5: {
                     nativeVideoTracks: false,
@@ -381,14 +384,14 @@ export default {
     async created(){
         this.isLoading = true;
         try {
-            const res = await AxiosInstance.get(`/Coursedetails?` + "id=" + this.$route.query.id);
+            const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data; 
-            // const result = await axios.get('http://localhost:5000/StateManagement');
-            // this.watchTimeDatas = result.data;
-            // console.log(this.watchTimeDatas);
-            const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
-            this.courseDetails = subscription.data;
-            console.log(this.courseDetails);
+            const result = await AxiosInstance.get('/StateManagement');
+            this.watchTimeDatas = result.data;
+            console.log(this.watchTimeDatas);
+            // const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
+            // this.courseDetails = subscription.data;
+            // console.log(this.courseDetails);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
@@ -398,7 +401,7 @@ export default {
             }
             this.videoOptions.sources = [
                 {
-                    src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                    src: this.book.videoUrl,
                     type: this.videoType,
                     withCredentials: false,
                 }

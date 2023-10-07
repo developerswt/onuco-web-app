@@ -1,11 +1,14 @@
 {
   "authSelections": "userPoolOnly",
-  "resourceName": "onucowebappd923dbf8",
+  "resourceName": "onucowebapp40891873",
   "serviceType": "imported",
   "region": "ap-south-1",
   "usernameAttributes": [
     "email",
     "phone_number"
+  ],
+  "authProvidersUserPool": [
+    "Google"
   ],
   "requiredAttributes": [
     "name"
@@ -19,7 +22,8 @@
   ],
   "mfaConfiguration": "OFF",
   "autoVerifiedAttributes": [
-    "email"
+    "email",
+    "phone_number"
   ],
   "mfaTypes": []
 }

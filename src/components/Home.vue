@@ -1,9 +1,9 @@
 <template>
     <Carousel />
-    <Carouseltwo />
+    <!-- <Carouseltwo /> -->
 
-    <div class="container-fluid jk ">
-        <div class="container-fluid" id="first_container">
+    <!-- <div class="container-fluid jk "> -->
+        <div class="container-fluid  pb-3" id="first_container">
             <div class="container" id="home_container">
                 <Academics />
             </div>
@@ -13,13 +13,12 @@
                 <TopRatedCourses />
             </div>
         </div>
-    </div>
-    <div class="container-fluid" id="third_container">
-        <div class="container">
-            <BestLecture />
+        <div class="container-fluid" id="third_container">
+            <div class="container">
+                <BestLecture />
+            </div>
         </div>
-    </div>
-
+    <!-- </div> -->
 
     
     <Offer />
@@ -142,7 +141,15 @@ export default {
 }
 
  }
-
+#first_container {
+    background-color: white;
+}
+#second_container {
+    background-color: #DDEDFB;
+}
+#third_container {
+    background-color: white;
+}
 .content {
     top: 1582px;
     left: 0px;

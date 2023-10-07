@@ -1,12 +1,12 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs />
+        <!-- <Breadcrumbs /> -->
         <div class="container pt-4">
             <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
         <div class="parent_blocks">
             <div class="row pt-4">
                 <div class="box" v-for="branch in branches" :key="branch.id">
-                    <!-- <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;"> -->
+                    <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                                 <img src="../assets/images/book1.png">
@@ -17,7 +17,7 @@
                                 <p>{{ branch.title }}</p>
                             </div>
                         </div>
-                    <!-- </router-link>     -->
+                    </router-link>    
                 </div>
             </div>
         </div>
@@ -55,11 +55,11 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const res = await AxiosInstance.get(`/Academia/` + this.$route.query.id);
+            const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
             console.log(this.academia);
         
-            const result = await AxiosInstance.get(`/Branches/Branches/` + this.$route.query.id);
+            const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
             console.log(this.branches);
         } catch (error) {
