@@ -38,14 +38,14 @@
 
                     <template #addons>
                         
-                        <navigation />
-                            <!-- <template #next>
+                        <navigation >
+                            <template #next>
                                 <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
                             </template>
                             <template #prev>
                                 <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
                             </template>
-                        </navigation> -->
+                        </navigation>
                         
                     </template>
                 </carousel>
@@ -344,15 +344,15 @@ export default defineComponent ({
 
 .fa-chevron-right{
     position: absolute;
-    top: 100px;
-    right: 530px;
+    /* top: 100px; */
+    right: -27px;
     font-size: 14px;
     outline: none;
 }
 .fa-chevron-left {
     position: absolute;
-    top: 100px;
-    left: 530px;
+    /* top: 100px; */
+    left: -10px;
     font-size: 14px;
     outline: none;
 } 
@@ -360,6 +360,7 @@ export default defineComponent ({
 .carousel__slide {
 	
     margin-top: 34px;
+    margin-bottom: -22px;
 }
 .carousel__item {
   min-height: 200px;

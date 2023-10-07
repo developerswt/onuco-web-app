@@ -99,11 +99,11 @@
   <div class="container-fluid mt-5 carousel_header">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators (optional) -->
-      <!-- <ol class="carousel-indicators">
+      <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol> -->
+      </ol>
       
       <div class=" carousel-inner" style="margin-top: -33px; border-radius: none;">
         <!-- Slide 1 -->
@@ -157,14 +157,14 @@
       </div>
       
       <!-- Controls (optional) -->
-      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <!-- <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a>
+      </a> -->
     </div>
   </div>
   
@@ -239,7 +239,22 @@ export default {
   padding: 10px 0px 0px 10px;
 
 }
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 10%;
+  border-radius: 100%;
+}
+.carousel-indicators .active{
+  width: 20px;
+height: 10px;
+/* UI Properties */
+background: #FF9924 0% 0% no-repeat padding-box;
 
+border-radius: 65px;
+opacity: 1;
+}
 #carousel_button {
   height: 43px;
   padding: -1px 50px 0px 50px;

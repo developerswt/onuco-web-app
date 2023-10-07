@@ -40,8 +40,7 @@
     "@types/videojs-contrib-quality-levels": "^2.0.1",
     "@vitejs/plugin-vue": "^4.1.0",
     "video.js": "^7.8.4",
-    "vite": "^4.3.9",
-    "vite-plugin-pwa": "^0.16.5"
+    "vite": "^4.3.9"
   },
   "eslintConfig": {
     "root": true,
