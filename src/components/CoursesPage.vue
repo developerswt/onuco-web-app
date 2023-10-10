@@ -20,7 +20,7 @@
                       <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 4px;">
                         <div class="course_block_one">
                           <h5 :title="branch.name">{{ branch.name }}</h5>
-                          <p>{{ branch.description }}</p>
+                          <p><b>{{ branch.description }}</b></p>
                         </div>
                       </div>
                     </div>
@@ -132,7 +132,7 @@ export default {
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:18px;
+    padding:14px;
 
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
@@ -149,22 +149,22 @@ export default {
 
 
 .box h5 {
-    font-size: 20px;
+    font-size: 14px;
     font-family: 'Times New Roman', Times, serif;
     text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
+    font: normal normal 600 14px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
 
 .box p {
-    font-size: 14px;
+    font-size: 12px;
 
     text-align: left;
 
     letter-spacing: 0px;
-    color: #000000;
+    color:black;
     opacity: 0.49;
 }
 
