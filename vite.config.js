@@ -14,7 +14,7 @@ export default defineConfig({
         icons: [
           {
             src: "../assets/image/logo.png",
-            sizes: 512*512",
+            sizes: "512*512",
             type: "image/png",
             purpose: "any maskable"
           }
@@ -25,7 +25,7 @@ export default defineConfig({
           urlPattern: ({ url }) => {
             return url.pathname.startsWith("/api");
           },
-          handler: "CacheFirst" as const,
+          handler: "CacheFirst as const",
           options: {
             cacheName: "api-cache",
             cacheableResponse: {
