@@ -259,13 +259,13 @@ $(document).ready(function(){
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
+    font: normal normal 600 14px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
 .box p {
-    font-size: 14px;
+    font-size: 13px;
     
     text-align: left;
     

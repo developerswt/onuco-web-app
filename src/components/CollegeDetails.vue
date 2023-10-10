@@ -17,7 +17,7 @@
                         <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
-                                <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
+                                <p style="font-size: 12px; margin-top: -4px;" id="sem_description">{{ sem.description }}</p>
                         </div>
                         <!-- <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
@@ -36,9 +36,9 @@
                         <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
-                                <div class="col-md-4 mb-5" v-for="cou in course" :key="cou.id">
+                                <div class="col-md-4 mb-2" v-for="cou in course" :key="cou.id">
                                     <router-link v-bind:to="{ name:'CourseDetails', params:{name: cou.courseName}}" style="color: white; text-decoration: none;">
-                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
+                                    <div class="card mt-3" v-if="sem.id === cou.semesterId" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
                                                 <div class="col-lg-12 mn">
@@ -46,10 +46,11 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="sub_text" class="mb-0"><b>{{ cou.name }}</b></p>
+                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name" ><b>{{ cou.name }}</b></p>
+
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                    <p id="code_text" style=" color: #6A4343;"><small>18CS81 &nbsp;240 hrs</small></p>
                                                                 </div>
                                                             </div>
                                                           
@@ -83,7 +84,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text">(23 reviews)</p>
+                                                            <p id="review_text" style="margin: -5px; color: #828282;">(23 reviews)</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,6 +214,10 @@ export default {
         }
     },
 }
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
 </script>
 
 <style scoped>
@@ -307,11 +312,11 @@ export default {
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     #sem_text {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     #sem_description {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     #sub_text,
@@ -340,11 +345,11 @@ export default {
 
 @media only screen and (max-width: 1024px) and (min-width: 600px) {
     #sem_text {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     #sem_description {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .academic_head_text {
@@ -372,7 +377,7 @@ export default {
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .academic_head_text {
-        font-size: 18px;
+        font-size: 14px;
         padding: 0 !important;
 
 
@@ -392,14 +397,17 @@ export default {
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=fbaebb&c2=b6def5&gt=r&gd=dtl
 */
-    /* background: #FBAEBB; */
-    /* background: radial-gradient(at left top, #FBAEBB, #B6DEF5); */
-    /* box-shadow: 0px 0px 9px #000000A1; */
-    background: #FBAEBB;
-    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
     box-shadow: 0px 0px 9px #000000A1;
-    border: 1px solid #FFFFFF;
-    height: 100%;
+    border: 1px solid #F0F6FC;
+    /* background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 20%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 9px #00000005; 
+    border: 1px solid #F0F6FC; */
+    width: 100%;
+    height: 200px;
+    opacity: 1;
+    padding: 8%;
 
 
 }
@@ -416,6 +424,8 @@ export default {
 .card-header {
     height: 65px;
     border-bottom:none;
+        padding-left: 15px;
+    padding-top: 2px;
 }
 
 .icon {
@@ -469,4 +479,17 @@ export default {
     font-weight: bold;
     padding-right: 10px;
 
-}</style>
+}
+
+#desc_text{
+    font-size: 12px;
+}
+#sub_text{
+    font-size: 14px;  
+}
+
+.fa{
+    color:orange ;
+}
+
+</style>

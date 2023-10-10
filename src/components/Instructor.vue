@@ -35,14 +35,14 @@
                             <div class="col-md-7 col-lg-7">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="share_icon_block">
+                                        <div class="share_icon_block" style="color: aliceblue;">
                                             <img src="../assets/images/share.png" class="share-icon">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="btn-group">
-                                            <button type="button" class="btn" id="left_button">13 Following</button>
-                                            <button type="button" class="btn" id="right_button">1200 Follwers</button>
+                                            <button type="button" class="btn" id="left_button" style="color: #b1afaf;">13 Following</button>
+                                            <button type="button" class="btn" id="right_button" style="color: #b1afaf;">1200 Follwers</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,23 +76,23 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
+                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -102,7 +102,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                         
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
@@ -130,23 +130,23 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
                                                     </div>
                                                     
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
+                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -156,7 +156,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                         
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
@@ -176,7 +176,7 @@
                 </div>
             </section>
             <section id="non_course_section">
-                <h5 class="course_text"><span id="course_text">Non-Academic Courses</span> (10)</h5>
+                <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (10)</h5>
                 <div class="row">
                     
 
@@ -195,23 +195,23 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
+                                                        <p style="font-size: 14px;color: #707070;"> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                    
@@ -221,7 +221,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                        
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
@@ -249,23 +249,23 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
                                                     </div>
                                                     
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
+                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -275,7 +275,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
                                                        
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
@@ -367,17 +367,17 @@ export default {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-#instructor_card{
+/* #instructor_card{
     background: #FBAEBB;
     background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
     box-shadow: 0px 0px 9px #000000A1;
     border: 1px solid #FFFFFF;
-}
+} */
 #instructor_card{
-    background: #FBAEBB;
-    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
     box-shadow: 0px 0px 9px #000000A1;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #F0F6FC;
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
@@ -467,7 +467,7 @@ export default {
 }
 
 .professor-name .btn-group {
-    background-color: #828282;
+    background-color: white;
     border-top-left-radius: 2em 2em;
     border-top-right-radius: 2em 2em;
     border-bottom-right-radius: 2em 2em;
@@ -538,7 +538,7 @@ export default {
     width: 100%;
     color: black;
    
-   
+   height: 200px;
     padding: 10px;
 
 }
@@ -720,7 +720,7 @@ export default {
     .instructor_head_text,
     .course_text,
     ::v-deep .Object_text {
-        font-size: 15px !important;
+        font-size: 14px !important;
     }
 
 
@@ -784,6 +784,7 @@ text-align: left !important;
 }
 .course_text{
     font-size: 20px;
+    margin-top: -15px;
 }
 
 
@@ -793,6 +794,22 @@ text-align: left !important;
     }
     
 }
-
+.btn-group .btn {
+    background-color: #EFF5FC ;
+}
+.professor-details_text {
+    margin: 25px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    font-family: 'Noto Sans', sans-serif;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #828282;
+    opacity: 1;
+}
 </style>
 
