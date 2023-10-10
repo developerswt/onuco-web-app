@@ -311,7 +311,7 @@ export default {
   .merged_block {
     border: 1px solid white;
     border-radius: 30px;
-    padding: 4px;
+    
     margin-top: 70px;
   }
   .right_carousel_block h4 {
@@ -349,14 +349,15 @@ export default {
 @media screen and (min-width: 200px) and (max-width: 540px) {
   .search_box {
     margin-top: 20px; 
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 30px;
   }
   .merged_block {
     border: 1px solid white;
     border-radius: 30px;
-    padding: 4px;
+    font-size: 13px;
     margin-top: 60px;
+    width: 116%;
   }
   .right_carousel_block h4 {
     font-size: 18px;
@@ -364,6 +365,7 @@ export default {
     position: relative;
     left: 35px;
     top: 60px;
+    margin-left: -199px;
   }
   .right_carousel_block p {
     font-size: 16px;
@@ -371,10 +373,11 @@ export default {
     position: relative;
     left: 35px;
     top: 70px;
+    margin-left: -199px;
   }
   #carousel_button {
     height: 35px;
-    padding: 10px 8px 43px 8px;
+    padding: 10px 8px 30px 8px;
     background: white;
     color: #0066CC;
     border-radius: 22px;
@@ -394,17 +397,17 @@ export default {
     position: relative;
     top: 105px;
   }
-}
-/* @media only screen and (min-width: 200) and (max-width: 320px) {
-  #carousel_button {
-    height: 35px;
-    padding: 10px 8px 65px 8px;
-    background: white;
-    color: #0066CC;
-    border-radius: 22px;
-    float: right;
+  #carousel_input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px 0px 0px 10px;
+    margin-right: 66px;
   }
-} */
+}
+
+
 .container-fluid{
   padding-left: 0px;
   padding-right: 0px;

@@ -162,7 +162,7 @@ h2 {
 
 #offer_block {
    
-    padding: 20px 0px 70px 15px;
+    padding: 20px 0px 20px 15px;
    
 }
 .add{

@@ -197,16 +197,16 @@ export default defineComponent ({
     border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
-    margin: 20px;
+    /* margin: 20px; */
     margin-bottom: 30px;
     margin-top: 30px;
     /* background: rgb(2,0,36); */
     background: #F6F6F6;
     background: #F6F6F6;
     background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
-
-
     transition: 0.3s;
+    
+    
 }
 
 .mb .card-title {
@@ -414,7 +414,11 @@ router-link {
 }
 
 #academy_container{
-    padding:15px 0px 15px 0px;
+    padding:0px 0px 0px 0px;
+}
+
+.carousel{
+    padding: 19px;
 }
 
 </style>

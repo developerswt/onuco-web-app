@@ -15,7 +15,7 @@
                     <slide v-for="facult in faculty" :key="facult.id">
                         
                         <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                    <div class="card">
+                            <div class="card">
                         <div class="user-follower">
                             <img :src="facult.imageUrl" class="user-icon">
                         </div>
@@ -24,11 +24,20 @@
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">{{ facult.name }}1</div>
-                            <div class="card-text">{{ facult.description.slice(0,20) }} ....</div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
+                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-text"> {{ facult.description.slice(0,20) }}...</div>
+                            
+                            <div class="mn text-left">
+                                <p>
+                                    (23 Reviews) 
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                </p>
+                               
+                
                             </div>
                         </div>
                     </div>
@@ -122,7 +131,8 @@ export default defineComponent ({
             600: {
                 itemsToShow: 1,
                 snapAlign: 'center',
-            }
+            },
+          
         },
     }),
     async created() {   
@@ -266,8 +276,9 @@ export default defineComponent ({
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
-    width: 112%;
+    width: 100%;
     margin-top: 5%;
+    padding: 8px;
 }
 
 .academic_head_text {
@@ -383,5 +394,39 @@ export default defineComponent ({
   box-sizing: content-box;
   border: 89px solid blue;
 }
+.fa{
+    color: orange;
+}
+.mn {
+    padding-top: 20px;
+}
+
+.mn p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    /* text-align: center; */
+    font: normal normal normal 14px/18px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    margin: 0%;
+    opacity: 1;
+}
+.mn  .fa{
+    letter-spacing: 2px;
+    
+}
+.mn .el-rate {
+    float: right;
+    margin-top: -14%;
+    margin-left: 7%;
+}
+/* @media only screen {
+    .carousel{
+    padding: 26px;
+}  
+} */
+
+
 </style>
 

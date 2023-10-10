@@ -3,7 +3,7 @@
     <!-- <Carouseltwo /> -->
 
     <!-- <div class="container-fluid jk "> -->
-        <div class="container-fluid  pb-3" id="first_container">
+        <div class="container-fluid " id="first_container">
             <div class="container" id="home_container">
                 <Academics />
             </div>
@@ -13,7 +13,7 @@
                 <TopRatedCourses />
             </div>
         </div>
-        <div class="container-fluid" id="third_container">
+        <div class="container-fluid" id="third_container" style="height: 305px;">
             <div class="container">
                 <BestLecture />
             </div>
@@ -145,7 +145,7 @@ export default {
     background-color: white;
 }
 #second_container {
-    background-color: #DDEDFB;
+    background-color: #EFF5FC ;
 }
 #third_container {
     background-color: white;
@@ -247,9 +247,7 @@ export default {
    
 } */
 
-#second_container{
-    background: #DDEDFB;
-}
+
 
 /* #third_container
 
