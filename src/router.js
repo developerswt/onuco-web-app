@@ -62,7 +62,7 @@ Hub.listen("auth", async (data) => {
         // console.log('Signed in and remembered device');
         router.go(-1);
         // router.push({path: '/'});
-        store.commit('isLoggedIn', true);
+        store.commit('isLoggedIn', true); 
         localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
         
        

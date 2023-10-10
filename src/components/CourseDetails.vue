@@ -144,12 +144,13 @@
                                                                                     <div v-for="video in watchTimeDatas" :key="video.id">
                                                                                         <div v-for="watch in video.watchTimeData" :key="watch.id">
                                                                                             <div class="progress_block" v-if="subject.id === watch.videoId">
-                                                                                                <progress class="progress" :value="watch.watchTime" max="100">
+                                                                                                <progress :value="watch.watchTime" max="100">
                                                                                                     {{watch.watchTime}}%
                                                                                                 </progress>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <!-- <progress value="0" max="100"> </progress> -->
                                                                                 </div>
                                                                                 <!-- <div class="col-lg-6 col-6 col-sm-6">
                                                                                     <div class="progress_block">
@@ -421,6 +422,32 @@ export default {
 </script>
 
 <style scoped>
+progress{
+    /*reset to default appearance*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+ 
+    width: 200px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #434343;
+}
+ 
+/*style for background track*/
+progress::-webkit-progress-bar {
+    /* background: rgb(221, 221, 221); */
+    background: #CCCCCC;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+    border-radius: 20px;
+    height: 6px;
+    width: 171px;
+}
+/*style for progress track*/
+progress::-webkit-progress-value {
+    background-image: linear-gradient(120deg,#ffd173 0,#18cc00 55%);
+    border-radius: 20px;
+}
 .progress-container {
     position: relative;
     width: 30px; /* Set the width and height of the container */
@@ -845,7 +872,7 @@ progress {
   border: none;
   width: 171px;
   height: 10px;
-  background: #fff;
+  /* background: #fff; */
   margin-left: -34px;
 }
 
