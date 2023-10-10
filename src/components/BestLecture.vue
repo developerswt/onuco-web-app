@@ -203,7 +203,7 @@ export default defineComponent ({
 
 .user-following p {
     position: relative;
-    top: -30px;
+    top: -34px;
     font-size: 14px;
     text-align: right;
     width: 100%;
@@ -277,7 +277,7 @@ export default defineComponent ({
     border-radius: 4px;
     opacity: 1;
     width: 100%;
-    margin-top: 5%;
+    margin-top: 6%;
     padding: 8px;
 }
 
@@ -359,7 +359,7 @@ export default defineComponent ({
 .fa-chevron-right{
     position: absolute;
     /* top: 100px; */
-    right: -21px;
+    right: -3px;
     font-size: 14px;
     outline: none;
 }

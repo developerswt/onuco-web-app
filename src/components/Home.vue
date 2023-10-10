@@ -2,7 +2,7 @@
     <Carousel />
     <!-- <Carouseltwo /> -->
     <!-- {{ this.isuser }} -->
-    {{ this.username }}
+    <!-- {{ this.username }} -->
 
     <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid " id="first_container">
