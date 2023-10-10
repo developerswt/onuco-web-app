@@ -81,7 +81,7 @@
                         <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
-
+                    
 
 
                 </ul>
@@ -111,7 +111,7 @@ export default {
             suggestions: [],
             showSuggestions: false,
             dataarray: [],
-          
+            username: localStorage.getItem("username")
 
         }
     },

@@ -1,6 +1,8 @@
 <template>
     <Carousel />
     <!-- <Carouseltwo /> -->
+    <!-- {{ this.isuser }} -->
+    {{ this.username }}
 
     <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid  pb-3" id="first_container">
@@ -60,7 +62,7 @@ export default {
         TopRatedCourses,
         BestLecture,
         Offer,
-        Carouseltwo
+        Carouseltwo,
 
     },
     data() {
@@ -72,12 +74,21 @@ export default {
         "../assets/images/ac4.jpg",
       ],
       currentIndex: 0,
+      username: localStorage.getItem('username')
     };
   },
   computed: {
     currentImage() {
       return this.imageSources[this.currentIndex];
     },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+        isuser() {
+            console.log(this.$store.state.user);
+            return this.$store.state.user;
+        },
+
   },
   created() {
     // Check if the currentIndex is stored in local storage

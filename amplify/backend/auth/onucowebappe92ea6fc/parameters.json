@@ -1,6 +1,6 @@
 {
   "authSelections": "userPoolOnly",
-  "resourceName": "onucowebapp40891873",
+  "resourceName": "onucowebappe92ea6fc",
   "serviceType": "imported",
   "region": "ap-south-1",
   "usernameAttributes": [
@@ -8,6 +8,7 @@
     "phone_number"
   ],
   "authProvidersUserPool": [
+    "Facebook",
     "Google"
   ],
   "requiredAttributes": [
