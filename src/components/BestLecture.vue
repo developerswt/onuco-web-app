@@ -23,9 +23,9 @@
                             <p class="text-right"><small>13 Following</small></p>
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
-                        <div class="card-body" style="margin-top: -7%;">
+                        <div class="card-body " style="margin-top: -7%; ">
                             <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"> {{ facult.description.slice(0,20) }}...</div>
+                            <div class="card-text"> {{ facult.description.slice(0,55)}}...</div>
                             
                             <div class="mn text-left">
                                 <p>
@@ -203,7 +203,8 @@ export default defineComponent ({
 
 .user-following p {
     position: relative;
-    top: -34px;
+    top: -32px;
+    
     font-size: 14px;
     text-align: right;
     width: 100%;
@@ -271,14 +272,15 @@ export default defineComponent ({
 }
 
 .card {
-    margin-bottom: 20%;
+    
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
-    width: 100%;
-    margin-top: 6%;
-    padding: 8px;
+    width: 90%;
+    /* margin-top: 10%; */
+    padding: 0px;
+    margin: 0 14px 30px;
 }
 
 .academic_head_text {
@@ -297,6 +299,9 @@ export default defineComponent ({
     color: #006acd;
     font-weight: bold;
     padding-right: 10px;
+}
+.mn .fa {
+    color: orange;
 }
 
 @media (max-width: 768px) {
@@ -325,6 +330,9 @@ export default defineComponent ({
     .card {
         margin-bottom: 50px;
     }
+    .mn .fa {
+    color: orange;
+}
 
 }
 .card-text{
@@ -334,7 +342,7 @@ export default defineComponent ({
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-aeaeae);
     text-align: left;
-    font: normal normal normal 16px/21px Segoe UI;
+    font: normal normal normal 14px/21px Segoe UI;
     letter-spacing: 0px;
     color: #AEAEAE;
     opacity: 1;
@@ -398,7 +406,7 @@ export default defineComponent ({
   box-sizing: content-box;
   border: 89px solid blue;
 }
-.fa{
+.mn .fa {
     color: orange;
 }
 .mn {
@@ -430,7 +438,10 @@ export default defineComponent ({
     padding: 26px;
 }  
 } */
-
+.text-right{
+    position: relative;
+    bottom: 11px;
+}
 
 </style>
 

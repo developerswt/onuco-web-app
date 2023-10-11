@@ -9,12 +9,12 @@
                     <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
-                                <img src="../assets/images/book1.png">
+                                <img src="../assets/images/book1.png" style="height: 60px;">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 0px;">
+                            <div class="col-md-9 col-9 col-sm-9 " style="position: relative;right: 0px;">
                                 <h5  data-placement="top" :title="branch.name" >{{ branch.name }}</h5>
-                                <p>{{ branch.description }}</p>
-                                <p>{{ branch.title }}</p>
+                                <p style="margin-top: -8px;">{{ branch.description }}</p>
+                               
                             </div>
                         </div>
                     </router-link>    
@@ -235,19 +235,17 @@ $(document).ready(function(){
 }
 
 .box {
-    
-    height:100px;
+    height:83px;
     width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:18px;
+    padding:9px;
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
-    
+    border-radius: 16%;  
 }
 .parent_block {
     max-width: 1300px;
@@ -259,13 +257,13 @@ $(document).ready(function(){
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     text-align: left;
-    font: normal normal 600 14px/24px Segoe UI;
+    font: normal normal 600 17px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
 .box p {
-    font-size: 13px;
+    font-size: 14px;
     
     text-align: left;
     

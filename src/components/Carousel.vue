@@ -421,10 +421,11 @@ background: #FF9924 0% 0% no-repeat padding-box;
     margin-right: 66px;
   }
 }
-
-
 .container-fluid{
   padding-left: 0px;
   padding-right: 0px;
+}
+#carousel_input{
+  margin-right: 170px;
 }
 </style> 

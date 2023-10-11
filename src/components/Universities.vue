@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 10px;">
                                 <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
-                                <p v-html="college.description.slice(0,75)"></p>
+                                <p style="margin-top: -8px;" v-html="college.description.slice(0,83)"></p>
                             </div>
                         </div>
                     </router-link>    
@@ -147,15 +147,15 @@ export default {
     
     font-family: 'Times New Roman', Times, serif;
     text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
+    font: normal normal 600 17px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
 .box p {
-    font: normal normal 300 12px/14px Segoe UI;
-        font-weight:bold;
-    text-align: left;   
+    font-size: 13px;
+    
+    text-align: left;
     
     letter-spacing: 0px;
     color: #000000;

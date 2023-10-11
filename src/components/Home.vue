@@ -15,7 +15,7 @@
                 <TopRatedCourses />
             </div>
         </div>
-        <div class="container-fluid" id="third_container" style="height: 305px;">
+        <div class="container-fluid" id="third_container" style="height: 290px;">
             <div class="container">
                 <BestLecture />
             </div>

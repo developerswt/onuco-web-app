@@ -370,7 +370,7 @@ export default {
     border-radius: 47px 10px 10px 10px;
     padding: 15px;
     margin: 10px;
-    height: 80px;
+    height: 86px;
     background: radial-gradient(circle at 18.7% 37.8%, rgb(225, 234, 250) 0%, rgb(225, 234, 238) 90%);
 
 }
@@ -413,6 +413,7 @@ export default {
 
 #asset_image img {
     width: 30px;
+    height: 55px;
 }
 
 
@@ -563,7 +564,7 @@ export default {
         font-size: 12px;
     }
     .inner_block{
-        height:auto;
+        height:90px;
     }
 
 }
@@ -573,7 +574,7 @@ export default {
     text-align: right;
 }
 .inner_block{
-    height: auto;
+    height: 90px;
 }
 }
 .bt{

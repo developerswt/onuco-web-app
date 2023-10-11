@@ -14,13 +14,13 @@
                     <div class="row">
                       <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                         <div class="course_block">
-                          <img src="../assets/images/book1.png">
+                          <img src="../assets/images/book1.png" style="height: 60px;">
                         </div>
                       </div>
-                      <div class="col-md-9 col-9 col-sm-9 pt-2" style="position: relative;right: 4px;">
+                      <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 4px;">
                         <div class="course_block_one">
                           <h5 :title="branch.name">{{ branch.name }}</h5>
-                          <p><b>{{ branch.description }}</b></p>
+                          <p style="margin-top: -8px;">{{ branch.description }}</p>
                         </div>
                       </div>
                     </div>
@@ -127,18 +127,18 @@ export default {
 }
 
 .box {
-    height:100px;
+    height:83px;
     width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:14px;
+    padding:9px;
 
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
+    border-radius: 16%;
 
 }
 
@@ -152,14 +152,14 @@ export default {
     font-size: 14px;
     font-family: 'Times New Roman', Times, serif;
     text-align: left;
-    font: normal normal 600 14px/24px Segoe UI;
+    font: normal normal 600 17px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
 
 .box p {
-    font-size: 12px;
+    font-size: 13px;
 
     text-align: left;
 

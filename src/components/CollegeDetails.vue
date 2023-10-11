@@ -3,21 +3,23 @@
         <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
+            <button class="bt">BUY NOW</button>
         </h4> 
-        <p>{{ university.description }}</p>
+       
+        <p v-html="university.description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
         </h4>
         <p>yufutfyufi</p> -->
-        <div class="pt-3">
+        <div class="pt-2">
             <div class="row" v-for="(sem, index) in semester" :key="index" >
                 <div class="card" id="main_card">
                     <h5 class="card-header">
                         <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }}</h4>
-                                <p style="font-size: 12px; margin-top: -4px;" id="sem_description">{{ sem.description }}</p>
+                                <p  id="sem_description">{{ sem.description }}</p>
                         </div>
                         <!-- <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
@@ -46,7 +48,7 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name" ><b>{{ cou.name }}</b></p>
+                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,22)}}...</p>
 
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
@@ -245,12 +247,13 @@ $(document).ready(function(){
 
 #sem_text {
     color: #707070;
-
+    margin: 14px -2px;
 }
 
 #sem_description {
     color: #777777;
-
+    font-size: 13px;
+    margin-top: -11px;
 }
 
 #sem_icon {
@@ -302,21 +305,22 @@ $(document).ready(function(){
 }
 
 #sem_text {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 #sem_description {
-    font-size: 11px;
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     #sem_text {
-        font-size: 14px;
+        font-size: 13px;
+        margin: 4px -2px 11px;
     }
 
     #sem_description {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     #sub_text,
@@ -326,7 +330,7 @@ $(document).ready(function(){
     }
 
     #desc_text {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     #review_text {
@@ -341,15 +345,26 @@ $(document).ready(function(){
         padding-top: 65px !important;
     }
 
+    .kj .action[data-v-723afcf3] {
+    float: right;
+    font-size: 29px;
+    width: 0.2em;
+    color: darkblue;
+    opacity: 1;
+    position: relative;
+    bottom: -11px;
+}
+
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 600px) {
     #sem_text {
-        font-size: 14px;
+        font-size: 13px;
+        margin: 4px -2px 11px;
     }
 
     #sem_description {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .academic_head_text {
@@ -366,12 +381,21 @@ $(document).ready(function(){
     }
 
     #desc_text {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     #review_text {
         font-size: 12px;
     }
+    .kj .action[data-v-723afcf3] {
+    float: right;
+    font-size: 29px;
+    width: 0.2em;
+    color: darkblue;
+    opacity: 1;
+    position: relative;
+    bottom: -11px;
+}
 
 }
 
@@ -490,6 +514,17 @@ background: #EEEAE4;
 
 .fa{
     color:orange ;
+}
+.bt{
+    background-color: #0177FB;
+    color: white;
+    position: relative;
+    float: right;
+    bottom: 0px;
+    padding: 7px;
+    width: 100px;
+    border-radius: -1%;
+    font-size: 12px;
 }
 
 </style>
