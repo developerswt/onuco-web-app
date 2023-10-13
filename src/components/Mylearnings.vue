@@ -173,7 +173,97 @@
                         </div>
                         </el-tab-pane>
                              
-                             <el-tab-pane label="LIVE" name="third">Live content</el-tab-pane>
+                             <el-tab-pane label="LIVE" name="third">
+                                <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                           <span id="aca_text">Live</span> Courses
+                                   <div class="row mt-4 ">
+                                    <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                        <h6 style="color:#B4B4B4;margin-top: -5px;">VTU</h6>
+                                        <p class="text_line">Mathematics and its formulas</p>
+                                        <div class="row ml-0">
+                                         <div class=" info">
+                                           <p>Dr. Adhyan San</p>
+                                         </div>
+                                         <div class="asset_image info1">
+                                                <img src="../assets/images/Icon ionic-ios-timer.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                01h 32min
+                                            </div>
+                                            <div class="asset_image info1">
+                                                <img src="../assets/images/Icon map-school.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
+                                                2 Modules<br>
+                                            </div>
+                                            <p class="pp" style="color: #666666; font-size: 12px; float: left;">Data Management Systems & Visualization software developme...</p>
+ 
+                                    </div>
+                                        </div>
+                                        <div class="col-lg-6 col-4 col-sm-4 col-md-6">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/Group 1403.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
+                                            </div>
+                                        </div>
+                                   </div>
+                                   <div class="inner_block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">Computer Science</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">22h 33m left</p>
+                                                </div>
+                                                <button class="bt">Renew</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inner_block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">Computer Science</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">22h 33m left</p>
+                                                </div>
+                                                <button class="bt">Renew</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                </div>
+                                </div>
+                               
+                             </el-tab-pane>
                              <!-- <el-tab-pane label="COMPLETED" name="fourth">completed</el-tab-pane> -->
               
                             <el-tab-pane label="COMPLETED" name="fourth">
@@ -585,4 +675,45 @@ export default {
     bottom: 39px;
 }
 
+.text_line{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal normal 16px/28px Segoe UI;
+letter-spacing: 0px;
+color: #444444;
+opacity: 1;
+margin-top: -7px;
+}
+.info{
+    font-size: 13px;
+    color: #666666;
+    margin-top: -14px;
+}
+.info1{
+    font-size: 11px;
+    color: #666666;
+    margin-top: -14px;
+}
+/* .container-fluid {
+    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
+    background-size: cover !important;
+
+} 
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+  background: #EFF5FC 0% 0% no-repeat padding-box;
+  opacity: 1;
+ 
+} */
+/* .pp{
+    margin-top: -12px; 
+}
+@media  (min-width: 100px)and(max-width: 600px){
+   .pp{
+    margin-top: 10px;
+}
+   
+} */
 </style>

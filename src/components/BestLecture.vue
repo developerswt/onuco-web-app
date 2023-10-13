@@ -25,7 +25,7 @@
                         </div>
                         <div class="card-body " style="margin-top: -7%; ">
                             <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"> {{ facult.description.slice(0,55)}}...</div>
+                            <div class="card-text"> {{ facult.description.slice(0,50)}}...</div>
                             
                             <div class="mn text-left">
                                 <p>
@@ -383,6 +383,7 @@ export default defineComponent ({
 	
     margin-top: 34px;
     margin-bottom: -22px;
+    padding: 7px;
 }
 .carousel__item {
   min-height: 200px;

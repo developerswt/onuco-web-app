@@ -48,7 +48,7 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,22)}}...</p>
+                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,20)}}...</p>
 
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12 mn1">
-                                                    <div class="row">
+                                                    <div class="row aa">
                                                         <div class="col-lg-7 col-6 col-sm-6 col-md-6">
                                                             <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -86,7 +86,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text" style="margin: -5px; color: #828282;">(23 reviews)</p>
+                                                            <p id="review_text" style="">(23 reviews)</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -323,14 +323,16 @@ $(document).ready(function(){
         font-size: 11px;
     }
 
-    #sub_text,
+    #sub_text{
+        font-size: 11px;
+    }
     #code_text {
-        font-size: 13px;
+        font-size: 11px;
         color: black;
     }
 
     #desc_text {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     #review_text {
@@ -354,6 +356,21 @@ $(document).ready(function(){
     position: relative;
     bottom: -11px;
 }
+#sem_card{
+    height: 200px;
+    opacity: 1;
+    padding: 8%;  
+}
+#review_text{
+    margin: -3px -2px;
+     color: #828282;
+}
+}
+
+@media only screen and (max-width: 400px) and (min-width: 100px) {
+.row .aa {
+    margin-top: -18px;
+}
 
 }
 
@@ -374,18 +391,20 @@ $(document).ready(function(){
 
     }
 
-    #sub_text,
+    #sub_text{
+        font-size: 11px; 
+    }
     #code_text {
-        font-size: 13px;
+        font-size: 11px;
         color: black;
     }
 
     #desc_text {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     #review_text {
-        font-size: 12px;
+        font-size: 13px;
     }
     .kj .action[data-v-723afcf3] {
     float: right;
@@ -396,7 +415,16 @@ $(document).ready(function(){
     position: relative;
     bottom: -11px;
 }
-
+#review_text{
+    margin: -3px -2px;
+     color: #828282;
+}
+ .row .aa{
+    margin-top: -20px;
+}
+#sem_card[data-v-723afcf3] {
+    width: 102%;
+}
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
@@ -406,6 +434,16 @@ $(document).ready(function(){
 
 
     }
+    @media only screen and (max-width: 600px) and (min-width: 100px){
+#sem_card[data-v-723afcf3] {
+    height: 172px;
+    opacity: 1;
+    padding: 6%;
+} 
+.aa .row{
+    margin-top: -20px;
+}
+}
 
 }
 
@@ -423,17 +461,22 @@ $(document).ready(function(){
 */
 background: #EEEAE4;
     background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
-    box-shadow: 0px 0px 9px #000000A1;
+    /* box-shadow: 0px 0px 9px #000000A1; */
     border: 1px solid #F0F6FC;
     /* background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 20%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 9px #00000005; 
     border: 1px solid #F0F6FC; */
     width: 100%;
-    height: 200px;
+    height: 179px;
     opacity: 1;
-    padding: 8%;
+    padding: 6%;
 
 
+}
+
+#review_text{
+    margin: -5px -2px;
+     color: #828282;
 }
 
 #sem_card p {
@@ -509,7 +552,7 @@ background: #EEEAE4;
     font-size: 12px;
 }
 #sub_text{
-    font-size: 14px;  
+    font-size: 12.5px;  
 }
 
 .fa{
@@ -526,5 +569,20 @@ background: #EEEAE4;
     border-radius: -1%;
     font-size: 12px;
 }
-
+@media only screen and (max-width: 280px) {
+    #sem_card[data-v-723afcf3] {
+    width: 340%;
+    height: 179px;
+    opacity: 1;
+    padding: 23%;
+    margin: -23px;
+    }
+    .card-header[data-v-723afcf3] {
+    width: 210px;
+    height: 65px;
+    border-bottom: none;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+}
 </style>

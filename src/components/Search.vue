@@ -141,8 +141,133 @@
                                 </div>
                                 
                             </el-tab-pane>
-                            <el-tab-pane label="Course" name="second">Config</el-tab-pane>
-                            <el-tab-pane label="Author" name="third">Role</el-tab-pane>
+                            <el-tab-pane label="Course" name="second">
+                                <div class="row">
+                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                        <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
+                                            techniques...</p>
+                                    </div>
+                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                        <div class="select_block">
+                                            <label for="label-select" id="sort_label"> Sort by:</label>
+
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="label-select">
+                                                <option selected>Popular</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </el-tab-pane>
+                            <el-tab-pane label="Author" name="third">
+                                <div class="row">
+                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                        <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
+                                            techniques...</p>
+                                    </div>
+                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                        <div class="select_block">
+                                            <label for="label-select" id="sort_label"> Sort by:</label>
+
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="label-select">
+                                                <option selected>Popular</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+            <div class="row cr">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card new mt-5">
+                        <div class="user-follower">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title">Dr. Adhyan San</div>
+                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
+                            
+                            <div class="mn text-left">
+                                <p>
+                                    (23 Reviews) 
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                </p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card new mt-5">
+                        <div class="user-follower">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title">Dr. Adhyan San</div>
+                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
+                            
+                            <div class="mn text-left">
+                                <p>
+                                    (23 Reviews) 
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                </p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card  new mt-5">
+                        <div class="user-follower">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title">Dr. Adhyan San</div>
+                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
+                            
+                            <div class="mn text-left">
+                                <p>
+                                    (23 Reviews) 
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                </p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                               </div>
+                                </div>
+                            </el-tab-pane>
                             <!-- <el-tab-pane label="Other" name="fourth">Task</el-tab-pane> -->
 
 
@@ -494,4 +619,12 @@ export default {
     margin-bottom: 5%;
 }
 
+.cr{
+    display: block;
+}
+.new{
+    width:1000%;
+    height: 150px;
+    
+}
 </style>
