@@ -226,7 +226,7 @@
                                         </div>
                                         <div class="col-lg-6 col-4 col-sm-4 col-md-6">
                                             <div id="asset_image">
-                                                <img src="../assets/images/Group 1403.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
+                                                <img src="../assets/images/Group1303@2x.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
                                             </div>
                                         </div>
                                    </div>
