@@ -1,5 +1,6 @@
 <template>
     <div class="container jk">
+        <Breadcrumbs />
         <div class="parent_block pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
@@ -34,12 +35,14 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Offer from './Offer.vue'
 import AxiosInstance from '../config/axiosInstance'
+import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
     name: 'Universities',
     components: {
         Offer,
-        Loading
+        Loading,
+        Breadcrumbs
     },
     data() {
         return {

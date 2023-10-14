@@ -1,6 +1,6 @@
 <template>
   <div class="video-container">
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
+    <!-- <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video> -->
     <div v-if="!isSubscribed && showPoster" class="poster-overlay">
       <div class="overlay-item">
         <p class="vo-question">
@@ -14,6 +14,7 @@
         </div>
       </div>
     </div>
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered" v-else></video>
   </div>
 </template>
 

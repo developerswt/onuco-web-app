@@ -168,7 +168,7 @@ export default defineComponent({
 
 
 <!-- Breadcrumb.vue -->
-<template>
+<!-- <template>
   <nav class="breadcrumb">
     <ul>
       <li v-for="(crumb, index) in breadcrumbs" :key="index">
@@ -195,4 +195,174 @@ export default {
 
 <style>
 /* Add your breadcrumb styling here */
+</style> -->
+
+
+<!-- <template>
+  <div>
+    {{ crumbs }}
+    <br><br>
+    <div class="container">
+       <b-breadcrumb :items="crumbs"/>
+    </div>
+  </div>
+</template>
+<script>
+
+export default {
+  computed: {
+    crumbs: function() {
+      let pathArray = this.$route.path.split("/")
+      pathArray.shift()
+      let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+        breadcrumbArray.push({
+          path: path,
+          to: breadcrumbArray[idx - 1]
+            ? "/" + breadcrumbArray[idx - 1].path + "/" + path
+            : "/" + path,
+          text: this.$route.matched[idx].meta.breadCrumb || path,
+        });
+        return breadcrumbArray;
+      }, [])
+      return breadcrumbs;
+    }
+  }
+};
+</script>
+<style scoped>
+.container{
+  margin: auto;
+  width: 50%
+}
+</style> -->
+
+<!-- <template>
+  <nav class="breadcrumbs">
+    <ul>
+      <li v-for="(crumb, index) in breadcrumbs" :key="index">
+        <router-link :to="crumb.to">{{ crumb.label }}</router-link>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      breadcrumbs: [],
+    };
+  },
+  watch: {
+    $route() {
+      this.updateBreadcrumbs();
+    },
+  },
+  created() {
+    this.updateBreadcrumbs();
+  },
+  methods: {
+    updateBreadcrumbs() {
+      const matchedRoutes = this.$route.matched;
+
+      this.breadcrumbs = matchedRoutes.map((route) => ({
+        to: route.path,
+        label: route.meta.title || route.name,
+      }));
+    },
+  },
+};
+</script>
+
+<style>
+
+</style> -->
+
+
+<template>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb" >
+      <li class="breadcrumb-item" v-for="(crumb, index) in breadcrumbs" :key="index">
+        <router-link :to="crumb.to">{{ crumb.label }}</router-link>
+      </li>
+    </ol>
+  </nav>
+  <!-- <nav class="breadcrumbs">
+    <ul>
+      <li v-for="(crumb, index) in breadcrumbs" :key="index">
+        <router-link :to="crumb.to">{{ crumb.label }}</router-link>
+      </li>
+    </ul>
+  </nav> -->
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      breadcrumbs: [],
+    };
+  },
+  watch: {
+    $route() {
+      this.updateBreadcrumbs();
+    },
+  },
+  created() {
+    this.updateBreadcrumbs();
+  },
+  // methods: {
+  //   updateBreadcrumbs() {
+  //     const matchedRoutes = this.$route.matched;
+
+  //     this.breadcrumbs = matchedRoutes.map((route) => ({
+  //       to: route.path,
+  //       label: route.name,
+  //     }));
+  //   },
+  // },
+  methods: {
+    updateBreadcrumbs() {
+      const routeHistory = this.$route.matched.map((route) => ({
+        to: route.path,
+        label: route.name,
+      }));
+
+      // Ensure unique breadcrumb paths, only adding them once
+      const breadcrumbPaths = new Set();
+      this.breadcrumbs = routeHistory.filter((route) => {
+        if (!breadcrumbPaths.has(route.to)) {
+          breadcrumbPaths.add(route.to);
+          return true;
+        }
+        return false;
+      });
+    },
+  },  
+};
+</script>
+
+<style scoped>
+.breadcrumb {
+    background: transparent;
+    margin-left: -22px;
+}
+
+.breadcrumb-item a {
+    color: #888888;
+    font-size: 16px;
+}
+a {
+  color: #888888;
+  text-decoration: none;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
+    color: #888888;
+}
+ol {
+    margin-top: 0;
+
+}
+
 </style>

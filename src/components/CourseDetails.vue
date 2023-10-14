@@ -141,15 +141,15 @@
                                                                                     <p id="duration_text_one">{{ subject.time }}</p>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <div v-for="video in watchTimeDatas" :key="video.id">
-                                                                                        <div v-for="watch in video.watchTimeData" :key="watch.id">
-                                                                                            <div class="progress_block" v-if="subject.id === watch.videoId">
-                                                                                                <progress :value="watch.watchTime" max="100">
-                                                                                                    {{watch.watchTime}}%
+                                                                                    <!-- <div v-for="video in watchTimeDatas" :key="video.id">
+                                                                                        <div v-for="watch in video.watchTimeData" :key="watch.id"> v-if="subject.id === watch.videoId" -->
+                                                                                            <div class="progress_block" >
+                                                                                                <progress value="10" max="100">
+                                                                                                    10
                                                                                                 </progress>
                                                                                             </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                        <!-- </div>
+                                                                                    </div> -->
                                                                                     <!-- <progress value="0" max="100"> </progress> -->
                                                                                 </div>
                                                                                 <!-- <div class="col-lg-6 col-6 col-sm-6">
@@ -390,8 +390,8 @@ export default {
             const result = await AxiosInstance.get('/StateManagement');
             this.watchTimeDatas = result.data;
             console.log(this.watchTimeDatas);
-            // const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseId=" + this.$route.query.id);
-            // this.courseDetails = subscription.data;
+            const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
+            this.courseDetails = subscription.data;
             // console.log(this.courseDetails);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
@@ -439,8 +439,8 @@ progress::-webkit-progress-bar {
     /* background: rgb(221, 221, 221); */
     background: #CCCCCC;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
-    border-radius: 20px;
-    height: 6px;
+    border-radius: 6px;
+    height: 4px;
     width: 171px;
 }
 /*style for progress track*/
@@ -481,12 +481,13 @@ progress::-webkit-progress-value {
 }
 
 .breadcrumb-item a {
-    color: #0066CC;
+    color: #888888;
+    font-size: 16px;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
     content: ">";
-    color: #0066CC;
+    color: #888888;
 }
 ol {
     margin-top: 0;
@@ -873,9 +874,33 @@ progress {
   width: 171px;
   height: 10px;
   /* background: #fff; */
-  margin-left: -34px;
+  margin-left: -76px;
 }
-
+@media screen and (min-width: 760px) and (max-width: 915px) {
+    progress {
+        margin-left: -70px;
+    }
+}
+@media only screen and (max-width: 550px) {
+    progress {
+        margin-left: -120px;
+    }
+}
+@media only screen and (max-width: 499px) {
+    progress {
+        margin-left: -69px;
+    }
+}
+@media only screen and (max-width: 280px) {
+    progress {
+        margin-left: -29px;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    progress {
+        margin-left: -55px;
+    }
+}
 progress {
   color: #FF9924;
 }

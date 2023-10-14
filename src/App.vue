@@ -1,5 +1,6 @@
 <template>
   <Navbar :showSearchBox="showSearchBox"  />
+  <!-- <Breadcrumbs  style="padding-top: 12%;"/> -->
   <router-view :key="$route.fullPath" />
   <Footer />
 </template>
