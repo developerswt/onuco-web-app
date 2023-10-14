@@ -2,6 +2,7 @@
     
     <div class="container jk">
         <div class="Instructor_parent_block">
+            <Breadcrumbs />
             <h2 class="instructor_head_text"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>
                 <div class="instructor-details">
@@ -313,17 +314,20 @@
 </template>
 
 <script>
+import Breadcrumbs from "./Breadcrumbs.vue"
 import axios from 'axios'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 
 import Offer from './Offer.vue'
+import BreadcrumbsVue from './Breadcrumbs.vue';
 export default {
     name: 'InstructorView',
     components: {
        Offer,
-       Loading
+       Loading,
+       Breadcrumbs
     },
     data() {
         return {

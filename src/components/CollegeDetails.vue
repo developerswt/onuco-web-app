@@ -1,10 +1,11 @@
 <template>
     <div class="container-fluid jk">
         <div class="container pt-4">
+            <Breadcrumbs />
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
         </h4> 
-        <p>{{ university.description }}</p>
+        <p v-html="this.university[0].description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
@@ -177,13 +178,14 @@ import AxiosInstance  from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-
+import Breadcrumbs from './Breadcrumbs.vue';
 
 export default {
     name: 'CollegeDetails',
     components: {
         Offer,
-        Loading
+        Loading,
+        Breadcrumbs
     },
     data() {
         return {

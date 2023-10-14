@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid jk">
-      <div class="container pt-4" v-for="academi in academia" :key="academi.id">
+      <Breadcrumbs style="padding-left: 102px;" />
+      <div class="container" v-for="academi in academia" :key="academi.id">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>
           <h2 id="available_text"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
@@ -43,12 +44,14 @@ import Offer from './Offer.vue'
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
     name: 'CoursesPage',
     components: {
         Offer,
         Loading,
+        Breadcrumbs
     },
     data() {
         return {

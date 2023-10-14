@@ -142,7 +142,80 @@
                                 
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">Config</el-tab-pane>
-                            <el-tab-pane label="Author" name="third">Role</el-tab-pane>
+                            <el-tab-pane label="Author" name="third">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-8 user_details">
+                                                        <img src="../assets/images/Author.png" >
+                                                        <div class="user_details_name">
+                                                            <h2>Dr. Adhyan San</h2>
+                                                            <p>Data Management Systems & Visualization software developme...</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 author_reviews">
+                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <div class="reviews_details">
+                                                            <p>(23 reviews) <br>
+                                                            <el-rate v-model="value2" :colors="colors" /></p>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-8 user_details">
+                                                        <img src="../assets/images/Author.png" >
+                                                        <div class="user_details_name">
+                                                            <h2>Dr. Adhyan San</h2>
+                                                            <p>Data Management Systems & Visualization software developme...</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 author_reviews">
+                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <div class="reviews_details">
+                                                            <p>(23 reviews) <br>
+                                                            <el-rate v-model="value2" :colors="colors" /></p>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-8 user_details">
+                                                        <img src="../assets/images/Author.png" >
+                                                        <div class="user_details_name">
+                                                            <h2>Dr. Adhyan San</h2>
+                                                            <p>Data Management Systems & Visualization software developme...</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 author_reviews">
+                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <div class="reviews_details">
+                                                            <p>(23 reviews) <br>
+                                                            <el-rate v-model="value2" :colors="colors" /></p>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </el-tab-pane>
                             <!-- <el-tab-pane label="Other" name="fourth">Task</el-tab-pane> -->
 
 
@@ -493,5 +566,280 @@ export default {
     margin-top: 5%;
     margin-bottom: 5%;
 }
+.author_img {
+    width: 105px;
+    height: 105px;
+/* UI Properties */
+    /* background: transparent url('../assets/images/Author.png') 0% 0% no-repeat padding-box; */
+    box-shadow: 0px 3px 6px #00000029;
+    border: 3px solid #FFFFFF;
+    border-radius: 63px;
+    opacity: 1;
 
+
+}
+.author_reviews .reviews_details p{
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+.author_details {
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 4%;
+}
+.author_details h2 {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 21px/28px Segoe UI;
+    letter-spacing: 0px;
+    color: #444444;
+    opacity: 1;
+}
+.author_details p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
+}
+.author_reviews {
+    text-align: right;
+}
+.author_reviews p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/18px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    text-align: right;
+    font: normal normal normal 16px/18px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+.author_reviews .reviews_details p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/18px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    text-align: right;
+    font: normal normal normal 16px/18px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.user_details img {
+    float: left;
+    width: 105px;
+    height: 105px;
+/* UI Properties */
+    /* background: transparent url('../assets/images/Author.png') 0% 0% no-repeat padding-box; */
+    box-shadow: 0px 3px 6px #00000029;
+    border: 3px solid #FFFFFF;
+    border-radius: 63px;
+    opacity: 1;
+
+}
+.user_details .user_details_name {
+    float: right;
+    text-align: left;
+    margin-left: -20px;
+    padding-top: 22px;
+    padding-right: 80px;
+} 
+.user_details_name p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #666666;
+}
+.user_details_name h2 {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 21px/28px Segoe UI;
+    letter-spacing: 0px;
+    color: #444444;
+    opacity: 1;
+}
+@media screen and (min-width: 500px) and (max-width: 600px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 75%;
+        text-align: left;
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        /* UI Properties */
+        /* background: transparent url('../assets/images/Author.png') 0% 0% no-repeat padding-box; */
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+    .author_reviews {
+        padding-top: 15px;
+    }
+    .author_reviews p {
+        float: left;
+        width: 50%;
+        padding-top: 2px;
+        padding-right: 30px;
+    }
+    .author_reviews .reviews_details p{
+        float: right;
+        width: 50%;
+        padding-left: 10%;
+    }
+}
+@media screen and (min-width: 400px) and (max-width: 500px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 65%;
+        text-align: left;
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+    .author_reviews {
+        padding-top: 15px;
+        
+    }
+    .author_reviews p {
+        float: left;
+        width: 40%;
+        
+    }
+    .author_reviews .reviews_details p {
+        float: right;
+        width: 60%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+@media screen and (min-width: 300px) and (max-width: 400px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 60%;
+        text-align: left;
+        padding-top: 10px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+    .author_reviews {
+        padding-top: 15px;
+    }
+    .author_reviews p {
+        float: left;
+        width: 40%;
+    }
+    .author_reviews .reviews_details p {
+        float: right;
+        padding-left: 20px;
+        width: 60%;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 300px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 100%;
+        text-align: left;
+        padding-top: 10px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+    .author_reviews {
+        padding-top: 15px;
+    }
+    .author_reviews p {
+        float: left;
+        width: 45%;
+    }
+    .author_reviews .reviews_details p {
+        float: right;
+        padding-left: 20px;
+        width: 55%;
+    }
+}
+@media screen and (min-width: 1000px) and (max-width: 1024px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 75%;
+        text-align: left;
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+
+}
+@media screen and (min-width: 750px) and (max-width: 950px) {
+    .user_details .user_details_name {
+        float: right;
+        width: 70%;
+        text-align: left;
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .user_details img {
+        float: left;
+        width: 105px;
+        height: 105px;
+        box-shadow: 0px 3px 6px #00000029;
+        border: 3px solid #FFFFFF;
+        border-radius: 63px;
+        opacity: 1;
+
+    }
+
+}
 </style>

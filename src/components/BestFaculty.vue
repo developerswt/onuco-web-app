@@ -1,7 +1,7 @@
  <template>
      <div class="category-test pt-3">
         <div class="container" style="margin-top: 70px;">
-            <h6>Home > Best Lecturers</h6>
+            <Breadcrumbs />
             <h4 class="academic_head_text pt-4">
                 <span id="aca_text">Best</span>Lecturers</h4>
         </div>
@@ -234,9 +234,13 @@
 
 <script>
 import axios from 'axios'
+import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
     name: 'BestLecture',
+    components: {
+        Breadcrumbs
+    },
     data() {
         return {
             faculty: []

@@ -26,7 +26,7 @@
                     <li class="nav-item " :class="{ 'active': isActive('/Mylearnings') }">
                         <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
-                    <li class="nav-item" :class="{ 'active': isActive('/Courses') }">
+                    <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
 
                         <router-link class="nav-link"  to="/Courses" >Courses</router-link>
                     </li>
@@ -178,6 +178,10 @@ export default {
         isActive(route) {
             return this.$route.path === route;
         },
+        isActiveAcademia() {
+      // Check if the current route starts with "/Academia/" and has a parameter
+      return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
+    },
   
 
         // setActive(index) {

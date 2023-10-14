@@ -1,10 +1,9 @@
 <template>
     <div class="container-fluid jk">
-        <!-- <Breadcrumbs /> -->
         <div class="container">
             <div class="learning_block">
-
-                <div class="row">
+                <Breadcrumbs />
+                <div class="row" v-if="selectedItem !== null">
                     <div class="col-lg-12">
                         <div>
                             <div class="purple_block">
@@ -12,14 +11,14 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="right_block">
-                                            <p id="subject_text">Math 1(NEP Series)</p>
-                                            <p class="mb-0">123 Hrs Video Course</p>
+                                            <p id="subject_text">{{ selectedItem.title }}</p>
+                                            <p class="mb-0">{{ selectedItem.videoDemand }} Video Course</p>
                                             <p>2 Quiz and 3 Question Banks</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="left_block">
-                                            <p>5 Modules <span id="span_text">32 Topics</span></p>
+                                            <p>{{ selectedItem.modules }} <span id="span_text">32 Topics</span></p>
 
                                             <button id="course_button">Start Course <i class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
@@ -30,7 +29,29 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row mb-3">
+                    <div class="col-sm-12 justify-content-center">
+                        <div class="radio_checkbox" style="text-align: center;">
+                            <div class="radio-item" v-for="item in myLearning" :key="item.id" :class="{ 'active': item === selectedItem }">
+                                <div class="dot" @click="handleItemChange(item)"></div>
+                                    <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <!-- <div class="row mb-3">
+                    <div class="col-sm-12 justify-content-center">
+                        <div class="radio_checkbox" style="text-align: center;">
+                            <form>
+                                <div class="radio-item" v-for="item in myLearning" :key="item.id">
+                                    <input type="radio" @click="handleItemChange(item)" :value="item.id" name="radio" v-model="selectedItem">
+                                     <label :for="'radio' + item.id">{{ item.title }}</label> 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
                 <!-- <section id="tab_section">
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -53,7 +74,7 @@
                         <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                             <el-tab-pane label="MY COURSES" name="first">
 
-                           <div class="tab-content" id="myTabContent">
+                           <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="">
                                 <div class="row mt-3">
@@ -82,7 +103,41 @@
                                         </div>
                                     </div>
                                 </div>
-                                  <div class="inner_block">
+                                <div class="" v-for="subject in selectedItem.subject" :key="subject.id">
+                                    <div class="" v-for="chapter in subject.values" :key="chapter.id">
+                                        <div class="" v-for="course in chapter.values" :key="course.id">
+                                            <div class="inner_block">
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                        <div id="asset_image">
+                                                            <img src="../assets/images/book1.png" class="img-fluid">
+                                                        </div>
+
+                                                    </div> 
+                                                    <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                        <p class="mb-0" id="text_one">{{ course.lession }}</p>
+                                                        <p id="text_two">stacks</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                                <div class="progress_block">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                                <p id="text_three">22h 33m left</p>
+                                                            </div>
+                                                            <button class="bt">Renew</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>            
+                                <!-- <div class="inner_block">
                                     <div class="row">
                                         <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                             <div id="asset_image">
@@ -137,35 +192,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">Renew</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> -->
                              
                             </div>
 
@@ -305,11 +332,12 @@
 
 
 
-    </div>
+    
 </template>
 
 <script>
 import Breadcrumbs from './Breadcrumbs.vue';
+import AxiosInstance  from '../config/axiosInstance';
 
 export default {
     name: 'Mylearnings',
@@ -319,19 +347,63 @@ export default {
     data() {
         return {
            activeName: 'first',
+           myLearning: [],
+           selectedItem: null,
         }
     },
     methods: {
         handleClick(tab, event) {
             console.log(tab, event);
         },
+        handleItemChange(item) {
+            // Update your component's state to display the selected item's details
+            this.selectedItem = item;
+            console.log(this.selectedItem);
+        },
+    },
+    async created() {
+        try {
+            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=dbae6829-8b5e-4f31-9c79-9d3b0c0aec08`);
+            this.myLearning = res.data;
+            console.log(this.myLearning);
+            if (this.myLearning.length > 0) {
+                // Set the default selected item to the first item in myLearning
+                this.selectedItem = this.myLearning[0];
+            }
+        } catch (error) {
+            console.log(error);
+            // this.isLoading = false;
+        }
+        // finally {
+        //     this.isLoading = false;
+        // }
     }
 }
 </script>
 
 <style scoped>
+.radio-item {
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff; /* Default color for inactive items */
+    border: 1px solid #FF9900;
+}
+
+.active .dot {
+    background-color: #FF9900; /* Color for active item */
+}
+
+
+/* Style your radio buttons as needed */
 .learning_block {
-    padding-top: 100px;
+    padding-top: 70px;
 }
 
 .purple_block {
@@ -582,6 +654,21 @@ export default {
     position: relative;
     left: 407px;
     bottom: 39px;
+}
+input[type="radio"] {
+   appearance: none; /* Hide the default radio button */
+    width: 12px; /* Adjust size as needed */
+    height: 12px;
+    border-radius: 50%; /* Make it circular */
+    border: 2px solid #FF9900; /* Border color (blue in this example) */
+    margin-right: 5px; /* Add spacing between the button and label */
+    background: #FF9900 0% 0% no-repeat padding-box;
+    opacity: 1;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background-color: white; /* Background color when selected */
 }
 
 </style>
