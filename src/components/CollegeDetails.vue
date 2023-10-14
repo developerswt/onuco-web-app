@@ -7,7 +7,7 @@
             <button class="bt">BUY NOW</button>
         </h4> 
        
-        <p v-html="university.description"></p>
+        <p v-html="this.university[0].description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
