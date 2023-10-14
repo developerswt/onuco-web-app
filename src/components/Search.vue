@@ -82,7 +82,7 @@
                                     </div>
 
                                 </div>
-                                <div class="" v-if="searchResults.length > 0">
+                                <!-- <div class="" v-if="searchResults.length > 0">
                                 <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
                                     <div class="row no-gutters" >
                                         <div class="col-lg-3 col-md-3" >
@@ -138,8 +138,110 @@
                                
                                 <div class="no_result_found" v-else>
                                     <h4>No Results Found</h4>
-                                </div>
+                                </div> -->
+                                <div class="tab_inner_block">
+                                    <div class="row no-gutters" >
+                                        <div class="col-lg-3 col-md-3" >
+                                            <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
+                                        </div>
+                                        <div class="col-lg-9 col-md-9">
+                                            <div class="results_inner_block">
+                                                <div class="row">
+                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                        <p id="title_text" class="mb-1">VTU</p>
+                                                        <p id="sub_text" class="mb-1"></p>
+                                                        <div class="inner_child">
+                                                            
+                                                                <!--  -->
+                                                                    <p id="prof_text" class="">Mathematics and its formulas</p><br>
+                                                                    
+                                                                <div class="row" style="margin-right: 47px;margin-top: -28px;">
+                                                                    <div class="col-lg-4 col-md-5">
+                                                                    <p  style="font-size: 13px;">Dr. Adhyan San</p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-3">
+                                                                    <p id="duration_text" class=""><img
+                                                                            src="../assets/images/Iconionic-ios-timer@2x.png">03h 32min</p>
+                                                                    </div>
+                                                                     <div class="col-lg-3 col-md-3">
+                                                                    <p id="module_text" class=""><img
+                                                                            src="../assets/images/Iconmap-school@2x.png">8 Modules</p>  
+                                                                </div>
+                                                                <p class="ml-3" style="font-size: 13px;">Data Management Systems & Visualization software developme...</p>
+                                                            </div>
+                                                        </div>
                                 
+                                                    </div>
+                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                        <div class="right_block">
+                                                            <p id="amount_text"><span id="strike_text"> &#8377;444</span>
+                                                            &#8377;2000</p>
+                                                        <button id="buy_button">Buy now</button>
+                                                        <div class="icon_blck">
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                        </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="tab_inner_block " style="margin-top: 73px;">
+                                    <div class=" card row no-gutters"  style=" display: flex; ">
+                                        <div class="col-lg-1 col-md-2" >
+                                            <img src="../assets/images/Image 21.png" style="width: 100px; height: 100px;position: relative; left: 20px; top: 10px;" class="img-fluid" id="sub_image" />
+                                        </div>
+                                        <div class="col-lg-7 col-md-7" style="margin:29px">
+                                            <p id="title_text" class="">Mathematics and its formulas</p>
+                                            <p id="prof_text" class="">Data Management Systems & Visualization software developme...</p> 
+                                            </div>
+                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                        <div class="right_block" style="font-size: 13px;padding-left: 181px;">
+                                                            <p style="margin-bottom: -1px;" >13 Following</p>
+                                                            <p style="margin-bottom: 29px;"> 1200 Follow </p>
+                                                       
+                                                       
+                                                            <p style="margin-bottom: -1px;">(23 reviews)</p>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900; letter-spacing: 8px;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;letter-spacing: 8px;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;letter-spacing: 8px;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;letter-spacing: 8px;"></i>
+                                                            <i class="fa-solid fa-star" style="color: #ff9900;letter-spacing: 8px;"></i>
+                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                </div> 
+                            </el-tab-pane>
+                            <el-tab-pane label="Course" name="second">
+                                <div class="row">
+                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                        <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
+                                            techniques...</p>
+                                    </div>
+                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                        <div class="select_block">
+                                            <label for="label-select" id="sort_label"> Sort by:</label>
+
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="label-select">
+                                                <option selected>Popular</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">Config</el-tab-pane>
                             <el-tab-pane label="Author" name="third">

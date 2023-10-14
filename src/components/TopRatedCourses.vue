@@ -246,7 +246,7 @@ export default {
 
 .box {
 
-    height: 350px;
+    height: 348px;
     /* UI Properties */
     width: 262px;
     /* border: 1px solid #FFFFFF; */
@@ -264,12 +264,20 @@ export default {
     padding: 12px 10px;
 }
 
+@media screen and (max-width: 400px){
 
+.box[data-v-3344e108] {
+    width: 100%;
+    margin-bottom: 35px;
+    height: 360px;
+}
+}
 
 @media screen and (max-width: 600px) {
     .box {
         width: 100%;
         margin-bottom: 35px;
+        height: 380px;
     }
 
     .box .offer {
@@ -298,6 +306,7 @@ export default {
     .box {
         width: 47%;
         margin-bottom: 35px;
+        height: 380px;
     }
 }
 
@@ -305,6 +314,7 @@ export default {
     .box {
         width: 30%;
         margin-bottom: 3%;
+        height: 380px;
     }
 }
 
