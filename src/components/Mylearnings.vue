@@ -213,11 +213,11 @@
                                            <p>Dr. Adhyan San</p>
                                          </div>
                                          <div class="asset_image info1">
-                                                <img src="../assets/images/Icon ionic-ios-timer.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
                                                 01h 32min
                                             </div>
                                             <div class="asset_image info1">
-                                                <img src="../assets/images/Icon map-school.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
+                                                <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
                                                 2 Modules<br>
                                             </div>
                                             <p class="pp" style="color: #666666; font-size: 12px; float: left;">Data Management Systems & Visualization software developme...</p>
