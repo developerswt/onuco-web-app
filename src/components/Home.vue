@@ -80,13 +80,13 @@ export default {
     currentImage() {
       return this.imageSources[this.currentIndex];
     },
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-        isuser() {
-            console.log(this.$store.state.user);
-            return this.$store.state.user;
-        },
+    isLoggedIn() {
+        return this.$store.state.IsLoggedIn;
+    },
+    isuser() {
+        console.log(this.$store.state.user);
+        return this.$store.state.user;
+    },
 
   },
   created() {
