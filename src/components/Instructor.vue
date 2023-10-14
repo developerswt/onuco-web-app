@@ -75,9 +75,9 @@
 
                                             <div class="card_top_text">
                                                 <div class="row">
-                                                    
+                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
@@ -131,7 +131,7 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-2 col-3 col-sm-3">
@@ -196,7 +196,7 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
@@ -250,7 +250,7 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"><b>Math 1 (NEP Series)</b></p>
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-2 col-3 col-sm-3">
