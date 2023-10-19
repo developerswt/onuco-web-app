@@ -64,8 +64,15 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']"  style="background-color: none;">
+    <authenticator class="custom-sign-in" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
         
+      <template v-slot:icon-facebook>
+        <div style="padding: var(--amplify-space-large);">
+      <img src="../assets/images/Icon awesome-facebook.png" alt="Facebook" />
+    </div>
+    </template>
+   
+
         <template v-slot:header>
         <div style="padding: var(--amplify-space-large); text-align: center">
           <!-- <img
@@ -88,6 +95,8 @@ export default {
   
 
 <style scoped>
+
+
 .amplify-button[data-variation='primary'] {
   background: linear-gradient(
     to right,
@@ -153,4 +162,5 @@ export default {
     background-image: url('../assets/images/Group 246.png');
 
 }
+
 </style>

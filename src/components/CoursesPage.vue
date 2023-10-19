@@ -4,7 +4,7 @@
       <div class="container" v-for="academi in academia" :key="academi.id">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>
-          <h2 id="available_text"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
+          <h2 id="available_text"  style="margin-top: 20px;"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
           {{ academi.id }}
           <div class="parent_blocks">
             <div class="row pt-4">
@@ -15,7 +15,7 @@
                     <div class="row">
                       <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                         <div class="course_block">
-                          <img src="../assets/images/book1.png" style="height: 60px;">
+                          <img src="../assets/images/book1.png" style="height: 65px;">
                         </div>
                       </div>
                       <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 4px;">
@@ -107,9 +107,11 @@ export default {
 
     }
 
-    .box {
-        width: 300px !important;
-        background-size: contain !important;
+    .box{
+        height: 98px !important;
+    width: 359px !important;
+    padding: 15px  !important;
+ 
     }
 
     #available_text {
@@ -130,7 +132,7 @@ export default {
 }
 
 .box {
-    height:83px;
+    height:90px;
     width:360px;
     cursor: pointer;
     margin-bottom: 1%;

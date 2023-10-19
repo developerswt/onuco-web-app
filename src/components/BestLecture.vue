@@ -406,6 +406,7 @@ export default defineComponent ({
     margin-right: -20px;
   box-sizing: content-box;
   border: 89px solid blue;
+  outline: none !important;
 }
 .mn .fa {
     color: orange;
