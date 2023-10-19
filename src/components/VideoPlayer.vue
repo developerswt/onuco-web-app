@@ -1,6 +1,6 @@
 <template>
   <div class="video-container">
-    <!-- <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video> -->
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video> 
     <div v-if="!isSubscribed && showPoster" class="poster-overlay">
       <div class="overlay-item">
         <p class="vo-question">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered" v-else></video>
+
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
     return {
       player: null,
       showPoster: false, // Initialize showPoster to false
+      enablePoster: false
     }
   },
   computed: {
@@ -71,12 +72,22 @@ export default {
     this.player.on('timeupdate', () => {
       if (this.player.currentTime() >= 8 && !this.showPoster) {
         this.showPoster = true;
+        this.enablePoster = true;
         this.player.pause();
       }
     });
     this.player.on('ended', () => {
       if (this.showPoster) {
         this.showPoster = false;
+      }
+    });
+    this.player.on('fullscreenchange', () => {
+      if (this.player.isFullscreen()) {
+        // When entering full-screen mode, show the poster overlay
+        this.showPoster = false;
+      } else {
+        // When exiting full-screen mode, hide the poster overlay
+        this.showPoster = true;
       }
     });
   },
@@ -162,6 +173,7 @@ export default {
   width: 100% !important;
   height: 100% !important;
 }
+
 .poster-overlay {
   position: absolute;
   top: 0;
@@ -173,41 +185,49 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* z-index: 2147483647; */
   z-index: 100;
 }
 
-.overlaysWrap {
-    /* visibility: hidden; */
-    /* pointer-events: none; */
-    position: absolute;
-    top: 0;
-    color: #FFF;
-    font-size: 20px;
-    background-color: rgba(0, 0, 0, 0.85);
-    width: 100%;
-    height: 100%;
-    z-index: 100;
+.poster-overlay.full-screen {
+  position: fixed;
 }
+
+/* .video-container:fullscreen .poster-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483647;
+} */
+
+/* Add your other styles here */
 
 .subscribeBtn {
   color: #ffff;
   background-color: red;
   font-size: 15px;
 }
+
 .customePlyr {
   position: relative;
 }
+
 .overlay-item {
   position: absolute;
-    display: block;
-    /* justify-content: center; */
-    top: 40%;
-    text-align: center;
-    /* transform: translate(-50%, -50%); */
-    align-items: center;
-    /* justify-content: space-between; */
+  display: block;
+  top: 40%;
+  text-align: center;
+  align-items: center;
 }
-.vo-question{
+
+.vo-question {
   font-size: 15px;
 }
 

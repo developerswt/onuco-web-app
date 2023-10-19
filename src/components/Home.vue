@@ -1,7 +1,7 @@
 <template>
     <Carousel />
     <!-- <Carouseltwo /> -->
-
+    <!-- {{ this.isuser }} -->
 
     <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid " id="first_container">

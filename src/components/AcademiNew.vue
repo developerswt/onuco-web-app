@@ -292,20 +292,26 @@
             </div>
             </div>
         </div> -->
+        <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
   </div>
 </template>
 <script>
 import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from './Breadcrumbs.vue'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 export default {
     name: 'AcademiNewView',
     components: {
-        Breadcrumbs
+        Breadcrumbs,
+        Loading
     },
     data() {
         return {
-            academia: []
+            academia: [],
+            isLoading: false,
         }
     },
     async created() {

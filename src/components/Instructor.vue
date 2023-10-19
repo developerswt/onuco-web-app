@@ -1,8 +1,8 @@
 <template>
     
     <div class="container jk">
+        <Breadcrumbs />
         <div class="Instructor_parent_block">
-            <Breadcrumbs />
             <h2 class="instructor_head_text"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>
                 <div class="instructor-details">
@@ -814,6 +814,10 @@ text-align: left !important;
     letter-spacing: 0px;
     color: #828282;
     opacity: 1;
+}
+.instructor_head_text {
+    padding: 0px 0px 20px 2px;
+    font-size: 20px;
 }
 </style>
 

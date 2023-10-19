@@ -419,7 +419,7 @@
          </div>
     </div>
 </div>
-
+<Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
 
 
     
@@ -428,14 +428,19 @@
 <script>
 import Breadcrumbs from './Breadcrumbs.vue';
 import AxiosInstance  from '../config/axiosInstance';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 export default {
     name: 'Mylearnings',
     components: {
-        Breadcrumbs
+        Breadcrumbs,
+        Loading
     },
     data() {
         return {
+            isLoading: false,
            activeName: 'first',
            myLearning: [],
            selectedItem: null,
@@ -452,6 +457,7 @@ export default {
         },
     },
     async created() {
+        this.isLoading = true;
         try {
             const res = await AxiosInstance.get(`/MyLearnings?CognitoId=dbae6829-8b5e-4f31-9c79-9d3b0c0aec08`);
             this.myLearning = res.data;
@@ -462,11 +468,11 @@ export default {
             }
         } catch (error) {
             console.log(error);
-            // this.isLoading = false;
+            this.isLoading = false;
         }
-        // finally {
-        //     this.isLoading = false;
-        // }
+        finally {
+            this.isLoading = false;
+        }
     }
 }
 </script>

@@ -33,7 +33,7 @@ export default {
           formFields: {
               signIn: {
                   username: {
-                      placeholder: 'Enter Your Username Here',
+                      placeholder: 'Email or Phone_number (Include +91)',
                       isRequired: true,
                       label: 'Username:'
                   },

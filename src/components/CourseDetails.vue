@@ -392,7 +392,7 @@ export default {
             console.log(this.watchTimeDatas);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
-            // console.log(this.courseDetails);
+            console.log(this.courseDetails);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {

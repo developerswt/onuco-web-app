@@ -41,218 +41,40 @@
                 </div>
             </div>
         </div>        
-                <!-- <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-3">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                               
-                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">Dr. Adhyan San</div>
-                            <div class="card-text"> Data Management Sysyems & Visualization software developement....</div>
-                            
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        <!-- </div> -->
+        <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
         
 </template>
 
 <script>
 import axios from 'axios'
 import Breadcrumbs from './Breadcrumbs.vue'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 export default {
     name: 'BestLecture',
     components: {
-        Breadcrumbs
+        Breadcrumbs,
+        Loading
     },
     data() {
         return {
-            faculty: []
+            faculty: [],
+            isLoading: false,
         }
     },
     async created() {   
+        this.isLoading = true;
         try {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {
             console.log(error);
+            this.isLoading= false;
+        } finally {
+            this.isLoading = false;
         }
     },
   }
