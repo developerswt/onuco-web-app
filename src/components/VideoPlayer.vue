@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <!-- <video ref="videoPlayer" class="video-js vjs-big-play-centered" ></video>  </div> -->
+
   </div>
 </template>
 
