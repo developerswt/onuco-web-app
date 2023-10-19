@@ -165,7 +165,7 @@
                                 </div>  
                                  
                             </el-tab-pane>
-                            <!-- <el-tab-pane label="Course" name="second">
+                            <el-tab-pane label="Course" name="second">
                                 <div class="row">
                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
@@ -187,9 +187,31 @@
                                     </div>
 
                                 </div>
-                            </el-tab-pane> -->
-                            <el-tab-pane label="Course" name="second">Config</el-tab-pane>
+                            </el-tab-pane>
+                            <!-- <el-tab-pane label="Course" name="second">Config</el-tab-pane> -->
                             <el-tab-pane label="Author" name="third">
+                               
+                                <div class="row">
+                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                        <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
+                                            techniques...</p>
+                                    </div>
+                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                        <div class="select_block">
+                                            <label for="label-select" id="sort_label"> Sort by:</label>
+
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="label-select">
+                                                <option selected>Popular</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                                 <div class="row mb-2">
                                     <div class="col-sm-12">
                                         <div class="card">
@@ -448,7 +470,7 @@ export default {
 }
 
 #title_text {
-    color: #B4B4B4;
+    color: #444444;
     font-size: 16px;
 }
 

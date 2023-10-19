@@ -29,10 +29,9 @@ import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
 import UserNotification from "./components/UserNotification.vue"
 import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
-import PayuPage from "./components/PayuPage.vue";
-
-
-
+import Course from "./components/Course.vue"
+import CoursePayment from "./components/CoursePayment.vue"
+import Payment from "./components/Payment.vue"
 
 let user;
 
@@ -345,20 +344,33 @@ const routes = [
         title: 'Privacy Page',
     },
   },
+  
+
   {
-    path: "/Pay",
-    name: "PayuPage",
-    component: PayuPage,
+    path:"/Course",
+    name: "Course",
+    component: Course,
+    meta: {
+        title: 'Course Page',
+    },
+  },
+  
+  {
+    path:"/CoursePayment",
+    name: "CoursePayment",
+    component: CoursePayment,
+    meta: {
+        title: 'CoursePayment Page',
+    },
+  },
+  {
+    path:"/Payment",
+    name: "Payment",
+    component: Payment,
     meta: {
         title: 'Payment Page',
     },
   },
-  
-  // {
-  //   path: '*',
-  //   redirect: '/'
-  // }
-
 
 ];
 

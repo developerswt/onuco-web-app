@@ -64,7 +64,7 @@
                     <template #addons>
      
 
-      <navigation class="carousel-navigation" style="margin-left: -10px;" />
+      <navigation />
       <pagination />
     </template>
                 </Carousel>
@@ -424,7 +424,8 @@ export default defineComponent ({
     margin-right: -20px;
   box-sizing: content-box;
   border: 89px solid blue;
-} */
+  outline: none !important;
+}
 .mn .fa {
     color: orange;
 }
@@ -432,17 +433,7 @@ export default defineComponent ({
     padding-top: 20px;
 }
 
-.mn p {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
-    letter-spacing: var(--unnamed-character-spacing-0);
-    color: var(--unnamed-color-707070);
-    /* text-align: center; */
-    font: normal normal normal 14px/18px Segoe UI;
-    letter-spacing: 0px;
-    color: #707070;
-    margin: 0%;
-    opacity: 1;
-}
+
 .mn  .fa{
     letter-spacing: 2px;
     

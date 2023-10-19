@@ -36,7 +36,9 @@ a {
 a:hover {
   color: #535bf2;
 }
-
+/* .amplify-button {
+  background-color: blue !important;
+} */
 
 
 /* body {
@@ -77,9 +79,35 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-.amplify-button .amplify-button--primary {
-  background-color: blue !important;
-} 
+.amplify-button--primary {
+  background-color:#0066CC !important;
+}
+ 
+ 
+.amplify-field-group__control {
+
+  border-color: #0066CC !important;
+}
+
+ .amplify-field-group__field-wrapper .amplify-field-group__control{
+    border-color: #c1c1c1 !important;
+}
+
+.amplify-field-group__outer-end .amplify-field-group__control{
+  border-color: #c1c1c1 !important;
+}
+
+ .amplify-authenticator__tabs-wrapper .amplify-tabs-item{
+  color: #0066CC !important;
+  /* border-color: #0066CC !important; */
+}
+.amplify-tabs-item[data-state=active]
+{
+  border-color: #0066CC !important;
+}
+/* .amplify-button .amplify-button--primary {
+ 
+}  */
 /* h3 {
   font-family: 'Times New Roman', Times, serif;
 }
@@ -193,4 +221,8 @@ font-size: 20px;
 .el-tabs__content{
   font-family: 'Noto Sans', sans-serif;
 
+}
+.carousel__prev,
+.carousel__next {
+  outline: none !important;
 }
