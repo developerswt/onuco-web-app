@@ -11,7 +11,7 @@
     </div>
         <div class="container-fluid">
             <!-- <div class="row pt-5"> -->
-                <carousel :settings="settings" :breakpoints="breakpoints">
+                <Carousel :settings="settings" :breakpoints="breakpoints">
                     <slide v-for="facult in faculty" :key="facult.id">
                         
                         <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
@@ -45,8 +45,12 @@
                     </slide>
                     
 
-                    <template #addons>
-                        
+                    <!-- <template #addons>
+                        <style>
+                            .carousel-navigation-button:focus {
+                                outline: none;
+                            }
+                        </style>
                         <navigation >
                             <template #next>
                                 <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
@@ -56,8 +60,14 @@
                             </template>
                         </navigation>
                         
-                    </template>
-                </carousel>
+                    </template> -->
+                    <template #addons>
+     
+
+      <navigation class="carousel-navigation" style="margin-left: -10px;" />
+      <pagination />
+    </template>
+                </Carousel>
                 
                 <!-- <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
                     <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
@@ -144,6 +154,12 @@ export default defineComponent ({
             console.log(error);
         }
     },
+    methods: {
+        removeButtonOutline() {
+            const prevButton = document.querySelector('.carousel__prev');
+            prevButton.style.outline = 'none';
+        },
+    }
     // mounted() {
     //     this.$gtm.trackView('MyScreenName1', this.$route.path);
     // },
@@ -156,6 +172,11 @@ export default defineComponent ({
 
 
 <style scoped>
+
+.carousel-navigation {
+  margin: 0 -10px !important;
+}
+
 .category-test a {
     text-decoration: none;
 }
@@ -360,10 +381,7 @@ export default defineComponent ({
 *::-webkit-scrollbar-thumb {
     background-color: transparent; /* Hide the thumb on webkit-based browsers */
 }
-.carousel-prev,
-.carousel-next {
-  border: none; /* Remove the border */
-}
+
 .fa-chevron-right{
     position: absolute;
     /* top: 100px; */
@@ -400,13 +418,13 @@ export default defineComponent ({
   padding: 10px;
 } */
 
-.carousel__prev,
+/* .carousel__prev,
 .carousel__next {
     margin-left: -20px;
     margin-right: -20px;
   box-sizing: content-box;
   border: 89px solid blue;
-}
+} */
 .mn .fa {
     color: orange;
 }

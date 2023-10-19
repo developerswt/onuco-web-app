@@ -23,7 +23,7 @@
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
                         <router-link class="nav-link" to="/" >Home</router-link>
                     </li>
-                    <li class="nav-item " :class="{ 'active': isActive('/Mylearnings') }">
+                    <li class="nav-item " v-if="isLoggedIn" :class="{ 'active': isActive('/Mylearnings') }">
                         <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
@@ -111,7 +111,8 @@ export default {
             suggestions: [],
             showSuggestions: false,
             dataarray: [],
-            username: localStorage.getItem("username")
+            name: '',
+            // username: localStorage.getItem("username")
 
         }
     },
@@ -126,18 +127,21 @@ export default {
         istoken() {
             console.log(this.$store.state.token);
             return this.$store.state.token;
-        }
+        },
+        user() {
+            return this.$store.state.user;
+        },
     },
     methods: {
         handleKeyEnter(item) {
             if (item.length >= 2) {
-                this.$router.push({ path: '/search', query: { data: item.title } });
+                this.$router.push({ path: '/search', query: { data: item } });
             }
             console.log(item)
         },
         handleSelect(item) {
             if (item.title.length >= 2) {
-                this.$router.push({ path: '/search', query: { data: item.title } });
+                this.$router.push({ path: '/search', query: { data: item } });
                 console.log(item);
             }
             console.log(item);
@@ -153,7 +157,7 @@ export default {
         },
         createFilter(queryString) {
             console.log("queryString", queryString)
-            axios.get("https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Coursedetails/SearchGlobalSearch?title=" + this.searchTerm)
+            axios.get("https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=" + this.searchTerm)
                 .then((res) => (this.dataarray = res.data));
             console.log(this.dataarray);
             return this.dataarray;
@@ -180,8 +184,8 @@ export default {
         },
         isActiveAcademia() {
       // Check if the current route starts with "/Academia/" and has a parameter
-      return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
-    },
+            return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
+        },
   
 
         // setActive(index) {
@@ -196,6 +200,32 @@ export default {
         }
 
     },
+    created() {
+  try {
+    const jwtToken = localStorage.getItem('username');
+    if (jwtToken) {
+      const parts = jwtToken.split('.');
+      if (parts.length === 3) {
+        const payload = parts[1];
+        const decodedPayload = atob(payload);
+        console.log(decodedPayload);
+        const jwtPayload = JSON.parse(decodedPayload);
+        if (jwtPayload.email) {
+          this.name = jwtPayload.email;
+          console.log(this.name);
+        } else {
+          console.log('JWT payload does not contain the "name" property.');
+        }
+      } else {
+        console.log('Invalid JWT format.');
+      }
+    } else {
+      console.log('JWT token not found in local storage.');
+    }
+  } catch (error) {
+    console.error('Error decoding JWT:', error);
+  }
+}
 
 }
 

@@ -40,13 +40,21 @@
                         <div class="User_Name">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="icon_bg_color">
-                                        <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
+                                    <div class="icon_bg_color" v-if="!editing">
+                                        <!-- <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i> -->
+                                        <img :src="this.updatedAttribute.picture">
+                                    </div>
+                                    <div class="icon_bg_colors" v-else>
+                                        <input type="file" id="fileInput" accept="image/*" class="hidden" @change="handleFileChange" />
+                                        <label for="fileInput" class="file-icon">
+                                            <i class="fas fa-upload"></i> 
+                                        </label>
                                     </div>    
-                                    <div class="User_details">
+                                    
+                                    <div class="User_details pl-2">
                                         <h2>Welcome</h2>
                                         <!-- <h3>User Name !!!</h3> -->
-                                        <h3 v-if="!editing">User Name !!!</h3>
+                                        <h3 v-if="!editing">{{ this.updatedAttribute.name }} !!!</h3>
                                         <input v-model="userName" placeholder="User Name" type="text" v-else style="border: 1px solid #DEDEDE; font-size: 14px;color: #707070;">
                                     </div>
                                 </div>
@@ -71,7 +79,7 @@
                                 <h2>User details</h2>
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
-                                <p v-if="!editing">userName@email.com</p>
+                                <p v-if="!editing">{{ this.updatedAttribute.email }}</p>
                                 <input v-model="userEmail" placeholder="userName@email.com" type="text" v-else style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
@@ -116,39 +124,118 @@
 
 
 
-
     </div>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+
 </template>
 
 <script>
+import axios from 'axios';
+import axiosInstance from '../config/axiosInstance'
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 
 export default {
     name: 'UpdatedProfile',
+    components: {
+        Loading
+    },
     data() {
         return {
+            isLoading: false,
+            updatedAttribute: [],
             editing: false,
+            userName: '',
+            userEmail: '',
+            selectedFile: null,
+            isuser: localStorage.getItem("username"),
         }
+    },
+    computed: {
+        authorizationHeader() {
+            if (this.isLoggedIn) {
+                return `Bearer ${this.isuser}`;
+            } else {
+                return ''; // Set your dummy value here
+            }
+        },
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+        // isuser() {
+        //     console.log(this.$store.state.user);
+        //     return this.$store.state.user;
+        // },
     },
     methods: {
         editProfile() {
             this.editing = true;
         },
         saveProfile() {
-            // Perform any necessary data validation here
-
-            // Save the changes
+            this.uploadImage();
             this.editing = false;
-        }
+
+        },
+        handleFileChange(event) {
+            this.selectedFile = event.target.files[0];
+        },
+        async uploadImage() {
+            const headers = { 
+                Authorization:  this.authorizationHeader,
+                'Content-Type': 'multipart/form-data'
+            };
+            const formData = new FormData();
+            
+            formData.append('Email', this.userEmail);
+            formData.append('Name', this.userName);
+            formData.append('file', this.selectedFile);
+
+            try {
+                const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UploadS3Files/upload', formData, {
+                    headers 
+                });
+
+                // Handle the API response as needed
+                console.log('Response from API:', response.data);
+                await this.update();
+                this.userEmail = '';
+                this.userName = '';
+                this.selectedFile = null;
+                this.$refs.fileInput.value = ''; // Clear the file input
+                
+            } catch (error) {
+                // Handle errors
+                console.error('Error:', error);
+            }
+        },
+        async update() {
+            this.isLoading = true;
+            try {
+                const res = await axiosInstance.get('/UploadS3Files/profile');
+                this.updatedAttribute = res.data;
+                console.log(this.updatedAttribute);    
+            } catch (error) {
+                console.log(error);
+                this.isLoading = false;
+            } finally {
+                this.isLoading = false;
+            }
+        },
     },
-    async created() {
-        try {
-            const res = await axios.get('/UploadS3Files/profile');
-            this.updatedAttribute = res.data;
-            console.log(this.updatedAttribute);    
-        } catch (error) {
-            console.log(error);
-        }    
-    },
+    // async created() {
+    //     this.isLoading = true;
+    //     try {
+    //         const res = await axiosInstance.get('/UploadS3Files/profile');
+    //         this.updatedAttribute = res.data;
+    //         console.log(this.updatedAttribute);    
+    //     } catch (error) {
+    //         console.log(error);
+    //         this.isLoading = false;
+    //     } finally {
+    //         this.isLoading = false;
+    //     }
+    // },
 
 
 }
@@ -187,18 +274,25 @@ export default {
     border-radius: 4px;
     opacity: 1;
 }
-.icon_bg_color {
+.icon_bg_colors {
     width: 58px;
     height: 58px;
     background: #0066CC 0% 0% no-repeat padding-box;
     opacity: 1;
     border-radius: 50%;
 }
-.icon_bg_color i {
+.icon_bg_color img {
+    width: 70px;
+    height: 70px;
+    border: 0.5px solid #0066CC;
+    opacity: 1;
+    border-radius: 50%;
+} 
+.icon_bg_colors i {
     float: left;
     width: 10%;
-    padding-top: 12px;
-    padding-left: 15px;
+    padding-top: 10px;
+    padding-left: 13px;
     font-size: 32px;
 }
  .User_details {
@@ -456,5 +550,21 @@ input[type="radio"]:checked {
         width: 81%;
     }
 }
+.hidden {
+  display: none;
+}
+
+/* Style the label as an icon or button */
+.file-icon {
+  display: inline-block;
+  padding: 0px 0px; /* Adjust the padding as needed */
+  /* background-color: #0074d9; */
+color: #fff; /* Button text color */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Change button color on hover */
 
 </style>

@@ -29,6 +29,7 @@ import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
 import UserNotification from "./components/UserNotification.vue"
 import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
+import PayuPage from "./components/PayuPage.vue";
 
 
 
@@ -90,7 +91,8 @@ function getUser() {
 Hub.listen('auth', async (data) => {
   if (data.payload.event === 'signIn') {
     const user = await getUser();
-
+    console.log(user);
+    console.log("hi");
     if (user) {
       router.go(-1);
       store.commit('isLoggedIn', true);
@@ -343,6 +345,15 @@ const routes = [
         title: 'Privacy Page',
     },
   },
+  {
+    path: "/Pay",
+    name: "PayuPage",
+    component: PayuPage,
+    meta: {
+        title: 'Payment Page',
+    },
+  },
+  
   // {
   //   path: '*',
   //   redirect: '/'

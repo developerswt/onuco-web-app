@@ -15,6 +15,8 @@ export default createStore ({
         IsLoggedIn: false,
         user: null,
         token: null,
+        jwtToken: null,
+        users: null,
         // isCourseActive: false,
     },
     
@@ -22,6 +24,12 @@ export default createStore ({
         isLoggedIn(state, status) {
             state.IsLoggedIn = status;
             
+        },
+        setJwtToken(state, token) {
+            state.jwtToken = token;
+        },
+        setUser(state, users) {
+            state.users = users;
         },
         setUser(state, user) {
             state.user = user;

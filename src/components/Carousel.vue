@@ -248,10 +248,9 @@ export default {
 }
 .carousel-indicators .active{
   border-radius: 15px;
-  
   width: 22px;
   height: 10px;
-background: #FF9924 0% 0% no-repeat padding-box;
+  background: #FF9924 0% 0% no-repeat padding-box;
 
 
 }
