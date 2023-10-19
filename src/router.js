@@ -29,9 +29,6 @@ import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
 import UserNotification from "./components/UserNotification.vue"
 import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
-import Learning from "./components/Learning.vue"
-import NewLearning from "./components/NewLearning.vue"
-import Notification from "./components/Notification.vue"
 import Course from "./components/Course.vue"
 import CoursePayment from "./components/CoursePayment.vue"
 import Payment from "./components/Payment.vue"
@@ -347,31 +344,7 @@ const routes = [
         title: 'Privacy Page',
     },
   },
-  {
-    path: "/Learning",
-    name: "Learning",
-    component: Learning,
-    meta: {
-        title: 'Privacy Page',
-    },
-  },
-
-  {
-    path: "/NewLearning",
-    name: "NewLearning",
-    component: NewLearning,
-    meta: {
-        title: 'Privacy Page',
-    },
-  },
-  {
-    path:"/Notification",
-    name: "Notification",
-    component: Notification,
-    meta: {
-        title: 'Notification Page',
-    },
-  },
+  
 
   {
     path:"/Course",
