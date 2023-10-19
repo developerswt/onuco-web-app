@@ -7,7 +7,7 @@
             <button class="bt">BUY NOW</button>
         </h4> 
        
-        <p v-html="this.university[0].description"></p>
+        <p style="color: #777777;" v-html="this.university[0].description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
@@ -60,7 +60,7 @@
                                                    
                                                         </div>
                                                         <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/share.png" class="icon">
+                                                            <img src="../assets/images/Union 193.png" style="width: 16px; height: 20px;" class="icon">
                                                         </div>
                                                     </div>  
                                                 </div>
@@ -72,7 +72,7 @@
                                                             <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,35)"></p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/video.png" class="video">
+                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -87,7 +87,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text" style="">(23 reviews)</p>
+                                                            <p id="review_text" style="color: #828282;">(23 reviews)</p>
                                                         </div>
                                                     </div>
                                                 </div>

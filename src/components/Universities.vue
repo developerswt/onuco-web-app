@@ -89,10 +89,8 @@ export default {
     }
     .box {
      
-        height: 109px !important;
-    width: 307px !important;
-    background-size: contain !important;
-
+        height: 100px !important;
+    width: 370px !important;
     
         margin-bottom: 5%;
       

@@ -29,10 +29,12 @@ import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
 import UserNotification from "./components/UserNotification.vue"
 import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
-import PayuPage from "./components/PayuPage.vue";
-
-
-
+import Learning from "./components/Learning.vue"
+import NewLearning from "./components/NewLearning.vue"
+import Notification from "./components/Notification.vue"
+import Course from "./components/Course.vue"
+import CoursePayment from "./components/CoursePayment.vue"
+import Payment from "./components/Payment.vue"
 
 let user;
 
@@ -346,19 +348,56 @@ const routes = [
     },
   },
   {
-    path: "/Pay",
-    name: "PayuPage",
-    component: PayuPage,
+    path: "/Learning",
+    name: "Learning",
+    component: Learning,
+    meta: {
+        title: 'Privacy Page',
+    },
+  },
+
+  {
+    path: "/NewLearning",
+    name: "NewLearning",
+    component: NewLearning,
+    meta: {
+        title: 'Privacy Page',
+    },
+  },
+  {
+    path:"/Notification",
+    name: "Notification",
+    component: Notification,
+    meta: {
+        title: 'Notification Page',
+    },
+  },
+
+  {
+    path:"/Course",
+    name: "Course",
+    component: Course,
+    meta: {
+        title: 'Course Page',
+    },
+  },
+  
+  {
+    path:"/CoursePayment",
+    name: "CoursePayment",
+    component: CoursePayment,
+    meta: {
+        title: 'CoursePayment Page',
+    },
+  },
+  {
+    path:"/Payment",
+    name: "Payment",
+    component: Payment,
     meta: {
         title: 'Payment Page',
     },
   },
-  
-  // {
-  //   path: '*',
-  //   redirect: '/'
-  // }
-
 
 ];
 

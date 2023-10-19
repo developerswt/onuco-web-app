@@ -9,7 +9,7 @@
                     <router-link v-bind:to="{ name:'Universities', params:{name: branch.branchName}}" style="color: white; text-decoration: none;">
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
-                                <img src="../assets/images/book1.png" style="height: 60px;">
+                                <img src="../assets/images/book1.png" style="height: 65px;">
                             </div>
                             <div class="col-md-9 col-9 col-sm-9 " style="position: relative;right: 0px;">
                                 <h5  data-placement="top" :title="branch.name" >{{ branch.name }}</h5>
@@ -211,9 +211,9 @@ $(document).ready(function(){
 
     }
     .box{
-        height: 109px !important;
-    width: 307px !important;
-    background-size: contain !important;
+        height: 98px !important;
+    width: 359px !important;
+    padding: 15px  !important;
  
     }
     #available_text{
@@ -235,7 +235,7 @@ $(document).ready(function(){
 }
 
 .box {
-    height:83px;
+    height:90px;
     width:360px;
     cursor: pointer;
     margin-bottom: 1%;

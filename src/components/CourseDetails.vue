@@ -738,7 +738,7 @@ ol {
 }
 
 #inner_container {
-    padding-left: 38px;
+    padding-left: 15px;
 }
 
 
