@@ -106,11 +106,8 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6 " >
                                                                         <div class="accordion_block_one">
-                                                                            <i class="fa" aria-hidden="true"
-                                                                                :class="{
-                                                                                    'fa-circle-o': !hasAnySubjectComplete(lessons.values),
-                                                                                    'fa-check': hasAnySubjectComplete(lessons.values),
-                                                                                }"
+                                                                            <i class="fa fa-circle-o" aria-hidden="true"
+                                                                                
                                                                                 style="margin-right: 10px;"
                                                                             ></i>
                                                                             <p id="check_text"> {{ lessons.heading }}</p>
@@ -126,11 +123,11 @@
                                                                     <div class="row sub" :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
                                                                             <i class="fa" aria-hidden="true"
-                                                                                :class="{
-                                                                                    'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                    'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                            :class="{
+                                                                                   'fa-circle-o': playingSubject !== subject,
                                                                                     'fa-circle': playingSubject === subject
                                                                                 }"
+
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
@@ -167,12 +164,8 @@
                                                                                     <el-progress type="circle" :show-text="false" :percentage="10" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
                                                                                 </div>
 
-                                                                                <i class="fa" aria-hidden="true"
-                                                                                    :class="{
-                                                                                        'fa-bookmark-o': isProgressBarEmpty(subject.id),
-                                                                                        'fa-bookmark': isProgressBarComplete(subject.id),
-                                                                                        'fa-bookmark': isProgressBarStarted(subject.id),
-                                                                                    }"
+                                                                                <i class="fa fa-bookmark-o" aria-hidden="true"
+                                                                                    
                                                                                     style=" font-size: 26px;"
                                                                                 ></i>
                                                                             </div>
@@ -288,16 +281,16 @@ export default {
         }
     },
     methods: {
-        hasAnySubjectComplete(subjects) {
-            return subjects.every(subject => this.hasCompleteWatchTime(subject.id));
-        },
-        hasCompleteWatchTime(subjectId) {
-                // Check if any watch time data for the given subjectId has a WatchTime of 100
-            return this.watchTimeDatas.every(video => {
-                const watchData = video.watchTimeData.find(watch => watch.videoId === subjectId);
-                return watchData && watchData.watchTime === 100;
-            });
-        },
+        // hasAnySubjectComplete(subjects) {
+        //     return subjects.every(subject => this.hasCompleteWatchTime(subject.id));
+        // },
+        // hasCompleteWatchTime(subjectId) {
+        //         // Check if any watch time data for the given subjectId has a WatchTime of 100
+        //     return this.watchTimeDatas.every(video => {
+        //         const watchData = video.watchTimeData.find(watch => watch.videoId === subjectId);
+        //         return watchData && watchData.watchTime === 100;
+        //     });
+        // },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
@@ -354,26 +347,26 @@ export default {
                 player.load();
             }
         },
-        updateChapterProgress(chapterIndex, newProgress) {
-            this.lessons[chapterIndex].progress = newProgress;
-        },
-        isProgressBarStarted(videoId) {
-            // Check if there is watch time data for the given videoId
-            return this.watchTimeDatas.some(video => {
-                const watchData = video.watchTimeData.find(watch => watch.videoId === videoId);
-                return watchData && watchData.watchTime > 0;
-            });
-        },
-        isProgressBarComplete(videoId) {
-            // Check if the watch time for the given videoId is 100%
-            return this.watchTimeDatas.some(video => video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime === 100));
-        },
-        isProgressBarEmpty(videoId) {
-            // Check if there is no watch time data for the given videoId or all watch times are 0
-            return !this.watchTimeDatas.some(video =>
-                video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime > 0)
-            );
-        },
+        // updateChapterProgress(chapterIndex, newProgress) {
+        //     this.lessons[chapterIndex].progress = newProgress;
+        // },
+        // isProgressBarStarted(videoId) {
+        //     // Check if there is watch time data for the given videoId
+        //     return this.watchTimeDatas.some(video => {
+        //         const watchData = video.watchTimeData.find(watch => watch.videoId === videoId);
+        //         return watchData && watchData.watchTime > 0;
+        //     });
+        // },
+        // isProgressBarComplete(videoId) {
+        //     // Check if the watch time for the given videoId is 100%
+        //     return this.watchTimeDatas.some(video => video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime === 100));
+        // },
+        // isProgressBarEmpty(videoId) {
+        //     // Check if there is no watch time data for the given videoId or all watch times are 0
+        //     return !this.watchTimeDatas.some(video =>
+        //         video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime > 0)
+        //     );
+        // },
         shouldShowCircleIcon(subjectId) {
             // Return true if the video source has changed, otherwise return false
             return this.videoChanged;
@@ -387,9 +380,9 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data; 
-            const result = await AxiosInstance.get('/StateManagement');
-            this.watchTimeDatas = result.data;
-            console.log(this.watchTimeDatas);
+            // const result = await AxiosInstance.get('/StateManagement');
+            // this.watchTimeDatas = result.data;
+            // console.log(this.watchTimeDatas);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
@@ -402,7 +395,7 @@ export default {
             }
             this.videoOptions.sources = [
                 {
-                    src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+                    src: this.book.videoUrl,
                     type: this.videoType,
                     withCredentials: false,
                 }

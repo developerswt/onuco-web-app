@@ -70,7 +70,7 @@ export default {
     
     // Listen for timeupdate event to track watch time
     this.player.on('timeupdate', () => {
-      if (this.player.currentTime() >= 128 && !this.showPoster) {
+      if (this.player.currentTime() >= 5 && !this.showPoster) {
         this.showPoster = true;
         this.enablePoster = true;
         this.player.pause();
@@ -81,15 +81,15 @@ export default {
         this.showPoster = false;
       }
     });
-    this.player.on('fullscreenchange', () => {
-      if (this.player.isFullscreen()) {
-        // When entering full-screen mode, show the poster overlay
-        this.showPoster = false;
-      } else {
-        // When exiting full-screen mode, hide the poster overlay
-        this.showPoster = true;
-      }
-    });
+    // this.player.on('fullscreenchange', () => {
+    //   if (this.player.isFullscreen()) {
+    //     // When entering full-screen mode, show the poster overlay
+    //     this.showPoster = false;
+    //   } else {
+    //     // When exiting full-screen mode, hide the poster overlay
+    //     this.showPoster = true;
+    //   }
+    // });
   },
   beforeDestroy() {
     if (this.player) {
@@ -122,10 +122,10 @@ export default {
     //     console.error('Update failed:', error);
     //   }
     // },
-    pauseVideo() {
-      this.player.pause();
-      this.sendWatchTimeToBackend();
-    },
+    // pauseVideo() {
+    //   this.player.pause();
+    //   this.sendWatchTimeToBackend();
+    // },
     initVideoPlayer() {
       // Initialize the video player here
       // ...

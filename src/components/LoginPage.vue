@@ -84,7 +84,7 @@ methods: {
         
       <template v-slot:icon-facebook>
         <div style="padding: var(--amplify-space-large);">
-      <img src="../assets/images/Icon awesome-facebook.png" alt="Facebook" />
+      <img src="../assets/images/Icon-awesome-facebook.png" alt="Facebook" />
     </div>
     </template>
    
