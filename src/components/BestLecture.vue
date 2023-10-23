@@ -11,7 +11,7 @@
     </div>
         <div class="container-fluid">
             <!-- <div class="row pt-5"> -->
-                <Carousel :settings="settings" :breakpoints="breakpoints">
+                <carousel :settings="settings" :breakpoints="breakpoints">
                     <slide v-for="facult in faculty" :key="facult.id">
                         
                         <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
@@ -45,12 +45,8 @@
                     </slide>
                     
 
-                    <!-- <template #addons>
-                        <style>
-                            .carousel-navigation-button:focus {
-                                outline: none;
-                            }
-                        </style>
+                    <template #addons>
+                        
                         <navigation >
                             <template #next>
                                 <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
@@ -60,14 +56,8 @@
                             </template>
                         </navigation>
                         
-                    </template> -->
-                    <template #addons>
-     
-
-      <navigation />
-      <pagination />
-    </template>
-                </Carousel>
+                    </template>
+                </carousel>
                 
                 <!-- <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
                     <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
@@ -154,12 +144,6 @@ export default defineComponent ({
             console.log(error);
         }
     },
-    methods: {
-        removeButtonOutline() {
-            const prevButton = document.querySelector('.carousel__prev');
-            prevButton.style.outline = 'none';
-        },
-    }
     // mounted() {
     //     this.$gtm.trackView('MyScreenName1', this.$route.path);
     // },
@@ -172,11 +156,6 @@ export default defineComponent ({
 
 
 <style scoped>
-
-.carousel-navigation {
-  margin: 0 -10px !important;
-}
-
 .category-test a {
     text-decoration: none;
 }
@@ -381,7 +360,10 @@ export default defineComponent ({
 *::-webkit-scrollbar-thumb {
     background-color: transparent; /* Hide the thumb on webkit-based browsers */
 }
-
+.carousel-prev,
+.carousel-next {
+  border: none; /* Remove the border */
+}
 .fa-chevron-right{
     position: absolute;
     /* top: 100px; */
@@ -418,7 +400,7 @@ export default defineComponent ({
   padding: 10px;
 } */
 
-/* .carousel__prev,
+.carousel__prev,
 .carousel__next {
     margin-left: -20px;
     margin-right: -20px;
@@ -433,7 +415,17 @@ export default defineComponent ({
     padding-top: 20px;
 }
 
-
+.mn p {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    /* text-align: center; */
+    font: normal normal normal 14px/18px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    margin: 0%;
+    opacity: 1;
+}
 .mn  .fa{
     letter-spacing: 2px;
     
@@ -454,4 +446,3 @@ export default defineComponent ({
 }
 
 </style>
-

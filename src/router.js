@@ -41,66 +41,66 @@ let user;
 //     }
 // });
 
-// function getUser() {
-//     return Auth.currentAuthenticatedUser().then((data) => {
-//         if (data && data.signInUserSession) {
-//             store.commit('setUser', data);
-//             return data;
-//         }
-//     }).catch(() => {
-//         store.commit('setUser', null);
-//         return null;
-//     });
-// }
+function getUser() {
+    return Auth.currentAuthenticatedUser().then((data) => {
+        if (data && data.signInUserSession) {
+            store.commit('setUser', data);
+            return data;
+        }
+    }).catch(() => {
+        store.commit('setUser', null);
+        return null;
+    });
+}
 
-// Hub.listen("auth", async (data) => {
-//     // if (data.payload.event === 'signOut'){
-//     //     user = null;
-//     //     store.commit('setUser', null);
-//     //     router.push({path: '/SignIn'});
-//     // } else
-//     if (data.payload.event === 'signIn') {
-//         user = await getUser();
-//         // await Auth.rememberDevice();
-//         // console.log('Signed in and remembered device');
-//         router.go(-1);
-//         // router.push({path: '/'});
-//         store.commit('isLoggedIn', true); 
-//         localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
+Hub.listen("auth", async (data) => {
+    // if (data.payload.event === 'signOut'){
+    //     user = null;
+    //     store.commit('setUser', null);
+    //     router.push({path: '/SignIn'});
+    // } else
+    if (data.payload.event === 'signIn') {
+        user = await getUser();
+        // await Auth.rememberDevice();
+        // console.log('Signed in and remembered device');
+        router.go(-1);
+        // router.push({path: '/'});
+        store.commit('isLoggedIn', true); 
+        localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
         
        
         
 
-//     }
-// });
-function getUser() {
-  return Auth.currentAuthenticatedUser()
-    .then((data) => {
-      if (data) {
-        store.commit('setUser', data);
-        return data;
-      }
-    })
-    .catch(() => {
-      store.commit('setUser', null);
-      return null;
-    });
-}
-
-Hub.listen('auth', async (data) => {
-  if (data.payload.event === 'signIn') {
-    const user = await getUser();
-    console.log(user);
-    console.log("hi");
-    if (user) {
-      router.go(-1);
-      store.commit('isLoggedIn', true);
-      // Store user data as needed, considering data from Google or Facebook sign-ins.
-      localStorage.setItem('username', user.signInUserSession.idToken.jwtToken);
-      
     }
-  }
 });
+// function getUser() {
+//   return Auth.currentAuthenticatedUser()
+//     .then((data) => {
+//       if (data) {
+//         store.commit('setUser', data);
+//         return data;
+//       }
+//     })
+//     .catch(() => {
+//       store.commit('setUser', null);
+//       return null;
+//     });
+// }
+
+// Hub.listen('auth', async (data) => {
+//   if (data.payload.event === 'signIn') {
+//     const user = await getUser();
+//     console.log(user);
+//     console.log("hi");
+//     if (user) {
+//       router.go(-1);
+//       store.commit('isLoggedIn', true);
+//       // Store user data as needed, considering data from Google or Facebook sign-ins.
+//       localStorage.setItem('username', user.signInUserSession.idToken.jwtToken);
+      
+//     }
+//   }
+// });
 
 
 const routes = [

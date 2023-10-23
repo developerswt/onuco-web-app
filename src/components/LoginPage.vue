@@ -20,6 +20,7 @@ export default {
   },
   data() {
       return {
+        authState: 'signUp',
         theme: {
             name: 'pretty-princess',
             tokens: {
@@ -35,7 +36,8 @@ export default {
                   username: {
                       placeholder: 'Email or Phone_number (Include +91)',
                       isRequired: true,
-                      label: 'Username:'
+                      label: 'Username:',
+                      pattern: ''
                   },
               },
               signUp: {
@@ -45,7 +47,6 @@ export default {
                       label: 'Username:',
                       order: 1,
                       custom: true,
-                      validate: this.customSignUpValidation
                   },
               },
           },    
@@ -56,6 +57,21 @@ export default {
           // },
       }
   },
+methods: {
+  setAuthState(state) {
+      this.authState = state;
+    },
+    customSignUpValidation(username) {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const phonePattern = /^(?:\+\d{1,2}\s?)?\d{10}$/;
+
+      if (emailPattern.test(username) || phonePattern.test(username)) {
+        return true;
+      } else {
+        return 'Invalid username. Please enter a valid email or phone number.';
+      }
+    },
+}
   
 };
 </script>
@@ -64,7 +80,7 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
+    <authenticator class="custom-sign-in" :authState="authState" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
         
       <template v-slot:icon-facebook>
         <div style="padding: var(--amplify-space-large);">
