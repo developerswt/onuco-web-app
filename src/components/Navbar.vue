@@ -121,11 +121,9 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user;
         },
         istoken() {
-            console.log(this.$store.state.token);
             return this.$store.state.token;
         },
         user() {

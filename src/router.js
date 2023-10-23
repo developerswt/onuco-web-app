@@ -63,8 +63,12 @@ Hub.listen("auth", async (data) => {
         user = await getUser();
         // await Auth.rememberDevice();
         // console.log('Signed in and remembered device');
-        router.go(-1);
-        // router.push({path: '/'});
+        // if (router.go(-1) > 0) {
+        //   router.go(-1); // Navigate back to the previous page
+        // } else {
+        //   router.push({ path: '/' }); // Navigate to the home page
+        // }  
+        router.push({path: '/'});
         store.commit('isLoggedIn', true); 
         localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
         
