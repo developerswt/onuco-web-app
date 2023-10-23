@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="share_icon_block" style="color: aliceblue;">
-                                            <img src="../assets/images/Union 193.png" class="share-icon">
+                                            <img src="../assets/images/Union193.png" class="share-icon">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -99,7 +99,7 @@
                                                     
                                                     <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
-                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -153,7 +153,7 @@
                                                     
                                                     <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
-                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -218,7 +218,7 @@
                                                    
                                                     <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
-                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -272,7 +272,7 @@
                                                     
                                                     <div class="col-lg-3 col-3 col-sm-3">
                                                         <div class="video_logo">
-                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
