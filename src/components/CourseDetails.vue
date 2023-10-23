@@ -402,7 +402,7 @@ export default {
             }
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                    src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
                     type: this.videoType,
                     withCredentials: false,
                 }
