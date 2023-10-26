@@ -54,11 +54,11 @@ function getUser() {
 }
 
 Hub.listen("auth", async (data) => {
-    // if (data.payload.event === 'signOut'){
-    //     user = null;
-    //     store.commit('setUser', null);
-    //     router.push({path: '/SignIn'});
-    // } else
+    if (data.payload.event === 'signOut'){
+        user = null;
+        store.commit('setUser', null);
+        router.push({path: '/SignIn'});
+    } else
     if (data.payload.event === 'signIn') {
         user = await getUser();
         // await Auth.rememberDevice();
@@ -68,10 +68,15 @@ Hub.listen("auth", async (data) => {
         // } else {
         //   router.push({ path: '/' }); // Navigate to the home page
         // }  
-        router.push({path: '/'});
+        // router.push({path: '/'});
         store.commit('isLoggedIn', true); 
-        localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
-        
+        // localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
+        const previousRoute = sessionStorage.getItem('previousRoute');
+        if (previousRoute) {
+          router.push(previousRoute); // Navigate to the previously visited page
+        } else {
+          router.push({ path: '/' }); // Redirect to the home page
+        }
        
         
 
@@ -420,6 +425,7 @@ router.beforeEach((to, from, next) => {
     if (titleFromParams) {
       document.title = `${titleFromParams} - ${document.title}`;
     }
+    sessionStorage.setItem('previousRoute', from.fullPath + ':' + from.name);
     //Vue.$gtm.trackView(to.name, to.path);
 	next();
 });

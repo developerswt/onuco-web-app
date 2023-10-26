@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
         <div class="container pt-4">
-            <Breadcrumbs />
+            <!-- <Breadcrumbs /> -->
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
             <button class="bt">BUY NOW</button>
