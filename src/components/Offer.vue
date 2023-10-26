@@ -177,13 +177,13 @@ h2 {
 
 @media (max-width: 600px) {
     #offer_block{
-        padding:20px 0px 70px 15px;
+        padding:20px 0px 33px 15px;
     }   
     
 }
 @media (max-width: 1024px) {
     #offer_block{
-        padding:20px 0px 70px 0px;
+        padding:20px 0px 40px 0px;
     }   
    
     

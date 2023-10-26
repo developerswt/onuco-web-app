@@ -1,9 +1,9 @@
 <template>
     <div class="container" id="academy_container">
-     <div class="category-test pt-3">
+     <div class="category-test pt-2" >
         <div class="container" style="margin-top: 70px;">
-            <!-- <Breadcrumbs /> -->
-            <h4 class="academic_head_text pt-4">
+            <Breadcrumbs />
+            <h4 class="academic_head_text">
                 <span id="aca_text">Available</span>Academics</h4>
         </div>
       </div>
@@ -24,9 +24,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="ty">{{ item.academia.name }}</p>
-                        
-                    </router-link>
+                       </router-link>
+                    <p class="ty">{{ item.academia.name }}</p>
                 </div>
             </div>
 
@@ -387,7 +386,7 @@ export default {
 /* width: 122px; */
 width: 118px;
 cursor: pointer;
-height: 120px;
+height: 108px;
 border: 1px solid #ccc;
 border-radius: 25px;
 border-top-left-radius: 160px 130px;
@@ -416,7 +415,7 @@ box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
 .mb .row {
 display: flex;
 flex-direction: row;
-/* justify-content: space-between; */
+justify-content: space-between;
 flex-wrap: wrap;
 margin-left: 0px;
 margin-right: 0px;
@@ -435,15 +434,20 @@ height: 28rem;
 
 }
 
-@media screen and (max-width: 598.98px) {
+@media screen and (max-width: 510px) {
 .mb .box1 {
     width: 90%;
     margin: 30px 0px 30px 0px;
 }
-
+.ty1 {
+margin-top: 0px;
+font-size: 12px;
+}
 .academic_head_text {
     font-size: 15px !important;
-    padding-left: 0 !important;
+    padding-left: 39px !important;
+    position: relative;
+    left: -48px;
 
 }
 
@@ -453,7 +457,7 @@ height: 28rem;
 }
 
 .ty{
-    margin-top: -78px;
+    margin-top: -88px;
 
 }
 
@@ -479,7 +483,7 @@ height: 28rem;
 @media (min-width: 600px) and (max-width: 768px) {
 .academic_head_text {
     font-size: 18px !important;
-    padding-left:0 !important;
+    padding-left:39px !important;
 }
 
 #home_container{
@@ -512,8 +516,8 @@ opacity: 1;
 }
 
 .ty {
-margin-top: -94px;
-font-size: 14px;
+margin-top: -108px;
+font-size: 12px;
 color: black;
 text-align: center;
 }
@@ -523,7 +527,7 @@ margin-top: 0px;
 font-size: 14px;
 color: white;
 position: relative;
-top: -76px;
+top: -86px;
 text-align: center;
 }
 
@@ -543,15 +547,21 @@ top: -22px;
 
     top: -87px;
 }
+/* .container{
+    margin: 20px;
+} */
 }
 
-@media screen and (min-width: 650px) and (max-width: 912px) {
+/* @media screen and (min-width: 650px) and (max-width: 912px) {
 .wr {
     position: relative;
 
     top: -87px;
 }
+.container{
+    margin: 20px;
 }
+} */
 
 @media screen and (min-width: 450px) and (max-width: 650px) {
 .wr {
@@ -563,7 +573,7 @@ top: -22px;
 
 .academic_head_text {
 color: #006acd;
-/* padding-left: 10px; */
+padding-left: 0px;
 
 font-size: 20px;
 
@@ -579,13 +589,13 @@ padding-right: 10px;
 .parent_blocks {
 display: flex;
 flex-wrap: wrap;
-/* justify-content: space-between; */
+justify-content: space-between;
 margin: 30px 0px 30px 0px;
 }
 
-#academy_container{
-padding:15px 0px 15px 0px;
-}
+/* #academy_container{
+padding:15px -18px 15px 0px;
+} */
 
 .num{
     color: white;

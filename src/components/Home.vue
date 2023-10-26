@@ -284,4 +284,13 @@ export default {
 
 }
 
+@media ( min-width: 100px) and (max-width: 600px){
+    .content{
+        margin-bottom: 9%;
+        margin-top: -29px;
+    }
+}
+    
+
+
 </style>
