@@ -13,7 +13,7 @@
 
 
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
-            <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a>
+            <a class="nav-link gh" href="/login"><i class="fa fa-sign-in"></i></a>
 
 
 
@@ -27,7 +27,6 @@
                         <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
-
                         <router-link class="nav-link"  to="/Courses" >Courses</router-link>
                     </li>
                   
@@ -68,7 +67,7 @@
                     <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.email }}
+                            Hi {{ this.isuser.attributes.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
@@ -168,10 +167,9 @@ export default {
                 // console.log('Signed out and forgot device');
                 // await Auth.forgetDevice();
                 // console.log('Signed out and forgot device');
+                this.$store.dispatch('logout');
+                localStorage.removeItem("username");
                 this.$store.commit('isLoggedIn', false);
-                this.$store.dispatch('logout')
-                localStorage.removeItem("username")
-
                 this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
@@ -198,32 +196,32 @@ export default {
         }
 
     },
-    created() {
-  try {
-    const jwtToken = localStorage.getItem('username');
-    if (jwtToken) {
-      const parts = jwtToken.split('.');
-      if (parts.length === 3) {
-        const payload = parts[1];
-        const decodedPayload = atob(payload);
-        console.log(decodedPayload);
-        const jwtPayload = JSON.parse(decodedPayload);
-        if (jwtPayload.email) {
-          this.name = jwtPayload.email;
-          console.log(this.name);
-        } else {
-          console.log('JWT payload does not contain the "name" property.');
-        }
-      } else {
-        console.log('Invalid JWT format.');
-      }
-    } else {
-      console.log('JWT token not found in local storage.');
-    }
-  } catch (error) {
-    console.error('Error decoding JWT:', error);
-  }
-}
+//     created() {
+//   try {
+//     const jwtToken = localStorage.getItem('username');
+//     if (jwtToken) {
+//       const parts = jwtToken.split('.');
+//       if (parts.length === 3) {
+//         const payload = parts[1];
+//         const decodedPayload = atob(payload);
+//         console.log(decodedPayload);
+//         const jwtPayload = JSON.parse(decodedPayload);
+//         if (jwtPayload.email) {
+//           this.name = jwtPayload.email;
+//           console.log(this.name);
+//         } else {
+//           console.log('JWT payload does not contain the "name" property.');
+//         }
+//       } else {
+//         console.log('Invalid JWT format.');
+//       }
+//     } else {
+//       console.log('JWT token not found in local storage.');
+//     }
+//   } catch (error) {
+//     console.error('Error decoding JWT:', error);
+//   }
+// }
 
 }
 
@@ -494,5 +492,10 @@ li>a:before {
 .nav-item.active {
   border-bottom: 2px solid blue; /* Add the border for the active link */
   margin-bottom: -16px; /* Add margin for the active link */
+}
+@media (max-width: 920px) {
+  .nav-item.active {
+    display: none; /* Hide active links in responsive view */
+  }
 }
 </style>

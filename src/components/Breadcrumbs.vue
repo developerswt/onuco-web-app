@@ -282,8 +282,11 @@ export default {
 <template>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb" >
+      <li>
+        <router-link :to="fullPath">{{ name }} > </router-link>
+      </li>
       <li class="breadcrumb-item" v-for="(crumb, index) in breadcrumbs" :key="index">
-        <router-link :to="crumb.to">{{ crumb.label }}</router-link>
+        <router-link to="">{{ crumb.label }}</router-link>
       </li>
     </ol>
   </nav>
@@ -301,6 +304,9 @@ export default {
   data() {
     return {
       breadcrumbs: [],
+      // previousPath: sessionStorage.getItem('previousRoute')
+      fullPath: '',
+      name: ''
     };
   },
   watch: {
@@ -308,6 +314,20 @@ export default {
       this.updateBreadcrumbs();
     },
   },
+  mounted() {
+    // Retrieve the stored value from sessionStorage
+    const storedValue = sessionStorage.getItem('previousRoute');
+
+    if (storedValue) {
+      // Split the stored value into fullPath and name
+      const [fullPath, name] = storedValue.split(':');
+
+      // Assign the split values to data properties
+      this.fullPath = fullPath;
+      this.name = name;
+    }
+  },
+
   created() {
     this.updateBreadcrumbs();
   },

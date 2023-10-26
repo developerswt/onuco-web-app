@@ -57,8 +57,8 @@ export default {
           // },
       }
   },
-methods: {
-  setAuthState(state) {
+  methods: {
+    setAuthState(state) {
       this.authState = state;
     },
     customSignUpValidation(username) {
@@ -71,7 +71,38 @@ methods: {
         return 'Invalid username. Please enter a valid email or phone number.';
       }
     },
-}
+    async handleSignOut(signOut) {
+      try {
+        await signOut();
+        // Clear Vuex and local storage here
+        this.clearUserData();
+      } catch (error) {
+        console.error('Error signing out:', error);
+      }
+    },
+    clearUserData() {
+      // Clear Vuex state
+      this.$store.commit('setUser', null);
+      this.$store.commit('isLoggedIn', false);
+
+      // Clear local storage
+      localStorage.removeItem('username');
+    },
+    async getUser() {
+      try {
+        const data = await Auth.currentAuthenticatedUser();
+        if (data && data.signInUserSession) {
+          this.$store.commit('setUser', data);
+          return data;
+        }
+      } catch (error) {
+        console.error('Error getting user:', error);
+        this.clearUserData();
+        return null;
+      }
+    },
+
+  }
   
 };
 </script>
@@ -101,7 +132,7 @@ methods: {
         
         <template v-slot="{ user, signOut }">
             <h1>Hello {{ user.username }}!</h1>
-            <button @click="signOut">Sign Out</button>
+            <button @click="handleSignOut(signOut)">Sign Out</button>
         </template>
   
     </authenticator>
@@ -180,3 +211,55 @@ methods: {
 }
 
 </style>
+
+<!-- <template>
+  <authenticator>
+    <template v-slot="{ user, signUp, validationError }">
+      <h1>Hello {{ user ? user.username : 'Guest' }}!</h1>
+      <form @submit="onSubmit">
+        <input v-model="username" placeholder="Username" />
+        <input v-model="password" type="password" placeholder="Password" />
+        <input v-model="name" placeholder="Name" />
+        <p v-if="validationError" class="error-message">{{ validationError }}</p>
+        <button type="submit">Sign Up</button>
+      </form>
+      <button @click="signUp">Sign Up</button>
+    </template>
+  </authenticator>
+</template>
+
+<script>
+import { Authenticator } from 'aws-amplify-vue';
+
+export default {
+  components: {
+    Authenticator,
+  },
+  data() {
+    return {
+      username: '',
+      password: '',
+      name: '',
+    };
+  },
+  methods: {
+    onSubmit(event) {
+      event.preventDefault();
+      if (!this.validateFormData()) {
+        // Display validation error and prevent submission
+        return;
+      }
+      // Continue with the sign-up process
+      // Call this.$auth.signUp({...}) or use the Authenticator component's signUp method
+    },
+    validateFormData() {
+      // Implement custom validation logic for form fields
+      if (!this.username || !this.password || !this.name) {
+        this.validationError = 'All fields are required.';
+        return false;
+      }
+      return true;
+    },
+  },
+};
+</script> -->

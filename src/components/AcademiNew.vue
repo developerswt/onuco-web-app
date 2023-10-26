@@ -2,7 +2,7 @@
     <div class="container" id="academy_container">
      <div class="category-test pt-3">
         <div class="container" style="margin-top: 70px;">
-            <Breadcrumbs />
+            <!-- <Breadcrumbs /> -->
             <h4 class="academic_head_text pt-4">
                 <span id="aca_text">Available</span>Academics</h4>
         </div>
