@@ -425,7 +425,9 @@ router.beforeEach((to, from, next) => {
     if (titleFromParams) {
       document.title = `${titleFromParams} - ${document.title}`;
     }
-    sessionStorage.setItem('previousRoute', from.fullPath + ':' + from.name);
+    // sessionStorage.setItem('previousRoute', from.fullPath + ':' + from.name);
+    sessionStorage.setItem('previousRoute', from.fullPath);
+
     //Vue.$gtm.trackView(to.name, to.path);
 	next();
 });
