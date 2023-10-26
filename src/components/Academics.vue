@@ -417,9 +417,9 @@ router-link {
     padding:0px 0px 0px 0px;
 }
 
-.carousel{
+/* .carousel{
     padding: 19px;
-}
+} */
 
 </style>
 

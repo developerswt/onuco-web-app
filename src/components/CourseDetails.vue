@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
-                            <div class="pt-4 topic-card">
+                            <div class="pt-4 topic-card" style="padding-right: 14px;">
                                 <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
                                     <el-tab-pane label="Subject" name="first" class="rt">
                                         <div class="row box mb-5">
@@ -202,7 +202,8 @@
             </div>
         </div>        
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
+   <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
+   <div class="container-fluid cf"></div>
 </template>
 
 <script>
@@ -964,5 +965,10 @@ progress::-moz-progress-bar {
         margin-left: -34px;
         width: 136px;
     }
+}
+.cf {
+    width: 100%;
+    height: 200px;
+    background-image: url('../assets/images/Group 246.png');
 }
 </style>

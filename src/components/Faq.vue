@@ -56,6 +56,7 @@
 
 
     </div>
+    <div class="container-fluid cf"></div>
 </template>
 
 <script>
@@ -76,6 +77,8 @@ export default {
     padding: 20px;
     margin: 0 auto;
     max-width: 1000px;
+    position: relative;
+    top: 128px;
 }
 
 .action {
@@ -83,8 +86,9 @@ export default {
 }
 .faq_image_block{
     text-align: center;
-    margin-top: 150px;
-    margin-bottom:50px;
+    margin-bottom: 50px;
+    position: relative;
+    top: 162px;
 }
 
 #faq_card{
@@ -92,5 +96,10 @@ export default {
 }
 #faq_card_header{
     background: #EFF5FC;
+}
+.cf {
+    width: 100%;
+    height: 220px;
+    background-image: url('../assets/images/Group 246.png');
 }
 </style>

@@ -1,8 +1,8 @@
  <template>
      <div class="category-test pt-3">
         <div class="container" style="margin-top: 70px;">
-            <!-- <Breadcrumbs /> -->
-            <h4 class="academic_head_text pt-4">
+            <Breadcrumbs />
+            <h4 class="academic_head_text pt-1">
                 <span id="aca_text">Best</span>Lecturers</h4>
         </div>
     </div>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"> {{ facult.description.slice(0,20) }}...</div>
+                            <div class="card-text"> {{ facult.description.slice(0,50) }}...</div>
                             
                             <div class="mn text-left">
                                 <p>
@@ -42,7 +42,7 @@
             </div>
         </div>        
         <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
-        
+        <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
 </template>
 
 <script>
@@ -281,7 +281,7 @@ export default {
 
 @media only screen and (max-width: 1024px) {
 .col-md-6{
-    margin-bottom: -45px;
+    margin-bottom: -18px;
    
 }
 }
