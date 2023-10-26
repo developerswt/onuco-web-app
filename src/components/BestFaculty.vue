@@ -42,7 +42,7 @@
             </div>
         </div>        
         <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
-        
+        <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
 </template>
 
 <script>

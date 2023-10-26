@@ -83,87 +83,98 @@
 
                                 </div>
                                 <div class="" v-if="searchResults.length > 0">
-                                <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
-                                    <div class="row no-gutters" >
-                                        <div class="col-lg-3 col-md-3" >
-                                            <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
-                                        </div>
-                                        <div class="col-lg-9 col-md-9">
-                                            <div class="results_inner_block">
-                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
-                                                <div class="row">
-                                                    <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                        <p id="title_text" class="mb-1">{{ result.title }}</p>
-                                                        <p id="sub_text" class="mb-1"></p>
-                                                        <div class="inner_child">
-                                                            <div class="row">
-                                                                <div class="col-lg-5 col-md-5">
-                                                                    <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="duration_text" class="mb-2"><img
-                                                                            src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3">
-                                                                    <p id="module_text" class="mb-2"><img
+                                    <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
+                                        <div class="row no-gutters" >
+                                            <div class="col-lg-3 col-md-3" >
+                                                <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
+                                            </div>
+                                            <div class="col-lg-9 col-md-9">
+                                                <div class="results_inner_block">
+                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                            <p id="title_text" class="mb-1">{{ result.title }}</p>
+                                                            <p id="sub_text" class="mb-1"></p>
+                                                            <div class="inner_child">
+                                                                <div class="row">
+                                                                    <div class="col-lg-5 col-md-5">
+                                                                        <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-3">
+                                                                        <p id="duration_text" class="mb-2"><img
+                                                                                src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-3">
+                                                                        <p id="module_text" class="mb-2"><img
                                                                             src="../assets/images/Iconmap-school@2x.png">{{ result.modules }}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <p id="desc_text" >
+                                                            <p id="desc_text" >
                                                             <span class="desc" v-html="result.description.slice(0,58)"></span></p>
+                                                        </div>
+                                                        <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                            <div class="right_block">
+                                                                <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
+                                                                &#8377;{{ result.discountedPrice }}</p>
+                                                                <button id="buy_button">Buy now</button>
+                                                                <div class="icon_blck">
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
-                                                        <div class="right_block">
-                                                            <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
-                                                            &#8377;{{ result.discountedPrice }}</p>
-                                                        <button id="buy_button">Buy now</button>
-                                                        <div class="icon_blck">
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                            <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                    </router-link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row mb-2 pt-4" v-for="instruct in result.instructorName" :key="instruct.id">
+                                            <div class="col-sm-12">
+                                                <router-link v-bind:to="{ name: 'Instructor', params: { name: instruct.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-8 user_details">
+
+                                                                <img :src="instruct.imageUrl" class="user-icon" v-if="instruct.imageUrl != ''">
+                                                                <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                                                                <div class="user_details_name">
+                                                                    <h2>{{ instruct.name  }}</h2>
+                                                                    <p id="desc_text" >
+                                                                    <span class="desc" v-html="instruct.description.slice(0,58)"></span></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 author_reviews">
+                                                                <p class="oo">13 Following <br> 1200 Following</p>
+                                                                <div class="reviews_details">
+                                                                    <p>(23 reviews) <br></p>
+                                                                    <div class="icon">
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                </div>
+                                                                </div>
+                                                            </div>   
                                                         </div>
-                                                        </div>
-                                                       
                                                     </div>
                                                 </div>
                                                 </router-link>
                                             </div>
-                                        </div>
+                                        </div>  
                                     </div>
-                                </div>   
                                 </div>
-                               
                                 <div class="no_result_found" v-else>
                                     <h4>No Results Found</h4>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-8 user_details">
-                                                        <img src="../assets/images/Author.png" />
-                                                        <div class="user_details_name">
-                                                            <h2>Dr. Adhyan San</h2>
-                                                            <p>Data Management Systems & Visualization software developme...</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 author_reviews">
-                                                        <p class="ar">13 Following <br> 1200 Following</p>
-                                                        <div class="reviews_details">
-                                                            <p>(23 reviews) <br>
-                                                            <el-rate v-model="value2" :colors="colors" /></p>
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                                 
+
                             </el-tab-pane>
                             <el-tab-pane label="Course" name="second">
                                 <div class="row">
@@ -212,31 +223,51 @@
                                     </div>
 
                                 </div>
-                                <div class="row mb-2">
+                                <div class="" v-if="searchResults.length > 0">
+                                    <div class="" v-for="result in searchResults" :key="result.id">
+                                <div class="row mb-2" v-for="person in result.instructorName" :key="person.id">
                                     <div class="col-sm-12">
+                                        <router-link v-bind:to="{ name: 'Instructor', params: { name: person.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-sm-8 user_details">
-                                                        <img src="../assets/images/Author.png" />
+                                                 <div class="col-sm-8 user_details">
+
+                                                    <img :src="person.imageUrl" class="user-icon" v-if="person.imageUrl != ''">
+                                                    <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
                                                         <div class="user_details_name">
-                                                            <h2>Dr. Adhyan San</h2>
-                                                            <p>Data Management Systems & Visualization software developme...</p>
+                                                            <h2>{{ person.name  }}</h2>
+                                                            <p id="desc_text" >
+                                                            <span class="desc" v-html="person.description.slice(0,58)"></span></p>
                                                         </div>
-                                                    </div>
+                                                </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p class="ar">13 Following <br> 1200 Following</p>
+                                                        <p>13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
-                                                            <p>(23 reviews) <br>
-                                                            <el-rate v-model="value2" :colors="colors" /></p>
+                                                            <p>(23 reviews) <br></p>
+                                                            <div class="icon">
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                </div>
                                                         </div>
                                                     </div>   
                                                 </div>
                                             </div>
                                         </div>
+                                    </router-link>
                                     </div>
+                                  
                                 </div>
-                                <div class="row mb-2">
+                                
+                                </div>
+                                </div>
+                                <div class="no_result_found" v-else>
+                                    <h4>No Results Found</h4>
+                                </div>
+                                <!-- <div class="row mb-2">
                                     <div class="col-sm-12">
                                         <div class="card">
                                             <div class="card-body">
@@ -249,7 +280,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p class="ar">13 Following <br> 1200 Following</p>
+                                                        <p>13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -259,8 +290,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
+                                </div> -->
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="card">
                                             <div class="card-body">
@@ -273,7 +304,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p class="ar">13 Following <br> 1200 Following</p>
+                                                        <p>13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -283,11 +314,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </el-tab-pane>
-                            <!-- <el-tab-pane label="Other" name="fourth">Task</el-tab-pane> -->
+                                </div> -->
 
-
+                            </el-tab-pane>                  
                         </el-tabs>
                     </section>
                 </div>
@@ -712,7 +741,7 @@ export default {
     text-align: left;
     margin-left: -20px;
     padding-top: 22px;
-    padding-right: 80px;
+    padding-right: 135px;
 } 
 .user_details_name p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
@@ -795,10 +824,7 @@ export default {
         padding-left: 0px;
         padding-right: 0px;
     }
-    .ar{
-        position: relative;
-        top: 15px;
-    }
+    
 }
 @media screen and (min-width: 300px) and (max-width: 400px) {
     .user_details .user_details_name {
@@ -827,10 +853,6 @@ export default {
         float: right;
         padding-left: 20px;
         width: 60%;
-    }
-    .ar{
-        position: relative;
-        top: 15px;
     }
 }
 @media screen and (min-width: 200px) and (max-width: 300px) {
@@ -861,10 +883,6 @@ export default {
         padding-left: 20px;
         width: 55%;
     }
-    .ar{
-        position: relative;
-        top: 15px;
-    }
 }
 @media screen and (min-width: 1000px) and (max-width: 1024px) {
     .user_details .user_details_name {
@@ -882,10 +900,7 @@ export default {
         opacity: 1;
 
     }
-    .ar{
-        position: relative;
-        top: 15px;
-    }
+
 }
 @media screen and (min-width: 750px) and (max-width: 950px) {
     .user_details .user_details_name {
@@ -903,16 +918,13 @@ export default {
         opacity: 1;
 
     }
-    .ar{
-        position: relative;
-        top: 15px;
-    }
 
 }
-.card-body {
-    flex: 1 1 auto;
-    padding: 17px 17px 5px;
+
+.icon{
+    letter-spacing: 14px;
+    position: relative;
+    left: 17px;
+    bottom: 11px;
 }
-
-
 </style>

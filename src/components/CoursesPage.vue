@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-      <Breadcrumbs style="padding-left: 102px;" />
+      <Breadcrumbs class="brm" />
       <div class="container" v-for="academi in academia" :key="academi.id">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>
@@ -204,6 +204,15 @@ h2 {
     font-size: 20px;
 }
 
+.brm{
+  padding-left: 110px;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 100px) {
+  .brm{
+    padding-left: 20px;
+  }
+}
 </style>
 
 

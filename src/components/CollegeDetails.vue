@@ -573,8 +573,8 @@ background: #EEEAE4;
     font-size: 12px;
 }
 
-element.style {
-}
+
+
 @media only screen and (max-width: 280px){
 
 #sem_card[data-v-723afcf3][data-v-723afcf3] {

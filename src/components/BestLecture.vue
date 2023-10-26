@@ -383,7 +383,7 @@ export default defineComponent ({
 	
     margin-top: 34px;
     margin-bottom: -22px;
-    padding: 7px;
+    /* padding: 7px; */
 }
 .carousel__item {
   min-height: 200px;
