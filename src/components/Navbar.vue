@@ -67,7 +67,7 @@
                     <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.attributes.name }}
+                            Hi 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
@@ -111,7 +111,7 @@ export default {
             showSuggestions: false,
             dataarray: [],
             name: '',
-            // username: localStorage.getItem("username")
+            username: localStorage.getItem("username")
 
         }
     },

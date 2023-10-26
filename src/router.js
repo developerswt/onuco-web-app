@@ -70,7 +70,7 @@ Hub.listen("auth", async (data) => {
         // }  
         // router.push({path: '/'});
         store.commit('isLoggedIn', true); 
-        // localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
+        localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
         const previousRoute = sessionStorage.getItem('previousRoute');
         if (previousRoute) {
           router.push(previousRoute); // Navigate to the previously visited page
