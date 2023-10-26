@@ -23,6 +23,7 @@
         </div>
 
     </div>
+    <div class="container-fluid"></div>
 </template>
 
 <script scoped>
@@ -48,11 +49,13 @@
 }
 
 .error_parent_block {
-    margin-top: 85px;
+    margin-top: -250px;
+    position: relative;
+    top: 400px;
 }
 .error_image_block{
     text-align: center;
-    margin:70px;
+    /* margin:70px; */
 }
 .button_block{
     margin:40px;
@@ -61,9 +64,9 @@
     width:20%;
   padding:10px;
 }
-#top_text{
-    margin-top: 100px;
-}
+/* #top_text{
+    margin-top: 200px;
+} */
 
 @media (min-width: 320px) and (max-width: 575.98px){
     #top_text,#below_text{
@@ -120,5 +123,10 @@
     .error_image_block{
         margin:20px;
     }
+}
+.container-fluid {
+    width: 100%;
+    height: 520px;
+    background-image: url('../assets/images/Group 246.png');
 }
 </style>

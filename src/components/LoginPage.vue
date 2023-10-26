@@ -153,7 +153,8 @@ export default {
 }
 @media screen and (max-width: 600px) {
     .login_class {
-        padding: 15px;
+      position: relative;
+      top: 52px;
     }
 }
 .container-fluid {

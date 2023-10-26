@@ -29,6 +29,7 @@
 </div>
 
 </div>
+<!-- <div class="container-fluid cf"></div> -->
 </template>
 
 <script>
@@ -141,5 +142,10 @@ import Breadcrumbs from './Breadcrumbs.vue';
     .error_image_block{
         margin:20px;
     }
+}
+.cf {
+    width: 100%;
+    height: 520px;
+    background-image: url('../assets/images/Group 246.png');
 }
 </style>

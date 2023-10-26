@@ -7,7 +7,7 @@
             <button class="bt">BUY NOW</button>
         </h4> 
        
-        <p style="color: #777777;" v-html="this.university[0].description"></p>
+        <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
@@ -49,7 +49,7 @@
                                                         <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,20)}}...</p>
+                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,18)}}...</p>
 
                                                                 </div>
                                                                 <div class="col-lg-12 col-9 col-sm-9 col-md-9">
@@ -69,7 +69,7 @@
                                                 <div class="col-lg-12 mn">
                                                     <div class="row">
                                                         <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,35)"></p>
+                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,34)"></p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 col-sm-3 col-md-3">
                                                             <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
@@ -359,7 +359,7 @@ $(document).ready(function(){
     bottom: -11px;
 }
 #sem_card{
-    height: 200px;
+    height: 160px;
     opacity: 1;
     padding: 8%;  
 }
@@ -438,9 +438,10 @@ $(document).ready(function(){
     }
     @media only screen and (max-width: 600px) and (min-width: 100px){
 #sem_card[data-v-723afcf3] {
-    height: 172px;
+    height: 155px;
     opacity: 1;
-    padding: 6%;
+    padding: 5%;
+    width: 300px;
 } 
 .aa .row{
     margin-top: -20px;
@@ -571,20 +572,34 @@ background: #EEEAE4;
     border-radius: -1%;
     font-size: 12px;
 }
-@media only screen and (max-width: 280px) {
-    #sem_card[data-v-723afcf3] {
-    width: 340%;
-    height: 179px;
+
+element.style {
+}
+@media only screen and (max-width: 280px){
+
+#sem_card[data-v-723afcf3][data-v-723afcf3] {
+    width: 228px;
+    height: 180px;
     opacity: 1;
-    padding: 23%;
-    margin: -23px;
-    }
+    padding: 7%;
+    margin: -17px;
+}
     .card-header[data-v-723afcf3] {
-    width: 210px;
-    height: 65px;
+    width: 232px;
+    height: 75px;
     border-bottom: none;
     padding-left: 15px;
     padding-top: 2px;
 }
+}
+
+.desc{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal normal 16px/21px Segoe UI;
+letter-spacing: 0px;
+color: #777777;
+opacity: 1;
 }
 </style>

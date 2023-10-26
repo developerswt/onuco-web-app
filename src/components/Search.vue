@@ -152,7 +152,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <p class="ar">13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -225,7 +225,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <p class="ar">13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -249,7 +249,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <p class="ar">13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -273,7 +273,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
+                                                        <p class="ar">13 Following <br> 1200 Following</p>
                                                         <div class="reviews_details">
                                                             <p>(23 reviews) <br>
                                                             <el-rate v-model="value2" :colors="colors" /></p>
@@ -795,6 +795,10 @@ export default {
         padding-left: 0px;
         padding-right: 0px;
     }
+    .ar{
+        position: relative;
+        top: 15px;
+    }
 }
 @media screen and (min-width: 300px) and (max-width: 400px) {
     .user_details .user_details_name {
@@ -823,6 +827,10 @@ export default {
         float: right;
         padding-left: 20px;
         width: 60%;
+    }
+    .ar{
+        position: relative;
+        top: 15px;
     }
 }
 @media screen and (min-width: 200px) and (max-width: 300px) {
@@ -853,6 +861,10 @@ export default {
         padding-left: 20px;
         width: 55%;
     }
+    .ar{
+        position: relative;
+        top: 15px;
+    }
 }
 @media screen and (min-width: 1000px) and (max-width: 1024px) {
     .user_details .user_details_name {
@@ -870,7 +882,10 @@ export default {
         opacity: 1;
 
     }
-
+    .ar{
+        position: relative;
+        top: 15px;
+    }
 }
 @media screen and (min-width: 750px) and (max-width: 950px) {
     .user_details .user_details_name {
@@ -888,6 +903,16 @@ export default {
         opacity: 1;
 
     }
+    .ar{
+        position: relative;
+        top: 15px;
+    }
 
 }
+.card-body {
+    flex: 1 1 auto;
+    padding: 17px 17px 5px;
+}
+
+
 </style>
