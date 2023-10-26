@@ -60,7 +60,7 @@
                                                    
                                                         </div>
                                                         <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/Union 193.png" style="width: 16px; height: 20px;" class="icon">
+                                                            <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
                                                         </div>
                                                     </div>  
                                                 </div>
@@ -72,7 +72,7 @@
                                                             <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,34)"></p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/Path 4025.png" style="width: 30px; height:30px;" class="video">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                         </div>
                                                     </div>
                                                 </div>

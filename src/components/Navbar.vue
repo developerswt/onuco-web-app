@@ -68,7 +68,7 @@
                     <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.attributes.name }}
+                            Hi {{ this.isuser.email }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
@@ -121,11 +121,9 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user;
         },
         istoken() {
-            console.log(this.$store.state.token);
             return this.$store.state.token;
         },
         user() {
