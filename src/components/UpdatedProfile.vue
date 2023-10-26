@@ -62,7 +62,7 @@
                                             <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
                                             
                                         </div>
-                                        <input type="file" @change="handleFileChange()" class="input_file" style="width: 245px;">
+                                        <input type="file" @change="handleFileChange()" class="input_file" >
                                     </div>
                                 </div>
                                 
@@ -323,6 +323,7 @@ export default {
 }
 .input_file {
     margin-top: 4px;
+    width: 245px;
 }
 
 
@@ -646,6 +647,11 @@ input[type="radio"]:checked {
         margin-left: 0px;
         margin-right: 12px;
     }
+    .input_file{
+        position: relative;
+    top: 39px;
+    right: 26px;
+    }
 }
 @media screen and (min-width: 400px) and (max-width: 500px){
     .choose_file {
@@ -708,7 +714,7 @@ input[type="radio"]:checked {
     .choose_file .input_file {
         float: right;
         
-        margin-right: -33px;
+        margin-right: -54px;
         margin-top: -36px;
     }
     .users .editing_users_details {
