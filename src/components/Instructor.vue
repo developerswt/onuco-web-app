@@ -1,7 +1,7 @@
 <template>
     
     <div class="container jk">
-        <Breadcrumbs />
+        <!-- <Breadcrumbs /> -->
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>
