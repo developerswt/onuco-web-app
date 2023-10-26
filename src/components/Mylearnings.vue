@@ -2,7 +2,7 @@
     <div class="container-fluid jk">
         <div class="container">
             <div class="learning_block">
-                <Breadcrumbs />
+                <!-- <Breadcrumbs /> -->
                 <div class="row" v-if="selectedItem !== null">
                     <div class="col-lg-12">
                         <div>

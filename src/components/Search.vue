@@ -147,7 +147,7 @@
                                                                 <div class="user_details_name">
                                                                     <h2>{{ instruct.name  }}</h2>
                                                                     <p id="desc_text" >
-                                                                    <span class="desc" v-html="instruct.description.slice(0,58)"></span></p>
+                                                                    <span class="desc" v-html="instruct.description.slice(0,55)"></span></p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4 author_reviews">
@@ -238,7 +238,7 @@
                                                         <div class="user_details_name">
                                                             <h2>{{ person.name  }}</h2>
                                                             <p id="desc_text" >
-                                                            <span class="desc" v-html="person.description.slice(0,58)"></span></p>
+                                                            <span class="desc" v-html="person.description.slice(0,55)"></span></p>
                                                         </div>
                                                 </div>
                                                     <div class="col-sm-4 author_reviews">

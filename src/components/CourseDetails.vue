@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- <Breadcrumbs /> -->
-                                <nav aria-label="breadcrumb">
+                                <!-- <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb" >
                                         <li class="breadcrumb-item"><router-link to="/" style="text-decoration: none;">Home</router-link></li>
                                         <li class="breadcrumb-item"><router-link :to="'/Academia/' + this.book.brachRouteName" style="text-decoration: none;">{{ this.book.branchName }}</router-link></li>
@@ -16,7 +16,7 @@
                                         <li class="breadcrumb-item"><router-link to="" style="text-decoration: none;">{{ this.book.title }}</router-link></li>
 
                                     </ol>
-                                </nav>
+                                </nav> -->
                             </div>
                         </div>
                         <div class="row">
