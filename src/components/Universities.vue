@@ -1,6 +1,6 @@
 <template>
     <div class="container jk">
-        <Breadcrumbs />
+        <!-- <Breadcrumbs /> -->
         <div class="parent_block pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
