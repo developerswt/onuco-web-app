@@ -11,7 +11,8 @@ const awsmobile = {
         "scope": [
             "email",
             "openid",
-            "phone"
+            "phone",
+            "profile"
         ],
         "redirectSignIn": "https://dev.skillmeridiandev.tech/",
         "redirectSignOut": "https://dev.skillmeridiandev.tech/Login",

@@ -162,15 +162,11 @@ export default {
         },
         async logout() {
             try {
-                await Auth.signOut();
-                // await Auth.forgetDevice();
-                // console.log('Signed out and forgot device');
-                // await Auth.forgetDevice();
-                // console.log('Signed out and forgot device');
+                Auth.signOut();
                 this.$store.dispatch('logout');
                 localStorage.removeItem("username");
                 this.$store.commit('isLoggedIn', false);
-                this.$router.push("/Login");
+                // this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }

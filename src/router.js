@@ -57,7 +57,7 @@ Hub.listen("auth", async (data) => {
     if (data.payload.event === 'signOut'){
         user = null;
         store.commit('setUser', null);
-        router.push({path: '/SignIn'});
+        router.push({path: '/login'});
     } else
     if (data.payload.event === 'signIn') {
         user = await getUser();

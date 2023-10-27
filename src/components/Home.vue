@@ -1,8 +1,7 @@
 <template>
     <Carousel />
     <!-- <Carouseltwo /> -->
-   
-
+  
     <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid " id="first_container">
             <div class="container" id="home_container">
