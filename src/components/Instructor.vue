@@ -3,7 +3,7 @@
     <div class="container jk">
         <!-- <Breadcrumbs /> -->
         <div class="Instructor_parent_block">
-            <h2 class="instructor_head_text"><span id="Meet_text">Meet</span> Instructor</h2>
+            <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>
                 <div class="instructor-details">
                     <div class="professor-block">
@@ -172,6 +172,62 @@
                             </div>
                         </router-link>
                     </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <router-link to="/SemesterDetails">
+                            
+                            <div class="card" id="instructor_card">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
+
+                                            <div class="card_top_text">
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-10 col-9 col-sm-9">
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-2 col-3 col-sm-3">
+                                                        <img src="../assets/images/share.png" class="icon">
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                            hrs</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-9 col-9 col-sm-9">
+
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                            excepturi.</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3 col-3 col-sm-3">
+                                                        <div class="video_logo">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        
+                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                            (23
+                                                            reviews) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div>
+
+                    
                     
                     
                 </div>
@@ -500,9 +556,9 @@ export default {
     float: right;
     color: white;
 }
-::v-deep .advisory {
+/* ::v-deep .advisory {
     padding-left: 23px;
-}
+} */
 .video {
     width: 50px;
 
@@ -619,16 +675,16 @@ export default {
 }
 
 ::v-deep #row_block {
-    padding-left: 25px;
+    padding-left: 15px;
 }
-::v-deep .details {
+/* ::v-deep .details {
     padding-left: 25px;
-}
+} */
 ::v-deep .row_class {
     display: flex;
     margin-top: -3px;
-    padding-left: 25px;
-    padding-left: 25px;
+    /* padding-left: 25px;
+    padding-left: 25px; */
 }
 
 ::v-deep #education_text {
@@ -639,12 +695,12 @@ export default {
     font-size: 16px;
     font-weight: bold;
 }
-::v-deep .research_inner_block {
+/* ::v-deep .research_inner_block {
     padding-left: 25px;
-}
-::v-deep .research_inner_block {
+} */
+/* ::v-deep .research_inner_block {
     padding-left: 25px;
-}
+} */
 ::v-deep .row_class i {
     padding: 4px 0px 0px 10px;
 }
@@ -758,7 +814,9 @@ export default {
     }
 
     ::v-deep #row_block {
-        margin-top: 15px;
+        margin-top: -30px;
+    padding: 27px;
+    text-align: left;
     }
 
     .Sub_paragraph,
@@ -824,6 +882,10 @@ text-align: left !important;
 .instructor_head_text {
     padding: 0px 0px 20px 2px;
     font-size: 20px;
+}
+.col-lg-10 .col-9 .col-sm-9 .col-md-9{
+    position: relative;
+    right: 20px;
 }
 </style>
 

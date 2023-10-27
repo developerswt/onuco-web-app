@@ -198,6 +198,62 @@
                                     </div>
 
                                 </div>
+                                <div class="" v-if="searchResults.length > 0">
+                                    <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
+                                        <div class="row no-gutters" >
+                                            <div class="col-lg-3 col-md-3" >
+                                                <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
+                                            </div>
+                                            <div class="col-lg-9 col-md-9">
+                                                <div class="results_inner_block">
+                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                            <p id="title_text" class="mb-1">{{ result.title }}</p>
+                                                            <p id="sub_text" class="mb-1"></p>
+                                                            <div class="inner_child">
+                                                                <div class="row">
+                                                                    <div class="col-lg-5 col-md-5">
+                                                                        <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-3">
+                                                                        <p id="duration_text" class="mb-2"><img
+                                                                                src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-3">
+                                                                        <p id="module_text" class="mb-2"><img
+                                                                            src="../assets/images/Iconmap-school@2x.png">{{ result.modules }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p id="desc_text" >
+                                                            <span class="desc" v-html="result.description.slice(0,58)"></span></p>
+                                                        </div>
+                                                        <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                            <div class="right_block">
+                                                                <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
+                                                                &#8377;{{ result.discountedPrice }}</p>
+                                                                <button id="buy_button">Buy now</button>
+                                                                <div class="icon_blck">
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </router-link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="no_result_found" v-else>
+                                    <h4>No Results Found</h4>
+                                </div>
                             </el-tab-pane>
                             <!-- <el-tab-pane label="Course" name="second">Config</el-tab-pane> -->
                             <el-tab-pane label="Author" name="third">
