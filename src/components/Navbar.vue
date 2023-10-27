@@ -11,13 +11,38 @@
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
 
+        
 
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
-            <a class="nav-link gh" href="/login"><i class="fa fa-sign-in"></i></a>
 
+            <el-icon class="el-input__icon search2" @click="toggleSearchBoxVisibility"
+                                        style="color: blue;cursor: pointer;">
+                                        <Search />
+                                    </el-icon>
 
+            <!-- <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a> -->
 
+          
 
+            <el-row class="demo-autocomplete search2" style="width: 280px;  margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox">
+                        <el-col :span="23">
+                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                                value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
+                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search...">
+                                <template #suffix>
+                                    <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
+                                    <!-- <el-icon class="el-input__icon" @click="handleIconClick">
+                                    <edit />
+                                    </el-icon> -->
+
+                                    <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
+                                        style="color: blue;cursor: pointer;">
+                                        <Search />
+                                    </el-icon>
+                                </template>
+                            </el-autocomplete>
+                        </el-col>
+                    </el-row>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
@@ -27,6 +52,7 @@
                         <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
+
                         <router-link class="nav-link"  to="/Courses" >Courses</router-link>
                     </li>
                   
@@ -44,7 +70,7 @@
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row class="demo-autocomplete" style="width: 250px;  margin-right: 25px; " v-if="showSearchBox">
+                    <el-row class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; " v-if="showSearchBoxes">
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
@@ -52,8 +78,8 @@
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
                                     <!-- <el-icon class="el-input__icon" @click="handleIconClick">
-        <edit />
-      </el-icon> -->
+                                    <edit />
+                                    </el-icon> -->
 
                                     <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
                                         style="color: blue;cursor: pointer;">
@@ -67,13 +93,13 @@
                     <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi 
+                            Hi {{ this.isuser.email }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
                             <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notification</router-link>
                             <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link>
-                            <router-link class="dropdown-item" to="" @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
+                            <router-link class="dropdown-item" to="" @click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
                     </li>
                     <li class="nav-item" v-else :class="{ 'active': isActive('/Login') }">
@@ -99,6 +125,7 @@ export default {
     name: "NavbarView",
     props: {
         showSearchBox: Boolean,
+        showSearchBoxes:Boolean
     },
     data() {
         return {
@@ -111,8 +138,10 @@ export default {
             showSuggestions: false,
             dataarray: [],
             name: '',
-            username: localStorage.getItem("username")
-
+            // username: localStorage.getItem("username")
+            showSearchBox: false,
+            showSearchBoxes: true
+            
         }
     },
     computed: {
@@ -130,6 +159,9 @@ export default {
         },
     },
     methods: {
+        toggleSearchBoxVisibility() {
+         this.showSearchBox = !this.showSearchBox;
+        },
         handleKeyEnter(item) {
             if (item.length >= 2) {
                 this.$router.push({ path: '/search', query: { data: item } });
@@ -162,11 +194,16 @@ export default {
         },
         async logout() {
             try {
-                Auth.signOut();
-                this.$store.dispatch('logout');
-                localStorage.removeItem("username");
+                await Auth.signOut();
+                // await Auth.forgetDevice();
+                // console.log('Signed out and forgot device');
+                // await Auth.forgetDevice();
+                // console.log('Signed out and forgot device');
                 this.$store.commit('isLoggedIn', false);
-                // this.$router.push("/Login");
+                this.$store.dispatch('logout')
+                localStorage.removeItem("username")
+
+                this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }
@@ -192,32 +229,32 @@ export default {
         }
 
     },
-//     created() {
-//   try {
-//     const jwtToken = localStorage.getItem('username');
-//     if (jwtToken) {
-//       const parts = jwtToken.split('.');
-//       if (parts.length === 3) {
-//         const payload = parts[1];
-//         const decodedPayload = atob(payload);
-//         console.log(decodedPayload);
-//         const jwtPayload = JSON.parse(decodedPayload);
-//         if (jwtPayload.email) {
-//           this.name = jwtPayload.email;
-//           console.log(this.name);
-//         } else {
-//           console.log('JWT payload does not contain the "name" property.');
-//         }
-//       } else {
-//         console.log('Invalid JWT format.');
-//       }
-//     } else {
-//       console.log('JWT token not found in local storage.');
-//     }
-//   } catch (error) {
-//     console.error('Error decoding JWT:', error);
-//   }
-// }
+    created() {
+  try {
+    const jwtToken = localStorage.getItem('username');
+    if (jwtToken) {
+      const parts = jwtToken.split('.');
+      if (parts.length === 3) {
+        const payload = parts[1];
+        const decodedPayload = atob(payload);
+        console.log(decodedPayload);
+        const jwtPayload = JSON.parse(decodedPayload);
+        if (jwtPayload.email) {
+          this.name = jwtPayload.email;
+          console.log(this.name);
+        } else {
+          console.log('JWT payload does not contain the "name" property.');
+        }
+      } else {
+        console.log('Invalid JWT format.');
+      }
+    } else {
+      console.log('JWT token not found in local storage.');
+    }
+  } catch (error) {
+    console.error('Error decoding JWT:', error);
+  }
+}
 
 }
 
@@ -225,6 +262,12 @@ export default {
 </script>
 
 <style scoped>
+.search1{
+    display: block;
+}
+.search2{
+    display: none;
+}
 .logo {
     width: 100px;
     height: 42px;
@@ -489,9 +532,27 @@ li>a:before {
   border-bottom: 2px solid blue; /* Add the border for the active link */
   margin-bottom: -16px; /* Add margin for the active link */
 }
-@media (max-width: 920px) {
-  .nav-item.active {
-    display: none; /* Hide active links in responsive view */
-  }
+@media screen and (max-width:912px) {
+    .search1{
+    display: none;
+}
+.search2{
+    display: block;
+    font-size: 22px;
+    position: relative;
+    bottom: 4px;
+}
+}
+
+@media screen and (max-width:280px) {
+    .search1{
+    display: none;
+}
+.search2{
+    display: block;
+    font-size: 22px;
+    position: relative;
+    right: 10px;
+}
 }
 </style>

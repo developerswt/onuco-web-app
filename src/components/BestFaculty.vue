@@ -13,7 +13,8 @@
                     <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;"> 
                     <div class="card mt-5">
                         <div class="user-follower">
-                            <img :src="facult.imageUrl" class="user-icon">
+                            <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
