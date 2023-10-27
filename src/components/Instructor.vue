@@ -13,7 +13,8 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img :src="this.faculty.imageUrl" class="img-fluid">
+                                            <img :src="this.faculty.imageUrl" class="img-fluid" v-if="this.faculty.imageUrl !== ''">
+                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid" v-else>
                                         </div>
 
                                     </div>
@@ -389,7 +390,7 @@ export default {
         return {
             isLoading: false,
             faculty: [],
-            activeName: 'first',
+            activeName: '',
             attribute: [
                 { key: "Name", value: "Arun" },
                 { key: "Age", value: 30 },
@@ -397,10 +398,16 @@ export default {
             ],
         }
     },
+    // mounted() {
+    //     if (this.faculty.attribute.length > 0) {
+    //         // Set activeName to the heading of the first tab
+    //         this.activeName = this.faculty.attribute[0].heading;
+    //     }
+    // },    
     methods: {
-        handleClick(tab, event) {
-            console.log(tab, event);
-        },
+        handleClick(tab) {
+      this.activeName = tab.name;
+    },
     },
     async created() {   
         this.isLoading = true;
