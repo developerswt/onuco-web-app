@@ -194,11 +194,7 @@ export default {
         },
         async logout() {
             try {
-                await Auth.signOut();
-                // await Auth.forgetDevice();
-                // console.log('Signed out and forgot device');
-                // await Auth.forgetDevice();
-                // console.log('Signed out and forgot device');
+                Auth.signOut();
                 this.$store.commit('isLoggedIn', false);
                 this.$store.dispatch('logout')
                 localStorage.removeItem("username")
