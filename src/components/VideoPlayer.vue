@@ -70,7 +70,7 @@ export default {
     
     // Listen for timeupdate event to track watch time
     this.player.on('timeupdate', () => {
-      if (this.player.currentTime() >= 5 && !this.showPoster) {
+      if (this.player.currentTime() >= 30 && !this.showPoster) {
         this.showPoster = true;
         this.enablePoster = true;
         this.player.pause();

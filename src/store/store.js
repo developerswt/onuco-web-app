@@ -4,14 +4,10 @@ import { createStore } from 'vuex'
 export default createStore ({
     plugins: [
         createPersistedState({
-            storage: window.sessionStorage,
+            storage: window.localStorage,
         })
     ],
     state: {
-        cart: [],
-        webinar: '',
-        profile: '',
-        updateProfile: '',
         IsLoggedIn: false,
         user: null,
         token: null,
