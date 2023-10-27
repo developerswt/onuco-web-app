@@ -17,7 +17,10 @@
                         <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                             <div class="card">
                         <div class="user-follower">
-                            <img :src="facult.imageUrl" class="user-icon">
+                           
+                            <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
+                            <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                            <!-- <img :src="facult.imageUrl" class="user-icon"> -->
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
@@ -41,8 +44,8 @@
                             </div>
                         </div>
                     </div>
-                    </router-link>
-                    </slide>
+                </router-link>
+            </slide>
                     
 
                     <template #addons>
@@ -444,5 +447,9 @@ export default defineComponent ({
     position: relative;
     bottom: 11px;
 }
-
+@media only screen and (min-width: 280px) {
+.container-fluid{
+padding-left: 0px;
+}
+}
 </style>

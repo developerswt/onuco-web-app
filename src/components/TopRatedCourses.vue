@@ -419,5 +419,20 @@ height: auto;
    
 } 
 }
+
+@media only screen and (max-width: 280px) {
+
+.btn[data-v-3344e108] {
+    margin-left: 75px;
+    margin-top: -30px;
+    width: 93px;
+    font-size: 15px;
+}
+.box {
+    width: 100%;
+    margin-bottom: 35px;
+    height: 320px;
+}
+}
 </style>
 
