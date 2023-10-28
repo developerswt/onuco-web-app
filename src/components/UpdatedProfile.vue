@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container-fluid jk">
         <div class="container">
@@ -55,7 +57,7 @@
                             <div class="row pt-4">
                                 <div class="col-sm-12">
                                     <div class="edit_user">
-                                        <input v-model="userName" placeholder="User Name" type="text">
+                                        <input v-model="userName" placeholder="User Name" type="text" class="un">
                                     </div>    
                                     <div class="choose_file">
                                         <div class="icon_bg_colors">
@@ -700,6 +702,11 @@ input[type="radio"]:checked {
         float: none;
         margin-top: 12px;
     }
+    .un [data-v-36fde92e]{
+position: relative;
+    top: 0px;
+}
+
 }
 @media screen and (min-width: 360px) and (max-width: 379px){
     .choose_file {
@@ -725,6 +732,13 @@ input[type="radio"]:checked {
         float: none;
         margin-top: 12px;
     }
+  
+
+.un[data-v-36fde92e] {
+    position: relative;
+    top: 0px;
+    right: 11px;
+}
 }
 @media only screen and (max-width: 360px) {
     .choose_file {
@@ -774,6 +788,11 @@ input[type="radio"]:checked {
         float: none;
         margin-top: 12px;
     }
+
+    .un{
+position: relative;
+    top: 0px;
+}
 }
 @media only screen and (max-width: 280px) {
     .choose_file {
@@ -799,6 +818,10 @@ input[type="radio"]:checked {
         float: none;
         margin-top: 12px;
     }
+    .un{
+position: relative;
+    top: 0px;
+}
 }
 
 .hidden {
@@ -862,4 +885,8 @@ letter-spacing: 0px;
 color: #707070;
 opacity: 1;
 } */
+.un{
+position: relative;
+    top: 36px;
+}
 </style>

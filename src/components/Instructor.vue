@@ -1,3 +1,5 @@
+
+
 <template>
     
     <div class="container jk">
@@ -13,8 +15,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img :src="this.faculty.imageUrl" class="img-fluid" v-if="this.faculty.imageUrl !== ''">
-                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid" v-else>
+                                            <img :src="this.faculty.imageUrl" class="img-fluid">
                                         </div>
 
                                     </div>
@@ -65,8 +66,9 @@
             <section id="Course_section">
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
                 <div class="row">
-                    
-                    <div class="col-md-6 col-lg-4">
+                    <carousel :items-to-show="3" :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="slide in 5" :key="slide">
+                    <div class="col-md-6 col-lg-6 kk">
                         <router-link to="/SemesterDetails">
                            
                             <div class="card" id="instructor_card">
@@ -120,7 +122,7 @@
                         </router-link>
                     </div>
                     
-                    <div class="col-md-6 col-lg-4">
+                    <!-- <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                             
                             <div class="card" id="instructor_card">
@@ -226,22 +228,87 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
+                    </div> -->
 
                     
                     
-                    
+                   </slide>
+                   <template #addons>
+                        
+                        <navigation >
+                            <template #next>
+                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                            <template #prev>
+                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                        </navigation>
+                        
+                    </template>
+                   </carousel> 
                 </div>
             </section>
             <section id="non_course_section">
                 <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (10)</h5>
                 <div class="row">
-                    
+                    <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="slide in 5" :key="slide">
+                    <div class="col-md-6 col-lg-6 kk">
+                        <router-link to="/SemesterDetails">
+                           
+                            <div class="card" id="instructor_card">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
 
-                   
-                    
+                                            <div class="card_top_text">
+                                                <div class="row">
+                                                     
+                                                    <div class="col-lg-10 col-9 col-sm-9">
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-2 col-3 col-sm-3">
+                                                        <img src="../assets/images/share.png" class="icon">
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                            hrs</p>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
-                    <div class="col-md-6 col-lg-4">
+                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                            excepturi.</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3 col-3 col-sm-3">
+                                                        <div class="video_logo">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        
+                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                            (23
+                                                            reviews) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div>
+                
+                <!-- <div class="row">
+                <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                             
                             <div class="card" id="instructor_card">
@@ -348,6 +415,21 @@
                             </div>
                         </router-link>
                     </div>
+                </div> --> 
+            </slide>
+                   <template #addons>
+                        
+                        <navigation >
+                            <template #next>
+                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                            <template #prev>
+                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                        </navigation>
+                        
+                    </template>
+                   </carousel> 
                 </div>
             </section>
            
@@ -375,6 +457,9 @@ import Breadcrumbs from "./Breadcrumbs.vue"
 import axios from 'axios'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+
 
 
 import Offer from './Offer.vue'
@@ -384,13 +469,59 @@ export default {
     components: {
        Offer,
        Loading,
-       Breadcrumbs
+       Breadcrumbs,
+       Carousel,
+        Slide,
+       
+        Navigation,
+
     },
     data() {
         return {
             isLoading: false,
             faculty: [],
-            activeName: '',
+            settings: {
+            itemsToShow: 1,
+            snapAlign: 'center',
+        },
+   
+        breakpoints: {
+   
+            900: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            820: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            768:{
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            1024: {
+                itemsToShow: 3,
+                snapAlign: 'start',
+            },
+            600: {
+                itemsToShow: 1,
+                snapAlign: 'center',
+            },
+            375:{
+                itemsToShow: 1,
+                snapAlign: 'center',
+            },
+            360:{
+                itemsToShow: 1,
+                snapAlign: 'center', 
+            },
+            540:{
+                itemsToShow: 1,
+                snapAlign: 'center', 
+            }
+          
+        },
+            activeName: 'first',
             attribute: [
                 { key: "Name", value: "Arun" },
                 { key: "Age", value: 30 },
@@ -398,16 +529,10 @@ export default {
             ],
         }
     },
-    // mounted() {
-    //     if (this.faculty.attribute.length > 0) {
-    //         // Set activeName to the heading of the first tab
-    //         this.activeName = this.faculty.attribute[0].heading;
-    //     }
-    // },    
     methods: {
-        handleClick(tab) {
-      this.activeName = tab.name;
-    },
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
     },
     async created() {   
         this.isLoading = true;
@@ -452,13 +577,73 @@ export default {
     border-radius: 4%;
 }
 
-@media only screen and (max-width: 600px) and (min-width: 100px) {
+@media only screen and (max-width: 700px) and (min-width: 100px) {
     .jk {
         padding-top: 22%;
     }
     ::v-deep #sub_text{
         text-align: left;
     }
+    #instructor_card[data-v-54dfdb7f][data-v-54dfdb7f] {
+    border: 1px solid #F0F6FC;
+    width: 85%;
+    height: 241px;
+    opacity: 1;
+    padding: 8%;
+    border-radius: 4%;
+    position: relative;
+    left: 161px;
+}
+.carousel__slide[data-v-54dfdb7f] {
+    scroll-snap-stop: auto;
+    flex-shrink: 0;
+    margin: -8px;
+    position: relative !important;
+    /* right: 124px !important; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0);
+}
+.kk{
+    position: relative;
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+   
+}
+}
+
+@media only screen and (max-width: 820px) and (min-width: 700px){
+
+#instructor_card[data-v-54dfdb7f][data-v-54dfdb7f][data-v-54dfdb7f] {
+    border: 1px solid #F0F6FC;
+    width: 211%;
+    height: 241px;
+    opacity: 1;
+    padding: 8%;
+    border-radius: 4%;
+    position: relative;
+    left: 220px;
+}
+}
+
+@media only screen and (max-width: 920px) and (min-width: 850px){
+
+#instructor_card[data-v-54dfdb7f][data-v-54dfdb7f][data-v-54dfdb7f] {
+background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+    /* box-shadow: 0px 0px 9px #000000A1; */
+    border: 1px solid #F0F6FC;
+    width: 204%;
+    height: 225px;
+    opacity: 1;
+    padding: 14%;
+    border-radius: 4%;
+    text-align: left;
+    position: relative;
+    left: -129px;
+}
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
@@ -684,6 +869,10 @@ export default {
 ::v-deep #row_block {
     padding-left: 15px;
 }
+
+::v-deep #row_block1 {
+    padding-left: 0px;
+}
 /* ::v-deep .details {
     padding-left: 25px;
 } */
@@ -826,6 +1015,12 @@ export default {
     text-align: left;
     }
 
+    ::v-deep #row_block1 {
+        margin-top: -30px;
+    padding: 27px 0px;
+    text-align: left;
+    }
+
     .Sub_paragraph,
     .research_inner_block p,
     ::v-deep .professor-details_text {
@@ -893,6 +1088,36 @@ text-align: left !important;
 .col-lg-10 .col-9 .col-sm-9 .col-md-9{
     position: relative;
     right: 20px;
+}
+
+    #instructor_card[data-v-54dfdb7f] {
+        background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+    /* box-shadow: 0px 0px 9px #000000A1; */
+    border: 1px solid #F0F6FC;
+    width: 218%;
+    height: 225px;
+    opacity: 1;
+    padding: 14%;
+    border-radius: 4%;
+    text-align: left;
+    position: relative;
+    left: 31px;
+}
+
+
+
+
+.carousel__slide {
+    scroll-snap-stop: auto;
+    flex-shrink: 0;
+    margin: -2px;
+    position: relative !important;
+    right: 113px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0);
 }
 </style>
 
