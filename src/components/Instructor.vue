@@ -14,7 +14,7 @@
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
                                             <img :src="this.faculty.imageUrl" class="img-fluid" v-if="this.faculty.imageUrl !== ''">
-                                            <img src="../assets/images/MaskGroup1.png" class="img-fluid" v-else>
+                                            <img src="../assets/images/Image21.png" class="img-fluid" v-else>
                                         </div>
 
                                     </div>
@@ -391,30 +391,19 @@ export default {
             isLoading: false,
             faculty: [],
             activeName: '',
-            attribute: [
-                { key: "Name", value: "Arun" },
-                { key: "Age", value: 30 },
-                { key: "Location", value: "India" },
-            ],
         }
-    },
-    // mounted() {
-    //     if (this.faculty.attribute.length > 0) {
-    //         // Set activeName to the heading of the first tab
-    //         this.activeName = this.faculty.attribute[0].heading;
-    //     }
-    // },    
+    },    
     methods: {
-        handleClick(tab) {
-      this.activeName = tab.name;
-    },
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
     },
     async created() {   
         this.isLoading = true;
         try {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
-            console.log(this.faculty);
+            this.activeName = this.faculty.attributue[0].heading;
         } catch (error) {
             console.log(error);
             this.isLoading = false;

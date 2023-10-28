@@ -143,7 +143,7 @@
                                                             <div class="col-sm-8 user_details">
 
                                                                 <img :src="instruct.imageUrl" class="user-icon" v-if="instruct.imageUrl != ''">
-                                                                <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                                                                <img src="../assets/images/Image21.png" class="user-icon" v-else>
                                                                 <div class="user_details_name">
                                                                     <h2>{{ instruct.name  }}</h2>
                                                                     <p id="desc_text" >
@@ -290,7 +290,7 @@
                                                  <div class="col-sm-8 user_details">
 
                                                     <img :src="person.imageUrl" class="user-icon" v-if="person.imageUrl != ''">
-                                                    <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                                                    <img src="../assets/images/Image21.png" class="user-icon" v-else>
                                                         <div class="user_details_name">
                                                             <h2>{{ person.name  }}</h2>
                                                             <p id="desc_text" >
@@ -437,6 +437,7 @@ export default {
         // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
             
         },
+        
         querySearch(queryString,cb) {
             console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;

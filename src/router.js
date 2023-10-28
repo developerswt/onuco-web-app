@@ -58,8 +58,7 @@ Hub.listen("auth", async (data) => {
         user = null;
         store.commit('setUser', null);
         router.push({path: '/login'});
-    } else
-    if (data.payload.event === 'signIn') {
+    } else if (data.payload.event === 'signIn') {
         user = await getUser();
         // await Auth.rememberDevice();
         // console.log('Signed in and remembered device');

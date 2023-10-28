@@ -1,25 +1,25 @@
 <template>
-  <Navbar :showSearchBox="showSearchBox"  />
-  <!-- <Breadcrumbs  style="padding-top: 12%;"/> -->
-  <router-view :key="$route.fullPath" />
-  <Footer />
+  <div>
+    <Navbar :showSearchBox="showSearchBox" />
+    <router-view :key="$route.fullPath" />
+    <Footer />
+  </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
-// import Breadcrumbs from './components/Breadcrumbs.vue'
 
 export default {
   name: "AppView",
   components: {
     Navbar,
     Footer,
-    // Breadcrumbs
   },
   computed: {
     showSearchBox() {
-      return this.$route.path !== '/search'; // Hide search box on Search page
+      // Check if the current route is the search page and conditionally show/hide the search box
+      return this.$route.path !== '/search';
     },
   },
 }

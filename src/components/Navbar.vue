@@ -16,7 +16,7 @@
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
 
             <el-icon class="el-input__icon search2" @click="toggleSearchBoxVisibility"
-                                        style="color: blue;cursor: pointer;">
+                                        style="color: blue;cursor: pointer;margin-right: 13px;">
                                         <Search />
                                     </el-icon>
 
@@ -24,7 +24,7 @@
 
           
 
-            <el-row class="demo-autocomplete search2" style="width: 280px;  margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox">
+            <el-row class="demo-autocomplete search2" style="width: 280px;  margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox && showSearchBoxOnNavbar">
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
@@ -70,7 +70,7 @@
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; " v-if="showSearchBoxes">
+                    <el-row class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; " v-if="showSearchBoxOnNavbar">
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
@@ -145,6 +145,9 @@ export default {
         }
     },
     computed: {
+        showSearchBoxOnNavbar() {
+            return this.$route.path !== '/search';
+        },
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
@@ -170,7 +173,7 @@ export default {
         },
         handleSelect(item) {
             if (item.title.length >= 2) {
-                this.$router.push({ path: '/search', query: { data: item } });
+                this.$router.push({ path: '/search', query: { data: item.title } });
                 console.log(item);
             }
             console.log(item);
@@ -196,10 +199,9 @@ export default {
             try {
                 Auth.signOut();
                 this.$store.commit('isLoggedIn', false);
-                this.$store.dispatch('logout')
-                localStorage.removeItem("username")
-
-                this.$router.push("/Login");
+                this.$store.dispatch('logout');
+                localStorage.removeItem("username");
+                // this.$router.push("/Login");
             } catch (error) {
                 alert(error.message);
             }
@@ -550,5 +552,10 @@ li>a:before {
     position: relative;
     right: 10px;
 }
+}
+@media screen and (max-width: 920px) {
+    .nav-item.active {
+        display: none;
+    }
 }
 </style>
