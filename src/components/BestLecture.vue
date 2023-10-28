@@ -19,7 +19,7 @@
                         <div class="user-follower">
                            
                             <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
                             <!-- <img :src="facult.imageUrl" class="user-icon"> -->
                         </div>
                         <div class="user-following">

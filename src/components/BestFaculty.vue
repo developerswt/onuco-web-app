@@ -14,7 +14,7 @@
                     <div class="card mt-5">
                         <div class="user-follower">
                             <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
-                            <img src="../assets/images/MaskGroup1.png" class="user-icon" v-else>
+                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
