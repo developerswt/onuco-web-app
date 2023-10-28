@@ -604,6 +604,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: -1px;
     transform: translateZ(0);
 }
 .kk{
