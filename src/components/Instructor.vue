@@ -15,7 +15,8 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img :src="this.faculty.imageUrl" class="img-fluid">
+                                            <img :src="this.faculty.imageUrl" class="img-fluid" v-if="this.faculty.imageUrl !== ''">
+                                            <img src="../assets/images/Image21.png" class="img-fluid" v-else>
                                         </div>
 
                                     </div>
