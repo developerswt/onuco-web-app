@@ -585,7 +585,7 @@ export default {
     ::v-deep #sub_text{
         text-align: left;
     }
-    #instructor_card[data-v-54dfdb7f][data-v-54dfdb7f] {
+    #instructor_card {
     border: 1px solid #F0F6FC;
     width: 85%;
     height: 241px;
@@ -595,7 +595,7 @@ export default {
     position: relative;
     left: 161px;
 }
-.carousel__slide[data-v-54dfdb7f] {
+.carousel__slide {
     scroll-snap-stop: auto;
     flex-shrink: 0;
     margin: -8px;
@@ -632,7 +632,7 @@ export default {
 
 @media only screen and (max-width: 920px) and (min-width: 850px){
 
-#instructor_card[data-v-54dfdb7f][data-v-54dfdb7f][data-v-54dfdb7f] {
+#instructor_card {
 background: #EEEAE4;
     background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
     /* box-shadow: 0px 0px 9px #000000A1; */
@@ -761,7 +761,7 @@ background: #EEEAE4;
 ::v-deep .fa-circle {
     margin: 7px;
 }
-::v-deep .row_class i[data-v-54dfdb7f]
+/* ::v-deep .row_class i */
 .kl .card {
     padding: 10px 10px 0px;
     /* background-color: #8B8989; */
@@ -1092,7 +1092,7 @@ text-align: left !important;
     right: 20px;
 }
 
-    #instructor_card[data-v-54dfdb7f] {
+    #instructor_card {
         background: #EEEAE4;
     background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
     /* box-shadow: 0px 0px 9px #000000A1; */
