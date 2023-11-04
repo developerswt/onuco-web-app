@@ -36,7 +36,7 @@
                 <router-link to="/UserNotification" exact-active-class="activeButton"  @click="setActiveButton('UserNotification')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
                         <div class="box">
-                            <img src="../assets/images/Icon ionic-ios-notifications.png" class="icon" style="width: 29px; height: 29px;">
+                            <img src="../assets/images/Icon-ionic-ios-notifications.png" class="icon" style="width: 29px; height: 29px;">
                         </div>
                     </button> 
                 </router-link> 
@@ -56,7 +56,7 @@
                 <router-link to="/UpdatedProfile" exact-active-class="activeButton" @click="setActiveButton('UpdatedProfile')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UpdatedProfile' }">
                         <div class="box">
-                            <img src="../assets/images/Icon awesome-user.png" class="icon" style="width: 29px; height: 29px;">                            
+                            <img src="../assets/images/Icon-awesome-user.png" class="icon" style="width: 29px; height: 29px;">                            
                         </div>
                     </button> 
                 </router-link> 
