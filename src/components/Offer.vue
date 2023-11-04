@@ -188,4 +188,15 @@ h2 {
    
     
 }
+@media screen and (max-width: 280px) {
+    .add img {
+    position: relative;
+    right: 9px;
+}
+}
+@media (max-width:520px){
+    .add{
+        padding-bottom: 97px !important;
+    }
+}
 </style>

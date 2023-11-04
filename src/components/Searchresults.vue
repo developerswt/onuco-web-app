@@ -52,7 +52,7 @@
                                 </div>
                                 <p id="review_text">(23 Reviews)</p>
                                 <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                    &#8377;947 <button id="search_button">buy now</button></p>
+                                    &#8377;947 <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
 
                             </div>
                         </div>

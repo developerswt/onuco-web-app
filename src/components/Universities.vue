@@ -11,9 +11,9 @@
                     <router-link v-bind:to="{ name:'CollegeDetails', params:{name: college.universityName}}" style="text-decoration: none;" >
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
-                                <img src="../assets/images/university.png">
+                                <img  class="cb" src="../assets/images/university.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 10px;">
+                            <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 12px;">
                                 <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
                                 <p style="margin-top: -8px;" v-html="college.description.slice(0,83)"></p>
                             </div>
@@ -77,7 +77,7 @@ export default {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-@media only screen and (max-width: 768px) and (min-width: 100px) {
+@media only screen and (max-width: 768px) and (min-width: 300px) {
     .academic_head_text{
         font-size: 16px !important;
         padding:0 !important;
@@ -209,5 +209,35 @@ export default {
 .col-md-9{
     padding-right: 5px;
     padding-left: 1px;
+}
+
+@media screen and (min-width: 100px) and (max-width: 280px) {
+    .academic_head_text{
+        font-size: 16px !important;
+        padding:0 !important;
+
+    }
+    .parent_blocks{
+        justify-content: center !important;
+
+    }
+    
+   .box{
+    height: 90px !important;
+    width: 265px !important;
+    padding: 15px !important;
+    
+}
+.box h5{
+  font: normal normal 600 12px/24px Segoe UI;
+}
+.box p{
+  font-size: 10px;
+}
+.col-md-9{
+    padding-right: 0px !important;
+    padding-left:0px !important;
+}
+
 }
 </style>

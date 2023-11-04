@@ -4,23 +4,23 @@
       <div class="container" v-for="academi in academia" :key="academi.id">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>
-          <h2 id="available_text"  style="margin-top: 20px;"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
+          <h2 id="available_text"  style="margin-top: 20px;font-size: 18px;"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
           {{ academi.id }}
           <div class="parent_blocks">
-            <div class="row pt-4">
+            <div class="row pt-2">
               <div class="" v-for="branch in branches" :key="branch.id">
                 <div class="box" v-if="academi.academia.id == branch.academiaId">
                   <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
                     style="color: white;text-decoration: none;">
                     <div class="row">
                       <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
-                        <div class="course_block">
-                          <img src="../assets/images/book1.png" style="height: 65px;">
+                        <div class="course_block ">
+                          <img class="cb" src="../assets/images/book1.png" >
                         </div>
                       </div>
-                      <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 4px;">
+                      <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 10px;">
                         <div class="course_block_one">
-                          <h5 :title="branch.name">{{ branch.name }}</h5>
+                          <h5 :title="branch.name">{{ branch.name.slice(0,20) }}...</h5>
                           <p style="margin-top: -8px;">{{ branch.description }}</p>
                         </div>
                       </div>
@@ -93,14 +93,19 @@ export default {
 }
 </script>
 
+
 <style scoped>
+  .cb{
+  height: 65px !important;
+}
+
 .jk {
     padding-top: 70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 100px) {
+@media only screen and (max-width: 768px) and (min-width: 300px) {
 
     .parent_blocks {
         justify-content: center !important;
@@ -132,12 +137,12 @@ export default {
 }
 
 .box {
-    height:90px;
-    width:360px;
+  height: 85px;
+    width: 360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding:9px;
+    padding: 12px;
 
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
@@ -213,6 +218,28 @@ h2 {
     padding-left: 20px;
   }
 }
+@media screen and (min-width: 100px) and (max-width: 280px) {
+   .box{
+    height: 78px !important;
+    width: 230px !important;
+    padding: 15px !important;
+    
+}
+
+.cb{
+  height: 45px !important;
+  position: relative;
+    right: 16px;
+}
+.box h5{
+  font: normal normal 600 12px/24px Segoe UI;
+}
+.box p{
+  font-size: 10px;
+}
+
+}
+
 </style>
 
 

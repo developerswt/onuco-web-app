@@ -212,7 +212,7 @@ export default {
 .subscribeBtn {
   color: #ffff;
   background-color: red;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .customePlyr {
@@ -240,5 +240,19 @@ export default {
   pointer-events: none;
 }
 }
-/* Add your other styles here */
+@media (min-width: 280px) {
+  .overlay-item {
+  position: absolute;
+  display: block;
+  top: 20%;
+  text-align: center;
+  align-items: center;
+  }
+  .subscribeBtn {
+  color: #ffff;
+  background-color: red;
+  font-size: 13px;
+}
+}
+
 </style>

@@ -286,10 +286,16 @@ export default {
 @media ( min-width: 100px) and (max-width: 600px){
     .content{
         margin-bottom: 9%;
-        margin-top: -29px;
+        margin-top: -98px;
     }
 }
     
+@media (max-width:520px){
+    .banner{
+        padding-bottom: 118px !important;
+    }
+}
+
 
 
 </style>

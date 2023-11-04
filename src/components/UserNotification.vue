@@ -221,4 +221,9 @@ h3 {
         padding-left: 10%;
     }
 }
+@media (max-width:520px){
+    .card{
+        padding-bottom: 80px !important;
+    }
+}
 </style>

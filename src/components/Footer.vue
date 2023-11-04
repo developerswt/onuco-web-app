@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class="" style="padding-bottom: 150px;"> -->
     <div class="container-fluid footer">
         <div class="container">
             <div class="row">
@@ -20,22 +19,84 @@
         </div>
    
     </div>
-<!-- </div> -->
+
+    <div class="container-fluid enqiury">
+        <div class="row">
+            <div class="col-md-3">
+               <router-link to="/" exact-active-class="activeButton"  @click="setActiveButton('home')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'home' }">
+                        <div class="box">
+                            <img src="../assets/images/home.png" class="icon" style="width: 29px; height: 29px;">
+                        </div>
+                    </button>
+               </router-link>
+                <h2 class="txt">HOME</h2>
+            </div>
+            <div class="col-md-3">
+                <router-link to="/UserNotification" exact-active-class="activeButton"  @click="setActiveButton('UserNotification')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
+                        <div class="box">
+                            <img src="../assets/images/Icon ionic-ios-notifications.png" class="icon" style="width: 29px; height: 29px;">
+                        </div>
+                    </button> 
+                </router-link> 
+                <h2 class="txt" style=" position: relative; right: 6px;">NOTIFICATION</h2>
+            </div>
+            <div class="col-md-3" style="color: white;">
+                <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
+                    <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
+                        <div class="box">
+                            <img src="../assets/images/myLEarn.png" class="icon" style="width: 29px; height: 29px;">
+                        </div>
+                    </button>
+                </router-link> 
+                <h2 class="txt" style="  position: relative; left: 8px;">MYLEARNING</h2>  
+            </div>
+            <div class="col-md-3" style="color: white;">
+                <router-link to="/UpdatedProfile" exact-active-class="activeButton" @click="setActiveButton('UpdatedProfile')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'UpdatedProfile' }">
+                        <div class="box">
+                            <img src="../assets/images/Icon awesome-user.png" class="icon" style="width: 29px; height: 29px;">                            
+                        </div>
+                    </button> 
+                </router-link> 
+                <h2 class="txt" style="  position: relative; left: 10px;">PROFILE</h2>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 
 <script>
 export default {
-    name: 'FooterView'
-}
+  name: 'FooterView',
+  data() {
+    return {
+      activeButton: 'home',
+    };
+  },
+  methods: {
+    setActiveButton(button) {
+      this.activeButton = button;
+    },
+  },
+  
+};
+
 </script>
 
 
 <style scoped>
+.button:active,
+.button:focus  {
+    background-color: #FF9924 !important;
+}
+.activeButton {
+    background-color: #FF9924 !important;
+}
 .footer {
-    /* position: fixed;
-    bottom: 0px;
-    left: 0px; */
+   
     width: 100%;
     height: 100%;
     background: #0066CC 0% 0% no-repeat padding-box;
@@ -67,5 +128,59 @@ export default {
         text-align: left;
         color: white;
     }
+}
+
+.enqiury {
+    background: #EEEAE4;
+    background: radial-gradient(at right bottom, #0066CC -15%,  #9CCEFF  80%);
+    border: 1px solid #F0F6FC;
+    display: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+@media screen and (max-width: 520px) {
+    .enqiury {
+        display: block;
+        position: fixed;
+        bottom: -1%;
+        z-index: 999;
+    }
+    .footer{
+    display: none !important;
+}
+}
+/* .footer{
+    display: block;
+}
+.footer1{
+    display: none;
+} */
+.btn
+{
+    border-radius: 50%;
+    display: flex !important;
+    position: relative;
+    left: 12px;
+}
+
+.button {
+  padding: 10px;
+  text-decoration: none;
+  display:flex !important;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.txt{
+    font-family: Segoe UI;
+    font-size: 13px;
+    color: #FFFFFF;
+    text-align: right;
+}
+.col-md-3{
+    position: relative;
+    width: 23%;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 </style>

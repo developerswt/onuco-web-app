@@ -128,7 +128,7 @@
                       <input type="text" id="carousel_input" placeholder="Your@email address">
                     </div>
                     <div class="col-lg-4 col-6 col-sm-6">
-                      <button id="carousel_button">Free Sign up</button>
+                      <button id="carousel_button"><p class="cc">Free Sign up</p></button>
                     </div>
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default {
     top: 105px;
   }
 }
-@media screen and (min-width: 200px) and (max-width: 540px) {
+@media screen and (min-width: 300px) and (max-width: 540px) {
   .search_box {
     margin-top: 20px; 
     margin-left: 20px;
@@ -427,4 +427,74 @@ export default {
 #carousel_input{
   margin-right: 170px;
 }
+
+@media screen and (min-width: 100px) and (max-width: 300px) {
+.search_box {
+    margin-top: 0px; 
+    margin-left: 38px;
+    margin-right: 5px;
+  }
+  .merged_block {
+    border: 1px solid white;
+    border-radius: 30px;
+    font-size: 10px;
+    margin-top: 60px;
+    width: 116%;
+    height: 35px;
+  }
+  .right_carousel_block h4 {
+    font-size: 18px;
+    text-align: left;
+    position: relative;
+    left: 35px;
+    top: 60px;
+    margin-left: -199px;
+  }
+  .right_carousel_block p {
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+    left: 35px;
+    top: 70px;
+    margin-left: -199px;
+  }
+  #carousel_button {
+    height: 35px;
+    padding: 1px 8px 30px 8px;
+    background: white;
+    color: #0066CC;
+    border-radius: 22px;
+    float: right;
+    font-size: 12px;
+  }
+  .slider_2 h3 {
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 105px;
+  }
+  .slider_3 h3 {
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 105px;
+  }
+  #carousel_input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px 0px 0px 10px;
+    margin-right: 66px;
+  }
+    .cc{
+      margin-top: 5px;
+      font-size: 11px;
+
+  }
+}
+
+
 </style> 
