@@ -89,7 +89,7 @@
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
-                                                        <img src="../assets/images/share.png" class="icon">
+                                                        <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                         <p class="ft" > 18CS81</p>
@@ -280,7 +280,7 @@
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
-                                                        <img src="../assets/images/share.png" class="icon">
+                                                        <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                         <p class="ft"> 18CS81</p>
