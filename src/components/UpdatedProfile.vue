@@ -889,4 +889,10 @@ opacity: 1;
 position: relative;
     top: 36px;
 }
+@media (max-width:520px) {
+    .learning_block {
+        padding-bottom: 120px;
+    }  
+}
+
 </style>

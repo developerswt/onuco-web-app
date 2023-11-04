@@ -4,7 +4,7 @@
             <!-- <Breadcrumbs /> -->
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
-            <button class="bt">BUY NOW</button>
+            <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
         </h4> 
        
         <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
@@ -462,9 +462,8 @@ $(document).ready(function(){
 * Created with https://www.css-gradient.com
 * Gradient link: https://www.css-gradient.com/?c1=fbaebb&c2=b6def5&gt=r&gd=dtl
 */
-background: #EEEAE4;
+    background: #EEEAE4;
     background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
-    /* box-shadow: 0px 0px 9px #000000A1; */
     border: 1px solid #F0F6FC;
     /* background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 20%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 9px #00000005; 

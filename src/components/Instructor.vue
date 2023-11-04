@@ -64,11 +64,16 @@
                     </div>
                 </div>
             </section>
-            <section id="Course_section">
+            </div>
+                
+        </div>
+            <section id="Course_section">   
+                <div class="container">
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
-                <div class="row">
+               
+                    <carousel :items-to-show="3" :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="slide in 5" :key="slide">
                     
-                    <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                            
                             <div class="card" id="instructor_card">
@@ -80,23 +85,23 @@
                                                 <div class="row">
                                                      
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                        <p class="ft" > Math 1 (NEP Series)</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                        <p class="ft" > 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                        <p class="ft"  id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p class="ft" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -120,9 +125,9 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
                     
-                    <div class="col-md-6 col-lg-4">
+                    
+                    <!-- <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                             
                             <div class="card" id="instructor_card">
@@ -141,16 +146,16 @@
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                        <p> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                        <p id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -174,9 +179,9 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-6 col-lg-4">
+                    <!-- <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                             
                             <div class="card" id="instructor_card">
@@ -195,16 +200,16 @@
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                        <p> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                        <p id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -228,22 +233,38 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
-
+                    </div> -->
+                </slide>
+                   <template #addons>
+                        
+                        <navigation >
+                            <template #next>
+                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                            <template #prev>
+                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                        </navigation>
+                        
+                    </template>
+                   </carousel>
                     
-                    
+                 
                     
                 </div>
             </section>
             <section id="non_course_section">
+                <div class="container">
                 <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (10)</h5>
-                <div class="row">
+              
                     
-
+                    <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="slide in 5" :key="slide">
+                    
                    
                     
 
-                    <div class="col-md-6 col-lg-4">
+                    <!-- <div class="col-md-6 col-lg-4"> -->
                         <router-link to="/SemesterDetails">
                             
                             <div class="card" id="instructor_card">
@@ -255,23 +276,23 @@
                                                 <div class="row">
                                                     
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                        <p class="ft" > Math 1 (NEP Series)</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px;color: #707070;"> 18CS81</p>
+                                                        <p class="ft"> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                        <p class="ft" id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p class="ft" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                    
@@ -295,9 +316,9 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
+                   
                     
-                    <div class="col-md-6 col-lg-4">
+                    <!-- <div class="col-md-6 col-lg-4">
                         <router-link to="/SemesterDetails">
                            
                             <div class="card" id="instructor_card">
@@ -316,16 +337,16 @@
                                                         <img src="../assets/images/share.png" class="icon">
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;"> 18CS81</p>
+                                                        <p> 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p style="font-size: 14px; color: #707070;" id="small_text">240
+                                                        <p id="small_text">240
                                                             hrs</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p style="font-size: 14px; color: #707070;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
                                                             excepturi.</p>
                                                     </div>
                                                     
@@ -349,24 +370,37 @@
                                 </div>
                             </div>
                         </router-link>
-                    </div>
-                </div>
+                    </div> -->
+                </slide>
+                   <template #addons>
+                        
+                        <navigation >
+                            <template #next>
+                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                            <template #prev>
+                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                            </template>
+                        </navigation>
+                        
+                    </template>
+                   </carousel> 
+               
+            </div>
             </section>
 
             <section id="tab_block">
+                <div class="container">
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                     <el-tab-pane :label="att.heading" v-for="att in this.faculty.attributue" :name="att.heading" :key="att.heading">
                         <div class="" v-html="att.values"></div>
                     </el-tab-pane>
                     
                 </el-tabs>
+            </div>
             </section>
 
-        
-        </div>
-      
-      
-    </div>
+    
     <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
     <Offer />
     
@@ -436,9 +470,14 @@ export default {
                 snapAlign: 'center', 
             },
             540:{
+                itemsToShow: 2,
+                snapAlign: 'center', 
+            },
+            280:{
                 itemsToShow: 1,
                 snapAlign: 'center', 
             }
+          
           
         },
             activeName: 'first',
@@ -480,23 +519,6 @@ export default {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-/* #instructor_card{
-    background: #FBAEBB;
-    background: radial-gradient(at left top, #FBAEBB, #B6DEF5);
-    box-shadow: 0px 0px 9px #000000A1;
-    border: 1px solid #FFFFFF;
-} */
-#instructor_card{
-    background: #EEEAE4;
-    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
-    /* box-shadow: 0px 0px 9px #000000A1; */
-    border: 1px solid #F0F6FC;
-    width: 100%;
-    height: 221px;
-    opacity: 1;
-    padding: 6%;
-    border-radius: 4%;
-}
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     .jk {
@@ -514,26 +536,19 @@ export default {
     ::v-deep #sub_text{
         text-align: left;
     }
+
 }
 
-/* .user-img {
-    width: 12%;
-    height: 12%;
-}
-.col-md-5 img {
-    float: left;
-    width: 30%;
-    height: 100%;
-} */
-/* .col-md-5 h5 p .social-icons {
-    float: right;
-    width: 70%;
-    height: 100%;
-} */
 
-/* .col-md-5 h5 {
-    margin-top: 5%;
-} */
+@media only screen and (max-width: 1024px) and (min-width: 650px) {
+    .jk {
+        padding-top: 10%;
+    }
+    ::v-deep #sub_text{
+        text-align: left;
+    }
+}
+
 .social-icons .fa {
     padding: 10px;
     font-size: 14px;
@@ -649,19 +664,6 @@ export default {
     float: right;
 }
 
-.card {
-  
-  
-    margin-bottom: 4%;
-    margin-top: 20px;
-    width: 100%;
-    color: black;
-   
-   height: 200px;
-    padding: 10px;
-
-}
-
 #small_text {
     text-align: right;
 }
@@ -752,12 +754,7 @@ export default {
     font-size: 16px;
     font-weight: bold;
 }
-/* ::v-deep .research_inner_block {
-    padding-left: 25px;
-} */
-/* ::v-deep .research_inner_block {
-    padding-left: 25px;
-} */
+
 ::v-deep .row_class i {
     padding: 4px 0px 0px 10px;
 }
@@ -924,6 +921,7 @@ text-align: left !important;
         text-align: left;
     }
     
+    
 }
 .btn-group .btn {
     background-color: #EFF5FC ;
@@ -949,5 +947,110 @@ text-align: left !important;
 .col-lg-10 .col-9 .col-sm-9 .col-md-9{
     position: relative;
     right: 20px;
+}
+#instructor_card{
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+   
+    border: 1px solid #F0F6FC;
+    width: 88%;
+    height: 212px;
+    opacity: 1;
+    padding: 4%;
+    border-radius: 4%;
+    text-align: left;
+    position: relative;
+    left: 145px;
+}
+.ft{
+    font-size:14px;
+    color: #707070;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 14px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.carousel__slide {
+    scroll-snap-stop: auto;
+    flex-shrink: 0;
+    margin: -2px;
+    position: relative !important;
+    right: 113px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0);
+}
+
+@media(max-width:280px){
+.ft{
+    font-size: 12px;
+}
+
+#instructor_card{
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+    border: 1px solid #F0F6FC;
+    width: 88%;
+    height: 195px;
+    opacity: 1;
+    padding: 4%;
+    border-radius: 8%;
+    text-align: left;
+    position: relative;
+    left: 133px;
+    font-size: 11px;
+
+}
+}
+
+@media (max-width:950px){
+    #instructor_card{
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+    border: 1px solid #F0F6FC;
+    width: 88%;
+    height: 212px;
+    opacity: 1;
+    padding: 4%;
+    border-radius: 4%;
+    text-align: left;
+    position: relative;
+    left: -31px !important;
+}
+}
+
+@media (max-width:540px) {
+    #instructor_card{
+    position: relative;
+    left: 13px !important; 
+    font-size: 11px;
+    height: 200px;
+    }
+
+    .ft{
+    font-size: 12px;
+}
+}
+@media (max-width:500px) {
+    #instructor_card{
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+   
+    border: 1px solid #F0F6FC;
+    width: 88%;
+    height: 212px;
+    opacity: 1;
+    padding: 4%;
+    border-radius: 4%;
+    text-align: left;
+    position: relative;
+    left: 143px !important;
+}
 }
 </style>

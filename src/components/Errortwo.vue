@@ -15,7 +15,7 @@
                     <div class="error_image_block">
                         <img src="../assets/images/error1.png" class="img-fluid">
                         <div class="button_block">
-                            <button class="btn btn-primary">Back to Homepage</button>
+                            <router-link to="/"> <button class="btn btn-primary">Back to Homepage</button></router-link>
                         </div>
                     </div>
                 </div>

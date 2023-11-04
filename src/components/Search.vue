@@ -28,7 +28,8 @@
 
 
                 </form> -->
-
+              <!-- <div class="row">
+                <div class="col-lg-12"> -->
                 <el-autocomplete
                     v-model="searchQuery"
                     :fetch-suggestions="querySearch"
@@ -36,24 +37,31 @@
                     value-key="title"
                     size="large"
                     class="inline-input w-100"
-                    
+                    @keyup.enter="performSearch"
                     @select="handleSelect"
                     placeholder="Search..."
                 >
-                    <template #prefix>
+                <template #prefix>
                         <el-icon style="vertical-align: middle;float: right; width: 1rem; height: 2rem; cursor: pointer; color: blue; font-weight: bold;">
                             <Search />
                         </el-icon>
                     </template>
                     <template #suffix>
                                               
-                        <el-icon v-if="searchQuery !== ''" style="position: absolute;right: 143px; cursor: pointer" @click="clearInput"><CircleClose /></el-icon>
-                            
-                        <el-button style="height: 36px; background: #0177FB 0% 0% no-repeat padding-box; color: white; cursor: pointer; width: 130px; float: right; position: absolute; right: 2px;" @click="search()">
-                            <span style="font-size: 16px;"> SEARCH </span>
-                        </el-button>
+                        <el-icon v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer" @click="clearInput()"><CircleClose /></el-icon>
+                        <el-button class="btn1" @click="search()">
+                            <span style="font-size: 14px;"> SEARCH </span>
+                        </el-button> 
+                       
                     </template>
+                    
+                   
+                
                 </el-autocomplete>
+                <!-- </div>
+                
+                </div> -->
+                
 
                 <div class="tab_block">
                     <section id="tab_block">
@@ -117,7 +125,7 @@
                                                             <div class="right_block">
                                                                 <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
                                                                 &#8377;{{ result.discountedPrice }}</p>
-                                                                <button id="buy_button">Buy now</button>
+                                                                <router-link to="/login"><button id="buy_button">Buy now</button></router-link>
                                                                 <div class="icon_blck">
                                                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
@@ -233,7 +241,7 @@
                                                             <div class="right_block">
                                                                 <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
                                                                 &#8377;{{ result.discountedPrice }}</p>
-                                                                <button id="buy_button">Buy now</button>
+                                                                 <router-link to="/login"><button id="buy_button">Buy now</button></router-link>
                                                                 <div class="icon_blck">
                                                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
@@ -404,6 +412,7 @@ export default {
             searchQuery: this.$route.query.data,
             searchResults: [],
             activeName: 'first',
+           
         }    
     },
     // created() {
@@ -413,6 +422,16 @@ export default {
     //     }
     // },    
     methods: {
+
+        performSearch() {
+      this.isLoading = true;
+      this.search().then(() => {
+        this.isLoading = false;
+      });
+    },
+   
+  
+
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -432,6 +451,7 @@ export default {
                 this.isLoading = false;
             }
         },
+        
         handleSelect (item){
             console.log(item);
         // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
@@ -912,7 +932,7 @@ export default {
         width: 60%;
     }
 }
-@media screen and (min-width: 200px) and (max-width: 300px) {
+@media(max-width: 300px) {
     .user_details .user_details_name {
         float: right;
         width: 100%;
@@ -940,6 +960,13 @@ export default {
         padding-left: 20px;
         width: 55%;
     }
+    .btn1{
+        position: absolute;
+    right: 8px;
+    bottom: 0px;
+    height: 36px !important;
+    width: 70px !important; 
+    }  
 }
 @media screen and (min-width: 1000px) and (max-width: 1024px) {
     .user_details .user_details_name {
@@ -984,4 +1011,16 @@ export default {
     left: 17px;
     bottom: 11px;
 }
+
+.btn1{
+    height: 39px;
+     background: #0177FB 0% 0% no-repeat padding-box; 
+     color: white; 
+     cursor: pointer;
+      width: 130px; 
+      position: relative; 
+      /* right: 31px; */
+      left: 15px;
+}
+
 </style>

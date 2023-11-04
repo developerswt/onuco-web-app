@@ -278,11 +278,8 @@ export default defineComponent ({
     }
 
     .category-test h4 a{
-        padding-right:10px;
+        padding-right:0;
         font-size: 15px !important;
-    }
-    #aca_text {
-        padding-left: 15px;
     }
   
     .ty{
@@ -396,7 +393,7 @@ router-link {
 
 .academic_head_text {
     color: #006acd;
-    padding-left: 5px;
+    padding-left: 10px;
     
     font-size: 20px;
 

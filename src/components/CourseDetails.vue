@@ -56,8 +56,8 @@
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                 </div>
                                 <p id="review_text">(23 Reviews)</p>
-                                <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
-                                    &#8377;{{ this.book.discountedPrice }} <button id="search_button">buy now</button></p>
+                               <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
+                                    &#8377;{{ this.book.discountedPrice }} <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
 
                             </div>
                         </div>

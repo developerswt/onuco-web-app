@@ -266,7 +266,7 @@ export default {
 
 @media screen and (max-width: 400px){
 
-.box[data-v-3344e108] {
+.box {
     width: 100%;
     margin-bottom: 35px;
     height: 360px;
@@ -277,7 +277,7 @@ export default {
     .box {
         width: 100%;
         margin-bottom: 35px;
-        height: 380px;
+        height: 370px;
     }
 
     .box .offer {
@@ -411,7 +411,7 @@ export default {
 height: auto;
 }
 }
-@media only screen and (min-width: 280px) and (max-width: 700px) {
+@media only screen and (min-width: 300px) and (max-width: 700px) {
     .btn{ 
     margin-left: 118px;
     margin-top: -30px;
@@ -420,7 +420,7 @@ height: auto;
 } 
 }
 
-@media only screen and (max-width: 280px) {
+@media screen and (min-width: 100px) and (max-width: 300px) {
 
 .btn[data-v-3344e108] {
     margin-left: 75px;

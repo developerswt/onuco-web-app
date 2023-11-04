@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <div class="container">
+        <div class="container jk">
             <div class="learning_block">
                 <!-- <Breadcrumbs /> -->
                 <div class="row" v-if="selectedItem !== null">
@@ -216,7 +216,7 @@
                                                 <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
                                                 01h 32min
                                             </div>
-                                            <div class="asset_image info1">
+                                            <div class="asset_image info2">
                                                 <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
                                                 2 Modules<br>
                                             </div>
@@ -499,7 +499,7 @@ export default {
 
 /* Style your radio buttons as needed */
 .learning_block {
-    padding-top: 70px;
+    padding-top: 80px;
 }
 
 .purple_block {
@@ -787,6 +787,28 @@ margin-top: -7px;
     font-size: 11px;
     color: #666666;
     margin-top: -14px;
+    
+}
+.info2{
+    font-size: 11px;
+    color: #666666;
+    margin-top: -14px;
+}
+
+@media (max-width:520px) {
+    .info1{
+    font-size: 11px;
+    color: #666666;
+    margin-top: 11px;
+    position: relative;
+    right: 94px;
+}
+.info2{
+    font-size: 11px;
+    color: #666666;
+    margin-top: 8px;
+}
+    
 }
 /* .container-fluid {
     background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
@@ -809,4 +831,11 @@ body {
 }
    
 } */
+@media (max-width:520px) {
+    .jk{
+        padding-bottom: 65px !important;
+        padding-top: 20px;
+    }
+    
+}
 </style>

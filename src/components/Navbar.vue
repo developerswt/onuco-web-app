@@ -1,40 +1,27 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-
-
-
         <div class="container">
-
-
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
-
-        
-
-            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
+         <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
 
             <el-icon class="el-input__icon search2" @click="toggleSearchBoxVisibility"
-                                        style="color: blue;cursor: pointer;margin-right: 13px;">
-                                        <Search />
-                                    </el-icon>
-
-            <!-- <a class="nav-link gh" href="#"><i class="fa fa-sign-in"></i></a> -->
-
-          
-
-            <el-row class="demo-autocomplete search2" style="width: 280px;  margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox && showSearchBoxOnNavbar">
+                                style="color: blue;cursor: pointer;margin-right: 13px;">
+                            <Search />
+                        </el-icon>           
+            <el-row class="demo-autocomplete search2" style="width: 280px; margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox && showSearchBoxOnNavbar">
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
-                                value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search...">
+                                value-key="title" size="large" style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
+                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search..."
+                                @keydown.enter="handleKeyEnter(searchTerm)">
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
                                     <!-- <el-icon class="el-input__icon" @click="handleIconClick">
-                                    <edit />
+                                    <edit/>
                                     </el-icon> -->
-
                                     <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
                                         style="color: blue;cursor: pointer;">
                                         <Search />
@@ -74,7 +61,8 @@
                         <el-col :span="23">
                             <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search...">
+                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search..."
+                                @keydown.enter="handleKeyEnter(searchTerm)">
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
                                     <!-- <el-icon class="el-input__icon" @click="handleIconClick">
@@ -214,14 +202,6 @@ export default {
             return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
         },
   
-
-        // setActive(index) {
-        //     if (this.activeIndex !== null) {
-        //         this.navItems[this.activeIndex].active = false;
-        //     }
-        //     this.activeIndex = index;
-        //     this.navItems[this.activeIndex].active = true;
-        // },
         clearInput() {
             this.searchTerm = '';
         }
@@ -548,9 +528,9 @@ li>a:before {
 }
 .search2{
     display: block;
-    font-size: 22px;
+    font-size: 20px;
     position: relative;
-    right: 10px;
+    right: -6px;
 }
 }
 @media screen and (max-width: 920px) {
