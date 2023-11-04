@@ -4,13 +4,11 @@
     "start_url":"/",
     "icons": [
         {
-            "src": "/icon-themer-icon-192x192.png",
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/logo-download-512x512.png",
             "src": "/logo-download-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
@@ -23,7 +21,7 @@
     "app_id": "your-app-id",
     "launch_handler": "index.html",
     "orientation": "portrait",
-    "screenshots": ["https://example.com/screenshot1.png", "https://example.com/screenshot2.png"],
+    "screenshots": ["https://dev.skillmeridiandev.tech/Screenshot1.png", "https://dev.skillmeridiandev.tech/Screenshot2.png", "https://dev.skillmeridiandev.tech/Screenshot3.png", "https://dev.skillmeridiandev.tech/Screenshot4.png", "https://dev.skillmeridiandev.tech/Screenshot5.png"],
     "categories": ["Category1", "Category2"],
     "dir": "ltr",
     "iarc_rating_id": "iarc-id",
