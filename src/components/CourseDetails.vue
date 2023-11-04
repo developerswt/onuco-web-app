@@ -6,7 +6,9 @@
                     <div class="search_inner_block">
                         <div class="row">
                             <div class="col-lg-12">
-                                <!-- <Breadcrumbs /> -->
+                                <div class="">
+                                    <Breadcrumbs />
+                                </div>    
                                 <!-- <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb" >
                                         <li class="breadcrumb-item"><router-link to="/" style="text-decoration: none;">Home</router-link></li>
@@ -208,6 +210,7 @@
 
 <script>
 import axios from 'axios';
+import Breadcrumbs from './Breadcrumbs.vue';
 import VideoPlayer from './VideoPlayer.vue';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
@@ -220,8 +223,8 @@ export default {
     components: {
         VideoPlayer,
         Offer,
-        Loading
-        // Breadcrumbs
+        Loading,
+        Breadcrumbs
     },
     data() {
         return {
@@ -315,14 +318,22 @@ export default {
         async switchVideo(newVideoUrl, subject) {
             if (this.$refs.videoPlayerRef.player) {
                 const player = this.$refs.videoPlayerRef.player;
-        
+                console.log("Switching video");
+
                 // Pause the current video (if it's playing)
                 player.pause();
-        
+
                 // Reset the current time
                 player.currentTime(0);
 
-                // Change the video source to the new URL
+                // Get the custom element by its unique ID
+                const customElement = document.getElementById("testid");
+                if (customElement) {
+                    // Remove the custom element from the video container
+                    player.el().removeChild(customElement);
+                }
+
+                    // Change the video source to the new URL
                 this.videoOptions.sources = [
                 {
                     src: newVideoUrl,
@@ -330,24 +341,26 @@ export default {
                     withCredentials: false,
                 },
             ];
- 
+
             this.playingSubject = subject;
+        
                 // Hide the poster image if it's displayed
             this.$refs.videoPlayerRef.showPoster = false;
 
                 // Load the new video source
             player.src(this.videoOptions.sources);
-        
+    
                 // Listen for the 'loadedmetadata' event before playing
             player.one('loadedmetadata', async () => {
-                    // Play the new video
-                    await player.play();
+                // Play the new video
+                await player.play();
             });
 
             // Preload the new video source
-                player.load();
-            }
-        },
+            player.load();
+        }
+    },
+
         // updateChapterProgress(chapterIndex, newProgress) {
         //     this.lessons[chapterIndex].progress = newProgress;
         // },

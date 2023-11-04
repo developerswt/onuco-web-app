@@ -282,9 +282,9 @@ export default {
 <template>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb" >
-      <!-- <li>
-        <router-link :to="fullPath">{{ name }} > </router-link>
-      </li> -->
+      <li>
+        <router-link :to="previousPath">{{ previousPathName }} > </router-link>
+      </li> &nbsp;
       <li class="breadcrumb-item" v-for="(crumb, index) in breadcrumbs" :key="index">
         <router-link to="">{{ crumb.label }}</router-link>
       </li>
@@ -304,16 +304,17 @@ export default {
   data() {
     return {
       breadcrumbs: [],
-      // previousPath: sessionStorage.getItem('previousRoute')
-      fullPath: '',
-      name: ''
+      previousPath: sessionStorage.getItem('previousRoute'),
+      previousPathName: sessionStorage.getItem('previousRouteName')
+      // fullPath: '',
+      // name: ''
     };
   },
-  watch: {
-    $route() {
-      this.updateBreadcrumbs();
-    },
-  },
+  // watch: {
+  //   $route() {
+  //     this.updateBreadcrumbs();
+  //   },
+  // },
   // mounted() {
   //   // Retrieve the stored value from sessionStorage
   //   const storedValue = sessionStorage.getItem('previousRoute');
@@ -384,5 +385,9 @@ ol {
     margin-top: 0;
 
 }
-
+@media screen and (max-width: 1000px) {
+  .breadcrumb {
+    display: none;
+  }
+}
 </style>

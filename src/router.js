@@ -82,6 +82,43 @@ Hub.listen("auth", async (data) => {
     }
 });
 // function getUser() {
+//   return Auth.currentAuthenticatedUser().then((data) => {
+//     if (data && data.signInUserSession) {
+//       // Access the user's attributes from AWS Cognito
+//       const userAttributes = data.attributes;
+
+//       // Check if the 'name' attribute is available
+//       const userName = userAttributes.name || 'Default Name';
+//       console.log(userName);
+//       store.commit('setUser', data);
+//       return userName;
+//     }
+//   }).catch(() => {
+//     store.commit('setUser', null);
+//     return null;
+//   });
+// }
+
+// Hub.listen("auth", async (data) => {
+//   if (data.payload.event === 'signOut') {
+//     user = null;
+//     store.commit('setUser', null);
+//     router.push({ path: '/login' });
+//   } else if (data.payload.event === 'signIn') {
+//     const userName = await getUser();
+//     if (userName) {
+//       console.log(`User Name: ${userName}`);
+//     }
+//     if (previousRoute) {
+//       router.push(previousRoute); // Navigate to the previously visited page
+//     } else {
+//       router.push({ path: '/' }); // Redirect to the home page
+//     }
+//   }
+// });
+
+
+// function getUser() {
 //   return Auth.currentAuthenticatedUser()
 //     .then((data) => {
 //       if (data) {
@@ -426,6 +463,7 @@ router.beforeEach((to, from, next) => {
     }
     // sessionStorage.setItem('previousRoute', from.fullPath + ':' + from.name);
     sessionStorage.setItem('previousRoute', from.fullPath);
+    sessionStorage.setItem('previousRouteName', from.name);
 
     //Vue.$gtm.trackView(to.name, to.path);
 	next();

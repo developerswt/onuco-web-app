@@ -1,7 +1,7 @@
 <template>
     <div class="container jk">
-        <!-- <Breadcrumbs /> -->
-        <div class="parent_block pt-4">
+        <Breadcrumbs class="container" />
+        <div class="parent_block" style="margin-top: -2%;">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
