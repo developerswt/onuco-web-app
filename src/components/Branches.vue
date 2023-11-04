@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
-        <div class="container pt-4">
-            <!-- <Breadcrumbs /> -->
+        <Breadcrumbs class="container" />
+        <div class="container">
             <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
         <div class="parent_blocks">
             <div class="row pt-4">

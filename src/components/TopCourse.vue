@@ -1,7 +1,7 @@
 <template>
     <div class="category-test pt-3">
         <div class="container" style="margin-top: 70px;">
-            <h6>Home > Top Rated Courses</h6>
+            <Breadcrumbs />
             <h4 class="academic_head_text pt-4">
                 <span id="aca_text">Top</span>Rated Courses</h4>
         </div>
@@ -287,8 +287,13 @@
 </template>
 
 <script>
+import Breadcrumbs from './Breadcrumbs.vue'
+
 export default {
-    name: 'TopRatedCourse'
+    name: 'TopRatedCourse',
+    components: {
+        Breadcrumbs
+    }
 }
 </script>
 

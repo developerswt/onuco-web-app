@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
-        <div class="container pt-4">
-            <!-- <Breadcrumbs /> -->
+        <Breadcrumbs class="container"/>
+        <div class="container pt-3">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
             <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
@@ -19,7 +19,7 @@
                     <h5 class="card-header">
                         <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
                             <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
-                                <h4 id="sem_text">{{ sem.name }}</h4>
+                                <h4 id="sem_text">{{ sem.name }} </h4>
                                 <p  id="sem_description">{{ sem.description }}</p>
                         </div>
                         <!-- <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
@@ -41,7 +41,7 @@
                             <div class="row kl">
                                 <div class="col-md-4 mb-2" v-for="cou in course" :key="cou.id">
                                     <router-link v-bind:to="{ name:'CourseDetails', params:{name: cou.courseName}}" style="color: white; text-decoration: none;">
-                                    <div class="card mt-3" v-if="sem.id === cou.semesterId" id="sem_card">
+                                    <div class="card mt-3" id="sem_card">
                                         <div class="card-title">
                                             <div class="row">
                                                 <div class="col-lg-12 mn">
@@ -209,6 +209,8 @@ export default {
             const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
             console.log(this.course)
+            this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
+            console.log(this.course);
         } catch (error) {
             console.log(error);
             this.isLoading = false;

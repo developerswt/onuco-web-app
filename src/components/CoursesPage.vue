@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-      <!-- <Breadcrumbs class="brm" /> -->
+      <Breadcrumbs class="brm" />
       <div class="container" v-for="academi in academia" :key="academi.id">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>

@@ -3,7 +3,7 @@
 <template>
     
     <div class="container jk">
-        <!-- <Breadcrumbs /> -->
+        <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
             <section>

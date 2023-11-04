@@ -1,8 +1,8 @@
 <template>
     <div class="container" id="academy_container">
-     <div class="category-test pt-2" >
-        <div class="container" style="margin-top: 70px;">
-            <!-- <Breadcrumbs /> -->
+     <div class="category-test pt-4" >
+        <Breadcrumbs class="pt-5 pl-3" />
+        <div class="container" style="margin-top: 10px;">
             <h4 class="academic_head_text">
                 <span id="aca_text">Available</span>Academics</h4>
         </div>
