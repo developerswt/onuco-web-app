@@ -1,6 +1,6 @@
 {
   "auth": {
-    "onucowebapp72d4940f": {
+    "onucowebapp0c413e90": {
       "customAuth": false,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -9,35 +9,35 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_onucowebapp72d4940f_nativeClientId": {
+    "AMPLIFY_auth_onucowebapp0c413e90_nativeClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "onucowebapp72d4940f"
+          "resourceName": "onucowebapp0c413e90"
         }
       ]
     },
-    "AMPLIFY_auth_onucowebapp72d4940f_userPoolId": {
+    "AMPLIFY_auth_onucowebapp0c413e90_userPoolId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "onucowebapp72d4940f"
+          "resourceName": "onucowebapp0c413e90"
         }
       ]
     },
-    "AMPLIFY_auth_onucowebapp72d4940f_userPoolName": {
+    "AMPLIFY_auth_onucowebapp0c413e90_userPoolName": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "onucowebapp72d4940f"
+          "resourceName": "onucowebapp0c413e90"
         }
       ]
     },
-    "AMPLIFY_auth_onucowebapp72d4940f_webClientId": {
+    "AMPLIFY_auth_onucowebapp0c413e90_webClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "onucowebapp72d4940f"
+          "resourceName": "onucowebapp0c413e90"
         }
       ]
     }
