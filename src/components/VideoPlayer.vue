@@ -1,8 +1,8 @@
 <template>
   <div class="video-container">
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video> 
-    <div v-if="!isSubscribed && showPoster" class="poster-overlay">
-      <div class="overlay-item">
+    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
+    <!-- <div v-if="!isSubscribed && showPoster" id="" class=""> -->
+      <!-- <div class="overlay-item">
         <p class="vo-question">
           Please subscribe to watch the full video
         </p>
@@ -12,14 +12,14 @@
         <div class="btnStyle" v-else>
           <router-link to="/Login"><button class="btn subscribeBtn">SUBSCRIBE</button></router-link>
         </div>
-      </div>
-    </div>
-
+      </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
+
 <script>
-import axios from 'axios';
+import AxiosInstance from '../config/axiosInstance'
 import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
@@ -36,43 +36,48 @@ export default {
     },
     limitTime: Number,
     isSubscribed: Boolean,
+    videoId: Number,
+    courseId: Number,
   },
   data() {
     return {
       player: null,
       showPoster: false, // Initialize showPoster to false
-      enablePoster: false
+      enablePoster: false,
     }
   },
   computed: {
     isLoggedIn() {
       return this.$store.state.IsLoggedIn;
     },
+    isuser() {
+        return this.$store.state.user.signInUserSession.idToken.payload.sub;
+    },
   },
   
   mounted() {
+    console.log("loafing video");
     videojs.registerPlugin('qualityLevels', qualityLevels);
     videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
+
+   
+
+
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
       this.player.qualityLevels();
       console.log(this.player);
-      this.player.hlsQualitySelector({ displayCurrentQuality: true });
+      this.player.hlsQualitySelector({ displayCurrentQuality: true });      
+
       this.player.on('pause', this.pauseVideo);
     });
     this.initVideoPlayer();
 
-    // Delay showing the poster until 8 seconds have passed
-    // setTimeout(() => {
-    //   this.showPoster = true;
-    //   this.player.pause();
-    // }, 5890000); // 8 seconds (8000 milliseconds)
-    
-    // Listen for timeupdate event to track watch time
     this.player.on('timeupdate', () => {
-      if (this.player.currentTime() >= 30 && !this.showPoster) {
+      console.log(this.player.currentTime());
+      if (this.player.currentTime() >= 5 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
-        this.enablePoster = true;
+        this.showPosterOverlay();
         this.player.pause();
       }
     });
@@ -81,15 +86,6 @@ export default {
         this.showPoster = false;
       }
     });
-    // this.player.on('fullscreenchange', () => {
-    //   if (this.player.isFullscreen()) {
-    //     // When entering full-screen mode, show the poster overlay
-    //     this.showPoster = false;
-    //   } else {
-    //     // When exiting full-screen mode, hide the poster overlay
-    //     this.showPoster = true;
-    //   }
-    // });
   },
   beforeDestroy() {
     if (this.player) {
@@ -97,40 +93,47 @@ export default {
     }
   },
   methods: {
-    // sendWatchTimeToBackend() {
-    //   try {
-    //     const userId = '0d779166-7391-4042-9bf6-634046e7142a'; 
-    //     const courseId = 1; 
-    //     const videoId = 3; 
-    //     const watchTime = 90; 
-
-    //     const requestBody = {
-    //       id: 1,
-    //       userId: userId,
-    //       courseId: courseId,
-    //       watchTimeData: [
-    //         {
-    //           videoId: videoId,
-    //           WatchTime: watchTime,
-    //         },
-    //       ],
-    //     };
-
-    //     const response = axios.post('https://localhost:7233/api/StateManagement', requestBody);
-    //     console.log('Update successful:', response.data);
-    //   } catch (error) {
-    //     console.error('Update failed:', error);
-    //   }
-    // },
-    // pauseVideo() {
-    //   this.player.pause();
-    //   this.sendWatchTimeToBackend();
-    // },
+    showPosterOverlay() {
+      if (!this.isSubscribed && this.showPoster) {
+        const customElement = document.createElement('div');
+        customElement.setAttribute("id", "testid");
+        customElement.style.position = 'absolute';
+        customElement.style.top = '0';
+        customElement.style.left = '0';
+        customElement.style.width = '100%';
+        customElement.style.height = '100%';
+        customElement.style.color = 'white';
+        customElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        customElement.style.display = 'flex';
+        customElement.style.justifyContent = 'center';
+        customElement.style.alignItems = 'center';
+        customElement.style.zIndex = '1000'; // Set a higher z-index to ensure it's above the video
+  
+        if (this.isLoggedIn) {
+          customElement.innerHTML = `
+            <div class="overlay-content">
+              <p style="font-size: 16px;color: white;">Please subscribe to watch the full video</p>
+              <div style="margin-left: 70px;">
+                <a href="/Razorpay"><button style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button></a>
+              </div>
+            </div>
+          `;
+        } else {
+          customElement.innerHTML = `
+            <div class="overlay-content">
+              <p style="font-size: 16px;color: white;">Please subscribe to watch the full video</p>
+              <div style="margin-left: 70px;">
+                <a href="/login"><button style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button></a>
+              </div>
+            </div>
+          `;
+        }
+  
+          // Append the custom element to the video container
+        this.$refs.videoPlayer.parentNode.appendChild(customElement);
+      }
+    },
     initVideoPlayer() {
-      // Initialize the video player here
-      // ...
-
-      // Enable or disable the progress bar based on subscription status
       if (this.isSubscribed) {
         this.enableProgressBar();
       } else {
@@ -139,10 +142,11 @@ export default {
 
       // Start or pause the video based on subscription status
       if (this.isSubscribed) {
-        this.player.play();
+        this.player.pause();
       } else {
         this.player.pause();
       }
+
     },
 
     enableProgressBar() {
@@ -154,11 +158,54 @@ export default {
       // Disable the progress bar
       this.player.controlBar.progressControl.disable();
     },
+    async sendWatchTimeToBackend() {
+      if(this.isSubscribed) {
+        try {
+        
+        const userId = this.isuser; 
+        const courseId = this.courseId; 
+        const videoId = this.videoId;
+        const watchTime = this.player.currentTime(); 
+
+        const requestBody = {
+          id: 1,
+          userId: userId,
+          courseId: courseId,
+          watchTimeData: [
+            {
+              videoId: videoId,
+              watchTime: watchTime,
+            },
+          ],
+        };
+
+        const response = await AxiosInstance.put('/StateManagement', requestBody);
+
+        console.log('Update successful:', response.data);
+      } catch (error) {
+        console.error('Update failed:', error);
+      }
+    }
+    },
+    pauseVideo() {
+      this.player.pause();
+      this.sendWatchTimeToBackend();
+      // localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
+
+    },
   }
 };
 </script>
 
 <style scoped>
+.customElement {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200; /* Set a higher z-index for the customElement to be on top */
+}
 .video-container {
   position: relative;
   width: 100%;
@@ -185,13 +232,23 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* z-index: 2147483647; */
-  z-index: 100;
+  z-index: 100; /* Adjust the z-index to make it higher than the video player */
 }
-
-.poster-overlay.full-screen {
+.overlay-content {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Adjust the z-index to make it higher than the video player */
 }
+/* Add your other styles here */
+
 
 /* .video-container:fullscreen .poster-overlay {
   position: fixed;

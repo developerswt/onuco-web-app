@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../store/store'
 
 const instance = axios.create({
-  baseURL: 'https://migzype4x8.ap-southeast-1.awsapprunner.com/api',
+  baseURL: 'https://migzype4x8.ap-southeast-1.awsapprunner.com/api/',
  //https://56qv8e2whb.ap-southeast-1.awsapprunner.com/api
  //https://localhost:7233/api/UserCourseSubscription?courseId=1
 });
