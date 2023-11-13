@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container"/>
-        <div class="container pt-3">
-            <h4 class="academic_head_text">
+        <div class="container">
+            <h4 class="academic_head_text mt-4">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
             <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
         </h4> 
@@ -602,5 +602,11 @@ font: normal normal normal 16px/21px Segoe UI;
 letter-spacing: 0px;
 color: #777777;
 opacity: 1;
+}
+
+@media (max-width:520px) {
+    #sem_icon{
+        font-size: 25px;
+    }
 }
 </style>

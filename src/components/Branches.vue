@@ -222,6 +222,9 @@ $(document).ready(function(){
     .jk{
         padding-top:65px;
     }
+    #available_text{
+        margin-top: 30px;
+    }
     
 }
 @media only screen and (max-width: 1024px) and (min-width: 650px) {

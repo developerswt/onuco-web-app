@@ -11,25 +11,33 @@
                                 style="color: blue;cursor: pointer;margin-right: 13px;">
                             <Search />
                         </el-icon>           
-            <el-row class="demo-autocomplete search2" style="width: 280px; margin-right: 25px; position: relative; right: 9px; " v-if="showSearchBox && showSearchBoxOnNavbar">
-                        <el-col :span="23">
-                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
-                                value-key="title" size="large" style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
-                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search..."
-                                @keydown.enter="handleKeyEnter(searchTerm)">
-                                <template #suffix>
-                                    <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
-                                    <!-- <el-icon class="el-input__icon" @click="handleIconClick">
-                                    <edit/>
-                                    </el-icon> -->
-                                    <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
-                                        style="color: blue;cursor: pointer;">
-                                        <Search />
-                                    </el-icon>
-                                </template>
-                            </el-autocomplete>
-                        </el-col>
-                    </el-row>
+                        <el-row class="demo-autocomplete search2" style="width: 280px; margin-right: 25px; position: relative; right: 9px;" v-if="showSearchBox && showSearchBoxOnNavbar">
+    <el-col :span="23">
+        <el-autocomplete
+            v-model="searchTerm"
+            :fetch-suggestions="querySearch"
+            :trigger-on-focus="false"
+            value-key="title"
+            size="large"
+            style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
+            class="w-100 search"
+            @select="handleSelect"
+            clearable
+            placeholder="Search..."
+            @keydown.enter="handleKeyEnter(searchTerm)"
+        >
+            <template #suffix>
+                <el-icon
+                    class="el-input__icon"
+                    @click="handleKeyEnter(searchTerm)"
+                    style="color: blue; cursor: pointer;"
+                >
+                    <Search />
+                </el-icon>
+            </template>
+        </el-autocomplete>
+    </el-col>
+</el-row>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
@@ -159,6 +167,11 @@ export default {
                 this.$router.push({ path: '/search', query: { data: item } });
             }
             console.log(item)
+            document.querySelector(".search").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            handleKeyEnter(this.value); // Assuming this.value holds the current search term
+        }
+    });
         },
         handleSelect(item) {
             if (item.title.length >= 2) {

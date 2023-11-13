@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="container-fluid jk">
+    <div class="container-fluid jk mt-5">
         <div class="container">
             <div class="learning_block">
 
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="User_details pl-2">
                                         <h2>Welcome</h2>
-                                        <h3>{{ this.updatedAttribute.name }} !!!</h3>
+                                        <h3>{{ this.updatedAttribute.name }}</h3>
                                     </div>
                                 </div>
                             
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-2  mm">
                     <div class="col-sm-6 user">
                         <div class="card user_profile_details">
                             <div class="card-body">
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 not1">
                         <div class="card notification_details">
                             <div class="card-body">
                                 <h2>Notifications</h2>
@@ -113,13 +113,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 not2">
+                        <div class="card notification_details">
+                            <div class="card-body">
+                                <h2>Notifications</h2>
+                                <p>Item 1</p>
+                                <p>Item 2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-1">
                         <div class="card login_details">
                             <div class="card-body">
                                 <h2>Login details</h2>
                                 <p>Last access to application</p>
                                 <p>Wednesday, 6 September 2023, 11:46 PM (now)</p>
-                                <p>Tuesday, 5 September 2023, 09:46 PM &nbsp;<router-link to="" style="text-decoration: underline;">View all</router-link></p>
+                                <p>Tuesday, 5 September 2023, 09:46 PM &nbsp;<router-link class="va" to="" style="text-decoration: underline;">View all</router-link></p>
                             </div>
                         </div>
                     </div>
@@ -137,7 +146,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -643,7 +652,9 @@ input[type="radio"]:checked {
 }
 @media screen  and (min-width: 100px) and (max-width: 500px) {
     .button1 {
-        margin-left: 6px;
+        position: relative;
+    left: 170px;
+    bottom: 78px;
     }
     .button2 {
         margin-left: 0px;
@@ -891,8 +902,26 @@ position: relative;
 }
 @media (max-width:520px) {
     .learning_block {
-        padding-bottom: 120px;
-    }  
+        padding-bottom: 100px;
+    } 
+    .mm{
+        margin-top: -54px;
+    } 
+    .learning_block {
+    padding-top: 70px;
+}
+.va{
+    display: none;
+}
+.not1{
+    display: none;  
+}
+.not2{
+    display: block !important;
+}
+}
+.not2{
+    display: none;
 }
 
 </style>

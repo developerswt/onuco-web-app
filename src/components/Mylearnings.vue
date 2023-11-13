@@ -211,20 +211,20 @@
                     </div>
                              
                              <el-tab-pane label="LIVE" name="third">
-                                <div class="tab-content" id="myTabContent"  v-if="selectedproduct !== null">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <span id="aca_text">Live</span> Courses
+                                <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                           <span id="aca_text">Live</span> Courses
                                    <div class="row mt-4 ">
-                                    <div class="col-lg-6 text-left  col-sm-12 col-md-6 ">
-                                        <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedproduct.university }}</h6>
-                                        <p class="text_line">{{ selectedproduct.title }}</p>
+                                    <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                        <h6 style="color:#B4B4B4;margin-top: -5px;">VTU</h6>
+                                        <p class="text_line">Mathematics and its formulas</p>
                                         <div class="row ml-0">
-                                            <div class=" info">
-                                                <p>{{ selectedproduct.instructorName }}</p>
-                                            </div>
-                                            <div class="asset_image info1">
-                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;"
-                                                id="text_three">{{ calculateTime(selectedproduct).timeInMinutes }}:{{ calculateTime(selectedproduct).remainingSeconds }}
+                                         <div class=" info">
+                                           <p>Dr. Adhyan San</p>
+                                         </div>
+                                         <div class="asset_image info1">
+                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                01h 32min
                                             </div>
                                             <div class="asset_image info2">
                                                 <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
@@ -259,16 +259,14 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <div class="progress_block">
-                                                        <div v-if="selectedproduct !== null">
-                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(selectedproduct) }}</progress>
-                                                        </div>
-                                                        <div v-else>
-                                                            <progress value="10" max="100">0</progress>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">{{ remainingTimes(selectedproduct) }} left</p>
+                                                    <p id="text_three">22h 33m left</p>
                                                 </div>
                                                 <button class="bt">BUY NOW</button>
                                             </div>
@@ -530,228 +528,25 @@ export default {
             this.selectedItem = item;
             console.log(this.selectedItem);
         },
-        calculateTime(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-        
-            if (totalTime) {
-                const timeInHours = Math.floor(totalTime / 3600);
-                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
-                return {
-                    timeInHours,
-                    timeInMinutes,
-                    remainingSeconds
-                };
-            } else {
-                return {
-                    timeInHours: 0,
-                    timeInMinutes: 0,
-                    remainingSeconds: 0
-                };
-            }
-        },
-        calculateRemainingTime(totalTime, watchTime) {
-            // Ensure both totalTime and watchTime are valid numbers
-            if (typeof totalTime !== 'number' || typeof watchTime !== 'number') {
-                throw new Error('Invalid input. Please provide valid numbers for totalTime and watchTime.');
-            }
-
-            // Ensure totalTime and watchTime are positive numbers
-            if (totalTime < 0 || watchTime < 0) {
-                throw new Error('Invalid input. Please provide non-negative numbers for totalTime and watchTime.');
-            }
-
-            // Calculate remaining time
-            const remainingTime = totalTime - watchTime;
-
-            // Format the remaining time (assuming totalTime and watchTime are in seconds)
-            const hours = Math.floor(remainingTime / 3600);
-            const minutes = Math.floor((remainingTime % 3600) / 60);
-            const seconds = Math.floor((totalTime % 3600) % 60);
-            //const secondsString = seconds.toString().padStart(2, '0');
-            // Return the formatted remaining time
-            return `${hours}:${minutes}:${seconds}`;
-        },
-
-        // Example usage
-            // const totalTime = 3600; // 1 hour in seconds
-            // const watchTime = 1800; // 30 minutes in seconds
-        remainingTimes(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-            const watchTime = this.getWatchTime(selectedproduct); 
-            return this.calculateRemainingTime(totalTime, watchTime);
-            console.log(this.calculateRemainingTime);
-        },
-        //     const remainingTime = calculateRemainingTime(totalTime, watchTime);
-        //     console.log(`Remaining time: ${remainingTime}`);
-
-        // },
-        calculateTime(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-        
-            if (totalTime) {
-                const timeInHours = Math.floor(totalTime / 3600);
-                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
-                return {
-                    timeInHours,
-                    timeInMinutes,
-                    remainingSeconds
-                };
-            } else {
-                return {
-                    timeInHours: 0,
-                    timeInMinutes: 0,
-                    remainingSeconds: 0
-                };
-            }
-        },
-        calculatePercentage(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-            const watchTime = this.getWatchTime(selectedproduct);
-
-            if (totalTime && watchTime) {
-                console.log((watchTime / totalTime) * 100);
-                return (watchTime / totalTime) * 100;
-            } else {
-                return 0;
-            }
-        },
-
-        // calculateTime(selectedproductid) {
-        //     const totalTime = this.getTotalTime(selectedproductid);
-        
-        //     if (totalTime) {
-        //         const timeInHours = Math.floor(totalTime / 3600);
-        //         const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-        //         const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-        //         return {
-        //             timeInHours,
-        //             timeInMinutes,
-        //             remainingSeconds
-        //         };
-              
-        //     } else {
-        //         return {
-        //             timeInHours: 0,
-        //             timeInMinutes: 0,
-        //             remainingSeconds: 0
-        //         };
-        //     }
-        // },
-        findSubjectById(selectedproduct) {
-            for (const topic of Object.values(this.Learning)) {
-                if (topic.title === selectedproduct.title) {
-                    return topic;  // If you want to return the matching topic
-                }
-            }
-            return null;  // Return null if no match is found
-        },
-        findSubjectByMyCourseId(selectedItem) {
-            // Implement a method to find a subject by its ID
-            // You can replace this with your actual implementation
-            for (const topic of Object.values(this.myLearning.subject)) {
-                for (const lessons of topic.values) {
-                    for (const subject of lessons.values) {
-                        if (subject.id === selectedItem) {
-                            return subject;
-                        }
-                    }
-                }
-            }    
-            return null;
-        },
-        getWatchTime(selectedproduct) {
-            const watchData = this.findSubjectById(selectedproduct);
-            return watchData ? watchData.minTimeStateMangement : 0;
-        },
-
-        getTotalTime(selectedproduct) {
-                // Implement a method to get the total time for a specific subjectId
-                // For example, you might have a data property storing total times
-                // You can replace this with your actual implementation
-            const subject = this.findSubjectById(selectedproduct);
-            return subject ? parseFloat(subject.totalTimeCourse) : 0;
-        },
-
-        handleProductChange(product) {
-            // Update your component's state to display the selected item's details
-            this.selectedproduct = product;
-            if (this.$refs.videoPlayerRef.player) {
-                    const player = this.$refs.videoPlayerRef.player;
-
-                    this.videoOptions.sources = [
-                    {
-                        src: this.selectedproduct.videoUrl,
-                        type: this.videoType,
-                        withCredentials: false,
-                    }
-                ]
-                    player.src(this.videoOptions.sources);
-                    player.one('loadedmetadata', async () => {
-                    // Play the new video
-                        await player.pause();
-                    });
-
-                        // Preload the new video source
-                        player.load();
-            }        
-
-            console.log(this.videoOptions);
-            console.log(this.selectedproduct);
-        },
-        
     },
     async created() {
-        console.log(this.isuser.sub)
-    this.isLoading = true;
-    try {
-        const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
-        this.myLearning = res.data;
-        console.log(this.myLearning);
-        if (this.myLearning.length > 0) {
-            // Set the default selected item to the first item in myLearning
-            this.selectedItem = this.myLearning[0];
-        }
-        const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
-        this.Learning = result.data;
-        console.log(this.Learning);
-        if (this.Learning.length > 0) {
-            // Set the default selected item to the first item in myLearning
-            this.selectedproduct = this.Learning[0];
-            console.log(this.selectedproduct);
-        }
-        this.videoOptions.sources = [
-            {
-                src: this.selectedproduct.videoUrl,
-                type: this.videoType,
-                withCredentials: false,
+        this.isLoading = true;
+        try {
+            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=dbae6829-8b5e-4f31-9c79-9d3b0c0aec08`);
+            this.myLearning = res.data;
+            console.log(this.myLearning);
+            if (this.myLearning.length > 0) {
+                // Set the default selected item to the first item in myLearning
+                this.selectedItem = this.myLearning[0];
             }
-        ];
-            console.log(this.Learning);
-            console.log(this.videoOptions);
-    } catch (error) {
-        console.log(error);
-        this.isLoading = false;
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     }
-    finally {
-        this.isLoading = false;
-    }
-}
 }
 </script>
 
@@ -1121,45 +916,6 @@ body {
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
-    .inner_block{
-    height: 108px;
-    } 
-    #asset_image img{
-    width: 47px;
-    height: 76px;
-} 
-}
-@media(min-width: 1280px) {
-    .pt{
-        position: relative;
-        right: 300px;
-    }
-    .video_block{
-        width: 328px !important;
-        position: relative;
-        left: 199px;
-}
-}
-progress {
-    color: #FF9924;
-}
-
-progress {
-    border: none;
-    width: 171px;
-    height: 4px;
-    /* background: #fff; */
-
-}
-progress {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 200px;
-    height: 4px;
-    border-radius: 20px;
-}
-progress {
-    vertical-align: baseline;
+    
 }
 </style>

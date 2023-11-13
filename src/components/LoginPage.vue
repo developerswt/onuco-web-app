@@ -111,7 +111,7 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in" :authState="authState" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
+    <authenticator class="custom-sign-in jp" :authState="authState" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
         
       <template v-slot:icon-facebook>
         <div style="padding: var(--amplify-space-large);">
@@ -202,6 +202,13 @@ export default {
     .login_class {
       position: relative;
       top: 52px;
+      background-image: url('../assets/images/Path 4086.png');
+    }
+    .custom-sign-in{
+      padding: 40px !important;
+    }
+    .container-fluid{
+      display: none;
     }
 }
 .container-fluid {
@@ -210,6 +217,7 @@ export default {
     background-image: url('../assets/images/Group 246.png');
 
 }
+
 
 </style>
 
