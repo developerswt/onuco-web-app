@@ -1092,7 +1092,7 @@ body {
 }
 @media  (min-width: 100px)and(max-width: 600px){
    .pp{
-    margin-top: 10px;
+    margin-top: 10x;
 }
    
 } */
