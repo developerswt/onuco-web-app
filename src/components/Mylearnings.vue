@@ -724,7 +724,7 @@ export default {
         this.myLearning = res.data;
         console.log(this.myLearning);
         if (this.myLearning.length > 0) {
-            // Set the default selected item to the first item in myLearning
+            // Set the default selected item to the first item in myLearnin
             this.selectedItem = this.myLearning[0];
         }
         const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
