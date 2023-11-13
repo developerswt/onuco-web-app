@@ -108,8 +108,11 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6 " >
                                                                         <div class="accordion_block_one">
-                                                                            <i class="fa fa-circle-o" aria-hidden="true"
-                                                                                
+                                                                            <i class="fa" aria-hidden="true"
+                                                                                :class="{
+                                                                                    'fa-circle-o': !hasAnySubjectComplete(lessons),
+                                                                                    'fa-check': hasAnySubjectComplete(lessons),
+                                                                                }"
                                                                                 style="margin-right: 10px;"
                                                                             ></i>
                                                                             <p id="check_text"> {{ lessons.heading }}</p>
@@ -125,11 +128,11 @@
                                                                     <div class="row sub" :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
                                                                             <i class="fa" aria-hidden="true"
-                                                                            :class="{
-                                                                                   'fa-circle-o': playingSubject !== subject,
+                                                                                :class="{
+                                                                                    'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                    'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                     'fa-circle': playingSubject === subject
                                                                                 }"
-
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
@@ -137,37 +140,38 @@
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <p id="duration_text_one">{{ subject.time }}</p>
+                                                                                    <p id="duration_text_one">{{ calculateTime(subject.id).timeInMinutes }}:{{ calculateTime(subject.id).remainingSeconds }}</p>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <!-- <div v-for="video in watchTimeDatas" :key="video.id">
-                                                                                        <div v-for="watch in video.watchTimeData" :key="watch.id"> v-if="subject.id === watch.videoId" -->
-                                                                                            <div class="progress_block" >
-                                                                                                <progress value="10" max="100">
-                                                                                                    10
-                                                                                                </progress>
-                                                                                            </div>
-                                                                                        <!-- </div>
-                                                                                    </div> -->
-                                                                                    <!-- <progress value="0" max="100"> </progress> -->
-                                                                                </div>
-                                                                                <!-- <div class="col-lg-6 col-6 col-sm-6">
                                                                                     <div class="progress_block">
-                                                                                        <progress class="progress" value="75" max="100">
-                                                                                            75%
-                                                                                        </progress>
+                                                                                        <div v-if="hasMatchingVideoId(subject.id)">
+                                                                                            <progress :value="calculatePercentage(subject.id)" max="100">{{ getWatchTime(subject.id) }}</progress>
+                                                                                        </div>
+                                                                                        <div v-else>
+                                                                                            <progress value="0" max="100">0</progress>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div> -->
+                                                                                </div>
+
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 col-12 col-sm-12">
                                                                             <div class="inside_block">
                                                                                 <div class="progress-container" @click="switchVideo(subject.url, subject)">
-                                                                                    <el-progress type="circle" :show-text="false" :percentage="10" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                    <div class="progress_block" v-if="hasMatchingVideoId(subject.id)">
+                                                                                        <el-progress type="circle" :show-text="false" :percentage="calculatePercentage(subject.id)" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                    </div>
+                                                                                    <div class="progress_block" v-else>
+                                                                                        <el-progress type="circle" :show-text="false" :percentage="0" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                    </div>
+                                                                                        
                                                                                 </div>
 
-                                                                                <i class="fa fa-bookmark-o" aria-hidden="true"
-                                                                                    
+                                                                                <i class="fa" aria-hidden="true"
+                                                                                    :class="{
+                                                                                        'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
+                                                                                        'fa-bookmark': isProgressBarComplete(subject.id) || playingSubject === subject,
+                                                                                    }"
                                                                                     style=" font-size: 26px;"
                                                                                 ></i>
                                                                             </div>
@@ -182,7 +186,7 @@
                                             </div>            
                                             <div class="col-sm-6">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
                                         </div>
@@ -228,6 +232,8 @@ export default {
     },
     data() {
         return {
+            courseId: null,
+            videoId: null,
             isLoading: false,
             userIsSubscribed: false,
             courseDetails: null,
@@ -285,15 +291,101 @@ export default {
         }
     },
     methods: {
-        // hasAnySubjectComplete(subjects) {
-        //     return subjects.every(subject => this.hasCompleteWatchTime(subject.id));
-        // },
-        // hasCompleteWatchTime(subjectId) {
-        //         // Check if any watch time data for the given subjectId has a WatchTime of 100
-        //     return this.watchTimeDatas.every(video => {
-        //         const watchData = video.watchTimeData.find(watch => watch.videoId === subjectId);
-        //         return watchData && watchData.watchTime === 100;
-        //     });
+        hasMatchingVideoId(subjectId) {
+            return this.watchTimeDatas.watchTimeData.some(watch => watch.videoId === subjectId);
+        },
+        getWatchTime(subjectId) {
+            const watchData = this.watchTimeDatas.watchTimeData.find(watch => watch.videoId === subjectId);
+            return watchData ? watchData.watchTime : 0;
+        },
+        calculatePercentage(subjectId) {
+            const totalTime = this.getTotalTime(subjectId);
+            const watchTime = this.getWatchTime(subjectId);
+
+            if (totalTime && watchTime) {
+                console.log((watchTime / totalTime) * 100);
+                return (watchTime / totalTime) * 100;
+            } else {
+                return 0;
+            }
+        },
+        calculateTime(subjectId) {
+            const totalTime = this.getTotalTime(subjectId);
+        
+            if (totalTime) {
+                const timeInHours = Math.floor(totalTime / 3600);
+                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
+                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
+                // const timeInMinutes = totalTime % 60;
+                // const timeInHours = Math.floor(watchTime / 3600);
+                //   const remainingSeconds = watchTime % 3600;
+                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
+                //   const timeInSeconds = remainingSeconds % 60;
+
+
+                return {
+                    timeInHours,
+                    timeInMinutes,
+                    remainingSeconds
+                };
+            } else {
+                return {
+                    timeInHours: 0,
+                    timeInMinutes: 0,
+                    remainingSeconds: 0
+                };
+            }
+        },
+
+        
+        getTotalTime(subjectId) {
+                // Implement a method to get the total time for a specific subjectId
+                // For example, you might have a data property storing total times
+                // You can replace this with your actual implementation
+            const subject = this.findSubjectById(subjectId);
+            return subject ? parseFloat(subject.time) : 0;
+        },
+
+        findSubjectById(subjectId) {
+            // Implement a method to find a subject by its ID
+            // You can replace this with your actual implementation
+            for (const topic of Object.values(this.book.subject)) {
+                for (const lessons of topic.values) {
+                    for (const subject of lessons.values) {
+                        if (subject.id === subjectId) {
+                            return subject;
+                        }
+                    }
+                }
+            }    
+            return null;
+        },
+        hasAnySubjectComplete(subjects) {
+            return subjects.values.every(subject => this.hasCompleteWatchTime(subject.id));
+        },
+        hasCompleteWatchTime(subjectId) {
+            const subject = this.findSubjectById(subjectId);
+            if (subject) {
+                const totalTime = parseFloat(subject.time);
+                const watchTime = this.getWatchTime(subjectId);
+
+                if (totalTime && watchTime) {
+                    const percentage = (watchTime / totalTime) * 100;
+                    return percentage === 100;
+                }
+            }
+
+            return false;
+        },
+        // getWatchTimeValue(watchTime) {
+        // // Parse the watchTime string (e.g., "03:13 min") and convert it to a numeric value.
+        //     const timeParts = watchTime.split(':');
+        //     const minutes = parseInt(timeParts[0], 10);
+        //     const seconds = parseInt(timeParts[1], 10);
+        //     const totalSeconds = (minutes * 60) + seconds;
+        
+        //     // You can adjust this as needed, but for a percentage out of 100:
+        //     return (totalSeconds / (60 * 3.13)) * 100;
         // },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
@@ -320,10 +412,13 @@ export default {
                 const player = this.$refs.videoPlayerRef.player;
                 console.log("Switching video");
 
-                // Pause the current video (if it's playing)
+                this.videoId = subject.id;
+                console.log(this.videoId);
+                // player.pauseVideo();
+                
+
                 player.pause();
 
-                // Reset the current time
                 player.currentTime(0);
 
                 // Get the custom element by its unique ID
@@ -335,52 +430,47 @@ export default {
 
                     // Change the video source to the new URL
                 this.videoOptions.sources = [
-                {
-                    src: newVideoUrl,
-                    type: this.videoType,
-                    withCredentials: false,
-                },
-            ];
-
-            this.playingSubject = subject;
-        
-                // Hide the poster image if it's displayed
-            this.$refs.videoPlayerRef.showPoster = false;
-
-                // Load the new video source
-            player.src(this.videoOptions.sources);
+                    {
+                        src: newVideoUrl,
+                        type: this.videoType,
+                        withCredentials: false,
+                    },
+                ];
     
-                // Listen for the 'loadedmetadata' event before playing
-            player.one('loadedmetadata', async () => {
-                // Play the new video
-                await player.play();
-            });
+                this.playingSubject = subject;
+        
+                    // Hide the poster image if it's displayed
+                this.$refs.videoPlayerRef.showPoster = false;
 
-            // Preload the new video source
-            player.load();
-        }
-    },
+                    // Load the new video source
+                player.src(this.videoOptions.sources);
+    
+                    // Listen for the 'loadedmetadata' event before playing
+                player.one('loadedmetadata', async () => {
+                    // Play the new video
+                    await player.play();
+                });
 
-        // updateChapterProgress(chapterIndex, newProgress) {
-        //     this.lessons[chapterIndex].progress = newProgress;
-        // },
-        // isProgressBarStarted(videoId) {
-        //     // Check if there is watch time data for the given videoId
-        //     return this.watchTimeDatas.some(video => {
-        //         const watchData = video.watchTimeData.find(watch => watch.videoId === videoId);
-        //         return watchData && watchData.watchTime > 0;
-        //     });
-        // },
-        // isProgressBarComplete(videoId) {
-        //     // Check if the watch time for the given videoId is 100%
-        //     return this.watchTimeDatas.some(video => video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime === 100));
-        // },
-        // isProgressBarEmpty(videoId) {
-        //     // Check if there is no watch time data for the given videoId or all watch times are 0
-        //     return !this.watchTimeDatas.some(video =>
-        //         video.watchTimeData.some(watch => watch.videoId === videoId && watch.watchTime > 0)
-        //     );
-        // },
+                // Preload the new video source
+                player.load();
+            }
+        },
+
+        isProgressBarComplete(subjectId) {
+            const subject = this.findSubjectById(subjectId);
+
+            if (subject) {
+                const totalTime = parseFloat(subject.time);
+                const watchTime = this.getWatchTime(subjectId);
+
+                if (totalTime && watchTime) {
+                    const percentage = (watchTime / totalTime) * 100;
+                    return percentage === 100;
+                }
+            }
+
+            return false;
+        },
         shouldShowCircleIcon(subjectId) {
             // Return true if the video source has changed, otherwise return false
             return this.videoChanged;
@@ -394,9 +484,9 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data; 
-            // const result = await AxiosInstance.get('/StateManagement');
-            // this.watchTimeDatas = result.data;
-            // console.log(this.watchTimeDatas);
+            const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
+            this.watchTimeDatas = result.data;
+            console.log(this.watchTimeDatas.watchTimeData[0]);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
@@ -414,8 +504,9 @@ export default {
                     withCredentials: false,
                 }
             ]
-           
-            console.log(this.book);
+            this.courseId = this.book.id;
+            
+            console.log(this.book.id);
             console.log(this.videoOptions);
         } catch (err) {
             console.error(err);
@@ -947,6 +1038,8 @@ progress::-moz-progress-bar {
 .fa-bookmark-o {
     color: #0066CC;
 }
+
+
 .fa-bookmark {
     color: #0066CC;
 }

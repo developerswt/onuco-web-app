@@ -1,7 +1,6 @@
 <template>
     <Carousel />
     <!-- <Carouseltwo /> -->
-  
     <!-- <div class="container-fluid jk "> -->
         <div class="container-fluid " id="first_container">
             <div class="container" id="home_container">
@@ -84,7 +83,7 @@ export default {
     },
     isuser() {
         console.log(this.$store.state.user);
-        return this.$store.state.user;
+        return this.$store.state.user.signInUserSession.idToken.payload;
     },
 
   },

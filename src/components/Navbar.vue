@@ -81,7 +81,7 @@
                     <li class="nav-item dropdown " v-if="isLoggedIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ this.isuser.email }}
+                            Hi {{ isuser.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
@@ -140,14 +140,15 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            return this.$store.state.user;
+            console.log(this.$store.state.user.signInUserSession.idToken.payload);
+            return this.$store.state.user.signInUserSession.idToken.payload;
         },
         istoken() {
             return this.$store.state.token;
         },
-        user() {
-            return this.$store.state.user;
-        },
+        // user() {
+        //     return this.$store.state.user;
+        // },
     },
     methods: {
         toggleSearchBoxVisibility() {
@@ -218,7 +219,7 @@ export default {
         console.log(decodedPayload);
         const jwtPayload = JSON.parse(decodedPayload);
         if (jwtPayload.email) {
-          this.name = jwtPayload.email;
+          this.name = jwtPayload.name;
           console.log(this.name);
         } else {
           console.log('JWT payload does not contain the "name" property.');
@@ -509,6 +510,7 @@ li>a:before {
 .nav-item.active {
   border-bottom: 2px solid blue; /* Add the border for the active link */
   margin-bottom: -16px; /* Add margin for the active link */
+  margin-left: 0px;
 }
 @media screen and (max-width:912px) {
     .search1{

@@ -82,7 +82,11 @@ button:focus-visible {
 .amplify-button--primary {
   background-color:#0066CC !important;
 }
- 
+.subscribeBtn {
+  color: #ffff;
+  background-color: red;
+  font-size: 15px;
+}
  
 .amplify-field-group__control {
 

@@ -14,8 +14,8 @@ const awsmobile = {
             "phone",
             "profile"
         ],
-        "redirectSignIn": "https://dev.skillmeridiandev.tech/",
-        "redirectSignOut": "https://dev.skillmeridiandev.tech/Login",
+        "redirectSignIn": "http://localhost:5173/",
+        "redirectSignOut": "http://localhost:5173/Login",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",

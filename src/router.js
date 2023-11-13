@@ -33,54 +33,78 @@ import Course from "./components/Course.vue"
 import CoursePayment from "./components/CoursePayment.vue"
 import Payment from "./components/Payment.vue"
 
-let user;
 
-// getUser().then((user) => {
-//     if (user) {
-//         router.push({path: '/'});
-//     }
-// });
+let user = null; // Initialize user as null
 
 function getUser() {
-    return Auth.currentAuthenticatedUser().then((data) => {
-        if (data && data.signInUserSession) {
-            store.commit('setUser', data);
-            return data;
-        }
-    }).catch(() => {
-        store.commit('setUser', null);
+  return Auth.currentAuthenticatedUser()
+    .then(data => {
+      if (data && data.signInUserSession) {
+        return data;
+      }
+    })
+    .catch(error => {
+      console.error(error);
         return null;
     });
 }
 
-Hub.listen("auth", async (data) => {
-    if (data.payload.event === 'signOut'){
-        user = null;
-        store.commit('setUser', null);
-        router.push({path: '/login'});
-    } else if (data.payload.event === 'signIn') {
-        user = await getUser();
-        // await Auth.rememberDevice();
-        // console.log('Signed in and remembered device');
-        // if (router.go(-1) > 0) {
-        //   router.go(-1); // Navigate back to the previous page
-        // } else {
-        //   router.push({ path: '/' }); // Navigate to the home page
-        // }  
-        // router.push({path: '/'});
-        store.commit('isLoggedIn', true); 
-        localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
-        const previousRoute = sessionStorage.getItem('previousRoute');
-        if (previousRoute) {
-          router.push(previousRoute); // Navigate to the previously visited page
-        } else {
-          router.push({ path: '/' }); // Redirect to the home page
-        }
+Hub.listen("auth", async data => {
+  if (data.payload.event === 'signOut') {
+    user = null;
+    store.commit('setUser', null);
+    router.push({path: '/login'});
+    // Handle sign-out actions
+  } else if (data.payload.event === 'signIn') {
+    user = await getUser();
+    // Handle sign-in actions, e.g., store.commit('isLoggedIn', true)
+    store.commit('isLoggedIn', true); 
+    // Access the entire user attribute details
+    const attributes = user.attributes;
+    console.log(attributes);
+    // Store the user data in your state, for example:
+    store.commit('setUser', user); // Commit user data to the store
+
+    localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload); 
+    const previousRoute = sessionStorage.getItem('previousRoute');
+    if (previousRoute) {
+      router.push(previousRoute); // Navigate to the previously visited page
+    } else {
+      router.push({ path: '/' }); // Redirect to the home page
+    }
+
+    // Continue with your application logic
+  }
+});
+
+// Hub.listen("auth", async (data) => {
+//     if (data.payload.event === 'signOut'){
+//         user = null;
+//         store.commit('setUser', null);
+//         router.push({path: '/login'});
+//     } else if (data.payload.event === 'signIn') {
+//         user = await getUser();
+//         // await Auth.rememberDevice();
+//         // console.log('Signed in and remembered device');
+//         // if (router.go(-1) > 0) {
+//         //   router.go(-1); // Navigate back to the previous page
+//         // } else {
+//         //   router.push({ path: '/' }); // Navigate to the home page
+//         // }  
+//         // router.push({path: '/'});
+//         store.commit('isLoggedIn', true); 
+//         localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
+//         const previousRoute = sessionStorage.getItem('previousRoute');
+//         if (previousRoute) {
+//           router.push(previousRoute); // Navigate to the previously visited page
+//         } else {
+//           router.push({ path: '/' }); // Redirect to the home page
+//         }
        
         
 
-    }
-});
+//     }
+// });
 // function getUser() {
 //   return Auth.currentAuthenticatedUser().then((data) => {
 //     if (data && data.signInUserSession) {
