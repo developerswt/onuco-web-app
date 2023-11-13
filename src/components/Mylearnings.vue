@@ -576,7 +576,7 @@ export default {
             const minutes = Math.floor((remainingTime % 3600) / 60);
             const seconds = Math.floor((totalTime % 3600) % 60);
             //const secondsString = seconds.toString().padStart(2, '0');
-            // Return the formatted remaining time
+
             return `${hours}:${minutes}:${seconds}`;
         },
 
