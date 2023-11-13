@@ -715,23 +715,41 @@ export default {
         
     },
     async created() {
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=dbae6829-8b5e-4f31-9c79-9d3b0c0aec08`);
-            this.myLearning = res.data;
-            console.log(this.myLearning);
-            if (this.myLearning.length > 0) {
-                // Set the default selected item to the first item in myLearning
-                this.selectedItem = this.myLearning[0];
+        console.log(this.isuser.sub)
+    this.isLoading = true;
+    try {
+        const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
+        this.myLearning = res.data;
+        console.log(this.myLearning);
+        if (this.myLearning.length > 0) {
+            // Set the default selected item to the first item in myLearnin
+            this.selectedItem = this.myLearning[0];
+        }
+        const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
+        this.Learning = result.data;
+        console.log(this.Learning);
+        if (this.Learning.length > 0) {
+            // Set the default selected item to the first item in myLearning
+            this.selectedproduct = this.Learning[0];
+            console.log(this.selectedproduct);
+        }
+        this.videoOptions.sources = [
+            {
+                src: this.selectedproduct.videoUrl,
+                type: this.videoType,
+                withCredentials: false,
             }
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
+        ];
+            console.log(this.Learning);
+            console.log(this.videoOptions);
+    } catch (error) {
+        console.log(error);
+        this.isLoading = false;
     }
+    finally {
+        this.isLoading = false;
+    }
+}
 }
 </script>
 
