@@ -211,20 +211,20 @@
                     </div>
                              
                              <el-tab-pane label="LIVE" name="third">
-                                <div class="tab-content" id="myTabContent"  v-if="selectedproduct !== null">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <span id="aca_text">Live</span> Courses
+                                <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                           <span id="aca_text">Live</span> Courses
                                    <div class="row mt-4 ">
-                                    <div class="col-lg-6 text-left  col-sm-12 col-md-6 ">
-                                        <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedproduct.university }}</h6>
-                                        <p class="text_line">{{ selectedproduct.title }}</p>
+                                    <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                        <h6 style="color:#B4B4B4;margin-top: -5px;">VTU</h6>
+                                        <p class="text_line">Mathematics and its formulas</p>
                                         <div class="row ml-0">
-                                            <div class=" info">
-                                                <p>{{ selectedproduct.instructorName }}</p>
-                                            </div>
-                                            <div class="asset_image info1">
-                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;"
-                                                id="text_three">{{ calculateTime(selectedproduct).timeInMinutes }}:{{ calculateTime(selectedproduct).remainingSeconds }}
+                                         <div class=" info">
+                                           <p>Dr. Adhyan San</p>
+                                         </div>
+                                         <div class="asset_image info1">
+                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                01h 32min
                                             </div>
                                             <div class="asset_image info2">
                                                 <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
@@ -259,16 +259,14 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <div class="progress_block">
-                                                        <div v-if="selectedproduct !== null">
-                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(selectedproduct) }}</progress>
-                                                        </div>
-                                                        <div v-else>
-                                                            <progress value="10" max="100">0</progress>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">{{ remainingTimes(selectedproduct) }} left</p>
+                                                    <p id="text_three">22h 33m left</p>
                                                 </div>
                                                 <button class="bt">BUY NOW</button>
                                             </div>
@@ -1112,7 +1110,7 @@ body {
 }
 @media  (min-width: 100px)and(max-width: 600px){
    .pp{
-    margin-top: 10px;
+    margin-top: 10x;
 }
    
 } */
@@ -1121,45 +1119,6 @@ body {
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
-    .inner_block{
-    height: 108px;
-    } 
-    #asset_image img{
-    width: 47px;
-    height: 76px;
-} 
-}
-@media(min-width: 1280px) {
-    .pt{
-        position: relative;
-        right: 300px;
-    }
-    .video_block{
-        width: 328px !important;
-        position: relative;
-        left: 199px;
-}
-}
-progress {
-    color: #FF9924;
-}
-
-progress {
-    border: none;
-    width: 171px;
-    height: 4px;
-    /* background: #fff; */
-
-}
-progress {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 200px;
-    height: 4px;
-    border-radius: 20px;
-}
-progress {
-    vertical-align: baseline;
+    
 }
 </style>

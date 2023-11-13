@@ -62,31 +62,10 @@
                     </template>
                 </carousel>
                 
-                <!-- <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
-                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                    <div class="card">
-                        <div class="user-follower">
-                            <img :src="facult.imageUrl" class="user-icon">
-                        </div>
-                        
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text">{{ facult.description.slice(0,45) }} ....</div>
-                            <div class="mn">
-                                <p>(23 Reviews)</p>
-                                <el-rate v-model="value2" :colors="colors" />
-                            </div>
-                        </div>
-                    </div>
-                    </router-link>
-                </div> -->
                
             </div>
-        <!-- </div> -->
+        
+        
 
 </template>
 
@@ -140,7 +119,7 @@ export default defineComponent ({
     }),
     async created() {   
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
             this.faculty = res.data;
             console.log(this.faculty);
         } catch (error) {

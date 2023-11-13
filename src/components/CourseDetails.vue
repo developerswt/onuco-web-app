@@ -21,10 +21,15 @@
                                 </nav> -->
                             </div>
                         </div>
+                        <div class="container-fluid video2">
+                                                <div class="video_block mb-4 d-lg-none" v-if="videoOptions.sources.length>0">
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                </div>
+                                            </div>
                         <div class="row">
                             <div class="col-lg-6 col-12 col-sm-12 col-md-6">
                                 <div class="search_right_block">
-                                    <h4 class="academic_head_text">
+                                    <h4 class="academic_head_text mt-2">
 
                                         <span id="aca_text">{{ this.book.title }} </span>
 
@@ -88,6 +93,7 @@
                                                     <div class="accordion-item">
                                                         <h5 class="card-header">
                                                             <div :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
+                                                                
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                                         <button class="btn btn-link" style="text-decoration: none; border: none;">
@@ -184,7 +190,7 @@
                                                     </div>
                                                 </div>
                                             </div>            
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 video1 d-none d-lg-block">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                                                 </div>
@@ -1076,5 +1082,20 @@ progress::-moz-progress-bar {
     width: 100%;
     height: 200px;
     background-image: url('../assets/images/Group 246.png');
+}
+.video2{
+    display: none;
+}
+.video1{
+    display: block;
+}
+@media (max-width:520px) {
+    .video2{
+    display: block;
+}
+.container-fluid .video2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}  
 }
 </style>

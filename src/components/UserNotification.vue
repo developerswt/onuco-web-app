@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid header_padding">
         <p>Home>Profile>Notification</p>
-        <h2><b>Maths 1</b> (NEP Series)</h2>
+        <h2 class="pp"><b>Maths 1</b> (NEP Series)</h2>
         <h4>Dr. Ashoka P R</h4>
         <div class="row">
             <div class="col-sm-8">
@@ -25,11 +25,11 @@
                 <div class="card">
                     <div class="summary_details">
                         <div class="cancel_details">
-                            <p>Renew Discount (75%)</p>
+                            <p>Renew Discount (75%) </p>
                             <button class="button button1">CANCEL</button>
                         </div>
                         <div class="renew_details">
-                            <p><span>₹1,999</span><b>₹ 499</b></p>
+                            <p><span>₹1,999</span><b> ₹499</b></p>
                             <button class="btn">RENEW</button>
                         </div>
                     </div>
@@ -221,9 +221,36 @@ h3 {
         padding-left: 10%;
     }
 }
-@media (max-width:520px){
+@media screen and(min-width:300)and (max-width:520px){
     .card{
         padding-bottom: 80px !important;
+    }
+    .renew_details{
+        position: relative;
+    left: 20px;
+    }
+    .pp .h2{
+    padding-top: 35px !important;
+  
+}
+}
+
+@media (max-width:520px) {
+    .pp{
+    padding-top: 35px !important;
+}
+.card{
+        padding-bottom: 70px !important;
+    }
+}
+
+@media (max-width:280px) {
+    .renew_details{
+        position: relative;
+    right: 50px !important;
+    }
+    .card{
+        padding-bottom: 70px !important;
     }
 }
 </style>
