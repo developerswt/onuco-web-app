@@ -38,9 +38,17 @@
     <!-- <div class="text-center" >
         <img src="../assets/images/add.png" style="width: 80%; height: 100%;">
     </div> -->
-    <div class="text-center ">
+    <div class="container-fluid add1">
+  <div class=" container col-md-5">
+                        <div class="add">
+                            <img src="../assets/images/add2.png">
+                        </div>
+                    </div>
+                </div>
+    <div class="container-fluid text-center " id="ban ">
     <img :src="currentImage" class="banner">
   </div>
+  
 </template>
 
 <script>
@@ -158,6 +166,9 @@ export default {
 }
 #third_container {
     background-color: white;
+}
+.text-center{
+    background-color:#EFF5FC ;
 }
 .content {
     top: 1582px;
@@ -278,7 +289,7 @@ export default {
 
 .banner{
      margin-top: -6px;
-     height: 250px;
+     height: 140px;
     }
 
 }
@@ -290,10 +301,74 @@ export default {
     }
 }
     
+.add{
+        
+        display: none;
+    }
 @media (max-width:520px){
     .banner{
-        padding-bottom: 118px !important;
+        padding-bottom: 55px !important;
+        position: relative;
+    top: 31px;
+    
     }
+    #home_container{
+    border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: 5px !IMPORTANT;
+    /* box-shadow: 38px 14px 32px 50px #00000029; */
+    margin-bottom: 3px;
+    background-color: #EFF5FC;
+    }
+    #second_container{
+    border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: 5px !IMPORTANT;
+   background-color: #D4DEE7;
+    margin-bottom: 3px;
+    }
+    #third_container{
+    border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: 5px !IMPORTANT;
+    /* box-shadow: 38px 14px 32px 0px #00000029; */
+    margin-bottom: 3px;
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+    }
+    .content{
+        border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: -103px !IMPORTANT;
+    box-shadow: 38px 14px 32px 0px #00000029;
+    margin-bottom: 34px;  
+    }
+    .text-center{
+        border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: 8px !IMPORTANT;
+    box-shadow: 38px 14px 32px 0px #00000029;
+    position: relative;
+    bottom: 26px;
+    margin-bottom: 46px;
+    }
+    .add{
+      padding-bottom: 13px;
+      padding-top:15px;
+        display: block;
+        text-align: center;
+    }
+    .add1{
+        border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: -31px !IMPORTANT;
+    /* box-shadow: 38px 14px 32px 50px #00000029; */
+    margin-bottom: 32px;
+    background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%);
+
+    }
+
 }
 
 

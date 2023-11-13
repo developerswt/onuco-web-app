@@ -139,7 +139,7 @@ export default {
 
       // Start or pause the video based on subscription status
       if (this.isSubscribed) {
-        this.player.play();
+        this.player.pause();
       } else {
         this.player.pause();
       }

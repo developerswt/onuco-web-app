@@ -3,12 +3,12 @@
         <div class="container jk">
             <div class="learning_block">
                 <Breadcrumbs />
-                <div class="row" v-if="selectedItem !== null">
+                <div class="row">
                     <div class="col-lg-12">
                         <div>
                             <div class="purple_block">
                                 <p id="new_text">NEW</p>
-                                <div class="row">
+                                <div class="row" v-if="selectedItem !== null">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="right_block">
                                             <p id="subject_text">{{ selectedItem.title }}</p>
@@ -95,10 +95,10 @@
                                     <div class="col-lg-12 col-md-12">
                                         <div class="notify_block">
 
-                                            <p> <i class="fa-solid fa-triangle-exclamation"
-                                                    style="color: #ff9900;"></i>Please
+                                            <i class="fa-solid fa-triangle-exclamation"
+                                                    style="color: #ff9900;"></i><p class="pt"> Please
                                                 subscribe the subjects to
-                                                get more details...</p>
+                                                get more details</p>
                                             <button id="course_list_button">Course List</button>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <p id="text_three">22h 33m left</p>
                                                             </div>
-                                                            <button class="bt">Renew</button>
+                                                            <button class="bt">BUY NOW</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,7 +160,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
@@ -199,38 +199,82 @@
                             </div>
                         </div>
                         </el-tab-pane>
+                        <div class="row mb-3">
+                    <div class="col-sm-12 justify-content-center">
+                        <div class="radio_checkbox" style="text-align: center;">
+                            <div class="radio-item" v-for="product in Learning" :key="product.id" :class="{ 'active': product === selectedproduct }">
+                                <div class="dot" @click="handleProductChange(product)"></div>
+                                    <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                              
                              <el-tab-pane label="LIVE" name="third">
-                                <div class="tab-content" id="myTabContent">
+                                <div class="tab-content" id="myTabContent"  v-if="selectedproduct !== null">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                            <span id="aca_text">Live</span> Courses
                                    <div class="row mt-4 ">
-                                    <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                        <h6 style="color:#B4B4B4;margin-top: -5px;">VTU</h6>
-                                        <p class="text_line">Mathematics and its formulas</p>
+                                    <div class="col-lg-6 text-left  col-sm-12 col-md-6 ">
+                                        <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedproduct.university}}</h6>
+                                        <p class="text_line">{{ selectedproduct.title}}</p>
                                         <div class="row ml-0">
-                                         <div class=" info">
-                                           <p>Dr. Adhyan San</p>
-                                         </div>
-                                         <div class="asset_image info1">
-                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                01h 32min
+                                            <div class=" info">
+                                                <p>{{ selectedproduct.instructorName }}</p>
+                                            </div>
+                                            <div class="asset_image info1">
+                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;"
+                                                id="text_three">
                                             </div>
                                             <div class="asset_image info2">
                                                 <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
-                                                2 Modules<br>
+                                                {{ selectedproduct.modules }}<br>
                                             </div>
-                                            <p class="pp" style="color: #666666; font-size: 12px; float: left;">Data Management Systems & Visualization software developme...</p>
+                                            <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{ selectedproduct.courseDescription }}</p>
  
+                                        </div>
                                     </div>
+                                    <!-- <div class="col-lg-6 col-4 col-sm-4 col-md-6">
+                                        <div id="asset_image">
+                                            <img src="../assets/images/Group1303@2x.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
                                         </div>
-                                        <div class="col-lg-6 col-4 col-sm-4 col-md-6">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/Group1303@2x.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                                <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                </div>
+                                                
                                             </div>
-                                        </div>
                                    </div>
                                    <div class="inner_block">
+                                     <div class="row">
+                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                            <div id="asset_image">
+                                                <img src="../assets/images/book1.png" class="img-fluid">
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                            <p class="mb-0" id="text_one">{{ selectedproduct.title }}</p>
+                                            <p id="text_two">stacks</p>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                                aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">{{ calculateTime(selectedproduct.totalTimeCourse).timeInMinutes }}:{{ calculateTime(selectedproduct.minTimeStateMangement).remainingSeconds }}left</p>
+                                                </div>
+                                                <button class="bt">BUY NOW</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="inner_block">
                                     <div class="row">
                                         <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                             <div id="asset_image">
@@ -253,39 +297,11 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">Renew</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> -->
                                
                                 </div>
                                 </div>
@@ -347,7 +363,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +391,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +419,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <p id="text_three">22h 33m left</p>
                                                 </div>
-                                                <button class="bt">Renew</button>
+                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
@@ -430,21 +446,79 @@ import Breadcrumbs from './Breadcrumbs.vue';
 import AxiosInstance  from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import VideoPlayer from './VideoPlayer.vue';
 
 
 export default {
     name: 'Mylearnings',
     components: {
         Breadcrumbs,
-        Loading
+        Loading,
+        VideoPlayer
     },
     data() {
         return {
             isLoading: false,
+            userIsSubscribed: false,
            activeName: 'first',
            myLearning: [],
            selectedItem: null,
+           Learning: [],
+           selectedproduct: null,
+          
+           videoOptions: {
+                playbackRates: [0.5, 1, 1.5, 2],
+                autoplay: false,
+                controls: true,
+                width: 100,
+                techOrder: ['html5'],
+                preload: "metadata",
+                sources: [ 
+                    
+                ],
+                html5: {
+                    nativeVideoTracks: false,
+                    nativeAudioTracks: false,
+                    nativeTextTracks: false,
+                    vhs: {
+                        overrideNative: true,
+                    }
+                },
+                controlBar: {
+                    skipButtons: {
+                        forward: 5,
+                        backward: 10,
+                        muteToggle: false
+                    },
+                },
+                plugins: {
+
+                }
+            },
         }
+    },
+    computed: {
+        isuser() {
+            console.log(this.$store.state.user);
+            return this.$store.state.user.signInUserSession.idToken.payload;
+        },
+        videoType() {
+            if (typeof this.videoOptions.sources.src === 'string') {
+                if(this.videoOptions.sources.src.endsWith('.mp4')) {
+                    return 'video/mp4'; // MP4 Format
+                } else if(this.videoOptions.sources.src.endsWith('.m3u8')) {
+                    return 'application/x-mpegURL';  // HLS Format
+                }    
+            } else {
+                return '';
+            }
+        },
+        istoken() {
+            return this.$store.state.token;
+        },
+        user() {
+            return this.$store.state.id;
+        },
     },
     methods: {
         handleClick(tab, event) {
@@ -455,25 +529,109 @@ export default {
             this.selectedItem = item;
             console.log(this.selectedItem);
         },
+
+        calculateTime(selectedproductid) {
+            const totalTime = this.getTotalTime(selectedproductid);
+        
+            if (totalTime) {
+                const timeInHours = Math.floor(totalTime / 3600);
+                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
+                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
+                return {
+                    timeInHours,
+                    timeInMinutes,
+                    remainingSeconds
+                };
+              
+            } else {
+                return {
+                    timeInHours: 0,
+                    timeInMinutes: 0,
+                    remainingSeconds: 0
+                };
+            }
+        },
+        findsubjectById(selectedproduct) {
+            console.log("hi");
+            for (const topic of Object.values(this.Learning)) {
+                if( topic.title == selectedproduct.titele )
+                { 
+                  console.log(topic);
+                }
+                
+            }
+    
+    return null;
+    },
+
+    // getTotalTime(selectedproduct) {
+    //     const selectedproduct = this.findsubjectById(selectedproduct);
+    //     return selectedproduct ? parseFloat(selectedproduct.time) || 0 : 0;
+    // },
+        handleProductChange(product) {
+            // Update your component's state to display the selected item's details
+            this.selectedproduct = product;
+            if (this.$refs.videoPlayerRef.player) {
+                    const player = this.$refs.videoPlayerRef.player;
+
+                    this.videoOptions.sources = [
+                    {
+                        src: this.selectedproduct.videoUrl,
+                        type: this.videoType,
+                        withCredentials: false,
+                    }
+                ]
+                    player.src(this.videoOptions.sources);
+                    player.one('loadedmetadata', async () => {
+                    // Play the new video
+                        await player.pause();
+                    });
+
+                        // Preload the new video source
+                        player.load();
+            }        
+
+            console.log(this.videoOptions);
+            console.log(this.selectedproduct);
+        },
+        
     },
     async created() {
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=dbae6829-8b5e-4f31-9c79-9d3b0c0aec08`);
-            this.myLearning = res.data;
-            console.log(this.myLearning);
-            if (this.myLearning.length > 0) {
-                // Set the default selected item to the first item in myLearning
-                this.selectedItem = this.myLearning[0];
+        console.log(this.isuser.sub)
+    this.isLoading = true;
+    try {
+        const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
+        this.myLearning = res.data;
+        console.log(this.myLearning);
+        if (this.myLearning.length > 0) {
+            // Set the default selected item to the first item in myLearning
+            this.selectedItem = this.myLearning[0];
+        }
+        const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
+        this.Learning = result.data;
+        console.log(this.Learning);
+        if (this.Learning.length > 0) {
+            // Set the default selected item to the first item in myLearning
+            this.selectedproduct = this.Learning[0];
+            
+        }
+        this.videoOptions.sources = [
+            {
+                src: this.selectedproduct.videoUrl,
+                type: this.videoType,
+                withCredentials: false,
             }
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
+        ];
+            console.log(this.Learning);
+            console.log(this.videoOptions);
+    } catch (error) {
+        console.log(error);
+        this.isLoading = false;
     }
+    finally {
+        this.isLoading = false;
+    }
+}
 }
 </script>
 
@@ -750,7 +908,8 @@ export default {
     color: white;
     position: relative;
     left: 407px;
-    bottom: 39px;
+    bottom: 30px;
+    font-size: 12px;
 }
 input[type="radio"] {
    appearance: none; /* Hide the default radio button */
@@ -801,14 +960,20 @@ margin-top: -7px;
     color: #666666;
     margin-top: 11px;
     position: relative;
-    right: 94px;
+    right:111px;
 }
 .info2{
     font-size: 11px;
     color: #666666;
     margin-top: 8px;
+    position: relative;
+    right: 109px;
+    top: 2px;
 }
-    
+  .pp{
+    position: relative;
+    top: 10px;
+  }  
 }
 /* .container-fluid {
     background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
@@ -833,9 +998,26 @@ body {
 } */
 @media (max-width:520px) {
     .jk{
-        padding-bottom: 65px !important;
+        padding-bottom: 45px !important;
         padding-top: 20px;
     }
-    
+    .inner_block{
+    height: 108px;
+    } 
+    #asset_image img{
+    width: 47px;
+    height: 76px;
+} 
+}
+@media(min-width: 1280px) {
+    .pt{
+        position: relative;
+        right: 300px;
+    }
+    .video_block{
+    width: 328px !important;
+    position: relative;
+    left: 199px;
+}
 }
 </style>

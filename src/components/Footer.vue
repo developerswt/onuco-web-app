@@ -21,12 +21,13 @@
     </div>
 
     <div class="container-fluid enqiury">
+
         <div class="row">
             <div class="col-md-3">
                <router-link to="/" exact-active-class="activeButton"  @click="setActiveButton('home')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'home' }">
                         <div class="box">
-                            <img src="../assets/images/home.png" class="icon" style="width: 29px; height: 29px;">
+                            <img src="../assets/images/home.png" class="icon" style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
                </router-link>
@@ -36,31 +37,31 @@
                 <router-link to="/UserNotification" exact-active-class="activeButton"  @click="setActiveButton('UserNotification')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
                         <div class="box">
-                            <img src="../assets/images/Icon-ionic-ios-notifications.png" class="icon" style="width: 29px; height: 29px;">
+                            <img src="../assets/images/Icon-ionic-ios-notifications.png" class="icon" style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button> 
                 </router-link> 
-                <h2 class="txt" style=" position: relative; right: 6px;">NOTIFICATION</h2>
+                <h2 class="txt" style=" position: relative; right: 0px;">NOTIFICATION</h2>
             </div>
             <div class="col-md-3" style="color: white;">
                 <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
-                    <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
+                    <button class="btn button "  :class="{ activeButton: activeButton === 'Mylearnings' }">
                         <div class="box">
-                            <img src="../assets/images/myLEarn.png" class="icon" style="width: 29px; height: 29px;">
+                            <img src="../assets/images/myLEarn.png" class="icon" style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
                 </router-link> 
-                <h2 class="txt" style="  position: relative; left: 8px;">MYLEARNING</h2>  
+                <h2 class="txt" style="  position: relative; left: 8px;">MY_LEARNING</h2>  
             </div>
             <div class="col-md-3" style="color: white;">
                 <router-link to="/UpdatedProfile" exact-active-class="activeButton" @click="setActiveButton('UpdatedProfile')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UpdatedProfile' }">
                         <div class="box">
-                            <img src="../assets/images/Icon-awesome-user.png" class="icon" style="width: 29px; height: 29px;">                            
+                            <img src="../assets/images/Icon-awesome-user.png" class="icon" style="width: 15px; height: 15px; position: relative;bottom: 2px;">                            
                         </div>
                     </button> 
                 </router-link> 
-                <h2 class="txt" style="  position: relative; left: 10px;">PROFILE</h2>
+                <h2 class="txt" style="  position: relative; left: 3px;">PROFILE</h2>
             </div>
         </div>
     </div>
@@ -135,15 +136,15 @@ export default {
     background: radial-gradient(at right bottom, #0066CC -15%,  #9CCEFF  80%);
     border: 1px solid #F0F6FC;
     display: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 @media screen and (max-width: 520px) {
     .enqiury {
         display: block;
         position: fixed;
-        bottom: -1%;
+        bottom: -1px;
         z-index: 999;
     }
     .footer{
@@ -161,19 +162,19 @@ export default {
     border-radius: 50%;
     display: flex !important;
     position: relative;
-    left: 12px;
+    left: 17px;
 }
 
 .button {
-  padding: 10px;
+  /* padding: 6px; */
   text-decoration: none;
   display:flex !important;
-  margin: 4px 2px;
+  margin: 1px 2px;
   cursor: pointer;
 }
 .txt{
     font-family: Segoe UI;
-    font-size: 13px;
+    font-size: 11px;
     color: #FFFFFF;
     text-align: right;
 }
@@ -182,5 +183,19 @@ export default {
     width: 23%;
     padding-right: 15px;
     padding-left: 15px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* margin-right: -15px; */
+    margin-left: -15px;
+}
+@media (min-width:400px)and(max-width:450px) {
+    .activeButton{
+        position: relative;
+        left: 10px;
+    }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid" >
-        <div class="container" id="offer_block">
+        <div class="container-fluid" id="offer_block">
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Refer</span>And Learn Free
@@ -22,7 +22,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                
+                    <div class=" container col-md-5">
                         <div class="add">
                             <img src="../assets/images/add2.png">
                         </div>
@@ -126,6 +127,7 @@ export default {
 
 .add img {
     position: relative;
+    
    
 }
 
@@ -192,11 +194,32 @@ h2 {
     .add img {
     position: relative;
     right: 9px;
+    
 }
 }
 @media (max-width:520px){
     .add{
-        padding-bottom: 97px !important;
+        padding-bottom: 70px !important;
+        display: none;
+    }
+    #offer_block{
+    border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: 5px !IMPORTANT;
+    margin-bottom: 106px;
+    background: #EEEAE4 !important;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important;
+    
+    }
+    .container-fluid{
+        padding: 0px !important;
+    }
+    .box{
+        z-index: 999;
+    }
+    .academic_head_text{
+        margin-top: 20px !important;
     }
 }
+
 </style>

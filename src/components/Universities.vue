@@ -1,7 +1,7 @@
 <template>
     <div class="container jk">
         <Breadcrumbs class="container" />
-        <div class="parent_block" style="margin-top: -2%;">
+        <div class="parent_block" >
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
@@ -13,10 +13,15 @@
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
                                 <img  class="cb" src="../assets/images/university.png">
                             </div>
-                            <div class="col-md-9 col-9 col-sm-9" style="position: relative;right: 12px;">
+                            <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 12px;">
                                 <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
-                                <p style="margin-top: -8px;" v-html="college.description.slice(0,83)"></p>
+                                <p style="margin-top: -8px;" v-html="college.description.slice(0,63)"></p>
                             </div>
+                            <div class="col-md-2 col-2 col-sm-2">
+                        <div class="course_block ">
+                          <img class="cb1" src="../assets/images/Path 4024.png">
+                        </div>  
+                      </div>
                         </div>
                     </router-link>    
                 </div>
@@ -193,8 +198,8 @@ export default {
 }
 .parent_block {
     max-width: 1300px;
-    margin: 0 auto;
-    padding-top: 5%;
+    margin-top: 30px;
+   
 }
 
 .parent_blocks{
@@ -240,4 +245,17 @@ export default {
 }
 
 }
+
+.cb1{
+    display: none;
+}
+@media (max-width:520px) {
+    .cb1{
+    width: 25px;
+    display: block;
+    position: relative;
+    top: 13px;
+}  
+}
+
 </style>
