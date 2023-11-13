@@ -31,7 +31,7 @@
                       </div>
                       <div class="col-md-2 col-2 col-sm-2">
                         <div class="course_block ">
-                          <img class="cb1" src="../assets/images/Path 4024.png">
+                          <img class="cb1" src="../assets/images/Path4024.png">
                         </div>  
                       </div>
                     </div>
