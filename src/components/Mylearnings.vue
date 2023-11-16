@@ -224,7 +224,7 @@
                                          </div>
                                          <div class="asset_image info1">
                                                 <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                01h 32min
+                                                {{ calculateTime(selectedproduct).timeInHours }}:{{ calculateTime(selectedproduct).timeInMinutes }}:{{ calculateTime(selectedproduct).remainingSeconds }}
                                             </div>
                                             <div class="asset_image info2">
                                                 <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
@@ -259,14 +259,16 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div v-if="calculatePercentage(selectedproduct)">
+                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(subject.id) }}</progress>
                                                         </div>
-                                                    </div>
+                                                        <div v-else>
+                                                            <progress value="0" max="100">0</progress>
+                                                        </div>
+                                                    </div>    
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
+                                                    <p id="text_three">{{ remainingTimes(selectedproduct) }} left</p>
                                                 </div>
                                                 <button class="bt">BUY NOW</button>
                                             </div>
@@ -388,7 +390,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
+                                                    <p id="text_three">{{ remain }} left</p>
                                                 </div>
                                                 <button class="bt">BUY NOW</button>
                                             </div>
