@@ -442,6 +442,8 @@ export default {
                     console.log(this.videoId);
         
                     player.pause();
+
+                    this.$refs[refName].player.sendWatchTimeToBackend();
         
                     player.currentTime(0);
 
