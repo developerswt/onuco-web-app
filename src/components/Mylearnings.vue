@@ -200,11 +200,12 @@
                         </div>
                         </el-tab-pane>
                         <div class="row mb-3">
-                    <div class="col-sm-12 justify-content-center">
+                    
+                            <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
                             <div class="radio-item" v-for="product in Learning" :key="product.id" :class="{ 'active': product === selectedproduct }">
                                 <div class="dot" @click="handleProductChange(product)"></div>
-                                    <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -216,11 +217,11 @@
                            <span id="aca_text">Live</span> Courses
                                    <div class="row mt-4 ">
                                     <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                        <h6 style="color:#B4B4B4;margin-top: -5px;">VTU</h6>
-                                        <p class="text_line">Mathematics and its formulas</p>
+                                        <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedproduct.university}}</h6>
+                                        <p class="text_line">{{ selectedproduct.title}}</p>
                                         <div class="row ml-0">
                                          <div class=" info">
-                                           <p>Dr. Adhyan San</p>
+                                           <p>{{ selectedproduct.instructorName }}</p>
                                          </div>
                                          <div class="asset_image info1">
                                                 <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
@@ -260,7 +261,7 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <div class="progress_block">
                                                         <div v-if="calculatePercentage(selectedproduct)">
-                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(subject.id) }}</progress>
+                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(selectedproduct) }}</progress>
                                                         </div>
                                                         <div v-else>
                                                             <progress value="0" max="100">0</progress>
@@ -688,9 +689,9 @@ export default {
             return subject ? parseFloat(subject.totalTimeCourse) : 0;
         },
 
+       
         handleProductChange(product) {
-            // Update your component's state to display the selected item's details
-            this.selectedproduct = product;
+         this.selectedproduct = product;
             if (this.$refs.videoPlayerRef.player) {
                     const player = this.$refs.videoPlayerRef.player;
 
@@ -703,11 +704,11 @@ export default {
                 ]
                     player.src(this.videoOptions.sources);
                     player.one('loadedmetadata', async () => {
-                    // Play the new video
+                  
                         await player.pause();
                     });
 
-                        // Preload the new video source
+                        
                         player.load();
             }        
 
@@ -742,8 +743,8 @@ export default {
                 withCredentials: false,
             }
         ];
-            console.log(this.Learning);
-            console.log(this.videoOptions);
+            // console.log(this.Learning);
+            // console.log(this.videoOptions);
     } catch (error) {
         console.log(error);
         this.isLoading = false;

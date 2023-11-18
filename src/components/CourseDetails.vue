@@ -1,3 +1,6 @@
+
+
+
 <template>
     <div>
         <div class="container-fluid jk" id="search_container">
@@ -23,7 +26,7 @@
                         </div>
                         <div class="container-fluid video2">
                                                 <div class="video_block mb-4 d-lg-none" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef2" />
                                                 </div>
                                             </div>
                         <div class="row">
@@ -81,6 +84,14 @@
                     <b id="aca_text">Course</b>Description
                 </h4>
                 <p id="course_text" v-html="this.book.description"></p>
+                <!-- <p id="course_text" v-if="!book.readMore">{{this.book.description.slice(0,200)}}
+                    <span class="read" @click="toggleReadMore">...<span style="color:blue">Read more</span></span> 
+                </p>
+                <p id="course_text" v-if="book.readMore">{{this.book.description}}
+                    <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span> 
+                </p> -->
+                
+
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
@@ -192,7 +203,7 @@
                                             </div>            
                                             <div class="col-sm-6 video1 d-none d-lg-block">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef1" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
                                         </div>
@@ -238,6 +249,7 @@ export default {
     },
     data() {
         return {
+            readMore: false,
             courseId: null,
             videoId: null,
             isLoading: false,
@@ -297,6 +309,11 @@ export default {
         }
     },
     methods: {
+
+        toggleReadMore() {
+      this.book.readMore = !this.book.readMore;
+    },
+
         hasMatchingVideoId(subjectId) {
             return this.watchTimeDatas.watchTimeData.some(watch => watch.videoId === subjectId);
         },
@@ -414,53 +431,52 @@ export default {
             }
         },
         async switchVideo(newVideoUrl, subject) {
-            if (this.$refs.videoPlayerRef.player) {
-                const player = this.$refs.videoPlayerRef.player;
-                console.log("Switching video");
+            const isMobile = window.innerWidth <= 768; // Adjust the width based on your design's breakpoint
+            const refName = isMobile ? 'videoPlayerRef2' : 'videoPlayerRef1';
 
-                this.videoId = subject.id;
-                console.log(this.videoId);
-                // player.pauseVideo();
-                
+                if (this.$refs[refName] && this.$refs[refName].player) {
+                    const player = this.$refs[refName].player;
+                    console.log("Switching video");
 
-                player.pause();
-
-                player.currentTime(0);
-
-                // Get the custom element by its unique ID
-                const customElement = document.getElementById("testid");
-                if (customElement) {
-                    // Remove the custom element from the video container
-                    player.el().removeChild(customElement);
-                }
-
-                    // Change the video source to the new URL
-                this.videoOptions.sources = [
-                    {
-                        src: newVideoUrl,
-                        type: this.videoType,
-                        withCredentials: false,
-                    },
-                ];
-    
-                this.playingSubject = subject;
+                    this.videoId = subject.id;
+                    console.log(this.videoId);
         
-                    // Hide the poster image if it's displayed
-                this.$refs.videoPlayerRef.showPoster = false;
+                    player.pause();
+        
+                    player.currentTime(0);
 
-                    // Load the new video source
-                player.src(this.videoOptions.sources);
-    
-                    // Listen for the 'loadedmetadata' event before playing
-                player.one('loadedmetadata', async () => {
-                    // Play the new video
-                    await player.play();
-                });
+                    const customElement = document.getElementById("testid");
 
-                // Preload the new video source
-                player.load();
-            }
-        },
+                        if (customElement) {
+                            player.el().removeChild(customElement);
+                        }
+
+                            this.videoOptions.sources = [
+                            {
+                                src: newVideoUrl,
+                                type: this.videoType,
+                                withCredentials: false,
+                            },
+                ];
+
+        this.playingSubject = subject;
+
+        // Hide the poster image if it's displayed
+        this.$refs[refName].showPoster = false;
+
+        // Load the new video source
+        player.src(this.videoOptions.sources);
+
+        // Listen for the 'loadedmetadata' event before playing
+        player.one('loadedmetadata', async () => {
+            // Play the new video
+            await player.play();
+        });
+
+        // Preload the new video source
+        player.load();
+    }
+},
 
         isProgressBarComplete(subjectId) {
             const subject = this.findSubjectById(subjectId);
@@ -958,6 +974,8 @@ ol {
 
     .video_block {
         margin-top: 0px;
+        position: relative;
+        left: 1px;
     }
 
     .inside_block {
@@ -1098,4 +1116,5 @@ progress::-moz-progress-bar {
     padding-right: 0px;
 }  
 }
+
 </style>

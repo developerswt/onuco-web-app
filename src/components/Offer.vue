@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container-fluid" >
         <div class="container-fluid" id="offer_block">
@@ -202,13 +204,23 @@ h2 {
         padding-bottom: 70px !important;
         display: none;
     }
-    #offer_block{
+    /* #offer_block{
     border: 1px solid #00000029;
     border-radius: 4%;
     margin-top: 5px !IMPORTANT;
     margin-bottom: 106px;
     background: #EEEAE4 !important;
+    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important; */
+
+    #offer_block {
+    border: 1px solid #00000029;
+    border-radius: 4%;
+    margin-top: -37px !IMPORTANT;
+    margin-bottom: 106px;
+    background: #EEEAE4 !important;
     background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important;
+    position: relative;
+    top: 42px;
     
     }
     .container-fluid{

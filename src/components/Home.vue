@@ -1,3 +1,5 @@
+
+
 <template>
     <Carousel />
     <!-- <Carouseltwo /> -->
@@ -338,7 +340,7 @@ export default {
     .content{
         border: 1px solid #00000029;
     border-radius: 4%;
-    margin-top: -103px !IMPORTANT;
+    margin-top: -59px !IMPORTANT;
     box-shadow: 38px 14px 32px 0px #00000029;
     margin-bottom: 34px;  
     }

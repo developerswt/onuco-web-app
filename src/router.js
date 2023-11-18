@@ -32,7 +32,15 @@ import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
 import Course from "./components/Course.vue"
 import CoursePayment from "./components/CoursePayment.vue"
 import Payment from "./components/Payment.vue"
-
+import SideBar from "./components/SideBar.vue"
+import ApLecture from "./components/ApLecture.vue"
+import ApHome from "./components/ApHome.vue"
+import Adminpanal from "./components/Adminpanal.vue"
+import ApMenu from "./components/ApMenu.vue"
+import StudentDetails from "./components/StudentDetails.vue"
+import ActStudents from "./components/ActStudents.vue"
+import InactStudents from "./components/InactStudents.vue"
+import ApBilling from "./components/ApBilling.vue"
 
 let user = null; // Initialize user as null
 
@@ -440,6 +448,82 @@ const routes = [
         title: 'Payment Page',
     },
   },
+  {
+    path: "/SideBar",
+    name: "SideBar",
+    component: SideBar,
+    meta: {
+      title: 'Unoco Application',
+    },  
+  },
+  // {
+  //   path: "/ApLecture",
+  //   name: "ApLecture",
+  //   component: ApLecture,
+  //   meta: {
+  //     title: 'Unoco Application',
+  //   },  
+  // },
+  // {
+  //   path: "/ApHome",
+  //   name: "ApHome",
+  //   component: ApHome,
+  //   meta: {
+  //     title: 'Unoco Application',
+  //   },  
+  // },
+  {
+    path: "/ApMenu",
+    name: "ApMenu",
+    component: ApMenu,
+    meta: {
+      title: 'Unoco Application',
+    },  
+  },
+
+  {
+    path: "/Adminpanal",
+    name: "Adminpanal",
+    component: Adminpanal,
+    children: [
+      {
+        path: "/ApHome",
+        name: "ApHome",
+        component: ApHome,
+      },
+      {
+        path: "/ApLecture",
+        name: "ApLecture",
+        component: ApLecture,
+      },
+      {
+        path: "/StudentDetails",
+        name: "StudentDetails",
+        component: StudentDetails,
+      },
+      {
+        path: "/ActStudents",
+        name: "ActStudents",
+        component: ActStudents,
+
+      },
+      {
+        path: "/InactStudents",
+        name: "InactStudents",
+        component: InactStudents,
+      },
+      {
+        path: "/ApBilling",
+        name: "ApBilling",
+        component: ApBilling,
+      },
+      
+     ],
+    meta: {
+      title: 'Unoco Application',
+    },
+  },
+
 
 ];
 

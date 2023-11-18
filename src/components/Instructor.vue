@@ -1,5 +1,6 @@
 
 
+
 <template>
     
     <div class="container jk">
@@ -66,13 +67,25 @@
                      -->
 
                      
-                    <div class="row professor-details">
+                    <!-- <div class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
                             <p class="professor-details_text" v-if="!readActivated">{{faculty.description.slice(0,145)}}<span class="read" 
                             v-if="!readActivated" @click="faculty.readMore = !faculty.readMore">...<p style="color:blue">>Read more</p></span></p> 
                             <p class="professor-details_text" v-if="faculty.readMore">{{faculty.description}}</p>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <div class="row professor-details" id="app">
+  <div class="col-sm-12 col-lg-12">
+    <p class="professor-details_text" v-if="!faculty.readMore">{{ faculty.description.slice(0, 168) }}
+      <span class="read" @click="toggleReadMore">...<span style="color:blue">Read more</span></span>
+    </p>
+    <p class="professor-details_text" v-if="faculty.readMore">{{ faculty.description }}
+      <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span>
+    </p>
+  </div>
+</div>
+
                 </div>
             </section>
             </div>
@@ -443,6 +456,7 @@ export default {
     },
     data() {
         return {
+            readMore: false,
             isLoading: false,
             faculty: [],
             settings: {
@@ -501,9 +515,14 @@ export default {
         }
     },
     methods: {
-        activateReadMore(){
-            this.readActivated = true;
-        },
+
+        toggleReadMore() {
+      this.faculty.readMore = !this.faculty.readMore;
+    },
+
+        // activateReadMore(){
+        //     this.readActivated = true;
+        // },
         
         handleClick(tab, event) {
             console.log(tab, event);

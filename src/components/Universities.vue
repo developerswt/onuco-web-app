@@ -255,7 +255,10 @@ export default {
     display: block;
     position: relative;
     top: 13px;
-}  
+} 
+.box{
+    margin: 1px 1px 12px 1px !important;
+} 
 }
 
 </style>
