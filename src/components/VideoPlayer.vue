@@ -60,10 +60,7 @@ export default {
     videojs.registerPlugin('qualityLevels', qualityLevels);
     videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
 
-   
-
-
-    this.player = videojs(this.$refs.videoPlayer, this.options, () => {
+   this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
       this.player.qualityLevels();
       console.log(this.player);
