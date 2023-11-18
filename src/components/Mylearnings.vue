@@ -240,11 +240,11 @@
                                         </div>
                                     </div> -->
                                     <div class="col-sm-6">
-                                                <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
-                                                </div>
-                                                
-                                            </div>
+                                        <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
+                                            <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                        </div>
+                                            
+                                    </div>
                                    </div>
                                    <div class="inner_block">
                                      <div class="row">
@@ -472,8 +472,8 @@ export default {
                 autoplay: false,
                 controls: true,
                 width: 100,
-                techOrder: ['html5'],
-                preload: "metadata",
+                // techOrder: ['html5'],
+                // preload: "metadata",
                 sources: [ 
                     
                 ],
@@ -661,20 +661,20 @@ export default {
             }
             return null;  // Return null if no match is found
         },
-        findSubjectByMyCourseId(selectedItem) {
-            // Implement a method to find a subject by its ID
-            // You can replace this with your actual implementation
-            for (const topic of Object.values(this.myLearning.subject)) {
-                for (const lessons of topic.values) {
-                    for (const subject of lessons.values) {
-                        if (subject.id === selectedItem) {
-                            return subject;
-                        }
-                    }
-                }
-            }    
-            return null;
-        },
+        // findSubjectByMyCourseId(selectedItem) {
+        //     // Implement a method to find a subject by its ID
+        //     // You can replace this with your actual implementation
+        //     for (const topic of Object.values(this.myLearning.subject)) {
+        //         for (const lessons of topic.values) {
+        //             for (const subject of lessons.values) {
+        //                 if (subject.id === selectedItem) {
+        //                     return subject;
+        //                 }
+        //             }
+        //         }
+        //     }    
+        //     return null;
+        // },
         getWatchTime(selectedproduct) {
             const watchData = this.findSubjectById(selectedproduct);
             return watchData ? watchData.minTimeStateMangement : 0;
@@ -691,67 +691,91 @@ export default {
         handleProductChange(product) {
             // Update your component's state to display the selected item's details
             this.selectedproduct = product;
-            if (this.$refs.videoPlayerRef.player) {
-                    const player = this.$refs.videoPlayerRef.player;
+            console.log(this.selectedproduct);
 
-                    this.videoOptions.sources = [
+            if (this.$refs.videoPlayerRef.player) {
+                const player = this.$refs.videoPlayerRef.player;
+                console.log("Switching video");
+
+                // player.pauseVideo();
+
+                player.currentTime(0);
+
+                // Get the custom element by its unique ID
+                const customElement = document.getElementById("testid");
+                if (customElement) {
+                    // Remove the custom element from the video container
+                    player.el().removeChild(customElement);
+                }
+
+                    // Change the video source to the new URL
+                this.videoOptions.sources = [
                     {
                         src: this.selectedproduct.videoUrl,
                         type: this.videoType,
                         withCredentials: false,
-                    }
-                ]
-                    player.src(this.videoOptions.sources);
-                    player.one('loadedmetadata', async () => {
-                    // Play the new video
-                        await player.pause();
-                    });
+                    },
+                ];
+    
+        
+                    // Hide the poster image if it's displayed
+                this.$refs.videoPlayerRef.showPoster = false;
 
-                        // Preload the new video source
-                        player.load();
-            }        
+                    // Load the new video source
+                player.src(this.videoOptions.sources);
+    
+                    // Listen for the 'loadedmetadata' event before playing
+                player.one('loadedmetadata', async () => {
+                    // Play the new video
+                    await player.play();
+                });
+
+                // Preload the new video source
+                player.load();
+            }
 
             console.log(this.videoOptions);
             console.log(this.selectedproduct);
         },
+
         
     },
     async created() {
-        console.log(this.isuser.sub)
-    this.isLoading = true;
-    try {
-        const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
-        this.myLearning = res.data;
-        console.log(this.myLearning);
-        if (this.myLearning.length > 0) {
-            // Set the default selected item to the first item in myLearnin
-            this.selectedItem = this.myLearning[0];
-        }
-        const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
-        this.Learning = result.data;
-        console.log(this.Learning);
-        if (this.Learning.length > 0) {
-            // Set the default selected item to the first item in myLearning
-            this.selectedproduct = this.Learning[0];
-            console.log(this.selectedproduct);
-        }
-        this.videoOptions.sources = [
-            {
-                src: this.selectedproduct.videoUrl,
-                type: this.videoType,
-                withCredentials: false,
+
+        this.isLoading = true;
+        try {
+            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
+            this.myLearning = res.data;
+            console.log(this.myLearning);
+            if (this.myLearning.length > 0) {
+                // Set the default selected item to the first item in myLearnin
+                this.selectedItem = this.myLearning[0];
             }
-        ];
+            const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
+            this.Learning = result.data;
             console.log(this.Learning);
-            console.log(this.videoOptions);
-    } catch (error) {
-        console.log(error);
-        this.isLoading = false;
+            if (this.Learning.length > 0) {
+                // Set the default selected item to the first item in myLearning
+                this.selectedproduct = this.Learning[0];
+                console.log(this.selectedproduct);
+            }
+            this.videoOptions.sources = [
+                {
+                    src: this.selectedproduct.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }
+            ];
+                console.log(this.Learning);
+                console.log(this.videoOptions);
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     }
-    finally {
-        this.isLoading = false;
-    }
-}
 }
 </script>
 
