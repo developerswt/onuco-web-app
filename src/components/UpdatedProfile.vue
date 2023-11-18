@@ -64,7 +64,7 @@
                                             <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
                                             
                                         </div>
-                                        <input type="file" @change="handleFileChange()" class="input_file" >
+                                        <input type="file" @change="handleFileChange" id="input_file" class="input_file" >
                                     </div>
                                 </div>
                                 
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -165,11 +165,12 @@ export default {
             userName: '',
             userEmail: '',
             selectedFile: null,
-            isuser: localStorage.getItem("username"),
+            // isuser: localStorage.getItem("username"),
         }
     },
     computed: {
         authorizationHeader() {
+            console.log(this.isuser);
             if (this.isLoggedIn) {
                 return `Bearer ${this.isuser}`;
             } else {
@@ -179,10 +180,10 @@ export default {
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
-        // isuser() {
-        //     console.log(this.$store.state.user);
-        //     return this.$store.state.user;
-        // },
+        isuser() {
+            console.log(this.$store.state.user);
+            return this.$store.state.user.signInUserSession.idToken;
+        },
     },
     methods: {
         editProfile() {
@@ -194,11 +195,14 @@ export default {
 
         },
         handleFileChange(event) {
-            this.selectedFile = event.target.files[0];
+            if (event && event.target && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
+            }
+            // this.selectedFile = event.target.files[0];
         },
         async uploadImage() {
             const headers = { 
-                Authorization:  this.authorizationHeader,
+                // Authorization:  this.authorizationHeader,
                 'Content-Type': 'multipart/form-data'
             };
             const formData = new FormData();
@@ -208,7 +212,7 @@ export default {
             formData.append('file', this.selectedFile);
 
             try {
-                const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UploadS3Files/upload', formData, {
+                const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
                     headers 
                 });
 

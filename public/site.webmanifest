@@ -19,7 +19,6 @@
     "display": "standalone",
     "description": "It is Learning platform and improve and share skills and knowledge",
     "app_id": "your-app-id",
-    "launch_handler": "index.html",
     "screenshots": ["https://dev.skillmeridiandev.tech/Screenshot1.png", "https://dev.skillmeridiandev.tech/Screenshot2.png", "https://dev.skillmeridiandev.tech/Screenshot3.png", "https://dev.skillmeridiandev.tech/Screenshot4.png", "https://dev.skillmeridiandev.tech/Screenshot5.png"],
     "categories": ["Category1", "Category2"],
     "dir": "ltr",
