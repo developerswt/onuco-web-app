@@ -36,11 +36,13 @@ import SideBar from "./components/SideBar.vue"
 import ApLecture from "./components/ApLecture.vue"
 import ApHome from "./components/ApHome.vue"
 import Adminpanal from "./components/Adminpanal.vue"
-import ApMenu from "./components/ApMenu.vue"
+import SubStudents from "./components/SubStudents.vue"
 import StudentDetails from "./components/StudentDetails.vue"
 import ActStudents from "./components/ActStudents.vue"
 import InactStudents from "./components/InactStudents.vue"
 import ApBilling from "./components/ApBilling.vue"
+import AlertDialog from './components/AlertDialog.vue';
+import ApFaculty from './components/ApFaculty.vue'
 
 let user = null; // Initialize user as null
 
@@ -472,14 +474,7 @@ const routes = [
   //     title: 'Unoco Application',
   //   },  
   // },
-  {
-    path: "/ApMenu",
-    name: "ApMenu",
-    component: ApMenu,
-    meta: {
-      title: 'Unoco Application',
-    },  
-  },
+  
 
   {
     path: "/Adminpanal",
@@ -517,13 +512,30 @@ const routes = [
         name: "ApBilling",
         component: ApBilling,
       },
+      {
+        path: "/ApFaculty",
+        name: "ApFaculty",
+        component: ApFaculty,
+      },
+      {
+        path: "/SubStudents",
+    name: "SubStudents",
+    component: SubStudents,
+      },
       
      ],
     meta: {
       title: 'Unoco Application',
     },
   },
-
+  {
+    path: '/Alert',
+    name: 'AlertDialog',
+    component: AlertDialog,
+    meta: {
+      title: 'Unoco Application'
+    }
+  },
 
 ];
 

@@ -47,7 +47,7 @@
    </div>
   </div>
   <div class="col-sm-6 cardpd">
-  <div class="card">
+  <div class="card kk">
     <div class="box">
       <div class="content">
         <h3 class="head">Account Details</h3>
@@ -65,9 +65,9 @@
 
 </script>
 <style scoped>
-.cardpd{
+/* .cardpd{
   padding: 0px !important;
-}
+} */
  .card {
   position: relative;
   min-width: 200px;
@@ -193,7 +193,9 @@
   color: rgba(41, 37, 37, 0.1);
 }
 
-
+.kk{
+    margin-bottom: 100px;
+}
 }
 
 .card {

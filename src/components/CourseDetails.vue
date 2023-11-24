@@ -443,7 +443,7 @@ export default {
         
                     player.pause();
 
-                    this.$refs[refName].player.sendWatchTimeToBackend();
+                    // this.$refs[refName].player.sendWatchTimeToBackend();
         
                     player.currentTime(0);
 

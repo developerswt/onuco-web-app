@@ -82,7 +82,7 @@ export default {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-@media only screen and (max-width: 768px) and (min-width: 300px) {
+@media only screen and (max-width: 768px) and (min-width: 530px) {
     .academic_head_text{
         font-size: 16px !important;
         padding:0 !important;
@@ -130,7 +130,7 @@ export default {
 
 .box {
     height:100px;
-    width:354px;
+    width:auto;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
@@ -259,6 +259,9 @@ export default {
 .box{
     margin: 1px 1px 12px 1px !important;
 } 
+.jk{
+    margin-bottom: 61px;
+}
 }
 
 </style>
