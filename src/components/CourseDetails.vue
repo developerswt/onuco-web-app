@@ -553,8 +553,7 @@ export default {
             .then(response => {
                 // Handle success (if needed)
                 console.log(response.data);
-                const myModal = new bootstrap.Modal(document.getElementById('myModal'), options);
-                myModal.hide();
+                this.rating = '';
             })
             .catch(error => {
                 // Handle error (if needed)
