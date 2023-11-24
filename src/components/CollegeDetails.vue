@@ -81,10 +81,11 @@
                                                 <div class="col-lg-12 mn1">
                                                     <div class="row aa">
                                                         <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <i class="fa fa-star"></i>
+                                                            <StarRatings :rating="course.starRating" :max-rating="5" />
+                                                            <!-- <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-half-full"></i>
-                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i> -->
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                             <p id="review_text" style="color: #828282;">(23 reviews)</p>
@@ -176,18 +177,21 @@
 </template>
 
 <script>
+import axios from 'axios';
 import AxiosInstance  from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Breadcrumbs from './Breadcrumbs.vue';
+import StarRatings from './StarRatings.vue';
 
 export default {
     name: 'CollegeDetails',
     components: {
         Offer,
         Loading,
-        Breadcrumbs
+        Breadcrumbs,
+        StarRatings
     },
     data() {
         return {
@@ -211,6 +215,9 @@ export default {
             console.log(this.course)
             this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
             console.log(this.course);
+            for (const course of this.course) {
+                course.starRating = await this.getByRatings(course.id);
+            }
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -219,6 +226,17 @@ export default {
             this.isLoading = false;
         }
     },
+    methods: {
+        async getByRatings(courseId) {
+            try {
+                const result = await axios.get(`https://localhost:7202/api/Ratings/${courseId}?objectTypeId=2`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
+    }
 }
 
 $(document).ready(function(){
@@ -608,5 +626,9 @@ opacity: 1;
     #sem_icon{
         font-size: 25px;
     }
+}
+.star-rating {
+    font-size: 24px;
+    margin-top: -8%;
 }
 </style>

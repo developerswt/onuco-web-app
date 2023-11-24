@@ -59,19 +59,42 @@
 
 
                                 <div class="icon_blck">
+                                    <StarRatings :rating="ratings" :max-rating="5" />
+
+                                    <!-- <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i> -->
                                 </div>
                                 <p id="review_text">(23 Reviews)</p>
-                               <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
+                                <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
                                     &#8377;{{ this.book.discountedPrice }} <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
-
+                                <div class="Ratings_button_block" v-if="isLoggedIn">
+                                    <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
+                                </div>
                             </div>
                         </div>
-
+                        <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form @submit.prevent="submitRating">
+                                            <label for="rating">Rate the faculty member :</label><br>
+                                            <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
+                                            <el-rate v-model="rating" size="large" allow-half /><br>
+                                            <input type="submit" value="Submit">
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -203,7 +226,7 @@
                                             </div>            
                                             <div class="col-sm-6 video1 d-none d-lg-block">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef1" :videoId="videoId" :courseId="courseId" />
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
                                         </div>
@@ -236,6 +259,7 @@ import VideoPlayer from './VideoPlayer.vue';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import StarRatings from './StarRatings.vue'
 
 import AxiosInstance from '../config/axiosInstance'
 
@@ -245,10 +269,13 @@ export default {
         VideoPlayer,
         Offer,
         Loading,
-        Breadcrumbs
+        Breadcrumbs,
+        StarRatings
     },
     data() {
         return {
+            ratings: [],
+            rating: '',
             readMore: false,
             courseId: null,
             videoId: null,
@@ -292,6 +319,13 @@ export default {
         }
     },
     computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+        isusers() {
+            console.log(this.$store.state.user.signInUserSession.idToken.payload);
+            return this.$store.state.user.signInUserSession.idToken.payload;
+        },
         isuser() {
             console.log(this.$store.state.user);
             return this.$store.state.user;
@@ -318,9 +352,15 @@ export default {
             return this.watchTimeDatas.watchTimeData.some(watch => watch.videoId === subjectId);
         },
         getWatchTime(subjectId) {
-            const watchData = this.watchTimeDatas.watchTimeData.find(watch => watch.videoId === subjectId);
-            return watchData ? watchData.watchTime : 0;
+            if (this.watchTimeDatas && this.watchTimeDatas.watchTimeData) {
+                const watchData = this.watchTimeDatas.watchTimeData.find(watch => watch.videoId === subjectId);
+                return watchData ? watchData.watchTime : 0;
+            } else {
+                // Handle the case when watchTimeDatas or watchTimeData is undefined
+                return 0;
+            }
         },
+
         calculatePercentage(subjectId) {
             const totalTime = this.getTotalTime(subjectId);
             const watchTime = this.getWatchTime(subjectId);
@@ -393,7 +433,7 @@ export default {
                 const watchTime = this.getWatchTime(subjectId);
 
                 if (totalTime && watchTime) {
-                    const percentage = (watchTime / totalTime) * 100;
+                    const percentage = Math.round((watchTime / totalTime) * 100);
                     return percentage === 100;
                 }
             }
@@ -432,7 +472,7 @@ export default {
         },
         async switchVideo(newVideoUrl, subject) {
             const isMobile = window.innerWidth <= 768; // Adjust the width based on your design's breakpoint
-            const refName = isMobile ? 'videoPlayerRef2' : 'videoPlayerRef1';
+            const refName = isMobile ? 'videoPlayerRef2' : 'videoPlayerRef';
 
                 if (this.$refs[refName] && this.$refs[refName].player) {
                     const player = this.$refs[refName].player;
@@ -443,7 +483,11 @@ export default {
         
                     player.pause();
 
-                    this.$refs[refName].player.sendWatchTimeToBackend();
+                    const videoComponentRef = this.$refs.videoPlayerRef;
+
+                    // Call the method from the video component
+                    videoComponentRef.sendWatchTimeToBackend();
+                    // this.$refs[refName].player.sendWatchTimeToBackend();
         
                     player.currentTime(0);
 
@@ -461,38 +505,35 @@ export default {
                             },
                 ];
 
-        this.playingSubject = subject;
+                this.playingSubject = subject;
 
-        // Hide the poster image if it's displayed
-        this.$refs[refName].showPoster = false;
+                    // Hide the poster image if it's displayed
+                this.$refs[refName].showPoster = false;
 
-        // Load the new video source
-        player.src(this.videoOptions.sources);
+                // Load the new video source
+                player.src(this.videoOptions.sources);
+        
+                // Listen for the 'loadedmetadata' event before playing
+                player.one('loadedmetadata', async () => {
+                    // Play the new video
+                    await player.play();
+                });
 
-        // Listen for the 'loadedmetadata' event before playing
-        player.one('loadedmetadata', async () => {
-            // Play the new video
-            await player.play();
-        });
-
-        // Preload the new video source
-        player.load();
-    }
-},
-
-        isProgressBarComplete(subjectId) {
-            const subject = this.findSubjectById(subjectId);
-
-            if (subject) {
-                const totalTime = parseFloat(subject.time);
-                const watchTime = this.getWatchTime(subjectId);
-
-                if (totalTime && watchTime) {
-                    const percentage = (watchTime / totalTime) * 100;
-                    return percentage === 100;
-                }
+                // Preload the new video source
+                player.load();
             }
+        },
 
+        
+        isProgressBarComplete(subjectId) {
+            const totalTime = parseFloat(this.findSubjectById(subjectId).time);
+            const watchTime = this.getWatchTime(subjectId);
+
+            if (totalTime && watchTime) {
+                const percentage = Math.round((watchTime / totalTime) * 100);
+                return percentage === 100;
+            }
+        
             return false;
         },
         shouldShowCircleIcon(subjectId) {
@@ -502,6 +543,24 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
+        submitRating() {
+            axios.post('https://localhost:7202/api/Ratings', {
+                userId: this.isusers['cognito:username'],
+                objectId: this.book.id,
+                objectTypeId: 2,
+                ratingScore: this.rating
+            })
+            .then(response => {
+                // Handle success (if needed)
+                console.log(response.data);
+                const myModal = new bootstrap.Modal(document.getElementById('myModal'), options);
+                myModal.hide();
+            })
+            .catch(error => {
+                // Handle error (if needed)
+                console.error(error);
+            });
+        }
     },
     async created(){
         this.isLoading = true;
@@ -510,10 +569,13 @@ export default {
             this.book = res.data; 
             const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
             this.watchTimeDatas = result.data;
-            console.log(this.watchTimeDatas.watchTimeData[0]);
+            console.log(this.watchTimeDatas);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
+            const resul = await axios.get(`https://localhost:7202/api/Ratings/` + this.book.id + "?objectTypeId=2");
+            this.ratings = resul.data;
+            console.log(this.ratings);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
@@ -1117,6 +1179,35 @@ progress::-moz-progress-bar {
     padding-left: 0px;
     padding-right: 0px;
 }  
+}
+.star-rating {
+    font-size: 24px;
+}
+.Ratings_button_block {
+    margin-left: 55%;
+    cursor: pointer;
+}
+.Ratings_button_block .btn {
+    background-color: green;
+    padding: 5px 90px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+}
+input[type=number] {
+    width: 100%;
+}
+label {
+    font-weight: bold;
+    color: black;
+}
+input[type=submit] {
+    margin-top: 2%;
+    background-color: green;
+    padding: 5px 90px;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 
 </style>
