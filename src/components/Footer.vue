@@ -102,6 +102,8 @@ export default {
     height: 100%;
     background: #0066CC 0% 0% no-repeat padding-box;
     opacity: 1;
+    position: relative;
+    z-index: 999;
 }
 .footer-logo {
     margin-top: 10%;
@@ -197,5 +199,10 @@ export default {
         position: relative;
         left: 10px;
     }
+}
+@media (max-width: 700px) {
+  .footer[data-v-4896eafd]{
+    z-index: 999 !important;
+  }  
 }
 </style>

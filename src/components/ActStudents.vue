@@ -5,19 +5,63 @@
                    <thead>
                        <tr>
                            <th>ID</th>
-                           <th>Name</th>
-                           <th>Subject</th>
-                           <th>Active</th>
+                           <th>Course Name</th>
+                           <th>status</th>
+                           <th>Active Students</th>
+                           <th>Total Amount</th>
+                           <th> Paid Amount</th>
+                           
+                           
                           
                        </tr>
                    </thead>
-                       
+                    <tbody v-for="person in person.activeStudents" :key="person.id">
+                        <tr>
+                        <td>{{person.id }}</td>
+                        <td>{{person.name }}</td>
+                        <td>{{ person.state }}</td>
+                        <td>{{this.person.activeStudentsCount }}</td>
+                        <td>{{ this.person.totalAmount }}</td>
+                        <td>{{ this.person.discountedAmount }}</td>
+                    </tr>
+                    </tbody>   
                </table>
            </div>
            
            </div>
 </template>
 <script>
+  import axios from 'axios';
+  import Loading from 'vue3-loading-overlay';
+  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  export default {
+
+  name: "Actstudent",
+  components: {
+          Loading,
+          
+      },
+  data() {        
+          return {
+            person:[],
+          }
+        },
+        async created() { 
+            this.isLoading = true;  
+        try {
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetActiveStudentsCount`);
+            this.person = res.data;
+            console.log(this.person);
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
+    },
+    }
+
 
 </script>
 <style scoped>

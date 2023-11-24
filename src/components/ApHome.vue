@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <section class="main">
+  <div class="container ">
+    <section class="main" >
     <div class="row" style="justify-items: center;">
   <div class="col-sm-3 cardpd">
-   <div class="card" style="background-color: rgb(224, 188, 174);">
+   <div class="card color" >
     <div class="box">
       <div class="content">
       <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
@@ -13,7 +13,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card" style="background-color:rgb(149, 149, 204) ;">
+  <div class="card color">
     <div class="box">
       <div class="content">
         <h3 class="head"> <router-link to="/InactStudents">Inactive Students</router-link></h3>
@@ -23,7 +23,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-   <div class="card" style="background-color:  rgb(163, 221, 182);">
+   <div class="card color" >
     <div class="box">
       <div class="content">
       <h3 class="head"><router-link to="/StudentDetails">Subjects </router-link></h3>
@@ -33,17 +33,59 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card" style="background-color: rgb(212, 168, 212);">
+  <div class="card color" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/ApLecture">Faculty </router-link></h3>
+        <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
        
     </div>
    </div>
   </div>
   </div>
 </div>
-  <div class="row">
+<div class="row" style="justify-items: center;">
+  <div class="col-sm-3 cardpd">
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"> <router-link to="/SubStudents"> Subscription Students </router-link></h3>
+        
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"> <router-link to="/InactStudents">Inactive Students</router-link></h3>
+    
+    </div>
+   </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"><router-link to="/StudentDetails">Subjects </router-link></h3>
+             
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color" >
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div>
+</div>
+  <!-- <div class="row">
 <div class="col-sm-8">
     <div class="card view">
     <div class="box">
@@ -66,7 +108,7 @@
   </div>
 </div>
 <div class="col-sm-4">
-    <div class="card view">
+    <div class="card view vv">
     <div class="box">
       <div class="content">
         
@@ -88,7 +130,7 @@
    </div>
   </div>
 </div>
-  </div>
+  </div> -->
 
 
 </section>
@@ -98,9 +140,9 @@
 
 </script>
 <style scoped>
-.cardpd{
+/* .cardpd{
   padding: 0px !important;
-}
+} */
  .card {
   position: relative;
   min-width: 200px;
@@ -225,7 +267,9 @@
   font-size: 2.7rem;
   color: rgba(41, 37, 37, 0.1);
 }
-
+.vv{
+  margin-bottom: 85px;
+}
 
 }
 
@@ -255,4 +299,10 @@
 .head{
   font-size: 13px !important;
 }
+.color{
+  background: #EEEAE4;
+    background: radial-gradient(at left top, #EEEAE4 50%, #D3E4F6 80%);
+    border: 1px solid #F0F6FC;
+}
+
 </style>
