@@ -23,9 +23,7 @@
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
                                         <h5 id="prof_text">{{ this.faculty.name }}</h5>
-                                        <p class="rating_icons"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                class="fa fa-star-o"></i> (23 reviews) </p>
+                                        <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p>
                                         <div class="social-icons">
                                             <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
                                             <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
@@ -50,6 +48,11 @@
                                             <button type="button" class="btn" id="right_button" style="color: #b1afaf;">1200 Follwers</button>
                                         </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <div class="Ratings_button_block" v-if="isLoggedIn">
+                                            <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -57,6 +60,26 @@
 
                         </div>
 
+                    </div>
+                    <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="submitRating">
+                                        <label for="rating">Rate the faculty member :</label><br>
+                                        <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
+                                        <el-rate v-model="rating" size="large" allow-half /><br>
+                                        <input type="submit" value="Submit">
+                                    </form> 
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- <div class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
@@ -437,6 +460,8 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import StarRatings from './StarRatings.vue'
+
 
 
 
@@ -450,15 +475,17 @@ export default {
        Breadcrumbs,
        Carousel,
         Slide,
-       
+       StarRatings,
         Navigation,
 
     },
     data() {
         return {
+            rating: '',
             readMore: false,
             isLoading: false,
             faculty: [],
+            ratings: [],
             settings: {
             itemsToShow: 1,
             snapAlign: 'center',
@@ -514,11 +541,20 @@ export default {
             ],
         }
     },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+        isuser() {
+            console.log(this.$store.state.user.signInUserSession.idToken.payload);
+            return this.$store.state.user.signInUserSession.idToken.payload;
+        },
+    },
     methods: {
 
         toggleReadMore() {
-      this.faculty.readMore = !this.faculty.readMore;
-    },
+            this.faculty.readMore = !this.faculty.readMore;
+        },
 
         // activateReadMore(){
         //     this.readActivated = true;
@@ -527,6 +563,24 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
+        submitRating() {
+            axios.post('https://localhost:7202/api/Ratings', {
+                userId: this.isuser['cognito:username'],
+                objectId: this.faculty.id,
+                objectTypeId: 1,
+                ratingScore: this.rating
+            })
+            .then(response => {
+                // Handle success (if needed)
+                console.log(response.data);
+                const myModal = new bootstrap.Modal(document.getElementById('myModal'), options);
+                myModal.hide();
+            })
+            .catch(error => {
+                // Handle error (if needed)
+                console.error(error);
+            });
+        }
     },
     async created() {   
         this.isLoading = true;
@@ -534,6 +588,9 @@ export default {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
+            const result = await axios.get(`https://localhost:7202/api/Ratings/` + this.faculty.id + "?objectTypeId=1");
+            this.ratings = result.data;
+            console.log(this.ratings);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -1087,5 +1144,34 @@ text-align: left !important;
     position: relative;
     left: 143px !important;
 }
+}
+.Ratings_button_block {
+    margin-left: 123%;
+    cursor: pointer;
+}
+.Ratings_button_block .btn {
+    background-color: green;
+    padding: 5px 90px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+}
+input[type=number] {
+    width: 100%;
+}
+label {
+    font-weight: bold;
+    color: black;
+}
+input[type=submit] {
+    margin-top: 2%;
+    background-color: green;
+    padding: 5px 90px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.star-rating {
+    font-size: 24px;
 }
 </style>

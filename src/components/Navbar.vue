@@ -43,8 +43,8 @@
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
                         <router-link class="nav-link" to="/" >Home</router-link>
                     </li>
-                    <li class="nav-item " v-if="isLoggedIn" :class="{ 'active': isActive('/Mylearnings') }">
-                        <router-link class="nav-link" to="/Mylearnings" >My Learning</router-link>
+                    <li class="nav-item"   :class="{ 'active': isActive('/Mylearnings') }">
+                        <router-link class="nav-link" v-if="isLoggedIn" to="/Mylearnings" >My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
 

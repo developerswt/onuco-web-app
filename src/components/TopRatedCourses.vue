@@ -35,11 +35,7 @@
                                     </div> <br>
                                     <div class="row">
                                         <div class="col-sm-6  star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <StarRatings :rating="course.starRating" :max-rating="5" />
                                         </div>
                                         <div class="col-sm-6" >
                                             <a href="#" class="btn btn-primary" >Buy Now</a>
@@ -180,6 +176,7 @@
 import axios from 'axios';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import StarRatings from './StarRatings.vue';
 
 export default {
     name: 'TopRatedCourses',
@@ -187,7 +184,7 @@ export default {
        
        Carousel,
         Slide,
-       
+       StarRatings,
         Navigation,
 
     },
@@ -248,10 +245,24 @@ export default {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
             this.courses = res.data;
             console.log(this.courses);
+            for (const course of this.courses) {
+                course.starRating = await this.getByRatings(course.id);
+            }
         } catch (error) {
             console.log(error);
         }
     },
+    methods: {
+        async getByRatings(courseId) {
+            try {
+                const result = await axios.get(`https://localhost:7202/api/Ratings/${courseId}?objectTypeId=2`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
+    }
 }
 </script>
 

@@ -282,7 +282,7 @@ const routes = [
   },
   {
     path: "/CollegeDetails/:name",
-    name: "CollegeDetails",
+    name: "Semester",
     component: CollegeDetails,
     meta: {
         title: 'College Semaster details Page',
@@ -366,7 +366,7 @@ const routes = [
   },
   {
     path: "/Contact",
-    name: "GetSupport",
+    name: "Contact",
     component: GetSupport,
     meta: {
         title: 'ContactUs Page',

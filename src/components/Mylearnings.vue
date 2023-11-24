@@ -18,7 +18,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="left_block">
-                                            <p>{{ selectedItem.modules }} <span id="span_text">32 Topics</span></p>
+                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount }} Topics</span></p>
 
                                             <button id="course_button">Start Course <i class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
@@ -35,409 +35,197 @@
                             <div class="radio-item" v-for="item in myLearning" :key="item.id" :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
                                     <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div>    
-                <!-- <div class="row mb-3">
-                    <div class="col-sm-12 justify-content-center">
-                        <div class="radio_checkbox" style="text-align: center;">
-                            <form>
-                                <div class="radio-item" v-for="item in myLearning" :key="item.id">
-                                    <input type="radio" @click="handleItemChange(item)" :value="item.id" name="radio" v-model="selectedItem">
-                                     <label :for="'radio' + item.id">{{ item.title }}</label> 
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <section id="tab_section">
-                  <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="true">MY COURSES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">LIVE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                                aria-controls="contact" aria-selected="false">COMPLETED</a>
-                        </li>
-                    </ul> -->
-                
-                           
+                </div>
+            </div>    
             <div class="tab_block mt-3">
-               <section id="tab_block">
-                        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                            <el-tab-pane label="MY COURSES" name="first">
+                <section id="tab_block">
+                    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+                        <el-tab-pane label="MY COURSES" name="first">
 
-                           <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="">
-                                <div class="row mt-3">
-                                    <div class="col-lg-6 col-8 col-sm-8 col-md-6">
-                                        <h4 class="academic_head_text">
+                            <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="">
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-8 col-sm-8 col-md-6">
+                                                <h4 class="academic_head_text">
+    
+                                                    <span id="aca_text">interested</span> Courses
 
-                                            <span id="aca_text">interested</span> Courses
+                                                </h4>
+                                            </div>
+                                            <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
+                                                <router-link to="#" id="see_text">See all</router-link>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="notify_block">
 
-                                        </h4>
-                                    </div>
-                                    <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
-                                        <router-link to="#" id="see_text">See all</router-link>
+                                                    <i class="fa-solid fa-triangle-exclamation"
+                                                        style="color: #ff9900;"></i><p class="pt"> Please
+                                                        subscribe the subjects to
+                                                        get more details</p>
+                                                    <button id="course_list_button">Course List</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="" v-for="subject in selectedItem.subject" :key="subject.id">
+                                            <div class="" v-for="chapter in subject.values" :key="chapter.id">
+                                                <div class="" v-for="course in chapter.values" :key="course.id"> -->
+                                                    <div class="inner_block">
+                                                        <div class="row">
+                                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                                <div id="asset_image">
+                                                                    <img src="../assets/images/book1.png" class="img-fluid">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                                </router-link>    
+                                                                <p id="text_two">stacks</p>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                                        <div class="progress_block">
+                                                                            <div>
+                                                                                <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                                        <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                                    </div>
+                                                                    <!-- <button class="bt">BUY NOW</button> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- </div>
+                                            </div>
+                                        </div>             -->
                                     </div>
                                 </div>
-
-
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="notify_block">
-
-                                            <i class="fa-solid fa-triangle-exclamation"
-                                                    style="color: #ff9900;"></i><p class="pt"> Please
-                                                subscribe the subjects to
-                                                get more details</p>
-                                            <button id="course_list_button">Course List</button>
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane label="LIVE" name="third">
+                            <div class="" v-if="!selectedItem?.videoCompleted">
+                                <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <span id="aca_text">Live</span> Courses
+                                        <div class="row mt-4 ">
+                                            <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university}}</h6>
+                                                <p class="text_line">{{ selectedItem.title}}</p>
+                                                <div class="row ml-0">
+                                                    <div class=" info">
+                                                        <p>{{ selectedItem.instructorName[0].name }}</p>
+                                                    </div>
+                                                    <div class="asset_image info1">
+                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                        {{ calculateTime(selectedItem).timeInHours }}:{{ calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
+                                                    </div>
+                                                    <div class="asset_image info2">
+                                                        <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
+                                                        {{ selectedItem.modules }}<br>
+                                                    </div>
+                                                    <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{ selectedItem.courseDescription }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner_block">
+                                            <div class="row">
+                                                <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                    <div id="asset_image">
+                                                        <img src="../assets/images/book1.png" class="img-fluid">
+                                                    </div>
+                                                </div> 
+                                                <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                    </router-link>
+                                                    <p id="text_two">stacks</p>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <div class="progress_block">
+                                                                <div>
+                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                </div>
+                                                            </div>    
+                                                        </div>
+                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                        </div>
+                                                        <!-- <button class="bt">BUY NOW</button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="" v-for="subject in selectedItem.subject" :key="subject.id">
-                                    <div class="" v-for="chapter in subject.values" :key="chapter.id">
-                                        <div class="" v-for="course in chapter.values" :key="course.id">
+                            </div>    
+                        </el-tab-pane>
+                        <el-tab-pane label="COMPLETED" name="fourth">
+                            <div class="" v-if="selectedItem?.videoCompleted">
+                                <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="">
+                                            <div class="row mt-3">
+                                                <div class="col-lg-6 col-8 col-sm-8 col-md-6">
+                                                    <h4 class="academic_head_text">
+                                                        <span id="aca_text">interested</span> Courses
+                                                    </h4>
+                                                </div>
+                                                <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
+                                                    <router-link to="#" id="see_text">See all</router-link>
+                                                </div>
+                                            </div>
                                             <div class="inner_block">
                                                 <div class="row">
                                                     <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                                         <div id="asset_image">
                                                             <img src="../assets/images/book1.png" class="img-fluid">
                                                         </div>
-
                                                     </div> 
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <p class="mb-0" id="text_one">{{ course.lession }}</p>
+                                                        <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                            <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                        </router-link>    
                                                         <p id="text_two">stacks</p>
                                                         <div class="row">
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <div class="progress_block">
-                                                                    <div class="progress">
-                                                                        <!-- <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                        aria-valuemin="0" aria-valuemax="100"></div> -->
+                                                                    <div>
+                                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>        
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <p id="text_three">22h 33m left</p>
+                                                                <p id="text_three">{{ remainingTimes(selectedItem) }} Completed</p>
                                                             </div>
-                                                            <button class="bt">BUY NOW</button>
+                                                            <!-- <button class="bt">BUY NOW</button> -->
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>            
-                                <!-- <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                             
-                            </div>
-
-                            </div>
-                        </div>
+                            </div>        
                         </el-tab-pane>
-                        <div class="row mb-3">
-                    
-                            <div class="col-sm-12 justify-content-center">
-                        <div class="radio_checkbox" style="text-align: center;">
-                            <div class="radio-item" v-for="product in Learning" :key="product.id" :class="{ 'active': product === selectedproduct }">
-                                <div class="dot" @click="handleProductChange(product)"></div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                             
-                             <el-tab-pane label="LIVE" name="third">
-                                <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                           <span id="aca_text">Live</span> Courses
-                                   <div class="row mt-4 ">
-                                    <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                        <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedproduct.university}}</h6>
-                                        <p class="text_line">{{ selectedproduct.title}}</p>
-                                        <div class="row ml-0">
-                                         <div class=" info">
-                                           <p>{{ selectedproduct.instructorName }}</p>
-                                         </div>
-                                         <div class="asset_image info1">
-                                                <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                {{ calculateTime(selectedproduct).timeInHours }}:{{ calculateTime(selectedproduct).timeInMinutes }}:{{ calculateTime(selectedproduct).remainingSeconds }}
-                                            </div>
-                                            <div class="asset_image info2">
-                                                <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
-                                                {{ selectedproduct.modules }}<br>
-                                            </div>
-                                            <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{ selectedproduct.courseDescription }}</p>
- 
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col-lg-6 col-4 col-sm-4 col-md-6">
-                                        <div id="asset_image">
-                                            <img src="../assets/images/Group1303@2x.png" class="img-fluid" style="width: 300px; height: 151px; margin-bottom: 20px; float:right;">
-                                        </div>
-                                    </div> -->
-                                    <div class="col-sm-6">
-                                        <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                            <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
-                                        </div>
-                                            
-                                    </div>
-                                   </div>
-                                   <div class="inner_block">
-                                     <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">{{ selectedproduct.title }}</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div v-if="calculatePercentage(selectedproduct)">
-                                                            <progress :value="calculatePercentage(selectedproduct)" max="100">{{ getWatchTime(selectedproduct) }}</progress>
-                                                        </div>
-                                                        <div v-else>
-                                                            <progress value="0" max="100">0</progress>
-                                                        </div>
-                                                    </div>    
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">{{ remainingTimes(selectedproduct) }} left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                               
-                                </div>
-                                </div>
-                               
-                             </el-tab-pane>
-                             <!-- <el-tab-pane label="COMPLETED" name="fourth">completed</el-tab-pane> -->
-              
-                            <el-tab-pane label="COMPLETED" name="fourth">
-
-                           <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="">
-                                <div class="row mt-3">
-                                    <div class="col-lg-6 col-8 col-sm-8 col-md-6">
-                                        <h4 class="academic_head_text">
-
-                                            <span id="aca_text">interested</span> Courses
-
-                                        </h4>
-                                    </div>
-                                    <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
-                                        <router-link to="#" id="see_text">See all</router-link>
-                                    </div>
-                                </div>
-
-
-                                <!-- <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="notify_block">
-
-                                            <p> <i class="fa-solid fa-triangle-exclamation"
-                                                    style="color: #ff9900;"></i>Please
-                                                subscribe the subjects to
-                                                get more details...</p>
-                                            <button id="course_list_button">Course List</button>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                  <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Computer Science</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">E & C</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">{{ remain }} left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner_block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                            <div id="asset_image">
-                                                <img src="../assets/images/book1.png" class="img-fluid">
-                                            </div>
-
-                                        </div> 
-                                        <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                            <p class="mb-0" id="text_one">Mech</p>
-                                            <p id="text_two">stacks</p>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <div class="progress_block">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                    <p id="text_three">22h 33m left</p>
-                                                </div>
-                                                <button class="bt">BUY NOW</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </div>
-
-                            </div>
-                        </div>
-                    </el-tab-pane>
-               </el-tabs>
-            </section>
-         </div>
+                    </el-tabs>
+                </section>
+            </div>
+        </div>
     </div>
-</div>
-<Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
 
 
     
@@ -461,18 +249,19 @@ export default {
     data() {
         return {
             isLoading: false,
-            userIsSubscribed: false,
-           activeName: 'first',
-           myLearning: [],
-           selectedItem: null,
-           Learning: [],
-           selectedproduct: null,
-          
-           videoOptions: {
+            userIsSubscribed: true,
+            activeName: 'first',
+            myLearning: [],
+            selectedItem: null,
+            Learning: [],
+            selectedproduct: null,
+            
+            videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
                 controls: true,
                 width: 100,
+                preload: 'auto',
                 // techOrder: ['html5'],
                 // preload: "metadata",
                 sources: [ 
@@ -529,10 +318,49 @@ export default {
         handleItemChange(item) {
             // Update your component's state to display the selected item's details
             this.selectedItem = item;
-            console.log(this.selectedItem);
+
+            // Check if the video player reference exists
+            if (this.$refs.videoPlayerRef && this.$refs.videoPlayerRef.player) {
+                const player = this.$refs.videoPlayerRef.player;
+
+                    // Pause the video before changing the source
+                player.pause();
+
+                    // Reset the playback time to the beginning
+                player.currentTime(0);
+
+                    // Change the video source to the new URL
+                this.videoOptions.sources = [
+                    {
+                        src: this.selectedItem.videoUrl,
+                        type: this.videoType,
+                        withCredentials: false,
+                    },
+                ];
+
+                    // Load and play the new video
+                player.src(this.videoOptions.sources);
+                player.load();
+                player.play().catch((error) => {
+                    console.error("Error playing video:", error);
+                });
+
+                    // Hide the poster image if it's displayed
+                this.$refs.videoPlayerRef.showPoster = false;
+
+                    // Listen for the 'loadedmetadata' event before playing
+                player.one('loadedmetadata', () => {
+                    player.pause();
+                    // Video is loaded, you can perform additional actions if needed
+                    console.log("Video loaded:", this.selectedItem);
+                });
+            } else {
+                console.error("Video player reference not found.");
+            }
         },
-        calculateTime(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
+
+        calculateTime(selectedItem) {
+            const totalTime = this.getTotalTime(selectedItem);
         
             if (totalTime) {
                 const timeInHours = Math.floor(totalTime / 3600);
@@ -584,9 +412,9 @@ export default {
         // Example usage
             // const totalTime = 3600; // 1 hour in seconds
             // const watchTime = 1800; // 30 minutes in seconds
-        remainingTimes(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-            const watchTime = this.getWatchTime(selectedproduct); 
+        remainingTimes(selectedItem) {
+            const totalTime = this.getTotalTime(selectedItem);
+            const watchTime = this.getWatchTime(selectedItem); 
             return this.calculateRemainingTime(totalTime, watchTime);
             console.log(this.calculateRemainingTime);
         },
@@ -594,8 +422,8 @@ export default {
         //     console.log(`Remaining time: ${remainingTime}`);
 
         // },
-        calculateTime(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
+        calculateTime(selectedItem) {
+            const totalTime = this.getTotalTime(selectedItem);
         
             if (totalTime) {
                 const timeInHours = Math.floor(totalTime / 3600);
@@ -621,18 +449,18 @@ export default {
                 };
             }
         },
-        calculatePercentage(selectedproduct) {
-            const totalTime = this.getTotalTime(selectedproduct);
-            const watchTime = this.getWatchTime(selectedproduct);
+        calculatePercentage(selectedItem) {
+            const totalTime = this.getTotalTime(selectedItem);
+            const watchTime = this.getWatchTime(selectedItem);
 
-            if (totalTime && watchTime) {
-                console.log((watchTime / totalTime) * 100);
-                return (watchTime / totalTime) * 100;
+            if (totalTime && watchTime && isFinite(totalTime) && isFinite(watchTime)) {
+                const percentage = (watchTime / totalTime) * 100;
+                console.log(percentage);
+                return percentage;
             } else {
                 return 0;
             }
         },
-
         // calculateTime(selectedproductid) {
         //     const totalTime = this.getTotalTime(selectedproductid);
         
@@ -654,14 +482,19 @@ export default {
         //         };
         //     }
         // },
-        findSubjectById(selectedproduct) {
-            for (const topic of Object.values(this.Learning)) {
-                if (topic.title === selectedproduct.title) {
-                    return topic;  // If you want to return the matching topic
+        findSubjectById(selectedItem) {
+            if (this.myLearning && Array.isArray(this.myLearning)) {
+                for (const topic of this.myLearning) {
+                    if (topic && topic.id && topic.id === selectedItem.id) {
+                        console.log(topic);
+                        return topic;  // If you want to return the matching topic
+                    }
                 }
             }
-            return null;  // Return null if no match is found
+            return null;
         },
+
+
         // findSubjectByMyCourseId(selectedItem) {
         //     // Implement a method to find a subject by its ID
         //     // You can replace this with your actual implementation
@@ -676,17 +509,17 @@ export default {
         //     }    
         //     return null;
         // },
-        getWatchTime(selectedproduct) {
-            const watchData = this.findSubjectById(selectedproduct);
-            return watchData ? watchData.minTimeStateMangement : 0;
+        getWatchTime(selectedItem) {
+            const watchData = this.findSubjectById(selectedItem);
+            return watchData ? watchData.totalWatchTime : 0;
         },
 
-        getTotalTime(selectedproduct) {
+        getTotalTime(selectedItem) {
                 // Implement a method to get the total time for a specific subjectId
                 // For example, you might have a data property storing total times
                 // You can replace this with your actual implementation
-            const subject = this.findSubjectById(selectedproduct);
-            return subject ? parseFloat(subject.totalTimeCourse) : 0;
+            const subject = this.findSubjectById(selectedItem);
+            return subject ? parseFloat(subject.totalTimeVideo) : 0;
         },
 
        
@@ -753,17 +586,9 @@ export default {
                 // Set the default selected item to the first item in myLearnin
                 this.selectedItem = this.myLearning[0];
             }
-            const result = await AxiosInstance.get(`/MyLearnings/Live?CognitoId=` + this.isuser.sub);
-            this.Learning = result.data;
-            console.log(this.Learning);
-            if (this.Learning.length > 0) {
-                // Set the default selected item to the first item in myLearning
-                this.selectedproduct = this.Learning[0];
-                console.log(this.selectedproduct);
-            }
             this.videoOptions.sources = [
                 {
-                    src: this.selectedproduct.videoUrl,
+                    src: this.selectedItem.videoUrl,
                     type: this.videoType,
                     withCredentials: false,
                 }
@@ -782,6 +607,52 @@ export default {
 </script>
 
 <style scoped>
+
+progress{
+    /*reset to default appearance*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+ 
+    width: 200px;
+    height: 20px;
+    border-radius: 20px;
+ 
+}
+ 
+/*style for background track*/
+progress::-webkit-progress-bar {
+    /* background: rgb(221, 221, 221); */
+    background: #CCCCCC;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+    border-radius: 6px;
+    height: 4px;
+    width: 171px;
+}
+/*style for progress track*/
+progress::-webkit-progress-value {
+    background-image: linear-gradient(120deg,#ffd173 0,#18cc00 55%);
+    border-radius: 20px;
+}
+.progress-container {
+    position: relative;
+    width: 30px; /* Set the width and height of the container */
+    height: 30px;
+    margin: 5px;
+    background-image: url('../assets/images/Group1318@2x.png'); /* Replace 'your-image.jpg' with your image URL */
+    background-size: cover;
+}
+progress {
+  color: #FF9924;
+}
+
+progress::-webkit-progress-value {
+  background: #FF9924;
+}
+
+progress::-moz-progress-bar {
+  background: lightcolor;
+}
 .radio-item {
     display: inline-block;
     margin: 5px;
@@ -919,10 +790,14 @@ export default {
     text-align: center;
 }
 
-#text_two,
+#text_two {
+    font-size: 12px;
+    margin-bottom: 0px;
+}
 #text_three {
     font-size: 12px;
-    margin-bottom: 0;
+    margin-bottom: -30px;
+    margin-left: -43px;
 }
 
 #text_one {

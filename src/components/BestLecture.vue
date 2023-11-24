@@ -2,68 +2,69 @@
     <div class="category-test pt-3">
         <div class="container">
             <h4 class="academic_head_text">
-
-<span id="aca_text">Best</span>Lecturers
-<router-link to="/BestFaculty">See all</router-link>
-</h4>
+                <span id="aca_text">Best</span>Lecturers
+                <router-link to="/BestFaculty">See all</router-link>
+            </h4>
         </div>
     
     </div>
-        <div class="container-fluid">
-            <!-- <div class="row pt-5"> -->
-                <carousel :settings="settings" :breakpoints="breakpoints">
-                    <slide v-for="facult in faculty" :key="facult.id">
+    <div class="container-fluid">
+        <!-- <div class="row pt-5"> -->
+            <carousel :settings="settings" :breakpoints="breakpoints">
+                <slide v-for="facult in faculty" :key="facult.id">
                         
-                        <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                            <div class="card">
-                        <div class="user-follower">
+                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                        <div class="card">
+                            <div class="user-follower">
                            
-                            <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
-                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
-                            <!-- <img :src="facult.imageUrl" class="user-icon"> -->
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body " style="margin-top: -7%; ">
-                            <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"> {{ facult.description.slice(0,50)}}...</div>
+                                <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
+                                <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                                <!-- <img :src="facult.imageUrl" class="user-icon"> -->
+                            </div>
+                            <div class="user-following">
+                                <p class="text-right"><small>13 Following</small></p>
+                                <p class="text-right"><small>1200 Followers</small></p>
+                            </div>
+                            <div class="card-body " style="margin-top: -7%; ">
+                                <div class="card-title">{{ facult.name }}</div>
+                                <div class="card-text"> {{ facult.description.slice(0,50)}}...</div>
                             
-                            <div class="mn text-left">
-                                <p>
-                                    (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
+                                <div class="mn text-left">
+                                    <p>
+                                        (23 Reviews)
+                                        <StarRatings :rating="facult.starRating" :max-rating="5" />
+                                    </p>
+                                    <!-- <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i> -->
+                                
                                
                 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </router-link>
-            </slide>
+                    </router-link>
+                </slide>
                     
 
-                    <template #addons>
+                <template #addons>
+                    
+                    <navigation >
+                        <template #next>
+                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                        </template>
+                        <template #prev>
+                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                        </template>
+                    </navigation>
                         
-                        <navigation >
-                            <template #next>
-                                <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                            </template>
-                            <template #prev>
-                                <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                            </template>
-                        </navigation>
-                        
-                    </template>
-                </carousel>
+                </template>
+            </carousel>
                 
                
-            </div>
+        </div>
         
         
 
@@ -74,6 +75,8 @@ import { defineComponent } from 'vue'
 import axios from 'axios'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import StarRatings from './StarRatings.vue'
+
 
 
 export default defineComponent ({
@@ -81,11 +84,12 @@ export default defineComponent ({
     components: {
         Carousel,
         Slide,
-       
+        StarRatings,
         Navigation,
     },
     data: () => ({
         faculty: [],
+        // Ratings: [],
    
         settings: {
             itemsToShow: 1,
@@ -121,11 +125,26 @@ export default defineComponent ({
         try {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
             this.faculty = res.data;
-            console.log(this.faculty);
+            for (const facult of this.faculty) {
+                facult.starRating = await this.getByRatings(facult.id);
+            }
+
         } catch (error) {
             console.log(error);
         }
     },
+    methods: {
+        async getByRatings(facultyId) {
+            try {
+                const result = await axios.get(`https://localhost:7202/api/Ratings/${facultyId}?objectTypeId=1`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
+    }
+
     // mounted() {
     //     this.$gtm.trackView('MyScreenName1', this.$route.path);
     // },
@@ -241,10 +260,10 @@ export default defineComponent ({
     opacity: 1;
 }
 
-.mn .el-rate {
+.mn .star-rating {
     float: right;
-    margin-top: -14%;
-    margin-left: 7%;
+    margin-top: 0%;
+    margin-left: 4%;
 }
 
 
@@ -412,10 +431,10 @@ export default defineComponent ({
     letter-spacing: 2px;
     
 }
-.mn .el-rate {
+.mn .star-rating {
     float: right;
-    margin-top: -14%;
-    margin-left: 7%;
+    margin-top: 0%;
+    margin-left: 4%;
 }
 /* @media only screen {
     .carousel{

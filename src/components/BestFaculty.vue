@@ -27,11 +27,7 @@
                             <div class="mn text-left">
                                 <p>
                                     (23 Reviews) 
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                    <StarRatings :rating="facult.starRating" :max-rating="5" />
                                 </p>
                                
                 
@@ -51,13 +47,15 @@ import axios from 'axios'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import StarRatings from './StarRatings.vue'
 
 
 export default {
     name: 'BestLecture',
     components: {
         Breadcrumbs,
-        Loading
+        Loading,
+        StarRatings
     },
     data() {
         return {
@@ -70,7 +68,10 @@ export default {
         try {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
             this.faculty = res.data;
-            console.log(this.faculty);
+            for (const facult of this.faculty) {
+                facult.starRating = await this.getByRatings(facult.id);
+            }
+
         } catch (error) {
             console.log(error);
             this.isLoading= false;
@@ -78,6 +79,17 @@ export default {
             this.isLoading = false;
         }
     },
+    methods: {
+        async getByRatings(facultyId) {
+            try {
+                const result = await axios.get(`https://localhost:7202/api/Ratings/${facultyId}?objectTypeId=1`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
+    }
   }
 
 
@@ -191,10 +203,10 @@ export default {
     letter-spacing: 1px;
     
 }
-.mn .el-rate {
+.mn .star-rating {
     float: right;
-    margin-top: -14%;
-    margin-left: 7%;
+    margin-top: 0%;
+    margin-left: 4%;
 }
 
 .col-md-3 {
