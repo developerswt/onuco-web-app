@@ -55,13 +55,13 @@
           <el-row>
               <el-col :sm="24">
         <div class="my-header">
-            <img
+            <!-- <img
               src="../assets/41.webp" v-if="title == 'Success'"
               class="image"  />
          
              <img
               src="../assets/40.webp" v-if="title == 'Error'"
-              class="image"  />
+              class="image"  /> -->
           </div>
           </el-col>
           <el-col :sm="24">
