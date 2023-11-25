@@ -13,11 +13,11 @@
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="facult in faculty" :key="facult.id">
                         
-                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }" style="cursor: pointer; text-decoration: none;">
                         <div class="card">
                             <div class="user-follower">
                            
-                                <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
+                                <img :src="facult.image" class="user-icon" v-if="facult.image !== ''">
                                 <img src="../assets/images/Image21.png" class="user-icon" v-else>
                                 <!-- <img :src="facult.imageUrl" class="user-icon"> -->
                             </div>
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import axiosInstance from '../config/axiosInstance'
 import { defineComponent } from 'vue'
 import axios from 'axios'
 import 'vue3-carousel/dist/carousel.css'
@@ -126,7 +127,7 @@ export default defineComponent ({
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
-                facult.starRating = await this.getByRatings(facult.id);
+                facult.starRating = await this.getByRatings(facult.facultyId);
             }
 
         } catch (error) {
@@ -136,7 +137,7 @@ export default defineComponent ({
     methods: {
         async getByRatings(facultyId) {
             try {
-                const result = await axios.get(`https://localhost:7202/api/Ratings/${facultyId}?objectTypeId=1`);
+                const result = await axiosInstance.get(`/Ratings/${facultyId}?objectTypeId=4`);
                 return result.data;
             } catch (error) {
                 console.error(error);

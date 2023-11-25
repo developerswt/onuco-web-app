@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios'
+import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -66,7 +67,7 @@ export default {
     async created() {   
         this.isLoading = true;
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty`);
+            const res = await axiosInstance.get(`/Faculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
                 facult.starRating = await this.getByRatings(facult.id);
@@ -82,7 +83,7 @@ export default {
     methods: {
         async getByRatings(facultyId) {
             try {
-                const result = await axios.get(`https://localhost:7202/api/Ratings/${facultyId}?objectTypeId=1`);
+                const result = await axiosInstance.get(`/Ratings/${facultyId}?objectTypeId=4`);
                 return result.data;
             } catch (error) {
                 console.error(error);

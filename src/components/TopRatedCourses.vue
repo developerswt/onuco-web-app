@@ -13,8 +13,8 @@
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="course in courses" :key="course.id"> 
                    
-                        <div class="box"  >
-                            <router-link to="/Universities" style="text-decoration: none;">
+                        <div class="box">
+                            <router-link v-bind:to="{ name:'CourseDetails', params:{name: course.courseName}}" style="text-decoration: none;">
                                 <div class="wer">
                                     <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
                                     <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;"><br>
@@ -173,6 +173,7 @@
 </template>
 
 <script>
+import axiosInstance from '../config/axiosInstance'
 import axios from 'axios';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
@@ -255,7 +256,7 @@ export default {
     methods: {
         async getByRatings(courseId) {
             try {
-                const result = await axios.get(`https://localhost:7202/api/Ratings/${courseId}?objectTypeId=2`);
+                const result = await axiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
                 return result.data;
             } catch (error) {
                 console.error(error);
