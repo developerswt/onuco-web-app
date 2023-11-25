@@ -7,7 +7,7 @@
             <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
         </h4> 
        
-        <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
+        <p class="desc" style="color: #777777;" v-html="this.university.description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
@@ -39,7 +39,7 @@
                         <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
-                                <div class="col-md-4 mb-2" v-for="cou in course" :key="cou.id">
+                                <div class="col-md-4 mb-2" v-for="cou in filteredCourses(sem.id)" :key="cou.id">
                                     <router-link v-bind:to="{ name:'CourseDetails', params:{name: cou.courseName}}" style="color: white; text-decoration: none;">
                                     <div class="card mt-3" id="sem_card">
                                         <div class="card-title">
@@ -81,7 +81,7 @@
                                                 <div class="col-lg-12 mn1">
                                                     <div class="row aa">
                                                         <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <StarRatings :rating="course.starRating" :max-rating="5" />
+                                                            <StarRatings :rating="cou.starRating" :max-rating="5" />
                                                             <!-- <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-half-full"></i>
@@ -213,8 +213,8 @@ export default {
             const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
             console.log(this.course)
-            this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
-            console.log(this.course);
+            // this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
+            // console.log(this.course);
             for (const course of this.course) {
                 course.starRating = await this.getByRatings(course.id);
             }
@@ -229,14 +229,44 @@ export default {
     methods: {
         async getByRatings(courseId) {
             try {
-                const result = await axios.get(`https://localhost:7202/api/Ratings/${courseId}?objectTypeId=2`);
+                const result = await AxiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
                 return result.data;
             } catch (error) {
                 console.error(error);
                 return 0; // or handle error accordingly
             }
         },
-    }
+        async updateStarRatings() {
+            for (const course of this.course) {
+                course.starRating = await this.getByRatings(course.id);
+            }
+        },
+        filteredCourses(semesterId) {
+            return this.course.filter(c => c.semesterId === semesterId);
+        },
+    }    
+        // async getByRatings(courseId) {
+        //     try {
+        //         const result = await AxiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
+        //         return result.data;
+        //     } catch (error) {
+        //         console.error(error);
+        //         return 0; // or handle error accordingly
+        //     }
+        // },
+        // async getByRatings(courseId) {
+        // // Perform your asynchronous operation to get ratings here
+        // Replace the following line with your actual logic
+    //     const ratings = await fetchRatings(courseId);
+
+    //     return ratings; // Return the fetched ratings
+    // },
+    // async updateStarRatings() {
+    //     for (const course of this.course) {
+    //         course.starRating = await this.getByRatings(course.id);
+    //     }
+    // }
+    // }
 }
 
 $(document).ready(function(){

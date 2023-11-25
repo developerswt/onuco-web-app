@@ -454,6 +454,7 @@
 </template>
 
 <script>
+import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from "./Breadcrumbs.vue"
 import axios from 'axios'
 import Loading from 'vue3-loading-overlay';
@@ -564,10 +565,10 @@ export default {
             console.log(tab, event);
         },
         submitRating() {
-            axios.post('https://localhost:7202/api/Ratings', {
+            axiosInstance.post('/Ratings', {
                 userId: this.isuser['cognito:username'],
                 objectId: this.faculty.id,
-                objectTypeId: 1,
+                objectTypeId: 4,
                 ratingScore: this.rating
             })
             .then(response => {
@@ -588,7 +589,7 @@ export default {
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
-            const result = await axios.get(`https://localhost:7202/api/Ratings/` + this.faculty.id + "?objectTypeId=1");
+            const result = await axiosInstance.get(`/Ratings/` + this.faculty.id + "?objectTypeId=4");
             this.ratings = result.data;
             console.log(this.ratings);
         } catch (error) {

@@ -544,10 +544,10 @@ export default {
             console.log(tab, event);
         },
         submitRating() {
-            axios.post('https://localhost:7202/api/Ratings', {
+            AxiosInstance.post('/Ratings', {
                 userId: this.isusers['cognito:username'],
                 objectId: this.book.id,
-                objectTypeId: 2,
+                objectTypeId: 5,
                 ratingScore: this.rating
             })
             .then(response => {
@@ -573,7 +573,7 @@ export default {
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
-            const resul = await axios.get(`https://localhost:7202/api/Ratings/` + this.book.id + "?objectTypeId=2");
+            const resul = await AxiosInstance.get(`/Ratings/` + this.book.id + "?objectTypeId=5");
             this.ratings = resul.data;
             console.log(this.ratings);
             // const currentUserSubId = this.getCurrentUserCognitoId();

@@ -86,7 +86,7 @@ export default {
   },
   computed: {
     currentImage() {
-      return this.imageSources[this.currentIndex];
+        return this.imageSources[this.currentIndex];
     },
     isLoggedIn() {
         return this.$store.state.IsLoggedIn;
