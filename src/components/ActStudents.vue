@@ -1,12 +1,14 @@
 <template>
+     <div class="container" ><p> > Active Student </p>
     <div class="container" style="margin-top: 72px;">
+      
    <div class="table-responsive">
                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                    <thead>
                        <tr>
-                           <th>ID</th>
-                           <th>Course Name</th>
-                           <th>status</th>
+                           <!-- <th>ID</th>
+                           <th>Course Name</th> -->
+                           <!-- <th>status</th> -->
                            <th>Active Students</th>
                            <th>Total Amount</th>
                            <th> Paid Amount</th>
@@ -15,11 +17,11 @@
                           
                        </tr>
                    </thead>
-                    <tbody v-for="person in person.activeStudents" :key="person.id">
+                    <tbody v-if="person">
                         <tr>
-                        <td>{{person.id }}</td>
-                        <td>{{person.name }}</td>
-                        <td>{{ person.state }}</td>
+                        <!-- <td>{{person.id }}</td>
+                        <td>{{person.name }}</td> -->
+                        <!-- <td>{{ person.state }}</td> -->
                         <td>{{this.person.activeStudentsCount }}</td>
                         <td>{{ this.person.totalAmount }}</td>
                         <td>{{ this.person.discountedAmount }}</td>
@@ -29,6 +31,7 @@
            </div>
            
            </div>
+        </div>
 </template>
 <script>
   import axios from 'axios';
@@ -43,7 +46,7 @@
       },
   data() {        
           return {
-            person:[],
+            person:null,
           }
         },
         async created() { 

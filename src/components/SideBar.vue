@@ -8,8 +8,8 @@
 <menu  style="margin-top: 68px;">
   <ul>
    
-            <li class="nav-item ">
-            <router-link to="/ApHome" class="nav-link"> <i class="fas fa-fw fa-tachometer-alt"> </i>Dashboard</router-link>
+            <li class="nav-item active ">
+            <router-link to="/ApHome" class="nav-link">Dashboard</router-link>
     </li>
     <li><router-link to="/ApFaculty">Lecturers</router-link></li>
     <li><router-link to="/StudentDetails">Students</router-link></li>
@@ -140,15 +140,17 @@ menu li a {
   border-bottom: 1px solid rgba(255,255,255,.3);
   margin: 0 10px;
   padding: 10px;
-  color:  rgb(17, 205, 239);
+  /* color:  rgb(17, 205, 239); */
+  color: #707070;
   text-decoration: none;
+  font-size: 16px;
 }
 
-menu li a:hover {
-  /* background:  rgb(17, 205, 239); */
+/* menu li a:hover {
+  
   background: radial-gradient(at right bottom, #0066CC -15%,  #9CCEFF  80%);
   color:  white;
-}
+} */
 
 
 menu {

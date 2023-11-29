@@ -42,11 +42,12 @@
   }
   
   .star-rating span {
-    margin-right: 5px;
+    margin-right: 0px;
     color: gold;
   }
   
   .star-rating span.filled {
     color: gold; 
   }
+  
   </style>

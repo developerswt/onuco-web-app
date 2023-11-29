@@ -103,6 +103,12 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+
       </ol>
       
       <div class=" carousel-inner" style="margin-top: -33px; border-radius: none;">
@@ -139,7 +145,7 @@
         
         <!-- Slide 2 -->
         <div class="carousel-item">
-          <div class="carousel-card" style="height: 260px;">
+          <div class="carousel-card" style="height: 260px; ">
             <div class="slider_2">
               <h3>Refer A Friend</h3>
             </div>  
@@ -154,6 +160,59 @@
             </div>  
           </div>
         </div>
+     
+
+      <div class="carousel-item">
+          <div class="carousel-card" style="height: 260px;">
+            <div class="slider_3">
+              <div class="image_class">
+                  <img src="../assets/images/Artboard 4.png" class="img-fluid1">
+                </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-card" style="height: 260px;">
+            <div class="slider_3">
+              <div class="image_class">
+                  <img src="../assets/images/Artboard 5.png" class="img-fluid2">
+                </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-card" style="height: 260px;">
+            <div class="slider_3">
+              <div class="image_class">
+                  <img src="../assets/images/Artboard 6.png" class="img-fluid3">
+                </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-card" style="height: 260px;">
+            <div class="slider_3">
+              <div class="image_class">
+                  <img src="../assets/images/Artboard 10.png" class="img-fluid1">
+                </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-card" style="height: 260px;">
+            <div class="slider_3">
+              <div class="image_class">
+                  <img src="../assets/images/Artboard 13.png" class="img-fluid1">
+                </div>
+            </div>  
+          </div>
+        </div>
+
+
       </div>
       
       <!-- Controls (optional) -->
@@ -496,5 +555,49 @@ export default {
   }
 }
 
+.img-fluid1 {
+  width: 100%;
+    height: 620px;
+    opacity: 1;
+    position: relative;
+    bottom: 165px;
+}
 
+.img-fluid2 {
+  width: 100%;
+    height: 620px;
+    opacity: 1;
+    position: relative;
+    bottom: 170px;
+}
+.img-fluid3 {
+  width: 100%;
+    height: 620px;
+    opacity: 1;
+    position: relative;
+    bottom: 180px;
+}
+@media (max-width:520px) {
+  .img-fluid1 {
+    width: 100%;
+    height: 500px;
+    opacity: 1;
+    position: relative;
+    bottom: 89px;
+}
+.img-fluid2 {
+  width: 100%;
+    height: 500px;
+    opacity: 1;
+    position: relative;
+    bottom: 94px;
+}
+.img-fluid3 {
+  width: 100%;
+    height: 500px;
+    opacity: 1;
+    position: relative;
+    bottom: 100px;
+}
+}
 </style> 

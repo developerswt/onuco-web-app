@@ -1,86 +1,9 @@
-<!-- <template>
-    <div class="container" style="margin-top: 72px;">
-   <div class="table-responsive">
-    <div class="row">
-         <div class="col-sm-12">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                          
-                        <th>Id</th>
-                           <th>Subject Name</th>
-                           <th>Price</th>
-                           <th>Start Date</th>
-                           <th>End Date</th>
-                           <th>Status</th>
-                          
-                          
-                       </tr>
-                   </thead>
-                   <tbody v-for="product in product.completedStudents" :key="product.id">
-                    <tr>
-                        <td>{{product.id}}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{product.price  }}</td>
-                        <td>{{product.startdate}}</td>
-                        <td>{{ product.enddate }}</td>
-                        <td>{{ product.state }}</td>
-                     <td>{{ this.product.completedStudentsCount }}</td> 
-                        
-                    </tr>
-                   </tbody>
-                       
-               </table>
-            </div> 
-           
-            </div>
-           </div>
-           
-           </div>
-</template>
-<script>
-  import axios from 'axios';
-  import Loading from 'vue3-loading-overlay';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  export default {
-
-  name: "Actstudent",
-  components: {
-          Loading,
-          
-      },
-  data() {        
-          return {
-            product:[],
-           
-          }
-        },
-        async created() { 
-            this.isLoading = true;  
-        try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
-            this.product = res.data;
-            console.log(this.product);
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
-    },
-    }
-
-
-</script>
-<style scoped>
-
-</style> -->
 
 <template>
-    <div style="padding: 20px;"  >
+   <div class="container" ><p> > Course Workflow</p>
+    <div style="padding: 10px;"  >
       
-      <div class="example-wrapper" >
+      <div class="example-wrapper">
         
         <div style="height: 100%;">
           <ag-grid-vue 
@@ -110,74 +33,86 @@
   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 130px;left: 500px;" aria-modal="true" role="dialog" >
     <div class="modal-dialog" role="document">
       <div class="modal-content mc">
-        
+       
+       
         <div class="modal-body" style="overflow: auto !important;">
           
             <div class="container bg-light">
                                 <div class="row" v-if="ismodel">
+                                   
                                     <div class="col-sm-12">
-                                      <p><b>ID: </b> {{childPara.id  }}</p>
-                                      <p><b>Course ID :</b>{{ childPara.courseId }}</p>
-                                         <p><b>Subject Name:</b>{{childPara.name }}</p>
-                                         <p><b>Price:</b> {{ childPara.price }}</p>
-                                         <p><b>Start Date:</b> {{ childPara.startdate }}</p>
-                                         <p><b>End Date:</b> {{ childPara.enddate }}</p>
-                                         <p><b>Status:</b> {{ childPara.state }}</p>
+                                      <p><b> ID: </b> {{childPara.id  }}</p>
+                                         <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
+                                         <p><b>Course Name:</b>{{childPara.name  }}</p>
+                                         <p><b>Price:</b> {{ childPara.actualPrice }}</p>
+                                         <p><b>Status:</b> {{ childPara.workFlowStatement }}</p>
                                          
                                      </div>
+                                  
+                                    
                                 </div>
                                 <div class="row" v-else>
-                                  <div class="col-sm-12">
+                                    
+                                    <div class="col-sm-4">
                                          <p><b>ID: </b> {{childPara.id  }}</p>
-                                         <p><b>Course ID :</b>{{ childPara.courseId }}</p>
-                                         <p><b>Subject Name:</b>{{childPara.name }}</p>
-                                         <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
-                                        <div class="">
-                                          <label><b>Start Date:</b></label><br>
-                                          <input type="text" v-model="this.childPara.startdate" />
+                                         <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
+                                         
+                                         <div class="">
+                                          <label><b>Course Name:</b></label><br>
+                                          <input type="text" v-model="this.childPara.name" />
                                         </div> 
                                         <div class="">
-                                          <label><b>End Date:</b></label><br>
-                                          <input type="text" v-model="this.childPara.enddate" />
-                                        </div>
-                                        <p><b>Status:</b> {{ childPara.state }}</p> 
-                                    </div>
+                                          <label><b>Price:</b></label><br>
+                                          <input type="text" v-model="this.childPara.actualPrice" />
+                                        </div>  
+                                        <div>
+                                            <label><b>Status:</b></label><br>
+                                           <select name="Technician" id="Technician" class="selectcss " v-model="updateStatus"> 
+                                            <!-- <option disabled  value="">Update Status</option> -->
+                                            <option value="1">Draft</option>
+                                            <option value="2">Review</option>
+                                            <option value="3">Release</option>
+                                            </select> <button @click="updateUserStatus(childPara)">Update Status</button> 
+                                         </div>
                                         
+                                        </div>
                                 </div>
-                               </div>
-                               
-          </div>
+                            </div> 
+                        </div>         
+          
           <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(this.childPara.id)">Update</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button> 
         </div>
-          
-  </div>
+    </div>
+</div>
+  
       
       </div>
     </div>
-  </div>
+  
    <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
     <Loading v-model:active="isLoading"></Loading>
+    </div>
   </template>
   
   <script>
-  
+//   import AlertDialog from './AlertDialog.vue';
   import axios from "axios";
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
-  // import AlertDialog from './AlertDialog.vue';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   
   export default {
-    name: "studentpage",
+    name: "OrdersPage",
     components: {
       AgGridVue,
+    //   AlertDialog,
       Loading,
-      // AlertDialog
+     
     },
     data: function () {
       return {
@@ -190,7 +125,8 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate'},{name:'End Date',field:'enddate'},{name:'Status',field:'state'}],
+        showAllTechnicians: [],
+        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Course Name', field: 'name' },{name:'Price',field:'actualPrice'},{name:'Status',field:'workFlowStatement'}],
         gridApi: null,
         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
         columnApi: null,
@@ -216,18 +152,14 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
+        const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
         let req = res.data;
-        this.Orders = req;
-        if (Array.isArray(req.completedStudents)) {
-      this.rowData = req.completedStudents;
-    } else {
-      // Handle the case where completedStudents is not an array
-      console.error('completedStudents is not an array:', req.completedStudents);
-    }
+        this.Orders =  req;
         
-        } catch (error) {
-          this.isLoading = false;
+        const result = await axios.get(this.GetUser);
+        this.showAllTechnicians = result.data
+        console.log(this.showAllTechnicians);
+      } catch (error) {
         console.log(error);
         this.showDialog = true;  
         this.dialogTitle= "Error";
@@ -236,10 +168,11 @@
       finally {
         this.isLoading = false;
       }
+      this.rowData = this.Orders;
       this.rowSelection = 'single'; 
-  console.log(this.rowData);
-  this.popupParent = document.body;
-  this.paginationPageSize = 10;
+      console.log(this.rowData);
+      this.popupParent = document.body;
+      this.paginationPageSize = 10;
   
     },
     
@@ -270,11 +203,7 @@
       onBtnExport() {
         this.gridApi.exportDataAsCsv();
       },
-      onFilterTextBoxChanged() {
-        this.gridApi.setQuickFilter(
-          document.getElementById('filter-text-box').value
-        );
-      },
+     
       onPrintQuickFilterTexts() {
         this.gridApi.forEachNode(function (rowNode, index) {
           console.log(
@@ -286,22 +215,55 @@
         });
       },
      
+      updateUserStatus(params) {
+        this.showDialog = false;
+        try {
+          const res = axios.put(this.status + '?id='+ params.id + '&status='+ this.updateStatus);
+          console.log(res);
+          this.showDialog = true;  
+          this.dialogTitle= "Success";
+          this.dialogMessage= "Successfully Update The Status";
+          
+        } catch (error) {
+          console.log(error);
+          this.showDialog = true;  
+          this.dialogTitle= "Error";
+          this.dialogMessage= "Not get data";
+        }  
+      },
+      statusEditor(params) {
+        this.showDialog = false;
+        try {
+          console.log(params);
+          console.log(this.updateStatus);
+          this.showDialog=false;
+          const res = axios.put(this.status +'?id='+ params.id + '&status='+ this.updateStatus);
+          console.log(res); 
+          // this.showDialog = true;  
+          this.dialogTitle= "Success";
+          this.dialogMessage= "Successfully Update The Status";
+           
+        } catch (error) {
+          console.log(error);
+          this.showDialog = true;  
+          this.dialogTitle= "Error";
+          this.dialogMessage= "Not get data";
+        }
+      },
+      
       edit() {
         this.ismodel = false;
       },
       
+  
       update(id) {
         this.showDialog = false;
         try {
-          const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(this.childPara.startdate) + '&newEndDate=' +encodeURIComponent (this.childPara.enddate));
+      // console.log( this.childPara)
+      // let orders=parseInt(this.childPara.orderedItems)
+      // console.log
+          const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
           console.log(res);
-          
-          // this.gridApi.refreshCells({force : true});
-          if (res.status === 200) {
-            const newData = axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
-            this.rowData = newData.data.completedStudents;
-        }
-
           this.ismodel = true;
           this.gridApi.refreshCells({force : true});
       
@@ -320,15 +282,16 @@
     
   };
   
- 
+  const colors = ['New Orders', 'Completed','Collected', 'Cancelled','Assign','DSA'];
+  
+  const technician = ['Ramesh k', 'Nitish m r','Rohan s'];  
   </script>
-  <style scoped>
-     
-  .example-wrapper {
+  <style>
+      .example-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
+  width: 50%;
   }
   
   #myGrid {
@@ -346,8 +309,8 @@
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    /* --ag-header-cell-hover-background-color: #0d4b7e;
-    --ag-header-cell-moving-background-color: #0d4b7e; */
+    --ag-header-cell-hover-background-color: #0d4b7e;
+    --ag-header-cell-moving-background-color: #0d4b7e;
   
     --ag-font-size: 15px;
     --ag-font-family: 'Times New Roman';
@@ -413,23 +376,17 @@
       height: 630px; /* Set the height as needed */
       overflow-y: auto;
     }
-    .mc{
-      height: 300px;
-      width: 550px;
+    .modal-content {
+      height: 100%;
       overflow: hidden;
     }
     .modal-body {
       max-height: 400px; /* Adjust the max-height as needed */
       overflow-y: auto;
     }
-
-    @media (max-width:520px) {
-      .mc{
-        height: 0px;
-        width: 0px;
-      }
-      .example-wrapper {
-width: 100%;
-      }
+    .mc{
+      height: 300px;
+      width: 580px;
+      overflow: hidden;
     }
   </style>

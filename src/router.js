@@ -43,6 +43,11 @@ import InactStudents from "./components/InactStudents.vue"
 import ApBilling from "./components/ApBilling.vue"
 import AlertDialog from './components/AlertDialog.vue';
 import ApFaculty from './components/ApFaculty.vue'
+import ActstdBycourse from './components/ActstdBycourse.vue'
+import CourseWorkFlow from './components/CourseWorkFlow.vue'
+import BranchesUpdate from './components/BranchesUpdate.vue'
+import SemUpdate from './components/SemUpdate.vue'
+import UniUpdate from './components/UniUpdate.vue'
 
 let user = null; // Initialize user as null
 
@@ -519,10 +524,35 @@ const routes = [
       },
       {
         path: "/SubStudents",
-    name: "SubStudents",
-    component: SubStudents,
+        name: "SubStudents",
+        component: SubStudents,
       },
-      
+      {
+        path: "/ActstdBycourse",
+        name: "ActstdBycourse",
+        component: ActstdBycourse,
+      },
+      {
+        path: "/CourseWorkFlow",
+        name: "CourseWorkFlow",
+        component: CourseWorkFlow, 
+      },
+      {
+        path: "/BranchesUpdate",
+        name: "BranchesUpdate",
+        component: BranchesUpdate, 
+      },
+      {
+        path: "/SemUpdate",
+        name: "SemUpdate",
+        component: SemUpdate, 
+      },
+      {
+        path: "/UniUpdate",
+        name: "UniUpdate",
+        component: UniUpdate, 
+      },
+
      ],
     meta: {
       title: 'Unoco Application',
