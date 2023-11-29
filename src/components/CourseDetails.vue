@@ -516,11 +516,11 @@ export default {
                 console.log('New video is now playing.');
             });
 
-                // player.src(this.videoOptions.sources);
+                player.src(this.videoOptions.sources);
                 // // Preload the new video source
                 player.load();
     
-                // player.play();
+                player.play();
             }
         },
 
@@ -553,8 +553,7 @@ export default {
             .then(response => {
                 // Handle success (if needed)
                 console.log(response.data);
-                const myModal = new bootstrap.Modal(document.getElementById('myModal'), options);
-                myModal.hide();
+                this.rating = '';
             })
             .catch(error => {
                 // Handle error (if needed)
@@ -1179,6 +1178,11 @@ progress::-moz-progress-bar {
     padding-left: 0px;
     padding-right: 0px;
 }  
+.Ratings_button_block .btn{
+    padding: 6px 53px 6px!important;
+    position: relative;
+    right: 153px;
+}
 }
 .star-rating {
     font-size: 24px;
@@ -1189,7 +1193,7 @@ progress::-moz-progress-bar {
 }
 .Ratings_button_block .btn {
     background-color: green;
-    padding: 5px 90px;
+    padding: 5px 60px;
     border-radius: 50px;
     color: white;
     cursor: pointer;
