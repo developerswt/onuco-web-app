@@ -1,6 +1,3 @@
-
-
-
 <template>
     <div>
         <div class="container-fluid jk" id="search_container">
@@ -24,11 +21,11 @@
                                 </nav> -->
                             </div>
                         </div>
-                        <div class="container-fluid video2">
-                                                <div class="video_block mb-4 d-lg-none" v-if="videoOptions.sources.length>0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef2" />
-                                                </div>
-                                            </div>
+                        <!-- <div v-if="isMobileView" class="container-fluid">
+                            <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
+                                <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                            </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-lg-6 col-12 col-sm-12 col-md-6">
                                 <div class="search_right_block">
@@ -224,7 +221,7 @@
                                                     </div>
                                                 </div>
                                             </div>            
-                                            <div class="col-sm-6 video1 d-none d-lg-block">
+                                            <div class="col-sm-6">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
                                                     <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                                                 </div>
@@ -345,11 +342,14 @@ export default {
     methods: {
 
         toggleReadMore() {
-      this.book.readMore = !this.book.readMore;
-    },
+            this.book.readMore = !this.book.readMore;
+        },
 
         hasMatchingVideoId(subjectId) {
-            return this.watchTimeDatas.watchTimeData.some(watch => watch.videoId === subjectId);
+            if (this.watchTimeDatas && this.watchTimeDatas.watchTimeData) {
+                return this.watchTimeDatas.watchTimeData.some(watch => watch.videoId === subjectId);
+            }
+                return false;
         },
         getWatchTime(subjectId) {
             if (this.watchTimeDatas && this.watchTimeDatas.watchTimeData) {
@@ -470,57 +470,57 @@ export default {
                 return null;
             }
         },
+
         async switchVideo(newVideoUrl, subject) {
-            const isMobile = window.innerWidth <= 768; // Adjust the width based on your design's breakpoint
-            const refName = isMobile ? 'videoPlayerRef2' : 'videoPlayerRef';
+            if (this.$refs.videoPlayerRef.player) {
+                const player = this.$refs.videoPlayerRef.player;
+                console.log("Switching video");
 
-                if (this.$refs[refName] && this.$refs[refName].player) {
-                    const player = this.$refs[refName].player;
-                    console.log("Switching video");
+                // Pause the current video
+                player.pause();
 
-                    this.videoId = subject.id;
-                    console.log(this.videoId);
-        
-                    player.pause();
+                // Set the new video ID
+                this.videoId = subject.id;
+                console.log(this.videoId);
 
-                    const videoComponentRef = this.$refs.videoPlayerRef;
+                // const componentVideo = this.$refs.videoPlayerRef.player;
+                // componentVideo.sendWatchTimeToBackend();
+                // Remove any custom elements (if needed)
+                const customElement = document.getElementById("testid");
+                if (customElement) {
+                    player.el().removeChild(customElement);
+                }
 
-                    // Call the method from the video component
-                    videoComponentRef.sendWatchTimeToBackend();
-                    // this.$refs[refName].player.sendWatchTimeToBackend();
-        
-                    player.currentTime(0);
-
-                    const customElement = document.getElementById("testid");
-
-                        if (customElement) {
-                            player.el().removeChild(customElement);
-                        }
-
-                            this.videoOptions.sources = [
-                            {
-                                src: newVideoUrl,
-                                type: this.videoType,
-                                withCredentials: false,
-                            },
+                // Change the video source to the new URL
+                this.videoOptions.sources = [
+                    {
+                        src: newVideoUrl,
+                        type: this.videoType,
+                        withCredentials: false,
+                    },
                 ];
 
                 this.playingSubject = subject;
 
-                    // Hide the poster image if it's displayed
-                this.$refs[refName].showPoster = false;
+                // Show or hide the poster image as needed
+                this.$refs.videoPlayerRef.showPoster = false;
 
                 // Load the new video source
                 player.src(this.videoOptions.sources);
-        
+       
                 // Listen for the 'loadedmetadata' event before playing
                 player.one('loadedmetadata', async () => {
+                console.log('New video source loaded.');
                     // Play the new video
-                    await player.play();
-                });
+                await player.play();
+                console.log('New video is now playing.');
+            });
 
-                // Preload the new video source
+                // player.src(this.videoOptions.sources);
+                // // Preload the new video source
                 player.load();
+    
+                // player.play();
             }
         },
 
@@ -1210,4 +1210,14 @@ input[type=submit] {
     cursor: pointer;
 }
 
+.desktop-video {
+    display: block;
+}
+
+/* CSS for mobile view */
+@media (max-width: 767px) {
+    .desktop-video {
+        display: none;
+    }
+}
 </style>
