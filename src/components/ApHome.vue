@@ -58,7 +58,7 @@
   <div class="card color">
     <div class="box">
       <div class="content">
-        <h3 class="head"> <router-link to="/InactStudents">Inactive Students</router-link></h3>
+        <h3 class="head"> <router-link to="/ActstdBycourse">Active Students By Course</router-link></h3>
     
     </div>
    </div>
@@ -68,14 +68,14 @@
    <div class="card color" >
     <div class="box">
       <div class="content">
-      <h3 class="head"><router-link to="/StudentDetails">Subjects </router-link></h3>
+      <h3 class="head"><router-link to="/CourseWorkFlow">Course Workflow</router-link></h3>
              
     </div>
     </div>
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color" >
+  <div class="card color vv" >
     <div class="box">
       <div class="content">
         <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
@@ -145,8 +145,8 @@
 } */
  .card {
   position: relative;
-  min-width: 200px;
-  height: 140px;
+  min-width: 260px;
+  height: 180px;
 
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2),
     inset -2px -2px 10px rgba(255, 255, 255, 0.1),

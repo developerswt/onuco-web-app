@@ -1178,6 +1178,11 @@ progress::-moz-progress-bar {
     padding-left: 0px;
     padding-right: 0px;
 }  
+.Ratings_button_block .btn{
+    padding: 6px 53px 6px!important;
+    position: relative;
+    right: 153px;
+}
 }
 .star-rating {
     font-size: 24px;
@@ -1188,7 +1193,7 @@ progress::-moz-progress-bar {
 }
 .Ratings_button_block .btn {
     background-color: green;
-    padding: 5px 90px;
+    padding: 5px 60px;
     border-radius: 50px;
     color: white;
     cursor: pointer;

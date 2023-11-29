@@ -1,4 +1,5 @@
 <template>
+   <div class="container" ><p> > Courses </p>
     <div style="padding: 20px;"  >
       
       <div class="example-wrapper" >
@@ -74,8 +75,9 @@
       </div>
     </div>
   </div>
-   <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>  
+   <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
     <Loading v-model:active="isLoading"></Loading>
+    </div>
   </template>
   
   <script>
@@ -84,7 +86,7 @@
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
-  import AlertDialog from './AlertDialog.vue';
+  // import AlertDialog from './AlertDialog.vue';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   
@@ -93,7 +95,7 @@
     components: {
       AgGridVue,
       Loading,
-      AlertDialog
+      // AlertDialog
     },
     data: function () {
       return {
@@ -201,25 +203,66 @@
         this.ismodel = false;
       },
       
-      update() {
-        this.showDialog = false;
-        try {
-          const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
-          console.log(res);
-          this.ismodel = true;
-          this.gridApi.refreshCells({force : true});
+      // update(id) {
+      //   this.showDialog = false;
+      //   try {
+      //     const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+      //     console.log(res);
+      //     this.getdata();
+      //     this.ismodel = true;
+          
+      //     this.gridApi.refreshCells({force : true});
       
-        } catch (error) {
-          console.log(error);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      
+      // },
+      async update(id) {
+        this.showDialog = false;
+          try {
+                const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+                console.log(res);
+                this.ismodel = true;
+      
+            if (res.status === 200) {
+              await this.getdata();
+              this.gridApi.refreshCells({ force: true });
+            }
+          } catch (error) {
+            console.log(error);
+            }
+      },
+
+        onLogOut() {
+          this.$store.commit('isLoggedIn', false);
+          this.$router.push('/Loginpage');
+        },  
+        async getdata(){
+          this.domLayout = 'autoHeight'; 
+          this.isLoading = true;
+          try {
+            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+            let req = res.data;
+            this.Orders = req;
+          
+          } catch (error) {
+              this.isLoading = false;
+              console.log(error);
+              this.showDialog = true;  
+              this.dialogTitle= "Error";
+              this.dialogMessage= "Not get data";
+            }
+            finally {
+            this.isLoading = false;
+            }
+            this.rowData = this.Orders;
+            this.rowSelection = 'single'; 
+            console.log(this.rowData);
+            this.popupParent = document.body;
+            this.paginationPageSize = 10;
+      
         }
-      },
-  
-      onLogOut() {
-        this.$store.commit('isLoggedIn', false);
-        this.$router.push('/Loginpage');
-      },
-  
-     
     },
     
   };
