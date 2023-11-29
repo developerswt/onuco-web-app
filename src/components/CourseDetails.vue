@@ -516,11 +516,11 @@ export default {
                 console.log('New video is now playing.');
             });
 
-                // player.src(this.videoOptions.sources);
+                player.src(this.videoOptions.sources);
                 // // Preload the new video source
                 player.load();
     
-                // player.play();
+                player.play();
             }
         },
 
