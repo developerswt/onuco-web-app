@@ -27,7 +27,7 @@
          </div>  
        </div> 
      </div>
-     <form @submit.prevent="addBranch">
+     <form class="frm" @submit.prevent="addBranch" >
       <p><b></b> {{newBranch.id}}</p>
       <label for="branchName"> Name:</label>
       <input type="text" id="branchName" v-model="newBranch.name" required><br>
@@ -35,13 +35,25 @@
       <label for="description">Description:</label>
       <input type="text" id="description" v-model="newBranch.description" required><br>
 
-      <label for="universityId">University Id:</label>
-      <input type="text" id="academiaId" v-model="newBranch.universityId" required><br>
+      <label for="actualPrice">Actual Price:</label>
+      <input type="text" id="actualPrice" v-model="newBranch.actualPrice" required><br>
 
-      <label for="semesterName"><b>Semester Name:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.semesterName" required>
+      <label for="discountPrice"><b>Discount Price:</b></label>
+      <input type="text" id="discountPrice" v-model="newBranch.discountPrice" required><br>
 
-      <button type="submit">Add Branch</button>
+      <label for="semesterId"><b>Semester Id:</b></label>
+      <input type="text" id="semesterId" v-model="newBranch.semesterId" required><br>
+
+      <label for="courseName"><b>Course Name:</b></label>
+      <input type="text" id="courseName" v-model="newBranch.courseName" required><br>
+
+      <label for="workFlowStatement"><b>WorkFlow Statement:</b></label>
+      <input type="text" id="workFlowStatement" v-model="newBranch.workFlowStatement" required><br>
+
+      <label for="facultyId"><b>Faculty Id:</b></label>
+      <input type="text" id="facultyId" v-model="newBranch.facultyId" required><br>
+
+      <button type="submit" style="border: 1px solid;">Add Branch</button>
     </form>
    <div v-if="showChildRow">
    <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 170px;left: 500px;" aria-modal="true" role="dialog" >
@@ -118,9 +130,12 @@
         newBranch: {
         name: '',
         description: '',
-        universityId: '',
-        semesterName: '',
-        // Add other properties as needed
+        actualPrice: '',
+        discountPrice: '',
+        semesterId: '',
+        courseName: '',
+        workFlowStatement: '',
+        facultyId: '',
       },
          userName: '',
          ismodel: true,
@@ -131,7 +146,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'}],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'} ],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -157,7 +172,7 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester`);
+         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
          let req = res.data;
          this.Orders = req;
          
@@ -229,7 +244,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
+                 const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
                  console.log(res);
                  this.ismodel = true;
        
@@ -243,36 +258,22 @@
        },
  
        async addBranch() {
-    this.isLoading = true;
-    try {
-        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester', this.newBranch);
-
-        if (response.status === 201) {
-            console.log("Branch added successfully");
-            await this.getdata();
-
-            // Refresh the data grid
-            this.refreshDataGrid();
-
-            // Show success message
-            MessageBox.Show("Insert Successful");
-        } else {
-            // Show failure message
-            MessageBox.Show("Insert Fail");
+        this.isLoading = true;
+      try {
+        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course', this.newBranch);
+         if (response.status === 201) {
+          console.log("Branch added successfully");
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
         }
-    } catch (error) {
-        console.error("Error adding branch:", error);
-    } finally {
+      } catch (error) {
         this.isLoading = false;
-    }
-},
-
-refreshDataGrid() {
-    datagridview1.update();
-datagridview1.refresh();
-},
-
-
+        console.error("Error adding branch:", error);
+      }
+      finally {
+             this.isLoading = false;
+             }
+    },
          onLogOut() {
            this.$store.commit('isLoggedIn', false);
            this.$router.push('/Loginpage');
@@ -281,7 +282,7 @@ datagridview1.refresh();
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches`);
+             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
              let req = res.data;
              this.Orders = req;
            
@@ -314,7 +315,7 @@ datagridview1.refresh();
    display: flex;
    flex-direction: column;
    height: 100%;
-   width: 45%;
+   width: 70%;
    }
    
    #myGrid {
@@ -333,8 +334,8 @@ datagridview1.refresh();
      --ag-header-foreground-color: black;
      --ag-header-background-color: white;
      /* --ag-header-cell-hover-background-color: #0d4b7e;
-     --ag-header-cell-moving-background-color: #0d4b7e;
-    */
+     --ag-header-cell-moving-background-color: #0d4b7e; */
+   
      --ag-font-size: 15px;
      --ag-font-family: 'Times New Roman';
      
@@ -417,5 +418,10 @@ datagridview1.refresh();
        .example-wrapper {
  width: 100%;
        }
+     }
+     .frm{
+        padding: 30px;
+    border: 1px solid black;
+    width: 50%;
      }
    </style>

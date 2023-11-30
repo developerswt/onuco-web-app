@@ -78,12 +78,54 @@
   <div class="card color vv" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
+        <h3 class="head"><router-link to="/CourseUpdate">Courses Update</router-link></h3>
        
     </div>
    </div>
   </div>
   </div>
+</div>
+<div class="row" style="justify-items: center;">
+  <div class="col-sm-3 cardpd">
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"> <router-link to="/SemUpdate"> Semisters Update  </router-link></h3>
+        
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"> <router-link to="/UniUpdate">University Update</router-link></h3>
+    
+    </div>
+   </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"><router-link to="/BranchesUpdate">Branches Update</router-link></h3>
+             
+    </div>
+    </div>
+  </div>
+  </div>
+  <!-- <div class="col-sm-3 cardpd">
+  <div class="card color vv" >
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/CourseUpdate">Course Update</router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div> -->
 </div>
   <!-- <div class="row">
 <div class="col-sm-8">

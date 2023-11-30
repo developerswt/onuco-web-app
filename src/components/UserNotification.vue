@@ -89,10 +89,11 @@ h3 {
 }
 
 .button1 {
-    border: 1px solid var(--unnamed-color-0177fb);
+    /* border: 1px solid var(--unnamed-color-0177fb); */
     border: 1px solid #949494;
     border-radius: 4px;
     opacity: 1;
+    background-color: white;
 }
 .cancel_details p {
     font-size: 16px;

@@ -29,7 +29,7 @@
     </div>
   
   <div v-if="showChildRow">
-  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 130px;left: 500px;" aria-modal="true" role="dialog" >
+  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 170px;left: 520px;" aria-modal="true" role="dialog" >
     <div class="modal-dialog" role="document">
       <div class="modal-content mc">
         
@@ -275,7 +275,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 50%;
+  width: 55%;
   }
   
   #myGrid {
@@ -293,8 +293,8 @@
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    --ag-header-cell-hover-background-color: #0d4b7e;
-    --ag-header-cell-moving-background-color: #0d4b7e;
+    /* --ag-header-cell-hover-background-color: #0d4b7e;
+    --ag-header-cell-moving-background-color: #0d4b7e; */
   
     --ag-font-size: 15px;
     --ag-font-family: 'Times New Roman';

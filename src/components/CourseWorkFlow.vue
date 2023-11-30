@@ -309,8 +309,8 @@
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    --ag-header-cell-hover-background-color: #0d4b7e;
-    --ag-header-cell-moving-background-color: #0d4b7e;
+    /* --ag-header-cell-hover-background-color: #0d4b7e;
+    --ag-header-cell-moving-background-color: #0d4b7e; */
   
     --ag-font-size: 15px;
     --ag-font-family: 'Times New Roman';
