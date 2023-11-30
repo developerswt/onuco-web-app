@@ -513,7 +513,7 @@ export default {
                 // Load the new video source
                 player.src(this.videoOptions.sources);
        
-                // Listen for the 'loadedmetadata' event before playing
+            //    // Listen for the 'loadedmetadata' event before playing
             //         player.one('loadedmetadata', async () => {
             //         console.log('New video source loaded.');
             //             // Play the new video

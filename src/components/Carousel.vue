@@ -121,7 +121,7 @@
                   <!-- <h4>One App Many Benifits</h4>
                   <p>An Affordable learning platform <br>for better academic results</p> -->
                   <div class="image_class">
-                  <img src="../assets/images/Artboard 4.png" class="img-fluid1">
+                  <img src="../assets/images/Artboard4.png" class="img-fluid1">
                 </div>
               </div>
               <!-- <div class="col-lg-4">
@@ -152,7 +152,7 @@
               <h3>Refer A Friend</h3>
             </div>   -->
             <div class="image_class">
-                  <img src="../assets/images/Artboard 5.png" class="img-fluid2">
+                  <img src="../assets/images/Artboard5.png" class="img-fluid2">
                 </div>
           </div>
         </div>
@@ -164,7 +164,7 @@
               <h3>Contact Us</h3>
             </div>   -->
             <div class="image_class">
-                  <img src="../assets/images/Artboard 6.png" class="img-fluid3">
+                  <img src="../assets/images/Artboard6.png" class="img-fluid3">
                 </div>
           </div>
         </div>
@@ -204,7 +204,7 @@
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
-                  <img src="../assets/images/Artboard 10.png" class="img-fluid4">
+                  <img src="../assets/images/Artboard10.png" class="img-fluid4">
                 </div>
             </div>  
           </div>
@@ -214,7 +214,7 @@
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
-                  <img src="../assets/images/Artboard 13.png" class="img-fluid5">
+                  <img src="../assets/images/Artboard13.png" class="img-fluid5">
                 </div>
             </div>  
           </div>
