@@ -527,7 +527,7 @@ $(document).ready(function(){
 }
 
 #review_text{
-    margin: -5px -2px;
+    margin: 5px -2px;
      color: #828282;
 }
 
@@ -640,6 +640,14 @@ $(document).ready(function(){
     padding-left: 15px;
     padding-top: 2px;
 }
+.star-rating span{
+    margin-right: 0px;
+    color: gold;
+}
+}
+.star-rating span{
+    margin-right: 0px !important;
+    color: gold;
 }
 
 .desc{
@@ -656,9 +664,13 @@ opacity: 1;
     #sem_icon{
         font-size: 25px;
     }
+    /* .star-rating {
+    font-size: 20px !important;
+    margin-top: -8%;
+} */
 }
-.star-rating {
+/* .star-rating {
     font-size: 24px;
     margin-top: -8%;
-}
+} */
 </style>

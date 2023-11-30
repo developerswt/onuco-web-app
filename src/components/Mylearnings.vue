@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container-fluid jk">
         <div class="container jk">
@@ -366,18 +368,12 @@ export default {
                 const timeInHours = Math.floor(totalTime / 3600);
                 const timeInMinutes = Math.floor((totalTime % 3600) / 60);
                 const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
                 return {
                     timeInHours,
                     timeInMinutes,
                     remainingSeconds
                 };
+              
             } else {
                 return {
                     timeInHours: 0,
@@ -526,8 +522,6 @@ export default {
         handleProductChange(product) {
             // Update your component's state to display the selected item's details
             this.selectedproduct = product;
-            console.log(this.selectedproduct);
-
             if (this.$refs.videoPlayerRef.player) {
                 const player = this.$refs.videoPlayerRef.player;
                 console.log("Switching video");
@@ -568,7 +562,6 @@ export default {
             console.log(this.videoOptions);
             console.log(this.selectedproduct);
         },
-
         
     },
     async created() {
@@ -1009,7 +1002,7 @@ body {
 }
 @media  (min-width: 100px)and(max-width: 600px){
    .pp{
-    margin-top: 10x;
+    margin-top: 10px;
 }
    
 } */
@@ -1018,6 +1011,23 @@ body {
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
-    
+    .inner_block{
+    height: 108px;
+    } 
+    #asset_image img{
+    width: 47px;
+    height: 76px;
+} 
+}
+@media(min-width: 1280px) {
+    .pt{
+        position: relative;
+        right: 300px;
+    }
+    .video_block{
+    width: 328px !important;
+    position: relative;
+    left: 199px;
+}
 }
 </style>

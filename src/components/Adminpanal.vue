@@ -39,7 +39,7 @@ export default{
 <style scoped>
 .container-fluid {
     width: 100%;
-    padding-right: opx;
+    padding-right: 0px;
     padding-left: 0px;
     margin-right: auto;
     margin-left: auto;

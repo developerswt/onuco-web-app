@@ -11,7 +11,7 @@
                                 style="color: blue;cursor: pointer;margin-right: 13px;">
                             <Search />
                         </el-icon>           
-                        <el-row class="demo-autocomplete search2" style="width: 280px; margin-right: 25px; position: relative; right: 9px;" v-if="showSearchBox && showSearchBoxOnNavbar">
+                        <el-row class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;" v-if="showSearchBox && showSearchBoxOnNavbar">
     <el-col :span="23">
         <el-autocomplete
             v-model="searchTerm"

@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 12px;">
                                 <h5  data-placement="top" :title="college.name" >{{ college.name }}</h5>
-                                <p style="margin-top: -8px;" v-html="college.description.slice(0,63)"></p>
+                                <p style="margin-top: -8px;" v-html="college.description.slice(0,60)"></p>
                             </div>
                             <div class="col-md-2 col-2 col-sm-2">
                         <div class="course_block ">
@@ -82,7 +82,7 @@ export default {
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-@media only screen and (max-width: 768px) and (min-width: 300px) {
+@media only screen and (max-width: 768px) and (min-width: 530px) {
     .academic_head_text{
         font-size: 16px !important;
         padding:0 !important;
@@ -130,7 +130,7 @@ export default {
 
 .box {
     height:100px;
-    width:354px;
+    width:360px;
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
@@ -257,8 +257,11 @@ export default {
     top: 13px;
 } 
 .box{
-    margin: 1px 1px 12px 1px !important;
+    margin: 1px 1px 5px 1px !important;
 } 
+.jk{
+    margin-bottom: 61px;
+}
 }
 
 </style>
