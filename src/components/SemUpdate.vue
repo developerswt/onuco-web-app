@@ -35,11 +35,11 @@
       <label for="description">Description:</label>
       <input type="text" id="description" v-model="newBranch.description" required><br>
 
-      <label for="academiaId">AcademiaId:</label>
-      <input type="text" id="academiaId" v-model="newBranch.academiaId" required><br>
+      <label for="universityId">University Id:</label>
+      <input type="text" id="academiaId" v-model="newBranch.universityId" required><br>
 
-      <label for="branchName"><b>BranchName:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.branchName" required>
+      <label for="semesterName"><b>Semester Name:</b></label>
+      <input type="text" id="branchName" v-model="newBranch.semesterName" required>
 
       <button type="submit">Add Branch</button>
     </form>
@@ -118,8 +118,8 @@
         newBranch: {
         name: '',
         description: '',
-        academiaId: '',
-        branchName: '',
+        universityId: '',
+        semesterName: '',
         // Add other properties as needed
       },
          userName: '',
@@ -229,7 +229,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`hhttps://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
+                 const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
                  console.log(res);
                  this.ismodel = true;
        
@@ -245,10 +245,10 @@
        async addBranch() {
         this.isLoading = true;
       try {
-        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches', this.newBranch);
+        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Semester', this.newBranch);
          if (response.status === 201) {
           console.log("Branch added successfully");
-          this.getdata();
+          await this.getdata();
           this.gridApi.refreshCells({ force: true });
         }
       } catch (error) {
