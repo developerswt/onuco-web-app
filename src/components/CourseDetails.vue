@@ -21,11 +21,11 @@
                                 </nav> -->
                             </div>
                         </div>
-                        <!-- <div class="d-block d-sm-none">
+                        <div class="d-block d-sm-none">
                             <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
                                 <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                             </div>
-                        </div> -->
+                        </div>
                         <!-- <div v-if="isMobileView" class="container-fluid">
                             <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
                                 <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
@@ -226,7 +226,7 @@
                                                     </div>
                                                 </div>
                                             </div>            
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 d-none d-sm-block">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
                                                     <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayer" :videoId="videoId" :courseId="courseId" />
                                                 </div>
@@ -464,7 +464,7 @@ export default {
                 console.log('New Video URL:', newVideoUrl);
 
                 // Pause the current video
-                //player.pause();
+                player.pause();
 
                 console.log('Player paused.');
 
@@ -474,7 +474,7 @@ export default {
                 this.videoOptions.sources = [
                     {
                         src: newVideoUrl,
-                        type: "application/x-mpegURL",
+                        type: this.videoType,
                         withCredentials: false,
                     },
                 ];
@@ -488,43 +488,12 @@ export default {
 
                 player.src(this.videoOptions.sources);
 
-                // player.load();
-                // player.loop(true);
+                //player.load();
+                //player.loop(true);
                 player.play();
 
-                // Load the new video source using a promise
-                // const loadPromise = new Promise((resolve, reject) => {
-                //     player.one('loadeddata', () => {
-                //         console.log('Loadeddata event fired.');
-                //         resolve();
-        //     });
-        //     console.log("not playing");
-        //     player.one('error', (error) => {
-        //         console.error('Error loading video:', error);
-        //         reject(error);
-        //     });
-        //     console.log("not Played");
-        //     // Set the new video source
-        //     player.src(this.videoOptions.sources);
-
-        //     // Load the new source
-        //     // player.load();
-        // });
-
-        // Play the video once it's loaded
-        // loadPromise.then(() => {
-        //     player.play();
-        //     console.log('New video played.');
-        // }).catch((error) => {
-        //     console.error('Error playing video:', error);
-        // });
-    }
-},
-
-
-
-
-        
+            }
+        },
         isProgressBarComplete(subjectId) {
             const totalTime = parseFloat(this.findSubjectById(subjectId).time);
             const watchTime = this.getWatchTime(subjectId);

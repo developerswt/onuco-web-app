@@ -1,6 +1,6 @@
 <template>
   <div class="video-container">
-    <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered"></video>
+    <video ref="videoPlayer" id="videoId" preload="none" class="video-js vjs-big-play-centered"></video>
   </div>
 </template>
 
@@ -9,8 +9,8 @@
 import AxiosInstance from '../config/axiosInstance'
 import videojs from 'video.js';
 import "videojs-overlay";
-import qualityLevels from "videojs-contrib-quality-levels";
-import videojsqualityselector from 'videojs-hls-quality-selector';
+// import qualityLevels from "videojs-contrib-quality-levels";
+// import videojsqualityselector from 'videojs-hls-quality-selector';
 
 
 
@@ -46,14 +46,14 @@ export default {
   
   mounted() {
     console.log("loafing video");
-    videojs.registerPlugin('qualityLevels', qualityLevels);
-    videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
+    // videojs.registerPlugin('qualityLevels', qualityLevels);
+    // videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
 
    this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
-      this.player.qualityLevels();
+      // this.player.qualityLevels();
       console.log(this.player);
-      this.player.hlsQualitySelector({ displayCurrentQuality: true });      
+      // this.player.hlsQualitySelector({ displayCurrentQuality: true });      
 
       // this.player.on('pause', this.pauseVideo);
     });
