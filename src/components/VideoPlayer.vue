@@ -1,19 +1,6 @@
 <template>
   <div class="video-container">
-    <video ref="videoPlayer" class="video-js vjs-big-play-centered"></video>
-    <!-- <div v-if="!isSubscribed && showPoster" id="" class=""> -->
-      <!-- <div class="overlay-item">
-        <p class="vo-question">
-          Please subscribe to watch the full video
-        </p>
-        <div class="btnStyle" v-if="isLoggedIn">
-          <router-link to="/Razorpay"><button class="btn subscribeBtn">SUBSCRIBE</button></router-link>
-        </div>
-        <div class="btnStyle" v-else>
-          <router-link to="/Login"><button class="btn subscribeBtn">SUBSCRIBE</button></router-link>
-        </div>
-      </div> -->
-    <!-- </div> -->
+    <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered"></video>
   </div>
 </template>
 
@@ -24,6 +11,8 @@ import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
+
+
 
 export default {
   name: 'VideoPlayer',
@@ -66,7 +55,7 @@ export default {
       console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });      
 
-      this.player.on('pause', this.pauseVideo);
+      // this.player.on('pause', this.pauseVideo);
     });
     this.initVideoPlayer();
 
@@ -155,34 +144,34 @@ export default {
       // Disable the progress bar
       this.player.controlBar.progressControl.disable();
     },
-    async sendWatchTimeToBackend() {
-      if(this.isSubscribed) {
-        try {
+    //async sendWatchTimeToBackend() {
+    //  if(this.isSubscribed) {
+    //    try {
         
-        const userId = this.isuser; 
-        const courseId = this.courseId; 
-        const videoId = this.videoId;
-        const watchTime = this.player.currentTime(); 
+    //    const userId = this.isuser; 
+    //    const courseId = this.courseId; 
+    //    const videoId = this.videoId;
+    //    const watchTime = this.player.currentTime(); 
 
-        const requestBody = {
-          userId: userId,
-          courseId: courseId,
-          watchTimeData: [
-            {
-              videoId: videoId,
-              watchTime: watchTime,
-            },
-          ],
-        };
+    //    const requestBody = {
+    //      userId: userId,
+    //      courseId: courseId,
+    //      watchTimeData: [
+    //        {
+    //          videoId: videoId,
+    //          watchTime: watchTime,
+    //        },
+    //      ],
+    //    };
 
-        const response = await AxiosInstance.put('/StateManagement', requestBody);
+    //    const response = await AxiosInstance.put('/StateManagement', requestBody);
 
-        console.log('Update successful:', response.data);
-      } catch (error) {
-        console.error('Update failed:', error);
-      }
-    }
-    },
+    //    console.log('Update successful:', response.data);
+    //  } catch (error) {
+    //    console.error('Update failed:', error);
+    //  }
+    //}
+    //},
     pauseVideo() {
       this.player.pause();
       this.sendWatchTimeToBackend();
