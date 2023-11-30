@@ -339,21 +339,21 @@ export default {
                 ];
 
                     // Load and play the new video
-                player.src(this.videoOptions.sources);
-                player.load();
-                player.play().catch((error) => {
-                    console.error("Error playing video:", error);
-                });
+                // player.load();
+                // player.play().catch((error) => {
+                //     console.error("Error playing video:", error);
+                // });
 
                     // Hide the poster image if it's displayed
                 this.$refs.videoPlayerRef.showPoster = false;
 
+                player.src(this.videoOptions.sources);
                     // Listen for the 'loadedmetadata' event before playing
-                player.one('loadedmetadata', () => {
-                    player.pause();
-                    // Video is loaded, you can perform additional actions if needed
-                    console.log("Video loaded:", this.selectedItem);
-                });
+                // player.one('loadedmetadata', () => {
+                //     player.pause();
+                //     // Video is loaded, you can perform additional actions if needed
+                //     console.log("Video loaded:", this.selectedItem);
+                // });
             } else {
                 console.error("Video player reference not found.");
             }
@@ -532,18 +532,22 @@ export default {
                 const player = this.$refs.videoPlayerRef.player;
                 console.log("Switching video");
 
-                // player.pauseVideo();
+                // Pause the current video
+                player.pause();
 
-                player.currentTime(0);
+                // Set the new video ID
+                this.videoId = subject.id;
+                console.log(this.videoId);
 
-                // Get the custom element by its unique ID
+                // const componentVideo = this.$refs.videoPlayerRef.player;
+                // componentVideo.sendWatchTimeToBackend();
+                // Remove any custom elements (if needed)
                 const customElement = document.getElementById("testid");
                 if (customElement) {
-                    // Remove the custom element from the video container
                     player.el().removeChild(customElement);
                 }
 
-                    // Change the video source to the new URL
+                // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
                         src: this.selectedproduct.videoUrl,
@@ -551,22 +555,14 @@ export default {
                         withCredentials: false,
                     },
                 ];
-    
-        
-                    // Hide the poster image if it's displayed
+
+                this.playingSubject = subject;
+
+                // Show or hide the poster image as needed
                 this.$refs.videoPlayerRef.showPoster = false;
 
-                    // Load the new video source
+                // Load the new video source
                 player.src(this.videoOptions.sources);
-    
-                    // Listen for the 'loadedmetadata' event before playing
-                player.one('loadedmetadata', async () => {
-                    // Play the new video
-                    await player.play();
-                });
-
-                // Preload the new video source
-                player.load();
             }
 
             console.log(this.videoOptions);

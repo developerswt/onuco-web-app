@@ -21,6 +21,11 @@
                                 </nav> -->
                             </div>
                         </div>
+                        <div class="d-block d-sm-none">
+                            <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
+                                <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
+                            </div>
+                        </div>
                         <!-- <div v-if="isMobileView" class="container-fluid">
                             <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
                                 <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
@@ -221,8 +226,8 @@
                                                     </div>
                                                 </div>
                                             </div>            
-                                            <div class="col-sm-6">
-                                                <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
+                                            <div class="col-sm-6 d-none d-sm-block">
+                                                <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
                                                     <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
@@ -509,18 +514,15 @@ export default {
                 player.src(this.videoOptions.sources);
        
                 // Listen for the 'loadedmetadata' event before playing
-                player.one('loadedmetadata', async () => {
-                console.log('New video source loaded.');
-                    // Play the new video
-                await player.play();
-                console.log('New video is now playing.');
-            });
+            //         player.one('loadedmetadata', async () => {
+            //         console.log('New video source loaded.');
+            //             // Play the new video
+            //         await player.play();
+            //         console.log('New video is now playing.');
+            // });
+            //     // // Preload the new video source
+            //     player.load();
 
-                player.src(this.videoOptions.sources);
-                // // Preload the new video source
-                player.load();
-    
-                player.play();
             }
         },
 
@@ -566,9 +568,14 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data; 
-            const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
-            this.watchTimeDatas = result.data;
-            console.log(this.watchTimeDatas);
+            try {
+                const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
+                this.watchTimeDatas = result.data;
+                console.log(this.watchTimeDatas);
+            } catch {
+                this.watchTimeDatas = {"id": 0,"userId": this.isusers.sub,"courseId": 0,"watchTimeData": []};
+                console.log(this.watchTimeDatas);
+            }    
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
