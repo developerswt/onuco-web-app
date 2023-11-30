@@ -1174,4 +1174,53 @@ input[type=submit] {
 .star-rating {
     font-size: 24px;
 }
+@media screen and (max-width: 1024px) {
+    .Ratings_button_block {
+        margin-left: 109%;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 912px) {
+    .Ratings_button_block {
+        margin-left: 34%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 540px) {
+    .Ratings_button_block {
+        margin-left: 48%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 450px) and (max-width: 490px) {
+    .Ratings_button_block {
+        margin-left: 30%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 400px) and (max-width: 450px) {
+    .Ratings_button_block {
+        margin-left: 35%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 350px) and (max-width: 390px) {
+    .Ratings_button_block {
+        margin-left: 26%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 330px) and (max-width: 350px) {
+    .Ratings_button_block {
+        margin-left: 17%;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width: 300px) and (max-width: 329px) {
+    .Ratings_button_block {
+        margin-left: 10%;
+        cursor: pointer;
+    }
+}
+
 </style>
