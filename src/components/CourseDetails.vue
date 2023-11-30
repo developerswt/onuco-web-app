@@ -178,7 +178,7 @@
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo('https://dgoa3lo2n1ork.cloudfront.net/360p/Projections_of_Lamina.m3u8', subject)" style="cursor: pointer;">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -228,7 +228,7 @@
                                             </div>            
                                             <div class="col-sm-6 d-none d-sm-block">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
+                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayer" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
                                         </div>
@@ -293,29 +293,10 @@ export default {
                 autoplay: false,
                 controls: true,
                 width: 100,
-                techOrder: ['html5'],
-                preload: "metadata",
+
                 sources: [ 
                     
                 ],
-                html5: {
-                    nativeVideoTracks: false,
-                    nativeAudioTracks: false,
-                    nativeTextTracks: false,
-                    vhs: {
-                        overrideNative: true,
-                    }
-                },
-                controlBar: {
-                    skipButtons: {
-                        forward: 5,
-                        backward: 10,
-                        muteToggle: false
-                    },
-                },
-                plugins: {
-
-                }
             },
 
         }
@@ -477,54 +458,71 @@ export default {
         },
 
         async switchVideo(newVideoUrl, subject) {
-            if (this.$refs.videoPlayerRef.player) {
-                const player = this.$refs.videoPlayerRef.player;
-                console.log("Switching video");
+            if (this.$refs.videoPlayer.player) {
+                const player = this.$refs.videoPlayer.player;
+
+                console.log('New Video URL:', newVideoUrl);
 
                 // Pause the current video
-                player.pause();
+                //player.pause();
 
-                // Set the new video ID
-                this.videoId = subject.id;
-                console.log(this.videoId);
+                console.log('Player paused.');
 
-                // const componentVideo = this.$refs.videoPlayerRef.player;
-                // componentVideo.sendWatchTimeToBackend();
-                // Remove any custom elements (if needed)
-                const customElement = document.getElementById("testid");
-                if (customElement) {
-                    player.el().removeChild(customElement);
-                }
+                player.reset();
 
-                // Change the video source to the new URL
+                    // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
                         src: newVideoUrl,
-                        type: this.videoType,
+                        type: "application/x-mpegURL",
                         withCredentials: false,
                     },
                 ];
 
                 this.playingSubject = subject;
+        
+                console.log('Video source updated.');
 
                 // Show or hide the poster image as needed
-                this.$refs.videoPlayerRef.showPoster = false;
+                // this.$refs.videoPlayer.showPoster = false;
 
-                // Load the new video source
                 player.src(this.videoOptions.sources);
-       
-                // Listen for the 'loadedmetadata' event before playing
-            //         player.one('loadedmetadata', async () => {
-            //         console.log('New video source loaded.');
-            //             // Play the new video
-            //         await player.play();
-            //         console.log('New video is now playing.');
-            // });
-            //     // // Preload the new video source
-            //     player.load();
 
-            }
-        },
+                // player.load();
+                // player.loop(true);
+                player.play();
+
+                // Load the new video source using a promise
+                // const loadPromise = new Promise((resolve, reject) => {
+                //     player.one('loadeddata', () => {
+                //         console.log('Loadeddata event fired.');
+                //         resolve();
+        //     });
+        //     console.log("not playing");
+        //     player.one('error', (error) => {
+        //         console.error('Error loading video:', error);
+        //         reject(error);
+        //     });
+        //     console.log("not Played");
+        //     // Set the new video source
+        //     player.src(this.videoOptions.sources);
+
+        //     // Load the new source
+        //     // player.load();
+        // });
+
+        // Play the video once it's loaded
+        // loadPromise.then(() => {
+        //     player.play();
+        //     console.log('New video played.');
+        // }).catch((error) => {
+        //     console.error('Error playing video:', error);
+        // });
+    }
+},
+
+
+
 
         
         isProgressBarComplete(subjectId) {
