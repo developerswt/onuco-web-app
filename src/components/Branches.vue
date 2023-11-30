@@ -253,6 +253,7 @@ $(document).ready(function(){
 @media screen and (max-width: 600px) {
     .box {
         margin-right: 0px;
+        margin-left: 0px;
     }
 }
 .parent_block {

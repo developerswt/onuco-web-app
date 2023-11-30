@@ -257,7 +257,7 @@ export default {
     top: 13px;
 } 
 .box{
-    margin: 1px 1px 5px 1px !important;
+    margin: 1px 0px 5px 0px !important;
 } 
 .jk{
     margin-bottom: 61px;
