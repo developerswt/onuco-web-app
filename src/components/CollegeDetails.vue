@@ -7,7 +7,7 @@
             <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
         </h4> 
        
-        <p class="desc" style="color: #777777;" v-html="this.university.description"></p>
+        <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)

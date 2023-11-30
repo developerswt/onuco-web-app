@@ -250,6 +250,11 @@ $(document).ready(function(){
     background-repeat: no-repeat;
     border-radius: 16%;  
 }
+@media screen and (max-width: 600px) {
+    .box {
+        margin-right: 0px;
+    }
+}
 .parent_block {
     max-width: 1300px;
     margin: 0 auto;
