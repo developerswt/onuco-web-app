@@ -105,9 +105,9 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
         <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <!-- <li data-target="#myCarousel" data-slide-to="5"></li>
         <li data-target="#myCarousel" data-slide-to="6"></li>
-        <li data-target="#myCarousel" data-slide-to="7"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li> -->
 
       </ol>
       
@@ -115,19 +115,21 @@
         <!-- Slide 1 -->
         <div class=" carousel-item active ">
           <div class=" carousel-card" style="height: 260px;">
-            <div class=" container row">
-              <div class="col-lg-8">
+            <div class=" container">
+              
                 <div class="right_carousel_block">
-                  <h4>One App Many Benifits</h4>
-                  <p>An Affordable learning platform <br>for better academic results</p>
+                  <!-- <h4>One App Many Benifits</h4>
+                  <p>An Affordable learning platform <br>for better academic results</p> -->
+                  <div class="image_class">
+                  <img src="../assets/images/Artboard4.png" class="img-fluid1">
                 </div>
               </div>
-              <div class="col-lg-4">
+              <!-- <div class="col-lg-4">
                 <div class="image_class">
                   <img src="../assets/images/g.png" class="img-fluid">
                 </div>
-              </div>
-              <div class="col-lg-9 search_box">
+              </div> -->
+              <!-- <div class="col-lg-9 search_box">
                 <div class="merged_block">
                   <div class="row">
                     <div class="col-lg-8 col-6 col-sm-6">
@@ -138,7 +140,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>  
         </div>
@@ -146,23 +148,29 @@
         <!-- Slide 2 -->
         <div class="carousel-item">
           <div class="carousel-card" style="height: 260px; ">
-            <div class="slider_2">
+            <!-- <div class="slider_2">
               <h3>Refer A Friend</h3>
-            </div>  
+            </div>   -->
+            <div class="image_class">
+                  <img src="../assets/images/Artboard5.png" class="img-fluid2">
+                </div>
           </div>
         </div>
         
         <!-- Slide 3 -->
         <div class="carousel-item">
           <div class="carousel-card" style="height: 260px;">
-            <div class="slider_3">
+            <!-- <div class="slider_3">
               <h3>Contact Us</h3>
-            </div>  
+            </div>   -->
+            <div class="image_class">
+                  <img src="../assets/images/Artboard6.png" class="img-fluid3">
+                </div>
           </div>
         </div>
      
 
-      <div class="carousel-item">
+       <!-- <div class="carousel-item">
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
@@ -170,9 +178,9 @@
                 </div>
             </div>  
           </div>
-        </div>
+        </div> -->
 
-        <div class="carousel-item">
+        <!-- <div class="carousel-item">
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
@@ -180,9 +188,9 @@
                 </div>
             </div>  
           </div>
-        </div>
+        </div> -->
 
-        <div class="carousel-item">
+        <!-- <div class="carousel-item">
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
@@ -190,13 +198,13 @@
                 </div>
             </div>  
           </div>
-        </div>
+        </div> -->
 
         <div class="carousel-item">
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
-                  <img src="../assets/images/Artboard 10.png" class="img-fluid1">
+                  <img src="../assets/images/Artboard10.png" class="img-fluid4">
                 </div>
             </div>  
           </div>
@@ -206,7 +214,7 @@
           <div class="carousel-card" style="height: 260px;">
             <div class="slider_3">
               <div class="image_class">
-                  <img src="../assets/images/Artboard 13.png" class="img-fluid1">
+                  <img src="../assets/images/Artboard13.png" class="img-fluid5">
                 </div>
             </div>  
           </div>
@@ -244,12 +252,12 @@ export default {
   padding: 57px;
   text-align: center; */
   top: 150px;
-  left: 381px;
+  /* left: 381px; */
   width: 100%;
   height: 202px;
   /* UI Properties */
   /* background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box; */
-  background-image: url('../assets/images/bg.jpg');
+  /* background-image: url('../assets/images/bg.jpg'); */
   border-radius: 8px;
   opacity: 1;
 
@@ -258,10 +266,10 @@ export default {
   padding-top: 4%;
 }
 
-.search_box {
+/* .search_box {
   margin-top: 15px; 
   margin-left: 280px;
-}
+} */
 /* .slider_1 h2 {
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 25px/33px var(--unnamed-font-family-segoe-ui);
   letter-spacing: var(--unnamed-character-spacing-0);
@@ -276,20 +284,16 @@ export default {
   opacity: 1;
   font-size: 16px;
 } */
-.img-fluid {
-  /* background-image: url('../assets/images/mg25.png');
-  opacity: 1;
-  background-repeat: no-repeat; */
+/* .img-fluid {
+
   top: 100px;
   left: 773px;
   width: 185px;
   height: 251px;
   padding-left: 10px;
   margin-left: 100px;
-/* UI Properties */
-  /* background: transparent url('../assets/images/mg25.png') 0% 0% no-repeat padding-box; */
   opacity: 1;
-}
+} */
 #carousel_input {
   width: 50%;
   border: none;
@@ -335,7 +339,7 @@ export default {
 #carousel_input::placeholder {
   color: white !important;
 }
-.slider_2 h3 {
+/* .slider_2 h3 {
   font-size: 25px;
   color: white;
   text-align: center;
@@ -348,28 +352,28 @@ export default {
   text-align: center;
   position: relative;
   top: 105px;
-}
+} */
 .right_carousel_block {
   text-align: center;
   color: white;
-  margin-left: 200px;
+  /* margin-left: 200px; */
   margin-bottom: 20px;
 }
-.right_carousel_block h4 {
+/* .right_carousel_block h4 {
   font-size: 25px;
   text-align: left;
   position: relative;
   left: 80px;
   top: 37px;
 
-}
-.right_carousel_block p {
+} */
+/* .right_carousel_block p {
   font-size: 18px;
   text-align: left;
   position: relative;
   left: 83px;
   top: 42px;
-}
+} */
 @media screen and (min-width: 100px) and (max-width: 912px) {
   .img-fluid {
     display: none;
@@ -556,48 +560,128 @@ export default {
 }
 
 .img-fluid1 {
-  width: 100%;
-    height: 620px;
+  width: 153%;
+    height: 633px;
     opacity: 1;
     position: relative;
-    bottom: 165px;
+    bottom: 174px;
+    right: 284px;
 }
-
 .img-fluid2 {
-  width: 100%;
-    height: 620px;
+  width: 125%;
+    height: 625px;
     opacity: 1;
     position: relative;
-    bottom: 170px;
+    bottom: 175px;
+    right: 200px;
 }
 .img-fluid3 {
-  width: 100%;
-    height: 620px;
+  width: 125%;
+    height: 633px;
     opacity: 1;
     position: relative;
-    bottom: 180px;
+    bottom: 187px;
+    right: 161px;
+}
+.img-fluid4 {
+  width: 125%;
+    height: 636px;
+    opacity: 1;
+    position: relative;
+    bottom: 174px;
+    right: 163px;
+}
+.img-fluid5 {
+  width: 125%;
+    height: 633px;
+    opacity: 1;
+    position: relative;
+    bottom: 169px;
+    right: 159px;
 }
 @media (max-width:520px) {
   .img-fluid1 {
-    width: 100%;
-    height: 500px;
+    width: 133%;
+    height: 534px;
     opacity: 1;
     position: relative;
-    bottom: 89px;
+    bottom: 105px;
+    right: 54px;
 }
 .img-fluid2 {
-  width: 100%;
-    height: 500px;
+  width: 133%;
+    height: 534px;
     opacity: 1;
     position: relative;
-    bottom: 94px;
+    bottom: 109px;
+    right: 54px;
 }
 .img-fluid3 {
-  width: 100%;
-    height: 500px;
+  width: 133%;
+    height: 534px;
     opacity: 1;
     position: relative;
-    bottom: 100px;
+    bottom: 115px;
+    right: 54px;
+}
+.img-fluid4 {
+  width: 123%;
+    height: 636px;
+    opacity: 1;
+    position: relative;
+    bottom: 174px;
+    right: 44px;
+}
+.img-fluid5 {
+  width: 123%;
+    height: 633px;
+    opacity: 1;
+    position: relative;
+    bottom: 169px;
+    right: 42px;
+}
+}
+@media (min-width:540px) and (max-width:912px) {
+  
+.img-fluid1 {
+  width: 144%;
+    height: 633px;
+    opacity: 1;
+    position: relative;
+    bottom: 174px;
+    right: 140px;
+}
+.img-fluid2 {
+  width: 123%;
+    height: 625px;
+    opacity: 1;
+    position: relative;
+    bottom: 175px;
+    right: 109px;
+}
+.img-fluid3 {
+  width: 123%;
+    height: 633px;
+    opacity: 1;
+    position: relative;
+    bottom: 187px;
+    right: 86px;
+}
+.img-fluid4 {
+  width: 123%;
+    height: 636px;
+    opacity: 1;
+    position: relative;
+    bottom: 174px;
+    right: 88px;
+}
+.img-fluid5 {
+  width: 124%;
+    height: 633px;
+    opacity: 1;
+    position: relative;
+    bottom: 169px;
+    right: 90px;
 }
 }
 </style> 

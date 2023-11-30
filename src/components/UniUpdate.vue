@@ -35,11 +35,11 @@
       <label for="description">Description:</label>
       <input type="text" id="description" v-model="newBranch.description" required><br>
 
-      <label for="academiaId">AcademiaId:</label>
-      <input type="text" id="academiaId" v-model="newBranch.academiaId" required><br>
+      <label for="branchesId">Branches Id:</label>
+      <input type="text" id="academiaId" v-model="newBranch.branchesId" required><br>
 
-      <label for="branchName"><b>UniversityName:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.branchName" required>
+      <label for="universityName"><b>University Name:</b></label>
+      <input type="text" id="branchName" v-model="newBranch.universityName" required>
 
       <button type="submit">Add Branch</button>
     </form>
@@ -116,8 +116,8 @@
         newBranch: {
         name: '',
         description: '',
-        academiaId: '',
-        branchName: '',
+        branchesId: '',
+        universityName: '',
         // Add other properties as needed
       },
          userName: '',
