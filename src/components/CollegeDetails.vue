@@ -69,7 +69,7 @@
                                                 <div class="col-lg-12 mn">
                                                     <div class="row">
                                                         <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,34)"></p>
+                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,49)"></p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 col-sm-3 col-md-3">
                                                             <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
@@ -475,7 +475,7 @@ $(document).ready(function(){
     margin-top: -20px;
 }
 #sem_card[data-v-723afcf3] {
-    width: 102%;
+    width: auto;
 }
 }
 
@@ -491,7 +491,7 @@ $(document).ready(function(){
     height: 155px;
     opacity: 1;
     padding: 5%;
-    width: 300px;
+    width: auto;
 } 
 .aa .row{
     margin-top: -20px;
@@ -518,7 +518,7 @@ $(document).ready(function(){
     /* background: transparent radial-gradient(closest-side at 6% 11%, #EEEAE4 20%, #D3E4F6 100%) 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 9px #00000005; 
     border: 1px solid #F0F6FC; */
-    width: 100%;
+    width: auto;
     height: 179px;
     opacity: 1;
     padding: 6%;
@@ -602,6 +602,7 @@ $(document).ready(function(){
 
 #desc_text{
     font-size: 12px;
+    text-align: left;
 }
 #sub_text{
     font-size: 12.5px;  

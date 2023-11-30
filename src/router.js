@@ -48,6 +48,8 @@ import CourseWorkFlow from './components/CourseWorkFlow.vue'
 import BranchesUpdate from './components/BranchesUpdate.vue'
 import SemUpdate from './components/SemUpdate.vue'
 import UniUpdate from './components/UniUpdate.vue'
+import CourseUpdate from './components/CourseUpdate.vue'
+
 
 let user = null; // Initialize user as null
 
@@ -551,6 +553,11 @@ const routes = [
         path: "/UniUpdate",
         name: "UniUpdate",
         component: UniUpdate, 
+      },
+      {
+        path: "/CourseUpdate",
+        name: "CourseUpdate",
+        component: CourseUpdate, 
       },
 
      ],

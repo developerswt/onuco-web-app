@@ -190,7 +190,7 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate'},{name:'End Date',field:'enddate'},{name:'Status',field:'state'}],
+        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,},{name:'Status',field:'state'}],
         gridApi: null,
         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
         columnApi: null,
@@ -242,6 +242,7 @@
   this.paginationPageSize = 10;
   
     },
+    
     
     methods: {
       
@@ -318,8 +319,34 @@
      
     },
     
+    
   };
-  
+  var filterParams = {
+  comparator: (filterLocalDateAtMidnight, cellValue) => {
+    var dateAsString = cellValue;
+    if (dateAsString == null) return -1;
+    var dateParts = dateAsString.split('/');
+    var cellDate = new Date(
+      Number(dateParts[2]),
+      Number(dateParts[1]) - 1,
+      Number(dateParts[0])
+    );
+    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      return 0;
+    }
+    if (cellDate < filterLocalDateAtMidnight) {
+      return -1;
+    }
+    if (cellDate > filterLocalDateAtMidnight) {
+      return 1;
+    }
+    return 0;
+  },
+  minValidYear: 2000,
+  maxValidYear: 2023,
+  inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
+};
+
  
   </script>
   <style scoped>
@@ -346,10 +373,8 @@
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    /* --ag-header-cell-hover-background-color: #0d4b7e;
-    --ag-header-cell-moving-background-color: #0d4b7e; */
   
-    --ag-font-size: 15px;
+  --ag-font-size: 15px;
     --ag-font-family: 'Times New Roman';
     
   }
