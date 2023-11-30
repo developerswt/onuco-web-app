@@ -165,7 +165,6 @@ export default {
         const watchTime = this.player.currentTime(); 
 
         const requestBody = {
-          id: 1,
           userId: userId,
           courseId: courseId,
           watchTimeData: [
