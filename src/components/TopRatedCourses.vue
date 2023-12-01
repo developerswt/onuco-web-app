@@ -247,7 +247,8 @@ export default {
             this.courses = res.data;
             console.log(this.courses);
             for (const course of this.courses) {
-                course.starRating = await this.getByRatings(course.id);
+                const res = await this.getByRatings(course.id);
+                course.starRating = res.averageRating;
             }
         } catch (error) {
             console.log(error);

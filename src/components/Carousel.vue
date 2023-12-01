@@ -581,7 +581,7 @@ export default {
     opacity: 1;
     position: relative;
     bottom: 187px;
-    right: 161px;
+    right: 163px;
 }
 .img-fluid4 {
   width: 125%;
@@ -597,16 +597,16 @@ export default {
     opacity: 1;
     position: relative;
     bottom: 169px;
-    right: 159px;
+    right: 160px;
 }
 @media (max-width:520px) {
   .img-fluid1 {
-    width: 133%;
+    width: 134%;
     height: 534px;
     opacity: 1;
     position: relative;
     bottom: 105px;
-    right: 54px;
+    right: 56px;
 }
 .img-fluid2 {
   width: 133%;

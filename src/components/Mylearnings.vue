@@ -138,7 +138,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
+                                                    <video-player :options="videoOptions" v-if="renderComponent" :isSubscribed="userIsSubscribed" ref="videoPlayer" />
                                                 </div>
                                             </div>
                                         </div>
@@ -250,6 +250,7 @@ export default {
     },
     data() {
         return {
+            renderComponent: true,
             isLoading: false,
             userIsSubscribed: true,
             activeName: 'first',
@@ -269,24 +270,6 @@ export default {
                 sources: [ 
                     
                 ],
-                html5: {
-                    nativeVideoTracks: false,
-                    nativeAudioTracks: false,
-                    nativeTextTracks: false,
-                    vhs: {
-                        overrideNative: true,
-                    }
-                },
-                controlBar: {
-                    skipButtons: {
-                        forward: 5,
-                        backward: 10,
-                        muteToggle: false
-                    },
-                },
-                plugins: {
-
-                }
             },
         }
     },
@@ -317,47 +300,36 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
-        handleItemChange(item) {
+        async handleItemChange(item) {
             // Update your component's state to display the selected item's details
             this.selectedItem = item;
+            
+            if (this.$refs.videoPlayer.player) {
+                const player = this.$refs.videoPlayer.player;
 
-            // Check if the video player reference exists
-            if (this.$refs.videoPlayerRef && this.$refs.videoPlayerRef.player) {
-                const player = this.$refs.videoPlayerRef.player;
-
-                    // Pause the video before changing the source
+                // Pause the current video
                 player.pause();
-
-                    // Reset the playback time to the beginning
-                player.currentTime(0);
-
-                    // Change the video source to the new URL
+                console.log('Player paused.');
+                            
+                this.renderComponent = false;
+                console.log(this.renderComponent);
+                await this.$nextTick();
+                this.renderComponent = true;
+                
+                // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
                         src: this.selectedItem.videoUrl,
                         type: this.videoType,
                         withCredentials: false,
-                    },
+                    }
                 ];
 
-                    // Load and play the new video
-                // player.load();
-                // player.play().catch((error) => {
-                //     console.error("Error playing video:", error);
-                // });
+                this.playingSubject = subject;
+                console.log('Video source updated.');
 
-                    // Hide the poster image if it's displayed
-                this.$refs.videoPlayerRef.showPoster = false;
-
-                player.src(this.videoOptions.sources);
-                    // Listen for the 'loadedmetadata' event before playing
-                // player.one('loadedmetadata', () => {
-                //     player.pause();
-                //     // Video is loaded, you can perform additional actions if needed
-                //     console.log("Video loaded:", this.selectedItem);
-                // });
-            } else {
-                console.error("Video player reference not found.");
+                // Set the new sources
+                player.src(this.videoOptions.sources);   
             }
         },
 
@@ -457,27 +429,6 @@ export default {
                 return 0;
             }
         },
-        // calculateTime(selectedproductid) {
-        //     const totalTime = this.getTotalTime(selectedproductid);
-        
-        //     if (totalTime) {
-        //         const timeInHours = Math.floor(totalTime / 3600);
-        //         const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-        //         const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-        //         return {
-        //             timeInHours,
-        //             timeInMinutes,
-        //             remainingSeconds
-        //         };
-              
-        //     } else {
-        //         return {
-        //             timeInHours: 0,
-        //             timeInMinutes: 0,
-        //             remainingSeconds: 0
-        //         };
-        //     }
-        // },
         findSubjectById(selectedItem) {
             if (this.myLearning && Array.isArray(this.myLearning)) {
                 for (const topic of this.myLearning) {
@@ -491,20 +442,6 @@ export default {
         },
 
 
-        // findSubjectByMyCourseId(selectedItem) {
-        //     // Implement a method to find a subject by its ID
-        //     // You can replace this with your actual implementation
-        //     for (const topic of Object.values(this.myLearning.subject)) {
-        //         for (const lessons of topic.values) {
-        //             for (const subject of lessons.values) {
-        //                 if (subject.id === selectedItem) {
-        //                     return subject;
-        //                 }
-        //             }
-        //         }
-        //     }    
-        //     return null;
-        // },
         getWatchTime(selectedItem) {
             const watchData = this.findSubjectById(selectedItem);
             return watchData ? watchData.totalWatchTime : 0;
@@ -517,52 +454,6 @@ export default {
             const subject = this.findSubjectById(selectedItem);
             return subject ? parseFloat(subject.totalTimeVideo) : 0;
         },
-
-       
-        handleProductChange(product) {
-            // Update your component's state to display the selected item's details
-            this.selectedproduct = product;
-            if (this.$refs.videoPlayerRef.player) {
-                const player = this.$refs.videoPlayerRef.player;
-                console.log("Switching video");
-
-                // Pause the current video
-                player.pause();
-
-                // Set the new video ID
-                this.videoId = subject.id;
-                console.log(this.videoId);
-
-                // const componentVideo = this.$refs.videoPlayerRef.player;
-                // componentVideo.sendWatchTimeToBackend();
-                // Remove any custom elements (if needed)
-                const customElement = document.getElementById("testid");
-                if (customElement) {
-                    player.el().removeChild(customElement);
-                }
-
-                // Change the video source to the new URL
-                this.videoOptions.sources = [
-                    {
-                        src: this.selectedproduct.videoUrl,
-                        type: this.videoType,
-                        withCredentials: false,
-                    },
-                ];
-
-                this.playingSubject = subject;
-
-                // Show or hide the poster image as needed
-                this.$refs.videoPlayerRef.showPoster = false;
-
-                // Load the new video source
-                player.src(this.videoOptions.sources);
-            }
-
-            console.log(this.videoOptions);
-            console.log(this.selectedproduct);
-        },
-        
     },
     async created() {
 

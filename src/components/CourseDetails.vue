@@ -21,11 +21,11 @@
                                 </nav> -->
                             </div>
                         </div>
-                        <!-- <div class="d-block d-sm-none">
-                            <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" :videoId="videoId" :courseId="courseId" />
+                        <div class="container-fluid" v-if="isMobile">
+                            <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
+                                <video-player class="mobileVideo" :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayer" />
                             </div>
-                        </div> -->
+                        </div>
                         <!-- <div v-if="isMobileView" class="container-fluid">
                             <div class="video_block mb-4" v-if="videoOptions.sources.length>0">
                                 <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayerRef" />
@@ -69,7 +69,7 @@
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i> -->
                                 </div>
-                                <p id="review_text">(23 Reviews)</p>
+                                <p id="review_text">({{ ratingCount || 0 }} Reviews)</p>
                                 <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
                                     &#8377;{{ this.book.discountedPrice }} <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
                                 <div class="Ratings_button_block" v-if="isLoggedIn">
@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade bd-example-modal-sm"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog model-sm" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
@@ -157,7 +157,7 @@
                                                                                 }"
                                                                                 style="margin-right: 10px;"
                                                                             ></i>
-                                                                            <p id="check_text"> {{ lessons.heading }}</p>
+                                                                            <p id="check_text" data-palcement="top" :title="lessons.heading"> {{ lessons.heading.slice(0,16) }}...</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -178,7 +178,7 @@
                                                                                 style="margin-top: 6px;"
                                                                             ></i>
                                                                         </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo('https://dgoa3lo2n1ork.cloudfront.net/360p/Projections_of_Lamina.m3u8', subject)" style="cursor: pointer;">
+                                                                        <div class="col-lg-7 col-10 col-sm-10" @click="switchVideo(subject.url, subject)" style="cursor: pointer;">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -226,9 +226,9 @@
                                                     </div>
                                                 </div>
                                             </div>            
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6" v-if="!isMobile">
                                                 <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" :isSubscribed="userIsSubscribed" ref="videoPlayer" :videoId="videoId" :courseId="courseId" />
+                                                    <video-player :options="videoOptions" v-if="renderComponent" :isSubscribed="userIsSubscribed" ref="videoPlayer" :videoId="videoId" :courseId="courseId" />
                                                 </div>
                                             </div>
                                         </div>
@@ -276,6 +276,9 @@ export default {
     },
     data() {
         return {
+            ratingCount: '',
+            isMobile: window.innerWidth <= 767,
+            renderComponent: true,
             ratings: [],
             rating: '',
             readMore: false,
@@ -325,8 +328,25 @@ export default {
             }
         }
     },
-    methods: {
+    mounted() {
+            // Attach an event listener to the window resize event
+        window.addEventListener('resize', this.handleWindowResize);
+     
+        window.addEventListener('orientationchange', this.handleOrientationChange);
+            // Call the method to initially set the isMobile property
+        this.handleWindowResize();
+    },
+    beforeDestroy() {
+        // Remove the event listener when the component is destroyed to avoid memory leaks
+        window.removeEventListener('orientationchange', this.handleOrientationChange);
 
+        window.removeEventListener('resize', this.handleWindowResize);
+    },
+    methods: {
+        handleWindowResize() {
+            // Update the isMobile property based on the window width
+            this.isMobile = window.innerWidth <= 767;
+        },
         toggleReadMore() {
             this.book.readMore = !this.book.readMore;
         },
@@ -426,16 +446,29 @@ export default {
 
             return false;
         },
-        // getWatchTimeValue(watchTime) {
-        // // Parse the watchTime string (e.g., "03:13 min") and convert it to a numeric value.
-        //     const timeParts = watchTime.split(':');
-        //     const minutes = parseInt(timeParts[0], 10);
-        //     const seconds = parseInt(timeParts[1], 10);
-        //     const totalSeconds = (minutes * 60) + seconds;
-        
-        //     // You can adjust this as needed, but for a percentage out of 100:
-        //     return (totalSeconds / (60 * 3.13)) * 100;
-        // },
+        handleOrientationChange() {
+      // Check if the device is in landscape mode
+      const isLandscape = window.innerWidth > window.innerHeight;
+
+      // If in landscape mode, make the video fullscreen
+      if (isLandscape) {
+        this.makeVideoFullscreen();
+      }
+    },
+    makeVideoFullscreen() {
+      const videoPlayer = this.$refs.videoPlayer;
+
+      // Check if Fullscreen API is supported
+      if (videoPlayer.requestFullscreen) {
+        videoPlayer.requestFullscreen();
+      } else if (videoPlayer.mozRequestFullScreen) {
+        videoPlayer.mozRequestFullScreen();
+      } else if (videoPlayer.webkitRequestFullscreen) {
+        videoPlayer.webkitRequestFullscreen();
+      } else if (videoPlayer.msRequestFullscreen) {
+        videoPlayer.msRequestFullscreen();
+      }
+    },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
@@ -458,42 +491,42 @@ export default {
         },
 
         async switchVideo(newVideoUrl, subject) {
+
             if (this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
 
-                console.log('New Video URL:', newVideoUrl);
-
+                this.videoId = subject.id;
+                console.log(this.videoId);
                 // Pause the current video
                 player.pause();
-
                 console.log('Player paused.');
-
-                player.reset();
-
-                    // Change the video source to the new URL
+            
+                
+                this.renderComponent = false;
+                console.log(this.renderComponent);
+                await this.$nextTick();
+                this.renderComponent = true;
+                
+                // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
                         src: newVideoUrl,
                         type: this.videoType,
                         withCredentials: false,
-                    },
+                    }
                 ];
 
                 this.playingSubject = subject;
-        
                 console.log('Video source updated.');
 
-                // Show or hide the poster image as needed
-                // this.$refs.videoPlayer.showPoster = false;
-
+                // Set the new sources
                 player.src(this.videoOptions.sources);
 
-                //player.load();
-                //player.loop(true);
-                player.play();
-
+                // Try playing the video
+                
             }
         },
+
         isProgressBarComplete(subjectId) {
             const totalTime = parseFloat(this.findSubjectById(subjectId).time);
             const watchTime = this.getWatchTime(subjectId);
@@ -523,6 +556,7 @@ export default {
                 // Handle success (if needed)
                 console.log(response.data);
                 this.rating = '';
+                $('#exampleModal').modal('hide');
             })
             .catch(error => {
                 // Handle error (if needed)
@@ -535,19 +569,13 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data; 
-            try {
-                const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
-                this.watchTimeDatas = result.data;
-                console.log(this.watchTimeDatas);
-            } catch {
-                this.watchTimeDatas = {"id": 0,"userId": this.isusers.sub,"courseId": 0,"watchTimeData": []};
-                console.log(this.watchTimeDatas);
-            }    
+        
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
             const resul = await AxiosInstance.get(`/Ratings/` + this.book.id + "?objectTypeId=5");
-            this.ratings = resul.data;
+            this.ratings = resul.data.averageRating;
+            this.ratingCount = resul.data.ratingCount;
             console.log(this.ratings);
             // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
@@ -555,6 +583,16 @@ export default {
                 this.userIsSubscribed = true;
             } else {
                 this.userIsSubscribed = false;
+            }
+            if(this.userIsSubscribed) {
+                try {
+                    const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
+                    this.watchTimeDatas = result.data;
+                    console.log(this.watchTimeDatas);
+                } catch {
+                    this.watchTimeDatas = {"id": 0,"userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08","courseId": 0,"watchTimeData": []};
+                    console.log(this.watchTimeDatas);
+                }    
             }
             this.videoOptions.sources = [
                 {
@@ -1188,14 +1226,22 @@ input[type=submit] {
     cursor: pointer;
 }
 
-.desktop-video {
-    display: block;
-}
 
 /* CSS for mobile view */
 @media (max-width: 767px) {
-    .desktop-video {
-        display: none;
+    
+    .mobileVideo {
+        width: 335px;
+        margin-left: -6%;
     }
+    
+}
+@media (max-width: 360px) {
+    
+    .mobileVideo {
+        width: 330px;
+        margin-left: -7%;
+    }
+    
 }
 </style>

@@ -12,7 +12,6 @@ import ReadingFile from './components/ReadingFile.vue';
 import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
-import Picture from './components/Picture.vue';
 import Faq from './components/Faq.vue';
 import Search from './components/Search.vue'
 import Searchresults from './components/Searchresults.vue'
@@ -94,100 +93,6 @@ Hub.listen("auth", async data => {
   }
 });
 
-// Hub.listen("auth", async (data) => {
-//     if (data.payload.event === 'signOut'){
-//         user = null;
-//         store.commit('setUser', null);
-//         router.push({path: '/login'});
-//     } else if (data.payload.event === 'signIn') {
-//         user = await getUser();
-//         // await Auth.rememberDevice();
-//         // console.log('Signed in and remembered device');
-//         // if (router.go(-1) > 0) {
-//         //   router.go(-1); // Navigate back to the previous page
-//         // } else {
-//         //   router.push({ path: '/' }); // Navigate to the home page
-//         // }  
-//         // router.push({path: '/'});
-//         store.commit('isLoggedIn', true); 
-//         localStorage.setItem("username", user.signInUserSession.idToken.jwtToken); 
-//         const previousRoute = sessionStorage.getItem('previousRoute');
-//         if (previousRoute) {
-//           router.push(previousRoute); // Navigate to the previously visited page
-//         } else {
-//           router.push({ path: '/' }); // Redirect to the home page
-//         }
-       
-        
-
-//     }
-// });
-// function getUser() {
-//   return Auth.currentAuthenticatedUser().then((data) => {
-//     if (data && data.signInUserSession) {
-//       // Access the user's attributes from AWS Cognito
-//       const userAttributes = data.attributes;
-
-//       // Check if the 'name' attribute is available
-//       const userName = userAttributes.name || 'Default Name';
-//       console.log(userName);
-//       store.commit('setUser', data);
-//       return userName;
-//     }
-//   }).catch(() => {
-//     store.commit('setUser', null);
-//     return null;
-//   });
-// }
-
-// Hub.listen("auth", async (data) => {
-//   if (data.payload.event === 'signOut') {
-//     user = null;
-//     store.commit('setUser', null);
-//     router.push({ path: '/login' });
-//   } else if (data.payload.event === 'signIn') {
-//     const userName = await getUser();
-//     if (userName) {
-//       console.log(`User Name: ${userName}`);
-//     }
-//     if (previousRoute) {
-//       router.push(previousRoute); // Navigate to the previously visited page
-//     } else {
-//       router.push({ path: '/' }); // Redirect to the home page
-//     }
-//   }
-// });
-
-
-// function getUser() {
-//   return Auth.currentAuthenticatedUser()
-//     .then((data) => {
-//       if (data) {
-//         store.commit('setUser', data);
-//         return data;
-//       }
-//     })
-//     .catch(() => {
-//       store.commit('setUser', null);
-//       return null;
-//     });
-// }
-
-// Hub.listen('auth', async (data) => {
-//   if (data.payload.event === 'signIn') {
-//     const user = await getUser();
-//     console.log(user);
-//     console.log("hi");
-//     if (user) {
-//       router.go(-1);
-//       store.commit('isLoggedIn', true);
-//       // Store user data as needed, considering data from Google or Facebook sign-ins.
-//       localStorage.setItem('username', user.signInUserSession.idToken.jwtToken);
-      
-//     }
-//   }
-// });
-
 
 const routes = [
  
@@ -208,14 +113,6 @@ const routes = [
       title: 'Unoco Application',
     },  
   },
-  // {
-  //   path: "/Mylearnings",
-  //   name: "Mylearnings",
-  //   component: Mylearnings,
-  //   meta: {
-  //     title: 'Unoco Application',
-  //   },
-  // },
   {
     path: "/Login",
     name: "LoginPage",
@@ -269,6 +166,16 @@ const routes = [
     path: "/Academia/:name",
     name: "Branches",
     component: Branches,
+    beforeEnter: (to, from, next) => {
+      // Check if the route matches the pattern for dynamic content
+      if (to.params.name && to.params.name.endsWith('.png')) {
+        // If it looks like an image, don't let Vue Router handle it
+        next(false);
+      } else {
+        // Continue with normal route handling
+        next();
+      }
+    },
     meta: {
         title: 'Branches Details Page',
         breadcrumb: {
@@ -293,6 +200,16 @@ const routes = [
     path: "/CollegeDetails/:name",
     name: "Semester",
     component: CollegeDetails,
+    beforeEnter: (to, from, next) => {
+      // Check if the route matches the pattern for dynamic content
+      if (to.params.name && to.params.name.endsWith('.png')) {
+        // If it looks like an image, don't let Vue Router handle it
+        next(false);
+      } else {
+        // Continue with normal route handling
+        next();
+      }
+    },
     meta: {
         title: 'College Semaster details Page',
         // breadcrumb: 'CollegeDetails'
@@ -302,6 +219,16 @@ const routes = [
     path: "/CourseDetails/:name",
     name: "CourseDetails",
     component: CourseDetails,
+    beforeEnter: (to, from, next) => {
+      // Check if the route matches the pattern for dynamic content
+      if (to.params.name && to.params.name.endsWith('.png')) {
+        // If it looks like an image, don't let Vue Router handle it
+        next(false);
+      } else {
+        // Continue with normal route handling
+        next();
+      }
+    },
     meta: {
         title: 'Semaster details Page',
         // breadcrumb: CourseDetails
@@ -319,6 +246,16 @@ const routes = [
     path: "/Universities/:name",
     name: "Universities",
     component: Universities,
+    beforeEnter: (to, from, next) => {
+      // Check if the route matches the pattern for dynamic content
+      if (to.params.name && to.params.name.endsWith('.png')) {
+        // If it looks like an image, don't let Vue Router handle it
+        next(false);
+      } else {
+        // Continue with normal route handling
+        next();
+      }
+    },
     meta: {
         title: 'Universities Upload Page',
         // breadcrumb: route => route.params.id
@@ -328,6 +265,16 @@ const routes = [
     path: "/Instructor/:name",
     name: "Instructor",
     component: Instructor,
+    beforeEnter: (to, from, next) => {
+      // Check if the route matches the pattern for dynamic content
+      if (to.params.name && to.params.name.endsWith('.png')) {
+        // If it looks like an image, don't let Vue Router handle it
+        next(false);
+      } else {
+        // Continue with normal route handling
+        next();
+      }
+    },
     meta: {
         title: 'Instructor Page',
         // breadcrumb: 'Instructor'
@@ -379,14 +326,6 @@ const routes = [
     component: GetSupport,
     meta: {
         title: 'ContactUs Page',
-    },
-  },
-  {
-    path: "/Picture",
-    name: "Picture",
-    component: Picture,
-    meta: {
-        title: 'Picture Page',
     },
   },
   {

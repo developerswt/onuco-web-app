@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
                                         <h5 id="prof_text">{{ this.faculty.name }}</h5>
-                                        <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p>
+                                        <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> ({{ ratingCount || 0 }} reviews) </p>
                                         <div class="social-icons">
                                             <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
                                             <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
@@ -53,6 +53,26 @@
                                             <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
                                         </div>
                                     </div>
+                                    <div class="modal fade bd-example-modal-sm"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form @submit.prevent="submitRating">
+                                            <label for="rating">Rate the faculty member :</label><br>
+                                            <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
+                                            <el-rate v-model="rating" size="large" allow-half /><br>
+                                            <input type="submit" value="Submit">
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                                 </div>
 
 
@@ -61,26 +81,7 @@
                         </div>
 
                     </div>
-                    <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="submitRating">
-                                        <label for="rating">Rate the faculty member :</label><br>
-                                        <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
-                                        <el-rate v-model="rating" size="large" allow-half /><br>
-                                        <input type="submit" value="Submit">
-                                    </form> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
                     <!-- <div class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
                         
@@ -482,6 +483,8 @@ export default {
     },
     data() {
         return {
+            ratingCount: '',
+            modalShow: false,
             rating: '',
             readMore: false,
             isLoading: false,
@@ -552,7 +555,12 @@ export default {
         },
     },
     methods: {
-
+        openModal() {
+            this.modalShow = true;
+        },
+        closeModal() {
+            this.modalShow = false;
+        },
         toggleReadMore() {
             this.faculty.readMore = !this.faculty.readMore;
         },
@@ -575,6 +583,7 @@ export default {
                 // Handle success (if needed)
                 console.log(response.data);
                 this.rating = '';
+                $('#exampleModal').modal('hide');
             })
             .catch(error => {
                 // Handle error (if needed)
@@ -589,7 +598,8 @@ export default {
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
             const result = await axiosInstance.get(`/Ratings/` + this.faculty.id + "?objectTypeId=4");
-            this.ratings = result.data;
+            this.ratings = result.data.averageRating;
+            this.ratingCount = result.data.ratingCount;
             console.log(this.ratings);
         } catch (error) {
             console.log(error);
@@ -1171,6 +1181,7 @@ input[type=submit] {
     color: white;
     cursor: pointer;
 }
+
 .star-rating {
     font-size: 24px;
 }
@@ -1179,12 +1190,14 @@ input[type=submit] {
         margin-left: 109%;
         cursor: pointer;
     }
+
 }
 @media screen and (max-width: 912px) {
     .Ratings_button_block {
         margin-left: 34%;
         cursor: pointer;
     }
+    
 }
 @media screen and (min-width: 500px) and (max-width: 540px) {
     .Ratings_button_block {

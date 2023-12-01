@@ -26,7 +26,7 @@
                             
                             <div class="mn text-left">
                                 <p>
-                                    (23 Reviews) 
+                                    ({{ facult.ratingCount || 0 }} Reviews) 
                                     <StarRatings :rating="facult.starRating" :max-rating="5" />
                                 </p>
                                
@@ -70,7 +70,9 @@ export default {
             const res = await axiosInstance.get(`/Faculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
-                facult.starRating = await this.getByRatings(facult.id);
+                const res = await this.getByRatings(facult.id);
+                facult.starRating = res.averageRating;
+                facult.ratingCount = res.ratingCount;
             }
 
         } catch (error) {

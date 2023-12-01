@@ -31,7 +31,7 @@
                             
                                 <div class="mn text-left">
                                     <p>
-                                        (23 Reviews)
+                                        ({{ facult.ratingCount || 0 }} Reviews)
                                         <StarRatings :rating="facult.starRating" :max-rating="5" />
                                     </p>
                                     <!-- <i class="fa fa-star"></i>
@@ -91,7 +91,7 @@ export default defineComponent ({
     data: () => ({
         faculty: [],
         // Ratings: [],
-   
+        ratingScore: '',
         settings: {
             itemsToShow: 1,
             snapAlign: 'center',
@@ -127,7 +127,10 @@ export default defineComponent ({
             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
-                facult.starRating = await this.getByRatings(facult.facultyId);
+                const res = await this.getByRatings(facult.facultyId);
+                facult.starRating = res.averageRating;
+                facult.ratingCount = res.ratingCount;
+                
             }
 
         } catch (error) {
@@ -376,7 +379,7 @@ export default defineComponent ({
 .fa-chevron-left {
     position: absolute;
     /* top: 100px; */
-    left: -1px;
+    left: 13px;
     font-size: 14px;
     outline: none;
 } 
@@ -385,6 +388,7 @@ export default defineComponent ({
 	
     margin-top: 34px;
     margin-bottom: -22px;
+    padding-left: 15px;
     /* padding: 7px; */
 }
 .carousel__item {
