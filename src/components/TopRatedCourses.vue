@@ -1,6 +1,6 @@
 <template>
-    <div class="container-fluid category-test pt-3">
-        <div class="container">
+    <div class="container-fluid category-test pt-3" style="padding-left: 0px;">
+        <div class="container" style="padding-left: 0px;">
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Top</span>Rated Courses
@@ -172,6 +172,7 @@
     </section>
 </template>
 
+
 <script>
 import axiosInstance from '../config/axiosInstance'
 import axios from 'axios';
@@ -257,7 +258,7 @@ export default {
     methods: {
         async getByRatings(courseId) {
             try {
-                const result = await axiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
+                const result = await axiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
                 return result.data;
             } catch (error) {
                 console.error(error);
@@ -271,6 +272,10 @@ export default {
 
 
 <style scoped>
+/* .container-fluid category-test pt-3{
+    padding-left: 0%;
+} */
+
 .category-test a {
     text-decoration: none;
 }
@@ -470,7 +475,7 @@ export default {
 
 .academic_head_text {
     color: #006acd;
-    /* padding-left:20px; */
+    padding-left:0px;
     font-size: 20px;
 
 }

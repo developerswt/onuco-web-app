@@ -573,7 +573,7 @@ export default {
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
-            const resul = await AxiosInstance.get(`/Ratings/` + this.book.id + "?objectTypeId=5");
+            const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
             this.ratings = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
             console.log(this.ratings);

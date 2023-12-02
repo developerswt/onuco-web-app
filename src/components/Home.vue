@@ -14,7 +14,7 @@
                 <TopRatedCourses />
             </div>
         </div>
-        <div class="container-fluid" id="third_container" style="height: 300px;">
+        <div class="container-fluid" id="third_container" style="height: 290px;">
             <div class="container">
                 <BestLecture />
             </div>
@@ -37,7 +37,7 @@
         </div>
     </div>
     <!-- <div class="text-center" >
-        <img src="../assets/images/add.png" style="width: 80%; height: 100%;">
+        <img src="../assets/images/add.png"  style="width: 80%; height: 100%;">
     </div> -->
     <div class="container-fluid add1">
   <div class=" container col-md-5">

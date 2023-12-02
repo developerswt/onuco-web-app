@@ -2,7 +2,7 @@
 
 <template>
     <div class="container-fluid" >
-        <div class="container" id="offer_block">
+        <div class="container-fluid" id="offer_block">
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Refer</span>And Learn Free
@@ -89,6 +89,7 @@ export default {
     text-align: right;
 }
 
+
 @media screen and (max-width: 768px) {
     .box {
        
@@ -153,7 +154,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
-    padding-left:15px;
+    padding-left: 10.3em;
 
 }
 

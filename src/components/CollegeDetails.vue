@@ -88,7 +88,7 @@
                                                     <i class="fa fa-star-o"></i> -->
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text" style="color: #828282;">(23 reviews)</p>
+                                                            <p id="review_text" style="color: #828282;">({{ cou.ratingCount || 0 }} reviews)</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,6 +195,7 @@ export default {
     },
     data() {
         return {
+            ratingCount: '',
             isLoading: false,
             semester: [],
             course: [],
@@ -215,9 +216,13 @@ export default {
             console.log(this.course)
             // this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
             // console.log(this.course);
-            for (const course of this.course) {
-                course.starRating = await this.getByRatings(course.id);
-            }
+            // for (const course of this.course) {
+            //     const res = await this.getByRatings(course.id);
+            //     course.starRating = res.averageRating;
+            //     console.log(course.starRating);
+            //     this.ratingCount = res.ratingCount;
+            //     console.log(this.ratingCount);
+            // }
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -229,21 +234,40 @@ export default {
     methods: {
         async getByRatings(courseId) {
             try {
-                const result = await AxiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
+                const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
                 return result.data;
             } catch (error) {
                 console.error(error);
                 return 0; // or handle error accordingly
             }
         },
-        async updateStarRatings() {
-            for (const course of this.course) {
-                course.starRating = await this.getByRatings(course.id);
-            }
-        },
         filteredCourses(semesterId) {
-            return this.course.filter(c => c.semesterId === semesterId);
-        },
+        const filteredCourses = this.course.filter(c => c.semesterId === semesterId);
+        this.updateStarRatings(filteredCourses);
+        return filteredCourses;
+    },
+
+    async updateStarRatings(filteredCourses) {
+        for (const course of filteredCourses) {
+            const res = await this.getByRatings(course.id);
+            course.starRating = res.averageRating;
+            console.log(course.starRating);
+            course.ratingCount = res.ratingCount;
+            console.log(course.ratingCount);
+        }
+    },
+        // async updateStarRatings() {
+        //     for (const course of this.course) {
+        //         const res = await this.getByRatings(course.id);
+        //         course.starRating = res.averageRating;
+        //         console.log(course.starRating);
+        //         this.ratingCount = res.ratingCount;
+        //         console.log(this.ratingCount);
+        //     }
+        // },
+        // filteredCourses(semesterId) {
+        //     return this.course.filter(c => c.semesterId === semesterId);
+        // },
     }    
         // async getByRatings(courseId) {
         //     try {

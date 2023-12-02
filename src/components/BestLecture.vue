@@ -1,6 +1,6 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container">
+        <div class="container" >
             <h4 class="academic_head_text">
                 <span id="aca_text">Best</span>Lecturers
                 <router-link to="/BestFaculty">See all</router-link>
@@ -31,7 +31,7 @@
                             
                                 <div class="mn text-left">
                                     <p>
-                                        ({{ facult.ratingCount || 0 }} Reviews)
+                                        (23 Reviews)
                                         <StarRatings :rating="facult.starRating" :max-rating="5" />
                                     </p>
                                     <!-- <i class="fa fa-star"></i>
@@ -69,6 +69,7 @@
         
 
 </template>
+
 
 <script>
 import axiosInstance from '../config/axiosInstance'
@@ -140,7 +141,7 @@ export default defineComponent ({
     methods: {
         async getByRatings(facultyId) {
             try {
-                const result = await axiosInstance.get(`/Ratings/${facultyId}?objectTypeId=4`);
+                const result = await axiosInstance.get(`/Ratings?id=${facultyId}&objectTypeId=4`);
                 return result.data;
             } catch (error) {
                 console.error(error);
@@ -288,11 +289,14 @@ export default defineComponent ({
     margin: 0 14px 30px;
 }
 
-.academic_head_text {
+ .academic_head_text {
     color: #006acd;
-    /* padding-left: 20px; */
+    padding-left: 0px;
     font-size: 20px;
+}
 
+.container{
+    padding: 0%;
 }
 
 @media only screen and (min-width: 540px) and (max-width: 600px) {
@@ -379,7 +383,7 @@ export default defineComponent ({
 .fa-chevron-left {
     position: absolute;
     /* top: 100px; */
-    left: 13px;
+    left: -1px;
     font-size: 14px;
     outline: none;
 } 
@@ -388,7 +392,6 @@ export default defineComponent ({
 	
     margin-top: 34px;
     margin-bottom: -22px;
-    padding-left: 15px;
     /* padding: 7px; */
 }
 .carousel__item {

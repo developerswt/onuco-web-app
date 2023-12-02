@@ -46,6 +46,7 @@
     
 </template>
 
+
 <script>
 import { defineComponent } from 'vue'
 import axiosInstance from '../config/axiosInstance'
@@ -139,8 +140,6 @@ export default defineComponent ({
 }) 
 </script>
 
-
-
 <style scoped>
 .category-test a {
     text-decoration: none;
@@ -152,6 +151,7 @@ export default defineComponent ({
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
     padding-right:20px;
+    padding-left: 0px;
 }
 
 .kkj img {
@@ -393,8 +393,8 @@ router-link {
 
 .academic_head_text {
     color: #006acd;
-    padding-left: 10px;
-    
+    padding-left: 0px;
+
     font-size: 20px;
 
 }
@@ -422,4 +422,6 @@ router-link {
 } */
 
 </style>
+
+
 

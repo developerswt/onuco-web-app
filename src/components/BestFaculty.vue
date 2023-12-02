@@ -85,7 +85,7 @@ export default {
     methods: {
         async getByRatings(facultyId) {
             try {
-                const result = await axiosInstance.get(`/Ratings/${facultyId}?objectTypeId=4`);
+                const result = await axiosInstance.get(`/Ratings?id=${facultyId}&objectTypeId=4`);
                 return result.data;
             } catch (error) {
                 console.error(error);
