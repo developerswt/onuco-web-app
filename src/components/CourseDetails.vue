@@ -577,7 +577,6 @@ export default {
             this.ratings = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
             console.log(this.ratings);
-            // const currentUserSubId = this.getCurrentUserCognitoId();
             // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
                 this.userIsSubscribed = true;
