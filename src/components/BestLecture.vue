@@ -6,13 +6,11 @@
                 <router-link to="/BestFaculty">See all</router-link>
             </h4>
         </div>
-    
     </div>
     <div class="container-fluid">
         <!-- <div class="row pt-5"> -->
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="facult in faculty" :key="facult.id">
-                        
                     <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }" style="cursor: pointer; text-decoration: none;">
                         <div class="card">
                             <div class="user-follower">
@@ -31,17 +29,9 @@
                             
                                 <div class="mn text-left">
                                     <p>
-                                        (23 Reviews)
-                                        <StarRatings :rating="facult.starRating" :max-rating="5" />
+                                        ({{ facult.ratingCount || 0 }} Reviews)
+                                        <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
                                     </p>
-                                    <!-- <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> -->
-                                
-                               
-                
                                 </div>
                             </div>
                         </div>
@@ -62,12 +52,7 @@
                         
                 </template>
             </carousel>
-                
-               
         </div>
-        
-        
-
 </template>
 
 
@@ -149,13 +134,6 @@ export default defineComponent ({
             }
         },
     }
-
-    // mounted() {
-    //     this.$gtm.trackView('MyScreenName1', this.$route.path);
-    // },
-    
-  
-
 })
 </script>
 
@@ -165,7 +143,6 @@ export default defineComponent ({
 .category-test a {
     text-decoration: none;
 }
-
 .category-test h4 a {
     float: right;
     color: #0d4b7e;
@@ -173,21 +150,6 @@ export default defineComponent ({
     font-family: 'Noto Sans', sans-serif;
   
 }
-
-/* .user-icon {
-    width: 30%;
-    height: 30%;
-   
-    
-} */
-/* .follower {
-    position: relative;
-    top: -110px;
-    line-height: 90%;
-}
-.follower span {
-    font-size: 14px;
-} */
 .user-follower img {
     width: 60px;
     height: 60px;
@@ -200,24 +162,19 @@ export default defineComponent ({
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
 }
-
 .user-follower {
     position: absolute;
     top: -35px;
 }
-
-
 .user-following p {
     position: relative;
     top: -32px;
-    
     font-size: 14px;
     text-align: right;
     width: 100%;
     line-height: 2%;
     color: #707070;
 }
-
 .card-title {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -228,7 +185,6 @@ export default defineComponent ({
     opacity: 1;
 
 }
-
 .demo-rate-block {
     padding: 30px 0;
     text-align: center;
@@ -237,22 +193,18 @@ export default defineComponent ({
     width: 49%;
     box-sizing: border-box;
 }
-
 .demo-rate-block:last-child {
     border-right: none;
 }
-
 .demo-rate-block .demonstration {
     display: block;
     color: var(--el-text-color-secondary);
     font-size: 14px;
     margin-bottom: 20px;
 }
-
 .mn {
     padding-top: 20px;
 }
-
 .mn p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -264,41 +216,31 @@ export default defineComponent ({
     margin: 0%;
     opacity: 1;
 }
-
 .mn .star-rating {
     float: right;
     margin-top: 0%;
     margin-left: 4%;
 }
-
-
-
 .col-md-3 {
     margin-bottom: 3%;
 }
-
 .card {
-    
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
     width: 90%;
-    /* margin-top: 10%; */
     padding: 0px;
     margin: 0 14px 30px;
 }
-
- .academic_head_text {
+.academic_head_text {
     color: #006acd;
     padding-left: 0px;
     font-size: 20px;
 }
-
 .container{
     padding: 0%;
 }
-
 @media only screen and (min-width: 540px) and (max-width: 600px) {
     .card {
         width: 50%;
@@ -312,9 +254,7 @@ export default defineComponent ({
 .mn .fa {
     color: orange;
 }
-
 @media (max-width: 768px) {
- 
     .card-body
     {
         margin-top:0 !important;
@@ -345,8 +285,6 @@ export default defineComponent ({
 
 }
 .card-text{
-    /* overflow-y: scroll; */
-    /* height:75px; */
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-aeaeae);
@@ -361,7 +299,6 @@ export default defineComponent ({
     width: 0.5em; /* Adjust this to change the width of the scrollbar track */
 }
 
-/* Firefox */
 * {
     scrollbar-width: none; /* "thin" or "none" depending on your preference */
 }
@@ -375,14 +312,12 @@ export default defineComponent ({
 }
 .fa-chevron-right{
     position: absolute;
-    /* top: 100px; */
     right: -3px;
     font-size: 14px;
     outline: none;
 }
 .fa-chevron-left {
     position: absolute;
-    /* top: 100px; */
     left: -1px;
     font-size: 14px;
     outline: none;
@@ -404,11 +339,6 @@ export default defineComponent ({
   justify-content: center;
   align-items: center;
 }
-
-/* .carousel__slide {
-  padding: 10px;
-} */
-
 .carousel__prev,
 .carousel__next {
     margin-left: -20px;
@@ -444,11 +374,6 @@ export default defineComponent ({
     margin-top: 0%;
     margin-left: 4%;
 }
-/* @media only screen {
-    .carousel{
-    padding: 26px;
-}  
-} */
 .text-right{
     position: relative;
     bottom: 11px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :showSearchBox="showSearchBox" />
+    <Navbar :showSearchBox="true" />
     <router-view :key="$route.fullPath" />
     <Footer />
   </div>

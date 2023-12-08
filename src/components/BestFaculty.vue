@@ -27,7 +27,7 @@
                             <div class="mn text-left">
                                 <p>
                                     ({{ facult.ratingCount || 0 }} Reviews) 
-                                    <StarRatings :rating="facult.starRating" :max-rating="5" />
+                                    <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
                                 </p>
                                
                 
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>        
-        <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
+        <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>        
         <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
 </template>
 

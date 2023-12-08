@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container" />
-        <div class="container">
+        <div class="container" v-if="this.branches.length > 0 || this.academia.length > 0">
             <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
         <div class="parent_blocks">
             <div class="row pt-4">
@@ -22,11 +22,14 @@
             </div>
         </div>
         </div>
+        <div class="" v-else>
+            <h2 style="text-align: center;margin-bottom: 10%; margin-top: 10%;">Comming Soon ...</h2>
+        </div>
      
     </div>            
 
 
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
@@ -78,126 +81,6 @@ $(document).ready(function(){
 
 </script>
 
-<!-- <style scoped>
-.jk {
-    padding: 7% 0% 6% 12%;
-}
-
-@media only screen and (max-width: 768px) {
-    .academic_head_text {
-        font-size: 18px;
-        padding: 0 !important;
-
-    }
-
-    .container-fluid {
-        padding: 100px 20px 20px 20px;
-    }
-
-    .box {
-        width: 250px !important;
-    }
-}
-
-
-@media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
-        padding-top: 11%;
-    }
-
-    .academic_head_text {
-        font-size: 18px;
-        padding: 0 !important;
-
-    }
-}
-
-@keyframes slide1 {
-
-    0%,
-    100% {
-        transform: translate(0, 0);
-    }
-
-    50% {
-        transform: translate(10px, 0);
-    }
-}
-
-.arrow1 {
-    animation: slide1 1s ease-in-out infinite;
-    margin-left: 9px;
-}
-
-.kl {
-    border-radius: 25px;
-    background: #0d4b7e;
-    color: #fff;
-    font-weight: normal;
-    margin-top: 2%;
-}
-
-.kl:hover {
-    color: black;
-    background-color: white;
-}
-
-.parent_block {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding-top: 5%;
-}
-
-
-
-.academic_head_text {
-    color: #006acd;
-    padding: 0px 60px 0px 0px;
-
-
-}
-
-
-#aca_text {
-    color: #006acd;
-    font-weight: bold;
-
-}
-
-
-
-.box {
-
-    height: 95px;
-    width: 305px;
-    box-shadow: 0px 0px 6px #000000;
-    border-radius: 40px 40px 80px 40px;
-    border: 1px solid #FFFFFF;
-    cursor: pointer;
-    margin-bottom: 1%;
-    margin: 20px;
-    padding-left: 15px;
-
-}
-
-.box h5 {
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
-    letter-spacing: 0px;
-    color: #0066CC;
-    opacity: 1;
-}
-
-.box p {
-    font-size: 14px;
-    text-align: left;
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 0.49;
-}
-</style> -->
 <style scoped>
 .jk {
     padding-top:70px;

@@ -61,44 +61,41 @@
 
 
                                 <div class="icon_blck">
-                                    <StarRatings :rating="ratings" :max-rating="5" />
+                                    <StarRatings :rating="ratings !== undefined ? ratings : 0" :max-rating="5" />
 
                                     <!-- <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i>
                                     <i class="fa-solid fa-star" style="color: #ff9900;"></i> -->
+                                    <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
-                                <p id="review_text">({{ ratingCount || 0 }} Reviews)</p>
+                                
                                 <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
                                     &#8377;{{ this.book.discountedPrice }} <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
-                                <div class="Ratings_button_block" v-if="isLoggedIn">
+                                <!-- <div class="Ratings_button_block" v-if="isLoggedIn">
                                     <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                        <div class="modal fade bd-example-modal-sm"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog model-sm" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                        <div class="app1">
+                            <div v-if="isPopupVisible" class="popup">
+                                <div class="popup-content">
+                                    <div class="">
+                                        <span @click="closePopup" class="close">&times;</span>
+                                        <h5>Ratings System</h5>
                                     </div>
-                                    <div class="modal-body">
-                                        <form @submit.prevent="submitRating">
-                                            <label for="rating">Rate the faculty member :</label><br>
-                                            <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
-                                            <el-rate v-model="rating" size="large" allow-half /><br>
-                                            <input type="submit" value="Submit">
-                                        </form> 
-                                    </div>
+                                    <hr>    
+                                    <form @submit.prevent="submitRating">
+                                        <label for="rating">Rate the faculty :</label><br>
+                                        <el-rate v-model="rating" size="large" allow-half /><br>
+                                        <input type="submit" value="Submit">
+                                    </form>
+                                    <!-- Add your popup content here -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
 
@@ -201,10 +198,10 @@
                                                                             <div class="inside_block">
                                                                                 <div class="progress-container" @click="switchVideo(subject.url, subject)">
                                                                                     <div class="progress_block" v-if="hasMatchingVideoId(subject.id)">
-                                                                                        <el-progress type="circle" :show-text="false" :percentage="calculatePercentage(subject.id)" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                        <el-progress type="circle" :show-text="false" :percentage="calculatePercentage(subject.id)" :color="'#FF9924'"  :width="30" :stroke-width="2"></el-progress>
                                                                                     </div>
                                                                                     <div class="progress_block" v-else>
-                                                                                        <el-progress type="circle" :show-text="false" :percentage="0" :color="'#FF9924'"  :width="30" stroke-width="2"></el-progress>
+                                                                                        <el-progress type="circle" :show-text="false" :percentage="0" :color="'#FF9924'"  :width="30" :stroke-width="2"></el-progress>
                                                                                     </div>
                                                                                         
                                                                                 </div>
@@ -250,7 +247,7 @@
             </div>
         </div>        
     </div>
-   <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>        
+   <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>        
    <div class="container-fluid cf"></div>
 </template>
 
@@ -288,6 +285,7 @@ export default {
             userIsSubscribed: false,
             courseDetails: null,
             playingSubject: null,
+            isPopupVisible: false,
             watchTimeDatas: [],
             activeName: 'first',
             book: [],
@@ -343,6 +341,12 @@ export default {
         window.removeEventListener('resize', this.handleWindowResize);
     },
     methods: {
+        showPopup() {
+      this.isPopupVisible = true;
+    },
+    closePopup() {
+      this.isPopupVisible = false;
+    },
         handleWindowResize() {
             // Update the isMobile property based on the window width
             this.isMobile = window.innerWidth <= 767;
@@ -556,7 +560,7 @@ export default {
                 // Handle success (if needed)
                 console.log(response.data);
                 this.rating = '';
-                $('#exampleModal').modal('hide');
+                this.closePopup();
             })
             .catch(error => {
                 // Handle error (if needed)
@@ -1224,7 +1228,64 @@ input[type=submit] {
     color: white;
     cursor: pointer;
 }
+.popup h5 {
+    color: #006acd;
+    font-weight: bold;
+    text-align: left;
+}
 
+#app1 {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 900; /* Set a z-index lower than the popup but higher than the content */
+  display: none;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  width: 70%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width */
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .popup {
+    width: 90%; /* Adjust the width for smaller screens */
+  }
+}
 
 /* CSS for mobile view */
 @media (max-width: 767px) {

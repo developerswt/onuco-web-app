@@ -61,7 +61,7 @@ function getUser() {
     })
     .catch(error => {
       console.error(error);
-        return null;
+      return null;
     });
 }
 
@@ -69,19 +69,27 @@ Hub.listen("auth", async data => {
   if (data.payload.event === 'signOut') {
     user = null;
     store.commit('setUser', null);
-    router.push({path: '/login'});
+    router.push({ path: '/login' });
     // Handle sign-out actions
   } else if (data.payload.event === 'signIn') {
     user = await getUser();
+
+    // Display login details
+    console.log("Login details:");
+    console.log("Username:", user.username);
+    console.log("Last access to application:", new Date());
+
     // Handle sign-in actions, e.g., store.commit('isLoggedIn', true)
-    store.commit('isLoggedIn', true); 
+    store.commit('isLoggedIn', true);
+
     // Access the entire user attribute details
     const attributes = user.attributes;
     console.log(attributes);
+
     // Store the user data in your state, for example:
     store.commit('setUser', user); // Commit user data to the store
 
-    localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload); 
+    localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload);
     const previousRoute = sessionStorage.getItem('previousRoute');
     if (previousRoute) {
       router.push(previousRoute); // Navigate to the previously visited page
@@ -92,6 +100,106 @@ Hub.listen("auth", async data => {
     // Continue with your application logic
   }
 });
+
+// function getUser() {
+//   return Auth.currentAuthenticatedUser()
+//     .then(data => {
+//       if (data && data.signInUserSession) {
+//         return data;
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       return null;
+//     });
+// }
+
+// Hub.listen("auth", async data => {
+//   if (data.payload.event === 'signOut') {
+//     user = null;
+//     store.commit('setUser', null);
+//     router.push({path: '/login'});
+//     // Handle sign-out actions
+//   } else if (data.payload.event === 'signIn') {
+//     user = await getUser();
+    
+//     // Get the last login time
+//     const lastLoginTime = user?.signInUserSession?.idToken?.payload?.auth_time;
+//     console.log('Last Login Time:', lastLoginTime);
+
+//     const lastExpTime = user?.signInUserSession?.idToken?.payload?.exp;
+//     console.log('Exp Time:', lastExpTime);
+
+//     const lastJtiTime = user?.signInUserSession?.idToken?.payload?.jti;
+//     console.log('Jti :', lastJtiTime);
+//     // Get the user status (e.g., "FORCE_CHANGE_PASSWORD", "RESET_REQUIRED", etc.)
+//     const userStatus = user?.attributes?.['cognito:user_status'];
+//     console.log('User Status:', userStatus);
+
+//     // Handle sign-in actions, e.g., store.commit('isLoggedIn', true)
+//     store.commit('isLoggedIn', true);
+
+//     // Access the entire user attribute details
+//     const attributes = user.attributes;
+//     console.log(attributes);
+
+//     // Store the user data in your state, for example:
+//     store.commit('setUser', user); // Commit user data to the store
+
+//     localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload);
+
+//     const previousRoute = sessionStorage.getItem('previousRoute');
+//     if (previousRoute) {
+//       router.push(previousRoute); // Navigate to the previously visited page
+//     } else {
+//       router.push({ path: '/' }); // Redirect to the home page
+//     }
+
+//     // Continue with your application logic
+//   }
+// });
+
+
+// function getUser() {
+//   return Auth.currentAuthenticatedUser()
+//     .then(data => {
+//       if (data && data.signInUserSession) {
+//         return data;
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//         return null;
+//     });
+// }
+
+// Hub.listen("auth", async data => {
+//   if (data.payload.event === 'signOut') {
+//     user = null;
+//     store.commit('setUser', null);
+//     router.push({path: '/login'});
+//     // Handle sign-out actions
+//   } else if (data.payload.event === 'signIn') {
+//     user = await getUser();
+//     // Handle sign-in actions, e.g., store.commit('isLoggedIn', true)
+//     store.commit('isLoggedIn', true); 
+//     // Access the entire user attribute details
+//     const attributes = user.attributes;
+//     console.log(attributes);
+//     // Store the user data in your state, for example:
+//     store.commit('setUser', user); // Commit user data to the store
+
+//     localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload); 
+//     const previousRoute = sessionStorage.getItem('previousRoute');
+//     if (previousRoute) {
+//       router.push(previousRoute); // Navigate to the previously visited page
+//     } else {
+//       router.push({ path: '/' }); // Redirect to the home page
+//     }
+
+//     // Continue with your application logic
+//   }
+// });
 
 
 const routes = [

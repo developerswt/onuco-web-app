@@ -35,7 +35,7 @@
                                     </div> <br>
                                     <div class="row">
                                         <div class="col-sm-6  star">
-                                            <StarRatings :rating="course.starRating" :max-rating="5" />
+                                            <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                         </div>
                                         <div class="col-sm-6" >
                                             <a href="#" class="btn btn-primary" >Buy Now</a>
@@ -51,12 +51,12 @@
                 </slide>
                 <template #addons>         
                     <navigation >
-                        <template #next>
+                        <!-- <template #next>
                             <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
                         </template>
                         <template #prev>
                             <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
+                        </template> -->
                     </navigation>
                 
                 </template>

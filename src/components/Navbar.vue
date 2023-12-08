@@ -121,7 +121,7 @@ export default {
     name: "NavbarView",
     props: {
         showSearchBox: Boolean,
-        showSearchBoxes:Boolean
+        showSearchBoxesProp:Boolean
     },
     data() {
         return {

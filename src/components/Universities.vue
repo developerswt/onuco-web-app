@@ -1,7 +1,7 @@
 <template>
     <div class="container jk">
         <Breadcrumbs class="container" />
-        <div class="parent_block" >
+        <div class="parent_block" v-if="this.university.length > 0">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
@@ -28,10 +28,12 @@
             </div>
         </div>
         </div>
-    
+        <div class="" v-else>
+            <h2 class="comming_soon">Comming Soon ...</h2>
+        </div>
      
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
@@ -70,13 +72,19 @@ export default {
         }
     },
 }
-// $(document).ready(function(){
-//   $('[data-toggle="tooltip"]').tooltip();   
-// });
+
 
 </script>
 
 <style scoped>
+.comming_soon {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
 .jk {
     padding-top:70px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -263,5 +271,4 @@ export default {
     margin-bottom: 61px;
 }
 }
-
 </style>

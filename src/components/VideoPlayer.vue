@@ -46,8 +46,14 @@ export default {
   
   mounted() {
     
-    videojs.registerPlugin('qualityLevels', qualityLevels);
-    videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
+    if (!videojs.getPlugin('qualityLevels')) {
+      videojs.registerPlugin('qualityLevels', qualityLevels);
+    }
+
+      // Check if the 'hlsQualitySelector' plugin is not already registered
+    if (!videojs.getPlugin('hlsQualitySelector')) {
+      videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
+    }
 
    this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);

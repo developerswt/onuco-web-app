@@ -1,13 +1,13 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container"/>
-        <div class="container">
+        <div class="container" v-if="this.semester.length > 0">
             <h4 class="academic_head_text mt-4">
             <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
             <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
         </h4> 
        
-        <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
+        <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
         <!-- <div class="container pt-4">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Available</b></span> Semesters (0)
@@ -35,7 +35,7 @@
                                 <p style="font-size: 14px;">{{ sem.description }}</p>
                         </a>
                     </h5> -->
-                    <div  :id="'collapse-example' + index" :class="index==0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
+                    <div  :id="'collapse-example' + index" :class="index==0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse" v-if="filteredCourses(sem.id).length > 0">
                         <div class="card-body pt-0">
                             <div class="">
                             <div class="row kl">
@@ -81,7 +81,7 @@
                                                 <div class="col-lg-12 mn1">
                                                     <div class="row aa">
                                                         <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <StarRatings :rating="cou.starRating" :max-rating="5" />
+                                                            <StarRatings :rating="cou.starRating || 0" :max-rating="5" />
                                                             <!-- <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-half-full"></i>
@@ -101,6 +101,10 @@
                             </div>
                         </div>
                     </div>
+                    <div  :id="'collapse-example' + index" :class="index==0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse" v-else style="background-color: #EFF5FC;">
+                        <h2 class="comming_soons">Comming Soon ...</h2>
+                    </div>
+
                     <!-- <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
                         <div class="card-body pt-0">
                             <div class="">
@@ -169,10 +173,12 @@
             </div>
         </div>
         </div>
-
+        <div class="" v-else>
+            <h2 class="comming_soon">Comming Soon ...</h2>
+        </div>
     </div>
 
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
@@ -242,20 +248,21 @@ export default {
             }
         },
         filteredCourses(semesterId) {
-        const filteredCourses = this.course.filter(c => c.semesterId === semesterId);
-        this.updateStarRatings(filteredCourses);
-        return filteredCourses;
-    },
+            const coursesArray = Array.isArray(this.course) ? this.course : [];
+            const filteredCourses = coursesArray.filter(c => c.semesterId === semesterId);
+            this.updateStarRatings(filteredCourses);
+            return filteredCourses;
+        },
 
-    async updateStarRatings(filteredCourses) {
-        for (const course of filteredCourses) {
-            const res = await this.getByRatings(course.id);
-            course.starRating = res.averageRating;
-            console.log(course.starRating);
-            course.ratingCount = res.ratingCount;
-            console.log(course.ratingCount);
-        }
-    },
+        async updateStarRatings(filteredCourses) {
+            for (const course of filteredCourses) {
+                const res = await this.getByRatings(course.id);
+                course.starRating = res.averageRating;
+                console.log(course.starRating);
+                course.ratingCount = res.ratingCount;
+                console.log(course.ratingCount);
+            }
+        },
         // async updateStarRatings() {
         //     for (const course of this.course) {
         //         const res = await this.getByRatings(course.id);
@@ -299,6 +306,22 @@ $(document).ready(function(){
 </script>
 
 <style scoped>
+.comming_soon {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+.comming_soons {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
