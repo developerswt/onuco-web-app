@@ -20,7 +20,7 @@
                            <th>Fee Due</th> -->
                        </tr>
                    </thead>
-                   <tbody v-for="item in item" :key="item.subjectName">
+                   <tbody v-for="item in items" :key="item.subjectName">
                     <tr>
                         <td>{{ item.subjectName }}</td>
                         <td> {{ item.totalAmountCollected }}</td>
@@ -50,15 +50,15 @@
       },
   data() {        
           return {
-            item:[],
+            items:[],
           }
         },
         async created() { 
             this.isLoading = true;  
         try {
             const result = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/TotalAmountCollectedPerSubject`);
-            this.item = result.data;
-            console.log(this.item);
+            this.items = result.data;
+            console.log(this.items);
 
         } catch (error) {
             console.log(error);

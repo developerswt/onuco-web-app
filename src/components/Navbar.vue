@@ -73,7 +73,7 @@ class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 
 v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
                                 class=" w-100  search"  clearable placeholder="Search..." @select="handleSelect"
-                                @keydown.enter="handleKeyEnter(searchTerm)">
+                                @keydown.enter.prevent="handleKeyEnter(searchTerm)">
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
                                     <!-- <el-icon class="el-input__icon" @click="handleIconClick">
@@ -98,7 +98,7 @@ id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
-                            <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notification</router-link>
+                            <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notifications</router-link>
                             <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link>
                             <router-link class="dropdown-item" to="" @click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
@@ -197,11 +197,11 @@ export default {
                 this.$router.push({ path: '/search', query: { data: item } });
             }
             console.log(item)
-            document.querySelector(".search").addEventListener("keyup", function(event) {
-                if (event.key === "Enter") {
-                    handleKeyEnter(this.value); // Assuming this.value holds the current search term
-                }
-            });
+            // document.querySelector(".search").addEventListener("keyup", function(event) {
+            //     if (event.key === "Enter") {
+            //         handleKeyEnter(this.value); // Assuming this.value holds the current search term
+            //     }
+            // });
         },
         handleSelect(item) {
             if (item.title.length >= 2) {

@@ -11,12 +11,9 @@ import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
-import { DynamoDB } from 'aws-sdk';
-import AWS from 'aws-sdk'; // Import the AWS SDK
 
 
 // Assuming DynamoDB is configured appropriately (region, credentials, etc.)
-const dynamoDB = new DynamoDB.DocumentClient();
 
 
 export default {
@@ -32,6 +29,7 @@ export default {
     isSubscribed: Boolean,
     videoId: Number,
     courseId: Number,
+    watchTime: String,
   },
   data() {
     return {
@@ -62,6 +60,7 @@ export default {
 
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
+      this.player.currentTime(this.watchTime || 0);  
       this.player.qualityLevels();
       console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });
@@ -90,6 +89,7 @@ export default {
     }
   },
   methods: {
+
     showPosterOverlay() {
       if (!this.isSubscribed && this.showPoster) {
         const customElement = document.createElement('div');
@@ -156,54 +156,16 @@ export default {
       this.player.controlBar.progressControl.disable();
     },
     
-    async getNextId(courseId) {
-  try {
-    // Make a call to DynamoDB to get the current ID
-    const result = await dynamoDB.get({
-      TableName: 'StateManagement', // Replace with your counter table name
-      Key: { "CourseId": courseId }
-    }).promise();
-
-    // If the item is found, increment the current ID, otherwise set it to 1
-    const currentId = result.Item ? result.Item.CurrentValue + 1 : 1;
-
-    // Update the DynamoDB record with the new ID
-    await dynamoDB.update({
-      TableName: 'StateManagement', // Replace with your counter table name
-      Key: { "CourseId": courseId },
-      UpdateExpression: "SET CurrentValue = :newValue",
-      ExpressionAttributeValues: {
-        ":newValue": currentId
-      },
-      ReturnValues: "ALL_NEW"
-    }).promise();
-
-    return currentId;
-  } catch (error) {
-    console.error('Error fetching/updating ID from DynamoDB:', error);
-    throw error; // Handle the error appropriately in your application
-  }
-},
     async sendWatchTimeToBackend() {
       if (this.isSubscribed) {
         
         try {
-          AWS.config.update({ region: 'ap-southeast-1' }); // Replace with your AWS region
-
-
           const userId = this.isuser;
           const courseId = this.courseId;
           const videoId = this.videoId;
           const watchTime = this.player.currentTime();
           
-
-          if (courseId !== this.prevCourseId || videoId !== this.prevVideoId) {
-            // Fetch the current ID from DynamoDB and increment it
-            this.id = await this.getNextId(courseId);
-          }
-
           const requestBody = {
-            id: this.id,
             userId: userId,
             courseId: courseId,
             watchTimeData: [

@@ -101,7 +101,7 @@ v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
                
                     <carousel :settings="settings" :breakpoints="breakpoints">
-                    <slide  v-for="person in person" :key="person.id">
+                    <slide  v-for="person in persons" :key="person.id">
                     
                         <router-link to="/SemesterDetails">
                            
@@ -319,7 +319,7 @@ export default {
             isLoading: false,
             faculty: [],
             ratings: [],
-            person: [],
+            persons: [],
             settings: {
             itemsToShow: 1,
             snapAlign: 'center',
@@ -396,8 +396,8 @@ export default {
             this.ratingCount = result.data.ratingCount;
             console.log(this.ratings);
             const results = await axiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
-            this.person = results.data;
-            console.log(this.person);
+            this.persons = results.data;
+            console.log(this.persons);
 
             
 

@@ -8,7 +8,6 @@ import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
-import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
 import Faq from './components/Faq.vue';
@@ -292,14 +291,6 @@ const routes = [
     component: Faq,
     meta: {
         title: 'Faq Page',
-    },
-  },
-  {
-    path: "/RazorPay",
-    name: "RazorPay",
-    component: RazorPay,
-    meta: {
-        title: 'Amount Payment Page',
     },
   },
   {

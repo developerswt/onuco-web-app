@@ -2,13 +2,13 @@
   <div>
     <Navbar :show-search-box-prop="true" />
     <router-view :key="$route.fullPath" />
-    <Footer />
+    <AppFooter />
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
+import AppFooter from './components/AppFooter.vue';
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
@@ -54,7 +54,7 @@ export default {
   name: "AppView",
   components: {
     Navbar,
-    Footer,
+    AppFooter,
   },
   data() {
     return {

@@ -151,8 +151,8 @@ id="check_text" data-palcement="top"
                                                                     </div>
                                                                 </div>
                                                                 <div
-v-for="(subject, index) in lessons.values"
-                                                                    :key="index.id"
+v-for="(subject, lessonIndex) in lessons.values"
+                                                                    :key="lessonIndex.id"
                                                                     :class="{ 'playing-subject': playingSubject === subject }"
                                                                     class="chapters_block">
                                                                     <div
@@ -245,7 +245,7 @@ class="fa" aria-hidden="true" :class="{
                                                     <video-player
 v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :course-id="courseId" />
+                                                        :video-id="videoId" :course-id="courseId" :watch-time="watchTime" />
                                                 </div>
                                             </div>
                                         </div>
@@ -291,6 +291,7 @@ export default {
     },
     data() {
         return {
+            watchTime: null,
             ratingCount: '',
             isMobile: window.innerWidth <= 767,
             renderComponent: true,
@@ -333,15 +334,17 @@ export default {
             return this.$store.state.user;
         },
         videoType() {
+            let type = '';
+    
             if (typeof this.videoOptions.sources.src === 'string') {
                 if (this.videoOptions.sources.src.endsWith('.mp4')) {
-                    return 'video/mp4'; // MP4 Format
+                    type = 'video/mp4'; // MP4 Format
                 } else if (this.videoOptions.sources.src.endsWith('.m3u8')) {
-                    return 'application/x-mpegURL';  // HLS Format
+                    type = 'application/x-mpegURL'; // HLS Format
                 }
-            } else {
-                return '';
             }
+
+            return type;
         }
     },
     mounted() {
@@ -562,7 +565,7 @@ export default {
 
         async switchVideo(newVideoUrl, subject) {
 
-            if (this.$refs.videoPlayer.player) {
+            if (this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
 
                 this.videoId = subject.id;
@@ -589,6 +592,8 @@ export default {
                 this.playingSubject = subject;
                 console.log('Video source updated.');
 
+                this.watchTime = this.getWatchTime(subject.id);
+                console.log(this.watchTime);
                 // Set the new sources
                 player.src(this.videoOptions.sources);
 

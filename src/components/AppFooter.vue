@@ -71,7 +71,7 @@
 
 <script>
 export default {
-  name: 'FooterView',
+  name: 'AppFooterView',
   data() {
     return {
       activeButton: 'home',

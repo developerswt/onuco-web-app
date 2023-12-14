@@ -264,15 +264,17 @@ export default {
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         videoType() {
+            let type = '';
+    
             if (typeof this.videoOptions.sources.src === 'string') {
-                if(this.videoOptions.sources.src.endsWith('.mp4')) {
-                    return 'video/mp4'; // MP4 Format
-                } else if(this.videoOptions.sources.src.endsWith('.m3u8')) {
-                    return 'application/x-mpegURL';  // HLS Format
-                }    
-            } else {
-                return '';
+                if (this.videoOptions.sources.src.endsWith('.mp4')) {
+                    type = 'video/mp4'; // MP4 Format
+                } else if (this.videoOptions.sources.src.endsWith('.m3u8')) {
+                    type = 'application/x-mpegURL'; // HLS Format
+                }
             }
+
+            return type;
         },
         istoken() {
             return this.$store.state.token;
@@ -457,9 +459,7 @@ export default {
 </script>
 
 <style scoped>
-
 progress{
-    /*reset to default appearance*/
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -470,23 +470,20 @@ progress{
  
 }
  
-/*style for background track*/
 progress::-webkit-progress-bar {
-    /* background: rgb(221, 221, 221); */
     background: #CCCCCC;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
     border-radius: 6px;
     height: 4px;
     width: 171px;
 }
-/*style for progress track*/
 progress::-webkit-progress-value {
     background-image: linear-gradient(120deg,#ffd173 0,#18cc00 55%);
     border-radius: 20px;
 }
 .progress-container {
     position: relative;
-    width: 30px; /* Set the width and height of the container */
+    width: 30px; 
     height: 30px;
     margin: 5px;
     background-image: url('../assets/images/Group1318@2x.png'); /* Replace 'your-image.jpg' with your image URL */
@@ -538,6 +535,12 @@ progress::-moz-progress-bar {
 
 }
 
+/* #group_image {
+    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
+    background-size: cover !important;
+    padding-bottom: 20px;
+} */
+
 .academic_head_text {
     color: #006acd;
     /* padding-left: 20px; */
@@ -572,7 +575,6 @@ progress::-moz-progress-bar {
     opacity: 1;
     font-size: 12px;
     text-transform: uppercase;
-    /* bottom: 0; */
     position: absolute;
     bottom: -11px;
     right: 12px;
@@ -640,8 +642,7 @@ progress::-moz-progress-bar {
 }
 #text_three {
     font-size: 12px;
-    margin-bottom: -30px;
-    margin-left: -43px;
+    
 }
 
 #text_one {
@@ -840,18 +841,52 @@ margin-top: -7px;
     top: 10px;
   }  
 }
+/* .container-fluid {
+    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
+    background-size: cover !important;
+
+} 
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+  background: #EFF5FC 0% 0% no-repeat padding-box;
+  opacity: 1;
+ 
+} */
+/* .pp{
+    margin-top: -12px; 
+}
+@media  (min-width: 100px)and(max-width: 600px){
+   .pp{
+    margin-top: 10px;
+}
+   
+} */
 @media (max-width:520px) {
     .jk{
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
     .inner_block{
-    height: 108px;
+    height: 100px;
     } 
     #asset_image img{
-    width: 47px;
-    height: 76px;
+    width: 40px;
+    height: 70px;
 } 
+.line{
+    position:relative;
+    left:90px;
+    bottom: 28px !important;
+}
+.text{
+    position: relative;
+    right: 23px !important;
+}
+progress {
+    vertical-align: baseline;
+    width: 100%;
+}
 }
 @media(min-width: 1280px) {
     .pt{
@@ -864,4 +899,14 @@ margin-top: -7px;
     left: 199px;
 }
 }
+.line{
+    position:relative;
+    left:90px;
+    bottom: 15px;
+}
+.text{
+    position: relative;
+    right: 160px;
+}
+
 </style>
