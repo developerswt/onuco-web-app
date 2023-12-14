@@ -1,17 +1,19 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            <button
+class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
          <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
 
-            <el-icon class="el-input__icon search2" @click="toggleSearchBoxVisibility"
-                                style="color: blue;cursor: pointer;margin-right: 13px;">
+            <el-icon
+class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 13px;"
+                                @click="toggleSearchBoxVisibility">
                             <Search />
                         </el-icon>           
-                        <el-row class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;" v-if="showSearchBox && showSearchBoxOnNavbar">
+                        <el-row v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;">
     <el-col :span="23">
         <el-autocomplete
             v-model="searchTerm"
@@ -21,16 +23,16 @@
             size="large"
             style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
             class="w-100 search"
-            @select="handleSelect"
             clearable
             placeholder="Search..."
+            @select="handleSelect"
             @keydown.enter="handleKeyEnter(searchTerm)"
         >
             <template #suffix>
                 <el-icon
                     class="el-input__icon"
-                    @click="handleKeyEnter(searchTerm)"
                     style="color: blue; cursor: pointer;"
+                    @click="handleKeyEnter(searchTerm)"
                 >
                     <Search />
                 </el-icon>
@@ -38,13 +40,13 @@
         </el-autocomplete>
     </el-col>
 </el-row>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
                         <router-link class="nav-link" to="/" >Home</router-link>
                     </li>
                     <li class="nav-item"   :class="{ 'active': isActive('/Mylearnings') }">
-                        <router-link class="nav-link" v-if="isLoggedIn" to="/Mylearnings" >My Learning</router-link>
+                        <router-link v-if="isLoggedIn" class="nav-link" to="/Mylearnings" >My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
 
@@ -65,11 +67,12 @@
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; " v-if="showSearchBoxOnNavbar">
+                    <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
-                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                            <el-autocomplete
+v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search"  @select="handleSelect" clearable placeholder="Search..."
+                                class=" w-100  search"  clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter="handleKeyEnter(searchTerm)">
                                 <template #suffix>
                                     <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
@@ -77,8 +80,9 @@
                                     <edit />
                                     </el-icon> -->
 
-                                    <el-icon class="el-input__icon" @click="handleKeyEnter(searchTerm)"
-                                        style="color: blue;cursor: pointer;">
+                                    <el-icon
+class="el-input__icon" style="color: blue;cursor: pointer;"
+                                        @click="handleKeyEnter(searchTerm)">
                                         <Search />
                                     </el-icon>
                                 </template>
@@ -86,8 +90,9 @@
                         </el-col>
                     </el-row>
 
-                    <li class="nav-item dropdown " v-if="isLoggedIn">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <li v-if="isLoggedIn" class="nav-item dropdown ">
+                        <a
+id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi {{ isuser.name }}
                         </a>
@@ -98,7 +103,7 @@
                             <router-link class="dropdown-item" to="" @click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
                     </li>
-                    <li class="nav-item" v-else :class="{ 'active': isActive('/Login') }">
+                    <li v-else class="nav-item" :class="{ 'active': isActive('/Login') }">
                         <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
@@ -115,7 +120,6 @@
 <script>
 import { Auth } from 'aws-amplify';
 import axiosInstance from '../config/axiosInstance'
-import axios from 'axios';
 
 export default {
     name: "NavbarView",
@@ -125,10 +129,6 @@ export default {
     },
     data() {
         return {
-            searchTerm: null,
-            suggestions: [],
-            showSuggestions: false,
-            dataarray: [],
             searchTerm: null,
             suggestions: [],
             showSuggestions: false,
@@ -162,6 +162,32 @@ export default {
         //     return this.$store.state.user;
         // },
     },
+    created() {
+  try {
+    const jwtToken = localStorage.getItem('username');
+    if (jwtToken) {
+      const parts = jwtToken.split('.');
+      if (parts.length === 3) {
+        const payload = parts[1];
+        const decodedPayload = atob(payload);
+        console.log(decodedPayload);
+        const jwtPayload = JSON.parse(decodedPayload);
+        if (jwtPayload.email) {
+          this.name = jwtPayload.name;
+          console.log(this.name);
+        } else {
+          console.log('JWT payload does not contain the "name" property.');
+        }
+      } else {
+        console.log('Invalid JWT format.');
+      }
+    } else {
+      console.log('JWT token not found in local storage.');
+    }
+  } catch (error) {
+    console.error('Error decoding JWT:', error);
+  }
+},
     methods: {
         toggleSearchBoxVisibility() {
          this.showSearchBox = !this.showSearchBox;
@@ -172,10 +198,10 @@ export default {
             }
             console.log(item)
             document.querySelector(".search").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            handleKeyEnter(this.value); // Assuming this.value holds the current search term
-        }
-    });
+                if (event.key === "Enter") {
+                    handleKeyEnter(this.value); // Assuming this.value holds the current search term
+                }
+            });
         },
         handleSelect(item) {
             if (item.title.length >= 2) {
@@ -224,33 +250,7 @@ export default {
             this.searchTerm = '';
         }
 
-    },
-    created() {
-  try {
-    const jwtToken = localStorage.getItem('username');
-    if (jwtToken) {
-      const parts = jwtToken.split('.');
-      if (parts.length === 3) {
-        const payload = parts[1];
-        const decodedPayload = atob(payload);
-        console.log(decodedPayload);
-        const jwtPayload = JSON.parse(decodedPayload);
-        if (jwtPayload.email) {
-          this.name = jwtPayload.name;
-          console.log(this.name);
-        } else {
-          console.log('JWT payload does not contain the "name" property.');
-        }
-      } else {
-        console.log('Invalid JWT format.');
-      }
-    } else {
-      console.log('JWT token not found in local storage.');
     }
-  } catch (error) {
-    console.error('Error decoding JWT:', error);
-  }
-}
 
 }
 

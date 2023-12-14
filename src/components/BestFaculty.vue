@@ -10,13 +10,14 @@
 
     <div class="container">
         <div class="row pt-3" style="margin-bottom: -38px;">
-            <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
-                <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
+            <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
+                <router-link
+:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
                     style="cursor: pointer; text-decoration: none;">
                     <div class="card mt-5">
                         <div class="user-follower">
-                            <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
-                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                            <img v-if="facult.imageUrl !== ''" :src="facult.imageUrl" class="user-icon">
+                            <img v-else src="../assets/images/Image21.png" class="user-icon">
                         </div>
                         <div class="user-following">
                             <p class="text-right"><small>13 Following</small></p>
@@ -45,7 +46,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';

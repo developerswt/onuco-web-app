@@ -8,7 +8,6 @@ import FileUpload from './components/FileUpload.vue';
 import CoursesPage from './components/CoursesPage.vue';
 import Universities from './components/Universities.vue';
 import Instructor from './components/Instructor.vue';
-import ReadingFile from './components/ReadingFile.vue';
 import RazorPay from './components/RazorPay.vue';
 import Errorone from './components/Errorone.vue';
 import Errortwo from './components/Errortwo.vue';
@@ -27,7 +26,6 @@ import TopCourse from "./components/TopCourse.vue"
 import BestFaculty from "./components/BestFaculty.vue"
 import AcademiNew from "./components/AcademiNew.vue"
 import UserNotification from "./components/UserNotification.vue"
-import { breadcrumbState, updateBreadcrumbs } from "./breadcrumb.service";
 import Course from "./components/Course.vue"
 import CoursePayment from "./components/CoursePayment.vue"
 import Payment from "./components/Payment.vue"
@@ -294,14 +292,6 @@ const routes = [
     component: Faq,
     meta: {
         title: 'Faq Page',
-    },
-  },
-  {
-    path: "/ReadingFile",
-    name: "ReadingFile",
-    component: ReadingFile,
-    meta: {
-        title: 'ReadingFile Page',
     },
   },
   {

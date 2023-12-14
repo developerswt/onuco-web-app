@@ -8,7 +8,7 @@
                         <div>
                             <div class="purple_block">
                                 <p id="new_text">NEW</p>
-                                <div class="row" v-if="selectedItem !== null">
+                                <div v-if="selectedItem !== null" class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="right_block">
                                             <p id="subject_text">{{ selectedItem.title }}</p>
@@ -20,7 +20,8 @@
                                         <div class="left_block">
                                             <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount }} Topics</span></p>
 
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i
+class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -32,7 +33,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <div class="radio-item" v-for="item in myLearning" :key="item.id" :class="{ 'active': item === selectedItem }">
+                            <div v-for="item in myLearning" :key="item.id" class="radio-item" :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
                             </div>
                         </div>
@@ -43,8 +44,8 @@
                 <section id="tab_block">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                         <el-tab-pane label="MY COURSES" name="first">
-                            <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                                <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="">
                                         <div class="row mt-3">
                                             <div class="col-lg-6 col-8 col-sm-8 col-md-6">
@@ -53,13 +54,14 @@
                                                 </h4>
                                             </div>
                                             <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
-                                                <router-link to="#" id="see_text">See all</router-link>
+                                                <router-link id="see_text" to="#">See all</router-link>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="notify_block">
-                                                    <i class="fa-solid fa-triangle-exclamation"
+                                                    <i
+class="fa-solid fa-triangle-exclamation"
                                                         style="color: #ff9900;"></i><p class="pt"> Please
                                                         subscribe the subjects to
                                                         get more details</p>
@@ -75,8 +77,8 @@
                                                     </div>
                                                 </div> 
                                                 <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                        <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                    <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                        <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                     </router-link>    
                                                     <p id="text_two">stacks</p>
                                                 </div>
@@ -98,9 +100,9 @@
                             </div>
                         </el-tab-pane>
                         <el-tab-pane label="LIVE" name="third">
-                            <div class="" v-if="!selectedItem?.videoCompleted">
-                                <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div v-if="!selectedItem?.videoCompleted" class="">
+                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                         <span id="aca_text">Live</span> Courses
                                         <div class="row mt-4 ">
                                             <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
@@ -122,8 +124,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" v-if="renderComponent" :isSubscribed="userIsSubscribed" ref="videoPlayer" />
+                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
+                                                    <video-player v-if="renderComponent" ref="videoPlayer" :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
                                         </div>
@@ -135,8 +137,8 @@
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                                <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                                 </router-link>    
                                                                 <p id="text_two">stacks</p>
                                                             </div>
@@ -160,9 +162,9 @@
                             </div>    
                         </el-tab-pane>
                         <el-tab-pane label="COMPLETED" name="fourth">
-                            <div class="" v-if="selectedItem?.videoCompleted">
-                                <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div v-if="selectedItem?.videoCompleted" class="">
+                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="">
                                             <div class="row mt-3">
                                                 <div class="col-lg-6 col-8 col-sm-8 col-md-6">
@@ -171,7 +173,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
-                                                    <router-link to="#" id="see_text">See all</router-link>
+                                                    <router-link id="see_text" to="#">See all</router-link>
                                                 </div>
                                             </div>
                                             <div class="inner_block">
@@ -182,8 +184,8 @@
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                                <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                                 </router-link>    
                                                                 <p id="text_two">stacks</p>
                                                             </div>
@@ -227,7 +229,7 @@ import VideoPlayer from './VideoPlayer.vue';
 
 
 export default {
-    name: 'Mylearnings',
+    name: 'MylearningsView',
     components: {
         Breadcrumbs,
         Loading,
@@ -278,6 +280,35 @@ export default {
         user() {
             return this.$store.state.id;
         },
+    },
+    async created() {
+
+        this.isLoading = true;
+        try {
+            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
+            this.myLearning = res.data;
+            console.log(this.myLearning);
+            if (this.myLearning.length > 0) {
+                // Set the default selected item to the first item in myLearnin
+                this.selectedItem = this.myLearning[0];
+            }
+            
+            this.videoOptions.sources = [
+                {
+                    src: this.selectedItem.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }
+            ];
+                console.log(this.Learning);
+                console.log(this.videoOptions);
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     },
     methods: {
         handleClick(tab, event) {
@@ -362,29 +393,28 @@ export default {
             const totalTime = this.getTotalTime(selectedItem);
             const watchTime = this.getWatchTime(selectedItem); 
             return this.calculateRemainingTime(totalTime, watchTime);
-            console.log(this.calculateRemainingTime);
         },
-        calculateTime(selectedItem) {
-            const totalTime = this.getTotalTime(selectedItem);
+        // calculateTime(selectedItem) {
+        //     const totalTime = this.getTotalTime(selectedItem);
         
-            if (totalTime) {
-                const timeInHours = Math.floor(totalTime / 3600);
-                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
+        //     if (totalTime) {
+        //         const timeInHours = Math.floor(totalTime / 3600);
+        //         const timeInMinutes = Math.floor((totalTime % 3600) / 60);
+        //         const remainingSeconds = Math.floor((totalTime % 3600) % 60);
         
-                return {
-                    timeInHours,
-                    timeInMinutes,
-                    remainingSeconds
-                };
-            } else {
-                return {
-                    timeInHours: 0,
-                    timeInMinutes: 0,
-                    remainingSeconds: 0
-                };
-            }
-        },
+        //         return {
+        //             timeInHours,
+        //             timeInMinutes,
+        //             remainingSeconds
+        //         };
+        //     } else {
+        //         return {
+        //             timeInHours: 0,
+        //             timeInMinutes: 0,
+        //             remainingSeconds: 0
+        //         };
+        //     }
+        // },
         calculatePercentage(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
             const watchTime = this.getWatchTime(selectedItem);
@@ -422,35 +452,6 @@ export default {
             const subject = this.findSubjectById(selectedItem);
             return subject ? parseFloat(subject.totalTimeVideo) : 0;
         },
-    },
-    async created() {
-
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
-            this.myLearning = res.data;
-            console.log(this.myLearning);
-            if (this.myLearning.length > 0) {
-                // Set the default selected item to the first item in myLearnin
-                this.selectedItem = this.myLearning[0];
-            }
-            
-            this.videoOptions.sources = [
-                {
-                    src: this.selectedItem.videoUrl,
-                    type: this.videoType,
-                    withCredentials: false,
-                }
-            ];
-                console.log(this.Learning);
-                console.log(this.videoOptions);
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
     }
 }
 </script>

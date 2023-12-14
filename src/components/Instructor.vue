@@ -1,10 +1,4 @@
-
-
-
-
-
 <template>
-    
     <div class="container jk">
         <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
@@ -13,42 +7,41 @@
                 <div class="instructor-details">
                     <div class="professor-block">
                         <div class="row">
-
                             <div class="col-md-5 col-lg-5">
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img :src="this.faculty.imageUrl" class="img-fluid"
-                                                v-if="this.faculty.imageUrl !== ''">
-                                            <img src="../assets/images/Image21.png" class="img-fluid" v-else>
+                                            <img
+v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
+                                                class="img-fluid">
+                                            <img v-else src="../assets/images/Image21.png" class="img-fluid">
                                         </div>
-
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
-                                        <h5 id="prof_text">{{ this.faculty.name }}</h5>
+                                        <h5 id="prof_text">{{ faculty.name }}</h5>
                                         <div class="row">
-                                                <div class="col-lg-12 mn1">
-                                                    <div class="row aa">
-                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <StarRatings :rating="ratings" :max-rating="5" />
-                                                        </div>
-                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text">(23 reviews)</p>
-                                                        </div>
+                                            <div class="col-lg-12 mn1">
+                                                <div class="row aa">
+                                                    <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                        <StarRatings :rating="ratings" :max-rating="5" />
+                                                    </div>
+                                                    <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                        <p id="review_text">
+                                                            <a class="rating_icons" style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }}
+                                                            reviews)</a>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
                                         <div class="social-icons">
-                                            <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
-                                            <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
-                                            <a :href="this.faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
-
+                                            <a :href="faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
+                                            <a :href="faculty.twitter" target="blank" class="fa fa-twitter"></a>
+                                            <a :href="faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="col-md-7 col-lg-7">
                                 <div class="row">
@@ -59,64 +52,48 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="btn-group">
-                                            <button type="button" class="btn" id="left_button" style="color: #b1afaf;">13
+                                            <button id="left_button" type="button" class="btn" style="color: #b1afaf;">13
                                                 Following</button>
-                                            <button type="button" class="btn" id="right_button" style="color: #b1afaf;">1200
+                                            <button id="right_button" type="button" class="btn" style="color: #b1afaf;">1200
                                                 Follwers</button>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="Ratings_button_block" v-if="isLoggedIn">
-                                            <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
+                                    <div class="app1">
+                                        <div v-if="isPopupVisible" class="popup">
+                                            <div class="popup-content">
+                                                <div class="">
+                                                    <span class="close" @click="closePopup">&times;</span>
+                                                    <h5>Ratings System</h5>
+                                                </div>
+                                                <hr>
+                                                <form @submit.prevent="submitRating">
+                                                    <label for="rating">Rate the faculty :</label><br>
+                                                    <el-rate v-model="rating" size="large" allow-half /><br>
+                                                    <input type="submit" value="Submit">
+                                                </form>
+                                                <!-- Add your popup content here -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="submitRating">
-                                        <label for="rating">Rate the faculty member :</label><br>
-                                        <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
-                                        <el-rate v-model="rating" size="large" allow-half /><br>
-                                        <input type="submit" value="Submit">
-                                    </form> 
-                                </div>
                             </div>
                         </div>
                     </div>
-                    
-
-                     
-                    
-
-                    <div class="row professor-details" id="app">
-  <div class="col-sm-12 col-lg-12">
-    <p class="professor-details_text" v-if="!faculty.readMore">{{ faculty.description.slice(0, 168) }}
-      <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
-    </p>
-    <p class="professor-details_text" v-if="faculty.readMore">{{ faculty.description }}
-      <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read less</span></span>
-    </p>
-  </div>
-</div>
-
+                    <div id="app" class="row professor-details">
+                        <div class="col-sm-12 col-lg-12">
+                            <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
+                                faculty.description.slice(0, 168) : '' }}
+                                <span class="read" @click="toggleReadMore">...<span style="color:blue">Read
+                                        more</span></span>
+                            </p>
+                            <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
+                                <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
-            </div>
+        </div>
                 
         </div>
             <section id="Course_section">   
@@ -124,11 +101,11 @@
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
                
                     <carousel :settings="settings" :breakpoints="breakpoints">
-                   <slide  v-for="person in person" :key="person.id">
+                    <slide  v-for="person in person" :key="person.id">
                     
                         <router-link to="/SemesterDetails">
                            
-                            <div class="card" id="instructor_card">
+                            <div id="instructor_card" class="card">
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col-md-12 ">
@@ -147,7 +124,7 @@
                                                         <p class="ft" > 18CS81</p>
                                                     </div>
                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p class="ft"  id="small_text">240
+                                                        <p id="small_text"  class="ft">240
                                                             hrs</p>
                                                     </div>
                                                    
@@ -186,113 +163,6 @@
                         </router-link>
                     
                     
-                    <!-- <div class="col-md-6 col-lg-4">
-                        <router-link to="/SemesterDetails">
-                            
-                            <div class="card" id="instructor_card">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col-md-12 ">
-
-                                            <div class="card_top_text">
-                                                <div class="row">
-                                                    
-                                                    <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-2 col-3 col-sm-3">
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
-                                                            hrs</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-9 col-9 col-sm-9">
-
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
-                                                            excepturi.</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-3 col-3 col-sm-3">
-                                                        <div class="video_logo">
-                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
-                                                        
-                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                                            (23
-                                                            reviews) </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </div> -->
-
-                    <!-- <div class="col-md-6 col-lg-4">
-                        <router-link to="/SemesterDetails">
-                            
-                            <div class="card" id="instructor_card">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col-md-12 ">
-
-                                            <div class="card_top_text">
-                                                <div class="row">
-                                                    
-                                                    <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-2 col-3 col-sm-3">
-                                                        <img src="../assets/images/share.png" class="icon">
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p> 18CS81</p>
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text">240
-                                                            hrs</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-9 col-9 col-sm-9">
-
-                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
-                                                            excepturi.</p>
-                                                    </div>
-                                                    
-                                                    <div class="col-lg-3 col-3 col-sm-3">
-                                                        <div class="video_logo">
-                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
-                                                        
-                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                                            (23
-                                                            reviews) </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </div> -->
                 </slide>
                 <template #addons>
 
@@ -326,7 +196,7 @@
                     <!-- <div class="col-md-6 col-lg-4"> -->
                     <router-link to="/SemesterDetails">
 
-                        <div class="card" id="instructor_card">
+                        <div id="instructor_card" class="card">
                             <div class="card-title">
                                 <div class="row">
                                     <div class="col-md-12 ">
@@ -339,14 +209,15 @@
                                                 </div>
 
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img src="../assets/images/Union193.png"
+                                                    <img
+src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
                                                     <p class="ft"> 18CS81</p>
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p class="ft" id="small_text">240
+                                                    <p id="small_text" class="ft">240
                                                         hrs</p>
                                                 </div>
 
@@ -359,7 +230,8 @@
 
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
+                                                        <img
+src="../assets/images/Path4025.png"
                                                             style="width: 30px; height:30px;" class="video">
                                                     </div>
                                                 </div>
@@ -401,8 +273,9 @@
     <section id="tab_block">
         <div class="container">
             <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                <el-tab-pane :label="att.heading" v-for="att in this.faculty.attributue" :name="att.heading"
-                    :key="att.heading">
+                <el-tab-pane
+v-for="att in faculty.attributue" :key="att.heading" :label="att.heading"
+                    :name="att.heading">
                     <div class="" v-html="att.values"></div>
                 </el-tab-pane>
 
@@ -418,18 +291,12 @@
 <script>
 import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from "./Breadcrumbs.vue"
-import axios from 'axios'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import StarRatings from './StarRatings.vue'
-
-
-
-
 import Offer from './Offer.vue'
-import BreadcrumbsVue from './Breadcrumbs.vue';
 export default {
     name: 'InstructorView',
     components: {
@@ -444,7 +311,10 @@ export default {
     },
     data() {
         return {
+            ratingCount: '',
             rating: '',
+            isPopupVisible: false,
+            modalShow: false,
             readMore: false,
             isLoading: false,
             faculty: [],
@@ -515,8 +385,37 @@ export default {
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
-    methods: {
+    async created() {
+        this.isLoading = true;
+        try {
+            const res = await axiosInstance.get(`/Faculty/` + this.$route.params.name);
+            this.faculty = res.data;
+            this.activeName = this.faculty.attributue[0].heading;
+            const result = await axiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
+            this.ratings = result.data.averageRating;
+            this.ratingCount = result.data.ratingCount;
+            console.log(this.ratings);
+            const results = await axiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
+            this.person = results.data;
+            console.log(this.person);
 
+            
+
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
+    },
+    methods: {
+        showPopup() {
+            this.isPopupVisible = true;
+        },
+        closePopup() {
+            this.isPopupVisible = false;
+        },
         toggleReadMore() {
             this.faculty.readMore = !this.faculty.readMore;
         },
@@ -535,38 +434,16 @@ export default {
                 objectTypeId: 4,
                 ratingScore: this.rating
             })
-            .then(response => {
-                // Handle success (if needed)
-                console.log(response.data);
-                this.rating = '';
-            })
-            .catch(error => {
-                // Handle error (if needed)
-                console.error(error);
-            });
-        }
-    },
-    async created() {
-        this.isLoading = true;
-        try {
-            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
-            this.faculty = res.data;
-            this.activeName = this.faculty.attributue[0].heading;
-            const results = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
-            this.person = results.data;
-            console.log(this.person);
-            const result = await axiosInstance.get(`/Ratings/` + this.faculty.id + "?objectTypeId=4");
-            this.ratings = result.data;
-            console.log(this.ratings);
-
-            
-
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
+                .then(response => {
+                    // Handle success (if needed)
+                    console.log(response.data);
+                    this.rating = '';
+                    this.closePopup();
+                })
+                .catch(error => {
+                    // Handle error (if needed)
+                    console.error(error);
+                });
         }
     }
 }
@@ -833,8 +710,8 @@ export default {
     font-weight: bold;
     font-size: 16px;
     font-weight: bold;
-    position: relative;
-    left: 15px;
+    /* position: relative;
+    left: 15px; */
 }
 
 ::v-deep .row_class i {
@@ -1182,6 +1059,64 @@ input[type=submit] {
     color: white;
     cursor: pointer;
 }
+
+
+#app1 {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black background */
+    z-index: 900;
+    /* Set a z-index lower than the popup but higher than the content */
+    display: none;
+}
+
+.popup h5 {
+    color: #006acd;
+    font-weight: bold;
+    text-align: left;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    width: 70%;
+    /* Adjust the width as needed */
+    max-width: 400px;
+    /* Set a maximum width */
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
 .star-rating {
     font-size: 24px;
 }

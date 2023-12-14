@@ -10,22 +10,22 @@
          
                         <div style="height: 100%;">
                             <ag-grid-vue 
-                                :domLayout="domLayout"
+                                :dom-layout="domLayout"
                                 class="ag-theme-alpine"
-                                :columnDefs="columnDefs"
-                                :rowData="rowData"
-                                :editType="editType"
-                                :rowSelection="rowSelection"
-                                :defaultColDef="defaultColDef"
-                                :suppressExcelExport="true"
-                                :popupParent="popupParent"
+                                :column-defs="columnDefs"
+                                :row-data="rowData"
+                                :edit-type="editType"
+                                :row-selection="rowSelection"
+                                :default-col-def="defaultColDef"
+                                :suppress-excel-export="true"
+                                :popup-parent="popupParent"
+                                cache-quick-filter = true
+                                :pagination = "true"
+                                :pagination-page-size="paginationPageSize"
+                                is-loding ="true"
                                 @grid-ready="onGridReady"
                                 @cell-value-changed="onCellValueChanged"
                                 @row-clicked='onCellClicked'
-                                cacheQuickFilter = true
-                                :pagination = "true"
-                                :paginationPageSize="paginationPageSize"
-                                isLoding ="true"
                                     >
                             </ag-grid-vue>
                         </div>  
@@ -37,19 +37,19 @@
            
             <div class="col-lg-6 col-sm-12">
                 
-                <form v-show="formVisible" class="frm" @submit.prevent="addBranch"  style="margin-top:25px">
+                <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName"> Name:</label>
-                    <input type="text" id="branchName" v-model="newBranch.name" required><br>
+                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <input type="text" id="description" v-model="newBranch.description" required><br>
+                    <input id="description" v-model="newBranch.description" type="text" required><br>
 
                     <label for="academiaId">AcademiaId:</label>
-                    <input type="text" id="academiaId" v-model="newBranch.academiaId" required><br>
+                    <input id="academiaId" v-model="newBranch.academiaId" type="text" required><br>
 
                     <label for="branchName"><b>BranchName:</b></label>
-                    <input type="text" id="branchName" v-model="newBranch.branchName" required>
+                    <input id="branchName" v-model="newBranch.branchName" type="text" required>
 
                     <button class="btn2" type="submit">Add Branch</button>
                 </form>
@@ -63,7 +63,7 @@
          <div class="modal-body" style="overflow: auto !important;">
            
              <div class="container bg-light">
-                                 <div class="row" v-if="ismodel">
+                                 <div v-if="ismodel" class="row">
                                      <div class="col-sm-12">
                                        <p><b>ID: </b> {{childPara.id  }}</p>
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
@@ -72,17 +72,17 @@
                                           
                                       </div>
                                  </div>
-                                 <div class="row" v-else>
+                                 <div v-else class="row">
                                    <div class="col-sm-12">
                                           <p><b>ID: </b> {{childPara.id  }}</p>
                                           
                                           <div class="">
                                            <label><b>Branch Name:</b></label><br>
-                                           <input type="text" v-model="this.childPara.name" />
+                                           <input v-model="childPara.name" type="text" />
                                          </div> 
                                          <div class="">
                                            <label><b>Description:</b></label><br>
-                                           <input type="text" v-model="this.childPara.description" />
+                                           <input v-model="childPara.description" type="text" />
                                          </div>  
                                      </div>
                                          
@@ -91,8 +91,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                @click="update(this.childPara.id)">Update</button>
+              <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
+                @click="update(childPara.id)">Update</button>
               <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
             </div>
@@ -117,7 +118,6 @@ import { AgGridVue } from "ag-grid-vue3";
 // import AlertDialog from './AlertDialog.vue';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import axiosInstance from '../config/axiosInstance'
 
 
 export default {
@@ -172,23 +172,23 @@ export default {
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
-         let req = res.data;
-         this.Orders = req;
+        const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
+        let req = res.data;
+        this.Orders = req;
          
-         } catch (error) {
-           this.isLoading = false;
-         console.log(error);
-         this.showDialog = true;  
-         this.dialogTitle= "Error";
-         this.dialogMessage= "Not get data";
-       }
-       finally {
-         this.isLoading = false;
-       }
-       this.rowData = this.Orders;
-       this.rowSelection = 'single'; 
-       console.log(this.rowData);
+        } catch (error) {
+          this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;  
+        this.dialogTitle= "Error";
+        this.dialogMessage= "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowData = this.Orders;
+      this.rowSelection = 'single'; 
+      console.log(this.rowData);
        this.popupParent = document.body;
        this.paginationPageSize = 10;
    
@@ -218,9 +218,9 @@ export default {
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-       onRowDataA() {
-         this.gridApi.setRowData(colors);
-       },
+      //  onRowDataA() {
+      //    this.gridApi.setRowData(colors);
+      //  },
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },

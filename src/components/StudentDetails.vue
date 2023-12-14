@@ -8,22 +8,22 @@
         
         <div style="height: 100%;">
           <ag-grid-vue 
-            :domLayout="domLayout"
+            :dom-layout="domLayout"
             class="ag-theme-alpine"
-            :columnDefs="columnDefs"
-            :rowData="rowData"
-            :editType="editType"
-            :rowSelection="rowSelection"
-            :defaultColDef="defaultColDef"
-            :suppressExcelExport="true"
-            :popupParent="popupParent"
+            :column-defs="columnDefs"
+            :row-data="rowData"
+            :edit-type="editType"
+            :row-selection="rowSelection"
+            :default-col-def="defaultColDef"
+            :suppress-excel-export="true"
+            :popup-parent="popupParent"
+            cache-quick-filter = true
+            :pagination = "true"
+            :pagination-page-size="paginationPageSize"
+            is-loding ="true"
             @grid-ready="onGridReady"
             @cell-value-changed="onCellValueChanged"
             @row-clicked='onCellClicked'
-            cacheQuickFilter = true
-            :pagination = "true"
-            :paginationPageSize="paginationPageSize"
-            isLoding ="true"
           >
           </ag-grid-vue>
         </div>  
@@ -38,7 +38,7 @@
         <div class="modal-body" style="overflow: auto !important;">
           
             <div class="container bg-light">
-                                <div class="row" v-if="ismodel">
+                                <div v-if="ismodel" class="row">
                                     <div class="col-sm-12">
                                       <p><b>ID: </b> {{childPara.id  }}</p>
                                       <p><b>Course ID :</b>{{ childPara.courseId }}</p>
@@ -50,7 +50,7 @@
                                          
                                      </div>
                                 </div>
-                                <div class="row" v-else>
+                                <div v-else class="row">
                                   <div class="col-sm-12">
                                          <p><b>ID: </b> {{childPara.id  }}</p>
                                          <p><b>Course ID :</b>{{ childPara.courseId }}</p>
@@ -58,15 +58,15 @@
                                          <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
                                          <div class="">
                                           <label><b>Price:</b></label><br>
-                                          <input type="text" v-model="this.childPara.price" />
+                                          <input v-model="childPara.price" type="text" />
                                         </div>
                                         <div class="">
                                           <label><b>Start Date:</b></label><br>
-                                          <input type="text" v-model="this.childPara.startdate" />
+                                          <input v-model="childPara.startdate" type="text" />
                                         </div> 
                                         <div class="">
                                           <label><b>End Date:</b></label><br>
-                                          <input type="text" v-model="this.childPara.enddate" />
+                                          <input v-model="childPara.enddate" type="text" />
                                         </div>
                                         <!-- <p><b>Status:</b> {{ childPara.state }}</p>
                                         <div class="">
@@ -81,7 +81,7 @@
           </div>
           <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(this.childPara.id)">Update</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(childPara.id)">Update</button>
            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button> 
         </div>
           
@@ -106,7 +106,7 @@
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   
   export default {
-    name: "studentpage",
+    name: "StudentDetails",
     components: {
       AgGridVue,
       Loading,

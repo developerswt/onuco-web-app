@@ -111,16 +111,16 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in jp" :authState="authState" :theme=theme  :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
+    <authenticator class="custom-sign-in jp" :auth-state="authState" :theme=theme  :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
         
-      <template v-slot:icon-facebook>
+      <template #icon-facebook>
         <div style="padding: var(--amplify-space-large);">
       <img src="../assets/images/Icon-awesome-facebook.png" alt="Facebook" />
     </div>
     </template>
    
 
-        <template v-slot:header>
+        <template #header>
         <div style="padding: var(--amplify-space-large); text-align: center">
           <!-- <img
             class="amplify-image pt-5"
@@ -130,7 +130,7 @@ export default {
         </div>
       </template>
         
-        <template v-slot="{ user, signOut }">
+        <template #default="{ user, signOut }">
             <h1>Hello {{ user.username }}!</h1>
             <button @click="handleSignOut(signOut)">Sign Out</button>
         </template>

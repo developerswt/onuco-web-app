@@ -2,7 +2,7 @@
      <div class="container" ><p> > Lecturers </p>
         <div class="container" style="margin-top: 72px;">
             <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+               <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                    <thead>
                        <tr><th>Id</th>
                            <th>Subject Name</th>
@@ -10,12 +10,12 @@
                            <th>Total Subscribed Students</th>
                         </tr>
                    </thead>
-                   <tbody v-for="product in product" :key="product.id">
+                   <tbody v-for="products in product" :key="products.id">
                     <tr>
-                        <td>{{ product.id }}</td>
-                        <td>{{ product.courseName }}</td>
-                        <td>{{ product.totalAmountCollected }}</td>
-                        <td>{{ product.totalSubscribedStudents }}</td>
+                        <td>{{ products.id }}</td>
+                        <td>{{ products.courseName }}</td>
+                        <td>{{ products.totalAmountCollected }}</td>
+                        <td>{{ products.totalSubscribedStudents }}</td>
                     </tr>
                    </tbody>
                 </table>
@@ -29,7 +29,7 @@
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {
 
-  name: "Actstudent",
+  name: "ApFaculty",
   components: {
           Loading,
           
@@ -41,15 +41,15 @@
            
           }
         },
-        created() {
-        this.loadData();
-    },
    
     computed: {
         isuser() {
             console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         }
+    },
+        created() {
+        this.loadData();
     },
     methods: {
         async loadData() {

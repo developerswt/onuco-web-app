@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="academy_container">
+    <div id="academy_container" class="container">
         <div class="category-test pt-4">
             <Breadcrumbs class="pt-5 pl-3" />
             <div class="container" style="margin-top: 10px;">
@@ -12,7 +12,8 @@
             <div class="parent_blocks">
                 <div v-for="item in academia" :key="item.id">
                     <div class="box1">
-                        <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        <router-link
+:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                             style="color: white;text-decoration: none;">
                             <div class="box">
                                 <img src="../assets/images/book.png" class="icon">

@@ -22,7 +22,8 @@
                                         <div class="left_block">
                                             <p>5 Modules <span id="span_text">32 Topics</span></p>
 
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i
+class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -34,26 +35,26 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <input type="radio" checked="checked" id="myRadio" name="radio">&nbsp;
+                            <input id="myRadio" type="radio" checked="checked" name="radio">&nbsp;
                             <input type="radio" name="radio">
                         </div>    
                     </div>
                     <div class="col-sm-12 users">
-                        <div class="User_Name" v-if="!editing">
+                        <div v-if="!editing" class="User_Name">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="icon_bg_color" v-if="!editing">
-                                        <img :src="this.updatedAttribute.picture">
+                                    <div v-if="!editing" class="icon_bg_color">
+                                        <img :src="updatedAttribute.picture">
                                     </div>
                                     <div class="User_details pl-2">
                                         <h2>Welcome</h2>
-                                        <h3>{{ this.updatedAttribute.name }}</h3>
+                                        <h3>{{ updatedAttribute.name }}</h3>
                                     </div>
                                 </div>
                             
                             </div>    
                         </div>
-                        <div class="editing_users_details" v-else>
+                        <div v-else class="editing_users_details">
                             <div class="row pt-4">
                                 <!-- <div class="col-sm-12"> -->
                                     <div class="col-sm-4">
@@ -70,7 +71,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="file" @change="handleFileChange" id="input_file" class="input_file" >
+                                                <input id="input_file" type="file" class="input_file" @change="handleFileChange" >
                                             </div>
                                         </div>
                                     <!-- </div> -->
@@ -81,8 +82,8 @@
                         </div>
                         <div class="esdit_profile">
                             <!-- <button class="button button1">Edit Profile</button> -->
-                            <button class="button button1" @click="editProfile" v-if="!editing">EDIT PROFILE</button>
-                            <button class="buttons button2"  @click="saveProfile" v-else>SAVE</button>
+                            <button v-if="!editing" class="button button1" @click="editProfile">EDIT PROFILE</button>
+                            <button v-else  class="buttons button2" @click="saveProfile">SAVE</button>
 
                         </div>
                     </div>
@@ -94,8 +95,8 @@
                                 <h2>User details</h2>
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
-                                <p v-if="!editing">{{ this.updatedAttribute.email }}</p>
-                                <input v-model="userEmail" placeholder="userName@email.com" type="text" v-else style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
+                                <p v-if="!editing">{{ updatedAttribute.email }}</p>
+                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text" style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
                     </div>
@@ -161,7 +162,6 @@
 
 <script>
 import moment from 'moment';
-import axios from 'axios'
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -208,6 +208,10 @@ export default {
         shouldShowViewAll() {
             return this.loginHistorys.length > 2 && !this.showViewAll;
         },
+    },
+    async created() {
+        this.update();
+        this.loginHistory();
     },
     methods: {
         editProfile() {
@@ -292,10 +296,6 @@ export default {
                 return formattedDate;
             }
         },
-    },
-    async created() {
-        this.update();
-        this.loginHistory();
     }
     // async created() {
     //     this.isLoading = true;

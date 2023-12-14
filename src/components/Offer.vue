@@ -2,7 +2,7 @@
 
 <template>
     <div class="container-fluid" >
-        <div class="container-fluid" id="offer_block">
+        <div id="offer_block" class="container-fluid">
             <h4 class="academic_head_text">
 
                 <span id="aca_text">Refer</span>And Learn Free

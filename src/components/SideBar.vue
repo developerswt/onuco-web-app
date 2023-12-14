@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid mt-5">
         <header>
-          <span class="menu-anchor" @click="toggleMenu" :class="{ 'menu-active': isMenuActive }"></span>
+          <span class="menu-anchor" :class="{ 'menu-active': isMenuActive }" @click="toggleMenu"></span>
  
 </header>
 

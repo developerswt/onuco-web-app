@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
       <Breadcrumbs class="brm" />
-      <div class="container " v-for="academi in academia" :key="academi.id">
+      <div v-for="academi in academia" :key="academi.id" class="container ">
         <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
         <div>
           <h2 id="available_text"  style="margin-top: 30px;font-size: 18px;"><b>Available</b> {{ academi.academia.name }} Courses ({{ academi.bCount }})</h2>
@@ -9,11 +9,12 @@
           <div class="parent_blocks">
             <div class="row pt-2">
               
-              <div class="" v-for="branch in branches.branches" :key="branch.id">
+              <div v-for="branch in branches.branches" :key="branch.id" class="">
                 
-                <div class="box" v-if="academi.academia.id == branch.academiaId">
+                <div v-if="academi.academia.id == branch.academiaId" class="box">
                   
-                  <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                  <router-link
+:to="{ name: 'Universities', params: { name: branch.branchName } }"
                     style="color: white;text-decoration: none;">
                     
                     <div class="row">

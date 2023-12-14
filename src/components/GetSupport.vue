@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="container-fluid" id="group_image">
+            <div id="group_image" class="container-fluid">
                 <div class="error_image_block">
                 <img src="../assets/images/Contactus.png" class="img-fluid">
                 <div class="button_block">
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import Breadcrumbs from './Breadcrumbs.vue';
+// import Breadcrumbs from './Breadcrumbs.vue';
     export default {
         name: 'GetSupport',
-        components: {
-            Breadcrumbs
-        }
+        // components: {
+        //     Breadcrumbs
+        // }
     }
 </script>
 

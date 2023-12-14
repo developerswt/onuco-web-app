@@ -9,21 +9,6 @@ export default {
       
     }
   },
-  methods :{ 
-    async loadRazorPay(){
-      return new Promise(resolve=>{
-        const script = document.createElement('script')
-        script.src = this.script
-        script.onload = () =>{
-          resolve(true)
-        }
-        script.onerror = () =>{
-          resolve(false)
-        }        
-        document.body.appendChild(script)
-      })      
-    }
-  },
   async created(){
     const result = await this.loadRazorPay()
     if(!result){
@@ -57,6 +42,21 @@ export default {
     }; 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+  },
+  methods :{ 
+    async loadRazorPay(){
+      return new Promise(resolve=>{
+        const script = document.createElement('script')
+        script.src = this.script
+        script.onload = () =>{
+          resolve(true)
+        }
+        script.onerror = () =>{
+          resolve(false)
+        }        
+        document.body.appendChild(script)
+      })      
+    }
   }
 }
 </script>

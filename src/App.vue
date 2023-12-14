@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :showSearchBoxProp="true" />
+    <Navbar :show-search-box-prop="true" />
     <router-view :key="$route.fullPath" />
     <Footer />
   </div>
@@ -24,7 +24,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
+console.log(app);
 
 // Get registration token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="academy_container">
+    <div id="academy_container" class="container">
         <div class="category-test pt-3 ">
 
 
@@ -13,7 +13,8 @@
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="item in academia" :key="item.id">
                 <div class="box1">
-                    <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                    <router-link
+:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                         style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
@@ -48,7 +49,6 @@
 <script>
 import { defineComponent } from 'vue'
 import axiosInstance from '../config/axiosInstance'
-import router from '../router';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'

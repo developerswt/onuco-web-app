@@ -10,22 +10,22 @@
          
          <div style="height: 100%;">
            <ag-grid-vue 
-             :domLayout="domLayout"
+             :dom-layout="domLayout"
              class="ag-theme-alpine"
-             :columnDefs="columnDefs"
-             :rowData="rowData"
-             :editType="editType"
-             :rowSelection="rowSelection"
-             :defaultColDef="defaultColDef"
-             :suppressExcelExport="true"
-             :popupParent="popupParent"
+             :column-defs="columnDefs"
+             :row-data="rowData"
+             :edit-type="editType"
+             :row-selection="rowSelection"
+             :default-col-def="defaultColDef"
+             :suppress-excel-export="true"
+             :popup-parent="popupParent"
+             cache-quick-filter = true
+             :pagination = "true"
+             :pagination-page-size="paginationPageSize"
+             is-loding ="true"
              @grid-ready="onGridReady"
              @cell-value-changed="onCellValueChanged"
              @row-clicked='onCellClicked'
-             cacheQuickFilter = true
-             :pagination = "true"
-             :paginationPageSize="paginationPageSize"
-             isLoding ="true"
            >
            </ag-grid-vue>
          </div>  
@@ -34,19 +34,19 @@
      <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
      </div>
      <div class="col-lg-6 col-sm-12">
-     <form  v-show="formVisible" class="frm" @submit.prevent="addBranch" style="margin-top:22px">     
+     <form  v-show="formVisible" class="frm" style="margin-top:22px" @submit.prevent="addBranch">     
          <p><b></b> {{newBranch.id}}</p>
       <label for="branchName"> Name:</label>
-      <input type="text" id="branchName" v-model="newBranch.name" required><br>
+      <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
       <label for="description">Description:</label>
-      <input type="text" id="description" v-model="newBranch.description" required><br>
+      <input id="description" v-model="newBranch.description" type="text" required><br>
 
       <label for="universityId">University Id:</label>
-      <input type="text" id="academiaId" v-model="newBranch.universityId" required><br>
+      <input id="academiaId" v-model="newBranch.universityId" type="text" required><br>
 
       <label for="semesterName"><b>Semester Name:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.semesterName" required>
+      <input id="branchName" v-model="newBranch.semesterName" type="text" required>
 
       <button class="btn2" type="submit">Add Semester</button>
     </form>
@@ -60,7 +60,7 @@
          <div class="modal-body" style="overflow: auto !important;">
            
              <div class="container bg-light">
-                                 <div class="row" v-if="ismodel">
+                                 <div v-if="ismodel" class="row">
                                      <div class="col-sm-12">
                                        <p><b>ID: </b> {{childPara.id  }}</p>
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
@@ -70,17 +70,17 @@
                                           
                                       </div>
                                  </div>
-                                 <div class="row" v-else>
+                                 <div v-else class="row">
                                    <div class="col-sm-12">
                                           <p><b>ID: </b> {{childPara.id  }}</p>
                                           
                                           <div class="">
                                            <label><b>Semester Name:</b></label><br>
-                                           <input type="text" v-model="this.childPara.name" />
+                                           <input v-model="childPara.name" type="text" />
                                          </div> 
                                          <div class="">
                                            <label><b>Description:</b></label><br>
-                                           <input type="text" v-model="this.childPara.description" />
+                                           <input v-model="childPara.description" type="text" />
                                          </div>  
                                      </div>
                                          
@@ -89,7 +89,7 @@
             </div>
            <div class="modal-footer">
                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(this.childPara.id)">Update</button>
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(childPara.id)">Update</button>
                                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button> 
          </div>

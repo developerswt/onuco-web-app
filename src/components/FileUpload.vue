@@ -7,7 +7,7 @@
         </div>
         <div>
           <h2>Added files:</h2>
-          <div class="" v-for="file in state.files" :key="file.id">
+          <div v-for="file in state.files" :key="file.id" class="">
             {{ file.name }}
           </div>
         </div>

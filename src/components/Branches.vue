@@ -1,12 +1,13 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container" />
-        <div class="container" v-if="this.branches.length > 0 || this.academia.length > 0">
-            <h2 id="available_text"><b>Available</b> {{ this.academia.name }} Courses ({{ branches.length }})</h2>
+        <div v-if="branches.length > 0 || academia.length > 0" class="container">
+            <h2 id="available_text"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
             <div class="parent_blocks">
                 <div class="row pt-4">
-                    <div class="box" v-for="branch in branches" :key="branch.id">
-                        <router-link v-bind:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                    <div v-for="branch in branches" :key="branch.id" class="box">
+                        <router-link
+:to="{ name: 'Universities', params: { name: branch.branchName } }"
                             style="cursor: pointer; color: white; text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
@@ -23,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="" v-else>
+        <div v-else class="">
             <h2 style="text-align: center;margin-bottom: 10%; margin-top: 10%;">Comming Soon ...</h2>
         </div>
 
@@ -36,7 +37,6 @@
 
 <script>
 import AxiosInstance from '../config/axiosInstance';
-import router from '../router';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -76,9 +76,9 @@ export default {
     }
 }
 
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+// $(document).ready(function () {
+//     $('[data-toggle="tooltip"]').tooltip();
+// });
 
 </script>
 

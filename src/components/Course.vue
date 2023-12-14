@@ -169,7 +169,9 @@
     <div class="container-fluid"></div>
 </template>
 <script>
-
+export default {
+    name: 'CourseView'
+}
 </script>
 <style scoped>
 .bt{

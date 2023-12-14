@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container-fluid jk" id="search_container">
+        <div id="search_container" class="container-fluid jk">
             <div class="first_block">
                 <div class="container">
                     <div class="search_inner_block">
@@ -11,10 +11,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container-fluid" v-if="isMobile">
-                            <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                <video-player class="mobileVideo" :options="videoOptions" :isSubscribed="userIsSubscribed"
-                                    ref="videoPlayer" />
+                        <div v-if="isMobile" class="container-fluid">
+                            <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
+                                <video-player
+ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+                                    :is-subscribed="userIsSubscribed" />
                             </div>
                         </div>
                         <div class="row">
@@ -22,23 +23,24 @@
                                 <div class="search_right_block">
                                     <h4 class="academic_head_text mt-2">
 
-                                        <span id="aca_text">{{ this.book.title }} </span>
+                                        <span id="aca_text">{{ book.title }} </span>
 
                                     </h4>
                                     <div class="">
-                                        <p id="professor_text" v-for="instructor in this.book.instructorName"
+                                        <p
+v-for="instructor in book.instructorName" id="professor_text"
                                             :key="instructor.id"> {{ instructor.name }}</p>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
                                             <p id="duration_text" class="mb-2"><img
                                                     src="../assets/images/Iconionic-ios-timer@2x.png">{{
-                                                        this.book.videoDemand }}
+                                                        book.videoDemand }}
                                             </p>
                                         </div>
                                         <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
                                             <p id="module_text" class="mb-2"><img
-                                                    src="../assets/images/Iconmap-school@2x.png">{{ this.book.modules }}
+                                                    src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
                                             </p>
                                         </div>
                                     </div>
@@ -53,8 +55,8 @@
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
 
-                                <p id="amount_text"><span id="strike_text"> &#8377;{{ this.book.actualPrice }}</span>
-                                    &#8377;{{ this.book.discountedPrice }} <router-link to="/login"> <button
+                                <p id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                    &#8377;{{ book.discountedPrice }} <router-link to="/login"> <button
                                             id="search_button">buy now</button></router-link></p>
                             </div>
                         </div>
@@ -62,7 +64,7 @@
                             <div v-if="isPopupVisible" class="popup">
                                 <div class="popup-content">
                                     <div class="">
-                                        <span @click="closePopup" class="close">&times;</span>
+                                        <span class="close" @click="closePopup">&times;</span>
                                         <h5>Ratings System</h5>
                                     </div>
                                     <hr>
@@ -80,57 +82,64 @@
 
 
             </div>
-            <div class="container" id="inner_container">
+            <div id="inner_container" class="container">
                 <h4 class="academic_head_text_one">
                     <b id="aca_text">Course</b>Description
                 </h4>
-                <p id="course_text" v-html="this.book.description"></p>
+                <p id="course_text" v-html="book.description"></p>
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
                             <div class="pt-4 topic-card" style="padding-right: 14px;">
-                                <el-tabs class="demo-tabs" v-model="activeName" @tab-click="handleClick">
+                                <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                                     <el-tab-pane label="Subject" name="first" class="rt">
                                         <div class="row box mb-5">
                                             <div class="col-sm-6">
-                                                <div class="card" v-for="(topic, index) in this.book.subject"
-                                                    :key="topic.id">
+                                                <div
+v-for="(topic, index) in book.subject" :key="topic.id"
+                                                    class="card">
                                                     <div class="accordion-item">
                                                         <h5 class="card-header">
-                                                            <div :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'"
-                                                                data-toggle="collapse" :href="'#collapse-example' + index"
-                                                                aria-expanded="true" aria-controls="collapse-example"
-                                                                id="heading-example">
+                                                            <div
+id="heading-example"
+                                                                :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse"
+                                                                :href="'#collapse-example' + index" aria-expanded="true"
+                                                                aria-controls="collapse-example">
 
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <button class="btn btn-link"
+                                                                        <button
+class="btn btn-link"
                                                                             style="text-decoration: none; border: none;">
                                                                             {{ topic.heading }}
                                                                         </button>
                                                                     </div>
                                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                                         <div class="action"><i
-                                                                                class="fa fa-chevron-right rotate-icon"
-                                                                                id="sem_icon"></i>
+                                                                                id="sem_icon"
+                                                                                class="fa fa-chevron-right rotate-icon"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </h5>
-                                                        <div :id="'collapse-example' + index"
+                                                        <div
+:id="'collapse-example' + index"
                                                             :class="index === 0 ? 'collapse show' : 'collapse'"
                                                             aria-labelledby="heading-collapsed">
-                                                            <div class="cards_body_color" v-for="lessons in topic.values"
-                                                                :key="lessons.id">
+                                                            <div
+v-for="lessons in topic.values" :key="lessons.id"
+                                                                class="cards_body_color">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6 ">
                                                                         <div class="accordion_block_one">
-                                                                            <i class="fa" aria-hidden="true" :class="{
+                                                                            <i
+class="fa" aria-hidden="true" :class="{
                                                                                 'fa-circle-o': !hasAnySubjectComplete(lessons),
                                                                                 'fa-check': hasAnySubjectComplete(lessons),
                                                                             }" style="margin-right: 10px;"></i>
-                                                                            <p id="check_text" data-palcement="top"
+                                                                            <p
+id="check_text" data-palcement="top"
                                                                                 :title="lessons.heading"> {{
                                                                                     lessons.heading.slice(0, 16) }}...</p>
                                                                         </div>
@@ -141,22 +150,26 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div :class="{ 'playing-subject': playingSubject === subject }"
-                                                                    class="chapters_block"
-                                                                    v-for="(subject, index) in lessons.values"
-                                                                    :key="index.id">
-                                                                    <div class="row sub"
+                                                                <div
+v-for="(subject, index) in lessons.values"
+                                                                    :key="index.id"
+                                                                    :class="{ 'playing-subject': playingSubject === subject }"
+                                                                    class="chapters_block">
+                                                                    <div
+class="row sub"
                                                                         :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
-                                                                            <i class="fa" aria-hidden="true" :class="{
+                                                                            <i
+class="fa" aria-hidden="true" :class="{
                                                                                 'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                 'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                 'fa-circle': playingSubject === subject
                                                                             }" style="margin-top: 6px;"></i>
                                                                         </div>
-                                                                        <div class="col-lg-7 col-10 col-sm-10"
-                                                                            @click="switchVideo(subject.url, subject)"
-                                                                            style="cursor: pointer;">
+                                                                        <div
+class="col-lg-7 col-10 col-sm-10"
+                                                                            style="cursor: pointer;"
+                                                                            @click="switchVideo(subject.url, subject)">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -177,7 +190,8 @@
                                                                                                 }}</progress>
                                                                                         </div>
                                                                                         <div v-else>
-                                                                                            <progress value="0"
+                                                                                            <progress
+value="0"
                                                                                                 max="100">0</progress>
                                                                                         </div>
                                                                                     </div>
@@ -187,18 +201,22 @@
                                                                         </div>
                                                                         <div class="col-lg-4 col-12 col-sm-12">
                                                                             <div class="inside_block">
-                                                                                <div class="progress-container"
+                                                                                <div
+class="progress-container"
                                                                                     @click="switchVideo(subject.url, subject)">
-                                                                                    <div class="progress_block"
-                                                                                        v-if="hasMatchingVideoId(subject.id)">
-                                                                                        <el-progress type="circle"
+                                                                                    <div
+v-if="hasMatchingVideoId(subject.id)"
+                                                                                        class="progress_block">
+                                                                                        <el-progress
+type="circle"
                                                                                             :show-text="false"
                                                                                             :percentage="calculatePercentage(subject.id)"
                                                                                             :color="'#FF9924'" :width="30"
                                                                                             :stroke-width="2"></el-progress>
                                                                                     </div>
-                                                                                    <div class="progress_block" v-else>
-                                                                                        <el-progress type="circle"
+                                                                                    <div v-else class="progress_block">
+                                                                                        <el-progress
+type="circle"
                                                                                             :show-text="false"
                                                                                             :percentage="0"
                                                                                             :color="'#FF9924'" :width="30"
@@ -207,7 +225,8 @@
 
                                                                                 </div>
 
-                                                                                <i class="fa" aria-hidden="true" :class="{
+                                                                                <i
+class="fa" aria-hidden="true" :class="{
                                                                                     'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                     'fa-bookmark': isProgressBarComplete(subject.id) || playingSubject === subject,
                                                                                 }" style=" font-size: 26px;"></i>
@@ -221,23 +240,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6" v-if="!isMobile">
-                                                <div class="video_block mb-4" v-if="videoOptions.sources.length > 0">
-                                                    <video-player :options="videoOptions" v-if="renderComponent"
-                                                        :isSubscribed="userIsSubscribed" ref="videoPlayer"
-                                                        :videoId="videoId" :courseId="courseId" />
+                                            <div v-if="!isMobile" class="col-sm-6">
+                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
+                                                    <video-player
+v-if="renderComponent" ref="videoPlayer"
+                                                        :options="videoOptions" :is-subscribed="userIsSubscribed"
+                                                        :video-id="videoId" :course-id="courseId" />
                                                 </div>
                                             </div>
                                         </div>
                                     </el-tab-pane>
                                     <el-tab-pane label="Description " name="second">
-                                        <div class="" v-html="this.book.courseDescription"></div>
+                                        <div class="" v-html="book.courseDescription"></div>
                                     </el-tab-pane>
                                     <el-tab-pane label="Question Bank" name="third">
-                                        <div class="" v-html="this.book.questionBank"></div>
+                                        <div class="" v-html="book.questionBank"></div>
                                     </el-tab-pane>
                                     <el-tab-pane label="Quiz" name="fourth">
-                                        <div class="" v-html="this.book.quiz"></div>
+                                        <div class="" v-html="book.quiz"></div>
                                     </el-tab-pane>
                                 </el-tabs>
                             </div>
@@ -252,10 +272,9 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Breadcrumbs from './Breadcrumbs.vue';
 import VideoPlayer from './VideoPlayer.vue';
-import Offer from './Offer.vue'
+// import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import StarRatings from './StarRatings.vue'
@@ -266,7 +285,6 @@ export default {
     name: 'SemesterDetails',
     components: {
         VideoPlayer,
-        Offer,
         Loading,
         Breadcrumbs,
         StarRatings
@@ -334,11 +352,59 @@ export default {
         // Call the method to initially set the isMobile property
         this.handleWindowResize();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         // Remove the event listener when the component is destroyed to avoid memory leaks
         window.removeEventListener('orientationchange', this.handleOrientationChange);
 
         window.removeEventListener('resize', this.handleWindowResize);
+    },
+    async created() {
+        this.isLoading = true;
+        try {
+            const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
+            this.book = res.data;            
+            const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
+            this.courseDetails = subscription.data;
+            console.log(this.courseDetails);
+            const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
+            this.ratings = resul.data.averageRating;
+            this.ratingCount = resul.data.ratingCount;
+            console.log(this.ratings);
+            // console.log(this.courseDetails.userCognitoId);
+            if (this.courseDetails === true) {
+                this.userIsSubscribed = true;
+            } else {
+                this.userIsSubscribed = false;
+            }
+            if(this.userIsSubscribed) {
+                try {
+                    const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
+                    this.watchTimeDatas = result.data;
+                    console.log(this.watchTimeDatas);
+                } catch {
+                    this.watchTimeDatas = {"id": 0,"userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08","courseId": 0,"watchTimeData": []};
+                    console.log(this.watchTimeDatas);
+                }    
+            }
+
+            this.videoOptions.sources = [
+                {
+                    src: this.book.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }
+            ]
+            this.courseId = this.book.id;
+
+            console.log(this.book.id);
+            console.log(this.videoOptions);
+        } catch (err) {
+            console.error(err);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     },
     methods: {
         showPopup() {
@@ -542,10 +608,10 @@ export default {
 
             return false;
         },
-        shouldShowCircleIcon(subjectId) {
-            // Return true if the video source has changed, otherwise return false
-            return this.videoChanged;
-        },
+        // shouldShowCircleIcon(subjectId) {
+        //     // Return true if the video source has changed, otherwise return false
+        //     return this.videoChanged;
+        // },
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -566,54 +632,6 @@ export default {
                     // Handle error (if needed)
                     console.error(error);
                 });
-        }
-    },
-    async created() {
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
-            this.book = res.data;            
-            const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
-            this.courseDetails = subscription.data;
-            console.log(this.courseDetails);
-            const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
-            this.ratings = resul.data.averageRating;
-            this.ratingCount = resul.data.ratingCount;
-            console.log(this.ratings);
-            // console.log(this.courseDetails.userCognitoId);
-            if (this.courseDetails === true) {
-                this.userIsSubscribed = true;
-            } else {
-                this.userIsSubscribed = false;
-            }
-            if(this.userIsSubscribed) {
-                try {
-                    const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
-                    this.watchTimeDatas = result.data;
-                    console.log(this.watchTimeDatas);
-                } catch {
-                    this.watchTimeDatas = {"id": 0,"userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08","courseId": 0,"watchTimeData": []};
-                    console.log(this.watchTimeDatas);
-                }    
-            }
-
-            this.videoOptions.sources = [
-                {
-                    src: this.book.videoUrl,
-                    type: this.videoType,
-                    withCredentials: false,
-                }
-            ]
-            this.courseId = this.book.id;
-
-            console.log(this.book.id);
-            console.log(this.videoOptions);
-        } catch (err) {
-            console.error(err);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
         }
     },
 }

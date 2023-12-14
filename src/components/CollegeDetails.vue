@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container" />
-        <div class="container" v-if="this.semester.length > 0">
+        <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
                 <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
                 <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
@@ -9,26 +9,29 @@
 
             <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
             <div class="pt-2">
-                <div class="row" v-for="(sem, index) in semester" :key="index">
-                    <div class="card" id="main_card">
+                <div v-for="(sem, index) in semester" :key="index" class="row">
+                    <div id="main_card" class="card">
                         <h5 class="card-header">
-                            <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse"
-                                :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example"
-                                id="heading-example">
-                                <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
+                            <div
+id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
+                                data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true"
+                                aria-controls="collapse-example">
+                                <span class="action"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
                                 <h4 id="sem_text">{{ sem.name }} </h4>
                                 <p id="sem_description">{{ sem.description }}</p>
                             </div>
                         </h5>
-                        <div :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
-                            aria-labelledby="heading-collapse" v-if="filteredCourses(sem.id).length > 0">
+                        <div
+v-if="filteredCourses(sem.id).length > 0" :id="'collapse-example' + index"
+                            :class="index == 0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
                             <div class="card-body pt-0">
                                 <div class="">
                                     <div class="row kl">
-                                        <div class="col-md-4 mb-2" v-for="cou in filteredCourses(sem.id)" :key="cou.id">
-                                            <router-link v-bind:to="{ name: 'CourseDetails', params: { name: cou.courseName } }"
+                                        <div v-for="cou in filteredCourses(sem.id)" :key="cou.id" class="col-md-4 mb-2">
+                                            <router-link
+:to="{ name: 'CourseDetails', params: { name: cou.courseName } }"
                                                 style="color: white; text-decoration: none;">
-                                                <div class="card mt-3" id="sem_card">
+                                                <div id="sem_card" class="card mt-3">
                                                     <div class="card-title">
                                                         <div class="row">
                                                             <div class="col-lg-12 mn">
@@ -36,7 +39,8 @@
                                                                     <div class="col-lg-8 col-9 col-sm-9 col-md-9">
                                                                         <div class="row">
                                                                             <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                                <p id="sub_text" class="mb-0"
+                                                                                <p
+id="sub_text" class="mb-0"
                                                                                     data-placement="top" :title="cou.name">
                                                                                     {{ cou.name.slice(0, 18) }}...</p>
 
@@ -50,7 +54,8 @@
 
                                                                     </div>
                                                                     <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                                        <img src="../assets/images/Union193.png"
+                                                                        <img
+src="../assets/images/Union193.png"
                                                                             style="width: 16px; height: 20px;" class="icon">
                                                                     </div>
                                                                 </div>
@@ -60,11 +65,13 @@
                                                             <div class="col-lg-12 mn">
                                                                 <div class="row">
                                                                     <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                                        <p style="padding-top:10px;" id="desc_text"
+                                                                        <p
+id="desc_text" style="padding-top:10px;"
                                                                             v-html="cou.description.slice(0, 49)"></p>
                                                                     </div>
                                                                     <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                                        <img src="../assets/images/Path4025.png"
+                                                                        <img
+src="../assets/images/Path4025.png"
                                                                             style="width: 30px; height:30px;" class="video">
                                                                     </div>
                                                                 </div>
@@ -74,7 +81,8 @@
                                                             <div class="col-lg-12 mn1">
                                                                 <div class="row aa">
                                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                                        <StarRatings :rating="cou.starRating || 0"
+                                                                        <StarRatings
+:rating="cou.starRating || 0"
                                                                             :max-rating="5" />
                                                                         <!-- <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -96,15 +104,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
-                            aria-labelledby="heading-collapse" v-else style="background-color: #EFF5FC;">
+                        <div
+v-else :id="'collapse-example' + index"
+                            :class="index == 0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse" style="background-color: #EFF5FC;">
                             <h2 class="comming_soons">Comming Soon ...</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="" v-else>
+        <div v-else class="">
             <h2 class="comming_soon">Comming Soon ...</h2>
         </div>
     </div>
@@ -114,7 +123,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import AxiosInstance from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
@@ -188,9 +196,9 @@ export default {
     }
 }
 
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+// $(document).ready(function () {
+//     $('[data-toggle="tooltip"]').tooltip();
+// });
 </script>
 
 <style scoped>

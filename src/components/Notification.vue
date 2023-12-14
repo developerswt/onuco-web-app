@@ -58,7 +58,9 @@
                     </div>
 </template>
 <script>
-
+export default {
+    name: 'NotificationView'
+}
 </script>
 <style scoped>
 

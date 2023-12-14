@@ -15,10 +15,11 @@
         <div class="accordion_block">
 
             <div class="">
-                <div class="card" id="faq_card">
-                    <h5 class="card-header" id="faq_card_header">
-                        <div data-toggle="collapse" href="#collapse-example2" aria-expanded="true"
-                            aria-controls="collapse-example" id="heading-example" class="d-block kj">
+                <div id="faq_card" class="card">
+                    <h5 id="faq_card_header" class="card-header">
+                        <div
+id="heading-example" data-toggle="collapse" href="#collapse-example2"
+                            aria-expanded="true" aria-controls="collapse-example" class="d-block kj">
 
                             Your Agreement <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
                         </div>
@@ -33,10 +34,11 @@
 
                     </div>
                 </div>
-                <div class="card" id="faq_card">
-                    <h5 class="card-header" id="faq_card_header">
-                        <div data-toggle="collapse" href="#collapse-example" aria-expanded="false"
-                            aria-controls="collapse-example" id="heading-example" class="d-block kj">
+                <div id="faq_card" class="card">
+                    <h5 id="faq_card_header" class="card-header">
+                        <div
+id="heading-example" data-toggle="collapse" href="#collapse-example"
+                            aria-expanded="false" aria-controls="collapse-example" class="d-block kj">
 
                             Your Agreement <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
                         </div>
@@ -61,7 +63,7 @@
 
 <script>
 export default {
-    name: 'Faq',
+    name: 'FaqView',
 
 }
 </script>

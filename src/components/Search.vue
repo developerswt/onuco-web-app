@@ -37,9 +37,9 @@
                     value-key="title"
                     size="large"
                     class="inline-input w-100"
+                    placeholder="Search..."
                     @keyup.enter="performSearch"
                     @select="handleSelect"
-                    placeholder="Search..."
                 >
                 <template #prefix>
                         <el-icon style="vertical-align: middle;float: right; width: 1rem; height: 2rem; cursor: pointer; color: blue; font-weight: bold;">
@@ -76,10 +76,11 @@
                                     </div>
                                     <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
-                                            <label for="label-select" id="sort_label"> Sort by:</label>
+                                            <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select class="form-select" aria-label="Default select example"
-                                                id="label-select">
+                                            <select
+id="label-select" class="form-select"
+                                                aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -90,15 +91,15 @@
                                     </div>
 
                                 </div>
-                                <div class="" v-if="searchResults.length > 0">
-                                    <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
+                                <div v-if="searchResults.length > 0" class="">
+                                    <div v-for="result in searchResults"  :key="result.id" class="tab_inner_block">
                                         <div class="row no-gutters" >
                                             <div class="col-lg-3 col-md-3" >
-                                                <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
+                                                <img id="sub_image" src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="results_inner_block">
-                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
+                                                    <router-link :to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
                                                     <div class="row">
                                                         <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                             <p id="title_text" class="mb-1">{{ result.title }}</p>
@@ -142,16 +143,16 @@
                                             </div>
                                         </div>
                                       
-                                        <div class="row mb-2 pt-4" v-for="instruct in result.instructorName" :key="instruct.id">
+                                        <div v-for="instruct in result.instructorName" :key="instruct.id" class="row mb-2 pt-4">
                                             <div class="col-sm-12">
-                                                <router-link v-bind:to="{ name: 'Instructor', params: { name: instruct.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                                                <router-link :to="{ name: 'Instructor', params: { name: instruct.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-sm-8 user_details">
 
-                                                                <img :src="instruct.imageUrl" class="user-icon" v-if="instruct.imageUrl != ''">
-                                                                <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                                                                <img v-if="instruct.imageUrl != ''" :src="instruct.imageUrl" class="user-icon">
+                                                                <img v-else src="../assets/images/Image21.png" class="user-icon">
                                                                 <div class="user_details_name">
                                                                     <h2>{{ instruct.name  }}</h2>
                                                                     <p id="desc_text" >
@@ -179,7 +180,7 @@
                                         </div>  
                                     </div>
                                 </div>
-                                <div class="no_result_found" v-else>
+                                <div v-else class="no_result_found">
                                     <h4>No Results Found</h4>
                                 </div>
 
@@ -192,10 +193,11 @@
                                     </div>
                                     <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
-                                            <label for="label-select" id="sort_label"> Sort by:</label>
+                                            <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select class="form-select" aria-label="Default select example"
-                                                id="label-select">
+                                            <select
+id="label-select" class="form-select"
+                                                aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -206,15 +208,15 @@
                                     </div>
 
                                 </div>
-                                <div class="" v-if="searchResults.length > 0">
-                                    <div class="tab_inner_block"  v-for="result in searchResults" :key="result.id">
+                                <div v-if="searchResults.length > 0" class="">
+                                    <div v-for="result in searchResults"  :key="result.id" class="tab_inner_block">
                                         <div class="row no-gutters" >
                                             <div class="col-lg-3 col-md-3" >
-                                                <img src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" id="sub_image" />
+                                                <img id="sub_image" src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="results_inner_block">
-                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
+                                                    <router-link :to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
                                                     <div class="row">
                                                         <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                                             <p id="title_text" class="mb-1">{{ result.title }}</p>
@@ -259,7 +261,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="no_result_found" v-else>
+                                <div v-else class="no_result_found">
                                     <h4>No Results Found</h4>
                                 </div>
                             </el-tab-pane>
@@ -273,10 +275,11 @@
                                     </div>
                                     <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
-                                            <label for="label-select" id="sort_label"> Sort by:</label>
+                                            <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select class="form-select" aria-label="Default select example"
-                                                id="label-select">
+                                            <select
+id="label-select" class="form-select"
+                                                aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -287,18 +290,18 @@
                                     </div>
 
                                 </div>
-                                <div class="" v-if="searchResults.length > 0">
-                                    <div class="" v-for="result in searchResults" :key="result.id">
-                                <div class="row mb-2" v-for="person in result.instructorName" :key="person.id">
+                                <div v-if="searchResults.length > 0" class="">
+                                    <div v-for="result in searchResults" :key="result.id" class="">
+                                <div v-for="person in result.instructorName" :key="person.id" class="row mb-2">
                                     <div class="col-sm-12">
-                                        <router-link v-bind:to="{ name: 'Instructor', params: { name: person.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                                        <router-link :to="{ name: 'Instructor', params: { name: person.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
                                                  <div class="col-sm-8 user_details">
 
-                                                    <img :src="person.imageUrl" class="user-icon" v-if="person.imageUrl != ''">
-                                                    <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                                                    <img v-if="person.imageUrl != ''" :src="person.imageUrl" class="user-icon">
+                                                    <img v-else src="../assets/images/Image21.png" class="user-icon">
                                                         <div class="user_details_name">
                                                             <h2>{{ person.name  }}</h2>
                                                             <p id="desc_text" >
@@ -328,7 +331,7 @@
                                 
                                 </div>
                                 </div>
-                                <div class="no_result_found" v-else>
+                                <div v-else class="no_result_found">
                                     <h4>No Results Found</h4>
                                 </div>
                                
@@ -347,7 +350,6 @@
 <script>
 import axiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue';
-import axios from 'axios';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
@@ -367,6 +369,22 @@ export default {
             activeName: 'first',
            
         }    
+    },
+    async created() {
+        this.isLoading = true;
+        try {
+            const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
+            const data = await response.json();
+
+                // Assuming your API returns an array of objects with a "name" property
+            this.searchResults = data;
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     },
     // created() {
     //     const queryValue = this.$route.query.data;
@@ -427,22 +445,6 @@ export default {
         },
         clearInput() {
             this.searchQuery = '';
-        }
-    },
-    async created() {
-        this.isLoading = true;
-        try {
-            const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
-            const data = await response.json();
-
-                // Assuming your API returns an array of objects with a "name" property
-            this.searchResults = data;
-        } catch (error) {
-            console.error('Error fetching search results:', error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
         }
     },    
 }

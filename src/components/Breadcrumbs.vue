@@ -140,7 +140,6 @@ export default {
  -->
 
 
- // Breadcrumbs.vue
 
 <!-- Breadcrumbs.vue -->
 
@@ -285,7 +284,7 @@ export default {
       <li>
         <router-link :to="previousPath">{{ previousPathName }} > </router-link>
       </li> &nbsp;
-      <li class="breadcrumb-item" v-for="(crumb, index) in breadcrumbs" :key="index">
+      <li v-for="(crumb, index) in breadcrumbs" :key="index" class="breadcrumb-item">
         <router-link to="">{{ crumb.label }}</router-link>
       </li>
     </ol>
@@ -301,6 +300,7 @@ export default {
 
 <script>
 export default {
+  name: 'BreadcrumbsView',
   data() {
     return {
       breadcrumbs: [],

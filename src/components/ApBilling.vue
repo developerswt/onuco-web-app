@@ -29,7 +29,7 @@
     <div class="box">
       <div class="content">
         <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="50px" cellspacing="0">
+                <table id="dataTable" class="table table-bordered" width="50px" cellspacing="0">
                     <thead>
                       <header style="color:black; font-size:large; align-items: center !important;">Invoice</header>
                         <tr>

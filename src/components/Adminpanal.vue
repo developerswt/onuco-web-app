@@ -16,7 +16,7 @@
 import SideBar from './SideBar.vue'
 // import APDashboard from './APDashboard.vue'
 export default{
-    name: "AdminPanel-world",
+    name: "AdminPanelWorld",
     components: {
        
         SideBar,

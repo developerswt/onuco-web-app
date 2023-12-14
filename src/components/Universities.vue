@@ -1,14 +1,14 @@
 <template>
     <div class="container jk">
         <Breadcrumbs class="container" />
-        <div class="parent_block" v-if="this.university.length > 0">
+        <div v-if="university.length > 0" class="parent_block">
             <h4 class="academic_head_text">
             <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
         </h4>
         <div class=" parent_blocks" >
             <div class="row pt-4"  >
-                <div class="box" v-for="college in university" :key="college.id">
-                    <router-link v-bind:to="{ name:'Semester', params:{name: college.universityName}}" style="text-decoration: none;" >
+                <div v-for="college in university" :key="college.id" class="box">
+                    <router-link :to="{ name:'Semester', params:{name: college.universityName}}" style="text-decoration: none;" >
                         <div class="row">
                             <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
                                 <img  class="cb" src="../assets/images/university.png">
@@ -28,7 +28,7 @@
             </div>
         </div>
         </div>
-        <div class="" v-else>
+        <div v-else class="">
             <h2 class="comming_soon">Comming Soon ...</h2>
         </div>
      
@@ -45,7 +45,7 @@ import AxiosInstance from '../config/axiosInstance'
 import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
-    name: 'Universities',
+    name: 'UniversitiesView',
     components: {
         Offer,
         Loading,

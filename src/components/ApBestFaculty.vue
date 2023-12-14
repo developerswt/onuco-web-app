@@ -10,22 +10,22 @@
          
                         <div style="height: 100%;">
                             <ag-grid-vue 
-                                :domLayout="domLayout"
+                                :dom-layout="domLayout"
                                 class="ag-theme-alpine"
-                                :columnDefs="columnDefs"
-                                :rowData="rowData"
-                                :editType="editType"
-                                :rowSelection="rowSelection"
-                                :defaultColDef="defaultColDef"
-                                :suppressExcelExport="true"
-                                :popupParent="popupParent"
+                                :column-defs="columnDefs"
+                                :row-data="rowData"
+                                :edit-type="editType"
+                                :row-selection="rowSelection"
+                                :default-col-def="defaultColDef"
+                                :suppress-excel-export="true"
+                                :popup-parent="popupParent"
+                                cache-quick-filter = true
+                                :pagination = "true"
+                                :pagination-page-size="paginationPageSize"
+                                is-loding ="true"
                                 @grid-ready="onGridReady"
                                 @cell-value-changed="onCellValueChanged"
                                 @row-clicked='onCellClicked'
-                                cacheQuickFilter = true
-                                :pagination = "true"
-                                :paginationPageSize="paginationPageSize"
-                                isLoding ="true"
                                     >
                             </ag-grid-vue>
                         </div>  
@@ -37,24 +37,24 @@
            
             <div class="col-lg-4 col-sm-12">
                 
-                <form v-show="formVisible" class="frm" @submit.prevent="addBranch"  style="margin-top:25px">
+                <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
                     <label for="id"> Id:</label>
-                    <input type="text" id="id" v-model="newBranch.id" required><br>
+                    <input id="id" v-model="newBranch.id" type="text" required><br>
                     <!-- <p><b></b> {{newBranch.id}}</p> -->
                     <label for="branchName"> Name:</label>
-                    <input type="text" id="branchName" v-model="newBranch.name" required><br>
+                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <input type="text" id="description" v-model="newBranch.description" required><br>
+                    <input id="description" v-model="newBranch.description" type="text" required><br>
 
                     <label for="facultyId">FacultyId:</label>
-                    <input type="text" id="facultyId" v-model="newBranch.facultyId" required><br>
+                    <input id="facultyId" v-model="newBranch.facultyId" type="text" required><br>
 
                     <label for="facultyDynamicRouting"><b>FacultyDynamicRouting:</b></label>
-                    <input type="text" id="facultyDynamicRouting" v-model="newBranch.facultyDynamicRouting" required>
+                    <input id="facultyDynamicRouting" v-model="newBranch.facultyDynamicRouting" type="text" required>
 
                     <label for="image">image:</label>
-                    <input type="text" id="facultyId" v-model="newBranch.image" required><br>
+                    <input id="facultyId" v-model="newBranch.image" type="text" required><br>
 
                     <button class="btn2" type="submit">Add Branch</button>
                 </form>
@@ -219,9 +219,9 @@
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-       onRowDataA() {
-         this.gridApi.setRowData(colors);
-       },
+      //  onRowDataA() {
+      //    this.gridApi.setRowData(colors);
+      //  },
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },

@@ -4,43 +4,43 @@
   <div class="container ">
     <section class="main" >
     <div class="row" style="justify-items: center;">
-  <div class="col-sm-3 cardpd"  v-if="isUserSuperadmin">
+  <div v-if="isUserSuperadmin"  class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
-      <div class="content" v-if="person">
+      <div v-if="person" class="content">
 
       <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
-        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
+        <span style=" font-size:26px"> {{person.activeStudentsCount }}</span>
     </div>
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd" v-if="isUserSuperadmin">
+  <div v-if="isUserSuperadmin" class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
-      <div class="content" v-if="student">
+      <div v-if="student" class="content">
         <h3 class="head"> <router-link to="/InactStudents">Inactive Students</router-link></h3>
-        <span style=" font-size:26px"> {{this.student.inactiveStudentsCount }}</span>
+        <span style=" font-size:26px"> {{student.inactiveStudentsCount }}</span>
     </div>
    </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+  <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
-      <div class="content" v-if="count">
+      <div v-if="count" class="content">
       <h3 class="head"><router-link to="/StudentDetails">Complete Students </router-link></h3>
-      <span style=" font-size:26px"> {{this.count.completedStudentsCount }}</span>      
+      <span style=" font-size:26px"> {{count.completedStudentsCount }}</span>      
     </div>
     </div>
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color" v-if="isUserSuperadmin">
+  <div v-if="isUserSuperadmin" class="card color">
     <div class="box">
-      <div class="content" v-if="counts">
+      <div v-if="counts" class="content">
         <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
-        <span style=" font-size:26px"> {{this.counts.totalCount }}</span>
+        <span style=" font-size:26px"> {{counts.totalCount }}</span>
     </div>
    </div>
   </div>
@@ -78,7 +78,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color " v-if="isUserSuperadmin" >
+  <div v-if="isUserSuperadmin" class="card color " >
     <div class="box">
       <div class="content">
         <h3 class="head"><router-link to="/CourseUpdate">Courses Update</router-link></h3>
@@ -90,7 +90,7 @@
 </div>
 <div class="row" style="justify-items: center;">
   <div class="col-sm-3 cardpd">
-   <div class="card color" v-if="isUserSuperadmin">
+   <div v-if="isUserSuperadmin" class="card color">
     <div class="box">
       <div class="content">
       <h3 class="head"> <router-link to="/SemUpdate"> Semisters Update  </router-link></h3>
@@ -100,7 +100,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color" v-if="isUserSuperadmin">
+  <div v-if="isUserSuperadmin" class="card color">
     <div class="box">
       <div class="content">
         <h3 class="head"> <router-link to="/UniUpdate">University Update</router-link></h3>
@@ -110,7 +110,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-   <div class="card color vv" v-if="isUserSuperadmin">
+   <div v-if="isUserSuperadmin" class="card color vv">
     <div class="box">
       <div class="content">
       <h3 class="head"><router-link to="/BranchesUpdate">Branches Update</router-link></h3>
@@ -120,7 +120,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd" >
-  <div class="card color vv" v-if="isUserSuperadmin">
+  <div v-if="isUserSuperadmin" class="card color vv">
     <div class="box">
       <div class="content">
         <h3 class="head"><router-link to="/ApBestFaculty">ADD Best Faculty</router-link></h3>
@@ -130,7 +130,7 @@
   </div>
   </div>
 </div>
-<div class="row" style="justify-items: center;"  v-if="isUserAdmin">
+<div v-if="isUserAdmin" class="row"  style="justify-items: center;">
   <div class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
@@ -173,7 +173,7 @@
   </div>
 </div>
 <div class="row" style="justify-items: center;"  >
-  <div class="col-sm-3 cardpd" v-if="isUserSuperadmin" >
+  <div v-if="isUserSuperadmin" class="col-sm-3 cardpd" >
    <div class="card color" >
     <div class="box">
       <div class="content">
@@ -183,7 +183,7 @@
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+  <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
       <div class="content">
@@ -193,13 +193,13 @@
    </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+  <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
-      <div class="content" v-if="person">
+      <div v-if="person" class="content">
 
       <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
-        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
+        <span style=" font-size:26px"> {{person.activeStudentsCount }}</span>
     </div>
     </div>
   </div>
@@ -273,7 +273,7 @@
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {
 
-  name: "Actstudent",
+  name: "ApHome",
   components: {
           Loading,
           

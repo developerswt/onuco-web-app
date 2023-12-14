@@ -5,17 +5,17 @@
     
     <!-- <Carouseltwo /> -->
     <!-- <div class="container-fluid jk "> -->
-        <div class="container-fluid " id="first_container">
-            <div class="container" id="home_container">
+        <div id="first_container" class="container-fluid ">
+            <div id="home_container" class="container">
                 <Academics />
             </div>
         </div>
-        <div class="container-fluid" id="second_container">
+        <div id="second_container" class="container-fluid">
             <div class="container">
                 <TopRatedCourses />
             </div>
         </div>
-        <div class="container-fluid" id="third_container" style="height: 290px;">
+        <div id="third_container" class="container-fluid" style="height: 290px;">
             <div class="container">
                 <BestLecture />
             </div>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-    <div class="container-fluid text-center " id="ban ">
+    <div id="ban " class="container-fluid text-center ">
     <img :src="currentImage" class="banner">
   </div>
   
@@ -59,7 +59,6 @@ import Carousel from "./Carousel.vue"
 import TopRatedCourses from "./TopRatedCourses.vue"
 import BestLecture from "./BestLecture.vue"
 import Offer from './Offer.vue'
-import Carouseltwo from './Carouseltwo.vue'
 
 
 export default {
@@ -70,7 +69,7 @@ export default {
         TopRatedCourses,
         BestLecture,
         Offer,
-        Carouseltwo,
+
 
     },
     data() {

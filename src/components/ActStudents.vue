@@ -113,22 +113,22 @@
           
           <div style="height: 100%;">
             <ag-grid-vue 
-              :domLayout="domLayout"
+              :dom-layout="domLayout"
               class="ag-theme-alpine"
-              :columnDefs="columnDefs"
-              :rowData="rowData"
-              :editType="editType"
-              :rowSelection="rowSelection"
-              :defaultColDef="defaultColDef"
-              :suppressExcelExport="true"
-              :popupParent="popupParent"
+              :column-defs="columnDefs"
+              :row-data="rowData"
+              :edit-type="editType"
+              :row-selection="rowSelection"
+              :default-col-def="defaultColDef"
+              :suppress-excel-export="true"
+              :popup-parent="popupParent"
+              cache-quick-filter = true
+              :pagination = "true"
+              :pagination-page-size="paginationPageSize"
+              is-loding ="true"
               @grid-ready="onGridReady"
               @cell-value-changed="onCellValueChanged"
               @row-clicked='onCellClicked'
-              cacheQuickFilter = true
-              :pagination = "true"
-              :paginationPageSize="paginationPageSize"
-              isLoding ="true"
             >
             </ag-grid-vue>
           </div>  
@@ -136,7 +136,7 @@
       </div>
     
       <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+               <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                    <thead>
                        <tr>
                            <th>Active Students</th>
@@ -146,9 +146,9 @@
                    </thead>
                     <tbody v-if="person">
                         <tr>
-                            <td>{{this.person.activeStudentsCount }}</td>
-                            <td>{{ this.person.totalAmount }}</td>
-                            <td>{{ this.person.discountedAmount }}</td>
+                            <td>{{person.activeStudentsCount }}</td>
+                            <td>{{ person.totalAmount }}</td>
+                            <td>{{ person.discountedAmount }}</td>
                         </tr>
                     </tbody>   
                </table>
@@ -160,7 +160,6 @@
     
     <script>
     
-    import axios from "axios";
     import "ag-grid-community/styles/ag-grid.css";
     import "ag-grid-community/styles/ag-theme-alpine.css";
     import { AgGridVue } from "ag-grid-vue3";
@@ -169,7 +168,7 @@
     import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
     
     export default {
-      name: "studentpage",
+      name: "ActStudents",
       components: {
         AgGridVue,
         Loading,

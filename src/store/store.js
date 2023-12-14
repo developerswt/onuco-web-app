@@ -24,9 +24,9 @@ export default createStore ({
         setJwtToken(state, token) {
             state.jwtToken = token;
         },
-        setUser(state, users) {
-            state.users = users;
-        },
+        // setUser(state, users) {
+        //     state.users = users;
+        // },
         setUser(state, user) {
             state.user = user;
         },

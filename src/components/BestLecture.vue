@@ -11,13 +11,14 @@
         <!-- <div class="row pt-5"> -->
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="facult in faculty" :key="facult.id">
-                <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }"
+                <router-link
+:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }"
                     style="cursor: pointer; text-decoration: none;">
                     <div class="card">
                         <div class="user-follower">
 
-                            <img :src="facult.image" class="user-icon" v-if="facult.image !== ''">
-                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                            <img v-if="facult.image !== ''" :src="facult.image" class="user-icon">
+                            <img v-else src="../assets/images/Image21.png" class="user-icon">
                             <!-- <img :src="facult.imageUrl" class="user-icon"> -->
                         </div>
                         <div class="user-following">
@@ -60,7 +61,6 @@
 <script>
 import axiosInstance from '../config/axiosInstance'
 import { defineComponent } from 'vue'
-import axios from 'axios'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import StarRatings from './StarRatings.vue'

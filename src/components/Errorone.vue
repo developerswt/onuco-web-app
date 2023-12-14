@@ -27,7 +27,9 @@
 </template>
 
 <script scoped>
-
+export default {
+    name: 'ErroroneView'
+}
 </script>
 
 <style scoped>
