@@ -21,7 +21,6 @@
     <li><a href="#">Sign Out</a></li>
   </ul>
 </menu>
-<Loading v-model:active="isLoading"></Loading>
 </div>
   </template>
   <!-- <script>

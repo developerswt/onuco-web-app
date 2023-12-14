@@ -54,7 +54,6 @@
 
             </template>
         </carousel>
-        <Loading v-model:active="isLoading"></Loading>
     </div>
 </template>
 
@@ -62,7 +61,6 @@
 <script>
 import axiosInstance from '../config/axiosInstance'
 import { defineComponent } from 'vue'
-import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import StarRatings from './StarRatings.vue'
 
