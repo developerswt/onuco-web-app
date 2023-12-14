@@ -1,5 +1,5 @@
 
-
+aplecturer
 <template>
    <div class="container" ><p>Dashbord > Courses </p>
     <div style="padding: 20px 20px 80px 20px; "  >
@@ -84,15 +84,14 @@
   
   <script>
   
- import AxiosInstance from '../config/axiosInstance'
+  
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
-  // import AlertDialog from './AlertDialog.vue';
+  import AxiosInstance  from '../config/axiosInstance';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  import axios from "axios";
-
+  
   export default {
     name: "OrdersPage",
     components: {
@@ -139,9 +138,13 @@
       try {
         const res = await AxiosInstance.get(`/Course`);
         let req = res.data;
-        this.Orders = req;
-        
-        } catch (error) {
+    this.Orders = req;
+    if (Array.isArray(req.courses)) {
+      this.rowData = req.courses;
+    } else {
+      console.error('completedStudents is not an array:', req.courses);
+    }
+  } catch (error) {
           this.isLoading = false;
         console.log(error);
         this.showDialog = true;  
@@ -151,13 +154,11 @@
       finally {
         this.isLoading = false;
       }
-      this.rowData = this.Orders;
       this.rowSelection = 'single'; 
-      console.log(this.rowData);
-      this.popupParent = document.body;
-      this.paginationPageSize = 10;
-  
-    },
+  console.log(this.rowData);
+  this.popupParent = document.body;
+  this.paginationPageSize = 10;
+},
     
     methods: {
       
@@ -180,9 +181,7 @@
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
       },
-      // onRowDataA() {
-      //   this.gridApi.setRowData(colors);
-      // },
+     
       onBtnExport() {
         this.gridApi.exportDataAsCsv();
       },
@@ -224,7 +223,7 @@
       async update(id) {
         this.showDialog = false;
           try {
-                const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+                const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
                 console.log(res);
                 this.ismodel = true;
       
@@ -237,35 +236,34 @@
             }
       },
 
-        onLogOut() {
-          this.$store.commit('isLoggedIn', false);
-          this.$router.push('/Loginpage');
-        },  
+        
         async getdata(){
           this.domLayout = 'autoHeight'; 
           this.isLoading = true;
           try {
-            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course`);
+            const res = await AxiosInstance.get(`/Course`);
             let req = res.data;
-            this.Orders = req;
-          
-          } catch (error) {
-              this.isLoading = false;
-              console.log(error);
-              this.showDialog = true;  
-              this.dialogTitle= "Error";
-              this.dialogMessage= "Not get data";
-            }
-            finally {
-            this.isLoading = false;
-            }
-            this.rowData = this.Orders;
-            this.rowSelection = 'single'; 
-            console.log(this.rowData);
-            this.popupParent = document.body;
-            this.paginationPageSize = 10;
-      
-        }
+    this.Orders = req;
+    if (Array.isArray(req.courses)) {
+      this.rowData = req.courses;
+    } else {
+      console.error('completedStudents is not an array:', req.courses);
+    }
+  } catch (error) {
+          this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;  
+        this.dialogTitle= "Error";
+        this.dialogMessage= "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowSelection = 'single'; 
+  console.log(this.rowData);
+  this.popupParent = document.body;
+  this.paginationPageSize = 10;
+}
     },
     
   };

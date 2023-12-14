@@ -54,6 +54,7 @@
 
             </template>
         </carousel>
+        <Loading v-model:active="isLoading"></Loading>
     </div>
 </template>
 

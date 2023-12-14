@@ -21,6 +21,7 @@
                 </table>
             </div> 
         </div>
+        <Loading v-model:active="isLoading"></Loading>
     </div>
 </template>
 <script>

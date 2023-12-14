@@ -1,5 +1,7 @@
 
 
+
+
 <template>
   <div class="container ">
     <section class="main" >
@@ -119,16 +121,17 @@
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd" >
-  <div v-if="isUserSuperadmin" class="card color vv">
+  <div v-if="isUserSuperadmin" class="col-sm-3 cardpd" >
+   <div class="card color" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/ApBestFaculty">ADD Best Faculty</router-link></h3>
-       
+      <h3 class="head"> <router-link to="/AcademicsUpdate">Academics Update </router-link></h3>
+        
     </div>
-   </div>
+    </div>
   </div>
   </div>
+ 
 </div>
 <div v-if="isUserAdmin" class="row"  style="justify-items: center;">
   <div class="col-sm-3 cardpd">
@@ -173,14 +176,14 @@
   </div>
 </div>
 <div class="row" style="justify-items: center;"  >
-  <div v-if="isUserSuperadmin" class="col-sm-3 cardpd" >
-   <div class="card color" >
+  <div class="col-sm-3 cardpd" >
+  <div v-if="isUserSuperadmin" class="card color vv">
     <div class="box">
       <div class="content">
-      <h3 class="head"> <router-link to="/AcademicsUpdate">Academics Update </router-link></h3>
-        
+        <h3 class="head"><router-link to="/ApBestFaculty">ADD Best Faculty</router-link></h3>
+       
     </div>
-    </div>
+   </div>
   </div>
   </div>
   <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
@@ -204,17 +207,61 @@
     </div>
   </div>
   </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color vv" >
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/CourseWorkflow">Course Workflow</router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div>
+</div>
+<div class="row" style="justify-items: center;"  >
+  <div class="col-sm-3 cardpd" >
+  <div v-if="isUserSuperadmin" class="card color vv">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/TypesUpdate">Types Update</router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div>
+  <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
+  <div class="card color">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"> <router-link to="/AdTypes">Types</router-link></h3>
+    
+    </div>
+   </div>
+  </div>
+  </div>
+  <!-- <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+   <div class="card color" >
+    <div class="box">
+      <div class="content" v-if="person">
+
+      <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
+        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
+    </div>
+    </div>
+  </div>
+  </div> -->
   <!-- <div class="col-sm-3 cardpd">
   <div class="card color vv" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/AdSem">Semesters</router-link></h3>
+        <h3 class="head"><router-link to="/CourseWorkflow">Course Workflow</router-link></h3>
        
     </div>
    </div>
   </div>
   </div> -->
 </div>
+
 
   <!-- <div class="row">
 <div class="col-sm-8">
@@ -265,6 +312,7 @@
 
 
 </section>
+<Loading v-model:active="isLoading"></Loading>
 </div>
 </template>
 <script>
@@ -273,7 +321,7 @@
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {
 
-  name: "ApHome",
+  name: "Actstudent",
   components: {
           Loading,
           

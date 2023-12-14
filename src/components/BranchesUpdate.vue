@@ -111,7 +111,7 @@ type="button" class="btn btn-secondary" data-dismiss="modal"
    
 <script>
 
-import axios from "axios";
+import AxiosInstance  from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue3";
@@ -172,27 +172,20 @@ export default {
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-        const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
-        let req = res.data;
-        this.Orders = req;
-         
-        } catch (error) {
-          this.isLoading = false;
-        console.log(error);
-        this.showDialog = true;  
-        this.dialogTitle= "Error";
-        this.dialogMessage= "Not get data";
-      }
-      finally {
-        this.isLoading = false;
-      }
-      this.rowData = this.Orders;
-      this.rowSelection = 'single'; 
-      console.log(this.rowData);
-       this.popupParent = document.body;
-       this.paginationPageSize = 10;
-   
-     },
+        const res = await AxiosInstance.get(`/Branches`);
+    let req = res.data;
+    this.Orders = req;
+    if (Array.isArray(req.branches)) {
+      this.rowData = req.branches;
+    } else {
+      console.error('completedStudents is not an array:', req.branches);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    this.isLoading = false;
+  }
+},
      
      methods: {
         toggleForm() {
@@ -218,9 +211,7 @@ export default {
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-      //  onRowDataA() {
-      //    this.gridApi.setRowData(colors);
-      //  },
+      
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },
@@ -247,7 +238,7 @@ export default {
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
+                 const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
                  console.log(res);
                  this.ismodel = true;
        
@@ -263,7 +254,7 @@ export default {
        async addBranch() {
         this.isLoading = true;
       try {
-        const response = await axios.post(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`, this.newBranch);
+        const response = await AxiosInstance.post(`/Branches`, this.newBranch);
         this.ismodel = true; 
         if (response.status === 200) {
           console.log("Branch added successfully");
@@ -292,27 +283,20 @@ export default {
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
-             let req = res.data;
-             this.Orders = req;
-           
-           } catch (error) {
-               this.isLoading = false;
-               console.log(error);
-               this.showDialog = true;  
-               this.dialogTitle= "Error";
-               this.dialogMessage= "Not get data";
-             }
-             finally {
-             this.isLoading = false;
-             }
-             this.rowData = this.Orders;
-             this.rowSelection = 'single'; 
-             console.log(this.rowData);
-             this.popupParent = document.body;
-             this.paginationPageSize = 10;
-       
-         }
+            const res = await AxiosInstance.get(`/Branches`);
+    let req = res.data;
+    this.Orders = req;
+    if (Array.isArray(req.branches)) {
+      this.rowData = req.branches;
+    } else {
+      console.error('completedStudents is not an array:', req.branches);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    this.isLoading = false;
+  }
+},
      },
      
    };

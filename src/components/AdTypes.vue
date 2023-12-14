@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="container" ><p>Dashbord > Branchs Update </p>
+    <div class="container" ><p>Dashbord > Types </p>
         
                 <div style="padding: 20px;"  >
        
@@ -43,7 +43,7 @@
    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
    
    export default {
-     name: "OrdersPage",
+     name: "AdSem",
      components: {
        AgGridVue,
        Loading,
@@ -62,7 +62,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'},{name:'WorkFlow Statement',field:'workFlowStatement'} ],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Type Name', field: 'name' },{name:'Description',field:'description'}],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -88,21 +88,27 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-        const res = await AxiosInstance.get(`/Course`);
-        let req = res.data;
-    this.Orders = req;
-    if (Array.isArray(req.courses)) {
-      this.rowData = req.courses;
-    } else {
-      console.error('completedStudents is not an array:', req.courses);
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  } finally {
-    this.isLoading = false;
-  }
-},
-     
+        const res = await AxiosInstance.get(`/Types`);
+             let req = res.data;
+             this.Orders = req;
+           
+           } catch (error) {
+               this.isLoading = false;
+               console.log(error);
+               this.showDialog = true;  
+               this.dialogTitle= "Error";
+               this.dialogMessage= "Not get data";
+             }
+             finally {
+             this.isLoading = false;
+             }
+             this.rowData = this.Orders;
+             this.rowSelection = 'single'; 
+             console.log(this.rowData);
+             this.popupParent = document.body;
+             this.paginationPageSize = 10;
+       
+         },    
    };
    
   
@@ -113,7 +119,7 @@
    display: flex;
    flex-direction: column;
    height: 100%;
-   width: 80%;
+   width: 50%;
    }
    
    #myGrid {

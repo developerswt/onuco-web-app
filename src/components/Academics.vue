@@ -13,8 +13,7 @@
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="item in academia" :key="item.id">
                 <div class="box1">
-                    <router-link
-:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                    <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                         style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">

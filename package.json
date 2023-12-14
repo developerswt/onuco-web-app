@@ -64,7 +64,6 @@
       "plugin:vue/vue3-recommended",
       "prettier"
     ],
-   
     "rules": {
       "vue/require-default-prop": "off"
     }

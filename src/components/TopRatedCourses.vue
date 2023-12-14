@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body" >
-                                    <p class="card-text">{{course.description.slice(3,65)}}...</p>
+                                    <p class="card-text">{{course.description.slice(0,65)}}...</p>
                                     <div class="text-left price" style="float: right;">
                                         <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{ course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
                                 

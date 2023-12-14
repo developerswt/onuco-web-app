@@ -38,9 +38,9 @@
             <div class="col-lg-4 col-sm-12">
                 
                 <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
-                    <label for="id"> Id:</label>
-                    <input id="id" v-model="newBranch.id" type="text" required><br>
-                    <!-- <p><b></b> {{newBranch.id}}</p> -->
+                    <!-- <label for="id"> Id:</label>
+                    <input id="id" v-model="newBranch.id" type="text" required><br> -->
+                    <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName"> Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
@@ -111,7 +111,7 @@
    
    <script>
    
-   import axios from "axios";
+   import AxiosInstance  from '../config/axiosInstance';
    import "ag-grid-community/styles/ag-grid.css";
    import "ag-grid-community/styles/ag-theme-alpine.css";
    import { AgGridVue } from "ag-grid-vue3";
@@ -129,7 +129,7 @@
      data: function () {
        return {
         newBranch: {
-        id:'',
+     
         name: '',
         description: '',
         facultyId: '',
@@ -173,7 +173,7 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Faculty`);
+         const res = await AxiosInstance.get(`/Faculty`);
          let req = res.data;
          this.Orders = req;
          
@@ -264,7 +264,7 @@
        async addBranch() {
         this.isLoading = true;
       try {
-        const response = await axios.post(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Bestfaculty/AddBestFaculty`, this.newBranch);
+        const response = await AxiosInstance.post(`/Bestfaculty/AddBestFaculty`, this.newBranch);
         this.ismodel = true; 
         if (response.status === 200) {
           console.log("Branch added successfully");
@@ -293,7 +293,7 @@
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Faculty`);
+             const res = await AxiosInstance.get(`/Faculty`);
              let req = res.data;
              this.Orders = req;
            
