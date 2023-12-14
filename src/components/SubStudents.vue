@@ -34,11 +34,13 @@
       </div>
     
   </div>
+  <Loading v-model:active="isLoading"></Loading>
+
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
+  import AxiosInstance  from '../config/axiosInstance';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {
@@ -56,9 +58,9 @@
         async created() { 
             this.isLoading = true;  
         try {
-            const result = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/TotalAmountCollectedPerSubject`);
-            this.items = result.data;
-            console.log(this.items);
+            const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
+            this.item = result.data;
+            console.log(this.item);
 
         } catch (error) {
             console.log(error);

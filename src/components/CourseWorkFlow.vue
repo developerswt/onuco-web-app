@@ -101,7 +101,7 @@
   
   <script>
 //   import AlertDialog from './AlertDialog.vue';
-  import axios from "axios";
+import AxiosInstance  from '../config/axiosInstance';
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
@@ -154,14 +154,16 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course`);
-        let req = res.data;
-        this.Orders =  req;
-        
-        const result = await axios.get(this.GetUser);
-        this.showAllTechnicians = result.data
-        console.log(this.showAllTechnicians);
-      } catch (error) {
+        const res = await AxiosInstance.get(`/Course`);
+         let req = res.data;
+    this.Orders = req;
+    if (Array.isArray(req.courses)) {
+      this.rowData = req.courses;
+    } else {
+      console.error('completedStudents is not an array:', req.courses);
+    }
+  } catch (error) {
+          this.isLoading = false;
         console.log(error);
         this.showDialog = true;  
         this.dialogTitle= "Error";
@@ -170,13 +172,11 @@
       finally {
         this.isLoading = false;
       }
-      this.rowData = this.Orders;
       this.rowSelection = 'single'; 
-      console.log(this.rowData);
-      this.popupParent = document.body;
-      this.paginationPageSize = 10;
-  
-    },
+  console.log(this.rowData);
+  this.popupParent = document.body;
+  this.paginationPageSize = 10;
+},
     
     methods: {
       
@@ -199,9 +199,7 @@
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
       },
-      onRowDataA() {
-        this.gridApi.setRowData(colors);
-      },
+     
       onBtnExport() {
         this.gridApi.exportDataAsCsv();
       },
@@ -261,7 +259,7 @@
       update(id) {
         this.showDialog = false;
         try {
-          const res = axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
+          const res = AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
           console.log(res);
           this.ismodel = true;
           this.gridApi.refreshCells({force : true});
@@ -271,11 +269,7 @@
         }
       },
   
-      onLogOut() {
-        this.$store.commit('isLoggedIn', false);
-        this.$router.push('/Loginpage');
-      },
-  
+    
      
     },
     

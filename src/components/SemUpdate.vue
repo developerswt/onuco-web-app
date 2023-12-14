@@ -107,7 +107,7 @@
    
    <script>
    
-   import axios from "axios";
+   import AxiosInstance  from '../config/axiosInstance';
    import "ag-grid-community/styles/ag-grid.css";
    import "ag-grid-community/styles/ag-theme-alpine.css";
    import { AgGridVue } from "ag-grid-vue3";
@@ -166,27 +166,20 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester`);
-         let req = res.data;
-         this.Orders = req;
-         
-         } catch (error) {
-           this.isLoading = false;
-         console.log(error);
-         this.showDialog = true;  
-         this.dialogTitle= "Error";
-         this.dialogMessage= "Not get data";
-       }
-       finally {
-         this.isLoading = false;
-       }
-       this.rowData = this.Orders;
-       this.rowSelection = 'single'; 
-       console.log(this.rowData);
-       this.popupParent = document.body;
-       this.paginationPageSize = 10;
-   
-     },
+        const res = await AxiosInstance.get(`/Semester`);
+        let req = res.data;
+    this.Orders = req;
+    if (Array.isArray(req.semester)) {
+      this.rowData = req.semester;
+    } else {
+      console.error('completedStudents is not an array:', req.semester);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    this.isLoading = false;
+  }
+},
      
      methods: {
         toggleForm() {
@@ -211,9 +204,9 @@
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-       onRowDataA() {
-         this.gridApi.setRowData(colors);
-       },
+      //  onRowDataA() {
+      //    this.gridApi.setRowData(colors);
+      //  },
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },
@@ -240,7 +233,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
+                 const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
                  console.log(res);
                  this.ismodel = true;
        
@@ -256,7 +249,7 @@
        async addBranch() {
   this.isLoading = true;
   try {
-    const response = await axios.post('https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester', this.newBranch);
+    const response = await AxiosInstance.post('/Semester', this.newBranch);
     this.ismodel = true;
 
     if (response.status === 200) {
@@ -275,37 +268,25 @@
     this.isLoading = false;
   }
 },
-
-
-         onLogOut() {
-           this.$store.commit('isLoggedIn', false);
-           this.$router.push('/Loginpage');
-         },  
+  
          async getdata(){
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester`);
-             let req = res.data;
-             this.Orders = req;
-           
-           } catch (error) {
-               this.isLoading = false;
-               console.log(error);
-               this.showDialog = true;  
-               this.dialogTitle= "Error";
-               this.dialogMessage= "Not get data";
-             }
-             finally {
-             this.isLoading = false;
-             }
-             this.rowData = this.Orders;
-             this.rowSelection = 'single'; 
-             console.log(this.rowData);
-             this.popupParent = document.body;
-             this.paginationPageSize = 10;
-       
-         }
+            const res = await AxiosInstance.get(`/Semester`);
+        let req = res.data;
+    this.Orders = req;
+    if (Array.isArray(req.semester)) {
+      this.rowData = req.semester;
+    } else {
+      console.error('completedStudents is not an array:', req.semester);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    this.isLoading = false;
+  }
+},
      },
      
    };

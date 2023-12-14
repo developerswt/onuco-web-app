@@ -53,7 +53,8 @@ import AdCourse from './components/AdCourse.vue'
 import AdSem from './components/AdSem.vue'
 import AcademicsUpdate from './components/AcademicsUpdate.vue'
 import AdAcademics from './components/AdAcademics.vue'
-
+import AdTypes from './components/AdTypes.vue'
+import TypesUpdate from './components/TypesUpdate.vue'
 
 let user = null; // Initialize user as null
 
@@ -529,6 +530,19 @@ const routes = [
         component: AdAcademics, 
 
       },
+      {
+        path:"/AdTypes",
+        name: "AdTypes",
+        component: AdTypes, 
+
+      },
+      {
+        path:"/TypesUpdate",
+        name: "TypesUpdate",
+        component: TypesUpdate, 
+
+      },
+      
 
      ],
     meta: {

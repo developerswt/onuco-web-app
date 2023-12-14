@@ -1,60 +1,51 @@
 
 
 <template>
-    <div class="container" ><p>Dashbord > Branchs Update </p>
+    <div class="container" ><p>Dashbord > Types Update </p>
         <div class="row">
             <div class="col-lg-6 col-sm-12">
-                <div style="padding: 20px;"  >
+     <div style="padding: 20px;"  >
        
-                    <div class="example-wrapper" >
+       <div class="example-wrapper" >
          
-                        <div style="height: 100%;">
-                            <ag-grid-vue 
-                                :dom-layout="domLayout"
-                                class="ag-theme-alpine"
-                                :column-defs="columnDefs"
-                                :row-data="rowData"
-                                :edit-type="editType"
-                                :row-selection="rowSelection"
-                                :default-col-def="defaultColDef"
-                                :suppress-excel-export="true"
-                                :popup-parent="popupParent"
-                                cache-quick-filter = true
-                                :pagination = "true"
-                                :pagination-page-size="paginationPageSize"
-                                is-loding ="true"
-                                @grid-ready="onGridReady"
-                                @cell-value-changed="onCellValueChanged"
-                                @row-clicked='onCellClicked'
-                                    >
-                            </ag-grid-vue>
-                        </div>  
-                    </div> 
-                </div>
-                <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
-            </div>
+         <div style="height: 100%;">
+           <ag-grid-vue 
+             :dom-layout="domLayout"
+             class="ag-theme-alpine"
+             :column-defs="columnDefs"
+             :row-data="rowData"
+             :edit-type="editType"
+             :row-selection="rowSelection"
+             :default-col-def="defaultColDef"
+             :suppress-excel-export="true"
+             :popup-parent="popupParent"
+             cache-quick-filter = true
+             :pagination = "true"
+             :pagination-page-size="paginationPageSize"
+             is-loding ="true"
+             @grid-ready="onGridReady"
+             @cell-value-changed="onCellValueChanged"
+             @row-clicked='onCellClicked'
+           >
+           </ag-grid-vue>
+         </div>  
+       </div> 
+     </div>
+     <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+    </div>
+     <div class="col-lg-6 col-sm-12">
+     <form v-show="formVisible" class="frm" style="margin-top:23px" @submit.prevent="addBranch" >      
+        <p><b></b> {{newBranch.id}}</p>
+      <label for="branchName"> Name:</label>
+      <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
-           
-            <div class="col-lg-6 col-sm-12">
-                
-                <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
-                    <p><b></b> {{newBranch.id}}</p>
-                    <label for="branchName"> Name:</label>
-                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
+      <label for="description">Description:</label>
+      <input id="description" v-model="newBranch.description" type="text" required><br>
 
-                    <label for="description">Description:</label>
-                    <input id="description" v-model="newBranch.description" type="text" required><br>
-
-                    <label for="typeId">TypeId:</label>
-                    <input id="typeId" v-model="newBranch.typeId" type="text" required><br>
-
-                    <label for="academiaName"><b>Academia Name:</b></label>
-                    <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
-
-                    <button class="btn2" type="submit">Add Branch</button>
-                </form>
-            </div>
-        </div>
+      <button class="btn2" type="submit">Add University</button>
+    </form>
+    </div>
+    </div>
    <div v-if="showChildRow">
    <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
      <div class="modal-dialog" role="document">
@@ -67,24 +58,24 @@
                                      <div class="col-sm-12">
                                        <p><b>ID: </b> {{childPara.id  }}</p>
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                          <p><b>Academia Name:</b>{{childPara.name }}</p>
+                                          <p><b>Type Name:</b>{{childPara.name }}</p>
                                           <p><b>Description:</b> {{ childPara.description }}</p>
-                                          
-                                      </div>
+                                     </div>
                                  </div>
                                  <div v-else class="row">
                                    <div class="col-sm-12">
-                                          <p><b>ID: </b>{{childPara.id}}</p>
+                                          <p><b>ID: </b> {{childPara.id  }}</p>
                                           
                                           <div class="">
-                                           <label><b>Academia Name:</b></label><br>
-                                           <input v-model="childPara.name" type="text"/>
+                                           <label><b>Type Name:</b></label><br>
+                                           <input v-model="childPara.name" type="text" />
                                          </div> 
                                          <div class="">
                                            <label><b>Description:</b></label><br>
-                                           <input v-model="childPara.description" type="text"/>
+                                           <input v-model="childPara.description" type="text" />
                                          </div>  
                                      </div>
+                                         
                                  </div>
                                 </div>
             </div>
@@ -128,9 +119,7 @@
         newBranch: {
         name: '',
         description: '',
-        typeId: '',
-        academiaName: '',
-        // Add other properties as needed
+       
       },
       formVisible: false,
          userName: '',
@@ -142,7 +131,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Academia Name', field: 'name' },{name:'Description',field:'description'}],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Type Name', field: 'name' },{name:'Description',field:'description'}],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -168,31 +157,33 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-            const response = await AxiosInstance.get(`/Academia`);
-            const dataArray = Object.values(response.data);
-            this.Orders = dataArray.map(item => item.academia);
-            this.rowData = this.Orders;
-            this.rowSelection = 'single';
-            console.log(this.rowData);
-        }
-        catch (error) {
-            this.isLoading = false;
-            console.log(error);
-            this.showDialog = true;  
-            this.dialogTitle= "Error";
-            this.dialogMessage= "Not get data";
-        }
-        finally {
-            this.isLoading = false;
-        }
-    
-    },
-     
+        
+             const res = await AxiosInstance.get(`/Types`);
+             let req = res.data;
+             this.Orders = req;
+           
+           } catch (error) {
+               this.isLoading = false;
+               console.log(error);
+               this.showDialog = true;  
+               this.dialogTitle= "Error";
+               this.dialogMessage= "Not get data";
+             }
+             finally {
+             this.isLoading = false;
+             }
+             this.rowData = this.Orders;
+             this.rowSelection = 'single'; 
+             console.log(this.rowData);
+             this.popupParent = document.body;
+             this.paginationPageSize = 10;
+       
+         },
+        
      methods: {
         toggleForm() {
           this.formVisible = !this.formVisible;
         },
-       
      onCellClicked(params) {
              this.childPara = params.node.data
          console.log(this.childPara);
@@ -212,7 +203,7 @@
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-     
+      
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },
@@ -239,7 +230,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
+                 const res = await AxiosInstance.put(`/Types` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
                  console.log(res);
                  this.ismodel = true;
        
@@ -255,9 +246,9 @@
        async addBranch() {
         this.isLoading = true;
       try {
-        const res = await AxiosInstance.post(`/Academia`, this.newBranch);
+        const response = await AxiosInstance.post('/Types', this.newBranch);
         this.ismodel = true; 
-        if (res.status === 200) {
+        if (response.status === 200) {
           console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
@@ -284,28 +275,30 @@
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-            const response = await AxiosInstance.get(`/Academia`);
-            const dataArray = Object.values(response.data);
-            this.Orders = dataArray.map(item => item.academia);
-            this.rowData = this.Orders;
-            this.rowSelection = 'single';
-            console.log(this.rowData);
-        }
-        catch (error) {
-            this.isLoading = false;
-            console.log(error);
-            this.showDialog = true;  
-            this.dialogTitle= "Error";
-            this.dialogMessage= "Not get data";
-        }
-        finally {
-            this.isLoading = false;
-        }
+             const res = await AxiosInstance.get(`/Types`);
+             let req = res.data;
+             this.Orders = req;
+           
+           } catch (error) {
+               this.isLoading = false;
+               console.log(error);
+               this.showDialog = true;  
+               this.dialogTitle= "Error";
+               this.dialogMessage= "Not get data";
+             }
+             finally {
+             this.isLoading = false;
+             }
+             this.rowData = this.Orders;
+             this.rowSelection = 'single'; 
+             console.log(this.rowData);
+             this.popupParent = document.body;
+             this.paginationPageSize = 10;
        
-        }
-    },
-    
-};
+         }
+     },
+     
+   };
    
   
    </script>

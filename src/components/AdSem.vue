@@ -43,7 +43,7 @@
    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
    
    export default {
-     name: "OrdersPage",
+     name: "AdSem",
      components: {
        AgGridVue,
        Loading,
@@ -102,17 +102,7 @@
     this.isLoading = false;
   }
 },
-     
-     methods: {
-   
-         onLogOut() {
-           this.$store.commit('isLoggedIn', false);
-           this.$router.push('/Loginpage');
-         },  
-  
-     },
-     
-   };
+ };
    
   
    </script>

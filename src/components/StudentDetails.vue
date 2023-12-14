@@ -198,9 +198,7 @@
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
       },
-      onRowDataA() {
-        this.gridApi.setRowData(colors);
-      },
+     
       onBtnExport() {
         this.gridApi.exportDataAsCsv();
       },

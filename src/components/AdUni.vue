@@ -102,17 +102,7 @@
     this.isLoading = false;
   }
 },
-     
-     methods: {
-   
-         onLogOut() {
-           this.$store.commit('isLoggedIn', false);
-           this.$router.push('/Loginpage');
-         },  
-  
-     },
-     
-   };
+};
    
   
    </script>

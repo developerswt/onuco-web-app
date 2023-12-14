@@ -76,7 +76,7 @@
                                      <div class="col-sm-12">
                                        <p><b>ID: </b> {{childPara.id  }}</p>
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                          <p><b>Semester Name:</b>{{childPara.name }}</p>
+                                          <p><b>Course Name:</b>{{childPara.name }}</p>
                                           <p><b>Description:</b> {{ childPara.description }}</p>
                                           <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
                                           
@@ -87,21 +87,21 @@
                                           <p><b>ID: </b> {{childPara.id  }}</p>
                                           
                                           <div class="">
-                                           <label><b>Semester Name:</b></label><br>
+                                           <label><b>Course Name:</b></label><br>
                                            <input v-model="childPara.name" type="text" />
                                          </div> 
                                          <div class="">
                                            <label><b>Description:</b></label><br>
                                            <input v-model="childPara.description" type="text" />
                                          </div> 
-                                         <div>
+                                         <!-- <div>
                                             <label><b>Work Flow:</b></label><br>
                                             <select v-model="childPara.workFlowStatement">
                                             <option value="Draft">Draft</option>
                                             <option value="Review">Review</option>
                                             <option value="Release">Release</option>
                                           </select>
-                                         </div> 
+                                         </div>  -->
                                      </div>
                                          
                                  </div>
@@ -162,7 +162,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'},{name:'WorkFlow Statement',field:'workFlowStatement'} ],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'}],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -236,9 +236,7 @@
          this.gridApi = params.api;
          this.gridColumnApi = params.columnApi;
        },
-       onRowDataA() {
-         this.gridApi.setRowData(colors);
-       },
+     
        onBtnExport() {
          this.gridApi.exportDataAsCsv();
        },
@@ -267,29 +265,17 @@
            try {
                  const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
                  console.log(res);
-                 if (res.status === 200) {
-            const newData = AxiosInstance.get(`/Course`);
-            this.rowData = newData.data.courses;
-        }
-
-          this.ismodel = true;
-          this.gridApi.refreshCells({force : true});
-           } catch (error) {
-             console.log(error);
-             }
-       },
-       update(id) {
-        this.showDialog = false;
-        try {
-          const res = AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
-          console.log(res);
-          this.ismodel = true;
-          this.gridApi.refreshCells({force : true});
+                 this.ismodel = true;
       
-        } catch (error) {
-          console.log(error);
-        }
-      },
+      if (res.status === 200) {
+        await this.getdata();
+        this.gridApi.refreshCells({ force: true });
+      }
+    } catch (error) {
+      console.log(error);
+      }
+       },
+      
  
        async addBranch() {
         this.isLoading = true;
