@@ -79,20 +79,18 @@
                                                         <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
                                                     </router-link>    
                                                     <p id="text_two">stacks</p>
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <div class="progress_block">
-                                                                <div>
-                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                        </div>
-                                                            <!-- <button class="bt">BUY NOW</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="row line">
+                                                <div class="col-lg-4 col-sm-4 col-6">
+                                                    <div class="progress_block">
+                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-8 col-sm-8 col-6 text">
+                                                    <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                </div>
+                                                <!-- <button class="bt">BUY NOW</button> -->
                                             </div>
                                         </div>
                                     </div>
@@ -132,31 +130,31 @@
                                         <div class="inner_block">
                                             <div class="row">
                                                 <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                    <div id="asset_image">
-                                                        <img src="../assets/images/book1.png" class="img-fluid">
-                                                    </div>
-                                                </div> 
-                                                <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
-                                                    </router-link>
-                                                    <p id="text_two">stacks</p>
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <div class="progress_block">
-                                                                <div>
-                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                <div id="asset_image">
+                                                                    <img src="../assets/images/book1.png" class="img-fluid">
                                                                 </div>
-                                                            </div>    
+                                                            </div> 
+                                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                                </router-link>    
+                                                                <p id="text_two">stacks</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                        </div>
-                                                        <!-- <button class="bt">BUY NOW</button> -->
+                                                                <div class="row line">
+                                                                    <div class="col-lg-4 col-sm-4 col-6">
+                                                                        <div class="progress_block">
+                                                                            <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8 col-sm-8 col-6 text">
+                                                                        <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                                    </div>
+                                                                    <!-- <button class="bt">BUY NOW</button> -->
+                                                                </div>
+                                                            
+                                                        
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>    
@@ -177,33 +175,33 @@
                                                 </div>
                                             </div>
                                             <div class="inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                        <div id="asset_image">
-                                                            <img src="../assets/images/book1.png" class="img-fluid">
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                            <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
-                                                        </router-link>    
-                                                        <p id="text_two">stacks</p>
                                                         <div class="row">
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <div class="progress_block">
-                                                                    <div>
-                                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                    </div>
+                                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                                <div id="asset_image">
+                                                                    <img src="../assets/images/book1.png" class="img-fluid">
                                                                 </div>
-                                                            </div>        
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <p id="text_three">{{ remainingTimes(selectedItem) }} Completed</p>
+                                                            </div> 
+                                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                                </router-link>    
+                                                                <p id="text_two">stacks</p>
                                                             </div>
-                                                            <!-- <button class="bt">BUY NOW</button> -->
                                                         </div>
+                                                                <div class="row line">
+                                                                    <div class="col-lg-4 col-sm-4 col-6">
+                                                                        <div class="progress_block">
+                                                                            <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8 col-sm-8 col-6 text">
+                                                                        <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                                    </div>
+                                                                    <!-- <button class="bt">BUY NOW</button> -->
+                                                                </div>
+                                                            
+                                                        
                                                     </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
