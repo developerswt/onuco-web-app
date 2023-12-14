@@ -30,7 +30,7 @@
                                 <div class="card-body" >
                                     <p class="card-text">{{course.description.slice(3,65)}}...</p>
                                     <div class="text-left price" style="float: right;">
-                                        <p>&#8377;<del style="margin-right: 5px;">{{ course.actualPrice }}</del><b style="margin-right: 2px;">&#8377;{{ course.discountPrice }}</b></p>
+                                        <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{ course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
                                 
                                     </div> <br>
                                     <div class="row">
@@ -243,7 +243,7 @@ export default {
     
     async created() {   
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
+            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
             this.courses = res.data;
             console.log(this.courses);
             for (const course of this.courses) {

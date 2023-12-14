@@ -89,21 +89,21 @@
                                                                     <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
                                                                 </router-link>    
                                                                 <p id="text_two">stacks</p>
-                                                                <div class="row">
-                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            </div>
+                                                        </div>
+                                                                <div class="row line">
+                                                                    <div class="col-lg-4 col-sm-4 col-6">
                                                                         <div class="progress_block">
-                                                                            <div>
-                                                                                <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                            </div>
+                                                                            <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                                    <div class="col-lg-8 col-sm-8 col-6 text">
                                                                         <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
                                                                     </div>
                                                                     <!-- <button class="bt">BUY NOW</button> -->
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                            
+                                                        
                                                     </div>
                                                 <!-- </div>
                                             </div>
@@ -154,22 +154,23 @@
                                                     <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
                                                     </router-link>
                                                     <p id="text_two">stacks</p>
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                </div>
+                                        </div>
+                                                    <div class="row line">
+                                                        <div class="col-lg-4 col-sm-4 col-6">
                                                             <div class="progress_block">
                                                                 <div>
                                                                     <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                                 </div>
                                                             </div>    
                                                         </div>
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                        <div class="col-lg-8 col-sm-8 col-6 text">
                                                             <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
                                                         </div>
                                                         <!-- <button class="bt">BUY NOW</button> -->
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                           
                                     </div>
                                 </div>
                             </div>    
@@ -201,22 +202,23 @@
                                                             <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
                                                         </router-link>    
                                                         <p id="text_two">stacks</p>
-                                                        <div class="row">
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    </div>
+                                            </div>
+                                                        <div class="row line">
+                                                            <div class="col-lg-4 col-sm-4 col-6">
                                                                 <div class="progress_block">
                                                                     <div>
                                                                         <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                                     </div>
                                                                 </div>
                                                             </div>        
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <div class="col-lg-8 col-sm-8 col-6 text">
                                                                 <p id="text_three">{{ remainingTimes(selectedItem) }} Completed</p>
                                                             </div>
                                                             <!-- <button class="bt">BUY NOW</button> -->
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                
                                         </div>
                                     </div>
                                 </div>
@@ -488,7 +490,7 @@ export default {
 
 <style scoped>
 
-progress{
+.progress{
     /*reset to default appearance*/
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -501,7 +503,7 @@ progress{
 }
  
 /*style for background track*/
-progress::-webkit-progress-bar {
+.progress::-webkit-progress-bar {
     /* background: rgb(221, 221, 221); */
     background: #CCCCCC;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
@@ -510,27 +512,27 @@ progress::-webkit-progress-bar {
     width: 171px;
 }
 /*style for progress track*/
-progress::-webkit-progress-value {
+.progress::-webkit-progress-value {
     background-image: linear-gradient(120deg,#ffd173 0,#18cc00 55%);
     border-radius: 20px;
 }
 .progress-container {
     position: relative;
-    width: 30px; /* Set the width and height of the container */
+    width: 30px; 
     height: 30px;
     margin: 5px;
     background-image: url('../assets/images/Group1318@2x.png'); /* Replace 'your-image.jpg' with your image URL */
     background-size: cover;
 }
-progress {
+.progress {
   color: #FF9924;
 }
 
-progress::-webkit-progress-value {
+.progress::-webkit-progress-value {
   background: #FF9924;
 }
 
-progress::-moz-progress-bar {
+.progress::-moz-progress-bar {
   background: lightcolor;
 }
 .radio-item {
@@ -608,7 +610,6 @@ progress::-moz-progress-bar {
     opacity: 1;
     font-size: 12px;
     text-transform: uppercase;
-    /* bottom: 0; */
     position: absolute;
     bottom: -11px;
     right: 12px;
@@ -676,8 +677,7 @@ progress::-moz-progress-bar {
 }
 #text_three {
     font-size: 12px;
-    margin-bottom: -30px;
-    margin-left: -43px;
+    
 }
 
 #text_one {
@@ -903,12 +903,25 @@ body {
         padding-top: 20px;
     }
     .inner_block{
-    height: 108px;
+    height: 100px;
     } 
     #asset_image img{
-    width: 47px;
-    height: 76px;
+    width: 40px;
+    height: 70px;
 } 
+.line{
+    position:relative;
+    left:90px;
+    bottom: 28px !important;
+}
+.text{
+    position: relative;
+    right: 23px !important;
+}
+progress {
+    vertical-align: baseline;
+    width: 100%;
+}
 }
 @media(min-width: 1280px) {
     .pt{
@@ -920,5 +933,14 @@ body {
     position: relative;
     left: 199px;
 }
+}
+.line{
+    position:relative;
+    left:90px;
+    bottom: 15px;
+}
+.text{
+    position: relative;
+    right: 160px;
 }
 </style>

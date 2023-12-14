@@ -1,6 +1,8 @@
 
 
 
+
+
 <template>
     
     <div class="container jk">
@@ -23,7 +25,19 @@
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
                                         <h5 id="prof_text">{{ this.faculty.name }}</h5>
-                                        <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> ({{ ratingCount || 0 }} reviews) </p>
+                                        <div class="row">
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row aa">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <StarRatings :rating="ratings" :max-rating="5" />
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
                                         <div class="social-icons">
                                             <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
                                             <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
@@ -53,26 +67,6 @@
                                             <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
                                         </div>
                                     </div>
-                                    <div class="modal fade bd-example-modal-sm"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form @submit.prevent="submitRating">
-                                            <label for="rating">Rate the faculty member :</label><br>
-                                            <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
-                                            <el-rate v-model="rating" size="large" allow-half /><br>
-                                            <input type="submit" value="Submit">
-                                        </form> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                                 </div>
 
 
@@ -81,31 +75,38 @@
                         </div>
 
                     </div>
-                
-                    <!-- <div class="row professor-details">
-                        <div class="col-sm-12 col-lg-12">
-                        
-                            <p class="professor-details_text"   v-html="this.faculty.description"></p>
+                    <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="submitRating">
+                                        <label for="rating">Rate the faculty member :</label><br>
+                                        <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
+                                        <el-rate v-model="rating" size="large" allow-half /><br>
+                                        <input type="submit" value="Submit">
+                                    </form> 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                     -->
+                    
 
                      
-                    <!-- <div class="row professor-details">
-                        <div class="col-sm-12 col-lg-12">
-                            <p class="professor-details_text" v-if="!readActivated">{{faculty.description.slice(0,145)}}<span class="read" 
-                            v-if="!readActivated" @click="faculty.readMore = !faculty.readMore">...<p style="color:blue">>Read more</p></span></p> 
-                            <p class="professor-details_text" v-if="faculty.readMore">{{faculty.description}}</p>
-                        </div>
-                    </div> -->
+                    
 
                     <div class="row professor-details" id="app">
   <div class="col-sm-12 col-lg-12">
     <p class="professor-details_text" v-if="!faculty.readMore">{{ faculty.description.slice(0, 168) }}
-      <span class="read" @click="toggleReadMore">...<span style="color:blue">Read more</span></span>
+      <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
     </p>
     <p class="professor-details_text" v-if="faculty.readMore">{{ faculty.description }}
-      <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span>
+      <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read less</span></span>
     </p>
   </div>
 </div>
@@ -119,8 +120,8 @@
                 <div class="container">
                 <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
                
-                    <carousel :items-to-show="3" :settings="settings" :breakpoints="breakpoints">
-                   <slide  v-for="slide in 5" :key="slide">
+                    <carousel :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="person in person" :key="person.id">
                     
                         <router-link to="/SemesterDetails">
                            
@@ -133,7 +134,7 @@
                                                 <div class="row">
                                                      
                                                     <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p class="ft" > Math 1 (NEP Series)</p>
+                                                        <p class="ft" data-placement="top" :title="person.name" > {{ person.name.slice(0,18)}}...</p>
                                                     </div>
                                                    
                                                     <div class="col-lg-2 col-3 col-sm-3">
@@ -149,8 +150,7 @@
                                                    
                                                     <div class="col-lg-9 col-9 col-sm-9">
 
-                                                        <p class="ft" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
-                                                            excepturi.</p>
+                                                        <p class="ft" >{{ person.description.slice(0,50) }}...</p>
                                                     </div>
                                                     
                                                     <div class="col-lg-3 col-3 col-sm-3">
@@ -159,12 +159,20 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
-                                                        
+                                                        <!-- <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                       
                                                                 class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
                                                             (23
-                                                            reviews) </p>
+                                                            reviews) </p> -->
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-6">
+                                                            <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5"/></p>
+                                                        </div>
+                                                        <div class="col-lg-6 col-6" style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
+                                                            <p> (23 reviews) </p>
+                                                        </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -483,17 +491,17 @@ export default {
     },
     data() {
         return {
-            ratingCount: '',
-            modalShow: false,
             rating: '',
             readMore: false,
             isLoading: false,
             faculty: [],
             ratings: [],
+            person: [],
             settings: {
             itemsToShow: 1,
             snapAlign: 'center',
             readActivated: false,
+            
         },
    
         breakpoints: {
@@ -555,12 +563,7 @@ export default {
         },
     },
     methods: {
-        openModal() {
-            this.modalShow = true;
-        },
-        closeModal() {
-            this.modalShow = false;
-        },
+
         toggleReadMore() {
             this.faculty.readMore = !this.faculty.readMore;
         },
@@ -583,7 +586,6 @@ export default {
                 // Handle success (if needed)
                 console.log(response.data);
                 this.rating = '';
-                $('#exampleModal').modal('hide');
             })
             .catch(error => {
                 // Handle error (if needed)
@@ -594,13 +596,18 @@ export default {
     async created() {   
         this.isLoading = true;
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
+            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
+            const results = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
+            this.person = results.data;
+            console.log(this.person);
             const result = await axiosInstance.get(`/Ratings/` + this.faculty.id + "?objectTypeId=4");
-            this.ratings = result.data.averageRating;
-            this.ratingCount = result.data.ratingCount;
+            this.ratings = result.data;
             console.log(this.ratings);
+
+            
+
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -615,6 +622,7 @@ export default {
 
 
 <style scoped>
+
 
 .jk {
     padding-top: 5%;
@@ -656,7 +664,7 @@ export default {
     font-size: 14px;
     width: 35px;
     text-align: center;
-    text-decoration: none;
+   
     margin: 12px 10px 0px 0px;
     /* border-radius: 50%; */
     clip-path: circle();
@@ -736,6 +744,8 @@ export default {
 }
 ::v-deep .fa-circle {
     margin: 7px;
+    position: relative;
+    bottom: 7px;
 }
 /* ::v-deep .row_class i */
 .kl .card {
@@ -805,10 +815,10 @@ export default {
 
 }
 ::v-deep .Objective_left_side {
-    text-align: right;
+    text-align: left;
 }
 ::v-deep .Objective_left_side {
-    text-align: right;
+    text-align: left;
 }
 .round_class {
     height: 20px;
@@ -824,20 +834,24 @@ export default {
     height: auto;
     background: #0177FB;
     position: relative;
-    top: 23px;
+    top: 18px;
     left: -16px;
     margin-bottom: 18px;
     /* bottom: 10px; */
 
 }
+/* .fa-circle{
+    position: relative;
+    bottom: 7px;
+} */
 
 ::v-deep #row_block {
     padding-left: 15px;
 }
 
-::v-deep #row_block1 {
+/* ::v-deep #row_block1 {
     padding: 30px 18px;
-}
+} */
 /* ::v-deep .details {
     padding-left: 25px;
 } */
@@ -855,6 +869,8 @@ export default {
     font-weight: bold;
     font-size: 16px;
     font-weight: bold;
+    position: relative;
+    left: 15px;
 }
 
 ::v-deep .row_class i {
@@ -915,7 +931,7 @@ export default {
 }
 @media only screen and (min-width: 760px) and (max-width: 912px) {
     ::v-deep .Objective_left_side {
-        text-align: right;
+        text-align: left;
         width: 25%;
         float: left;
     }
@@ -991,7 +1007,7 @@ export default {
         padding: 0;
     }
     .Objective_left_side{
-text-align: left !important;
+     text-align: left !important;
     }
 
 
@@ -1181,23 +1197,24 @@ input[type=submit] {
     color: white;
     cursor: pointer;
 }
-
 .star-rating {
     font-size: 24px;
+}
+.details{
+    position: relative;
+    left: 16px;
 }
 @media screen and (max-width: 1024px) {
     .Ratings_button_block {
         margin-left: 109%;
         cursor: pointer;
     }
-
 }
 @media screen and (max-width: 912px) {
     .Ratings_button_block {
         margin-left: 34%;
         cursor: pointer;
     }
-    
 }
 @media screen and (min-width: 500px) and (max-width: 540px) {
     .Ratings_button_block {
@@ -1235,5 +1252,18 @@ input[type=submit] {
         cursor: pointer;
     }
 }
-
+#review_text{
+    color: #828282; 
+    position:relative;
+    top:7px; 
+    right:65px;
+}
+@media (max-width:540px) {
+    #review_text{
+    color: #828282; 
+    position:relative;
+    top:7px; 
+    right:20px;
+} 
+}
 </style>

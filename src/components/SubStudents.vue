@@ -1,6 +1,10 @@
+
+
+
 <!-- App.vue -->
 <template>
-  <div class="container" style="margin-top: 72px;">
+    <div class="container" ><p>Dashbord > Subscription Students </p>
+  <div class="container" style="margin-top: 72px;padding-bottom: 80px;">
    <div class="table-responsive">
     <div class="row">
       <div class="col-sm-12">
@@ -30,6 +34,7 @@
       </div>
     
   </div>
+  </div>
 </template>
 
 <script>
@@ -51,7 +56,7 @@
         async created() { 
             this.isLoading = true;  
         try {
-            const result = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/TotalAmountCollectedPerSubject`);
+            const result = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/TotalAmountCollectedPerSubject`);
             this.item = result.data;
             console.log(this.item);
 

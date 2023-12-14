@@ -560,12 +560,13 @@ export default {
 }
 
 .img-fluid1 {
-  width: 153%;
+  /* width: 153%; */
+  width:100%;
     height: 633px;
     opacity: 1;
     position: relative;
     bottom: 174px;
-    right: 284px;
+    /* right: 284px; */
 }
 .img-fluid2 {
   width: 125%;

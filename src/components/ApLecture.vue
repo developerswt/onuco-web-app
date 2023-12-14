@@ -1,6 +1,8 @@
+
+
 <template>
-   <div class="container" ><p> > Courses </p>
-    <div style="padding: 20px;"  >
+   <div class="container" ><p>Dashbord > Courses </p>
+    <div style="padding: 20px 20px 80px 20px; "  >
       
       <div class="example-wrapper" >
         
@@ -29,7 +31,7 @@
     </div>
   
   <div v-if="showChildRow">
-  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 170px;left: 520px;" aria-modal="true" role="dialog" >
+  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
     <div class="modal-dialog" role="document">
       <div class="modal-content mc">
         
@@ -134,7 +136,7 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+        const res = await AxiosInstance.get(`/Course`);
         let req = res.data;
         this.Orders = req;
         
@@ -206,7 +208,7 @@
       // update(id) {
       //   this.showDialog = false;
       //   try {
-      //     const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+      //     const res = axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
       //     console.log(res);
       //     this.getdata();
       //     this.ismodel = true;
@@ -221,7 +223,7 @@
       async update(id) {
         this.showDialog = false;
           try {
-                const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+                const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
                 console.log(res);
                 this.ismodel = true;
       
@@ -242,7 +244,7 @@
           this.domLayout = 'autoHeight'; 
           this.isLoading = true;
           try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course`);
             let req = res.data;
             this.Orders = req;
           
@@ -371,12 +373,26 @@
     }
 
     @media (max-width:520px) {
-      .mc{
+      /* .mc{
         height: 0px;
         width: 0px;
-      }
+      } */
       .example-wrapper {
 width: 100%;
       }
+    }
+    button {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+        background-color: #007bff;
     }
   </style>

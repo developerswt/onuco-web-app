@@ -82,10 +82,6 @@
                                                     <div class="row aa">
                                                         <div class="col-lg-7 col-6 col-sm-6 col-md-6">
                                                             <StarRatings :rating="cou.starRating" :max-rating="5" />
-                                                            <!-- <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                    <i class="fa fa-star-o"></i> -->
                                                         </div>
                                                         <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                             <p id="review_text" style="color: #828282;">(23 reviews)</p>

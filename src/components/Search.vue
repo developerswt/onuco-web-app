@@ -438,7 +438,7 @@ export default {
         async search() {
             this.isLoading = true;
             try {
-                const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
+                const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
                 const data = await response.json();
                 
                 // Assuming your API returns an array of objects with a "name" property
@@ -466,7 +466,7 @@ export default {
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
-                axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`)
+                axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`)
 		.then((res) => (this.dataarray = res.data));
                 console.log(this.dataarray);
                 return this.dataarray;
@@ -479,7 +479,7 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
+            const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
             const data = await response.json();
 
                 // Assuming your API returns an array of objects with a "name" property

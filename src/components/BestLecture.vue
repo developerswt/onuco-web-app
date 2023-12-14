@@ -124,7 +124,7 @@ export default defineComponent ({
     }),
     async created() {   
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
+            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
                 const res = await this.getByRatings(facult.facultyId);

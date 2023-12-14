@@ -1,50 +1,53 @@
+
+
 <template>
   <div class="container ">
     <section class="main" >
     <div class="row" style="justify-items: center;">
-  <div class="col-sm-3 cardpd">
+  <div class="col-sm-3 cardpd"  v-if="isUserSuperadmin">
    <div class="card color" >
     <div class="box">
-      <div class="content">
+      <div class="content" v-if="person">
+
       <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
-        
+        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
     </div>
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd">
+  <div class="col-sm-3 cardpd" v-if="isUserSuperadmin">
   <div class="card color">
     <div class="box">
-      <div class="content">
+      <div class="content" v-if="student">
         <h3 class="head"> <router-link to="/InactStudents">Inactive Students</router-link></h3>
-    
+        <span style=" font-size:26px"> {{this.student.inactiveStudentsCount }}</span>
     </div>
    </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd">
+  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
    <div class="card color" >
     <div class="box">
-      <div class="content">
-      <h3 class="head"><router-link to="/StudentDetails">Subjects </router-link></h3>
-             
+      <div class="content" v-if="count">
+      <h3 class="head"><router-link to="/StudentDetails">Complete Students </router-link></h3>
+      <span style=" font-size:26px"> {{this.count.completedStudentsCount }}</span>      
     </div>
     </div>
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color" >
+  <div class="card color" v-if="isUserSuperadmin">
     <div class="box">
-      <div class="content">
+      <div class="content" v-if="counts">
         <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
-       
+        <span style=" font-size:26px"> {{this.counts.totalCount }}</span>
     </div>
    </div>
   </div>
   </div>
 </div>
 <div class="row" style="justify-items: center;">
-  <div class="col-sm-3 cardpd">
+  <!-- <div class="col-sm-3 cardpd" >
    <div class="card color" >
     <div class="box">
       <div class="content">
@@ -53,7 +56,7 @@
     </div>
     </div>
   </div>
-  </div>
+  </div> -->
   <div class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
@@ -68,14 +71,14 @@
    <div class="card color" >
     <div class="box">
       <div class="content">
-      <h3 class="head"><router-link to="/CourseWorkFlow">Course Workflow</router-link></h3>
-             
+      <h3 class="head"> <router-link to="/ListOfSubject">List Of Subjects  </router-link></h3>
+       
     </div>
     </div>
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color vv" >
+  <div class="card color " v-if="isUserSuperadmin" >
     <div class="box">
       <div class="content">
         <h3 class="head"><router-link to="/CourseUpdate">Courses Update</router-link></h3>
@@ -87,7 +90,7 @@
 </div>
 <div class="row" style="justify-items: center;">
   <div class="col-sm-3 cardpd">
-   <div class="card color" >
+   <div class="card color" v-if="isUserSuperadmin">
     <div class="box">
       <div class="content">
       <h3 class="head"> <router-link to="/SemUpdate"> Semisters Update  </router-link></h3>
@@ -97,7 +100,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color">
+  <div class="card color" v-if="isUserSuperadmin">
     <div class="box">
       <div class="content">
         <h3 class="head"> <router-link to="/UniUpdate">University Update</router-link></h3>
@@ -107,7 +110,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-   <div class="card color" >
+   <div class="card color vv" v-if="isUserSuperadmin">
     <div class="box">
       <div class="content">
       <h3 class="head"><router-link to="/BranchesUpdate">Branches Update</router-link></h3>
@@ -116,17 +119,103 @@
     </div>
   </div>
   </div>
+  <div class="col-sm-3 cardpd" >
+  <div class="card color vv" v-if="isUserSuperadmin">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/ApBestFaculty">ADD Best Faculty</router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div>
+</div>
+<div class="row" style="justify-items: center;"  v-if="isUserAdmin">
+  <div class="col-sm-3 cardpd">
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"> <router-link to="/AdBranches">Branches </router-link></h3>
+        
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"> <router-link to="/AdUni">University</router-link></h3>
+    
+    </div>
+   </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+   <div class="card color vv">
+    <div class="box">
+      <div class="content">
+      <h3 class="head"><router-link to="/AdCourse">Courses Details</router-link></h3>
+             
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd">
+  <div class="card color vv" >
+    <div class="box">
+      <div class="content">
+        <h3 class="head"><router-link to="/AdSem">Semesters</router-link></h3>
+       
+    </div>
+   </div>
+  </div>
+  </div>
+</div>
+<div class="row" style="justify-items: center;"  >
+  <div class="col-sm-3 cardpd" v-if="isUserSuperadmin" >
+   <div class="card color" >
+    <div class="box">
+      <div class="content">
+      <h3 class="head"> <router-link to="/AcademicsUpdate">Academics Update </router-link></h3>
+        
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+  <div class="card color">
+    <div class="box">
+      <div class="content">
+        <h3 class="head"> <router-link to="/AdAcademics">Academics</router-link></h3>
+    
+    </div>
+   </div>
+  </div>
+  </div>
+  <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+   <div class="card color" >
+    <div class="box">
+      <div class="content" v-if="person">
+
+      <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
+        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
+    </div>
+    </div>
+  </div>
+  </div>
   <!-- <div class="col-sm-3 cardpd">
   <div class="card color vv" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/CourseUpdate">Course Update</router-link></h3>
+        <h3 class="head"><router-link to="/AdSem">Semesters</router-link></h3>
        
     </div>
    </div>
   </div>
   </div> -->
 </div>
+
   <!-- <div class="row">
 <div class="col-sm-8">
     <div class="card view">
@@ -179,6 +268,73 @@
 </div>
 </template>
 <script>
+   import AxiosInstance  from '../config/axiosInstance';
+  import Loading from 'vue3-loading-overlay';
+  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  export default {
+
+  name: "Actstudent",
+  components: {
+          Loading,
+          
+      },
+  data() {        
+    return {
+      person:null,
+      student: null,
+      count:null,
+      counts:null,
+    }
+  },
+  computed: {
+    isuser() {
+      return this.$store.state.user?.signInUserSession?.idToken?.payload;
+    },
+    isUserAdmin() {
+      return Array.isArray(this.isuser?.['cognito:groups']) &&
+        this.isuser['cognito:groups'][0] === 'Admin';
+      },
+      isUserfaculty() {
+      return Array.isArray(this.isuser?.['cognito:groups']) &&
+        this.isuser['cognito:groups'][1] === 'Faculty';
+      },
+     
+      isUserSuperadmin() {
+  return Array.isArray(this.isuser?.['cognito:groups']) &&
+    this.isuser['cognito:groups'][0] === 'SuperAdmin';
+},
+
+  },
+  async created() { 
+    this.isLoading = true;
+    console.log(this.isuser)
+    try {
+      const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
+      this.person = res.data;
+      console.log(this.person);
+
+      const result = await AxiosInstance.get(`/UserCourseSubscription/GetInactiveStudentsCount`);
+      this.student = result.data;
+      console.log(this.student);
+
+      const resl = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
+      this.count = resl.data;
+      console.log(this.count);
+
+      const results = await AxiosInstance.get(`/Course`);
+      this.counts = results.data;
+      console.log(this.count);
+    } catch (error) {
+      console.log(error);
+      this.isLoading = false;
+    }
+    finally {
+      this.isLoading = false;
+    }
+  },
+  
+}
+
 
 </script>
 <style scoped>

@@ -21,7 +21,7 @@
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-title" data-placement="top" :title="facult.name">{{ facult.name.slice(0,20) }}..</div>
                             <div class="card-text"> {{ facult.description.slice(0,50) }}...</div>
                             
                             <div class="mn text-left">

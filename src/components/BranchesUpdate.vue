@@ -1,50 +1,62 @@
+
+
 <template>
-    <div class="container" ><p> > Courses </p>
-     <div style="padding: 20px;"  >
+    <div class="container" ><p>Dashbord > Branchs Update </p>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div style="padding: 20px;"  >
        
-       <div class="example-wrapper" >
+                    <div class="example-wrapper" >
          
-         <div style="height: 100%;">
-           <ag-grid-vue 
-             :domLayout="domLayout"
-             class="ag-theme-alpine"
-             :columnDefs="columnDefs"
-             :rowData="rowData"
-             :editType="editType"
-             :rowSelection="rowSelection"
-             :defaultColDef="defaultColDef"
-             :suppressExcelExport="true"
-             :popupParent="popupParent"
-             @grid-ready="onGridReady"
-             @cell-value-changed="onCellValueChanged"
-             @row-clicked='onCellClicked'
-             cacheQuickFilter = true
-             :pagination = "true"
-             :paginationPageSize="paginationPageSize"
-             isLoding ="true"
-           >
-           </ag-grid-vue>
-         </div>  
-       </div> 
-     </div>
-     <form @submit.prevent="addBranch" >
-      <p><b></b> {{newBranch.id}}</p>
-      <label for="branchName"> Name:</label>
-      <input type="text" id="branchName" v-model="newBranch.name" required><br>
+                        <div style="height: 100%;">
+                            <ag-grid-vue 
+                                :domLayout="domLayout"
+                                class="ag-theme-alpine"
+                                :columnDefs="columnDefs"
+                                :rowData="rowData"
+                                :editType="editType"
+                                :rowSelection="rowSelection"
+                                :defaultColDef="defaultColDef"
+                                :suppressExcelExport="true"
+                                :popupParent="popupParent"
+                                @grid-ready="onGridReady"
+                                @cell-value-changed="onCellValueChanged"
+                                @row-clicked='onCellClicked'
+                                cacheQuickFilter = true
+                                :pagination = "true"
+                                :paginationPageSize="paginationPageSize"
+                                isLoding ="true"
+                                    >
+                            </ag-grid-vue>
+                        </div>  
+                    </div> 
+                </div>
+                <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+            </div>
 
-      <label for="description">Description:</label>
-      <input type="text" id="description" v-model="newBranch.description" required><br>
+           
+            <div class="col-lg-6 col-sm-12">
+                
+                <form v-show="formVisible" class="frm" @submit.prevent="addBranch"  style="margin-top:25px">
+                    <p><b></b> {{newBranch.id}}</p>
+                    <label for="branchName"> Name:</label>
+                    <input type="text" id="branchName" v-model="newBranch.name" required><br>
 
-      <label for="academiaId">AcademiaId:</label>
-      <input type="text" id="academiaId" v-model="newBranch.academiaId" required><br>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" v-model="newBranch.description" required><br>
 
-      <label for="branchName"><b>BranchName:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.branchName" required>
+                    <label for="academiaId">AcademiaId:</label>
+                    <input type="text" id="academiaId" v-model="newBranch.academiaId" required><br>
 
-      <button type="submit">Add Branch</button>
-    </form>
+                    <label for="branchName"><b>BranchName:</b></label>
+                    <input type="text" id="branchName" v-model="newBranch.branchName" required>
+
+                    <button class="btn2" type="submit">Add Branch</button>
+                </form>
+            </div>
+        </div>
    <div v-if="showChildRow">
-   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 170px;left: 500px;" aria-modal="true" role="dialog" >
+   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
      <div class="modal-dialog" role="document">
        <div class="modal-content mc">
          
@@ -121,6 +133,7 @@
         branchName: '',
         // Add other properties as needed
       },
+      formVisible: false,
          userName: '',
          ismodel: true,
          isLoading: false,
@@ -156,7 +169,7 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches`);
+         const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
          let req = res.data;
          this.Orders = req;
          
@@ -179,6 +192,9 @@
      },
      
      methods: {
+        toggleForm() {
+          this.formVisible = !this.formVisible;
+        },
        
      onCellClicked(params) {
              this.childPara = params.node.data
@@ -228,7 +244,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
+                 const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
                  console.log(res);
                  this.ismodel = true;
        
@@ -241,15 +257,22 @@
              }
        },
  
-    async addBranch() {
+       async addBranch() {
         this.isLoading = true;
       try {
-        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches', this.newBranch);
-         if (response.status === 201) {
+        const response = await axios.post(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`, this.newBranch);
+        this.ismodel = true; 
+        if (response.status === 200) {
           console.log("Branch added successfully");
-           await this.getdata();
+          await this.getdata();
           this.gridApi.refreshCells({ force: true });
-        }
+
+        alert("Insert Successful");
+    } else {
+      // Show failure message
+      alert("Insert Fail");
+    }
+        
       } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
@@ -266,7 +289,7 @@
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Branches`);
+             const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Branches`);
              let req = res.data;
              this.Orders = req;
            
@@ -299,7 +322,7 @@
    display: flex;
    flex-direction: column;
    height: 100%;
-   width: 45%;
+   width: 100%;
    }
    
    #myGrid {
@@ -395,12 +418,72 @@
      }
  
      @media (max-width:520px) {
-       .mc{
+       /* .mc{
          height: 0px;
          width: 0px;
-       }
+       } */
        .example-wrapper {
  width: 100%;
        }
      }
+     .frm{
+        padding: 20px;
+    border: 1px solid black;
+    width: 90%;
+    background-color: #fff;
+     }
+    
+
+    .frm {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-bottom: 80px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 1px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+     }
+     .btn2 {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+     }
+    .btn1{
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 80px; 
+    }
+
+
+    button:hover {
+        background-color: #007bff;
+    }
    </style>

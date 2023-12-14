@@ -29,7 +29,7 @@
                             <button class="button button1">CANCEL</button>
                         </div>
                         <div class="renew_details">
-                            <p><span><del>₹1,999</del></span><b> ₹499</b></p>
+                            <p style=" color:#707070 !important;"><span><del>₹1,999</del></span><b style=" color:black !important;"> ₹499</b></p>
                             <button class="btn">RENEW</button>
                         </div>
                     </div>
