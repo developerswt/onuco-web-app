@@ -1,7 +1,7 @@
 <template>
     <div class="container" id="academy_container">
         <div class="category-test pt-3 ">
-            
+
 
             <h4 class="academic_head_text">
 
@@ -14,7 +14,7 @@
             <slide v-for="item in academia" :key="item.id">
                 <div class="box1">
                     <router-link v-bind:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
-                    style="color: white;text-decoration: none;">
+                        style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
                             <div class="top">
@@ -27,25 +27,23 @@
                             </div>
                         </div>
                         <p class="ty">{{ item.academia.name }}</p>
-                        
+
                     </router-link>
                 </div>
             </slide>
-                    
+
 
             <template #addons>
-                        
+
                 <navigation />
-                        
+
             </template>
         </carousel>
 
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 
-    
-</template>
-
+</template>    
 
 <script>
 import { defineComponent } from 'vue'
@@ -56,7 +54,7 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
-export default defineComponent ({
+export default defineComponent({
     name: 'AcademicsView',
     components: {
         Carousel,
@@ -67,14 +65,14 @@ export default defineComponent ({
     data: () => ({
         academia: [],
         isLoading: false,
-   
+
         settings: {
             itemsToShow: 3,
             snapAlign: 'start',
         },
-   
+
         breakpoints: {
-   
+
             900: {
                 itemsToShow: 4,
                 snapAlign: 'start',
@@ -83,7 +81,7 @@ export default defineComponent ({
                 itemsToShow: 4,
                 snapAlign: 'start',
             },
-            768:{
+            768: {
                 itemsToShow: 4,
                 snapAlign: 'start',
             },
@@ -91,14 +89,14 @@ export default defineComponent ({
                 itemsToShow: 7,
                 snapAlign: 'start',
             },
-            
+
             600: {
                 itemsToShow: 3,
                 snapAlign: 'start',
             },
             540: {
                 itemsToShow: 3,
-                snapAlign: 'start', 
+                snapAlign: 'start',
             },
             414: {
                 itemsToShow: 2,
@@ -120,7 +118,7 @@ export default defineComponent ({
         },
     }),
     async created() {
-        this.isLoading = true;    
+        this.isLoading = true;
         try {
             const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
@@ -150,7 +148,7 @@ export default defineComponent ({
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-    padding-right:20px;
+    padding-right: 20px;
     padding-left: 0px;
 }
 
@@ -173,21 +171,6 @@ export default defineComponent ({
     left: 15%;
 }
 
-/* .mb h2 {
-    font-family: serif;
-} */
-
-/* .mb .box {
-    width: 13%;
-    cursor: pointer;
-    height: auto; 
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    margin-bottom: 10px;
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg,lightblue 20%, blue, 20%, darkblue 100%);
-    transition: 0.3s;
-} */
 
 .box1 {
     /* width: 122px; */
@@ -205,8 +188,8 @@ export default defineComponent ({
     background: #F6F6F6;
     background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
     transition: 0.3s;
-    
-    
+
+
 }
 
 .mb .card-title {
@@ -240,36 +223,37 @@ export default defineComponent ({
         /* width:48%; */
         margin-bottom: 55px;
     }
-  
+
 }
+
 @media screen and (max-width: 100px) and (max-width: 414px) {
     .box1 {
         width: 70%;
         margin: 30px 0px 30px 0px;
     }
 }
+
 @media screen and (min-width: 450px) and (max-width: 500px) {
     .box1 {
         width: 40%;
         margin: 30px 0px 30px 0px;
     }
 }
+
 @media screen and (min-width: 540px) and (max-width: 600px) {
     .box1 {
         width: 70%;
         margin: 30px 0px 30px 0px;
     }
+
     .wr {
         position: relative;
         left: -8px;
         top: -87px;
     }
-}    
+}
+
 @media only screen and (max-width: 598.98px) {
-    /* .box1 {
-        width: 40%;
-        margin: 30px 0px 30px 0px;
-    } */
 
     .academic_head_text {
         font-size: 15px !important;
@@ -277,16 +261,16 @@ export default defineComponent ({
 
     }
 
-    .category-test h4 a{
-        padding-right:0;
+    .category-test h4 a {
+        padding-right: 0;
         font-size: 15px !important;
     }
-  
-    .ty{
+
+    .ty {
         margin-top: -78px;
-  
+
     }
-    
+
 
 }
 
@@ -302,18 +286,18 @@ export default defineComponent ({
     .academic_head_text {
         font-size: 20px;
     }
-  
+
 
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
     .academic_head_text {
         font-size: 18px !important;
-        padding-left:0 !important;
+        padding-left: 0 !important;
     }
-   
-    #home_container{
-        margin-top:0 ;
+
+    #home_container {
+        margin-top: 0;
 
     }
 
@@ -383,14 +367,6 @@ router-link {
     }
 }
 
-/* @media screen and (min-width: 450px) and (max-width: 650px) {
-    .wr {
-        position: relative;
-        left: 30px;
-        top: -87px;
-    }
-} */
-
 .academic_head_text {
     color: #006acd;
     padding-left: 0px;
@@ -413,13 +389,9 @@ router-link {
     margin: 30px 0px 30px 0px;
 }
 
-#academy_container{
-    padding:0px 0px 0px 0px;
+#academy_container {
+    padding: 0px 0px 0px 0px;
 }
-
-/* .carousel{
-    padding: 19px;
-} */
 
 </style>
 

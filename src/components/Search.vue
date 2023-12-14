@@ -331,55 +331,7 @@
                                 <div class="no_result_found" v-else>
                                     <h4>No Results Found</h4>
                                 </div>
-                                <!-- <div class="row mb-2">
-                                    <div class="col-sm-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-8 user_details">
-                                                        <img src="../assets/images/Author.png" >
-                                                        <div class="user_details_name">
-                                                            <h2>Dr. Adhyan San</h2>
-                                                            <p>Data Management Systems & Visualization software developme...</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
-                                                        <div class="reviews_details">
-                                                            <p>(23 reviews) <br>
-                                                            <el-rate v-model="value2" :colors="colors" /></p>
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-8 user_details">
-                                                        <img src="../assets/images/Author.png" >
-                                                        <div class="user_details_name">
-                                                            <h2>Dr. Adhyan San</h2>
-                                                            <p>Data Management Systems & Visualization software developme...</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
-                                                        <div class="reviews_details">
-                                                            <p>(23 reviews) <br>
-                                                            <el-rate v-model="value2" :colors="colors" /></p>
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
+                               
                             </el-tab-pane>                  
                         </el-tabs>
                     </section>
@@ -388,11 +340,12 @@
         </section>
 
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
 <script>
+import axiosInstance from '../config/axiosInstance'
 import Offer from './Offer.vue';
 import axios from 'axios';
 import Loading from 'vue3-loading-overlay';
@@ -438,7 +391,7 @@ export default {
         async search() {
             this.isLoading = true;
             try {
-                const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
+                const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
                 const data = await response.json();
                 
                 // Assuming your API returns an array of objects with a "name" property
@@ -466,7 +419,7 @@ export default {
         },
         createFilter(queryString) {
                 console.log("queryString",queryString)
-                axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`)
+                axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
 		.then((res) => (this.dataarray = res.data));
                 console.log(this.dataarray);
                 return this.dataarray;
@@ -479,7 +432,7 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const response = await fetch(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
+            const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
             const data = await response.json();
 
                 // Assuming your API returns an array of objects with a "name" property

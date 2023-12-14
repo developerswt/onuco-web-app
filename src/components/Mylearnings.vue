@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="container-fluid jk">
         <div class="container jk">
@@ -36,7 +34,6 @@
                         <div class="radio_checkbox" style="text-align: center;">
                             <div class="radio-item" v-for="item in myLearning" :key="item.id" :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
-                                    <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
                             </div>
                         </div>
                     </div>
@@ -46,16 +43,13 @@
                 <section id="tab_block">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                         <el-tab-pane label="MY COURSES" name="first">
-
                             <div class="tab-content" id="myTabContent" v-if="selectedItem !== null">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="">
                                         <div class="row mt-3">
                                             <div class="col-lg-6 col-8 col-sm-8 col-md-6">
                                                 <h4 class="academic_head_text">
-    
                                                     <span id="aca_text">interested</span> Courses
-
                                                 </h4>
                                             </div>
                                             <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
@@ -65,7 +59,6 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="notify_block">
-
                                                     <i class="fa-solid fa-triangle-exclamation"
                                                         style="color: #ff9900;"></i><p class="pt"> Please
                                                         subscribe the subjects to
@@ -74,40 +67,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="" v-for="subject in selectedItem.subject" :key="subject.id">
-                                            <div class="" v-for="chapter in subject.values" :key="chapter.id">
-                                                <div class="" v-for="course in chapter.values" :key="course.id"> -->
-                                                    <div class="inner_block">
-                                                        <div class="row">
-                                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                                <div id="asset_image">
-                                                                    <img src="../assets/images/book1.png" class="img-fluid">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                                <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                                    <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
-                                                                </router-link>    
-                                                                <p id="text_two">stacks</p>
-                                                                <div class="row">
-                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                        <div class="progress_block">
-                                                                            <div>
-                                                                                <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                        <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                                    </div>
-                                                                    <!-- <button class="bt">BUY NOW</button> -->
+                                        <div class="inner_block">
+                                            <div class="row">
+                                                <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                    <div id="asset_image">
+                                                        <img src="../assets/images/book1.png" class="img-fluid">
+                                                    </div>
+                                                </div> 
+                                                <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                        <p class="mb-0" id="text_one">{{ selectedItem.title }}</p>
+                                                    </router-link>    
+                                                    <p id="text_two">stacks</p>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <div class="progress_block">
+                                                                <div>
+                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                        </div>
+                                                            <!-- <button class="bt">BUY NOW</button> -->
                                                     </div>
-                                                <!-- </div>
+                                                </div>
                                             </div>
-                                        </div>             -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +214,7 @@
             </div>
         </div>
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 
 
     
@@ -265,8 +252,6 @@ export default {
                 controls: true,
                 width: 100,
                 preload: 'auto',
-                // techOrder: ['html5'],
-                // preload: "metadata",
                 sources: [ 
                     
                 ],
@@ -304,7 +289,7 @@ export default {
             // Update your component's state to display the selected item's details
             this.selectedItem = item;
             
-            if (this.$refs.videoPlayer.player) {
+            if (this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
 
                 // Pause the current video
@@ -325,7 +310,6 @@ export default {
                     }
                 ];
 
-                this.playingSubject = subject;
                 console.log('Video source updated.');
 
                 // Set the new sources
@@ -376,20 +360,12 @@ export default {
 
             return `${hours}:${minutes}:${seconds}`;
         },
-
-        // Example usage
-            // const totalTime = 3600; // 1 hour in seconds
-            // const watchTime = 1800; // 30 minutes in seconds
         remainingTimes(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
             const watchTime = this.getWatchTime(selectedItem); 
             return this.calculateRemainingTime(totalTime, watchTime);
             console.log(this.calculateRemainingTime);
         },
-        //     const remainingTime = calculateRemainingTime(totalTime, watchTime);
-        //     console.log(`Remaining time: ${remainingTime}`);
-
-        // },
         calculateTime(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
         
@@ -397,13 +373,7 @@ export default {
                 const timeInHours = Math.floor(totalTime / 3600);
                 const timeInMinutes = Math.floor((totalTime % 3600) / 60);
                 const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
+        
                 return {
                     timeInHours,
                     timeInMinutes,
@@ -466,6 +436,7 @@ export default {
                 // Set the default selected item to the first item in myLearnin
                 this.selectedItem = this.myLearning[0];
             }
+            
             this.videoOptions.sources = [
                 {
                     src: this.selectedItem.videoUrl,
@@ -567,12 +538,6 @@ progress::-moz-progress-bar {
     mix-blend-mode: normal;
 
 }
-
-/* #group_image {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
-    padding-bottom: 20px;
-} */
 
 .academic_head_text {
     color: #006acd;
@@ -876,27 +841,6 @@ margin-top: -7px;
     top: 10px;
   }  
 }
-/* .container-fluid {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
-
-} 
-body {
-  margin: 0;
-  font-family: 'Noto Sans', sans-serif;
-  background: #EFF5FC 0% 0% no-repeat padding-box;
-  opacity: 1;
- 
-} */
-/* .pp{
-    margin-top: -12px; 
-}
-@media  (min-width: 100px)and(max-width: 600px){
-   .pp{
-    margin-top: 10px;
-}
-   
-} */
 @media (max-width:520px) {
     .jk{
         padding-bottom: 45px !important;

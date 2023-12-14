@@ -111,7 +111,7 @@ export default {
 
 <template>
     <div class="login_class">
-    <authenticator class="custom-sign-in jp" :authState="authState" :theme=theme :style="buttonStyle" :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
+    <authenticator class="custom-sign-in jp" :authState="authState" :theme=theme  :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
         
       <template v-slot:icon-facebook>
         <div style="padding: var(--amplify-space-large);">
@@ -221,54 +221,3 @@ export default {
 
 </style>
 
-<!-- <template>
-  <authenticator>
-    <template v-slot="{ user, signUp, validationError }">
-      <h1>Hello {{ user ? user.username : 'Guest' }}!</h1>
-      <form @submit="onSubmit">
-        <input v-model="username" placeholder="Username" />
-        <input v-model="password" type="password" placeholder="Password" />
-        <input v-model="name" placeholder="Name" />
-        <p v-if="validationError" class="error-message">{{ validationError }}</p>
-        <button type="submit">Sign Up</button>
-      </form>
-      <button @click="signUp">Sign Up</button>
-    </template>
-  </authenticator>
-</template>
-
-<script>
-import { Authenticator } from 'aws-amplify-vue';
-
-export default {
-  components: {
-    Authenticator,
-  },
-  data() {
-    return {
-      username: '',
-      password: '',
-      name: '',
-    };
-  },
-  methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      if (!this.validateFormData()) {
-        // Display validation error and prevent submission
-        return;
-      }
-      // Continue with the sign-up process
-      // Call this.$auth.signUp({...}) or use the Authenticator component's signUp method
-    },
-    validateFormData() {
-      // Implement custom validation logic for form fields
-      if (!this.username || !this.password || !this.name) {
-        this.validationError = 'All fields are required.';
-        return false;
-      }
-      return true;
-    },
-  },
-};
-</script> -->

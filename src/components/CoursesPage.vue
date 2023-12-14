@@ -9,7 +9,7 @@
           <div class="parent_blocks">
             <div class="row pt-2">
               
-              <div class="" v-for="branch in branches" :key="branch.id">
+              <div class="" v-for="branch in branches.branches" :key="branch.id">
                 
                 <div class="box" v-if="academi.academia.id == branch.academiaId">
                   
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
   </template>
   

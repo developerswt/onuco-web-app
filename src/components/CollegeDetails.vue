@@ -1,184 +1,121 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs class="container"/>
-        <div class="container">
+        <Breadcrumbs class="container" />
+        <div class="container" v-if="this.semester.length > 0">
             <h4 class="academic_head_text mt-4">
-            <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
-            <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
-        </h4> 
-       
-        <p class="desc" style="color: #777777;" v-html="this.university[0].description"></p>
-        <!-- <div class="container pt-4">
-            <h4 class="academic_head_text">
-            <span id="aca_text"><b>Available</b></span> Semesters (0)
-        </h4>
-        <p>yufutfyufi</p> -->
-        <div class="pt-2">
-            <div class="row" v-for="(sem, index) in semester" :key="index" >
-                <div class="card" id="main_card">
-                    <h5 class="card-header">
-                        <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example" id="heading-example">
-                            <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
-                                <h4 id="sem_text">{{ sem.name }} </h4>
-                                <p  id="sem_description">{{ sem.description }}</p>
-                        </div>
-                        <!-- <div v-else class="collapsed d-block kj" data-toggle="collapse" :href="'#collapse-example' + sem.id" aria-expanded="true" aria-controls="collapse-example" id="heading-example" >
-                            <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
-                                <h4 id="sem_text">{{ sem.name }}</h4>
-                                <p style="font-size: 14px;" id="sem_description">{{ sem.description }}</p>
-                        </div> -->
-                    </h5>
-                    <!-- <h5 class="card-header">
-                        <a class="collapsed d-block" style="text-decoration: none;" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed">
-                            <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
-                                <h4>{{ sem.name }}</h4>
-                                <p style="font-size: 14px;">{{ sem.description }}</p>
-                        </a>
-                    </h5> -->
-                    <div  :id="'collapse-example' + index" :class="index==0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
-                        <div class="card-body pt-0">
-                            <div class="">
-                            <div class="row kl">
-                                <div class="col-md-4 mb-2" v-for="cou in filteredCourses(sem.id)" :key="cou.id">
-                                    <router-link v-bind:to="{ name:'CourseDetails', params:{name: cou.courseName}}" style="color: white; text-decoration: none;">
-                                    <div class="card mt-3" id="sem_card">
-                                        <div class="card-title">
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p  id="sub_text" class="mb-0"  data-placement="top" :title="cou.name">{{cou.name.slice(0,18)}}...</p>
+                <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
+                <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
+            </h4>
 
-                                                                </div>
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="code_text" style=" color: #6A4343;"><small>18CS81 &nbsp;240 hrs</small></p>
+            <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
+            <div class="pt-2">
+                <div class="row" v-for="(sem, index) in semester" :key="index">
+                    <div class="card" id="main_card">
+                        <h5 class="card-header">
+                            <div :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse"
+                                :href="'#collapse-example' + index" aria-expanded="true" aria-controls="collapse-example"
+                                id="heading-example">
+                                <span class="action"><i class="fa fa-chevron-right rotate-icon" id="sem_icon"></i></span>
+                                <h4 id="sem_text">{{ sem.name }} </h4>
+                                <p id="sem_description">{{ sem.description }}</p>
+                            </div>
+                        </h5>
+                        <div :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
+                            aria-labelledby="heading-collapse" v-if="filteredCourses(sem.id).length > 0">
+                            <div class="card-body pt-0">
+                                <div class="">
+                                    <div class="row kl">
+                                        <div class="col-md-4 mb-2" v-for="cou in filteredCourses(sem.id)" :key="cou.id">
+                                            <router-link v-bind:to="{ name: 'CourseDetails', params: { name: cou.courseName } }"
+                                                style="color: white; text-decoration: none;">
+                                                <div class="card mt-3" id="sem_card">
+                                                    <div class="card-title">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mn">
+                                                                <div class="row">
+                                                                    <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                                <p id="sub_text" class="mb-0"
+                                                                                    data-placement="top" :title="cou.name">
+                                                                                    {{ cou.name.slice(0, 18) }}...</p>
+
+                                                                            </div>
+                                                                            <div class="col-lg-12 col-9 col-sm-9 col-md-9">
+                                                                                <p id="code_text" style=" color: #6A4343;">
+                                                                                    <small>18CS81 &nbsp;240 hrs</small></p>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                                        <img src="../assets/images/Union193.png"
+                                                                            style="width: 16px; height: 20px;" class="icon">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                          
-                                                   
                                                         </div>
-                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mn">
+                                                                <div class="row">
+                                                                    <div class="col-lg-9 col-9 col-sm-9 col-md-9">
+                                                                        <p style="padding-top:10px;" id="desc_text"
+                                                                            v-html="cou.description.slice(0, 49)"></p>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-3 col-sm-3 col-md-3">
+                                                                        <img src="../assets/images/Path4025.png"
+                                                                            style="width: 30px; height:30px;" class="video">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text" v-html="cou.description.slice(0,49)"></p>
-                                                        </div>
-                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn1">
-                                                    <div class="row aa">
-                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <StarRatings :rating="cou.starRating" :max-rating="5" />
-                                                            <!-- <i class="fa fa-star"></i>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mn1">
+                                                                <div class="row aa">
+                                                                    <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                                        <StarRatings :rating="cou.starRating || 0"
+                                                                            :max-rating="5" />
+                                                                        <!-- <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-half-full"></i>
                                                     <i class="fa fa-star-o"></i> -->
-                                                        </div>
-                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text" style="color: #828282;">({{ cou.ratingCount || 0 }} reviews)</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </router-link>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div v-else :id="'collapse-example' + sem.id" class="collapse" aria-labelledby="heading-collapsed">
-                        <div class="card-body pt-0">
-                            <div class="">
-                            <div class="row kl">
-                                <div class="col-md-4" v-for="cou in course" :key="cou.id">
-                                    <router-link v-bind:to="'/CourseDetails?id='+ cou.id">
-                                    <div class="card" v-if="sem.id === cou.semesterId" id="sem_card">
-                                        <div class="card-title">
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-8 col-9 col-sm-9 col-md-9">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="sub_text" class="mb-0"><b>Math 1 (NEP Series)</b></p>
-                                                                </div>
-                                                                <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                    <p id="code_text"><small>18CS81&nbsp;240 hrs</small></p>
+                                                                    </div>
+                                                                    <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                                        <p id="review_text" style="color: #828282;">({{
+                                                                            cou.ratingCount || 0 }} reviews)</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                          
-                                                   
-                                                        </div>
-                                                        <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/share.png" class="icon">
-                                                        </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn">
-                                                    <div class="row">
-                                                        <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                            <p style="padding-top:10px;" id="desc_text"><b>{{ cou.description }}</b></p>
-                                                        </div>
-                                                        <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                            <img src="../assets/images/video.png" class="video">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 mn1">
-                                                    <div class="row">
-                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                            <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                            <p id="review_text">(23 reviews)</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </router-link>
                                         </div>
                                     </div>
-                                    </router-link>
                                 </div>
                             </div>
-                            </div>
                         </div>
-                    </div> -->
+                        <div :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
+                            aria-labelledby="heading-collapse" v-else style="background-color: #EFF5FC;">
+                            <h2 class="comming_soons">Comming Soon ...</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="" v-else>
+            <h2 class="comming_soon">Comming Soon ...</h2>
         </div>
-
     </div>
 
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
 <script>
 import axios from 'axios';
-import AxiosInstance  from '../config/axiosInstance';
+import AxiosInstance from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -198,7 +135,7 @@ export default {
             ratingCount: '',
             isLoading: false,
             semester: [],
-            course: [],
+            course: {},
             university: [],
         }
     },
@@ -214,15 +151,6 @@ export default {
             const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
             console.log(this.course)
-            // this.course = this.course.filter(cou => this.semester.some(sem => sem.id === cou.semesterId));
-            // console.log(this.course);
-            // for (const course of this.course) {
-            //     const res = await this.getByRatings(course.id);
-            //     course.starRating = res.averageRating;
-            //     console.log(course.starRating);
-            //     this.ratingCount = res.ratingCount;
-            //     console.log(this.ratingCount);
-            // }
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -242,63 +170,48 @@ export default {
             }
         },
         filteredCourses(semesterId) {
-        const filteredCourses = this.course.filter(c => c.semesterId === semesterId);
-        this.updateStarRatings(filteredCourses);
-        return filteredCourses;
-    },
+            const coursesArray = Array.isArray(this.course.courses) ? this.course.courses : [];
+            const filteredCourses = coursesArray.filter(c => c.semesterId === semesterId);
+            this.updateStarRatings(filteredCourses);
+            return filteredCourses;
+        },
 
-    async updateStarRatings(filteredCourses) {
-        for (const course of filteredCourses) {
-            const res = await this.getByRatings(course.id);
-            course.starRating = res.averageRating;
-            console.log(course.starRating);
-            course.ratingCount = res.ratingCount;
-            console.log(course.ratingCount);
-        }
-    },
-        // async updateStarRatings() {
-        //     for (const course of this.course) {
-        //         const res = await this.getByRatings(course.id);
-        //         course.starRating = res.averageRating;
-        //         console.log(course.starRating);
-        //         this.ratingCount = res.ratingCount;
-        //         console.log(this.ratingCount);
-        //     }
-        // },
-        // filteredCourses(semesterId) {
-        //     return this.course.filter(c => c.semesterId === semesterId);
-        // },
-    }    
-        // async getByRatings(courseId) {
-        //     try {
-        //         const result = await AxiosInstance.get(`/Ratings/${courseId}?objectTypeId=5`);
-        //         return result.data;
-        //     } catch (error) {
-        //         console.error(error);
-        //         return 0; // or handle error accordingly
-        //     }
-        // },
-        // async getByRatings(courseId) {
-        // // Perform your asynchronous operation to get ratings here
-        // Replace the following line with your actual logic
-    //     const ratings = await fetchRatings(courseId);
-
-    //     return ratings; // Return the fetched ratings
-    // },
-    // async updateStarRatings() {
-    //     for (const course of this.course) {
-    //         course.starRating = await this.getByRatings(course.id);
-    //     }
-    // }
-    // }
+        async updateStarRatings(filteredCourses) {
+            for (const course of filteredCourses) {
+                const res = await this.getByRatings(course.id);
+                course.starRating = res.averageRating;
+                console.log(course.starRating);
+                course.ratingCount = res.ratingCount;
+                console.log(course.ratingCount);
+            }
+        },
+    }
 }
 
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 
 <style scoped>
+.comming_soon {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+
+.comming_soons {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
@@ -363,13 +276,14 @@ $(document).ready(function(){
 .kj:not(.collapsed) .rotate-icon {
     transform: rotate(90deg);
 }
+
 .kj1 .action {
     float: right;
     font-size: 30px;
     width: 1.2em;
     color: darkblue;
     opacity: 1;
-    
+
 }
 
 
@@ -399,9 +313,10 @@ $(document).ready(function(){
         font-size: 11px;
     }
 
-    #sub_text{
+    #sub_text {
         font-size: 11px;
     }
+
     #code_text {
         font-size: 11px;
         color: black;
@@ -414,39 +329,43 @@ $(document).ready(function(){
     #review_text {
         font-size: 13px;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         font-size: 16px !important;
-        padding:0 !important;
+        padding: 0 !important;
 
     }
-    .jk{
+
+    .jk {
         padding-top: 65px !important;
     }
 
     .kj .action[data-v-723afcf3] {
-    float: right;
-    font-size: 29px;
-    width: 0.2em;
-    color: darkblue;
-    opacity: 1;
-    position: relative;
-    bottom: -11px;
-}
-#sem_card{
-    height: 160px;
-    opacity: 1;
-    padding: 8%;  
-}
-#review_text{
-    margin: -3px -2px;
-     color: #828282;
-}
+        float: right;
+        font-size: 29px;
+        width: 0.2em;
+        color: darkblue;
+        opacity: 1;
+        position: relative;
+        bottom: -11px;
+    }
+
+    #sem_card {
+        height: 160px;
+        opacity: 1;
+        padding: 8%;
+    }
+
+    #review_text {
+        margin: -3px -2px;
+        color: #828282;
+    }
 }
 
 @media only screen and (max-width: 400px) and (min-width: 100px) {
-.row .aa {
-    margin-top: -18px;
-}
+    .row .aa {
+        margin-top: -18px;
+    }
 
 }
 
@@ -467,9 +386,10 @@ $(document).ready(function(){
 
     }
 
-    #sub_text{
-        font-size: 11px; 
+    #sub_text {
+        font-size: 11px;
     }
+
     #code_text {
         font-size: 11px;
         color: black;
@@ -482,25 +402,29 @@ $(document).ready(function(){
     #review_text {
         font-size: 13px;
     }
+
     .kj .action[data-v-723afcf3] {
-    float: right;
-    font-size: 29px;
-    width: 0.2em;
-    color: darkblue;
-    opacity: 1;
-    position: relative;
-    bottom: -11px;
-}
-#review_text{
-    margin: -3px -2px;
-     color: #828282;
-}
- .row .aa{
-    margin-top: -20px;
-}
-#sem_card[data-v-723afcf3] {
-    width: auto;
-}
+        float: right;
+        font-size: 29px;
+        width: 0.2em;
+        color: darkblue;
+        opacity: 1;
+        position: relative;
+        bottom: -11px;
+    }
+
+    #review_text {
+        margin: -3px -2px;
+        color: #828282;
+    }
+
+    .row .aa {
+        margin-top: -20px;
+    }
+
+    #sem_card[data-v-723afcf3] {
+        width: auto;
+    }
 }
 
 @media only screen and (max-width: 600px) and (min-width: 100px) {
@@ -510,23 +434,23 @@ $(document).ready(function(){
 
 
     }
-    @media only screen and (max-width: 600px) and (min-width: 100px){
-#sem_card[data-v-723afcf3] {
-    height: 155px;
-    opacity: 1;
-    padding: 5%;
-    width: auto;
-} 
-.aa .row{
-    margin-top: -20px;
-}
-}
+
+    @media only screen and (max-width: 600px) and (min-width: 100px) {
+        #sem_card[data-v-723afcf3] {
+            height: 155px;
+            opacity: 1;
+            padding: 5%;
+            width: auto;
+        }
+
+        .aa .row {
+            margin-top: -20px;
+        }
+    }
 
 }
 
 .card {
-    /* margin-bottom: 4%;
-    margin-top: 2%; */
     width: 100%;
     border-radius: 10px;
 }
@@ -550,9 +474,9 @@ $(document).ready(function(){
 
 }
 
-#review_text{
+#review_text {
     margin: 5px -2px;
-     color: #828282;
+    color: #828282;
 }
 
 #sem_card p {
@@ -566,8 +490,8 @@ $(document).ready(function(){
 
 .card-header {
     height: 65px;
-    border-bottom:none;
-        padding-left: 15px;
+    border-bottom: none;
+    padding-left: 15px;
     padding-top: 2px;
 }
 
@@ -624,18 +548,20 @@ $(document).ready(function(){
 
 }
 
-#desc_text{
+#desc_text {
     font-size: 12px;
     text-align: left;
 }
-#sub_text{
-    font-size: 12.5px;  
+
+#sub_text {
+    font-size: 12.5px;
 }
 
-.fa{
-    color:orange ;
+.fa {
+    color: orange;
 }
-.bt{
+
+.bt {
     background-color: #0177FB;
     color: white;
     position: relative;
@@ -649,53 +575,48 @@ $(document).ready(function(){
 
 
 
-@media only screen and (max-width: 280px){
+@media only screen and (max-width: 280px) {
 
-#sem_card[data-v-723afcf3][data-v-723afcf3] {
-    width: 228px;
-    height: 180px;
-    opacity: 1;
-    padding: 7%;
-    margin: -17px;
-}
+    #sem_card[data-v-723afcf3][data-v-723afcf3] {
+        width: 228px;
+        height: 180px;
+        opacity: 1;
+        padding: 7%;
+        margin: -17px;
+    }
+
     .card-header[data-v-723afcf3] {
-    width: 232px;
-    height: 75px;
-    border-bottom: none;
-    padding-left: 15px;
-    padding-top: 2px;
+        width: 232px;
+        height: 75px;
+        border-bottom: none;
+        padding-left: 15px;
+        padding-top: 2px;
+    }
+
+    .star-rating span {
+        margin-right: 0px;
+        color: gold;
+    }
 }
-.star-rating span{
-    margin-right: 0px;
-    color: gold;
-}
-}
-.star-rating span{
+
+.star-rating span {
     margin-right: 0px !important;
     color: gold;
 }
 
-.desc{
+.desc {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
-letter-spacing: var(--unnamed-character-spacing-0);
-text-align: left;
-font: normal normal normal 16px/21px Segoe UI;
-letter-spacing: 0px;
-color: #777777;
-opacity: 1;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/21px Segoe UI;
+    letter-spacing: 0px;
+    color: #777777;
+    opacity: 1;
 }
 
 @media (max-width:520px) {
-    #sem_icon{
+    #sem_icon {
         font-size: 25px;
     }
-    /* .star-rating {
-    font-size: 20px !important;
-    margin-top: -8%;
-} */
 }
-/* .star-rating {
-    font-size: 24px;
-    margin-top: -8%;
-} */
 </style>

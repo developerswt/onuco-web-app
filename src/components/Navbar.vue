@@ -114,14 +114,14 @@
 
 <script>
 import { Auth } from 'aws-amplify';
-
+import axiosInstance from '../config/axiosInstance'
 import axios from 'axios';
 
 export default {
     name: "NavbarView",
     props: {
-        showSearchBox: Boolean,
-        showSearchBoxes:Boolean
+        showSearchBoxProp: Boolean, // Change the prop name
+        showSearchBoxesProp: Boolean,
     },
     data() {
         return {
@@ -142,6 +142,10 @@ export default {
     },
     computed: {
         showSearchBoxOnNavbar() {
+            return this.$route.path !== '/search';
+        },
+        showSearchBoxComputed() {
+        // Change the computed property name
             return this.$route.path !== '/search';
         },
         isLoggedIn() {
@@ -191,7 +195,7 @@ export default {
         },
         createFilter(queryString) {
             console.log("queryString", queryString)
-            axios.get("https://migzype4x8.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=" + this.searchTerm)
+            axiosInstance.get("/GlobalSearch?searchTerm=" + this.searchTerm)
                 .then((res) => (this.dataarray = res.data));
             console.log(this.dataarray);
             return this.dataarray;

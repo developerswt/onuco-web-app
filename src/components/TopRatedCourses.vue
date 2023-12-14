@@ -24,7 +24,7 @@
                                         <img class="card-img-top" src="../assets/images/offer.png">
                                     </div>
                                     <div class="offer-details">
-                                        <font class="card-image-top"><b>20% OFF</b></font>
+                                        <span class="card-image-top"><b>20% OFF</b></span>
                                     </div>
                                 </div>
                                 <div class="card-body" >
@@ -35,7 +35,7 @@
                                     </div> <br>
                                     <div class="row">
                                         <div class="col-sm-6  star">
-                                            <StarRatings :rating="course.starRating" :max-rating="5" />
+                                            <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                         </div>
                                         <div class="col-sm-6" >
                                             <a href="#" class="btn btn-primary" >Buy Now</a>
@@ -51,12 +51,12 @@
                 </slide>
                 <template #addons>         
                     <navigation >
-                        <template #next>
+                        <!-- <template #next>
                             <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
                         </template>
                         <template #prev>
                             <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
+                        </template> -->
                     </navigation>
                 
                 </template>
@@ -244,7 +244,7 @@ export default {
     
     async created() {   
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
+            const res = await axiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
             console.log(this.courses);
             for (const course of this.courses) {
@@ -280,6 +280,9 @@ export default {
     text-decoration: none;
 }
 
+.card-image-top {
+    font-weight: bold;
+}
 .category-test h4 a {
     float: right;
     color: #0d4b7e;
