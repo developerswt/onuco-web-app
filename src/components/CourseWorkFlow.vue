@@ -1,7 +1,9 @@
 
+
+
 <template>
-   <div class="container" ><p> > Course Workflow</p>
-    <div style="padding: 10px;"  >
+   <div class="container" ><p>Dashbord > Course Workflow</p>
+    <div style="padding: 20px 20px 80px 20px;"  >
       
       <div class="example-wrapper">
         
@@ -30,7 +32,7 @@
     </div>
   
   <div v-if="showChildRow">
-  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 130px;left: 500px;" aria-modal="true" role="dialog" >
+  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
     <div class="modal-dialog" role="document">
       <div class="modal-content mc">
        
@@ -45,7 +47,7 @@
                                          <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
                                          <p><b>Course Name:</b>{{childPara.name  }}</p>
                                          <p><b>Price:</b> {{ childPara.actualPrice }}</p>
-                                         <p><b>Status:</b> {{ childPara.workFlowStatement }}</p>
+                                         <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
                                          
                                      </div>
                                   
@@ -56,23 +58,23 @@
                                     <div class="col-sm-4">
                                          <p><b>ID: </b> {{childPara.id  }}</p>
                                          <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                         
-                                         <div class="">
+                                         <p><b>Course Name:</b>{{childPara.name  }}</p>
+                                         <p><b>Price:</b> {{ childPara.actualPrice }}</p>
+                                         <!-- <div class="">
                                           <label><b>Course Name:</b></label><br>
                                           <input type="text" v-model="this.childPara.name" />
                                         </div> 
                                         <div class="">
                                           <label><b>Price:</b></label><br>
                                           <input type="text" v-model="this.childPara.actualPrice" />
-                                        </div>  
+                                        </div>   -->
                                         <div>
-                                            <label><b>Status:</b></label><br>
-                                           <select name="Technician" id="Technician" class="selectcss " v-model="updateStatus"> 
-                                            <!-- <option disabled  value="">Update Status</option> -->
-                                            <option value="1">Draft</option>
-                                            <option value="2">Review</option>
-                                            <option value="3">Release</option>
-                                            </select> <button @click="updateUserStatus(childPara)">Update Status</button> 
+                                            <label><b>Work Flow:</b></label><br>
+                                            <select v-model="childPara.workFlowStatement">
+                                            <option value="Draft">Draft</option>
+                                            <option value="Review">Review</option>
+                                            <option value="Release">Release</option>
+                                          </select>
                                          </div>
                                         
                                         </div>
@@ -126,7 +128,7 @@
         Orders: [],
         req: [],
         showAllTechnicians: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Course Name', field: 'name' },{name:'Price',field:'actualPrice'},{name:'Status',field:'workFlowStatement'}],
+        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Course Name', field: 'name' },{name:'Price',field:'actualPrice'},{name:'Work Flow',field:'workFlowStatement'}],
         gridApi: null,
         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
         columnApi: null,
@@ -152,7 +154,7 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+        const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course`);
         let req = res.data;
         this.Orders =  req;
         
@@ -259,10 +261,7 @@
       update(id) {
         this.showDialog = false;
         try {
-      // console.log( this.childPara)
-      // let orders=parseInt(this.childPara.orderedItems)
-      // console.log
-          const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
+          const res = axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
           console.log(res);
           this.ismodel = true;
           this.gridApi.refreshCells({force : true});
@@ -281,17 +280,14 @@
     },
     
   };
-  
-  const colors = ['New Orders', 'Completed','Collected', 'Cancelled','Assign','DSA'];
-  
-  const technician = ['Ramesh k', 'Nitish m r','Rohan s'];  
+ 
   </script>
   <style>
       .example-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 50%;
+  width: 55%;
   }
   
   #myGrid {
@@ -389,4 +385,13 @@
       width: 580px;
       overflow: hidden;
     }
+    @media (max-width:520px) {
+       /* .mc{
+         height: 0px;
+         width: 0px;
+       } */
+       .example-wrapper {
+ width: 100%;
+       }
+     }
   </style>

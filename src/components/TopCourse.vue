@@ -23,8 +23,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
-                                
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                             </div> <br>
                            <div class="row">
                             <div class="col-sm-6  star">
@@ -59,7 +58,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -93,7 +92,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -127,7 +126,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -161,7 +160,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -195,7 +194,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -229,7 +228,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">
@@ -263,7 +262,7 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                           <p>&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px;">&#8377;1999</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
                                 
                             </div> <br>
                            <div class="row">

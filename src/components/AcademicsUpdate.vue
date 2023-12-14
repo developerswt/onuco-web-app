@@ -1,57 +1,60 @@
 
 
 <template>
-    <div class="container" ><p>Dashbord > semester Update </p>
+    <div class="container" ><p>Dashbord > Branchs Update </p>
         <div class="row">
             <div class="col-lg-6 col-sm-12">
-     <div style="padding: 20px;"  >
+                <div style="padding: 20px;"  >
        
-       <div class="example-wrapper" >
+                    <div class="example-wrapper" >
          
-         <div style="height: 100%;">
-           <ag-grid-vue 
-             :domLayout="domLayout"
-             class="ag-theme-alpine"
-             :columnDefs="columnDefs"
-             :rowData="rowData"
-             :editType="editType"
-             :rowSelection="rowSelection"
-             :defaultColDef="defaultColDef"
-             :suppressExcelExport="true"
-             :popupParent="popupParent"
-             @grid-ready="onGridReady"
-             @cell-value-changed="onCellValueChanged"
-             @row-clicked='onCellClicked'
-             cacheQuickFilter = true
-             :pagination = "true"
-             :paginationPageSize="paginationPageSize"
-             isLoding ="true"
-           >
-           </ag-grid-vue>
-         </div>  
-       </div> 
-     </div>
-     <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
-     </div>
-     <div class="col-lg-6 col-sm-12">
-     <form  v-show="formVisible" class="frm" @submit.prevent="addBranch" style="margin-top:22px">     
-         <p><b></b> {{newBranch.id}}</p>
-      <label for="branchName"> Name:</label>
-      <input type="text" id="branchName" v-model="newBranch.name" required><br>
+                        <div style="height: 100%;">
+                            <ag-grid-vue 
+                                :domLayout="domLayout"
+                                class="ag-theme-alpine"
+                                :columnDefs="columnDefs"
+                                :rowData="rowData"
+                                :editType="editType"
+                                :rowSelection="rowSelection"
+                                :defaultColDef="defaultColDef"
+                                :suppressExcelExport="true"
+                                :popupParent="popupParent"
+                                @grid-ready="onGridReady"
+                                @cell-value-changed="onCellValueChanged"
+                                @row-clicked='onCellClicked'
+                                cacheQuickFilter = true
+                                :pagination = "true"
+                                :paginationPageSize="paginationPageSize"
+                                isLoding ="true"
+                                    >
+                            </ag-grid-vue>
+                        </div>  
+                    </div> 
+                </div>
+                <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+            </div>
 
-      <label for="description">Description:</label>
-      <input type="text" id="description" v-model="newBranch.description" required><br>
+           
+            <div class="col-lg-6 col-sm-12">
+                
+                <form v-show="formVisible" class="frm" @submit.prevent="addBranch"  style="margin-top:25px">
+                    <p><b></b> {{newBranch.id}}</p>
+                    <label for="branchName"> Name:</label>
+                    <input type="text" id="branchName" v-model="newBranch.name" required><br>
 
-      <label for="universityId">University Id:</label>
-      <input type="text" id="academiaId" v-model="newBranch.universityId" required><br>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" v-model="newBranch.description" required><br>
 
-      <label for="semesterName"><b>Semester Name:</b></label>
-      <input type="text" id="branchName" v-model="newBranch.semesterName" required>
+                    <label for="typeId">TypeId:</label>
+                    <input type="text" id="typeId" v-model="newBranch.typeId" required><br>
 
-      <button class="btn2" type="submit">Add Semester</button>
-    </form>
-    </div>
-    </div>
+                    <label for="academiaName"><b>Academia Name:</b></label>
+                    <input type="text" id="academiaName" v-model="newBranch.academiaName" required>
+
+                    <button class="btn2" type="submit">Add Branch</button>
+                </form>
+            </div>
+        </div>
    <div v-if="showChildRow">
    <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
      <div class="modal-dialog" role="document">
@@ -64,26 +67,24 @@
                                      <div class="col-sm-12">
                                        <p><b>ID: </b> {{childPara.id  }}</p>
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                          <p><b>Semester Name:</b>{{childPara.name }}</p>
+                                          <p><b>Academia Name:</b>{{childPara.name }}</p>
                                           <p><b>Description:</b> {{ childPara.description }}</p>
-                                          
                                           
                                       </div>
                                  </div>
                                  <div class="row" v-else>
                                    <div class="col-sm-12">
-                                          <p><b>ID: </b> {{childPara.id  }}</p>
+                                          <p><b>ID: </b>{{childPara.id}}</p>
                                           
                                           <div class="">
-                                           <label><b>Semester Name:</b></label><br>
-                                           <input type="text" v-model="this.childPara.name" />
+                                           <label><b>Academia Name:</b></label><br>
+                                           <input type="text" v-model="this.childPara.name"/>
                                          </div> 
                                          <div class="">
                                            <label><b>Description:</b></label><br>
-                                           <input type="text" v-model="this.childPara.description" />
+                                           <input type="text" v-model="this.childPara.description"/>
                                          </div>  
                                      </div>
-                                         
                                  </div>
                                 </div>
             </div>
@@ -127,8 +128,9 @@
         newBranch: {
         name: '',
         description: '',
-        universityId: '',
-        semesterName: '',
+        typeId: '',
+        academiaName: '',
+        // Add other properties as needed
       },
       formVisible: false,
          userName: '',
@@ -140,7 +142,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'}],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Academia Name', field: 'name' },{name:'Description',field:'description'}],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -166,32 +168,31 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester`);
-         let req = res.data;
-         this.Orders = req;
-         
-         } catch (error) {
-           this.isLoading = false;
-         console.log(error);
-         this.showDialog = true;  
-         this.dialogTitle= "Error";
-         this.dialogMessage= "Not get data";
-       }
-       finally {
-         this.isLoading = false;
-       }
-       this.rowData = this.Orders;
-       this.rowSelection = 'single'; 
-       console.log(this.rowData);
-       this.popupParent = document.body;
-       this.paginationPageSize = 10;
-   
-     },
+            const response = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Academia`);
+            const dataArray = Object.values(response.data);
+            this.Orders = dataArray.map(item => item.academia);
+            this.rowData = this.Orders;
+            this.rowSelection = 'single';
+            console.log(this.rowData);
+        }
+        catch (error) {
+            this.isLoading = false;
+            console.log(error);
+            this.showDialog = true;  
+            this.dialogTitle= "Error";
+            this.dialogMessage= "Not get data";
+        }
+        finally {
+            this.isLoading = false;
+        }
+    
+    },
      
      methods: {
         toggleForm() {
           this.formVisible = !this.formVisible;
         },
+       
      onCellClicked(params) {
              this.childPara = params.node.data
          console.log(this.childPara);
@@ -240,7 +241,7 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
+                 const res = await axios.put(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Academia` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
                  console.log(res);
                  this.ismodel = true;
        
@@ -254,29 +255,29 @@
        },
  
        async addBranch() {
-  this.isLoading = true;
-  try {
-    const response = await axios.post('https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester', this.newBranch);
-    this.ismodel = true;
+        this.isLoading = true;
+      try {
+        const res = await axios.post(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Academia`, this.newBranch);
+        this.ismodel = true; 
+        if (res.status === 200) {
+          console.log("Branch added successfully");
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
 
-    if (response.status === 200) {
-      console.log("Branch added successfully");
-      await this.getdata();
-      this.gridApi.refreshCells({ force: true });
-     
-      alert("Insert Successful");
+        alert("Insert Successful");
     } else {
       // Show failure message
       alert("Insert Fail");
     }
-  } catch (error) {
-    console.error("Error adding branch:", error);
-  } finally {
-    this.isLoading = false;
-  }
-},
-
-
+        
+      } catch (error) {
+        this.isLoading = false;
+        console.error("Error adding branch:", error);
+      }
+      finally {
+             this.isLoading = false;
+             }
+    },
          onLogOut() {
            this.$store.commit('isLoggedIn', false);
            this.$router.push('/Loginpage');
@@ -285,30 +286,28 @@
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Semester`);
-             let req = res.data;
-             this.Orders = req;
-           
-           } catch (error) {
-               this.isLoading = false;
-               console.log(error);
-               this.showDialog = true;  
-               this.dialogTitle= "Error";
-               this.dialogMessage= "Not get data";
-             }
-             finally {
-             this.isLoading = false;
-             }
-             this.rowData = this.Orders;
-             this.rowSelection = 'single'; 
-             console.log(this.rowData);
-             this.popupParent = document.body;
-             this.paginationPageSize = 10;
+            const response = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Academia`);
+            const dataArray = Object.values(response.data);
+            this.Orders = dataArray.map(item => item.academia);
+            this.rowData = this.Orders;
+            this.rowSelection = 'single';
+            console.log(this.rowData);
+        }
+        catch (error) {
+            this.isLoading = false;
+            console.log(error);
+            this.showDialog = true;  
+            this.dialogTitle= "Error";
+            this.dialogMessage= "Not get data";
+        }
+        finally {
+            this.isLoading = false;
+        }
        
-         }
-     },
-     
-   };
+        }
+    },
+    
+};
    
   
    </script>
@@ -337,8 +336,8 @@
      --ag-header-foreground-color: black;
      --ag-header-background-color: white;
      /* --ag-header-cell-hover-background-color: #0d4b7e;
-     --ag-header-cell-moving-background-color: #0d4b7e;
-    */
+     --ag-header-cell-moving-background-color: #0d4b7e; */
+   
      --ag-font-size: 15px;
      --ag-font-family: 'Times New Roman';
      
@@ -422,7 +421,6 @@
  width: 100%;
        }
      }
-
      .frm{
         padding: 20px;
     border: 1px solid black;

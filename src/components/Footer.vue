@@ -164,7 +164,7 @@ export default {
     border-radius: 50%;
     display: flex !important;
     position: relative;
-    left: 17px;
+    left: 25px;
 }
 
 .button {
@@ -199,10 +199,20 @@ export default {
         position: relative;
         left: 10px;
     }
+
 }
 @media (max-width: 700px) {
   .footer[data-v-4896eafd]{
     z-index: 999 !important;
   }  
+}
+@media (max-width: 395px){
+    .btn
+{
+    border-radius: 50%;
+    display: flex !important;
+    position: relative;
+    left: 18px !important;
+}
 }
 </style>

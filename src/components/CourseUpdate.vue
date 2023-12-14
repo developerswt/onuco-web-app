@@ -1,5 +1,9 @@
+
+
 <template>
-    <div class="container" ><p> > Courses </p>
+    <div class="container" ><p>Dashbord > Courses Update </p>
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
      <div style="padding: 20px;"  >
        
        <div class="example-wrapper" >
@@ -27,7 +31,10 @@
          </div>  
        </div> 
      </div>
-     <form class="frm" @submit.prevent="addBranch" >
+     <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+</div>
+<div class="col-lg-4 col-sm-12">
+     <form v-show="formVisible" class="frm" @submit.prevent="addBranch" style="margin-top:23px" >
       <p><b></b> {{newBranch.id}}</p>
       <label for="branchName"> Name:</label>
       <input type="text" id="branchName" v-model="newBranch.name" required><br>
@@ -53,10 +60,12 @@
       <label for="facultyId"><b>Faculty Id:</b></label>
       <input type="text" id="facultyId" v-model="newBranch.facultyId" required><br>
 
-      <button type="submit" style="border: 1px solid;">Add Branch</button>
+      <button class="btn2" type="submit" style="border: 1px solid;">Add Course</button>
     </form>
+    </div>
+    </div>
    <div v-if="showChildRow">
-   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 170px;left: 500px;" aria-modal="true" role="dialog" >
+   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
      <div class="modal-dialog" role="document">
        <div class="modal-content mc">
          
@@ -69,7 +78,7 @@
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
                                           <p><b>Semester Name:</b>{{childPara.name }}</p>
                                           <p><b>Description:</b> {{ childPara.description }}</p>
-                                          
+                                          <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
                                           
                                       </div>
                                  </div>
@@ -84,7 +93,15 @@
                                          <div class="">
                                            <label><b>Description:</b></label><br>
                                            <input type="text" v-model="this.childPara.description" />
-                                         </div>  
+                                         </div> 
+                                         <div>
+                                            <label><b>Work Flow:</b></label><br>
+                                            <select v-model="childPara.workFlowStatement">
+                                            <option value="Draft">Draft</option>
+                                            <option value="Review">Review</option>
+                                            <option value="Release">Release</option>
+                                          </select>
+                                         </div> 
                                      </div>
                                          
                                  </div>
@@ -114,7 +131,7 @@
    import "ag-grid-community/styles/ag-grid.css";
    import "ag-grid-community/styles/ag-theme-alpine.css";
    import { AgGridVue } from "ag-grid-vue3";
-   // import AlertDialog from './AlertDialog.vue';
+   import AxiosInstance  from '../config/axiosInstance';
    import Loading from 'vue3-loading-overlay';
    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
    
@@ -137,6 +154,7 @@
         workFlowStatement: '',
         facultyId: '',
       },
+      formVisible: false,
          userName: '',
          ismodel: true,
          isLoading: false,
@@ -146,7 +164,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'} ],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'},{name:'WorkFlow Statement',field:'workFlowStatement'} ],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -172,29 +190,34 @@
        this.domLayout = 'autoHeight'; 
        this.isLoading = true;
        try {
-         const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+         const res = await AxiosInstance.get(`/Course`);
          let req = res.data;
-         this.Orders = req;
-         
-         } catch (error) {
-           this.isLoading = false;
-         console.log(error);
-         this.showDialog = true;  
-         this.dialogTitle= "Error";
-         this.dialogMessage= "Not get data";
-       }
-       finally {
-         this.isLoading = false;
-       }
-       this.rowData = this.Orders;
-       this.rowSelection = 'single'; 
-       console.log(this.rowData);
-       this.popupParent = document.body;
-       this.paginationPageSize = 10;
-   
-     },
+    this.Orders = req;
+    if (Array.isArray(req.courses)) {
+      this.rowData = req.courses;
+    } else {
+      console.error('completedStudents is not an array:', req.courses);
+    }
+  } catch (error) {
+          this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;  
+        this.dialogTitle= "Error";
+        this.dialogMessage= "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowSelection = 'single'; 
+  console.log(this.rowData);
+  this.popupParent = document.body;
+  this.paginationPageSize = 10;
+},
      
      methods: {
+        toggleForm() {
+          this.formVisible = !this.formVisible;
+        },
        
      onCellClicked(params) {
              this.childPara = params.node.data
@@ -244,28 +267,48 @@
        async update(id) {
          this.showDialog = false;
            try {
-                 const res = await axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
+                 const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
                  console.log(res);
-                 this.ismodel = true;
-       
-             if (res.status === 200) {
-               await this.getdata();
-               this.gridApi.refreshCells({ force: true });
-             }
+                 if (res.status === 200) {
+            const newData = AxiosInstance.get(`/Course`);
+            this.rowData = newData.data.courses;
+        }
+
+          this.ismodel = true;
+          this.gridApi.refreshCells({force : true});
            } catch (error) {
              console.log(error);
              }
        },
+       update(id) {
+        this.showDialog = false;
+        try {
+          const res = AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
+          console.log(res);
+          this.ismodel = true;
+          this.gridApi.refreshCells({force : true});
+      
+        } catch (error) {
+          console.log(error);
+        }
+      },
  
        async addBranch() {
         this.isLoading = true;
       try {
-        const response = await axios.post('https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course', this.newBranch);
-         if (response.status === 201) {
+        const response = await AxiosInstance.post('/Course', this.newBranch);
+        this.ismodel = true; 
+        if (response.status === 200) {
           console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
-        }
+
+        alert("Insert Successful");
+    } else {
+      // Show failure message
+      alert("Insert Fail");
+    }
+        
       } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
@@ -282,27 +325,29 @@
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
            try {
-             const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Course`);
+             const res = await AxiosInstance.get(`/Course`);
              let req = res.data;
-             this.Orders = req;
-           
-           } catch (error) {
-               this.isLoading = false;
-               console.log(error);
-               this.showDialog = true;  
-               this.dialogTitle= "Error";
-               this.dialogMessage= "Not get data";
-             }
-             finally {
-             this.isLoading = false;
-             }
-             this.rowData = this.Orders;
-             this.rowSelection = 'single'; 
-             console.log(this.rowData);
-             this.popupParent = document.body;
-             this.paginationPageSize = 10;
-       
-         }
+    this.Orders = req;
+    if (Array.isArray(req.courses)) {
+      this.rowData = req.courses;
+    } else {
+      console.error('completedStudents is not an array:', req.courses);
+    }
+  } catch (error) {
+          this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;  
+        this.dialogTitle= "Error";
+        this.dialogMessage= "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowSelection = 'single'; 
+  console.log(this.rowData);
+  this.popupParent = document.body;
+  this.paginationPageSize = 10;
+},
      },
      
    };
@@ -315,7 +360,7 @@
    display: flex;
    flex-direction: column;
    height: 100%;
-   width: 70%;
+   width: 100%;
    }
    
    #myGrid {
@@ -411,17 +456,72 @@
      }
  
      @media (max-width:520px) {
-       .mc{
+       /* .mc{
          height: 0px;
          width: 0px;
-       }
+       } */
        .example-wrapper {
  width: 100%;
        }
      }
      .frm{
-        padding: 30px;
+        padding: 20px;
     border: 1px solid black;
-    width: 50%;
+    width: 90%;
+    background-color: #fff;
      }
+    
+
+    .frm {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-bottom: 80px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 1px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+     }
+     .btn2 {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+     }
+    .btn1{
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 80px; 
+    }
+
+
+    button:hover {
+        background-color: #007bff;
+    }
    </style>

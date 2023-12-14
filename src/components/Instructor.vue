@@ -1,7 +1,10 @@
 
 
 
+
+
 <template>
+    
     <div class="container jk">
         <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
@@ -23,11 +26,19 @@
                                     </div>
                                     <div class="col-lg-8 col-8 col-sm-8">
                                         <h5 id="prof_text">{{ this.faculty.name }}</h5>
-                                        <p class="rating_icons">
-                                            <StarRatings :rating="ratings || 0" :max-rating="5" /><a
-                                                style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }}
-                                                reviews)</a>
-                                        </p>
+                                        <div class="row">
+                                                <div class="col-lg-12 mn1">
+                                                    <div class="row aa">
+                                                        <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                            <StarRatings :rating="ratings" :max-rating="5" />
+                                                        </div>
+                                                        <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                            <p id="review_text">(23 reviews)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
                                         <div class="social-icons">
                                             <a :href="this.faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
                                             <a :href="this.faculty.twitter" target="blank" class="fa fa-twitter"></a>
@@ -54,21 +65,9 @@
                                                 Follwers</button>
                                         </div>
                                     </div>
-                                    <div class="app1">
-                                        <div v-if="isPopupVisible" class="popup">
-                                            <div class="popup-content">
-                                                <div class="">
-                                                    <span @click="closePopup" class="close">&times;</span>
-                                                    <h5>Ratings System</h5>
-                                                </div>
-                                                <hr>
-                                                <form @submit.prevent="submitRating">
-                                                    <label for="rating">Rate the faculty :</label><br>
-                                                    <el-rate v-model="rating" size="large" allow-half /><br>
-                                                    <input type="submit" value="Submit">
-                                                </form>
-                                                <!-- Add your popup content here -->
-                                            </div>
+                                    <div class="col-lg-6">
+                                        <div class="Ratings_button_block" v-if="isLoggedIn">
+                                            <button type="button" class="btn" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">Ratings</button>
                                         </div>
                                     </div>
                                 </div>
@@ -79,88 +78,221 @@
                         </div>
 
                     </div>
-
-                    <div class="row professor-details" id="app">
-                        <div class="col-sm-12 col-lg-12">
-                            <p class="professor-details_text" v-if="!faculty.readMore">{{ faculty && faculty.description ?
-                                faculty.description.slice(0, 168) : '' }}
-                                <span class="read" @click="toggleReadMore">...<span style="color:blue">Read
-                                        more</span></span>
-                            </p>
-                            <p class="professor-details_text" v-if="faculty.readMore">{{ faculty.description }}
-                                <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span>
-                            </p>
+                    <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ratings System</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="submitRating">
+                                        <label for="rating">Rate the faculty member :</label><br>
+                                        <!-- <input type="number" id="rating" v-model="rating" name="rating" min="1" max="5"><br> -->
+                                        <el-rate v-model="rating" size="large" allow-half /><br>
+                                        <input type="submit" value="Submit">
+                                    </form> 
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
+
+                     
+                    
+
+                    <div class="row professor-details" id="app">
+  <div class="col-sm-12 col-lg-12">
+    <p class="professor-details_text" v-if="!faculty.readMore">{{ faculty.description.slice(0, 168) }}
+      <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
+    </p>
+    <p class="professor-details_text" v-if="faculty.readMore">{{ faculty.description }}
+      <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read less</span></span>
+    </p>
+  </div>
+</div>
 
                 </div>
             </section>
+            </div>
+                
         </div>
+            <section id="Course_section">   
+                <div class="container">
+                <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
+               
+                    <carousel :settings="settings" :breakpoints="breakpoints">
+                   <slide  v-for="person in person" :key="person.id">
+                    
+                        <router-link to="/SemesterDetails">
+                           
+                            <div class="card" id="instructor_card">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
 
-    </div>
-    <section id="Course_section">
-        <div class="container">
-            <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
-
-            <carousel :items-to-show="3" :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="slide in 5" :key="slide">
-
-                    <router-link to="/SemesterDetails">
-
-                        <div class="card" id="instructor_card">
-                            <div class="card-title">
-                                <div class="row">
-                                    <div class="col-md-12 ">
-
-                                        <div class="card_top_text">
-                                            <div class="row">
-
-                                                <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft"> Math 1 (NEP Series)</p>
-                                                </div>
-
-                                                <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img src="../assets/images/Union193.png"
-                                                        style="width: 16px; height: 20px;" class="icon">
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p class="ft"> 18CS81</p>
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p class="ft" id="small_text">240
-                                                        hrs</p>
-                                                </div>
-
-                                                <div class="col-lg-9 col-9 col-sm-9">
-
-                                                    <p class="ft">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Esse,
-                                                        excepturi.</p>
-                                                </div>
-
-                                                <div class="col-lg-3 col-3 col-sm-3">
-                                                    <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
-                                                            style="width: 30px; height:30px;" class="video">
+                                            <div class="card_top_text">
+                                                <div class="row">
+                                                     
+                                                    <div class="col-lg-10 col-9 col-sm-9">
+                                                        <p class="ft" data-placement="top" :title="person.name" > {{ person.name.slice(0,18)}}...</p>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <p style="color: #707070;" class="sub_icons mb-0"><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star-o"></i>
-                                                        (23
-                                                        reviews) </p>
+                                                   
+                                                    <div class="col-lg-2 col-3 col-sm-3">
+                                                        <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p class="ft" > 18CS81</p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p class="ft"  id="small_text">240
+                                                            hrs</p>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-9 col-9 col-sm-9">
+
+                                                        <p class="ft" >{{ person.description.slice(0,50) }}...</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3 col-3 col-sm-3">
+                                                        <div class="video_logo">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <!-- <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                       
+                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                            (23
+                                                            reviews) </p> -->
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-6">
+                                                            <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5"/></p>
+                                                        </div>
+                                                        <div class="col-lg-6 col-6" style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
+                                                            <p> (23 reviews) </p>
+                                                        </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </router-link>
+                        </router-link>
+                    
+                    
+                    <!-- <div class="col-md-6 col-lg-4">
+                        <router-link to="/SemesterDetails">
+                            
+                            <div class="card" id="instructor_card">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
 
+                                            <div class="card_top_text">
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-10 col-9 col-sm-9">
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-2 col-3 col-sm-3">
+                                                        <img src="../assets/images/share.png" class="icon">
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p> 18CS81</p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p id="small_text">240
+                                                            hrs</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-9 col-9 col-sm-9">
 
+                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                            excepturi.</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3 col-3 col-sm-3">
+                                                        <div class="video_logo">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        
+                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                            (23
+                                                            reviews) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div> -->
+
+                    <!-- <div class="col-md-6 col-lg-4">
+                        <router-link to="/SemesterDetails">
+                            
+                            <div class="card" id="instructor_card">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
+
+                                            <div class="card_top_text">
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-10 col-9 col-sm-9">
+                                                        <p style="font-size: 14px;"> Math 1 (NEP Series)</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-2 col-3 col-sm-3">
+                                                        <img src="../assets/images/share.png" class="icon">
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p> 18CS81</p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6 col-sm-6">
+                                                        <p id="small_text">240
+                                                            hrs</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-9 col-9 col-sm-9">
+
+                                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+                                                            excepturi.</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3 col-3 col-sm-3">
+                                                        <div class="video_logo">
+                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
+                                                        
+                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                            (23
+                                                            reviews) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div> -->
                 </slide>
                 <template #addons>
 
@@ -312,61 +444,60 @@ export default {
     },
     data() {
         return {
-            ratingCount: '',
-            isPopupVisible: false,
-            modalShow: false,
             rating: '',
             readMore: false,
             isLoading: false,
             faculty: [],
             ratings: [],
+            person: [],
             settings: {
+            itemsToShow: 1,
+            snapAlign: 'center',
+            readActivated: false,
+            
+        },
+   
+        breakpoints: {
+   
+            900: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            820: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            768:{
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            1024: {
+                itemsToShow: 3,
+                snapAlign: 'start',
+            },
+            600: {
                 itemsToShow: 1,
                 snapAlign: 'center',
-                readActivated: false,
             },
-
-            breakpoints: {
-
-                900: {
-                    itemsToShow: 2,
-                    snapAlign: 'center',
-                },
-                820: {
-                    itemsToShow: 2,
-                    snapAlign: 'center',
-                },
-                768: {
-                    itemsToShow: 2,
-                    snapAlign: 'center',
-                },
-                1024: {
-                    itemsToShow: 3,
-                    snapAlign: 'start',
-                },
-                600: {
-                    itemsToShow: 1,
-                    snapAlign: 'center',
-                },
-                375: {
-                    itemsToShow: 1,
-                    snapAlign: 'center',
-                },
-                360: {
-                    itemsToShow: 1,
-                    snapAlign: 'center',
-                },
-                540: {
-                    itemsToShow: 2,
-                    snapAlign: 'center',
-                },
-                280: {
-                    itemsToShow: 1,
-                    snapAlign: 'center',
-                }
-
-
+            375:{
+                itemsToShow: 1,
+                snapAlign: 'center',
             },
+            360:{
+                itemsToShow: 1,
+                snapAlign: 'center', 
+            },
+            540:{
+                itemsToShow: 2,
+                snapAlign: 'center', 
+            },
+            280:{
+                itemsToShow: 1,
+                snapAlign: 'center', 
+            }
+          
+          
+        },
             activeName: 'first',
             attribute: [
                 { key: "Name", value: "Arun" },
@@ -385,12 +516,7 @@ export default {
         },
     },
     methods: {
-        showPopup() {
-            this.isPopupVisible = true;
-        },
-        closePopup() {
-            this.isPopupVisible = false;
-        },
+
         toggleReadMore() {
             this.faculty.readMore = !this.faculty.readMore;
         },
@@ -409,28 +535,32 @@ export default {
                 objectTypeId: 4,
                 ratingScore: this.rating
             })
-                .then(response => {
-                    // Handle success (if needed)
-                    console.log(response.data);
-                    this.rating = '';
-                    this.closePopup();
-                })
-                .catch(error => {
-                    // Handle error (if needed)
-                    console.error(error);
-                });
+            .then(response => {
+                // Handle success (if needed)
+                console.log(response.data);
+                this.rating = '';
+            })
+            .catch(error => {
+                // Handle error (if needed)
+                console.error(error);
+            });
         }
     },
     async created() {
         this.isLoading = true;
         try {
-            const res = await axiosInstance.get(`/Faculty/` + this.$route.params.name);
+            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
-            const result = await axiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
-            this.ratings = result.data.averageRating;
-            this.ratingCount = result.data.ratingCount;
+            const results = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
+            this.person = results.data;
+            console.log(this.person);
+            const result = await axiosInstance.get(`/Ratings/` + this.faculty.id + "?objectTypeId=4");
+            this.ratings = result.data;
             console.log(this.ratings);
+
+            
+
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -445,6 +575,8 @@ export default {
 
 
 <style scoped>
+
+
 .jk {
     padding-top: 5%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -488,7 +620,7 @@ export default {
     font-size: 14px;
     width: 35px;
     text-align: center;
-    text-decoration: none;
+   
     margin: 12px 10px 0px 0px;
     /* border-radius: 50%; */
     clip-path: circle();
@@ -570,6 +702,8 @@ export default {
 
 ::v-deep .fa-circle {
     margin: 7px;
+    position: relative;
+    bottom: 7px;
 }
 
 /* ::v-deep .row_class i */
@@ -643,11 +777,11 @@ export default {
 }
 
 ::v-deep .Objective_left_side {
-    text-align: right;
+    text-align: left;
 }
 
 ::v-deep .Objective_left_side {
-    text-align: right;
+    text-align: left;
 }
 
 .round_class {
@@ -664,21 +798,24 @@ export default {
     height: auto;
     background: #0177FB;
     position: relative;
-    top: 23px;
+    top: 18px;
     left: -16px;
     margin-bottom: 18px;
     /* bottom: 10px; */
 
 }
+/* .fa-circle{
+    position: relative;
+    bottom: 7px;
+} */
 
 ::v-deep #row_block {
     padding-left: 15px;
 }
 
-::v-deep #row_block1 {
+/* ::v-deep #row_block1 {
     padding: 30px 18px;
-}
-
+} */
 /* ::v-deep .details {
     padding-left: 25px;
 } */
@@ -696,6 +833,8 @@ export default {
     font-weight: bold;
     font-size: 16px;
     font-weight: bold;
+    position: relative;
+    left: 15px;
 }
 
 ::v-deep .row_class i {
@@ -759,7 +898,7 @@ export default {
 
 @media only screen and (min-width: 760px) and (max-width: 912px) {
     ::v-deep .Objective_left_side {
-        text-align: right;
+        text-align: left;
         width: 25%;
         float: left;
     }
@@ -836,9 +975,8 @@ export default {
     .rating_icons i {
         padding: 0;
     }
-
-    .Objective_left_side {
-        text-align: left !important;
+    .Objective_left_side{
+     text-align: left !important;
     }
 
 
@@ -1044,81 +1182,18 @@ input[type=submit] {
     color: white;
     cursor: pointer;
 }
-
-#app1 {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black background */
-    z-index: 900;
-    /* Set a z-index lower than the popup but higher than the content */
-    display: none;
-}
-
-.popup h5 {
-    color: #006acd;
-    font-weight: bold;
-    text-align: left;
-}
-
-.popup {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    width: 70%;
-    /* Adjust the width as needed */
-    max-width: 400px;
-    /* Set a maximum width */
-    transform: translate(-50%, -50%);
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.popup-content {
-    text-align: center;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-/* Media query for smaller screens */
-@media (max-width: 600px) {
-    .popup {
-        width: 90%;
-        /* Adjust the width for smaller screens */
-    }
-}
-
 .star-rating {
     font-size: 24px;
 }
-
+.details{
+    position: relative;
+    left: 16px;
+}
 @media screen and (max-width: 1024px) {
     .Ratings_button_block {
         margin-left: 109%;
         cursor: pointer;
     }
-
 }
 
 @media screen and (max-width: 912px) {
@@ -1126,7 +1201,6 @@ input[type=submit] {
         margin-left: 34%;
         cursor: pointer;
     }
-
 }
 
 @media screen and (min-width: 500px) and (max-width: 540px) {
@@ -1169,4 +1243,19 @@ input[type=submit] {
         margin-left: 10%;
         cursor: pointer;
     }
-}</style>
+}
+#review_text{
+    color: #828282; 
+    position:relative;
+    top:7px; 
+    right:65px;
+}
+@media (max-width:540px) {
+    #review_text{
+    color: #828282; 
+    position:relative;
+    top:7px; 
+    right:20px;
+} 
+}
+</style>

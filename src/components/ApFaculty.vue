@@ -24,8 +24,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
-import AxiosInstance  from '../config/axiosInstance';
+  import AxiosInstance  from '../config/axiosInstance';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {

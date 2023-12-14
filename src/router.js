@@ -48,6 +48,14 @@ import BranchesUpdate from './components/BranchesUpdate.vue'
 import SemUpdate from './components/SemUpdate.vue'
 import UniUpdate from './components/UniUpdate.vue'
 import CourseUpdate from './components/CourseUpdate.vue'
+import ApBestFaculty from './components/ApBestFaculty.vue'
+import ListOfSubject from './components/ListOfSubject.vue'
+import AdUni from './components/AdUni.Vue'
+import AdBranches from './components/AdBranches.vue'
+import AdCourse from './components/AdCourse.vue'
+import AdSem from './components/AdSem.vue'
+import AcademicsUpdate from './components/AcademicsUpdate.vue'
+import AdAcademics from './components/AdAcademics.vue'
 
 
 let user = null; // Initialize user as null
@@ -497,6 +505,48 @@ const routes = [
         path: "/CourseUpdate",
         name: "CourseUpdate",
         component: CourseUpdate, 
+      },
+      {
+        path: "/ApBestFaculty",
+        name: "ApBestFaculty",
+        component: ApBestFaculty, 
+      },
+      {
+        path: "/ListOfSubject",
+        name: "ListOfSubject",
+        component: ListOfSubject, 
+      },
+      {
+        path: "/AdBranches",
+        name: "AdBranches",
+        component: AdBranches, 
+      },
+      {
+        path: "/AdCourse",
+        name: "AdCourse",
+        component: AdCourse, 
+      },
+      {
+        path: "/AdSem",
+        name: "AdSem",
+        component: AdSem, 
+      },
+      {
+        path: "/AdUni",
+        name: "AdUni",
+        component: AdUni, 
+      },
+      {
+        path:"/AcademicsUpdate",
+        name: "AcademicsUpdate",
+        component: AcademicsUpdate, 
+
+      },
+      {
+        path:"/AdAcademics",
+        name: "AdAcademics",
+        component: AdAcademics, 
+
       },
 
      ],

@@ -1,83 +1,7 @@
-<!-- <template>
-    <div class="container" style="margin-top: 72px;">
-   <div class="table-responsive">
-    <div class="row">
-         <div class="col-sm-12">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                          
-                        <th>Id</th>
-                           <th>Subject Name</th>
-                           <th>Price</th>
-                           <th>Start Date</th>
-                           <th>End Date</th>
-                           <th>Status</th>
-                          
-                          
-                       </tr>
-                   </thead>
-                   <tbody v-for="product in product.completedStudents" :key="product.id">
-                    <tr>
-                        <td>{{product.id}}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{product.price  }}</td>
-                        <td>{{product.startdate}}</td>
-                        <td>{{ product.enddate }}</td>
-                        <td>{{ product.state }}</td>
-                     <td>{{ this.product.completedStudentsCount }}</td> 
-                        
-                    </tr>
-                   </tbody>
-                       
-               </table>
-            </div> 
-           
-            </div>
-           </div>
-           
-           </div>
-</template>
-<script>
-  import axios from 'axios';
-  import Loading from 'vue3-loading-overlay';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  export default {
 
-  name: "Actstudent",
-  components: {
-          Loading,
-          
-      },
-  data() {        
-          return {
-            product:[],
-           
-          }
-        },
-        async created() { 
-            this.isLoading = true;  
-        try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
-            this.product = res.data;
-            console.log(this.product);
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
-    },
-    }
-
-
-</script>
-<style scoped>
-
-</style> -->
 
 <template>
+  <div class="container" ><p>Dashbord > Complete Students </p>
     <div style="padding: 20px;"  >
       
       <div class="example-wrapper" >
@@ -107,7 +31,7 @@
     </div>
   
   <div v-if="showChildRow">
-  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;position: fixed; top: 130px;left: 500px;" aria-modal="true" role="dialog" >
+  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
     <div class="modal-dialog" role="document">
       <div class="modal-content mc">
         
@@ -132,6 +56,10 @@
                                          <p><b>Course ID :</b>{{ childPara.courseId }}</p>
                                          <p><b>Subject Name:</b>{{childPara.name }}</p>
                                          <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
+                                         <div class="">
+                                          <label><b>Price:</b></label><br>
+                                          <input type="text" v-model="this.childPara.price" />
+                                        </div>
                                         <div class="">
                                           <label><b>Start Date:</b></label><br>
                                           <input type="text" v-model="this.childPara.startdate" />
@@ -140,7 +68,11 @@
                                           <label><b>End Date:</b></label><br>
                                           <input type="text" v-model="this.childPara.enddate" />
                                         </div>
-                                        <p><b>Status:</b> {{ childPara.state }}</p> 
+                                        <!-- <p><b>Status:</b> {{ childPara.state }}</p>
+                                        <div class="">
+                                          <label><b>Status:</b></label><br>
+                                          <input type="text" v-model="this.childPara.state" />
+                                        </div>  -->
                                     </div>
                                         
                                 </div>
@@ -160,11 +92,12 @@
   </div>
    <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
     <Loading v-model:active="isLoading"></Loading>
+    </div>
   </template>
   
   <script>
   
-  import axios from "axios";
+  import AxiosInstance  from '../config/axiosInstance';
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
@@ -190,7 +123,7 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,},{name:'Status',field:'state'}],
+        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,}],
         gridApi: null,
         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
         columnApi: null,
@@ -216,7 +149,7 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
+        const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
         let req = res.data;
         this.Orders = req;
         if (Array.isArray(req.completedStudents)) {
@@ -294,12 +227,12 @@
       update(id) {
         this.showDialog = false;
         try {
-          const res = axios.put(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(this.childPara.startdate) + '&newEndDate=' +encodeURIComponent (this.childPara.enddate));
+          const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(this.childPara.startdate) + '&newEndDate=' +encodeURIComponent (this.childPara.enddate));
           console.log(res);
           
           // this.gridApi.refreshCells({force : true});
           if (res.status === 200) {
-            const newData = axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetCompletedStudentsCount`);
+            const newData = AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
             this.rowData = newData.data.completedStudents;
         }
 
@@ -449,12 +382,26 @@
     }
 
     @media (max-width:520px) {
-      .mc{
+      /* .mc{
         height: 0px;
         width: 0px;
-      }
+      } */
       .example-wrapper {
 width: 100%;
       }
+    }
+    button {
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+        background-color: #007bff;
     }
   </style>
