@@ -14,7 +14,7 @@
                         <div v-if="isMobile" class="container-fluid">
                             <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
                                 <video-player
-ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+ref="videoPlayer" class="mobileVideo" :options="videoOptions" :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
                                     :is-subscribed="userIsSubscribed" />
                             </div>
                         </div>
