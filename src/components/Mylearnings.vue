@@ -950,9 +950,6 @@ progress {
     vertical-align: baseline;
     width: 100%;
 }
-    width: 40px;
-    height: 70px;
-} 
 .line{
     position:relative;
     left:90px;
