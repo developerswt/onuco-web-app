@@ -24,7 +24,7 @@
                                         <img class="card-img-top" src="../assets/images/offer.png">
                                     </div>
                                     <div class="offer-details">
-                                        <font class="card-image-top"><b>20% OFF</b></font>
+                                        <span class="card-image-top"><b>20% OFF</b></span>
                                     </div>
                                 </div>
                                 <div class="card-body" >
@@ -244,7 +244,7 @@ export default {
     
     async created() {   
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
+            const res = await axiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
             console.log(this.courses);
             for (const course of this.courses) {
@@ -280,6 +280,9 @@ export default {
     text-decoration: none;
 }
 
+.card-image-top {
+    font-weight: bold;
+}
 .category-test h4 a {
     float: right;
     color: #0d4b7e;

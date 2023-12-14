@@ -135,8 +135,14 @@
                             <div class="card-body">
                                 <h2>Login details</h2>
                                 <p>Last access to application</p>
-                                <p>Wednesday, 6 September 2023, 11:46 PM (now)</p>
-                                <p>Tuesday, 5 September 2023, 09:46 PM &nbsp;<router-link class="va" to="" style="text-decoration: underline;">View all</router-link></p>
+                                <div v-for="(login, index) in visibleLoginDetails" :key="index">
+                                    <p>{{ formatCreationDate(login.creationDate) }}</p>
+                                </div>
+                                <p v-if="shouldShowViewAll">
+                                    <router-link class="va" to="" style="text-decoration: underline;" @click="toggleViewAll">
+                                        View all
+                                    </router-link>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -149,11 +155,12 @@
 
 
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 
 </template>
 
 <script>
+import moment from 'moment';
 import axios from 'axios'
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
@@ -167,8 +174,10 @@ export default {
     },
     data() {
         return {
+            showViewAll: false,
             isLoading: false,
             updatedAttribute: [],
+            loginHistorys: [],
             editing: false,
             userName: '',
             userEmail: '',
@@ -192,6 +201,13 @@ export default {
             console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken;
         },
+        visibleLoginDetails() {
+            // Show the first two login details by default or all details if showViewAll is true
+            return this.showViewAll ? this.loginHistorys : this.loginHistorys.slice(0, 2);
+        },
+        shouldShowViewAll() {
+            return this.loginHistorys.length > 2 && !this.showViewAll;
+        },
     },
     methods: {
         editProfile() {
@@ -201,6 +217,9 @@ export default {
             this.uploadImage();
             this.editing = false;
 
+        },
+        toggleViewAll() {
+            this.showViewAll = !this.showViewAll;
         },
         handleFileChange(event) {
             if (event && event.target && event.target.files.length > 0) {
@@ -250,9 +269,33 @@ export default {
                 this.isLoading = false;
             }
         },
+        async loginHistory() {
+            this.isLoading = true;
+            try {
+                const res = await axiosInstance.get('/UserLoginHistory/history');
+                this.loginHistorys = res.data;
+                console.log(this.loginHistorys);    
+            } catch (error) {
+                console.log(error);
+                this.isLoading = false;
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        formatCreationDate(creationDate) {
+            const formattedDate = moment(creationDate).utcOffset('+05:30').format('dddd, D MMMM YYYY, h:mm A');
+            const currentDate = moment();
+      
+            if (moment(creationDate).isSame(currentDate, 'minute')) {
+                return `${formattedDate} (Now)`;
+            } else {
+                return formattedDate;
+            }
+        },
     },
     async created() {
         this.update();
+        this.loginHistory();
     }
     // async created() {
     //     this.isLoading = true;

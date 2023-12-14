@@ -1,6 +1,6 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container" >
+        <div class="container">
             <h4 class="academic_head_text">
                 <span id="aca_text">Best</span>Lecturers
                 <router-link to="/BestFaculty">See all</router-link>
@@ -9,50 +9,51 @@
     </div>
     <div class="container-fluid">
         <!-- <div class="row pt-5"> -->
-            <carousel :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="facult in faculty" :key="facult.id">
-                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                        <div class="card">
-                            <div class="user-follower">
-                           
-                                <img :src="facult.image" class="user-icon" v-if="facult.image !== ''">
-                                <img src="../assets/images/Image21.png" class="user-icon" v-else>
-                                <!-- <img :src="facult.imageUrl" class="user-icon"> -->
-                            </div>
-                            <div class="user-following">
-                                <p class="text-right"><small>13 Following</small></p>
-                                <p class="text-right"><small>1200 Followers</small></p>
-                            </div>
-                            <div class="card-body " style="margin-top: -7%; ">
-                                <div class="card-title">{{ facult.name }}</div>
-                                <div class="card-text"> {{ facult.description.slice(0,50)}}...</div>
-                            
-                                <div class="mn text-left">
-                                    <p>
-                                        ({{ facult.ratingCount || 0 }} Reviews)
-                                        <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
-                                    </p>
-                                </div>
+        <carousel :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="facult in faculty" :key="facult.id">
+                <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }"
+                    style="cursor: pointer; text-decoration: none;">
+                    <div class="card">
+                        <div class="user-follower">
+
+                            <img :src="facult.image" class="user-icon" v-if="facult.image !== ''">
+                            <img src="../assets/images/Image21.png" class="user-icon" v-else>
+                            <!-- <img :src="facult.imageUrl" class="user-icon"> -->
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body " style="margin-top: -7%; ">
+                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
+
+                            <div class="mn text-left">
+                                <p>
+                                    ({{ facult.ratingCount || 0 }} Reviews)
+                                    <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
+                                </p>
                             </div>
                         </div>
-                    </router-link>
-                </slide>
-                    
+                    </div>
+                </router-link>
+            </slide>
 
-                <template #addons>
-                    
-                    <navigation >
-                        <template #next>
-                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                        <template #prev>
-                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                    </navigation>
-                        
-                </template>
-            </carousel>
-        </div>
+
+            <template #addons>
+
+                <navigation>
+                    <template #next>
+                        <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                    <template #prev>
+                        <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                </navigation>
+
+            </template>
+        </carousel>
+    </div>
 </template>
 
 
@@ -66,7 +67,7 @@ import StarRatings from './StarRatings.vue'
 
 
 
-export default defineComponent ({
+export default defineComponent({
     name: 'BestLecture',
     components: {
         Carousel,
@@ -82,9 +83,9 @@ export default defineComponent ({
             itemsToShow: 1,
             snapAlign: 'center',
         },
-   
+
         breakpoints: {
-   
+
             900: {
                 itemsToShow: 2,
                 snapAlign: 'center',
@@ -93,7 +94,7 @@ export default defineComponent ({
                 itemsToShow: 2,
                 snapAlign: 'center',
             },
-            768:{
+            768: {
                 itemsToShow: 2,
                 snapAlign: 'center',
             },
@@ -105,18 +106,18 @@ export default defineComponent ({
                 itemsToShow: 1,
                 snapAlign: 'center',
             },
-          
+
         },
     }),
-    async created() {   
+    async created() {
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Bestfaculty`);
+            const res = await axiosInstance.get(`/Bestfaculty`);
             this.faculty = res.data;
             for (const facult of this.faculty) {
                 const res = await this.getByRatings(facult.facultyId);
                 facult.starRating = res.averageRating;
                 facult.ratingCount = res.ratingCount;
-                
+
             }
 
         } catch (error) {
@@ -143,29 +144,33 @@ export default defineComponent ({
 .category-test a {
     text-decoration: none;
 }
+
 .category-test h4 a {
     float: right;
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-  
+
 }
+
 .user-follower img {
     width: 60px;
     height: 60px;
     margin-left: 19%;
     padding-top: 2%;
-    background-color:#fff;
+    background-color: #fff;
     box-shadow: 0px 3px 6px #00000029;
-    border: 3px solid #FFFFFF;    
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
 }
+
 .user-follower {
     position: absolute;
     top: -35px;
 }
+
 .user-following p {
     position: relative;
     top: -32px;
@@ -175,6 +180,7 @@ export default defineComponent ({
     line-height: 2%;
     color: #707070;
 }
+
 .card-title {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -185,6 +191,7 @@ export default defineComponent ({
     opacity: 1;
 
 }
+
 .demo-rate-block {
     padding: 30px 0;
     text-align: center;
@@ -193,18 +200,22 @@ export default defineComponent ({
     width: 49%;
     box-sizing: border-box;
 }
+
 .demo-rate-block:last-child {
     border-right: none;
 }
+
 .demo-rate-block .demonstration {
     display: block;
     color: var(--el-text-color-secondary);
     font-size: 14px;
     margin-bottom: 20px;
 }
+
 .mn {
     padding-top: 20px;
 }
+
 .mn p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -216,14 +227,17 @@ export default defineComponent ({
     margin: 0%;
     opacity: 1;
 }
+
 .mn .star-rating {
     float: right;
     margin-top: 0%;
     margin-left: 4%;
 }
+
 .col-md-3 {
     margin-bottom: 3%;
 }
+
 .card {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
@@ -233,40 +247,47 @@ export default defineComponent ({
     padding: 0px;
     margin: 0 14px 30px;
 }
+
 .academic_head_text {
     color: #006acd;
     padding-left: 0px;
     font-size: 20px;
 }
-.container{
+
+.container {
     padding: 0%;
 }
+
 @media only screen and (min-width: 540px) and (max-width: 600px) {
     .card {
         width: 50%;
     }
 }
+
 #aca_text {
     color: #006acd;
     font-weight: bold;
     padding-right: 10px;
 }
+
 .mn .fa {
     color: orange;
 }
+
 @media (max-width: 768px) {
-    .card-body
-    {
-        margin-top:0 !important;
+    .card-body {
+        margin-top: 0 !important;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         font-size: 15px !important;
-    padding-left: 0 !important;
+        padding-left: 0 !important;
 
     }
-    .category-test h4 a{
+
+    .category-test h4 a {
         padding-right: 0;
-    font-size: 15px !important;
+        font-size: 15px !important;
     }
 
 }
@@ -279,12 +300,14 @@ export default defineComponent ({
     .card {
         margin-bottom: 50px;
     }
+
     .mn .fa {
-    color: orange;
-}
+        color: orange;
+    }
 
 }
-.card-text{
+
+.card-text {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-aeaeae);
@@ -296,60 +319,71 @@ export default defineComponent ({
 }
 
 ::-webkit-scrollbar {
-    width: 0.5em; /* Adjust this to change the width of the scrollbar track */
+    width: 0.5em;
+    /* Adjust this to change the width of the scrollbar track */
 }
 
 * {
-    scrollbar-width: none; /* "thin" or "none" depending on your preference */
+    scrollbar-width: none;
+    /* "thin" or "none" depending on your preference */
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Hide the thumb on webkit-based browsers */
+    background-color: transparent;
+    /* Hide the thumb on webkit-based browsers */
 }
+
 .carousel-prev,
 .carousel-next {
-  border: none; /* Remove the border */
+    border: none;
+    /* Remove the border */
 }
-.fa-chevron-right{
+
+.fa-chevron-right {
     position: absolute;
     right: -3px;
     font-size: 14px;
     outline: none;
 }
+
 .fa-chevron-left {
     position: absolute;
     left: -1px;
     font-size: 14px;
     outline: none;
-} 
+}
 
 .carousel__slide {
-	
+
     margin-top: 34px;
     margin-bottom: -22px;
     /* padding: 7px; */
 }
+
 .carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: var(--vc-clr-primary);
-  color: var(--vc-clr-white);
-  font-size: 20px;
-  border-radius: 8px;
-  justify-content: center;
-  align-items: center;
+    min-height: 200px;
+    width: 100%;
+    background-color: var(--vc-clr-primary);
+    color: var(--vc-clr-white);
+    font-size: 20px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
 }
+
 .carousel__prev,
 .carousel__next {
     margin-left: -20px;
     margin-right: -20px;
-  box-sizing: content-box;
-  border: 89px solid blue;
-  outline: none !important;
+    box-sizing: content-box;
+    border: 89px solid blue;
+    outline: none !important;
 }
+
 .mn .fa {
     color: orange;
 }
+
 .mn {
     padding-top: 20px;
 }
@@ -365,22 +399,26 @@ export default defineComponent ({
     margin: 0%;
     opacity: 1;
 }
-.mn  .fa{
+
+.mn .fa {
     letter-spacing: 2px;
-    
+
 }
+
 .mn .star-rating {
     float: right;
     margin-top: 0%;
     margin-left: 4%;
 }
-.text-right{
+
+.text-right {
     position: relative;
     bottom: 11px;
 }
+
 @media only screen and (min-width: 280px) {
-.container-fluid{
-padding-left: 0px;
-}
+    .container-fluid {
+        padding-left: 0px;
+    }
 }
 </style>

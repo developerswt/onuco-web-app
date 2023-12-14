@@ -9,7 +9,7 @@
           <div class="parent_blocks">
             <div class="row pt-2">
               
-              <div class="" v-for="branch in branches" :key="branch.id">
+              <div class="" v-for="branch in branches.branches" :key="branch.id">
                 
                 <div class="box" v-if="academi.academia.id == branch.academiaId">
                   

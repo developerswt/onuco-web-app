@@ -11,7 +11,12 @@ import videojs from 'video.js';
 import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
+import { DynamoDB } from 'aws-sdk';
+import AWS from 'aws-sdk'; // Import the AWS SDK
 
+
+// Assuming DynamoDB is configured appropriately (region, credentials, etc.)
+const dynamoDB = new DynamoDB.DocumentClient();
 
 
 export default {
@@ -40,26 +45,26 @@ export default {
       return this.$store.state.IsLoggedIn;
     },
     isuser() {
-        return this.$store.state.user.signInUserSession.idToken.payload.sub;
+      return this.$store.state.user.signInUserSession.idToken.payload.sub;
     },
   },
-  
+
   mounted() {
-    
+
     if (!videojs.getPlugin('qualityLevels')) {
       videojs.registerPlugin('qualityLevels', qualityLevels);
     }
 
-      // Check if the 'hlsQualitySelector' plugin is not already registered
+    // Check if the 'hlsQualitySelector' plugin is not already registered
     if (!videojs.getPlugin('hlsQualitySelector')) {
       videojs.registerPlugin('hlsQualitySelector', videojsqualityselector);
     }
 
-   this.player = videojs(this.$refs.videoPlayer, this.options, () => {
+    this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
       this.player.qualityLevels();
       console.log(this.player);
-      this.player.hlsQualitySelector({ displayCurrentQuality: true });      
+      this.player.hlsQualitySelector({ displayCurrentQuality: true });
 
       this.player.on('pause', this.pauseVideo);
     });
@@ -100,7 +105,7 @@ export default {
         customElement.style.justifyContent = 'center';
         customElement.style.alignItems = 'center';
         customElement.style.zIndex = '1000'; // Set a higher z-index to ensure it's above the video
-  
+
         if (this.isLoggedIn) {
           customElement.innerHTML = `
             <div class="overlay-content">
@@ -120,8 +125,8 @@ export default {
             </div>
           `;
         }
-  
-          // Append the custom element to the video container
+
+        // Append the custom element to the video container
         this.$refs.videoPlayer.parentNode.appendChild(customElement);
       }
     },
@@ -150,33 +155,74 @@ export default {
       // Disable the progress bar
       this.player.controlBar.progressControl.disable();
     },
+    
+    async getNextId(courseId) {
+  try {
+    // Make a call to DynamoDB to get the current ID
+    const result = await dynamoDB.get({
+      TableName: 'StateManagement', // Replace with your counter table name
+      Key: { "CourseId": courseId }
+    }).promise();
+
+    // If the item is found, increment the current ID, otherwise set it to 1
+    const currentId = result.Item ? result.Item.CurrentValue + 1 : 1;
+
+    // Update the DynamoDB record with the new ID
+    await dynamoDB.update({
+      TableName: 'StateManagement', // Replace with your counter table name
+      Key: { "CourseId": courseId },
+      UpdateExpression: "SET CurrentValue = :newValue",
+      ExpressionAttributeValues: {
+        ":newValue": currentId
+      },
+      ReturnValues: "ALL_NEW"
+    }).promise();
+
+    return currentId;
+  } catch (error) {
+    console.error('Error fetching/updating ID from DynamoDB:', error);
+    throw error; // Handle the error appropriately in your application
+  }
+},
     async sendWatchTimeToBackend() {
-     if(this.isSubscribed) {
-       try {
+      if (this.isSubscribed) {
         
-       const userId = this.isuser; 
-       const courseId = this.courseId; 
-       const videoId = this.videoId;
-       const watchTime = this.player.currentTime(); 
+        try {
+          AWS.config.update({ region: 'ap-southeast-1' }); // Replace with your AWS region
 
-       const requestBody = {
-         userId: userId,
-         courseId: courseId,
-         watchTimeData: [
-           {
-             videoId: videoId,
-             watchTime: watchTime,
-           },
-         ],
-       };
 
-       const response = await AxiosInstance.put('/StateManagement', requestBody);
+          const userId = this.isuser;
+          const courseId = this.courseId;
+          const videoId = this.videoId;
+          const watchTime = this.player.currentTime();
+          
 
-       console.log('Update successful:', response.data);
-     } catch (error) {
-       console.error('Update failed:', error);
-     }
-    }
+          if (courseId !== this.prevCourseId || videoId !== this.prevVideoId) {
+            // Fetch the current ID from DynamoDB and increment it
+            this.id = await this.getNextId(courseId);
+          }
+
+          const requestBody = {
+            id: this.id,
+            userId: userId,
+            courseId: courseId,
+            watchTimeData: [
+              {
+                videoId: videoId,
+                watchTime: watchTime,
+              },
+            ],
+          };
+
+          const response = await AxiosInstance.put('/StateManagement', requestBody);
+
+          console.log('Update successful:', response.data);
+          this.prevCourseId = courseId;
+          this.prevVideoId = videoId;
+        } catch (error) {
+          console.error('Update failed:', error);
+        }
+      }
     },
     pauseVideo() {
       this.player.pause();
@@ -195,13 +241,16 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 200; /* Set a higher z-index for the customElement to be on top */
+  z-index: 200;
+  /* Set a higher z-index for the customElement to be on top */
 }
+
 .video-container {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (adjust as needed) */
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio (adjust as needed) */
 }
 
 .video-js {
@@ -223,8 +272,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100; /* Adjust the z-index to make it higher than the video player */
+  z-index: 100;
+  /* Adjust the z-index to make it higher than the video player */
 }
+
 .overlay-content {
   position: fixed;
   top: 0;
@@ -236,27 +287,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; /* Adjust the z-index to make it higher than the video player */
+  z-index: 999;
+  /* Adjust the z-index to make it higher than the video player */
 }
-/* Add your other styles here */
-
-
-/* .video-container:fullscreen .poster-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2147483647;
-} */
-
-/* Add your other styles here */
-
 .subscribeBtn {
   color: #ffff;
   background-color: red;
@@ -279,14 +312,15 @@ export default {
   font-size: 15px;
 }
 
-@media (min-width: 768px)  and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   /* .video-js{
     height: 0 !important;
   } */
-  
-.gh {
-  pointer-events: none;
+
+  .gh {
+    pointer-events: none;
+  }
 }
-}
+
 /* Add your other styles here */
 </style>

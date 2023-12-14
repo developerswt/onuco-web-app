@@ -1,16 +1,18 @@
- <template>
-     <div class="category-test pt-3">
+<template>
+    <div class="category-test pt-3">
         <div class="container" style="margin-top: 60px;">
             <Breadcrumbs class="pl-2" />
             <h4 class="academic_head_text pt-1">
-                <span id="aca_text">Best</span>Lecturers</h4>
+                <span id="aca_text">Best</span>Lecturers
+            </h4>
         </div>
     </div>
 
-        <div class="container">
-            <div class="row pt-3" style="margin-bottom: -38px;">
-                <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
-                    <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;"> 
+    <div class="container">
+        <div class="row pt-3" style="margin-bottom: -38px;">
+            <div class="col-md-6 col-lg-3" v-for="facult in faculty" :key="facult.id">
+                <router-link v-bind:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
+                    style="cursor: pointer; text-decoration: none;">
                     <div class="card mt-5">
                         <div class="user-follower">
                             <img :src="facult.imageUrl" class="user-icon" v-if="facult.imageUrl !== ''">
@@ -22,24 +24,24 @@
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
                             <div class="card-title">{{ facult.name }}</div>
-                            <div class="card-text"> {{ facult.description.slice(0,50) }}...</div>
-                            
+                            <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
+
                             <div class="mn text-left">
                                 <p>
-                                    ({{ facult.ratingCount || 0 }} Reviews) 
+                                    ({{ facult.ratingCount || 0 }} Reviews)
                                     <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
                                 </p>
-                               
-                
+
+
                             </div>
                         </div>
                     </div>
-                    </router-link>
-                </div>
+                </router-link>
             </div>
-        </div>        
-        <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>        
-        <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
+        </div>
+    </div>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+    <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
 </template>
 
 <script>
@@ -64,7 +66,7 @@ export default {
             isLoading: false,
         }
     },
-    async created() {   
+    async created() {
         this.isLoading = true;
         try {
             const res = await axiosInstance.get(`/Faculty`);
@@ -77,7 +79,7 @@ export default {
 
         } catch (error) {
             console.log(error);
-            this.isLoading= false;
+            this.isLoading = false;
         } finally {
             this.isLoading = false;
         }
@@ -93,7 +95,7 @@ export default {
             }
         },
     }
-  }
+}
 
 
 </script>
@@ -110,34 +112,20 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-  
+
 }
 
-/* .user-icon {
-    width: 30%;
-    height: 30%;
-   
-    
-} */
-/* .follower {
-    position: relative;
-    top: -110px;
-    line-height: 90%;
-}
-.follower span {
-    font-size: 14px;
-} */
 .user-follower img {
     width: 60px;
     height: 60px;
     margin-left: 19%;
     padding-top: 2%;
-    background-color:#fff;
+    background-color: #fff;
     box-shadow: 0px 3px 6px #00000029;
-    border: 3px solid #FFFFFF;    
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
 }
 
 .user-follower {
@@ -202,10 +190,12 @@ export default {
     margin: 0%;
     opacity: 1;
 }
-.mn  .fa{
+
+.mn .fa {
     letter-spacing: 1px;
-    
+
 }
+
 .mn .star-rating {
     float: right;
     margin-top: 0%;
@@ -239,19 +229,20 @@ export default {
 }
 
 @media (max-width: 768px) {
- 
-    .card-body
-    {
-        margin-top:0 !important;
+
+    .card-body {
+        margin-top: 0 !important;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         font-size: 15px !important;
-    padding-left: 0 !important;
+        padding-left: 0 !important;
 
     }
-    .category-test h4 a{
+
+    .category-test h4 a {
         padding-right: 0;
-    font-size: 15px !important;
+        font-size: 15px !important;
     }
 
 }
@@ -266,9 +257,8 @@ export default {
     }
 
 }
-.card-text{
-    /* overflow-y: scroll; */
-    /* height:75px; */
+
+.card-text {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-aeaeae);
@@ -280,26 +270,30 @@ export default {
 }
 
 ::-webkit-scrollbar {
-    width: 0.5em; /* Adjust this to change the width of the scrollbar track */
+    width: 0.5em;
+    /* Adjust this to change the width of the scrollbar track */
 }
 
 /* Firefox */
 * {
-    scrollbar-width: none; /* "thin" or "none" depending on your preference */
+    scrollbar-width: none;
+    /* "thin" or "none" depending on your preference */
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Hide the thumb on webkit-based browsers */
+    background-color: transparent;
+    /* Hide the thumb on webkit-based browsers */
 }
-.fa{
+
+.fa {
     color: orange;
 }
 
 @media only screen and (max-width: 1024px) {
-.col-md-6{
-    margin-bottom: -18px;
-   
-}
+    .col-md-6 {
+        margin-bottom: -18px;
+
+    }
 }
 </style>
 

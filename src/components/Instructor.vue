@@ -424,7 +424,7 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const res = await axios.get(`https://migzype4x8.ap-southeast-1.awsapprunner.com/api/Faculty/` + this.$route.params.name);
+            const res = await axiosInstance.get(`/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
             const result = await axiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
