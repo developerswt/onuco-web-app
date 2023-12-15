@@ -10,58 +10,36 @@
                     </h4>
                 </div>
 
-                <!-- <form class="search-bar" @submit.prevent="search">
-                    <div class="row">
-                        <div class="col-lg-6 col-8 col-sm-8 col-md-9">
-                            <div class="child_class">
-                                <i class="fa-solid fa-magnifying-glass" style="color: #0066cc;"></i>
-                                <input class="text" type="search" v-model="searchQuery" placeholder="Search">
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6 col-4 col-sm-4 col-md-3">
-                            <button id="search_button" type="submit">Search</button>
-                        </div>
-                    </div>
-
-                    <button class="" type="submit"><i class="fa fa-search"></i></button>
-
-
-                </form> -->
-              <!-- <div class="row">
-                <div class="col-lg-12"> -->
                 <el-autocomplete
-                    v-model="searchQuery"
-                    :fetch-suggestions="querySearch"
-                    :trigger-on-focus="false"
-                    value-key="title"
-                    size="large"
-                    class="inline-input w-100"
-                    placeholder="Search..."
-                    @keyup.enter="performSearch"
-                    @select="handleSelect"
-                >
-                <template #prefix>
-                        <el-icon style="vertical-align: middle;float: right; width: 1rem; height: 2rem; cursor: pointer; color: blue; font-weight: bold;">
+v-model="searchQuery" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                    value-key="title" size="large" class="inline-input w-100" placeholder="Search..."
+                    @keyup.enter="performSearch" @select="handleSelect">
+                    <template #prefix>
+                        <el-icon
+                            style="vertical-align: middle;float: right; width: 1rem; height: 2rem; cursor: pointer; color: blue; font-weight: bold;">
                             <Search />
                         </el-icon>
                     </template>
                     <template #suffix>
-                                              
-                        <el-icon v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer" @click="clearInput()"><CircleClose /></el-icon>
+
+                        <el-icon
+v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer"
+                            @click="clearInput()">
+                            <CircleClose />
+                        </el-icon>
                         <el-button class="btn1" @click="search()">
                             <span style="font-size: 14px;"> SEARCH </span>
-                        </el-button> 
-                       
+                        </el-button>
+
                     </template>
-                    
-                   
-                
+
+
+
                 </el-autocomplete>
                 <!-- </div>
                 
                 </div> -->
-                
+
 
                 <div class="tab_block">
                     <section id="tab_block">
@@ -92,92 +70,135 @@ id="label-select" class="form-select"
 
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">
-                                    <div v-for="result in searchResults"  :key="result.id" class="tab_inner_block">
-                                        <div class="row no-gutters" >
-                                            <div class="col-lg-3 col-md-3" >
-                                                <img id="sub_image" src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" />
+                                    <div v-for="result in searchResults" :key="result.id" class="tab_inner_block">
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-3 col-md-3">
+                                                <img
+id="sub_image" src="../assets/images/java.jpg"
+                                                    style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="results_inner_block">
-                                                    <router-link :to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
-                                                    <div class="row">
-                                                        <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                            <p id="title_text" class="mb-1">{{ result.title }}</p>
-                                                            <p id="sub_text" class="mb-1"></p>
-                                                            <div class="inner_child">
-                                                                <div class="row">
-                                                                    <div class="col-lg-5 col-md-5">
-                                                                        <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
-                                                                    </div>
-                                                                    <div class="col-lg-3 col-md-3">
-                                                                        <p id="duration_text" class="mb-2"><img
-                                                                                src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
-                                                                    </div>
-                                                                    <div class="col-lg-3 col-md-3">
-                                                                        <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Iconmap-school@2x.png">{{ result.modules }}</p>
+                                                    <router-link
+                                                        :to="{ name: 'CourseDetails', params: { name: result.courseRouteName } }"
+                                                        style="text-decoration: none;">
+                                                        <div class="row">
+                                                            <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                                <p id="title_text" class="mb-1">{{ result.title }}</p>
+                                                                <p id="sub_text" class="mb-1"></p>
+                                                                <div class="inner_child">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-5 col-md-5">
+                                                                            <p id="prof_text" class="mb-2">{{
+                                                                                result.instructorName[0].name }}</p>
+                                                                        </div>
+                                                                        <div class="col-lg-3 col-md-3">
+                                                                            <p id="duration_text" class="mb-2"><img
+                                                                                    src="../assets/images/Iconionic-ios-timer@2x.png">{{
+                                                                                        result.videoDemand }}</p>
+                                                                        </div>
+                                                                        <div class="col-lg-3 col-md-3">
+                                                                            <p id="module_text" class="mb-2"><img
+                                                                                    src="../assets/images/Iconmap-school@2x.png">{{
+                                                                                        result.modules }}</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <p id="desc_text">
+                                                                    <span
+class="desc"
+                                                                        v-html="result.description.slice(0, 58)"></span>
+                                                                </p>
                                                             </div>
-                                                            <p id="desc_text" >
-                                                            <span class="desc" v-html="result.description.slice(0,58)"></span></p>
-                                                        </div>
-                                                        <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
-                                                            <div class="right_block">
-                                                                <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
-                                                                &#8377;{{ result.discountedPrice }}</p>
-                                                                <router-link to="/login"><button id="buy_button">Buy now</button></router-link>
-                                                                <div class="icon_blck">
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                                <div class="right_block">
+                                                                    <p id="amount_text"><span id="strike_text"> &#8377;{{
+                                                                        result.actualPrice }}</span>
+                                                                        &#8377;{{ result.discountedPrice }}</p>
+                                                                    <router-link to="/login"><button id="buy_button">Buy
+                                                                            now</button></router-link>
+                                                                    <div class="icon_blck">
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                    </div>
                                                                 </div>
+
                                                             </div>
-                                                        
                                                         </div>
-                                                    </div>
                                                     </router-link>
                                                 </div>
                                             </div>
                                         </div>
-                                      
-                                        <div v-for="instruct in result.instructorName" :key="instruct.id" class="row mb-2 pt-4">
-                                            <div class="col-sm-12">
-                                                <router-link :to="{ name: 'Instructor', params: { name: instruct.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-8 user_details">
 
-                                                                <img v-if="instruct.imageUrl != ''" :src="instruct.imageUrl" class="user-icon">
-                                                                <img v-else src="../assets/images/Image21.png" class="user-icon">
-                                                                <div class="user_details_name">
-                                                                    <h2>{{ instruct.name  }}</h2>
-                                                                    <p id="desc_text" >
-                                                                    <span class="desc" v-html="instruct.description.slice(0,55)"></span></p>
+                                        <div
+v-for="instruct in result.instructorName" :key="instruct.id"
+                                            class="row mb-2 pt-4">
+                                            <div class="col-sm-12">
+                                                <router-link
+                                                    :to="{ name: 'Instructor', params: { name: instruct.facultyDyanamicRouting } }"
+                                                    style="cursor: pointer; text-decoration: none;">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-8 user_details">
+
+                                                                    <img
+v-if="instruct.imageUrl != ''"
+                                                                        :src="instruct.imageUrl" class="user-icon">
+                                                                    <img
+v-else src="../assets/images/Image21.png"
+                                                                        class="user-icon">
+                                                                    <div class="user_details_name">
+                                                                        <h2>{{ instruct.name }}</h2>
+                                                                        <p id="desc_text">
+                                                                            <span
+class="desc"
+                                                                                v-html="instruct.description.slice(0, 55)"></span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 author_reviews">
+                                                                    <p class="oo">13 Following <br> 1200 Following</p>
+                                                                    <div class="reviews_details">
+                                                                        <p>(23 reviews) <br></p>
+                                                                        <div class="icon">
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 author_reviews">
-                                                                <p class="oo">13 Following <br> 1200 Following</p>
-                                                                <div class="reviews_details">
-                                                                    <p>(23 reviews) <br></p>
-                                                                    <div class="icon">
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                </div>
-                                                                </div>
-                                                            </div>   
                                                         </div>
                                                     </div>
-                                                </div>
                                                 </router-link>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-else class="no_result_found">
@@ -209,52 +230,74 @@ id="label-select" class="form-select"
 
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">
-                                    <div v-for="result in searchResults"  :key="result.id" class="tab_inner_block">
-                                        <div class="row no-gutters" >
-                                            <div class="col-lg-3 col-md-3" >
-                                                <img id="sub_image" src="../assets/images/java.jpg" style="width: 100%; height: auto;" class="img-fluid" />
+                                    <div v-for="result in searchResults" :key="result.id" class="tab_inner_block">
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-3 col-md-3">
+                                                <img
+id="sub_image" src="../assets/images/java.jpg"
+                                                    style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="results_inner_block">
-                                                    <router-link :to="{ name:'CourseDetails', params:{name: result.courseRouteName}}" style="text-decoration: none;">
-                                                    <div class="row">
-                                                        <div class="col-lg-8 col-12 col-sm-12 col-md-8">
-                                                            <p id="title_text" class="mb-1">{{ result.title }}</p>
-                                                            <p id="sub_text" class="mb-1"></p>
-                                                            <div class="inner_child">
-                                                                <div class="row">
-                                                                    <div class="col-lg-5 col-md-5">
-                                                                        <p id="prof_text" class="mb-2">{{ result.instructorName[0].name }}</p>
-                                                                    </div>
-                                                                    <div class="col-lg-3 col-md-3">
-                                                                        <p id="duration_text" class="mb-2"><img
-                                                                                src="../assets/images/Iconionic-ios-timer@2x.png">{{ result.videoDemand }}</p>
-                                                                    </div>
-                                                                    <div class="col-lg-3 col-md-3">
-                                                                        <p id="module_text" class="mb-2"><img
-                                                                            src="../assets/images/Iconmap-school@2x.png">{{ result.modules }}</p>
+                                                    <router-link
+                                                        :to="{ name: 'CourseDetails', params: { name: result.courseRouteName } }"
+                                                        style="text-decoration: none;">
+                                                        <div class="row">
+                                                            <div class="col-lg-8 col-12 col-sm-12 col-md-8">
+                                                                <p id="title_text" class="mb-1">{{ result.title }}</p>
+                                                                <p id="sub_text" class="mb-1"></p>
+                                                                <div class="inner_child">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-5 col-md-5">
+                                                                            <p id="prof_text" class="mb-2">{{
+                                                                                result.instructorName[0].name }}</p>
+                                                                        </div>
+                                                                        <div class="col-lg-3 col-md-3">
+                                                                            <p id="duration_text" class="mb-2"><img
+                                                                                    src="../assets/images/Iconionic-ios-timer@2x.png">{{
+                                                                                        result.videoDemand }}</p>
+                                                                        </div>
+                                                                        <div class="col-lg-3 col-md-3">
+                                                                            <p id="module_text" class="mb-2"><img
+                                                                                    src="../assets/images/Iconmap-school@2x.png">{{
+                                                                                        result.modules }}</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <p id="desc_text">
+                                                                    <span
+class="desc"
+                                                                        v-html="result.description.slice(0, 58)"></span>
+                                                                </p>
                                                             </div>
-                                                            <p id="desc_text" >
-                                                            <span class="desc" v-html="result.description.slice(0,58)"></span></p>
-                                                        </div>
-                                                        <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
-                                                            <div class="right_block">
-                                                                <p id="amount_text"><span id="strike_text"> &#8377;{{ result.actualPrice }}</span>
-                                                                &#8377;{{ result.discountedPrice }}</p>
-                                                                 <router-link to="/login"><button id="buy_button">Buy now</button></router-link>
-                                                                <div class="icon_blck">
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                            <div class="col-lg-4 text-right col-12 col-sm-12 col-md-4">
+                                                                <div class="right_block">
+                                                                    <p id="amount_text"><span id="strike_text"> &#8377;{{
+                                                                        result.actualPrice }}</span>
+                                                                        &#8377;{{ result.discountedPrice }}</p>
+                                                                    <router-link to="/login"><button id="buy_button">Buy
+                                                                            now</button></router-link>
+                                                                    <div class="icon_blck">
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                        <i
+class="fa-solid fa-star"
+                                                                            style="color: #ff9900;"></i>
+                                                                    </div>
                                                                 </div>
+
                                                             </div>
-                                                        
                                                         </div>
-                                                    </div>
                                                     </router-link>
                                                 </div>
                                             </div>
@@ -267,7 +310,7 @@ id="label-select" class="form-select"
                             </el-tab-pane>
                             <!-- <el-tab-pane label="Course" name="second">Config</el-tab-pane> -->
                             <el-tab-pane label="Author" name="third">
-                               
+
                                 <div class="row">
                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
@@ -292,50 +335,69 @@ id="label-select" class="form-select"
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">
                                     <div v-for="result in searchResults" :key="result.id" class="">
-                                <div v-for="person in result.instructorName" :key="person.id" class="row mb-2">
-                                    <div class="col-sm-12">
-                                        <router-link :to="{ name: 'Instructor', params: { name: person.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                 <div class="col-sm-8 user_details">
+                                        <div v-for="person in result.instructorName" :key="person.id" class="row mb-2">
+                                            <div class="col-sm-12">
+                                                <router-link
+                                                    :to="{ name: 'Instructor', params: { name: person.facultyDyanamicRouting } }"
+                                                    style="cursor: pointer; text-decoration: none;">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-8 user_details">
 
-                                                    <img v-if="person.imageUrl != ''" :src="person.imageUrl" class="user-icon">
-                                                    <img v-else src="../assets/images/Image21.png" class="user-icon">
-                                                        <div class="user_details_name">
-                                                            <h2>{{ person.name  }}</h2>
-                                                            <p id="desc_text" >
-                                                            <span class="desc" v-html="person.description.slice(0,55)"></span></p>
-                                                        </div>
-                                                </div>
-                                                    <div class="col-sm-4 author_reviews">
-                                                        <p>13 Following <br> 1200 Following</p>
-                                                        <div class="reviews_details">
-                                                            <p>(23 reviews) <br></p>
-                                                            <div class="icon">
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
-                                                                    <i class="fa-solid fa-star" style="color: #ff9900;"></i>
+                                                                    <img
+v-if="person.imageUrl != ''" :src="person.imageUrl"
+                                                                        class="user-icon">
+                                                                    <img
+v-else src="../assets/images/Image21.png"
+                                                                        class="user-icon">
+                                                                    <div class="user_details_name">
+                                                                        <h2>{{ person.name }}</h2>
+                                                                        <p id="desc_text">
+                                                                            <span
+class="desc"
+                                                                                v-html="person.description.slice(0, 55)"></span>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="col-sm-4 author_reviews">
+                                                                    <p>13 Following <br> 1200 Following</p>
+                                                                    <div class="reviews_details">
+                                                                        <p>(23 reviews) <br></p>
+                                                                        <div class="icon">
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                            <i
+class="fa-solid fa-star"
+                                                                                style="color: #ff9900;"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>   
-                                                </div>
+                                                    </div>
+                                                </router-link>
                                             </div>
+
                                         </div>
-                                    </router-link>
+
                                     </div>
-                                  
-                                </div>
-                                
-                                </div>
                                 </div>
                                 <div v-else class="no_result_found">
                                     <h4>No Results Found</h4>
                                 </div>
-                               
-                            </el-tab-pane>                  
+
+                            </el-tab-pane>
                         </el-tabs>
                     </section>
                 </div>
@@ -343,7 +405,7 @@ id="label-select" class="form-select"
         </section>
 
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
 
@@ -367,8 +429,8 @@ export default {
             searchQuery: this.$route.query.data,
             searchResults: [],
             activeName: 'first',
-           
-        }    
+
+        }
     },
     async created() {
         this.isLoading = true;
@@ -376,7 +438,7 @@ export default {
             const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
             const data = await response.json();
 
-                // Assuming your API returns an array of objects with a "name" property
+            // Assuming your API returns an array of objects with a "name" property
             this.searchResults = data;
         } catch (error) {
             console.error('Error fetching search results:', error);
@@ -386,22 +448,16 @@ export default {
             this.isLoading = false;
         }
     },
-    // created() {
-    //     const queryValue = this.$route.query.data;
-    //     if (queryValue) {
-    //         this.searchQuery = queryValue;
-    //     }
-    // },    
     methods: {
 
         performSearch() {
-      this.isLoading = true;
-      this.search().then(() => {
-        this.isLoading = false;
-      });
-    },
-   
-  
+            this.isLoading = true;
+            this.search().then(() => {
+                this.isLoading = false;
+            });
+        },
+
+
 
         handleClick(tab, event) {
             console.log(tab, event);
@@ -411,7 +467,7 @@ export default {
             try {
                 const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
                 const data = await response.json();
-                
+
                 // Assuming your API returns an array of objects with a "name" property
                 this.searchResults = data;
             } catch (error) {
@@ -422,31 +478,31 @@ export default {
                 this.isLoading = false;
             }
         },
-        
-        handleSelect (item){
+
+        handleSelect(item) {
             console.log(item);
-        // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
-            
+            // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
+
         },
-        
-        querySearch(queryString,cb) {
+
+        querySearch(queryString, cb) {
             console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
             console.log(results);
             cb(results);
         },
         createFilter(queryString) {
-                console.log("queryString",queryString)
-                axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
-		.then((res) => (this.dataarray = res.data));
-                console.log(this.dataarray);
-                return this.dataarray;
-            
+            console.log("queryString", queryString)
+            axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
+                .then((res) => (this.dataarray = res.data));
+            console.log(this.dataarray);
+            return this.dataarray;
+
         },
         clearInput() {
             this.searchQuery = '';
         }
-    },    
+    },
 }
 </script>
 
@@ -570,7 +626,8 @@ export default {
     color: #666666;
     list-style-type: none;
 }
-::v-deep .desc ul li{
+
+::v-deep .desc ul li {
     list-style-type: none;
     margin-left: -40px;
 }
@@ -609,97 +666,115 @@ export default {
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
 }
+
 @media (max-width: 768px) {
-    .academic_head_text{
-        
-    padding-top: 25px;
-    font-size: 15px;
+    .academic_head_text {
+
+        padding-top: 25px;
+        font-size: 15px;
     }
-    .child_class{
+
+    .child_class {
         display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 5px;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
     }
-    #search_button{
-        width:100%;
+
+    #search_button {
+        width: 100%;
         height: 100%;
         font-size: 15px;
     }
-    .select_block{
+
+    .select_block {
         justify-content: flex-start !important;
     }
 
-    .right_block{
+    .right_block {
         text-align: left;
     }
-    #sub_text{
+
+    #sub_text {
         font-size: 18px;
 
     }
-    .icon_blck{
-        margin-top:15px;
+
+    .icon_blck {
+        margin-top: 15px;
 
     }
-    .icon_blck i{
-        margin:5px;
+
+    .icon_blck i {
+        margin: 5px;
     }
 }
 
 @media (max-width: 1024px) {
-    .academic_head_text{
-        
-    padding-top: 25px;
-    font-size: 15px;
+    .academic_head_text {
+
+        padding-top: 25px;
+        font-size: 15px;
     }
-    .child_class{
+
+    .child_class {
         display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 5px;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
     }
-    #search_button{
-        width:100%;
+
+    #search_button {
+        width: 100%;
         height: 100%;
         font-size: 15px;
     }
-   
-    #sub_text{
+
+    #sub_text {
         font-size: 16px;
     }
-    .icon_blck{
-        margin-top:15px;
 
-    }    .icon_blck i{
-        margin:5px;
+    .icon_blck {
+        margin-top: 15px;
+
     }
-    #buy_button{
+
+    .icon_blck i {
+        margin: 5px;
+    }
+
+    #buy_button {
         width: 100px;
-    height: 40px;
-    font-size: 15px;
-    padding: 0;
+        height: 40px;
+        font-size: 15px;
+        padding: 0;
     }
-    #desc_text{
+
+    #desc_text {
         font-size: 14px;
     }
-    #prof_text{
+
+    #prof_text {
         font-size: 14px;
     }
-    #sub_image{
-        height:100% !important;
-        width:100% !important;
+
+    #sub_image {
+        height: 100% !important;
+        width: 100% !important;
         object-fit: cover;
     }
 }
+
 .no_result_found {
     text-align: center;
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
 .author_img {
     width: 105px;
     height: 105px;
-/* UI Properties */
+    /* UI Properties */
     /* background: transparent url('../assets/images/Author.png') 0% 0% no-repeat padding-box; */
     box-shadow: 0px 3px 6px #00000029;
     border: 3px solid #FFFFFF;
@@ -708,15 +783,18 @@ export default {
 
 
 }
-.author_reviews .reviews_details p{
+
+.author_reviews .reviews_details p {
     padding-top: 10px;
     padding-bottom: 0px;
 }
+
 .author_details {
     text-align: left;
     margin-left: 0px;
     margin-top: 4%;
 }
+
 .author_details h2 {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -726,6 +804,7 @@ export default {
     color: #444444;
     opacity: 1;
 }
+
 .author_details p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -735,9 +814,11 @@ export default {
     color: #666666;
     opacity: 1;
 }
+
 .author_reviews {
     text-align: right;
 }
+
 .author_reviews p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/18px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -748,6 +829,7 @@ export default {
     color: #707070;
     opacity: 1;
 }
+
 .author_reviews .reviews_details p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/18px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -763,18 +845,20 @@ export default {
     float: left;
     width: 125px;
     height: 125px;
-/* UI Properties */
+    /* UI Properties */
     /* background: transparent url('../assets/images/Author.png') 0% 0% no-repeat padding-box; */
     opacity: 1;
 
 }
+
 .user_details .user_details_name {
     float: right;
     text-align: left;
     margin-left: -20px;
     padding-top: 22px;
     padding-right: 135px;
-} 
+}
+
 .user_details_name p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -783,6 +867,7 @@ export default {
     letter-spacing: 0px;
     color: #666666;
 }
+
 .user_details_name h2 {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -792,6 +877,7 @@ export default {
     color: #444444;
     opacity: 1;
 }
+
 @media screen and (min-width: 500px) and (max-width: 600px) {
     .user_details .user_details_name {
         float: right;
@@ -801,6 +887,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -810,21 +897,25 @@ export default {
         opacity: 1;
 
     }
+
     .author_reviews {
         padding-top: 15px;
     }
+
     .author_reviews p {
         float: left;
         width: 50%;
         padding-top: 2px;
         padding-right: 30px;
     }
-    .author_reviews .reviews_details p{
+
+    .author_reviews .reviews_details p {
         float: right;
         width: 50%;
         padding-left: 10%;
     }
 }
+
 @media screen and (min-width: 400px) and (max-width: 500px) {
     .user_details .user_details_name {
         float: right;
@@ -834,6 +925,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -841,23 +933,27 @@ export default {
         opacity: 1;
 
     }
+
     .author_reviews {
         padding-top: 15px;
-        
+
     }
+
     .author_reviews p {
         float: left;
         width: 40%;
-        
+
     }
+
     .author_reviews .reviews_details p {
         float: right;
         width: 60%;
         padding-left: 0px;
         padding-right: 0px;
     }
-    
+
 }
+
 @media screen and (min-width: 300px) and (max-width: 400px) {
     .user_details .user_details_name {
         float: right;
@@ -867,6 +963,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -874,19 +971,23 @@ export default {
         opacity: 1;
 
     }
+
     .author_reviews {
         padding-top: 15px;
     }
+
     .author_reviews p {
         float: left;
         width: 40%;
     }
+
     .author_reviews .reviews_details p {
         float: right;
         padding-left: 20px;
         width: 60%;
     }
 }
+
 @media(max-width: 300px) {
     .user_details .user_details_name {
         float: right;
@@ -896,6 +997,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -903,26 +1005,31 @@ export default {
         opacity: 1;
 
     }
+
     .author_reviews {
         padding-top: 15px;
     }
+
     .author_reviews p {
         float: left;
         width: 45%;
     }
+
     .author_reviews .reviews_details p {
         float: right;
         padding-left: 20px;
         width: 55%;
     }
-    .btn1{
+
+    .btn1 {
         position: absolute;
-    right: 8px;
-    bottom: 0px;
-    height: 36px !important;
-    width: 70px !important; 
-    }  
+        right: 8px;
+        bottom: 0px;
+        height: 36px !important;
+        width: 70px !important;
+    }
 }
+
 @media screen and (min-width: 1000px) and (max-width: 1024px) {
     .user_details .user_details_name {
         float: right;
@@ -932,6 +1039,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -941,6 +1049,7 @@ export default {
     }
 
 }
+
 @media screen and (min-width: 750px) and (max-width: 950px) {
     .user_details .user_details_name {
         float: right;
@@ -950,6 +1059,7 @@ export default {
         padding-right: 0px;
         padding-left: 10px;
     }
+
     .user_details img {
         float: left;
         width: 105px;
@@ -960,22 +1070,21 @@ export default {
 
 }
 
-.icon{
+.icon {
     letter-spacing: 14px;
     position: relative;
     left: 17px;
     bottom: 11px;
 }
 
-.btn1{
+.btn1 {
     height: 39px;
-     background: #0177FB 0% 0% no-repeat padding-box; 
-     color: white; 
-     cursor: pointer;
-      width: 130px; 
-      position: relative; 
-      /* right: 31px; */
-      left: 15px;
+    background: #0177FB 0% 0% no-repeat padding-box;
+    color: white;
+    cursor: pointer;
+    width: 130px;
+    position: relative;
+    /* right: 31px; */
+    left: 15px;
 }
-
 </style>

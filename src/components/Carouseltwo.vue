@@ -1,43 +1,6 @@
 <template>
 	<div>
-		<!-- <figure class="icon-cards mt-3">
-			<div class="icon-cards__content">
-				<div class="icon-cards__item d-flex align-items-center justify-content-center">
-					<div class="child_class" data-v-e19d716d="">
-						<div class="row" data-v-e19d716d="">
-							<div class="col-lg-8" data-v-e19d716d="">
-								<div class="right_carousel_block" data-v-e19d716d="">
-									<h4 data-v-e19d716d="">One App Many Benifits</h4>
-									<p data-v-e19d716d="">An Affordable learning platform <br data-v-e19d716d=""> for better
-										academic results</p>
-								</div>
-							</div>
-							<div class="col-lg-4" data-v-e19d716d=""></div>
-							<div class="col-lg-12" data-v-e19d716d="">
-								<div class="merged_block" data-v-e19d716d="">
-									<div class="row" data-v-e19d716d="">
-										<div class="col-lg-8" data-v-e19d716d=""><input type="text" id="carousel_input"
-												placeholder="Your@email address" data-v-e19d716d=""></div>
-										<div class="col-lg-4" data-v-e19d716d=""><button id="carousel_button"
-												data-v-e19d716d="">Free Sign up</button></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="icon-cards__item d-flex align-items-center justify-content-center">
-					<div class="child_class_one" data-v-e19d716d="">
-						<p>Refer a Friend</p>
-					</div>
-				</div>
-				<div class="icon-cards__item d-flex align-items-center justify-content-center">
-					<div class="child_class_two">
-						<p>Contact Us</p>
-					</div>
-				</div>		
-			</div>
-		</figure> -->
+
 	</div>
 </template>
   
@@ -82,7 +45,7 @@ export default {
 	right: 0;
 	bottom: 0;
 	width: 100%;
-	height:250px;
+	height: 250px;
 	box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
 	border-radius: 6px;
 	transform-origin: center;
@@ -234,34 +197,35 @@ body {
 	margin: 0 auto;
 	background: transparent linear-gradient(180deg, #E6BAFF 0%, #5E69FF 100%) 0% 0% no-repeat padding-box;
 	border-radius: 8px;
-	height:250px;
+	height: 250px;
 }
-.child_class_one{
+
+.child_class_one {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #ff00cc;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-color:white;
-height:250px;
-width:100%;
-border-radius: 8px;
+	background: #ff00cc;
+	background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+	background: linear-gradient(to right, #333399, #ff00cc);
+	color: white;
+	height: 250px;
+	width: 100%;
+	border-radius: 8px;
 }
 
-.child_class_two{
-	background: #000428;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-color:white;
-height:250px;
-width:100%;
-border-radius: 8px;
-display: flex;
+.child_class_two {
+	background: #000428;
+	background: -webkit-linear-gradient(to top, #004e92, #000428);
+	background: linear-gradient(to top, #004e92, #000428);
+	color: white;
+	height: 250px;
+	width: 100%;
+	border-radius: 8px;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 }
+
 .merged_block[data-v-e19d716d] {
 	border: 1px solid white;
 	border-radius: 30px;
@@ -289,15 +253,17 @@ display: flex;
 
 }
 
-@media(max-width: 1024px){
+@media(max-width: 1024px) {
 	.icon-cards {
 		display: none;
 	}
 }
-#carousel_input::placeholder{
-	color:white;
+
+#carousel_input::placeholder {
+	color: white;
 }
-.right_carousel_block{
-	margin-top:20px;
+
+.right_carousel_block {
+	margin-top: 20px;
 }
 </style>

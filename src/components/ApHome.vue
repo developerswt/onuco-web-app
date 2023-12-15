@@ -314,14 +314,55 @@
 </section>
 <!-- <Loading v-model:active="isLoading"></Loading> -->
 </div>
+  <form-wizard step-size="xs" @on-complete="onComplete">
+    <tab-content title="Types">
+      <TypesUpdate />
+    </tab-content>
+    <tab-content title="Academics" >
+      <AcademicsUpdate />
+    </tab-content>
+    <tab-content title="Courses" >
+      <CourseUpdate />
+    </tab-content>
+    <tab-content title="University" >
+      <UniUpdate />
+    </tab-content>
+    <tab-content title="Brances" >
+      <BranchesUpdate />
+    </tab-content>
+    <tab-content title="Semester">
+      <SemUpdate />
+    </tab-content>
+  </form-wizard>
+
+
 </template>
 <script>
+
+import TypesUpdate from './TypesUpdate.vue'
+import AcademicsUpdate from './AcademicsUpdate.vue'
+import CourseUpdate from './CourseUpdate.vue'
+import BranchesUpdate from './BranchesUpdate.vue'
+import UniUpdate from './UniUpdate.vue'
+import SemUpdate from './SemUpdate.vue'
+import {FormWizard,TabContent} from "vue3-form-wizard";
+import 'vue3-form-wizard/dist/style.css'
    import AxiosInstance  from '../config/axiosInstance';
   // import Loading from 'vue3-loading-overlay';
   // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   export default {
 
-  name: "Actstudent",
+  name: "ApHomeView",
+  components: {
+    FormWizard,
+    TabContent,
+    TypesUpdate,
+    AcademicsUpdate,
+    CourseUpdate,
+    BranchesUpdate,
+    UniUpdate,
+    SemUpdate
+  },
   data() {        
     return {
       person:null,
@@ -375,6 +416,11 @@
     finally {
       this.isLoading = false;
     }
+  },
+  methods: {
+    onComplete() {
+      alert("Yay. Done!");
+    },
   },
   
 }

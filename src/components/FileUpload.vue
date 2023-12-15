@@ -1,29 +1,30 @@
 <template>
-    <main>
-      <div style="display: flex; margin-top: 10%; margin-bottom: 10%; justify-content: center; align-items: center; flex-direction: column; ">
-        <div style="margin-bottom: 4rem;">
-          <input multiple type="file" @change="addFiles"/>
-  
-        </div>
-        <div>
-          <h2>Added files:</h2>
-          <div v-for="file in state.files" :key="file.id" class="">
-            {{ file.name }}
-          </div>
-        </div>
-        <div>
-          <button @click="uploadFiles">Upload files</button>
+  <main>
+    <div
+      style="display: flex; margin-top: 10%; margin-bottom: 10%; justify-content: center; align-items: center; flex-direction: column; ">
+      <div style="margin-bottom: 4rem;">
+        <input multiple type="file" @change="addFiles" />
+
+      </div>
+      <div>
+        <h2>Added files:</h2>
+        <div v-for="file in state.files" :key="file.id" class="">
+          {{ file.name }}
         </div>
       </div>
-    </main>
-  </template>
+      <div>
+        <button @click="uploadFiles">Upload files</button>
+      </div>
+    </div>
+  </main>
+</template>
 
 <script setup>
-import {reactive} from "vue";
+import { reactive } from "vue";
 import axios from 'axios'
 
 let files = []
-const state = reactive({files})
+const state = reactive({ files })
 
 const addFiles = (event) => {
   state.files.push(event.target.files[0])
@@ -35,10 +36,10 @@ const uploadFiles = async () => {
     formData.append('file', files[i])
   }
   await axios.post('', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  },
   )
 }
 </script>

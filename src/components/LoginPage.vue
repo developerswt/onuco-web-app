@@ -16,46 +16,41 @@ I18n.putVocabulariesForLanguage('en', {
 
 export default {
   components: {
-      Authenticator,
+    Authenticator,
   },
   data() {
-      return {
-        authState: 'signUp',
-        theme: {
-            name: 'pretty-princess',
-            tokens: {
-                colors: {
-                    background: {
-                        primary: { value: 'hotpink'}
-                    }
-                }
+    return {
+      authState: 'signUp',
+      theme: {
+        name: 'pretty-princess',
+        tokens: {
+          colors: {
+            background: {
+              primary: { value: 'hotpink' }
             }
+          }
+        }
+      },
+      formFields: {
+        signIn: {
+          username: {
+            placeholder: 'Email or Phone_number (Include +91)',
+            isRequired: true,
+            label: 'Username:',
+            pattern: ''
+          },
         },
-          formFields: {
-              signIn: {
-                  username: {
-                      placeholder: 'Email or Phone_number (Include +91)',
-                      isRequired: true,
-                      label: 'Username:',
-                      pattern: ''
-                  },
-              },
-              signUp: {
-                  username: {
-                      placeholder: 'Email or Phone_number (Include +91)',
-                      required: true,
-                      label: 'Username:',
-                      order: 1,
-                      custom: true,
-                  },
-              },
-          },    
-          // authConfig: {
-          //   signUpConfig: {
-          //     validate: this.customSignUpValidation,
-          //   },
-          // },
-      }
+        signUp: {
+          username: {
+            placeholder: 'Email or Phone_number (Include +91)',
+            required: true,
+            label: 'Username:',
+            order: 1,
+            custom: true,
+          },
+        },
+      },
+    }
   },
   methods: {
     setAuthState(state) {
@@ -103,55 +98,51 @@ export default {
     },
 
   }
-  
+
 };
 </script>
 
 
 
 <template>
-    <div class="login_class">
-    <authenticator class="custom-sign-in jp" :auth-state="authState" :theme=theme  :login-mechanisms="['username']" :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']" style=" padding: 40px 40px 152px !important;">
-        
+  <div class="login_class">
+    <authenticator
+class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms="['username']"
+      :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']"
+      style=" padding: 40px 40px 152px !important;">
+
       <template #icon-facebook>
         <div style="padding: var(--amplify-space-large);">
-      <img src="../assets/images/Icon-awesome-facebook.png" alt="Facebook" />
-    </div>
-    </template>
-   
-
-        <template #header>
-        <div style="padding: var(--amplify-space-large); text-align: center">
-          <!-- <img
-            class="amplify-image pt-5"
-            alt="Amplify logo"
-            src="../assets/images/logo.png"
-          /> -->
+          <img src="../assets/images/Icon-awesome-facebook.png" alt="Facebook" />
         </div>
       </template>
-        
-        <template #default="{ user, signOut }">
-            <h1>Hello {{ user.username }}!</h1>
-            <button @click="handleSignOut(signOut)">Sign Out</button>
-        </template>
-  
+
+
+      <template #header>
+        <div style="padding: var(--amplify-space-large); text-align: center">
+        </div>
+      </template>
+
+      <template #default="{ user, signOut }">
+        <h1>Hello {{ user.username }}!</h1>
+        <button @click="handleSignOut(signOut)">Sign Out</button>
+      </template>
+
     </authenticator>
-    </div>
-    <div class="container-fluid"></div>
-  </template>
+  </div>
+  <div class="container-fluid"></div>
+</template>
   
 
 <style scoped>
-
-
 .amplify-button[data-variation='primary'] {
-  background: linear-gradient(
-    to right,
-    var(var(--amplify-colors-background-tertiary)),
-    
-  );
-  
+  background: linear-gradient(to right,
+      var(var(--amplify-colors-background-tertiary)),
+
+    );
+
 }
+
 .amplify-card {
   /* background-color: var(--amplify-colors-background-secondary); */
   box-shadow: 0px 3px 6px #00000029;
@@ -161,15 +152,19 @@ export default {
 .amplify-heading--6 {
   color: var(--amplify-colors-brand-secondary-80);
 }
+
 .amplify-text {
   color: var(--amplify-colors-neutral-80);
 }
+
 .amplify-tabs-item {
-    color: #0066CC !important;
+  color: #0066CC !important;
 }
+
 .authenticator {
-    --background-color: lightblue;
+  --background-color: lightblue;
 }
+
 [data-amplify-authenticator] {
   --amplify-colors-background-primary: var(--amplify-colors-neutral-90);
   --amplify-colors-background-secondary: var(--amplify-colors-neutral-100);
@@ -182,42 +177,47 @@ export default {
   --amplify-components-tabs-item-focus-color: var(--amplify-colors-white);
   --amplify-components-tabs-item-hover-color: var(--amplify-colors-orange);
 }
+
 .amplify-divider--label:after {
-    content: attr(data-label);
-    position: absolute;
-    transform: translateY(-50%);
-    font-size: var(--amplify-components-divider-label-font-size);
-    padding-inline: var(--amplify-components-divider-label-padding-inline);
-    /* background-color: var(--amplify-components-divider-label-background-color); */
-    color: black;
+  content: attr(data-label);
+  position: absolute;
+  transform: translateY(-50%);
+  font-size: var(--amplify-components-divider-label-font-size);
+  padding-inline: var(--amplify-components-divider-label-padding-inline);
+  /* background-color: var(--amplify-components-divider-label-background-color); */
+  color: black;
 }
+
 .amplify-input .amplify-field-group__control {
-    background-color: gray !important;
+  background-color: gray !important;
 }
+
 .login_class {
-    padding-top: 4%;
-    z-index: 1;
+  padding-top: 4%;
+  z-index: 1;
 }
+
 @media screen and (max-width: 600px) {
-    .login_class {
-      position: relative;
-      top: 52px;
-      background-image: url('../assets/images/Path 4086.png');
-    }
-    .custom-sign-in{
-      padding: 40px !important;
-    }
-    .container-fluid{
-      display: none;
-    }
+  .login_class {
+    position: relative;
+    top: 52px;
+    background-image: url('../assets/images/Path 4086.png');
+  }
+
+  .custom-sign-in {
+    padding: 40px !important;
+  }
+
+  .container-fluid {
+    display: none;
+  }
 }
+
 .container-fluid {
-    width: 100%;
-    height: 272px;
-    background-image: url('../assets/images/Group 246.png');
+  width: 100%;
+  height: 272px;
+  background-image: url('../assets/images/Group 246.png');
 
 }
-
-
 </style>
 

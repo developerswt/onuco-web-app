@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="container-fluid jk">
         <div class="container jk">
@@ -20,7 +18,8 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="left_block">
-                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount }} Topics</span></p>
+                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount
+                                            }} Topics</span></p>
 
                                             <button id="course_button">Start Course <i
 class="fa-solid fa-play"
@@ -35,14 +34,16 @@ class="fa-solid fa-play"
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <div v-for="item in myLearning" :key="item.id" class="radio-item" :class="{ 'active': item === selectedItem }">
+                            <div
+v-for="item in myLearning" :key="item.id" class="radio-item"
+                                :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
-                                    <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
+                                <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
             <div class="tab_block mt-3">
                 <section id="tab_block">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
@@ -54,7 +55,7 @@ class="fa-solid fa-play"
                                         <div class="row mt-3">
                                             <div class="col-lg-6 col-8 col-sm-8 col-md-6">
                                                 <h4 class="academic_head_text">
-    
+
                                                     <span id="aca_text">interested</span> Courses
 
                                                 </h4>
@@ -67,80 +68,11 @@ class="fa-solid fa-play"
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="notify_block">
 
-                                                    <i
-class="fa-solid fa-triangle-exclamation"
-                                                        style="color: #ff9900;"></i><p class="pt"> Please
+                                                    <i class="fa-solid fa-triangle-exclamation" style="color: #ff9900;"></i>
+                                                    <p class="pt"> Please
                                                         subscribe the subjects to
                                                         get more details</p>
                                                     <button id="course_list_button">Course List</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="" v-for="subject in selectedItem.subject" :key="subject.id">
-                                            <div class="" v-for="chapter in subject.values" :key="chapter.id">
-                                                <div class="" v-for="course in chapter.values" :key="course.id"> -->
-                                                    <div class="inner_block">
-                                                        <div class="row">
-                                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                                <div id="asset_image">
-                                                                    <img src="../assets/images/book1.png" class="img-fluid">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                                <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
-                                                                </router-link>    
-                                                                <p id="text_two">stacks</p>
-                                                            </div>
-                                                        </div>
-                                                                <div class="row line">
-                                                                    <div class="col-lg-4 col-sm-4 col-6">
-                                                                        <div class="progress_block">
-                                                                            <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-sm-8 col-6 text">
-                                                                        <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                                    </div>
-                                                                    <!-- <button class="bt">BUY NOW</button> -->
-                                                                </div>
-                                                            
-                                                        
-                                                    </div>
-                                                <!-- </div>
-                                            </div>
-                                        </div>             -->
-                                    </div>
-                                </div>
-                            </div>
-                        </el-tab-pane>
-                        <el-tab-pane label="LIVE" name="third">
-                            <div v-if="!selectedItem?.videoCompleted" class="">
-                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
-                                        <span id="aca_text">Live</span> Courses
-                                        <div class="row mt-4 ">
-                                            <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university}}</h6>
-                                                <p class="text_line">{{ selectedItem.title}}</p>
-                                                <div class="row ml-0">
-                                                    <div class=" info">
-                                                        <p>{{ selectedItem.instructorName[0].name }}</p>
-                                                    </div>
-                                                    <div class="asset_image info1">
-                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                        {{ calculateTime(selectedItem).timeInHours }}:{{ calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
-                                                    </div>
-                                                    <div class="asset_image info2">
-                                                        <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
-                                                        {{ selectedItem.modules }}<br>
-                                                    </div>
-                                                    <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{ selectedItem.courseDescription }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                                    <video-player v-if="renderComponent" ref="videoPlayer" :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
                                         </div>
@@ -150,37 +82,123 @@ class="fa-solid fa-triangle-exclamation"
                                                     <div id="asset_image">
                                                         <img src="../assets/images/book1.png" class="img-fluid">
                                                     </div>
-                                                </div> 
+                                                </div>
                                                 <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                    <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
-                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                    <router-link
+                                                        :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                        style="text-decoration: none;">
+                                                        <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                     </router-link>
                                                     <p id="text_two">stacks</p>
-                                                     </div>
-                                        </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <div class="progress_block">
-                                                                <div>
-                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                                </div>
-                                                            </div>    
-                                                        </div>
-                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                        </div>
-                                                        <!-- <button class="bt">BUY NOW</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="row line">
+                                                <div class="col-lg-4 col-sm-4 col-6">
+                                                    <div class="progress_block">
+                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{
+                                                            getWatchTime(selectedItem) }}</progress>
                                                     </div>
                                                 </div>
-                                           
+                                                <div class="col-lg-8 col-sm-8 col-6 text">
+                                                    <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                </div>
+                                                <!-- <button class="bt">BUY NOW</button> -->
+                                            </div>
+
+
+                                        </div>
+                                        <!-- </div>
+                                            </div>
+                                        </div>             -->
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane label="LIVE" name="third">
+                            <div v-if="!selectedItem?.videoCompleted" class="">
+                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                                    <div
+id="home" class="tab-pane fade show active" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <span id="aca_text">Live</span> Courses
+                                        <div class="row mt-4 ">
+                                            <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}
+                                                </h6>
+                                                <p class="text_line">{{ selectedItem.title }}</p>
+                                                <div class="row ml-0">
+                                                    <div class=" info">
+                                                        <p>{{ selectedItem.instructorName[0].name }}</p>
+                                                    </div>
+                                                    <div class="asset_image info1">
+                                                        <img
+src="../assets/images/Iconionic-ios-timer@2x.png"
+                                                            class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                        {{ calculateTime(selectedItem).timeInHours }}:{{
+                                                            calculateTime(selectedItem).timeInMinutes }}:{{
+        calculateTime(selectedItem).remainingSeconds }}
+                                                    </div>
+                                                    <div class="asset_image info2">
+                                                        <img
+src="../assets/images/Iconmap-school@2x.png"
+                                                            class="img-fluid ml-2" style="width: 17px; height: 18px;">
+                                                        {{ selectedItem.modules }}<br>
+                                                    </div>
+                                                    <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{
+                                                        selectedItem.courseDescription }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
+                                                    <video-player
+v-if="renderComponent" ref="videoPlayer"
+                                                        :options="videoOptions" :is-subscribed="userIsSubscribed" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner_block">
+                                            <div class="row">
+                                                <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                    <div id="asset_image">
+                                                        <img src="../assets/images/book1.png" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                    <router-link
+                                                        :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                        style="text-decoration: none;">
+                                                        <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                    </router-link>
+                                                    <p id="text_two">stacks</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <div class="progress_block">
+                                                        <div>
+                                                            <progress
+:value="calculatePercentage(selectedItem)"
+                                                                max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                    <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                </div>
+                                                <!-- <button class="bt">BUY NOW</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </el-tab-pane>
                         <el-tab-pane label="COMPLETED" name="fourth">
                             <div v-if="selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                    <div
+id="home" class="tab-pane fade show active" role="tabpanel"
+                                        aria-labelledby="home-tab">
                                         <div class="">
                                             <div class="row mt-3">
                                                 <div class="col-lg-6 col-8 col-sm-8 col-md-6">
@@ -198,22 +216,28 @@ class="fa-solid fa-triangle-exclamation"
                                                         <div id="asset_image">
                                                             <img src="../assets/images/book1.png" class="img-fluid">
                                                         </div>
-                                                    </div> 
+                                                    </div>
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <router-link :to="{ name:'CourseDetails', params:{name: selectedItem.courseRouteName}}" style="text-decoration: none;">
+                                                        <router-link
+                                                            :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                            style="text-decoration: none;">
                                                             <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
-                                                        </router-link>    
+                                                        </router-link>
                                                         <p id="text_two">stacks</p>
                                                         <div class="row">
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <div class="progress_block">
                                                                     <div>
-                                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                                        <progress
+:value="calculatePercentage(selectedItem)"
+                                                                            max="100">{{ getWatchTime(selectedItem)
+                                                                            }}</progress>
                                                                     </div>
                                                                 </div>
-                                                            </div>        
+                                                            </div>
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <p id="text_three">{{ remainingTimes(selectedItem) }} Completed</p>
+                                                                <p id="text_three">{{ remainingTimes(selectedItem) }}
+                                                                    Completed</p>
                                                             </div>
                                                             <!-- <button class="bt">BUY NOW</button> -->
                                                         </div>
@@ -223,29 +247,26 @@ class="fa-solid fa-triangle-exclamation"
                                         </div>
                                     </div>
                                 </div>
-                            </div>        
+                            </div>
                         </el-tab-pane>
                     </el-tabs>
                 </section>
             </div>
         </div>
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
-
-
-    
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
 </template>
 
 <script>
 import Breadcrumbs from './Breadcrumbs.vue';
-import AxiosInstance  from '../config/axiosInstance';
+import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VideoPlayer from './VideoPlayer.vue';
 
 
 export default {
-    name: 'Mylearnings',
+    name: 'MylearningsView',
     components: {
         Breadcrumbs,
         Loading,
@@ -261,7 +282,7 @@ export default {
             selectedItem: null,
             Learning: [],
             selectedproduct: null,
-            
+
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
@@ -270,8 +291,8 @@ export default {
                 preload: 'auto',
                 // techOrder: ['html5'],
                 // preload: "metadata",
-                sources: [ 
-                    
+                sources: [
+
                 ],
             },
         }
@@ -283,7 +304,7 @@ export default {
         },
         videoType() {
             let type = '';
-    
+
             if (typeof this.videoOptions.sources.src === 'string') {
                 if (this.videoOptions.sources.src.endsWith('.mp4')) {
                     type = 'video/mp4'; // MP4 Format
@@ -319,8 +340,8 @@ export default {
                     withCredentials: false,
                 }
             ];
-                console.log(this.Learning);
-                console.log(this.videoOptions);
+            console.log(this.Learning);
+            console.log(this.videoOptions);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -336,19 +357,19 @@ export default {
         async handleItemChange(item) {
             // Update your component's state to display the selected item's details
             this.selectedItem = item;
-            
+
             if (this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
 
                 // Pause the current video
                 player.pause();
                 console.log('Player paused.');
-                            
+
                 this.renderComponent = false;
                 console.log(this.renderComponent);
                 await this.$nextTick();
                 this.renderComponent = true;
-                
+
                 // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
@@ -358,17 +379,16 @@ export default {
                     }
                 ];
 
-                this.playingSubject = subject;
                 console.log('Video source updated.');
 
                 // Set the new sources
-                player.src(this.videoOptions.sources);   
+                player.src(this.videoOptions.sources);
             }
         },
 
         calculateTime(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
-        
+
             if (totalTime) {
                 const timeInHours = Math.floor(totalTime / 3600);
                 const timeInMinutes = Math.floor((totalTime % 3600) / 60);
@@ -378,7 +398,7 @@ export default {
                     timeInMinutes,
                     remainingSeconds
                 };
-              
+
             } else {
                 return {
                     timeInHours: 0,
@@ -388,68 +408,29 @@ export default {
             }
         },
         calculateRemainingTime(totalTime, watchTime) {
-            // Ensure both totalTime and watchTime are valid numbers
             if (typeof totalTime !== 'number' || typeof watchTime !== 'number') {
                 throw new Error('Invalid input. Please provide valid numbers for totalTime and watchTime.');
             }
 
-            // Ensure totalTime and watchTime are positive numbers
             if (totalTime < 0 || watchTime < 0) {
                 throw new Error('Invalid input. Please provide non-negative numbers for totalTime and watchTime.');
             }
 
-            // Calculate remaining time
             const remainingTime = totalTime - watchTime;
 
-            // Format the remaining time (assuming totalTime and watchTime are in seconds)
             const hours = Math.floor(remainingTime / 3600);
             const minutes = Math.floor((remainingTime % 3600) / 60);
             const seconds = Math.floor((totalTime % 3600) % 60);
-            //const secondsString = seconds.toString().padStart(2, '0');
-
+        
             return `${hours}:${minutes}:${seconds}`;
         },
 
-        // Example usage
-            // const totalTime = 3600; // 1 hour in seconds
-            // const watchTime = 1800; // 30 minutes in seconds
         remainingTimes(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
-            const watchTime = this.getWatchTime(selectedItem); 
+            const watchTime = this.getWatchTime(selectedItem);
             return this.calculateRemainingTime(totalTime, watchTime);
-            console.log(this.calculateRemainingTime);
         },
-        //     const remainingTime = calculateRemainingTime(totalTime, watchTime);
-        //     console.log(`Remaining time: ${remainingTime}`);
-
-        // },
-        calculateTime(selectedItem) {
-            const totalTime = this.getTotalTime(selectedItem);
         
-            if (totalTime) {
-                const timeInHours = Math.floor(totalTime / 3600);
-                const timeInMinutes = Math.floor((totalTime % 3600) / 60);
-                const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
-                return {
-                    timeInHours,
-                    timeInMinutes,
-                    remainingSeconds
-                };
-            } else {
-                return {
-                    timeInHours: 0,
-                    timeInMinutes: 0,
-                    remainingSeconds: 0
-                };
-            }
-        },
         calculatePercentage(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
             const watchTime = this.getWatchTime(selectedItem);
@@ -481,10 +462,7 @@ export default {
         },
 
         getTotalTime(selectedItem) {
-                // Implement a method to get the total time for a specific subjectId
-                // For example, you might have a data property storing total times
-                // You can replace this with your actual implementation
-            const subject = this.findSubjectById(selectedItem);
+             const subject = this.findSubjectById(selectedItem);
             return subject ? parseFloat(subject.totalTimeVideo) : 0;
         },
     }
@@ -492,17 +470,17 @@ export default {
 </script>
 
 <style scoped>
-progress{
+progress {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
- 
+
     width: 200px;
     height: 20px;
     border-radius: 20px;
- 
+
 }
- 
+
 progress::-webkit-progress-bar {
     background: #CCCCCC;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
@@ -510,30 +488,35 @@ progress::-webkit-progress-bar {
     height: 4px;
     width: 171px;
 }
+
 progress::-webkit-progress-value {
-    background-image: linear-gradient(120deg,#ffd173 0,#18cc00 55%);
+    background-image: linear-gradient(120deg, #ffd173 0, #18cc00 55%);
     border-radius: 20px;
 }
+
 .progress-container {
     position: relative;
-    width: 30px; 
-    width: 30px; 
+    width: 30px;
+    width: 30px;
     height: 30px;
     margin: 5px;
-    background-image: url('../assets/images/Group1318@2x.png'); /* Replace 'your-image.jpg' with your image URL */
+    background-image: url('../assets/images/Group1318@2x.png');
+    /* Replace 'your-image.jpg' with your image URL */
     background-size: cover;
 }
+
 progress {
-  color: #FF9924;
+    color: #FF9924;
 }
 
 progress::-webkit-progress-value {
-  background: #FF9924;
+    background: #FF9924;
 }
 
 progress::-moz-progress-bar {
-  background: lightcolor;
+    background: lightcolor;
 }
+
 .radio-item {
     display: inline-block;
     margin: 5px;
@@ -544,12 +527,14 @@ progress::-moz-progress-bar {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #fff; /* Default color for inactive items */
+    background-color: #fff;
+    /* Default color for inactive items */
     border: 1px solid #FF9900;
 }
 
 .active .dot {
-    background-color: #FF9900; /* Color for active item */
+    background-color: #FF9900;
+    /* Color for active item */
 }
 
 
@@ -568,19 +553,6 @@ progress::-moz-progress-bar {
     mix-blend-mode: normal;
 
 }
-
-/* #group_image {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
-    padding-bottom: 20px;
-} */
-
-/* #group_image {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
-    padding-bottom: 20px;
-} */
-
 .academic_head_text {
     color: #006acd;
     /* padding-left: 20px; */
@@ -680,10 +652,11 @@ progress::-moz-progress-bar {
     font-size: 12px;
     margin-bottom: 0px;
 }
+
 #text_three {
     font-size: 12px;
-    
-    
+
+
 }
 
 #text_one {
@@ -779,38 +752,49 @@ progress::-moz-progress-bar {
     .nav-tabs .nav-link {
         font-size: 12px;
     }
-    .academic_head_text,#see_text{
+
+    .academic_head_text,
+    #see_text {
         font-size: 14px !important;
     }
-    .notify_block[data-v-82375fac]{
-        padding:15px !important;
-        height:auto;
+
+    .notify_block[data-v-82375fac] {
+        padding: 15px !important;
+        height: auto;
     }
-    .notify_block p{
+
+    .notify_block p {
         font-size: 11px;
     }
-    .notify_block i{
-        padding-right:10px !important;
+
+    .notify_block i {
+        padding-right: 10px !important;
 
     }
-    #text_one, #text_two, #text_three{
+
+    #text_one,
+    #text_two,
+    #text_three {
         font-size: 12px;
     }
-    .inner_block{
-        height:90px;
+
+    .inner_block {
+        height: 90px;
     }
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px){
-.left_block{
-    text-align: right;
+@media (min-width: 768px) and (max-width: 1024px) {
+    .left_block {
+        text-align: right;
+    }
+
+    .inner_block {
+        height: 90px;
+    }
 }
-.inner_block{
-    height: 90px;
-}
-}
-.bt{
+
+.bt {
     background-color: #0177FB;
     color: white;
     position: relative;
@@ -818,171 +802,152 @@ progress::-moz-progress-bar {
     bottom: 30px;
     font-size: 12px;
 }
+
 input[type="radio"] {
-   appearance: none; /* Hide the default radio button */
-    width: 12px; /* Adjust size as needed */
+    appearance: none;
+    /* Hide the default radio button */
+    width: 12px;
+    /* Adjust size as needed */
     height: 12px;
-    border-radius: 50%; /* Make it circular */
-    border: 2px solid #FF9900; /* Border color (blue in this example) */
-    margin-right: 5px; /* Add spacing between the button and label */
+    border-radius: 50%;
+    /* Make it circular */
+    border: 2px solid #FF9900;
+    /* Border color (blue in this example) */
+    margin-right: 5px;
+    /* Add spacing between the button and label */
     background: #FF9900 0% 0% no-repeat padding-box;
     opacity: 1;
     cursor: pointer;
 }
 
 input[type="radio"]:checked {
-  background-color: white; /* Background color when selected */
+    background-color: white;
+    /* Background color when selected */
 }
 
-.text_line{
+.text_line {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 21px/28px var(--unnamed-font-family-segoe-ui);
-letter-spacing: var(--unnamed-character-spacing-0);
-text-align: left;
-font: normal normal normal 16px/28px Segoe UI;
-letter-spacing: 0px;
-color: #444444;
-opacity: 1;
-margin-top: -7px;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 16px/28px Segoe UI;
+    letter-spacing: 0px;
+    color: #444444;
+    opacity: 1;
+    margin-top: -7px;
 }
-.info{
+
+.info {
     font-size: 13px;
     color: #666666;
     margin-top: -14px;
 }
-.info1{
+
+.info1 {
     font-size: 11px;
     color: #666666;
     margin-top: -14px;
-    
+
 }
-.info2{
+
+.info2 {
     font-size: 11px;
     color: #666666;
     margin-top: -14px;
 }
 
 @media (max-width:520px) {
-    .info1{
-    font-size: 11px;
-    color: #666666;
-    margin-top: 11px;
-    position: relative;
-    right:111px;
-}
-.info2{
-    font-size: 11px;
-    color: #666666;
-    margin-top: 8px;
-    position: relative;
-    right: 109px;
-    top: 2px;
-}
-  .pp{
-    position: relative;
-    top: 10px;
-  }  
-}
-/* .container-fluid {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
+    .info1 {
+        font-size: 11px;
+        color: #666666;
+        margin-top: 11px;
+        position: relative;
+        right: 111px;
+    }
 
-} 
-body {
-  margin: 0;
-  font-family: 'Noto Sans', sans-serif;
-  background: #EFF5FC 0% 0% no-repeat padding-box;
-  opacity: 1;
- 
-} */
-/* .pp{
-    margin-top: -12px; 
-}
-@media  (min-width: 100px)and(max-width: 600px){
-   .pp{
-    margin-top: 10px;
-}
-   
-} */
-/* .container-fluid {
-    background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
-    background-size: cover !important;
+    .info2 {
+        font-size: 11px;
+        color: #666666;
+        margin-top: 8px;
+        position: relative;
+        right: 109px;
+        top: 2px;
+    }
 
-} 
-body {
-  margin: 0;
-  font-family: 'Noto Sans', sans-serif;
-  background: #EFF5FC 0% 0% no-repeat padding-box;
-  opacity: 1;
- 
-} */
-/* .pp{
-    margin-top: -12px; 
+    .pp {
+        position: relative;
+        top: 10px;
+    }
 }
-@media  (min-width: 100px)and(max-width: 600px){
-   .pp{
-    margin-top: 10px;
-}
-   
-} */
 @media (max-width:520px) {
-    .jk{
+    .jk {
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
-    .inner_block{
-    height: 100px;
-    height: 100px;
-    } 
-    #asset_image img{
-    width: 40px;
-    height: 70px;
-} 
-.line{
-    position:relative;
-    left:90px;
-    bottom: 28px !important;
+
+    .inner_block {
+        height: 100px;
+        height: 100px;
+    }
+
+    #asset_image img {
+        width: 40px;
+        height: 70px;
+    }
+
+    .line {
+        position: relative;
+        left: 90px;
+        bottom: 28px !important;
+    }
+
+    .text {
+        position: relative;
+        right: 23px !important;
+    }
+
+    progress {
+        vertical-align: baseline;
+        width: 100%;
+    }
+
+    .line {
+        position: relative;
+        left: 90px;
+        bottom: 28px !important;
+    }
+
+    .text {
+        position: relative;
+        right: 23px !important;
+    }
+
+    progress {
+        vertical-align: baseline;
+        width: 100%;
+    }
 }
-.text{
-    position: relative;
-    right: 23px !important;
-}
-progress {
-    vertical-align: baseline;
-    width: 100%;
-}
-.line{
-    position:relative;
-    left:90px;
-    bottom: 28px !important;
-}
-.text{
-    position: relative;
-    right: 23px !important;
-}
-progress {
-    vertical-align: baseline;
-    width: 100%;
-}
-}
+
 @media(min-width: 1280px) {
-    .pt{
+    .pt {
         position: relative;
         right: 300px;
     }
-    .video_block{
-    width: 328px !important;
+
+    .video_block {
+        width: 328px !important;
+        position: relative;
+        left: 199px;
+    }
+}
+
+.line {
     position: relative;
-    left: 199px;
-}
-}
-.line{
-    position:relative;
-    left:90px;
+    left: 90px;
     bottom: 15px;
 }
-.text{
+
+.text {
     position: relative;
     right: 160px;
 }
-
 </style>

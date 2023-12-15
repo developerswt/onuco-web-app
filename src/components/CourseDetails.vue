@@ -14,7 +14,8 @@
                         <div v-if="isMobile" class="container-fluid">
                             <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
                                 <video-player
-ref="videoPlayer" class="mobileVideo" :options="videoOptions" :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
+ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+                                    :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
                                     :is-subscribed="userIsSubscribed" />
                             </div>
                         </div>
@@ -95,16 +96,14 @@ v-for="instructor in book.instructorName" id="professor_text"
                                     <el-tab-pane label="Subject" name="first" class="rt">
                                         <div class="row box mb-5">
                                             <div class="col-sm-6">
-                                                <div
-v-for="(topic, index) in book.subject" :key="topic.id"
-                                                    class="card">
+                                                <div v-for="(topic, index) in book.subject" :key="topic.id" class="card">
                                                     <div class="accordion-item">
                                                         <h5 class="card-header">
                                                             <div
 id="heading-example"
-                                                                :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'" data-toggle="collapse"
-                                                                :href="'#collapse-example' + index" aria-expanded="true"
-                                                                aria-controls="collapse-example">
+                                                                :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'"
+                                                                data-toggle="collapse" :href="'#collapse-example' + index"
+                                                                aria-expanded="true" aria-controls="collapse-example">
 
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6">
@@ -116,7 +115,7 @@ class="btn btn-link"
                                                                     </div>
                                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                                         <div class="action"><i
-                                                                                id="sem_icon"
+id="sem_icon"
                                                                                 class="fa fa-chevron-right rotate-icon"></i>
                                                                         </div>
                                                                     </div>
@@ -335,7 +334,7 @@ export default {
         },
         videoType() {
             let type = '';
-    
+
             if (typeof this.videoOptions.sources.src === 'string') {
                 if (this.videoOptions.sources.src.endsWith('.mp4')) {
                     type = 'video/mp4'; // MP4 Format
@@ -365,7 +364,7 @@ export default {
         this.isLoading = true;
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
-            this.book = res.data;            
+            this.book = res.data;
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
@@ -379,15 +378,15 @@ export default {
             } else {
                 this.userIsSubscribed = false;
             }
-            if(this.userIsSubscribed) {
+            if (this.userIsSubscribed) {
                 try {
                     const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
                     this.watchTimeDatas = result.data;
                     console.log(this.watchTimeDatas);
                 } catch {
-                    this.watchTimeDatas = {"id": 0,"userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08","courseId": 0,"watchTimeData": []};
+                    this.watchTimeDatas = { "id": 0, "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08", "courseId": 0, "watchTimeData": [] };
                     console.log(this.watchTimeDatas);
-                }    
+                }
             }
 
             this.videoOptions.sources = [
@@ -458,13 +457,6 @@ export default {
                 const timeInHours = Math.floor(totalTime / 3600);
                 const timeInMinutes = Math.floor((totalTime % 3600) / 60);
                 const remainingSeconds = Math.floor((totalTime % 3600) % 60);
-                // const timeInMinutes = totalTime % 60;
-                // const timeInHours = Math.floor(watchTime / 3600);
-                //   const remainingSeconds = watchTime % 3600;
-                //   const timeInMinutes = Math.floor(remainingSeconds / 60);
-                //   const timeInSeconds = remainingSeconds % 60;
-
-
                 return {
                     timeInHours,
                     timeInMinutes,
@@ -481,16 +473,11 @@ export default {
 
 
         getTotalTime(subjectId) {
-            // Implement a method to get the total time for a specific subjectId
-            // For example, you might have a data property storing total times
-            // You can replace this with your actual implementation
             const subject = this.findSubjectById(subjectId);
             return subject ? parseFloat(subject.time) : 0;
         },
 
         findSubjectById(subjectId) {
-            // Implement a method to find a subject by its ID
-            // You can replace this with your actual implementation
             for (const topic of Object.values(this.book.subject)) {
                 for (const lessons of topic.values) {
                     for (const subject of lessons.values) {
@@ -545,15 +532,12 @@ export default {
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
-                // Handle the case where the token is not found in local storage
                 return null;
             }
             try {
-                // Decode the JWT token (assuming it's in the format "header.payload.signature")
                 const [, payload] = jwtToken.split('.');
                 const decodedPayload = JSON.parse(atob(payload));
 
-                // Extract the sub ID
                 const subId = decodedPayload.sub;
 
                 return subId;
@@ -570,7 +554,6 @@ export default {
 
                 this.videoId = subject.id;
                 console.log(this.videoId);
-                // Pause the current video
                 player.pause();
                 console.log('Player paused.');
 
@@ -580,7 +563,6 @@ export default {
                 await this.$nextTick();
                 this.renderComponent = true;
 
-                // Change the video source to the new URL
                 this.videoOptions.sources = [
                     {
                         src: newVideoUrl,
@@ -594,11 +576,8 @@ export default {
 
                 this.watchTime = this.getWatchTime(subject.id);
                 console.log(this.watchTime);
-                // Set the new sources
+
                 player.src(this.videoOptions.sources);
-
-                // Try playing the video
-
             }
         },
 
@@ -613,10 +592,6 @@ export default {
 
             return false;
         },
-        // shouldShowCircleIcon(subjectId) {
-        //     // Return true if the video source has changed, otherwise return false
-        //     return this.videoChanged;
-        // },
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -655,9 +630,7 @@ progress {
     border: 1px solid #434343;
 }
 
-/*style for background track*/
 progress::-webkit-progress-bar {
-    /* background: rgb(221, 221, 221); */
     background: #CCCCCC;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
     border-radius: 6px;
@@ -665,7 +638,6 @@ progress::-webkit-progress-bar {
     width: 171px;
 }
 
-/*style for progress track*/
 progress::-webkit-progress-value {
     background-image: linear-gradient(120deg, #ffd173 0, #18cc00 55%);
     border-radius: 20px;
@@ -674,11 +646,9 @@ progress::-webkit-progress-value {
 .progress-container {
     position: relative;
     width: 30px;
-    /* Set the width and height of the container */
     height: 30px;
     margin: 5px;
     background-image: url('../assets/images/Group1318@2x.png');
-    /* Replace 'your-image.jpg' with your image URL */
     background-size: cover;
 }
 
@@ -1305,9 +1275,7 @@ input[type=submit] {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black background */
     z-index: 900;
-    /* Set a z-index lower than the popup but higher than the content */
     display: none;
 }
 
@@ -1318,9 +1286,7 @@ input[type=submit] {
     top: 30%;
     left: 50%;
     width: 70%;
-    /* Adjust the width as needed */
     max-width: 400px;
-    /* Set a maximum width */
     transform: translate(-50%, -50%);
     border: 1px solid #ccc;
     background-color: #fff;
@@ -1344,11 +1310,9 @@ input[type=submit] {
 @media (max-width: 600px) {
     .popup {
         width: 90%;
-        /* Adjust the width for smaller screens */
     }
 }
 
-/* CSS for mobile view */
 @media (max-width: 767px) {
 
     .mobileVideo {

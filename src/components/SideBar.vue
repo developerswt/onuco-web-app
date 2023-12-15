@@ -1,37 +1,29 @@
 <template>
-    <div class="container-fluid mt-5">
-        <header>
-          <span class="menu-anchor" :class="{ 'menu-active': isMenuActive }" @click="toggleMenu"></span>
- 
-</header>
+  <div class="container-fluid mt-5">
+    <header>
+      <span class="menu-anchor" :class="{ 'menu-active': isMenuActive }" @click="toggleMenu"></span>
 
-<menu  style="margin-top: 68px;">
-  <ul>
-   
-            <li class="nav-item active ">
-            <router-link to="/ApHome" class="nav-link">Dashboard</router-link>
-    </li>
-    <li><router-link to="/ApFaculty">Lecturers</router-link></li>
-    <li><router-link to="/StudentDetails">Students</router-link></li>
-    <li><router-link to="/ApBilling">Billing</router-link></li>
-    <div class="sidebar-heading">
-        ACCOUNT PAGES
-    </div>
-    <li><a href="#">Profile</a></li>
-    <li><a href="#">Sign Out</a></li>
-  </ul>
-</menu>
-</div>
-  </template>
-  <!-- <script>
-  $(document).ready(function(){
-$('.menu-anchor').on('click touchstart', function(e){
-$('html').toggleClass('menu-active');
-  e.preventDefault();
-});
+    </header>
 
-})
-</script> -->
+    <menu style="margin-top: 68px;">
+      <ul>
+
+        <li class="nav-item active ">
+          <router-link to="/ApHome" class="nav-link">Dashboard</router-link>
+        </li>
+        <li><router-link to="/ApFaculty">Lecturers</router-link></li>
+        <li><router-link to="/StudentDetails">Students</router-link></li>
+        <li><router-link to="/ApBilling">Billing</router-link></li>
+        <div class="sidebar-heading">
+          ACCOUNT PAGES
+        </div>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Sign Out</a></li>
+      </ul>
+    </menu>
+  </div>
+</template>
+
 <script>
 export default {
   data() {
@@ -51,14 +43,16 @@ export default {
 </script>
 
 <style scoped>
-
 * {
- 
+
   padding: 0;
 }
 
 
-html, body {overflow-x: hidden;}
+html,
+body {
+  overflow-x: hidden;
+}
 
 body {
   font: 100% arial, verdana, tahoma, sans-serif;
@@ -68,7 +62,7 @@ body {
 
 header {
   /* background:  rgb(17, 205, 239); */
-  background: radial-gradient(at right bottom, #0066CC -15%,  #9CCEFF  80%);
+  background: radial-gradient(at right bottom, #0066CC -15%, #9CCEFF 80%);
   padding: 30px;
   overflow: hidden;
 }
@@ -80,7 +74,11 @@ header h1 {
   width: 80%;
   font-size: 1.5em;
 }
-h1 a {color: #FFF; text-decoration: none;}
+
+h1 a {
+  color: #FFF;
+  text-decoration: none;
+}
 
 header input {
   float: right;
@@ -91,8 +89,9 @@ header input {
 
 .main {
   padding: 30px;
-  background-color:white;
+  background-color: white;
 }
+
 .main p {
   font-size: .9em;
   line-height: 1.2em;
@@ -117,11 +116,13 @@ header input {
   margin: 7px auto;
   width: 70%;
   height: 0.25em;
-  background:  rgb(17, 205, 239);
-  box-shadow: 0 .45em 0 0  rgb(17, 205, 239), 0 .9em 0 0  rgb(17, 205, 239);
+  background: rgb(17, 205, 239);
+  box-shadow: 0 .45em 0 0 rgb(17, 205, 239), 0 .9em 0 0 rgb(17, 205, 239);
 }
 
-.menu-active .menu-anchor {background:white;}
+.menu-active .menu-anchor {
+  background: white;
+}
 
 menu {
   position: fixed;
@@ -131,27 +132,19 @@ menu {
   width: 220px;
   height: 100%;
   padding-top: 10px;
-  background:  white;
-  box-shadow: inset -5px -10px 10px 0 rgba(0,0,0,.3)
+  background: white;
+  box-shadow: inset -5px -10px 10px 0 rgba(0, 0, 0, .3)
 }
 
 menu li a {
   display: block;
-  border-bottom: 1px solid rgba(255,255,255,.3);
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
   margin: 0 10px;
   padding: 10px;
-  /* color:  rgb(17, 205, 239); */
   color: #707070;
   text-decoration: none;
   font-size: 16px;
 }
-
-/* menu li a:hover {
-  
-  background: radial-gradient(at right bottom, #0066CC -15%,  #9CCEFF  80%);
-  color:  white;
-} */
-
 
 menu {
   -webkit-transform: translateX(-220px);
@@ -165,7 +158,8 @@ menu {
 }
 
 
-header, .main {
+header,
+.main {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
@@ -176,9 +170,7 @@ header, .main {
   transition: all .25s linear;
 }
 
-/*
-   Com a classe menu-active na tag HTML
-*/
+
 .menu-active menu {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -186,17 +178,15 @@ header, .main {
   transform: translateX(0);
 }
 
-.menu-active header, 
+.menu-active header,
 .menu-active .main {
   -webkit-transform: translateX(220px);
   -moz-transform: translateX(220px);
   -ms-transform: translateX(220px);
   transform: translateX(220px);
 }
-/* .cardpd{
-  padding: 0px !important;
-} */
- .card {
+
+.card {
   position: relative;
   min-width: 300px;
   height: 140px;
@@ -208,24 +198,25 @@ header, .main {
   margin: 10px;
   transition: 0.5s;
 }
- .card:nth-child(1) .box .content a {
+
+.card:nth-child(1) .box .content a {
   background: #2196f3;
 }
 
- .card:nth-child(2) .box .content a {
+.card:nth-child(2) .box .content a {
   background: #e91e63;
 }
 
- .card:nth-child(3) .box .content a {
+.card:nth-child(3) .box .content a {
   background: #23c186;
 }
 
-  .card .box {
+.card .box {
   position: absolute;
   top: 20px;
   left: 10px;
   right: 10px;
- 
+
   border-radius: 15px;
 
   justify-content: center;
@@ -233,7 +224,8 @@ header, .main {
   overflow: hidden;
   transition: 0.5s;
 }
-  .card .box:before {
+
+.card .box:before {
   content: "";
   position: absolute;
   top: 0;
@@ -243,12 +235,12 @@ header, .main {
   background: rgba(255, 255, 255, 0.03);
 }
 
-  .card .box .content {
- 
+.card .box .content {
+
   text-align: center;
 }
 
-  .card .box .content h2 {
+.card .box .content h2 {
   position: absolute;
   top: 0px;
   right: 30px;
@@ -256,7 +248,7 @@ header, .main {
   color: rgba(41, 37, 37, 0.1);
 }
 
-  .card .box .content h3 {
+.card .box .content h3 {
 
   color: black;
   z-index: 1;
@@ -267,8 +259,8 @@ header, .main {
   font-size: 19px;
 }
 
-  .card .box .content p {
-  
+.card .box .content p {
+
   font-weight: 300;
   color: rgb(41, 40, 40);
   z-index: 1;
@@ -281,7 +273,7 @@ header, .main {
   overflow: visible !important;
 }
 
-  .card .box .content a {
+.card .box .content a {
   position: relative;
   display: inline-block;
   padding: 8px 20px;
@@ -293,20 +285,21 @@ header, .main {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 }
-  .card .box .content a:hover {
+
+.card .box .content a:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   background: #fff;
   color: #000;
 }
 
 @media screen and (max-width:520px) {
-   .card .box .content h2 {
-  position: absolute;
-  top: 0px;
-  left: 0;
-  font-size: 2.7rem;
-  color: rgba(41, 37, 37, 0.1);
-}
+  .card .box .content h2 {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    font-size: 2.7rem;
+    color: rgba(41, 37, 37, 0.1);
+  }
 
 
 }
@@ -319,27 +312,29 @@ header, .main {
 }
 
 
-@media (min-width: 100px) and (max-width: 700px){
- .card {
-  height: 140px;
-  position: relative;
-  min-width: 260px;
-}
-.scroll {
- height: 250px;
-  overflow: auto;
-}
+@media (min-width: 100px) and (max-width: 700px) {
+  .card {
+    height: 140px;
+    position: relative;
+    min-width: 260px;
+  }
+
+  .scroll {
+    height: 250px;
+    overflow: auto;
+  }
 
 }
 
 .sidebar-heading {
-  text-align:left;
+  text-align: left;
   padding: 0 1rem;
   font-weight: 800;
   font-size: 15px;
   color: #b7b9cc;
 }
- .view{
-    height: 240px;
+
+.view {
+  height: 240px;
 }
 </style>

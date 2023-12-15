@@ -60,7 +60,7 @@ export default {
 
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
-      this.player.currentTime(this.watchTime || 0);  
+      this.player.currentTime(this.watchTime || 0);
       this.player.qualityLevels();
       console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });
@@ -155,16 +155,16 @@ export default {
       // Disable the progress bar
       this.player.controlBar.progressControl.disable();
     },
-    
+
     async sendWatchTimeToBackend() {
       if (this.isSubscribed) {
-        
+
         try {
           const userId = this.isuser;
           const courseId = this.courseId;
           const videoId = this.videoId;
           const watchTime = this.player.currentTime();
-          
+
           const requestBody = {
             userId: userId,
             courseId: courseId,
@@ -252,6 +252,7 @@ export default {
   z-index: 999;
   /* Adjust the z-index to make it higher than the video player */
 }
+
 .subscribeBtn {
   color: #ffff;
   background-color: red;

@@ -11,9 +11,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-4 col-sm-4">
                                         <div class="professor_image_block">
-                                            <img
-v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
-                                                class="img-fluid">
+                                            <img v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl" class="img-fluid">
                                             <img v-else src="../assets/images/Image21.png" class="img-fluid">
                                         </div>
                                     </div>
@@ -27,8 +25,10 @@ v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
-                                                            <a class="rating_icons" style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }}
-                                                            reviews)</a>
+                                                            <a
+class="rating_icons" style="cursor: pointer;"
+                                                                @click="showPopup()">({{ ratingCount || 0 }}
+                                                                reviews)</a>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -94,64 +94,66 @@ v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
                 </div>
             </section>
         </div>
-                
-        </div>
-            <section id="Course_section">   
-                <div class="container">
-                <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
-               
-                    <carousel :settings="settings" :breakpoints="breakpoints">
-                    <slide  v-for="person in persons" :key="person.id">
-                    
-                        <router-link to="/SemesterDetails">
-                           
-                            <div id="instructor_card" class="card">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col-md-12 ">
 
-                                            <div class="card_top_text">
-                                                <div class="row">
-                                                     
-                                                    <div class="col-lg-10 col-9 col-sm-9">
-                                                        <p class="ft" data-placement="top" :title="person.name" > {{ person.name.slice(0,18)}}...</p>
-                                                    </div>
-                                                   
-                                                    <div class="col-lg-2 col-3 col-sm-3">
-                                                        <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p class="ft" > 18CS81</p>
-                                                    </div>
-                                                    <div class="col-lg-6 col-6 col-sm-6">
-                                                        <p id="small_text"  class="ft">240
-                                                            hrs</p>
-                                                    </div>
-                                                   
-                                                    <div class="col-lg-9 col-9 col-sm-9">
+    </div>
+    <section id="Course_section">
+        <div class="container">
+            <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
 
-                                                        <p class="ft" >{{ person.description.slice(0,50) }}...</p>
+            <carousel :settings="settings" :breakpoints="breakpoints">
+                <slide v-for="person in persons" :key="person.id">
+
+                    <router-link to="/SemesterDetails">
+
+                        <div id="instructor_card" class="card">
+                            <div class="card-title">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+
+                                        <div class="card_top_text">
+                                            <div class="row">
+
+                                                <div class="col-lg-10 col-9 col-sm-9">
+                                                    <p class="ft" data-placement="top" :title="person.name"> {{
+                                                        person.name.slice(0, 18) }}...</p>
+                                                </div>
+
+                                                <div class="col-lg-2 col-3 col-sm-3">
+                                                    <img
+src="../assets/images/Union193.png"
+                                                        style="width: 16px; height: 20px;" class="icon">
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p class="ft"> 18CS81</p>
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p id="small_text" class="ft">240
+                                                        hrs</p>
+                                                </div>
+
+                                                <div class="col-lg-9 col-9 col-sm-9">
+
+                                                    <p class="ft">{{ person.description.slice(0, 50) }}...</p>
+                                                </div>
+
+                                                <div class="col-lg-3 col-3 col-sm-3">
+                                                    <div class="video_logo">
+                                                        <img
+src="../assets/images/Path4025.png"
+                                                            style="width: 30px; height:30px;" class="video">
                                                     </div>
-                                                    
-                                                    <div class="col-lg-3 col-3 col-sm-3">
-                                                        <div class="video_logo">
-                                                            <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-6">
+                                                            <p class="rating_icons">
+                                                                <StarRatings :rating="ratings" :max-rating="5" />
+                                                            </p>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <!-- <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i
-                                                       
-                                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                                            (23
-                                                            reviews) </p> -->
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-6">
-                                                            <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5"/></p>
-                                                        </div>
-                                                        <div class="col-lg-6 col-6" style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
+                                                        <div
+class="col-lg-6 col-6"
+                                                            style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
                                                             <p> (23 reviews) </p>
-                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,9 +162,10 @@ v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
                                     </div>
                                 </div>
                             </div>
-                        </router-link>
-                    
-                    
+                        </div>
+                    </router-link>
+
+
                 </slide>
                 <template #addons>
 
@@ -273,9 +276,7 @@ src="../assets/images/Path4025.png"
     <section id="tab_block">
         <div class="container">
             <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                <el-tab-pane
-v-for="att in faculty.attributue" :key="att.heading" :label="att.heading"
-                    :name="att.heading">
+                <el-tab-pane v-for="att in faculty.attributue" :key="att.heading" :label="att.heading" :name="att.heading">
                     <div class="" v-html="att.values"></div>
                 </el-tab-pane>
 
@@ -321,53 +322,53 @@ export default {
             ratings: [],
             persons: [],
             settings: {
-            itemsToShow: 1,
-            snapAlign: 'center',
-            readActivated: false,
-            
-        },
-   
-        breakpoints: {
-   
-            900: {
-                itemsToShow: 2,
-                snapAlign: 'center',
-            },
-            820: {
-                itemsToShow: 2,
-                snapAlign: 'center',
-            },
-            768:{
-                itemsToShow: 2,
-                snapAlign: 'center',
-            },
-            1024: {
-                itemsToShow: 3,
-                snapAlign: 'start',
-            },
-            600: {
                 itemsToShow: 1,
                 snapAlign: 'center',
+                readActivated: false,
+
             },
-            375:{
-                itemsToShow: 1,
-                snapAlign: 'center',
+
+            breakpoints: {
+
+                900: {
+                    itemsToShow: 2,
+                    snapAlign: 'center',
+                },
+                820: {
+                    itemsToShow: 2,
+                    snapAlign: 'center',
+                },
+                768: {
+                    itemsToShow: 2,
+                    snapAlign: 'center',
+                },
+                1024: {
+                    itemsToShow: 3,
+                    snapAlign: 'start',
+                },
+                600: {
+                    itemsToShow: 1,
+                    snapAlign: 'center',
+                },
+                375: {
+                    itemsToShow: 1,
+                    snapAlign: 'center',
+                },
+                360: {
+                    itemsToShow: 1,
+                    snapAlign: 'center',
+                },
+                540: {
+                    itemsToShow: 2,
+                    snapAlign: 'center',
+                },
+                280: {
+                    itemsToShow: 1,
+                    snapAlign: 'center',
+                }
+
+
             },
-            360:{
-                itemsToShow: 1,
-                snapAlign: 'center', 
-            },
-            540:{
-                itemsToShow: 2,
-                snapAlign: 'center', 
-            },
-            280:{
-                itemsToShow: 1,
-                snapAlign: 'center', 
-            }
-          
-          
-        },
             activeName: 'first',
             attribute: [
                 { key: "Name", value: "Arun" },
@@ -395,11 +396,11 @@ export default {
             this.ratings = result.data.averageRating;
             this.ratingCount = result.data.ratingCount;
             console.log(this.ratings);
-            const results = await axiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/`+ this.faculty.id);
+            const results = await axiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
             this.persons = results.data;
             console.log(this.persons);
 
-            
+
 
         } catch (error) {
             console.log(error);
@@ -419,11 +420,6 @@ export default {
         toggleReadMore() {
             this.faculty.readMore = !this.faculty.readMore;
         },
-
-        // activateReadMore(){
-        //     this.readActivated = true;
-        // },
-
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -452,8 +448,6 @@ export default {
 
 
 <style scoped>
-
-
 .jk {
     padding-top: 5%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
@@ -497,9 +491,7 @@ export default {
     font-size: 14px;
     width: 35px;
     text-align: center;
-   
     margin: 12px 10px 0px 0px;
-    /* border-radius: 50%; */
     clip-path: circle();
 }
 
@@ -554,7 +546,6 @@ export default {
 .professor-details {
 
     text-align: left;
-    /* font: normal normal normal 12px/16px Segoe UI; */
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0px;
     color: #828282;
@@ -568,9 +559,6 @@ export default {
     color: white;
 }
 
-/* ::v-deep .advisory {
-    padding-left: 23px;
-} */
 .video {
     width: 50px;
 
@@ -583,14 +571,10 @@ export default {
     bottom: 7px;
 }
 
-/* ::v-deep .row_class i */
 .kl .card {
     padding: 10px 10px 0px;
-    /* background-color: #8B8989; */
-
     color: black;
     cursor: pointer;
-    /* background: radial-gradient(to right, darkblue, lightgray, blue); */
     box-shadow: 0px 0px 9px #000000A1;
     border: 1px solid #FFFFFF;
 
@@ -678,29 +662,17 @@ export default {
     top: 18px;
     left: -16px;
     margin-bottom: 18px;
-    /* bottom: 10px; */
 
 }
-/* .fa-circle{
-    position: relative;
-    bottom: 7px;
-} */
+
 
 ::v-deep #row_block {
     padding-left: 15px;
 }
 
-/* ::v-deep #row_block1 {
-    padding: 30px 18px;
-} */
-/* ::v-deep .details {
-    padding-left: 25px;
-} */
 ::v-deep .row_class {
     display: flex;
     margin-top: -3px;
-    /* padding-left: 25px;
-    padding-left: 25px; */
 }
 
 ::v-deep #education_text {
@@ -710,8 +682,6 @@ export default {
     font-weight: bold;
     font-size: 16px;
     font-weight: bold;
-    /* position: relative;
-    left: 15px; */
 }
 
 ::v-deep .row_class i {
@@ -852,8 +822,9 @@ export default {
     .rating_icons i {
         padding: 0;
     }
-    .Objective_left_side{
-     text-align: left !important;
+
+    .Objective_left_side {
+        text-align: left !important;
     }
 
 
@@ -1120,10 +1091,12 @@ input[type=submit] {
 .star-rating {
     font-size: 24px;
 }
-.details{
+
+.details {
     position: relative;
     left: 16px;
 }
+
 @media screen and (max-width: 1024px) {
     .Ratings_button_block {
         margin-left: 109%;
@@ -1179,18 +1152,20 @@ input[type=submit] {
         cursor: pointer;
     }
 }
-#review_text{
-    color: #828282; 
-    position:relative;
-    top:7px; 
-    right:65px;
+
+#review_text {
+    color: #828282;
+    position: relative;
+    top: 7px;
+    right: 65px;
 }
+
 @media (max-width:540px) {
-    #review_text{
-    color: #828282; 
-    position:relative;
-    top:7px; 
-    right:20px;
-} 
+    #review_text {
+        color: #828282;
+        position: relative;
+        top: 7px;
+        right: 20px;
+    }
 }
 </style>
