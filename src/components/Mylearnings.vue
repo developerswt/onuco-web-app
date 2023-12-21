@@ -254,7 +254,7 @@ id="home" class="tab-pane fade show active" role="tabpanel"
             </div>
         </div>
     </div>
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="'100px'" :height="'100px'"></Loading>
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
 <script>

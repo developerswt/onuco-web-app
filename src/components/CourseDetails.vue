@@ -312,7 +312,7 @@ export default {
                 autoplay: false,
                 controls: true,
                 width: 100,
-
+                preload: 'auto',
                 sources: [
 
                 ],

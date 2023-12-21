@@ -8,13 +8,8 @@
 <script>
 import AxiosInstance from '../config/axiosInstance'
 import videojs from 'video.js';
-import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
-
-
-// Assuming DynamoDB is configured appropriately (region, credentials, etc.)
-
 
 export default {
   name: 'VideoPlayer',

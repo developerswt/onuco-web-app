@@ -125,7 +125,6 @@ const routes = [
     component: LoginPage,
     meta: {
         title: 'Log In And Start Learning',
-        // breadcrumb: 'Login'
     },
   },
   {
@@ -134,17 +133,14 @@ const routes = [
     component: Errorone,
     meta: {
         title: '',
-        // breadcrumb: 'Errorone'
     },
   },
   {
     path: "/search",
-    // path: "/search/:query",
     name: "Search",
     component: Search,
     meta: {
         title: '',
-        // breadcrumb: 'Search'
     },
   },
   {
@@ -153,7 +149,6 @@ const routes = [
     component: Searchresults,
     meta: {
         title: '',
-        // breadcrumb: 'Searchresults'
     },
   },
 
@@ -163,31 +158,15 @@ const routes = [
     component: Errortwo,
     meta: {
         title: '',
-        // breadcrumb: 'Errortwo'
     },
   },
   
   {
-    // path: "/Academia/:name"
     path: "/Academia/:name",
     name: "Branches",
     component: Branches,
-    beforeEnter: (to, from, next) => {
-      // Check if the route matches the pattern for dynamic content
-      if (to.params.name && to.params.name.endsWith('.png')) {
-        // If it looks like an image, don't let Vue Router handle it
-        next(false);
-      } else {
-        // Continue with normal route handling
-        next();
-      }
-    },
     meta: {
         title: 'Branches Details Page',
-        breadcrumb: {
-            label: 'Branches',
-            parent: 'Home' 
-        }
     },
   },
   {
@@ -196,48 +175,22 @@ const routes = [
     component: CoursesPage,
     meta: {
         title: 'Courses Page',
-        // breadcrumb: {
-        //   label: 'Courses',
-        //   parent: 'Mylearnings' // Here you should use exact string as for name property in "parent" route
-        // }
     },
   },
   {
     path: "/CollegeDetails/:name",
     name: "Semester",
     component: CollegeDetails,
-    beforeEnter: (to, from, next) => {
-      // Check if the route matches the pattern for dynamic content
-      if (to.params.name && to.params.name.endsWith('.png')) {
-        // If it looks like an image, don't let Vue Router handle it
-        next(false);
-      } else {
-        // Continue with normal route handling
-        next();
-      }
-    },
     meta: {
         title: 'College Semaster details Page',
-        // breadcrumb: 'CollegeDetails'
     },
   },
   {
     path: "/CourseDetails/:name",
     name: "CourseDetails",
     component: CourseDetails,
-    beforeEnter: (to, from, next) => {
-      // Check if the route matches the pattern for dynamic content
-      if (to.params.name && to.params.name.endsWith('.png')) {
-        // If it looks like an image, don't let Vue Router handle it
-        next(false);
-      } else {
-        // Continue with normal route handling
-        next();
-      }
-    },
     meta: {
         title: 'Semaster details Page',
-        // breadcrumb: CourseDetails
     },
   },
   {
@@ -252,16 +205,6 @@ const routes = [
     path: "/Universities/:name",
     name: "Universities",
     component: Universities,
-    beforeEnter: (to, from, next) => {
-      // Check if the route matches the pattern for dynamic content
-      if (to.params.name && to.params.name.endsWith('.png')) {
-        // If it looks like an image, don't let Vue Router handle it
-        next(false);
-      } else {
-        // Continue with normal route handling
-        next();
-      }
-    },
     meta: {
         title: 'Universities Upload Page',
         // breadcrumb: route => route.params.id
@@ -271,19 +214,8 @@ const routes = [
     path: "/Instructor/:name",
     name: "Instructor",
     component: Instructor,
-    beforeEnter: (to, from, next) => {
-      // Check if the route matches the pattern for dynamic content
-      if (to.params.name && to.params.name.endsWith('.png')) {
-        // If it looks like an image, don't let Vue Router handle it
-        next(false);
-      } else {
-        // Continue with normal route handling
-        next();
-      }
-    },
     meta: {
         title: 'Instructor Page',
-        // breadcrumb: 'Instructor'
     },
   },
   {
@@ -394,23 +326,6 @@ const routes = [
       title: 'Unoco Application',
     },  
   },
-  // {
-  //   path: "/ApLecture",
-  //   name: "ApLecture",
-  //   component: ApLecture,
-  //   meta: {
-  //     title: 'Unoco Application',
-  //   },  
-  // },
-  // {
-  //   path: "/ApHome",
-  //   name: "ApHome",
-  //   component: ApHome,
-  //   meta: {
-  //     title: 'Unoco Application',
-  //   },  
-  // },
-  
 
   {
     path: "/Adminpanal",
@@ -562,13 +477,11 @@ const routes = [
 
 const router = createRouter({
 	history: createWebHistory(),
+  // base: '',
 	routes,
   breadcrumbs: {
     separator: " / ", // Customize the separator
   },
-	// scrollBehavior() {
-	// 	document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
-	// }
 	scrollBehavior(to) {
 		if (to.hash) {
 			return {
@@ -583,12 +496,7 @@ const router = createRouter({
 		}
 	}
 });
-// router.use(Breadcrumbs);
-
 router.beforeEach((to, from, next) => {
-	//document.title = `${to.meta.title}`;
-	//document.title = `${to.meta.title}`;
-    //document.title = `${to.params.name}`;
     const title = to.meta.title
 
     //Take the title from the parameters
@@ -622,7 +530,5 @@ router.beforeResolve(async (to, from, next) => {
   }
   return next()
 });
-
-
 
 export default router;
