@@ -16,23 +16,22 @@
                                     <th>Subscription Students</th>
                                     <!-- <th>Fee</th>
                            <th>Fee Due</th> -->
-                                </tr>
-                            </thead>
-                            <tbody v-for="item in items" :key="item.subjectName">
-                                <tr>
-                                    <td>{{ item.subjectName }}</td>
-                                    <td> {{ item.totalAmountCollected }}</td>
-                                    <td>{{ item.totalSubscribedStudents }}</td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
+                       </tr>
+                   </thead>
+                   <tbody v-for="items in item" :key="items.subjectName">
+                    <tr>
+                        <td>{{ items.subjectName }}</td>
+                        <td> {{ items.totalAmountCollected }}</td>
+                        <td>{{ items.totalSubscribedStudents}}</td>
+                    </tr>
+                   </tbody>
+                       
+               </table>
             </div>
-
-        </div>
-        <Loading v-model:active="isLoading"></Loading>
+      </div>
+      </div>
+    
+  </div>
 
     </div>
 </template>
@@ -43,18 +42,18 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 export default {
 
-    name: "SubStudent",
-    components: {
-        Loading,
-
-    },
-    data() {
-        return {
-            items: [],
-        }
-    },
-    async created() {
-        this.isLoading = true;
+  name: "SubStudent",
+  components: {
+          Loading,
+          
+      },
+  data() {        
+          return {
+            item:[],
+          }
+        },
+        async created() { 
+            this.isLoading = true;  
         try {
             const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
             this.item = result.data;

@@ -23,28 +23,25 @@
                 </table>
             </div>
         </div>
-        <Loading v-model:active="isLoading"></Loading>
+        <!-- <Loading v-model:active="isLoading"></Loading> -->
     </div>
 </template>
 <script>
-import AxiosInstance from '../config/axiosInstance';
-import Loading from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-export default {
+  import AxiosInstance  from '../config/axiosInstance';
+//   import Loading from 'vue3-loading-overlay';
+//   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  export default {
 
-    name: "ApFaculty",
-    components: {
-        Loading,
-
-    },
-    data() {
-        return {
-            product: [],
-
-
-        }
-    },
-
+  name: "ApFaculty",
+  
+  data() {        
+          return {
+            product:[],
+         
+           
+          }
+        },
+   
     computed: {
         isuser() {
             console.log(this.$store.state.user);

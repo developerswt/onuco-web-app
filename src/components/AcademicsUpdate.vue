@@ -38,44 +38,42 @@
           <label for="academiaName"><b>Academia Name:</b></label>
           <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
 
-          <button class="btn2" type="submit">Add Branch</button>
-        </form>
-      </div>
-    </div>
-    <div v-if="showChildRow">
-      <div
-class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
-        aria-modal="true" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content mc">
-
-            <div class="modal-body" style="overflow: auto !important;">
-
-              <div class="container bg-light">
-                <div v-if="ismodel" class="row">
-                  <div class="col-sm-12">
-                    <p><b>ID: </b> {{ childPara.id }}</p>
-                    <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                    <p><b>Academia Name:</b>{{ childPara.name }}</p>
-                    <p><b>Description:</b> {{ childPara.description }}</p>
-
-                  </div>
-                </div>
-                <div v-else class="row">
-                  <div class="col-sm-12">
-                    <p><b>ID: </b>{{ childPara.id }}</p>
-
-                    <div class="">
-                      <label><b>Academia Name:</b></label><br>
-                      <input v-model="childPara.name" type="text" />
-                    </div>
-                    <div class="">
-                      <label><b>Description:</b></label><br>
-                      <input v-model="childPara.description" type="text" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    <button class="btn2" type="submit">Add Academics</button>
+                </form>
+            </div>
+        </div>
+   <div v-if="showChildRow">
+   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
+     <div class="modal-dialog" role="document">
+       <div class="modal-content mc">
+         
+         <div class="modal-body" style="overflow: auto !important;">
+           
+             <div class="container bg-light">
+                                 <div v-if="ismodel" class="row">
+                                     <div class="col-sm-12">
+                                       <p><b>ID: </b> {{childPara.id  }}</p>
+                                          <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
+                                          <p><b>Academia Name:</b>{{childPara.name }}</p>
+                                          <p><b>Description:</b> {{ childPara.description }}</p>
+                                          
+                                      </div>
+                                 </div>
+                                 <div v-else class="row">
+                                   <div class="col-sm-12">
+                                          <p><b>ID: </b>{{childPara.id}}</p>
+                                          
+                                          <div class="">
+                                           <label><b>Academia Name:</b></label><br>
+                                           <input v-model="childPara.name" type="text"/>
+                                         </div> 
+                                         <div class="">
+                                           <label><b>Description:</b></label><br>
+                                           <input v-model="childPara.description" type="text"/>
+                                         </div>  
+                                     </div>
+                                 </div>
+                                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
