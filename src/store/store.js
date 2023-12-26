@@ -13,6 +13,12 @@ export default createStore ({
         token: null,
         jwtToken: null,
         users: null,
+        selectedType: null,
+    selectedBranch: null,
+    selectedUni: null,
+    selectedSem: null,
+    selectedCourse: null,
+    selectedAcademics: null,
         // isCourseActive: false,
     },
     
@@ -36,6 +42,24 @@ export default createStore ({
         // setIsAboutActive(state, isActive) {
         //     state.isCourseActive = isActive;
         // },
+        setType(state, type) {
+            state.selectedType = type;
+          },
+          setBranch(state, branch) {
+            state.selectedBranch = branch;
+          },
+          setUni(state, uni) {
+            state.selectedUni = uni;
+          },
+          setSem(state, sem) {
+            state.selectedSem = sem;
+          },
+          setCourse(state, course) {
+            state.selectedCourse = course;
+          },
+          setAcademics(state, Academia){
+            state.selectedAcademics = Academia;
+          }
         
     },
 

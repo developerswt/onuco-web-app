@@ -51,7 +51,7 @@
                     <label for="academiaName"><b>Academia Name:</b></label>
                     <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
 
-                    <button class="btn2" type="submit">Add Branch</button>
+                    <button class="btn2" type="submit">Add Academics</button>
                 </form>
             </div>
         </div>

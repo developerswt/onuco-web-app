@@ -78,6 +78,8 @@
                                           <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
                                           <p><b>Course Name:</b>{{childPara.name }}</p>
                                           <p><b>Description:</b> {{ childPara.description }}</p>
+                                          <p><b>Actual Price:</b> {{ childPara.actualPrice }}</p>
+                                         <p><b>Discount Price:</b> {{ childPara.discountPrice }}</p>
                                           <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
                                           
                                       </div>
@@ -85,7 +87,6 @@
                                  <div v-else class="row">
                                    <div class="col-sm-12">
                                           <p><b>ID: </b> {{childPara.id  }}</p>
-                                          
                                           <div class="">
                                            <label><b>Course Name:</b></label><br>
                                            <input v-model="childPara.name" type="text" />
@@ -94,16 +95,24 @@
                                            <label><b>Description:</b></label><br>
                                            <input v-model="childPara.description" type="text" />
                                          </div> 
-                                         <!-- <div>
-                                            <label><b>Work Flow:</b></label><br>
-                                            <select v-model="childPara.workFlowStatement">
-                                            <option value="Draft">Draft</option>
-                                            <option value="Review">Review</option>
-                                            <option value="Release">Release</option>
-                                          </select>
-                                         </div>  -->
-                                     </div>
-                                         
+                                         <div>
+                                         <label><b>Actual Price:</b></label><br>
+                                          <input v-model="childPara.actualPrice" type="text" @change="updatePrice(childPara.id, childPara.actualPrice)" />
+                                        </div>
+
+                                        <div class="">
+                                        <label><b>Discount Price:</b></label><br>
+                                        <input v-model="childPara.discountPrice" type="text" @change="updatePrice(childPara.id, childPara.discountPrice)" />
+                                        </div>  
+                                         <div>
+                                           <label><b>Work Flow:</b></label><br>
+                                           <select v-model="childPara.workFlowStatement" @change="updateWorkFlow(childPara.id)">
+                                             <option value="Draft">Draft</option>
+                                             <option value="Review">Review</option>
+                                             <option value="Release">Release</option>
+                                           </select>
+                                        </div>
+                                       </div>       
                                  </div>
                                 </div>
             </div>
@@ -162,7 +171,7 @@
          domLayout: null,
          Orders: [],
          req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'}],
+         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'},{name:'WorkFlow', field:'workFlowStatement'}],
          gridApi: null,
          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
          columnApi: null,
@@ -275,6 +284,38 @@
       console.log(error);
       }
        },
+
+       async updatePrice(id) {
+        this.showDialog = false;
+          try {
+                const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+                console.log(res);
+                this.ismodel = true;
+      
+            if (res.status === 200) {
+              await this.getdata();
+              this.gridApi.refreshCells({ force: true });
+            }
+          } catch (error) {
+            console.log(error);
+            }
+      },
+
+       async updateWorkFlow(id) {
+        this.showDialog = false;
+        try {
+          const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
+          console.log(result);
+          this.ismodel = true;
+
+          if (result.status === 200) {
+        await this.getdata();
+        this.gridApi.refreshCells({ force: true });
+      }
+    } catch (error) {
+      console.log(error);
+      }
+      },
       
  
        async addBranch() {

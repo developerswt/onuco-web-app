@@ -38,18 +38,17 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div v-if="isUserSuperadmin" class="card color">
+  <div class="card color">
     <div class="box">
-      <div v-if="counts" class="content">
-        <h3 class="head"><router-link to="/ApLecture">Course </router-link></h3>
-        <span style=" font-size:26px"> {{counts.totalCount }}</span>
+      <div class="content">
+        <h3 class="head"><router-link to="/ApLecture">Lecturer Payments </router-link></h3>
     </div>
    </div>
   </div>
   </div>
 </div>
 <div class="row" style="justify-items: center;">
-  <!-- <div class="col-sm-3 cardpd" >
+  <div class="col-sm-3 cardpd" >
    <div class="card color" >
     <div class="box">
       <div class="content">
@@ -58,7 +57,7 @@
     </div>
     </div>
   </div>
-  </div> -->
+  </div>
   <div class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
@@ -79,7 +78,7 @@
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd">
+  <!-- <div class="col-sm-3 cardpd">
   <div v-if="isUserSuperadmin" class="card color " >
     <div class="box">
       <div class="content">
@@ -88,9 +87,9 @@
     </div>
    </div>
   </div>
-  </div>
+  </div> -->
 </div>
-<div class="row" style="justify-items: center;">
+<!-- <div class="row" style="justify-items: center;">
   <div class="col-sm-3 cardpd">
    <div v-if="isUserSuperadmin" class="card color">
     <div class="box">
@@ -132,7 +131,7 @@
   </div>
   </div>
  
-</div>
+</div> -->
 <div v-if="isUserAdmin" class="row"  style="justify-items: center;">
   <div class="col-sm-3 cardpd">
    <div class="card color" >
@@ -211,7 +210,7 @@
   <div class="card color vv" >
     <div class="box">
       <div class="content">
-        <h3 class="head"><router-link to="/CourseWorkflow">Course Workflow</router-link></h3>
+        <h3 class="head"><router-link to="/DataCreation">Data Creation</router-link></h3>
        
     </div>
    </div>
@@ -312,16 +311,55 @@
 
 
 </section>
-<!-- <Loading v-model:active="isLoading"></Loading> -->
+
 </div>
+<!-- <form-wizard @on-complete="onComplete" step-size="xs">
+    <tab-content title="Types">
+      <AddTypes />
+    </tab-content>
+    <tab-content title="Academics" >
+      <AcademicsUpdate />
+    </tab-content>
+    <tab-content title="Branches" >
+      <AddBranches />
+    </tab-content>
+    <tab-content title="University" >
+      <AddUni />
+    </tab-content>
+    <tab-content title="Semester">
+      <AddSem />
+    </tab-content>
+    <tab-content title="Courses" >
+      <AddCourse />
+    </tab-content>
+  
+  </form-wizard> -->
 </template>
 <script>
-   import AxiosInstance  from '../config/axiosInstance';
-  // import Loading from 'vue3-loading-overlay';
-  // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+// import AddTypes from './AddTypes.vue'
+// import AcademicsUpdate from './AcademicsUpdate.vue'
+// import AddBranches from './AddBranches.vue'
+// import AddUni from './AddUni.vue'
+// import AddSem from './AddSem.vue'
+// import AddCourse from './AddCourse.vue'
+// import {FormWizard,TabContent} from "vue3-form-wizard";
+// import 'vue3-form-wizard/dist/style.css'
+import AxiosInstance  from '../config/axiosInstance';
+  
   export default {
 
-  name: "Actstudent",
+  name: "Aphome",
+  components: {
+    // FormWizard,
+    // TabContent,
+    // AddTypes,
+    // AcademicsUpdate,
+    // AddBranches,
+    // AddUni,
+    // AddCourse,
+    // AddSem,
+    AxiosInstance
+  },
   data() {        
     return {
       person:null,
@@ -348,6 +386,11 @@
     this.isuser['cognito:groups'][0] === 'SuperAdmin';
 },
 
+  },
+  methods: {
+    onComplete() {
+      alert("Yay. Done!");
+    },
   },
   async created() { 
     this.isLoading = true;

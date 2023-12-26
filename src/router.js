@@ -40,7 +40,7 @@ import ApBilling from "./components/ApBilling.vue"
 import AlertDialog from './components/AlertDialog.vue';
 import ApFaculty from './components/ApFaculty.vue'
 import ActstdBycourse from './components/ActstdBycourse.vue'
-import CourseWorkFlow from './components/CourseWorkFlow.vue'
+import AddTypes from './components/AddTypes.vue'
 import BranchesUpdate from './components/BranchesUpdate.vue'
 import SemUpdate from './components/SemUpdate.vue'
 import UniUpdate from './components/UniUpdate.vue'
@@ -55,6 +55,12 @@ import AcademicsUpdate from './components/AcademicsUpdate.vue'
 import AdAcademics from './components/AdAcademics.vue'
 import AdTypes from './components/AdTypes.vue'
 import TypesUpdate from './components/TypesUpdate.vue'
+import AddBranches from './components/AddBranches.vue'
+import AddUni from './components/AddUni.vue'
+import AddSem from './components/AddSem.vue'
+import AddCourse from './components/AddCourse.vue'
+import DataCreation from './components/DataCreation.vue'
+import AddAcademics from './components/AddAcademics.vue'
 
 let user = null; // Initialize user as null
 
@@ -464,9 +470,9 @@ const routes = [
         component: ActstdBycourse,
       },
       {
-        path: "/CourseWorkFlow",
-        name: "CourseWorkFlow",
-        component: CourseWorkFlow, 
+        path: "/AddTypes",
+        name: "AddTypes",
+        component: AddTypes, 
       },
       {
         path: "/BranchesUpdate",
@@ -542,7 +548,37 @@ const routes = [
         component: TypesUpdate, 
 
       },
+      {
+        path:"/AddBranches",
+        name: "AddBranches",
+        component: AddBranches, 
+      },
+      {
+        path:"/AddUni",
+        name: "AddUni",
+        component: AddUni, 
+      },
+      {
+        path:"/AddSem",
+        name: "AddSem",
+        component: AddSem, 
+      },
+      {
+        path:"/AddCourse",
+        name: "AddCourse",
+        component: AddCourse, 
+      },
       
+      {
+        path:"/DataCreation",
+        name: "DataCreation",
+        component: DataCreation, 
+      },
+      {
+        path:"/AddAcademics",
+        name: "AddAcademics",
+        component: AddAcademics, 
+      },
 
      ],
     meta: {

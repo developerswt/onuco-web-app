@@ -20,11 +20,11 @@
                            <th>Fee Due</th> -->
                        </tr>
                    </thead>
-                   <tbody v-for="item in items" :key="item.subjectName">
+                   <tbody v-for="items in item" :key="items.subjectName">
                     <tr>
-                        <td>{{ item.subjectName }}</td>
-                        <td> {{ item.totalAmountCollected }}</td>
-                        <td>{{item.totalSubscribedStudents}}</td>
+                        <td>{{ items.subjectName }}</td>
+                        <td> {{ items.totalAmountCollected }}</td>
+                        <td>{{ items.totalSubscribedStudents}}</td>
                     </tr>
                    </tbody>
                        
@@ -34,7 +34,6 @@
       </div>
     
   </div>
-  <Loading v-model:active="isLoading"></Loading>
 
   </div>
 </template>
@@ -52,7 +51,7 @@
       },
   data() {        
           return {
-            items:[],
+            item:[],
           }
         },
         async created() { 

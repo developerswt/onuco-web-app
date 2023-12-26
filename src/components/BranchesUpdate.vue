@@ -134,7 +134,7 @@ export default {
         description: '',
         academiaId: '',
         branchName: '',
-        // Add other properties as needed
+       
       },
       formVisible: false,
          userName: '',

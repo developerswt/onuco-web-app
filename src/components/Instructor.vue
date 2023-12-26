@@ -83,11 +83,10 @@ v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl"
                         <div class="col-sm-12 col-lg-12">
                             <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
                                 faculty.description.slice(0, 168) : '' }}
-                                <span class="read" @click="toggleReadMore">...<span style="color:blue">Read
-                                        more</span></span>
+                                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
                             </p>
                             <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
-                                <span @click="toggleReadMore"><br><span style="color:blue">Read less</span></span>
+                                <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read less</span></span>
                             </p>
                         </div>
                     </div>

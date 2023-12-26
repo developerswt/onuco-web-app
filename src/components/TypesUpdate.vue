@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="container" ><p>Dashbord > Types Update </p>
+    <div class="container" ><p>Types Update </p>
         <div class="row">
             <div class="col-lg-6 col-sm-12">
      <div style="padding: 20px;"  >
@@ -42,10 +42,11 @@
       <label for="description">Description:</label>
       <input id="description" v-model="newBranch.description" type="text" required><br>
 
-      <button class="btn2" type="submit">Add University</button>
+      <button class="btn2" type="submit">Add Types</button>
     </form>
     </div>
     </div>
+    
    <div v-if="showChildRow">
    <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
      <div class="modal-dialog" role="document">
@@ -267,10 +268,7 @@
              this.isLoading = false;
              }
     },
-         onLogOut() {
-           this.$store.commit('isLoggedIn', false);
-           this.$router.push('/Loginpage');
-         },  
+        
          async getdata(){
            this.domLayout = 'autoHeight'; 
            this.isLoading = true;
