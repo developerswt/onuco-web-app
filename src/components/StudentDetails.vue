@@ -77,6 +77,9 @@ type="button" class="btn btn-secondary" data-dismiss="modal"
       </div>
     </div>
     <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
+    <div class="col-sm-6">
+      <apexchart width="500" class="pt-5" :options="options" :series="series"></apexchart>
+    </div>
     <Loading v-model:active="isLoading"></Loading>
   </div>
 </template>
@@ -90,12 +93,15 @@ import { AgGridVue } from "ag-grid-vue3";
 // import AlertDialog from './AlertDialog.vue';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import VueApexCharts from "vue3-apexcharts";
+
 
 export default {
   name: "StudentDetails",
   components: {
     AgGridVue,
     Loading,
+    apexchart: VueApexCharts,
     // AlertDialog
   },
   data: function () {
@@ -123,6 +129,47 @@ export default {
         headerClass: 'ag-right-aligned-header',
         cellClass: 'ag-right-aligned-cell'
       },
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: [],
+          title: {
+            text: "Number Of Active and Total Price",
+          },
+        },
+        yaxis: [
+          {
+            title: {
+              text: "Active Students",
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: "Total Price",
+            },
+          },
+        ],
+        dataLabels: {
+          enabled: true,
+          enabledOnSeries: [1]
+
+        },
+        
+      },
+      series: [{
+          name: 'ActiveUser',
+          data: [],
+          type: 'bar',
+        },
+        {
+          name: 'Price',
+          data: [],
+          type: 'line',
+        },
+      ]
     };
   },
   computed: {
@@ -137,14 +184,15 @@ export default {
     try {
       const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
       let req = res.data;
-      this.Orders = req;
+      this.Orders = res.data;
+      console.log(this.Orders);
       if (Array.isArray(req.completedStudents)) {
         this.rowData = req.completedStudents;
       } else {
         // Handle the case where completedStudents is not an array
         console.error('completedStudents is not an array:', req.completedStudents);
       }
-
+      this.processChartData();
     } catch (error) {
       this.isLoading = false;
       console.log(error);
@@ -164,6 +212,31 @@ export default {
 
 
   methods: {
+    processChartData() {
+      console.log(this.Orders.completedStudents);
+      if (this.Orders) {
+        this.Orders.completedStudents.forEach(order => {
+          const dataPoint = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: 1,
+          };
+          const Price = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: order.price,
+          };
+          this.options.xaxis.categories = this.getMonthYear(order.startdate);
+          this.series[0].data.push(dataPoint);
+          this.series[1].data.push(Price);
+
+        });
+      }
+    },
+  
+    getMonthYear(date) {
+      const d = new Date(date);
+      const month = d.toLocaleString("en-US", { month: "short" });
+      return month;
+    },
 
     onCellClicked(params) {
       this.childPara = params.node.data
