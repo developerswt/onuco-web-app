@@ -3,15 +3,16 @@
       <h5>Universities Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select University Name:</label>
+          <label for="productDropdown">Select University :</label>
           <select v-model="selectedUni" @change="emitSelectedType">
+            <option value="" disabled selected hidden>Choose a Name</option>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
         </div>
-        <!-- <div class="table-responsive">
-          <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+        <div  class="table-responsive">
+          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -42,7 +43,18 @@
           </table>
           
           <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-          <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New University</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addBranch"> 
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName"> Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
@@ -51,14 +63,18 @@
                     <input id="description" v-model="newBranch.description" type="text" required><br>
 
                     <label for="branchesId">Branches Id:</label>
-                    <input id="branchesId" v-model="newBranch.branchesId" type="text" required><br>
+                    <input id="branchesId" v-model="this.selectedbranch" type="text" required><br>
 
                     <label for="universityName"><b>University Name:</b></label>
                     <input id="universityName" v-model="newBranch.universityName" type="text" required>
 
                     <button class="btn2" type="submit">Add University</button>
                 </form>
-        </div> -->
+                </div>
+                </div>
+                </div>
+                </div>
+        </div>
       </div>
     </div>
   </template>
@@ -74,7 +90,7 @@
       return {
         formVisible: false,
         products: [],
-        selectedUni: null,
+        selectedUni: '',
         selectedProduct: { id: null, name: '', description: '', branchesId:null },
         isLoading: false,
         editMode: false,
@@ -87,17 +103,32 @@
         newBranch: {
         name: '',
         description: '',
-        branchesId: '',
+        branchesId: this.selectedbranch,
         universityName: '',
        },
       };
     },
+    computed: {
+    isTableVisible() {
+      return !!this.selectedUni; // Show table if a type is selected
+    },
+  },
+  watch: {
+    selectedbranch: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        this.loadData();
+      },
+    },
+  },
     created() {
       this.loadData();
     },
     methods: {
       emitSelectedType() {
         this.$emit('selected-university-changed', this.selectedUni);
+        this.loadData(); 
+        this.loadProductDetails();
       },
       toggleForm() {
           this.formVisible = !this.formVisible;
@@ -108,19 +139,9 @@
       try {
         const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
         this.products = res.data;
-        console.log(this.selectedbranch);
+        // console.log(this.selectedbranch);
+        // this.loadProductDetails();
 
-      // if (Array.isArray(this.products.universities)) {
-      //   this.rowData = this.products.universities;
-      // } else {
-      //   console.error('universities is not an array:', this.products.universities);
-      //   this.rowData = []; 
-      // }
-  
-      // if (this.rowData.length > 0) {
-      //   this.selectedUni = this.rowData[0].id;
-      //   this.loadProductDetails();
-      // }
       } catch (error) {
         console.log(error);
       } finally {
@@ -128,87 +149,79 @@
       }
     },
     
-    // async loadProductDetails() {
-    //   if (Array.isArray(this.rowData)) {
-    //     const selectedProduct = this.rowData.find(product => product.id === this.selectedUni);
-    //   if (selectedProduct) {
-    //     this.selectedProduct = { ...selectedProduct };
-    //   // this.newBranch.branchesId = this.selectedProduct.id; 
+    async loadProductDetails() {
+      const selectedProduct = this.products.find(product => product.id === this.selectedUni);
+      if (selectedProduct) {
+        this.selectedProduct = { ...selectedProduct };
+      // this.newBranch.branchesId = this.selectedProduct.id; 
 
-    //   }
-    //   } else {
-    //     console.error('rowData is not an array:', this.rowData);
-    //   }
-    // },
+      }
+      
+    },
 
-    //   enableEditMode() {
-    //   this.editMode = true;
-    //   this.editedProduct.id = this.selectedProduct.id;
-    //   this.editedProduct.name = this.selectedProduct.name;
-    //   this.editedProduct.description = this.selectedProduct.description;
-    //   this.editedProduct.branchesId = this.selectedProduct.branchesId;
+      enableEditMode() {
+      this.editMode = true;
+      this.editedProduct.id = this.selectedProduct.id;
+      this.editedProduct.name = this.selectedProduct.name;
+      this.editedProduct.description = this.selectedProduct.description;
+      this.editedProduct.branchesId = this.selectedProduct.branchesId;
 
-    // },
+    },
 
-    // async updateProduct(id) {
-    //   try {
-    //     const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-    //     console.log(res);
+    async updateProduct(id) {
+      try {
+        const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+        console.log(res);
 
-    //     if (res.status === 200) {
-    //       await this.loadData();
-    //       this.editMode = false; // Disable edit mode after successful update
-    //       this.ismodel = true; 
-    //     }
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   },
+        if (res.status === 200) {
+          await this.loadData();
+          this.editMode = false; 
+          this.ismodel = true; 
+          this.loadProductDetails();
+        }
+        } catch (error) {
+          console.error(error);
+        }
+      },
 
-    // async addBranch() {
-    //   this.isLoading = true;
-    //   try {
-    //     const response = await AxiosInstance.post('/University', this.newBranch);
-    //     this.ismodel = true; 
-    //   if (response.status === 200) {
-    //     console.log("Branch added successfully");
-    //     await this.getdata();
-    //       // this.gridApi.refreshCells({ force: true });
+    async addBranch() {
+      this.isLoading = true;
+      try {
+        const response = await AxiosInstance.post('/University', this.newBranch);
+        this.ismodel = true; 
+      if (response.status === 200) {
+        console.log("Branch added successfully");
+        await this.loadData();
+        this.loadProductDetails();
+          // this.gridApi.refreshCells({ force: true });
 
-    //     alert("Insert Successful");
-    //   } else {
-    //     alert("Insert Fail");
-    //   }
+        alert("Insert Successful");
+        this.formVisible = false;
+
+      } else {
+        alert("Insert Fail");
+      }
           
-    //   } catch (error) {
-    //     this.isLoading = false;
-    //     console.error("Error adding branch:", error);
-    //   }
-    //   finally {
-    //          this.isLoading = false;
-    //   }
-    // },
+      } catch (error) {
+        this.isLoading = false;
+        console.error("Error adding branch:", error);
+      }
+      finally {
+             this.isLoading = false;
+      }
+    },
     // async getdata() {
     //    this.isLoading = true;
-    //     try {
-    //         const res = await AxiosInstance.get(`/University`);
-    //         this.products = res.data;
+    //    try {
+    //     const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
+    //     this.products = res.data;
+    //     console.log(this.selectedbranch);
 
-    //         if (Array.isArray(this.products.universities)) {
-    //         this.rowData = this.products.universities;
-    //     } else {
-    //         console.error('universities is not an array:', this.products.universities);
-    //     }
-
-    //     if (this.rowData.length > 0) {
-    //         this.selectedUni = this.rowData[0].id;
-    //         this.loadProductDetails();
-    //     }
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         this.isLoading = false;
-    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.isLoading = false;
+    //   }
         
     // },
 
@@ -270,10 +283,44 @@
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
+      margin-top: 20px;
     }
 
 
     button:hover {
         background-color: #007bff;
     }
+
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-dialog {
+    position: relative;
+    margin: 10% auto;
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f9fa;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
 </style>

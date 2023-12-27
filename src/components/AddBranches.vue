@@ -3,15 +3,16 @@
       <h5>Branches Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select BranchName:</label>
+          <label for="productDropdown">Select Branch :</label>
           <select v-model="selectedbranch" @change="emitSelectedType">
+            <option value="" disabled selected hidden>Choose a Name</option>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
         </div>
-        <div class="table-responsive">
-          <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+        <div  class="table-responsive">
+          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -26,7 +27,7 @@
                   <td>{{ this.selectedProduct.id }}</td>
                   <td v-if="!editMode">{{ this.selectedProduct.name }}</td>
                   <td v-if="editMode">
-                    <input v-model="this.selectedProduct.id" type="text" required>
+                    <input v-model="this.selectedProduct.name" type="text" required>
                   </td>
                   <td v-if="!editMode">{{ this.selectedProduct.description }}</td>
                   <td v-if="editMode">
@@ -42,7 +43,18 @@
           </table>
           
           <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-          <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Branch</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addBranch">  
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName"> Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
@@ -51,13 +63,17 @@
                     <input id="description" v-model="newBranch.description" type="text" required><br>
 
                     <label for="academiaId">AcademiaId:</label>
-                    <input id="academiaId" v-model="newBranch.academiaId" type="text" required><br>
+                    <input id="academiaId" v-model="this.selectedacademic" type="text" required><br>
 
                     <label for="branchName"><b>BranchName:</b></label>
                     <input id="branchName" v-model="newBranch.branchName" type="text" required>
 
                     <button class="btn2" type="submit">Add Branch</button>
                 </form>
+                </div>
+                </div>
+                </div>
+                </div>
         </div>
       </div>
     </div>
@@ -74,7 +90,7 @@
       return {
         formVisible: false,
         products: [],
-        selectedbranch: null,
+        selectedbranch:'',
         selectedProduct: { id: null, name: '', description: '',academiaId:null },
         isLoading: false,
         editMode: false,
@@ -87,19 +103,33 @@
         newBranch: {
         name: '',
         description: '',
-        academiaId: '',
+        academiaId: this.selectedacademic,
         branchName: '',
        },
       };
     },
+    computed: {
+    isTableVisible() {
+      return !!this.selectedbranch; // Show table if a type is selected
+    },
+  },
+  watch: {
+    selectedacademic: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        this.loadData();
+      },
+    },
+  },
     created() {
-      // console.log(this.selectedtype);
       this.loadData();
-      console.log('Selected Type:', this.selectedAcademics);
     },
     methods: {
       emitSelectedType() {
         this.$emit('selected-branches-changed', this.selectedbranch);
+        this.loadData(); 
+        this.loadProductDetails();
+
       },
       toggleForm() {
           this.formVisible = !this.formVisible;
@@ -110,8 +140,7 @@
       try {
         const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
         this.products = res.data;
-        // this.selectedbranch = this.products.id;
-        console.log(this.selectedAcademics);
+        this.loadProductDetails();
   
       } catch (error) {
         console.log(error);
@@ -121,36 +150,13 @@
     },
     
     async loadProductDetails() {
-    // {
-    //   const selectedBranchId = this.selectedbranch;
-    //     console.log('Selected Product ID:', selectedBranchId);
-
-    //     this.$store.commit('setBranch', selectedBranchId);
-    // },
+   
     const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
   
   if (selectedProduct) {
     this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
   }
-  const selectedBranchId = this.selectedbranch;
-        console.log('Selected Product ID:', selectedBranchId);
-
-        this.$store.commit('setBranch', selectedBranchId);
-},
-  // if (Array.isArray(this.rowData)) {
-    // const selectedProduct = this.products.includes(product => product.id === this.selectedbranch);
-    // console.log(selectedProduct);
-  //   if (selectedProduct) {
-  //     // Do something with the selected product
-  //     console.log(selectedProduct);
-  //   } else {
-  //     console.warn(`Product with ID ${this.selectedbranch} not found.`);
-  //   }
-  // } else {
-  //   console.error('rowData is not an array:', this.rowData);
-  // }
-// },
-
+    },
 
       enableEditMode() {
       this.editMode = true;
@@ -168,8 +174,10 @@
 
         if (res.status === 200) {
           await this.loadData();
-          this.editMode = false; // Disable edit mode after successful update
+          this.editMode = false; 
           this.ismodel = true; 
+          this.loadProductDetails();
+
         }
         } catch (error) {
           console.error(error);
@@ -185,8 +193,11 @@
 
       if (response.status === 200) {
         console.log("Branch added successfully");
-        await this.getdata();
+        await this.loadData();
+        this.loadProductDetails();
         alert("Insert Successful");
+        this.formVisible = false;
+
       } else {
         alert("Insert Fail");
       }
@@ -198,29 +209,20 @@
       this.isLoading = false;
     }
   },
-    async getdata() {
-       this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/Branches`);
-            this.products = res.data;
-
-            if (Array.isArray(this.products.branches)) {
-            this.rowData = this.products.branches;
-        } else {
-            console.error('Branches is not an array:', this.products.branches);
-        }
-
-        if (this.rowData.length > 0) {
-            this.selectedbranch = this.rowData[0].id;
-            this.loadProductDetails();
-        }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            this.isLoading = false;
-        }
+    // async getdata() {
+    //    this.isLoading = true;
+    //    try {
+    //     const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
+    //     this.products = res.data;
+    //     // console.log(this.selectedAcademics);
+  
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.isLoading = false;
+    //   }
         
-    },
+    // },
 
     },
 };
@@ -280,10 +282,45 @@
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
+      margin-top: 20px;
     }
 
 
     button:hover {
         background-color: #007bff;
     }
+
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-dialog {
+    position: relative;
+    margin: 10% auto;
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f9fa;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+ 
 </style>
