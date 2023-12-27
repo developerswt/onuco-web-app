@@ -3,15 +3,16 @@
       <h5>Semester Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select Semester Name:</label>
+          <label for="productDropdown">Select Semester :</label>
           <select v-model="selectedSem"  @change="emitSelectedType">
+            <option value="" disabled selected hidden>Choose a Name</option>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
           </select>
         </div>
-        <!-- <div class="table-responsive">
-          <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+        <div  class="table-responsive">
+          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -42,7 +43,18 @@
           </table>
           
           <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-          <form v-show="formVisible" class="frm" style="margin-top:25px"  @submit.prevent="addBranch">
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Semester</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addBranch"> 
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName"> Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
@@ -51,21 +63,24 @@
                     <input id="description" v-model="newBranch.description" type="text" required><br>
 
                     <label for="universityId">University Id:</label>
-                    <input id="universityId" v-model="newBranch.universityId" type="text" required><br>
+                    <input id="universityId" v-model="this.selecteduniversity" type="text" required><br>
 
                     <label for="semesterName"><b>Semester Name:</b></label>
                     <input id="semesterName" v-model="newBranch.semesterName" type="text" required>
 
                     <button class="btn2" type="submit">Add Semester</button>
                 </form>
-        </div> -->
+                </div>
+                </div>
+                </div>
+                </div>
+        </div>
       </div>
     </div>
   </template>
   
   <script>
   import AxiosInstance from '../config/axiosInstance';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   
   export default {
     name: "AddSem",
@@ -74,7 +89,7 @@
       return {
         formVisible: false,
         products: [],
-        selectedSem: null,
+        selectedSem: '',
         selectedProduct: { id: null, name: '', description: '',universityId:null },
         isLoading: false,
         editMode: false,
@@ -87,17 +102,32 @@
         newBranch: {
         name: '',
         description: '',
-        universityId: '',
+        universityId: this.selecteduniversity,
         semesterName: '',
        },
       };
     },
+    computed: {
+    isTableVisible() {
+      return !!this.selectedSem; // Show table if a type is selected
+    },
+  },
+  watch: {
+    selecteduniversity: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        this.loadData();
+      },
+    },
+  },
     created() {
       this.loadData();
     },
     methods: {
         emitSelectedType() {
             this.$emit('selected-semester-changed', this.selectedSem);
+            this.loadData(); 
+            this.loadProductDetails();
         },
       toggleForm() {
           this.formVisible = !this.formVisible;
@@ -108,18 +138,8 @@
       try {
         const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
         this.products = res.data;
-  
-    //   if (Array.isArray(this.products.semester)) {
-    //     this.rowData = this.products.semester;
-    //   } else {
-    //     console.error('semester is not an array:', this.products.semester);
-    //     this.rowData = []; 
-    //   }
-  
-    //   if (this.rowData.length > 0) {
-    //     this.selectedSem = this.rowData[0].id;
-    //     this.loadProductDetails();
-    //   }
+        this.loadProductDetails();
+
       } catch (error) {
         console.log(error);
       } finally {
@@ -127,18 +147,15 @@
       }
     },
     
-    // async loadProductDetails() {
-    //   if (Array.isArray(this.rowData)) {
-    //     const selectedProduct = this.rowData.find(product => product.id === this.selectedSem);
-    //   if (selectedProduct) {
-    //     this.selectedProduct = { ...selectedProduct };
-    //     //this.newBranch.universityId = this.selectedProduct.id; 
+    async loadProductDetails() {
+    
+        const selectedProduct = this.products.find(product => product.id === this.selectedSem);
+         if (selectedProduct) {
+        this.selectedProduct = { ...selectedProduct };
+        //this.newBranch.universityId = this.selectedProduct.id; 
 
-    //   }
-    //   } else {
-    //     console.error('rowData is not an array:', this.rowData);
-    //   }
-    // },
+      }
+    },
 
       enableEditMode() {
       this.editMode = true;
@@ -156,8 +173,9 @@
 
         if (res.status === 200) {
           await this.getdata();
-          this.editMode = false; // Disable edit mode after successful update
-          this.ismodel = true; 
+          this.editMode = false; 
+          this.ismodel = true;
+          this.loadProductDetails();
         }
         } catch (error) {
           console.error(error);
@@ -171,10 +189,13 @@
         this.ismodel = true; 
       if (response.status === 200) {
         console.log("Branch added successfully");
-        await this.getdata();
+        await this.loadData();
+        this.loadProductDetails();
           // this.gridApi.refreshCells({ force: true });
 
         alert("Insert Successful");
+        this.formVisible = false;
+
       } else {
         alert("Insert Fail");
       }
@@ -187,29 +208,19 @@
              this.isLoading = false;
       }
     },
-    async getdata() {
-       this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/Semester`);
-            this.products = res.data;
-
-            if (Array.isArray(this.products.semester)) {
-            this.rowData = this.products.semester;
-        } else {
-            console.error('semester is not an array:', this.products.semester);
-        }
-
-        if (this.rowData.length > 0) {
-            this.selectedSem = this.rowData[0].id;
-            this.loadProductDetails();
-        }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            this.isLoading = false;
-        }
+    // async getdata() {
+    //    this.isLoading = true;
+    //    try {
+    //     const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
+    //     this.products = res.data;
+  
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.isLoading = false;
+    //   }
         
-    },
+    // },
 
     },
 };
@@ -269,10 +280,43 @@
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
+      margin-top: 20px;
     }
 
 
     button:hover {
         background-color: #007bff;
     }
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-dialog {
+    position: relative;
+    margin: 10% auto;
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f9fa;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
 </style>

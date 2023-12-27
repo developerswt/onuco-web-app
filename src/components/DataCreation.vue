@@ -1,7 +1,7 @@
 <template>
 
     <div class="container">
-        <h5>Data Creation & Update</h5>
+        <!-- <h5>Data Creation & Update</h5> -->
   
         <form-wizard
     @on-complete="onComplete"
@@ -14,7 +14,7 @@
         <AddTypes @selected-type-changed="handleSelectedTypeChange" />
     </tab-content>
     <tab-content title="Academics">
-<AddAcademics :selectedtype="selectedType" @selected-academic-changed="handleSelectedAcademicChange" v-if="selectedType !== null" />
+    <AddAcademics :selectedtype="selectedType" @selected-academic-changed="handleSelectedAcademicChange" v-if="selectedType" />
     </tab-content>
     <tab-content title="Branches">
       <AddBranches :selectedacademic="selectedAcademic" @selected-branches-changed="handleSelectedBranchesChange" v-if="selectedAcademic" />
@@ -28,22 +28,6 @@
     <tab-content title="Courses" >
       <AddCourse :selectedsemester="selectedSemester" v-if="selectedSemester" />
     </tab-content>
-    <!-- <tab-content title="Academics" v-if="selectedType" >
-      <AddAcademics />
-    </tab-content>
-    <tab-content title="Branches" v-if="selectedAcademics">
-      <AddBranches />
-    </tab-content> -->
-    <!-- <tab-content title="University" v-if="selectedBranch">
-      <AddUni />
-    </tab-content>
-    <tab-content title="Semester">
-      <AddSem />
-    </tab-content>
-    <tab-content title="Courses" >
-      <AddCourse />
-    </tab-content> -->
-  
   </form-wizard>
 </div>
 </template>
@@ -80,20 +64,7 @@ import 'vue3-form-wizard/dist/style.css'
     AddCourse,
     AddSem
   },
-     computed: {
-        // selectedType() {
-        //     console.log(this.$store.state.selectedType);
-        //     return this.$store.state.selectedType;
-        // },
-        // selectedAcademics(){
-        //     console.log(this.$store.state.selectedAcademics);
-        //     return this.$store.state.selectedAcademics;
-        // },
-        // selectedBranch() {
-        //     console.log(this.$store.state.selectedBranch);
-        //     return this.$store.state.selectedBranch;
-        // },
-  },
+ 
   methods: {
     onComplete() {
       // Handle completion if needed

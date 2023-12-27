@@ -37,7 +37,7 @@
     </div>
   </div>
   </div>
-  <div class="col-sm-3 cardpd">
+  <div v-if="isUserAdmin" class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
       <div class="content">
@@ -48,7 +48,7 @@
   </div>
 </div>
 <div class="row" style="justify-items: center;">
-  <div class="col-sm-3 cardpd" >
+  <div v-if="isUserSuperadmin" class="col-sm-3 cardpd" >
    <div class="card color" >
     <div class="box">
       <div class="content">
@@ -207,7 +207,7 @@
   </div>
   </div>
   <div class="col-sm-3 cardpd">
-  <div class="card color vv" >
+  <div v-if="isUserSuperadmin" class="card color vv" >
     <div class="box">
       <div class="content">
         <h3 class="head"><router-link to="/DataCreation">Data Creation</router-link></h3>
@@ -218,7 +218,7 @@
   </div>
 </div>
 <div class="row" style="justify-items: center;"  >
-  <div class="col-sm-3 cardpd" >
+  <!-- <div class="col-sm-3 cardpd" >
   <div v-if="isUserSuperadmin" class="card color vv">
     <div class="box">
       <div class="content">
@@ -227,7 +227,7 @@
     </div>
    </div>
   </div>
-  </div>
+  </div> -->
   <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
   <div class="card color">
     <div class="box">
