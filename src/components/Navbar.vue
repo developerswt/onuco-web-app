@@ -90,11 +90,14 @@ id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i
 class="fa fa-user"
                                     aria-hidden="true"></i> Profile</router-link>
-                            <router-link class="dropdown-item" to="UserNotification"><i
+                                    <router-link v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item" to="/ApHome"><i class="fa fa-user" aria-hidden="true"></i>
+                                Admin</router-link>
+                                    <router-link class="dropdown-item" to="UserNotification"><i
 class="fa fa-bell"
                                     aria-hidden="true"></i> Notifications</router-link>
                             <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i>
                                 Setting</router-link>
+                                
                             <router-link class="dropdown-item" to="" @click="logout()"><i
 class="fa fa-sign-out"
                                     aria-hidden="true"></i> Logout</router-link>
@@ -138,6 +141,18 @@ export default {
         }
     },
     computed: {
+        isUserAdmin() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][0] === 'Admin';
+        },
+        isUserfaculty() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][1] === 'Faculty';
+        },
+        isUserSuperadmin() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][0] === 'SuperAdmin';
+        },
         showSearchBoxOnNavbar() {
             return this.$route.path !== '/search';
         },
