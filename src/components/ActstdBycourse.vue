@@ -7,38 +7,89 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Course Id</th>
-                            <!-- <th>Subject Name</th> -->
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Total Amount Collected</th>
+                            <th>FacultyCognitoId</th>
+                            <th>CompleteSubscribedCount</th>
+                            
 
                         </tr>
                     </thead>
-                    <tbody v-for="products in product.activeStudents" :key="products.id">
+                    <tbody v-for="items in item" :key="items.id">
                         <tr>
-                            <td>{{ products.id }}</td>
-                            <td>{{ products.courseId }}</td>
-                            <!-- <td>{{ product.courseName }}</td> -->
-                            <td>{{ products.startdate }}</td>
-                            <td>{{ products.enddate }}</td>
-                            <td>{{ this.products.totalAmountCollected }}</td>
+                            <td>{{ items.id }}</td>
+                            <td>{{ items.facultycognitoid }}</td>
+                            <td>{{ items.completesubscribedcount }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div>
+            <apexchart class="pt-5 mb-5" width="500" :options="options" :series="series"></apexchart>
         </div>
     </div>
 </template>
 <script>
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import VueApexCharts from "vue3-apexcharts";
+
+
 export default {
 
     name: "ActstdBycourse",
+    components: {
+        apexchart: VueApexCharts,
+    },
     data() {
         return {
-            product: [],
+            item: [],
+            options: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: -40,
+                    },
+                    title: {
+                        text: "Lecture VS Students"
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "Number Of Syudents Subscribed",
+                        },
+                    },
+                    // {
+                    //     opposite: true,
+                    //     title: {
+                    //         text: "Total Amount Collected",
+                    //     },
+                    // },
+                ],
+                // DataLabels configuration for the entire chart
+                
+                // DataLabels configuration for the entire chart
+                dataLabels: {
+                    enabled: true,
+                
+                },
+            },
+            series: [
+                {
+                    name: 'Lecture VS Students',
+                    type: 'bar',
+                    data: [],
+                },
+                // {
+                //     name: 'Lecture Subjects Price',
+                //     type: 'line',
+                //     data: [],
+                // },
+            ],
 
 
         }
@@ -49,27 +100,39 @@ export default {
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
-    created() {
-        this.loadData();
+    async created() {
+        this.isLoading = true;
+        try {
+            const result = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
+            this.item = result.data;
+            console.log(this.item);
+            this.processChartData();
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        }
+        finally {
+            this.isLoading = false;
+        }
     },
-
     methods: {
-        async loadData() {
-            this.isLoading = true;
-            console.log(this.isuser)
-            try {
-                const res = await AxiosInstance.get(`/UserCourseSubscription/ActiveStudentsByCourse?UcognitoId=` + this.isuser.sub);
-                this.product = res.data;
-                console.log(this.product);
-            } catch (error) {
-                this.isLoading = false;
-                console.log(error);
-            }
-            finally {
-                this.isLoading = false;
+        processChartData() {
+            if (this.item) {
+                this.item.forEach(lecture => {
+                    const dataPoint = {
+                        x: lecture.facultycognitoid,
+                        y: lecture.completesubscribedcount,
+                    };
+
+
+                    // this.options.xaxis.categories = this.getMonthYear(this.item.startDate);
+                    this.series[0].data.push(dataPoint);
+                })
             }
         },
+
     },
+
 }
 
 

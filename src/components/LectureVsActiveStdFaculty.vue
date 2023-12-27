@@ -1,9 +1,31 @@
 <!-- App.vue -->
 <template>
-    <div class="container mb-5">
+    <div class="container">
+    <p>Dashbord > Active Student By Course </p>
+    <div class="container" style="margin-top: 72px;">
+      <div class="table-responsive">
+        <br>
+        <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ActiveStudentsCount</th>
+              <th>StartDate</th>
+              <th>EndDate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ this.item[0].activeStudentsCount }}</td>
+              <td>{{ this.item[0].startdate }}</td>
+              <td>{{ this.item[0].enddate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
         <div>
             <apexchart class="mb-5" width="500" :options="options" :series="series"></apexchart>
         </div>
+    </div>
     </div>
 </template>
 

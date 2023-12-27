@@ -61,6 +61,8 @@ import AddSem from './components/AddSem.vue'
 import AddCourse from './components/AddCourse.vue'
 import DataCreation from './components/DataCreation.vue'
 import AddAcademics from './components/AddAcademics.vue'
+import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vue'
+import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
 
 let user = null; // Initialize user as null
 
@@ -507,6 +509,24 @@ const routes = [
     meta: {
       title: 'Unoco Application'
     }
+  },
+  {
+    path: "/LectureVsActiveStdFaculty",
+    name: "LectureVsActiveStdFaculty",
+    component: LectureVsActiveStdFaculty,
+    meta: {
+        title: 'Lecture Faculty',
+    },
+
+  },
+  {
+    path: "/LectureSubjectFaculty",
+    name: "LectureVsSubjectFaculty",
+    component: LectureVsSubjectFaculty,
+    meta: {
+        title: 'Lecture Details',
+    },
+
   },
 
 ];

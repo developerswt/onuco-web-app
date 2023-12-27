@@ -34,18 +34,6 @@
         <div>
             <apexchart class="mb-5" width="500" :options="options" :series="series"></apexchart>
         </div>
-        <div class="pt-5">
-            <LectureVsSubjectFaculty />
-        </div>
-        <div class="pt-5">
-            <LectureVsSubjectAdmin />
-        </div>
-        <div class="pt-5">
-            <LectureVsStudentsAdmin />
-        </div>
-        <div class="pt-5">
-            <LectureVsActiveStdFaculty />
-        </div>
     </div>
 </template>
 
@@ -54,21 +42,13 @@ import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VueApexCharts from "vue3-apexcharts";
-import LectureVsSubjectFaculty from './LectureVsSubjectFaculty.vue';
-import LectureVsSubjectAdmin from './LectureVsSubjectAdmin.vue';
-import LectureVsStudentsAdmin from './LectureVsStudentsAdmin.vue';
-import LectureVsActiveStdFaculty from './LectureVsActiveStdFaculty.vue'
 
 export default {
 
     name: "SubStudent",
     components: {
         Loading,
-        LectureVsSubjectAdmin,
-        LectureVsSubjectFaculty,
-        LectureVsStudentsAdmin,
         apexchart: VueApexCharts,
-        LectureVsActiveStdFaculty
     },
     data() {
         return {

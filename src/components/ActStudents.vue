@@ -35,7 +35,9 @@
         </tbody>
       </table>
     </div>
-
+    <div class="col-sm-6 pt-5">
+      <apexchart width="500" class="pt-5" :options="options" :series="series"></apexchart>
+    </div>
   </div>
 </template>
     
@@ -45,11 +47,14 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue3";
 import AxiosInstance from '../config/axiosInstance';
+import VueApexCharts from "vue3-apexcharts";
+
 
 export default {
   name: "ActStudents",
   components: {
     AgGridVue,
+    apexchart: VueApexCharts,
   },
   data: function () {
     return {
@@ -77,6 +82,47 @@ export default {
         headerClass: 'ag-right-aligned-header',
         cellClass: 'ag-right-aligned-cell'
       },
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: [],
+          title: {
+            text: "Number Of Active and Total Price",
+          },
+        },
+        yaxis: [
+          {
+            title: {
+              text: "Active Students",
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: "Total Price",
+            },
+          },
+        ],
+        dataLabels: {
+          enabled: true,
+          enabledOnSeries: [1]
+
+        },
+        
+      },
+      series: [{
+          name: 'ActiveUser',
+          data: [],
+          type: 'bar',
+        },
+        {
+          name: 'Price',
+          data: [],
+          type: 'line',
+        },
+      ]
     };
   },
   computed: {
@@ -85,6 +131,34 @@ export default {
     },
   },
 
+  methods: {
+    processChartData() {
+      console.log(this.Orders.activeStudents);
+      if (this.Orders) {
+        this.Orders.activeStudents.forEach(order => {
+          const dataPoint = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: 1,
+          };
+          const Price = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: order.price,
+          };
+          this.options.xaxis.categories = this.getMonthYear(order.startdate);
+          this.series[0].data.push(dataPoint);
+          this.series[1].data.push(Price);
+
+        });
+      }
+    },
+  
+    getMonthYear(date) {
+      const d = new Date(date);
+      const month = d.toLocaleString("en-US", { month: "short" });
+      return month;
+    },
+
+  },
   async created() {
     this.domLayout = 'autoHeight';
     this.isLoading = true;
@@ -92,12 +166,13 @@ export default {
       const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
       let req = res.data;
       this.Orders = req;
+      console.log(this.Orders);
       if (Array.isArray(req.activeStudents)) {
         this.rowData = req.activeStudents;
       } else {
         console.error('completedStudents is not an array:', req.activeStudents);
       }
-
+      this.processChartData();
       const result = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
       this.person = result.data;
       console.log(this.person);
