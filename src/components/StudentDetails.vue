@@ -1,33 +1,20 @@
-
-
 <template>
-  <div class="container" ><p>Dashbord > Complete Students </p>
-    <div style="padding: 20px;"  >
-      
-      <div class="example-wrapper" >
-        
+  <div class="container">
+    <p>Dashbord > Complete Students </p>
+    <div style="padding: 20px;">
+
+      <div class="example-wrapper">
+
         <div style="height: 100%;">
-          <ag-grid-vue 
-            :dom-layout="domLayout"
-            class="ag-theme-alpine"
-            :column-defs="columnDefs"
-            :row-data="rowData"
-            :edit-type="editType"
-            :row-selection="rowSelection"
-            :default-col-def="defaultColDef"
-            :suppress-excel-export="true"
-            :popup-parent="popupParent"
-            cache-quick-filter = true
-            :pagination = "true"
-            :pagination-page-size="paginationPageSize"
-            is-loding ="true"
-            @grid-ready="onGridReady"
-            @cell-value-changed="onCellValueChanged"
-            @row-clicked='onCellClicked'
-          >
+          <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+            :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
+            :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
+            :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
+            @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
           </ag-grid-vue>
-        </div>  
-      </div> 
+        </div>
+      </div>
     </div>
   
   <div v-if="showChildRow">
@@ -90,8 +77,8 @@
   </div>
    <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
     <Loading v-model:active="isLoading"></Loading>
-    </div>
-  </template>
+  </div>
+</template>
   
   <script>
   
@@ -262,25 +249,25 @@
             this.rowData = newData.data;
         }
 
-          this.ismodel = true;
-          this.gridApi.refreshCells({force : true});
-      
-        } catch (error) {
-          console.log(error);
-        }
-      },
-  
-      onLogOut() {
-        this.$store.commit('isLoggedIn', false);
-        this.$router.push('/Loginpage');
-      },
-  
-     
+        this.ismodel = true;
+        this.gridApi.refreshCells({ force: true });
+
+      } catch (error) {
+        console.log(error);
+      }
     },
-    
-    
-  };
-  var filterParams = {
+
+    onLogOut() {
+      this.$store.commit('isLoggedIn', false);
+      this.$router.push('/Loginpage');
+    },
+
+
+  },
+
+
+};
+var filterParams = {
   comparator: (filterLocalDateAtMidnight, cellValue) => {
     var dateAsString = cellValue;
     if (dateAsString == null) return -1;
@@ -306,11 +293,10 @@
   inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
 };
 
- 
-  </script>
-  <style scoped>
-     
-  .example-wrapper {
+
+</script>
+<style scoped>
+.example-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -320,66 +306,77 @@
   #myGrid {
   flex: 1 1 0px;
   width: 100%;
-  }
-  
-  .example-header {
+}
+
+.example-header {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px;
   margin-bottom: 5px;
-  }
-  
-  .ag-theme-alpine {
-    --ag-header-height: 30px;
-    --ag-header-foreground-color: black;
-    --ag-header-background-color: white;
-  
+}
+
+.ag-theme-alpine {
+  --ag-header-height: 30px;
+  --ag-header-foreground-color: black;
+  --ag-header-background-color: white;
   --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
-    
-  }
-  .ag-theme-alpine .ag-header {
+  --ag-font-family: 'Times New Roman';
+
+}
+
+.ag-theme-alpine .ag-header {
   font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-    font-size: 14px;
-  }
-  .ag-theme-alpine .ag-header-group-cell {
-    font-weight: normal;
-    font-size: 22px;
-  }
-  .ag-theme-alpine .ag-header-cell {
-    font-size: 16px;
-    text-align: center;
-  }
-  .ag-header-cell-label {
-   justify-content: center;
-  }
-  @media (max-width: 912px) {
+  font-size: 14px;
+}
+
+.ag-theme-alpine .ag-header-group-cell {
+  font-weight: normal;
+  font-size: 22px;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  font-size: 16px;
+  text-align: center;
+}
+
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+@media (max-width: 912px) {
   .ag-grid-vue {
     height: 20%;
   }
-  }
-  .ag-grid-vue {
-    width: 100%;
-    height: 80%;
-  }
-  .kl {
+}
+
+.ag-grid-vue {
+  width: 100%;
+  height: 80%;
+}
+
+.kl {
   text-align: center;
-  }
-  .sd {
+}
+
+.sd {
   width: 15%;
   font-size: 1em;
-  }
-  .sd1 {
+}
+
+.sd1 {
   width: 15%;
   font-size: 1em;
-  }
-  @media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 600px) {
   .kl {
     text-align: left;
   }
+
   .sd {
     width: 55%;
     font-size: 1em;
   }
+
   .sd1 {
     width: 42%;
     font-size: 1em;
@@ -407,27 +404,25 @@
       overflow-y: auto;
     }
 
-    @media (max-width:520px) {
-      /* .mc{
-        height: 0px;
-        width: 0px;
-      } */
-      .example-wrapper {
-width: 100%;
-      }
-    }
-    button {
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+@media (max-width:520px) {
 
-    button:hover {
-        background-color: #007bff;
-    }
-  </style>
+  .example-wrapper {
+    width: 100%;
+  }
+}
+
+button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #007bff;
+}
+</style>

@@ -62,199 +62,199 @@
                     <label for="description">Description:</label>
                     <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
-                    <label for="branchesId">Branches Id:</label>
-                    <input id="branchesId" v-model="this.selectedbranch" type="text" required><br>
+                  <label for="branchesId">Branches Id:</label>
+                  <input id="branchesId" v-model="this.selectedbranch" type="text" required><br>
 
-                    <label for="universityName"><b>University Name:</b></label>
-                    <input id="universityName" v-model="newBranch.universityName" type="text" required>
+                  <label for="universityName"><b>University Name:</b></label>
+                  <input id="universityName" v-model="newBranch.universityName" type="text" required>
 
-                    <button class="btn2" type="submit">Add University</button>
-                </form>
-                </div>
-                </div>
-                </div>
-                </div>
-        </div>
+                  <button class="btn2" type="submit">Add University</button>
+              </form>
+              </div>
+              </div>
+              </div>
+              </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import AxiosInstance from '../config/axiosInstance';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
-  export default {
-    name: "AddUni",
-    props:['selectedbranch'],
-    data() {
-      return {
-        formVisible: false,
-        products: [],
-        selectedUni: '',
-        selectedProduct: { id: null, name: '', description: '', branchesId:null },
-        isLoading: false,
-        editMode: false,
-        editedProduct: {
-        id: null,
-        name: '',
-        description: '',
-        branchesId: null,
-      },
-        newBranch: {
-        name: '',
-        description: '',
-        branchesId: this.selectedbranch,
-        universityName: '',
-       },
-      };
+  </div>
+</template>
+
+<script>
+import AxiosInstance from '../config/axiosInstance';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
+export default {
+  name: "AddUni",
+  props:['selectedbranch'],
+  data() {
+    return {
+      formVisible: false,
+      products: [],
+      selectedUni: '',
+      selectedProduct: { id: null, name: '', description: '', branchesId:null },
+      isLoading: false,
+      editMode: false,
+      editedProduct: {
+      id: null,
+      name: '',
+      description: '',
+      branchesId: null,
     },
-    computed: {
-    isTableVisible() {
-      return !!this.selectedUni; // Show table if a type is selected
-    },
+      newBranch: {
+      name: '',
+      description: '',
+      branchesId: this.selectedbranch,
+      universityName: '',
+     },
+    };
   },
-  watch: {
-    selectedbranch: {
-      immediate: true,
-      handler(newVal, oldVal) {
-        this.loadData();
-      },
-    },
+  computed: {
+  isTableVisible() {
+    return !!this.selectedUni; // Show table if a type is selected
   },
-    created() {
+},
+watch: {
+  selectedbranch: {
+    immediate: true,
+    handler(newVal, oldVal) {
       this.loadData();
     },
-    methods: {
-      emitSelectedType() {
-        this.$emit('selected-university-changed', this.selectedUni);
-        this.loadData(); 
-        this.loadProductDetails();
-      },
-      toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-
-      async loadData() {
-        this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
-        this.products = res.data;
-        // console.log(this.selectedbranch);
-        // this.loadProductDetails();
-
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
+  },
+},
+  created() {
+    this.loadData();
+  },
+  methods: {
+    emitSelectedType() {
+      this.$emit('selected-university-changed', this.selectedUni);
+      this.loadData(); 
+      this.loadProductDetails();
     },
-    
-    async loadProductDetails() {
-      const selectedProduct = this.products.find(product => product.id === this.selectedUni);
-      if (selectedProduct) {
-        this.selectedProduct = { ...selectedProduct };
-      // this.newBranch.branchesId = this.selectedProduct.id; 
-
-      }
-      
-    },
-
-      enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.branchesId = this.selectedProduct.branchesId;
-
-    },
-
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-        console.log(res);
-
-        if (res.status === 200) {
-          await this.loadData();
-          this.editMode = false; 
-          this.ismodel = true; 
-          this.loadProductDetails();
-        }
-        } catch (error) {
-          console.error(error);
-        }
+    toggleForm() {
+        this.formVisible = !this.formVisible;
       },
 
-    async addBranch() {
+    async loadData() {
       this.isLoading = true;
-      try {
-        const response = await AxiosInstance.post('/University', this.newBranch);
-        this.ismodel = true; 
-      if (response.status === 200) {
-        console.log("Branch added successfully");
+    try {
+      const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
+      this.products = res.data;
+      // console.log(this.selectedbranch);
+      // this.loadProductDetails();
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
+  
+  async loadProductDetails() {
+    const selectedProduct = this.products.find(product => product.id === this.selectedUni);
+    if (selectedProduct) {
+      this.selectedProduct = { ...selectedProduct };
+    // this.newBranch.branchesId = this.selectedProduct.id; 
+
+    }
+    
+  },
+
+    enableEditMode() {
+    this.editMode = true;
+    this.editedProduct.id = this.selectedProduct.id;
+    this.editedProduct.name = this.selectedProduct.name;
+    this.editedProduct.description = this.selectedProduct.description;
+    this.editedProduct.branchesId = this.selectedProduct.branchesId;
+
+  },
+
+  async updateProduct(id) {
+    try {
+      const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+      console.log(res);
+
+      if (res.status === 200) {
         await this.loadData();
+        this.editMode = false; 
+        this.ismodel = true; 
         this.loadProductDetails();
-          // this.gridApi.refreshCells({ force: true });
-
-        alert("Insert Successful");
-        this.formVisible = false;
-
-      } else {
-        alert("Insert Fail");
       }
-          
       } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
-             this.isLoading = false;
+        console.error(error);
       }
     },
-    // async getdata() {
-    //    this.isLoading = true;
-    //    try {
-    //     const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
-    //     this.products = res.data;
-    //     console.log(this.selectedbranch);
 
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
+  async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/University', this.newBranch);
+      this.ismodel = true; 
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+        // this.gridApi.refreshCells({ force: true });
+
+      alert("Insert Successful");
+      this.formVisible = false;
+
+    } else {
+      alert("Insert Fail");
+    }
         
-    // },
+    } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding branch:", error);
+    }
+    finally {
+           this.isLoading = false;
+    }
+  },
+  // async getdata() {
+  //    this.isLoading = true;
+  //    try {
+  //     const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
+  //     this.products = res.data;
+  //     console.log(this.selectedbranch);
 
-    },
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+      
+  // },
+
+  },
 };
 </script>
-  <style scoped>
+<style scoped>
 .frm{
-        padding: 20px;
-    border: 1px solid black;
-    width: 90%;
-    background-color: #fff;
-     }
-    
+      padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+  background-color: #fff;
+   }
+  
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+  .frm {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
-    input {
-      width: 100%;
-      padding: 1px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+  input {
+    width: 100%;
+    padding: 1px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
 
     button {
         color: #fff;
@@ -307,38 +307,38 @@
 }
 
 
-    button:hover {
-        background-color: #007bff;
-    }
-
-    .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+  button:hover {
+      background-color: #007bff;
   }
 
-  .modal-dialog {
-    position: relative;
-    margin: 10% auto;
-  }
+  .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+}
 
-  .modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
 
   .modal-body {
     padding: 15px;

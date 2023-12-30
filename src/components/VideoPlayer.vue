@@ -8,13 +8,8 @@
 <script>
 import AxiosInstance from '../config/axiosInstance'
 import videojs from 'video.js';
-import "videojs-overlay";
 import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
-
-
-// Assuming DynamoDB is configured appropriately (region, credentials, etc.)
-
 
 export default {
   name: 'VideoPlayer',
@@ -60,7 +55,7 @@ export default {
 
     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
       this.player.log('onPlayerReady', this);
-      this.player.currentTime(this.watchTime || 0);  
+      this.player.currentTime(this.watchTime || 0);
       this.player.qualityLevels();
       console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });
@@ -155,16 +150,16 @@ export default {
       // Disable the progress bar
       this.player.controlBar.progressControl.disable();
     },
-    
+
     async sendWatchTimeToBackend() {
       if (this.isSubscribed) {
-        
+
         try {
           const userId = this.isuser;
           const courseId = this.courseId;
           const videoId = this.videoId;
           const watchTime = this.player.currentTime();
-          
+
           const requestBody = {
             userId: userId,
             courseId: courseId,
@@ -252,6 +247,7 @@ export default {
   z-index: 999;
   /* Adjust the z-index to make it higher than the video player */
 }
+
 .subscribeBtn {
   color: #ffff;
   background-color: red;

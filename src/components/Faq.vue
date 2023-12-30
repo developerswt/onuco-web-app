@@ -8,18 +8,14 @@
                     </div>
                 </div>
             </div>
-          
-
-
         </div>
         <div class="accordion_block">
-
             <div class="">
                 <div id="faq_card" class="card">
                     <h5 id="faq_card_header" class="card-header">
                         <div
-id="heading-example" data-toggle="collapse" href="#collapse-example2"
-                            aria-expanded="true" aria-controls="collapse-example" class="d-block kj">
+id="heading-example" data-toggle="collapse" href="#collapse-example2" aria-expanded="true"
+                            aria-controls="collapse-example" class="d-block kj">
 
                             Your Agreement <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
                         </div>
@@ -30,15 +26,13 @@ id="heading-example" data-toggle="collapse" href="#collapse-example2"
                                 been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
                                 galley of type and scrambled it to make a type specimen book.</p>
                         </div>
-
-
                     </div>
                 </div>
                 <div id="faq_card" class="card">
                     <h5 id="faq_card_header" class="card-header">
                         <div
-id="heading-example" data-toggle="collapse" href="#collapse-example"
-                            aria-expanded="false" aria-controls="collapse-example" class="d-block kj">
+id="heading-example" data-toggle="collapse" href="#collapse-example" aria-expanded="false"
+                            aria-controls="collapse-example" class="d-block kj">
 
                             Your Agreement <span class="action"><i class="fa fa-chevron-right rotate-icon"></i></span>
                         </div>
@@ -47,16 +41,10 @@ id="heading-example" data-toggle="collapse" href="#collapse-example"
                         <div class="card-body">
                             <p>hello world</p>
                         </div>
-
-
                     </div>
                 </div>
-                
             </div>
-
         </div>
-
-
     </div>
     <div class="container-fluid cf"></div>
 </template>
@@ -86,19 +74,22 @@ export default {
 .action {
     float: right;
 }
-.faq_image_block{
+
+.faq_image_block {
     text-align: center;
     margin-bottom: 50px;
     position: relative;
     top: 162px;
 }
 
-#faq_card{
-    margin:20px;
+#faq_card {
+    margin: 20px;
 }
-#faq_card_header{
+
+#faq_card_header {
     background: #EFF5FC;
 }
+
 .cf {
     width: 100%;
     height: 220px;

@@ -6,60 +6,53 @@ class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
-         <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
+            <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
 
             <el-icon
 class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 13px;"
-                                @click="toggleSearchBoxVisibility">
-                            <Search />
-                        </el-icon>           
-                        <el-row v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;">
-    <el-col :span="23">
-        <el-autocomplete
-            v-model="searchTerm"
-            :fetch-suggestions="querySearch"
-            :trigger-on-focus="false"
-            value-key="title"
-            size="large"
-            style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
-            class="w-100 search"
-            clearable
-            placeholder="Search..."
-            @select="handleSelect"
-            @keydown.enter="handleKeyEnter(searchTerm)"
-        >
-            <template #suffix>
-                <el-icon
-                    class="el-input__icon"
-                    style="color: blue; cursor: pointer;"
-                    @click="handleKeyEnter(searchTerm)"
-                >
-                    <Search />
-                </el-icon>
-            </template>
-        </el-autocomplete>
-    </el-col>
-</el-row>
+                @click="toggleSearchBoxVisibility">
+                <Search />
+            </el-icon>
+            <el-row
+v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2"
+                style="width: 280px; position: relative; right: 9px;">
+                <el-col :span="23">
+                    <el-autocomplete
+v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                        value-key="title" size="large"
+                        style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
+                        class="w-100 search" clearable placeholder="Search..." @select="handleSelect"
+                        @keydown.enter="handleKeyEnter(searchTerm)">
+                        <template #suffix>
+                            <el-icon
+class="el-input__icon" style="color: blue; cursor: pointer;"
+                                @click="handleKeyEnter(searchTerm)">
+                                <Search />
+                            </el-icon>
+                        </template>
+                    </el-autocomplete>
+                </el-col>
+            </el-row>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item" :class="{ 'active': isActive('/') }">
-                        <router-link class="nav-link" to="/" >Home</router-link>
+                        <router-link class="nav-link" to="/">Home</router-link>
                     </li>
-                    <li class="nav-item"   :class="{ 'active': isActive('/Mylearnings') }">
-                        <router-link v-if="isLoggedIn" class="nav-link" to="/Mylearnings" >My Learning</router-link>
+                    <li class="nav-item" :class="{ 'active': isActive('/Mylearnings') }">
+                        <router-link v-if="isLoggedIn" class="nav-link" to="/Mylearnings">My Learning</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia() }">
 
-                        <router-link class="nav-link"  to="/Courses" >Courses</router-link>
+                        <router-link class="nav-link" to="/Courses">Courses</router-link>
                     </li>
-                  
+
                     <li class="nav-item" :class="{ 'active': isActive('/Announcement') }">
 
-                        <router-link class="nav-link" to="/Announcement" >Announcement</router-link>
+                        <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Contact') }">
 
-                        <router-link class="nav-link" to="/Contact" >Contact Us</router-link>
+                        <router-link class="nav-link" to="/Contact">Contact Us</router-link>
                     </li>
 
 
@@ -67,19 +60,16 @@ class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1" style="width: 250px;  margin-right: 25px; ">
+                    <el-row
+v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
+                        style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
                             <el-autocomplete
 v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
-                                class=" w-100  search"  clearable placeholder="Search..." @select="handleSelect"
+                                class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter.prevent="handleKeyEnter(searchTerm)">
                                 <template #suffix>
-                                    <!-- <el-icon class="el-input__icon" v-if="searchTerm !== ''" style="position: absolute;right: 27px; cursor: pointer;" @click="clearInput"><CircleClose /></el-icon> -->
-                                    <!-- <el-icon class="el-input__icon" @click="handleIconClick">
-                                    <edit />
-                                    </el-icon> -->
-
                                     <el-icon
 class="el-input__icon" style="color: blue;cursor: pointer;"
                                         @click="handleKeyEnter(searchTerm)">
@@ -97,17 +87,27 @@ id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             Hi {{ isuser.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
-                            <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notifications</router-link>
-                            <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link>
-                            <router-link class="dropdown-item" to="" @click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
+                            <router-link class="dropdown-item" to="/UpdatedProfile"><i
+class="fa fa-user"
+                                    aria-hidden="true"></i> Profile</router-link>
+                                    <router-link v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item" to="/ApHome"><i class="fa fa-user" aria-hidden="true"></i>
+                                Admin</router-link>
+                                    <router-link class="dropdown-item" to="UserNotification"><i
+class="fa fa-bell"
+                                    aria-hidden="true"></i> Notifications</router-link>
+                            <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i>
+                                Setting</router-link>
+                                
+                            <router-link class="dropdown-item" to="" @click="logout()"><i
+class="fa fa-sign-out"
+                                    aria-hidden="true"></i> Logout</router-link>
                         </div>
                     </li>
                     <li v-else class="nav-item" :class="{ 'active': isActive('/Login') }">
                         <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
                                 Up</span></router-link>
                     </li>
-                    
+
 
 
                 </ul>
@@ -137,15 +137,27 @@ export default {
             // username: localStorage.getItem("username")
             showSearchBox: false,
             showSearchBoxes: true
-            
+
         }
     },
     computed: {
+        isUserAdmin() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][0] === 'Admin';
+        },
+        isUserfaculty() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][1] === 'Faculty';
+        },
+        isUserSuperadmin() {
+            return Array.isArray(this.isuser?.['cognito:groups']) &&
+            this.isuser['cognito:groups'][0] === 'SuperAdmin';
+        },
         showSearchBoxOnNavbar() {
             return this.$route.path !== '/search';
         },
         showSearchBoxComputed() {
-        // Change the computed property name
+            // Change the computed property name
             return this.$route.path !== '/search';
         },
         isLoggedIn() {
@@ -158,39 +170,36 @@ export default {
         istoken() {
             return this.$store.state.token;
         },
-        // user() {
-        //     return this.$store.state.user;
-        // },
     },
     created() {
-  try {
-    const jwtToken = localStorage.getItem('username');
-    if (jwtToken) {
-      const parts = jwtToken.split('.');
-      if (parts.length === 3) {
-        const payload = parts[1];
-        const decodedPayload = atob(payload);
-        console.log(decodedPayload);
-        const jwtPayload = JSON.parse(decodedPayload);
-        if (jwtPayload.email) {
-          this.name = jwtPayload.name;
-          console.log(this.name);
-        } else {
-          console.log('JWT payload does not contain the "name" property.');
+        try {
+            const jwtToken = localStorage.getItem('username');
+            if (jwtToken) {
+                const parts = jwtToken.split('.');
+                if (parts.length === 3) {
+                    const payload = parts[1];
+                    const decodedPayload = atob(payload);
+                    console.log(decodedPayload);
+                    const jwtPayload = JSON.parse(decodedPayload);
+                    if (jwtPayload.email) {
+                        this.name = jwtPayload.name;
+                        console.log(this.name);
+                    } else {
+                        console.log('JWT payload does not contain the "name" property.');
+                    }
+                } else {
+                    console.log('Invalid JWT format.');
+                }
+            } else {
+                console.log('JWT token not found in local storage.');
+            }
+        } catch (error) {
+            console.error('Error decoding JWT:', error);
         }
-      } else {
-        console.log('Invalid JWT format.');
-      }
-    } else {
-      console.log('JWT token not found in local storage.');
-    }
-  } catch (error) {
-    console.error('Error decoding JWT:', error);
-  }
-},
+    },
     methods: {
         toggleSearchBoxVisibility() {
-         this.showSearchBox = !this.showSearchBox;
+            this.showSearchBox = !this.showSearchBox;
         },
         handleKeyEnter(item) {
             if (item.length >= 2) {
@@ -242,10 +251,10 @@ export default {
             return this.$route.path === route;
         },
         isActiveAcademia() {
-      // Check if the current route starts with "/Academia/" and has a parameter
+            // Check if the current route starts with "/Academia/" and has a parameter
             return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
         },
-  
+
         clearInput() {
             this.searchTerm = '';
         }
@@ -258,12 +267,14 @@ export default {
 </script>
 
 <style scoped>
-.search1{
+.search1 {
     display: block;
 }
-.search2{
+
+.search2 {
     display: none;
 }
+
 .logo {
     width: 100px;
     height: 42px;
@@ -320,12 +331,6 @@ li>a:before {
     transition: all 0.3s ease-in-out 0s;
 }
 
-/* li>a:hover:before {
-    visibility: visible;
-    -webkit-transform: scaleX(1);
-    transform: scaleX(1);
-} */
-
 .gh {
     font-size: 30px;
     display: none;
@@ -377,55 +382,6 @@ li>a:before {
         margin-right: 0 !important;
     }
 }
-
-
-/* .search-bar {
-   
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    border-radius: 50px;
-    border: 1px solid black;
-    padding: 0px 2px;
-    backdrop-filter: blur(4px) saturate(180%);
-}
-.search-bar input {
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding: 5px 25px;
-    font-size: 20px;
-    color: rgb(44, 0, 126);
-}
-::placeholder {
-    color: rgb(44, 0, 126);
-}
-
- 
-.search-bar button {
-    border: 0;    
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background-color: none;
-    background: #58629b;
-    cursor: pointer;
-}
-@media screen and (max-with: 600px) {
-    .search-bar input {
-        background: transparent;
-        flex: 1;
-        border: 0;
-        outline: none;
-        padding: 5px 25px;
-        font-size: 20px;
-        color: rgb(44, 0, 126);
-    }
-    .search-bar {
-        width: 100%;
-    }
-} */
 .search-bar button i {
     width: 25px;
     outline: none;
@@ -445,9 +401,6 @@ li>a:before {
     border: 1px solid blue;
     border: 1px solid blue;
     padding: 10px;
-    /* backdrop-filter: blur(4px) saturate(180%); */
-
-
 }
 
 .search-bar input {
@@ -520,38 +473,38 @@ li>a:before {
     color: blue;
 }
 
-/* .router-link-exact-active {
-    border-bottom: 2px solid blue;
-    bottom: -15px;
-} */
 .nav-item.active {
-  border-bottom: 2px solid blue; /* Add the border for the active link */
-  margin-bottom: -16px; /* Add margin for the active link */
-  margin-left: 0px;
+    border-bottom: 2px solid blue;
+    margin-bottom: -16px;
+    margin-left: 0px;
 }
+
 @media screen and (max-width:912px) {
-    .search1{
-    display: none;
-}
-.search2{
-    display: block;
-    font-size: 22px;
-    position: relative;
-    bottom: 4px;
-}
+    .search1 {
+        display: none;
+    }
+
+    .search2 {
+        display: block;
+        font-size: 22px;
+        position: relative;
+        bottom: 4px;
+    }
 }
 
 @media screen and (max-width:280px) {
-    .search1{
-    display: none;
+    .search1 {
+        display: none;
+    }
+
+    .search2 {
+        display: block;
+        font-size: 20px;
+        position: relative;
+        right: -6px;
+    }
 }
-.search2{
-    display: block;
-    font-size: 20px;
-    position: relative;
-    right: -6px;
-}
-}
+
 @media screen and (max-width: 920px) {
     .nav-item.active {
         display: none;

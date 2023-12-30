@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="container" ><p>Types Update </p>
         <div class="row">
@@ -39,8 +37,8 @@
       <label for="branchName"> Name:</label>
       <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
-      <label for="description">Description:</label>
-      <input id="description" v-model="newBranch.description" type="text" required><br>
+          <label for="description">Description:</label>
+          <input id="description" v-model="newBranch.description" type="text" required><br>
 
       <button class="btn2" type="submit">Add Types</button>
     </form>
@@ -80,193 +78,193 @@
                                  </div>
                                 </div>
             </div>
-           <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(childPara.id)">Update</button>
-                                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button> 
-         </div>
-           
-   </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
+              <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
+                @click="update(childPara.id)">Update</button>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+      <!-- <button type="button" class="btn btn-secondary" @click="addBranch(childPara)">Add Branch</button> -->
+    </div>
+    <Loading v-model:active="isLoading"></Loading>
+  </div>
+</template>
    
-       
-       </div>
-     </div>
-     <!-- <button type="button" class="btn btn-secondary" @click="addBranch(childPara)">Add Branch</button> -->
-   </div>
-     <Loading v-model:active="isLoading"></Loading>
-     </div>
-   </template>
-   
-   <script>
-   
-   import AxiosInstance  from '../config/axiosInstance';
-   import "ag-grid-community/styles/ag-grid.css";
-   import "ag-grid-community/styles/ag-theme-alpine.css";
-   import { AgGridVue } from "ag-grid-vue3";
-   // import AlertDialog from './AlertDialog.vue';
-   import Loading from 'vue3-loading-overlay';
-   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-   
-   export default {
-     name: "OrdersPage",
-     components: {
-       AgGridVue,
-       Loading,
-       // AlertDialog
-     },
-     data: function () {
-       return {
-        newBranch: {
+<script>
+
+import AxiosInstance from '../config/axiosInstance';
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { AgGridVue } from "ag-grid-vue3";
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
+export default {
+  name: "OrdersPage",
+  components: {
+    AgGridVue,
+    Loading,
+  },
+  data: function () {
+    return {
+      newBranch: {
         name: '',
         description: '',
-       
+
       },
       formVisible: false,
-         userName: '',
-         ismodel: true,
-         isLoading: false,
-         showDialog: false,
-         dialogTitle: '',
-         dialogMessage: '',
-         domLayout: null,
-         Orders: [],
-         req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Type Name', field: 'name' },{name:'Description',field:'description'}],
-         gridApi: null,
-         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
-         columnApi: null,
-         editType: null,
-         showChildRow: false,
-         childPara: null,
-         rowData: null,
-         rowSelection: null,
-         paginationPageSize: null,
-         rightAligned: {
-           headerClass: 'ag-right-aligned-header',
-           cellClass: 'ag-right-aligned-cell'
-         },
-       };
-     },
-     computed: {
-       isLoggedIn() {
-         return this.$store.state.IsLoggedIn;
-       },
-     },
-   
-     async created() {
-       this.domLayout = 'autoHeight'; 
-       this.isLoading = true;
-       try {
-        
-             const res = await AxiosInstance.get(`/Types`);
-             let req = res.data;
-             this.Orders = req;
-           
-           } catch (error) {
-               this.isLoading = false;
-               console.log(error);
-               this.showDialog = true;  
-               this.dialogTitle= "Error";
-               this.dialogMessage= "Not get data";
-             }
-             finally {
-             this.isLoading = false;
-             }
-             this.rowData = this.Orders;
-             this.rowSelection = 'single'; 
-             console.log(this.rowData);
-             this.popupParent = document.body;
-             this.paginationPageSize = 10;
-       
-         },
-        
-     methods: {
-        toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-     onCellClicked(params) {
-             this.childPara = params.node.data
-         console.log(this.childPara);
-         this.showChildRow= true;
-   
-         },
-   
-         OpenCloseFun(){
-            this.showChildRow=false;
-            this.ismodel = true;
-         },
-   
-       onCellValueChanged(event) {
-         console.log('Data after change is', event.data);
-       },
-       onGridReady(params) {
-         this.gridApi = params.api;
-         this.gridColumnApi = params.columnApi;
-       },
-      
-       onBtnExport() {
-         this.gridApi.exportDataAsCsv();
-       },
-       onFilterTextBoxChanged() {
-         this.gridApi.setQuickFilter(
-           document.getElementById('filter-text-box').value
-         );
-       },
-       onPrintQuickFilterTexts() {
-         this.gridApi.forEachNode(function (rowNode, index) {
-           console.log(
-             'Row ' +
-               index +
-               ' quick filter text is ' +
-               rowNode.quickFilterAggregateText
-           );
-         });
-       },
-      
-       edit() {
-         this.ismodel = false;
-       },
-     
-       async update(id) {
-         this.showDialog = false;
-           try {
-                 const res = await AxiosInstance.put(`/Types` + '?' +'id='+ id + '&name='+ this.childPara.name + '&desc=' + this.childPara.description );
-                 console.log(res);
-                 this.ismodel = true;
-       
-             if (res.status === 200) {
-               await this.getdata();
-               this.gridApi.refreshCells({ force: true });
-             }
-           } catch (error) {
-             console.log(error);
-             }
-       },
- 
-       async addBranch() {
-        this.isLoading = true;
+      userName: '',
+      ismodel: true,
+      isLoading: false,
+      showDialog: false,
+      dialogTitle: '',
+      dialogMessage: '',
+      domLayout: null,
+      Orders: [],
+      req: [],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Type Name', field: 'name' }, { name: 'Description', field: 'description' }],
+      gridApi: null,
+      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      columnApi: null,
+      editType: null,
+      showChildRow: false,
+      childPara: null,
+      rowData: null,
+      rowSelection: null,
+      paginationPageSize: null,
+      rightAligned: {
+        headerClass: 'ag-right-aligned-header',
+        cellClass: 'ag-right-aligned-cell'
+      },
+    };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
+    },
+  },
+
+  async created() {
+    this.domLayout = 'autoHeight';
+    this.isLoading = true;
+    try {
+
+      const res = await AxiosInstance.get(`/Types`);
+      let req = res.data;
+      this.Orders = req;
+
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
+    }
+    finally {
+      this.isLoading = false;
+    }
+    this.rowData = this.Orders;
+    this.rowSelection = 'single';
+    console.log(this.rowData);
+    this.popupParent = document.body;
+    this.paginationPageSize = 10;
+
+  },
+
+  methods: {
+    toggleForm() {
+      this.formVisible = !this.formVisible;
+    },
+    onCellClicked(params) {
+      this.childPara = params.node.data
+      console.log(this.childPara);
+      this.showChildRow = true;
+
+    },
+
+    OpenCloseFun() {
+      this.showChildRow = false;
+      this.ismodel = true;
+    },
+
+    onCellValueChanged(event) {
+      console.log('Data after change is', event.data);
+    },
+    onGridReady(params) {
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+    },
+
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
+    onFilterTextBoxChanged() {
+      this.gridApi.setQuickFilter(
+        document.getElementById('filter-text-box').value
+      );
+    },
+    onPrintQuickFilterTexts() {
+      this.gridApi.forEachNode(function (rowNode, index) {
+        console.log(
+          'Row ' +
+          index +
+          ' quick filter text is ' +
+          rowNode.quickFilterAggregateText
+        );
+      });
+    },
+
+    edit() {
+      this.ismodel = false;
+    },
+
+    async update(id) {
+      this.showDialog = false;
+      try {
+        const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.childPara.name + '&desc=' + this.childPara.description);
+        console.log(res);
+        this.ismodel = true;
+
+        if (res.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async addBranch() {
+      this.isLoading = true;
       try {
         const response = await AxiosInstance.post('/Types', this.newBranch);
-        this.ismodel = true; 
+        this.ismodel = true;
         if (response.status === 200) {
           console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
 
-        alert("Insert Successful");
-    } else {
-      // Show failure message
-      alert("Insert Fail");
-    }
-        
+          alert("Insert Successful");
+        } else {
+          // Show failure message
+          alert("Insert Fail");
+        }
+
       } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
       }
       finally {
-             this.isLoading = false;
-             }
+        this.isLoading = false;
+      }
     },
         
          async getdata(){
@@ -418,56 +416,58 @@
      }
     
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+.frm {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-    input {
-      width: 100%;
-      padding: 1px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+input {
+  width: 100%;
+  padding: 1px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
 
-    button {
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-     }
-     .btn2 {
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-     }
-    .btn1{
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 80px; 
-    }
+button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn2 {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn1 {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 80px;
+}
 
 
-    button:hover {
-        background-color: #007bff;
-    }
-   </style>
+button:hover {
+  background-color: #007bff;
+}
+</style>

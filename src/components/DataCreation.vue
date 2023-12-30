@@ -49,6 +49,7 @@
   </div>
 </template>
 
+
 <script>
 //import { mapState } from 'vuex';
 import AddTypes from './AddTypes.vue'
@@ -62,8 +63,17 @@ import 'vue3-form-wizard/dist/style.css'
 // import AxiosInstance  from '../config/axiosInstance';
 export default {
   name: 'DataCreation',
+export default {
+  name: 'DataCreation',
   data() {
     return {
+      selectedType: null,
+      selectedAcademic: null,
+      selectedBranch: null,
+      selectedUniversity: null,
+      selectedSemester: null,
+      validationError: false,
+    };
       selectedType: null,
       selectedAcademic: null,
       selectedBranch: null,
@@ -82,8 +92,42 @@ export default {
   AddCourse,
   AddSem
 },
+  FormWizard,
+  TabContent,
+  AddTypes,
+  AddAcademics,
+  AddBranches,
+  AddUni,
+  AddCourse,
+  AddSem
+},
   methods: {
     onComplete() {
+      if (this.validateForm()) {
+        alert('Completed');
+        this.$router.push('/Aphome');
+      } else {
+        this.validationError = true;
+      }
+    },
+    validateNext() {
+      if (this.validateForm()) {
+        FormWizard.value?.nextTab();
+        this.validationError = false;
+      } else {
+        this.validationError = true;
+      }
+    },
+    validateForm() {
+      return (
+        this.selectedType &&
+        this.selectedAcademic &&
+        this.selectedBranch &&
+        this.selectedUniversity &&
+        this.selectedSemester
+      );
+    },
+  
       if (this.validateForm()) {
         alert('Completed');
         this.$router.push('/Aphome');
@@ -139,6 +183,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
   /* Your scoped styles go here */

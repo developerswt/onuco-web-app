@@ -1,25 +1,27 @@
 <template>
-     <div class="container" ><p> > Lecturers </p>
+    <div class="container">
+        <p> > Lecturers </p>
         <div class="container" style="margin-top: 72px;">
             <div class="table-responsive">
-               <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
-                   <thead>
-                       <tr><th>Id</th>
-                           <th>Subject Name</th>
-                           <th>Total Amount Collected</th>
-                           <th>Total Subscribed Students</th>
+                <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Subject Name</th>
+                            <th>Total Amount Collected</th>
+                            <th>Total Subscribed Students</th>
                         </tr>
-                   </thead>
-                   <tbody v-for="products in product" :key="products.id">
-                    <tr>
-                        <td>{{ products.id }}</td>
-                        <td>{{ products.courseName }}</td>
-                        <td>{{ products.totalAmountCollected }}</td>
-                        <td>{{ products.totalSubscribedStudents }}</td>
-                    </tr>
-                   </tbody>
+                    </thead>
+                    <tbody v-for="products in product" :key="products.id">
+                        <tr>
+                            <td>{{ products.id }}</td>
+                            <td>{{ products.courseName }}</td>
+                            <td>{{ products.totalAmountCollected }}</td>
+                            <td>{{ products.totalSubscribedStudents }}</td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div> 
+            </div>
         </div>
         <!-- <Loading v-model:active="isLoading"></Loading> -->
     </div>
@@ -46,7 +48,7 @@
             return this.$store.state.user.signInUserSession.idToken.payload;
         }
     },
-        created() {
+    created() {
         this.loadData();
     },
     methods: {
@@ -65,10 +67,8 @@
             }
         },
     },
-    }
+}
 
 
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

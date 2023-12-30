@@ -55,16 +55,16 @@
                     </select>
                   </td>
 
-                  <td>{{ selectedProduct.facultyId }}</td>
-                  <td>
-                    <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
-          
-          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+                <td>{{ selectedProduct.facultyId }}</td>
+                <td>
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        
+        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
 <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
   <div class="modal-dialog" role="document">
@@ -84,11 +84,11 @@
                     <label for="description">Description:</label>
                     <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
-                    <label for="actualPrice">Actual Price:</label>
-                    <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
-                    
-                    <label for="discountPrice">Discount Price:</label>
-                    <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
+                  <label for="actualPrice">Actual Price:</label>
+                  <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
+                  
+                  <label for="discountPrice">Discount Price:</label>
+                  <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
 
                     <label for="semesterId">Semester Id:</label>
                     <input id="semesterId" v-model="this.selectedsemester" type="text" required><br>
@@ -103,8 +103,8 @@
                         <option value="Release">Release</option>
                       </select>
 
-                    <label for="facultyId"><b>FacultyId:</b></label>
-                    <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
+                  <label for="facultyId"><b>FacultyId:</b></label>
+                  <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
 
                     <button class="btn2" type="submit">Add Subject</button>
                 </form>
@@ -177,165 +177,165 @@
           this.formVisible = !this.formVisible;
         },
 
-      async loadData() {
-        this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
-        this.products = res.data;
-        this.loadProductDetails();
+    async loadData() {
+      this.isLoading = true;
+    try {
+      const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
+      this.products = res.data;
+      this.loadProductDetails();
 
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    
-    async loadProductDetails() {
-
-        const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
-      if (selectedProduct) {
-        this.selectedProduct = { ...selectedProduct };
-        //this.newBranch.semesterId = this.selectedProduct.id; 
-
-      }
-    
-    },
-
-      enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.actualPrice = this.selectedProduct.actualPrice;
-      this.editedProduct.discountPrice = this.selectedProduct.discountPrice;
-      this.editedProduct.semesterId = this.selectedProduct.semesterId;
-      this.editedProduct.courseName = this.selectedProduct.courseName;
-      this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
-      this.editedProduct.facultyId = this.selectedProduct.facultyId;
-
-
-    },
-
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-        console.log(res);
-
-        if (res.status === 200) {
-          await this.loadData();
-          this.editMode = false; // Disable edit mode after successful update
-          this.ismodel = true; 
-          this.loadProductDetails();
-        }
-        } catch (error) {
-          console.error(error);
-        }
-      },
-
-      async updatePrice(id) {
-        this.showDialog = false;
-          try {
-                const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
-                console.log(res);
-                this.editMode = false; // Disable edit mode after successful update
-                this.ismodel = true;
-                this.loadProductDetails();
-
-            if (res.status === 200) {
-              await this.getdata();
-            }
-          } catch (error) {
-            console.log(error);
-            }
-      },
-
-       async updateWorkFlow(id) {
-        this.showDialog = false;
-        try {
-          const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
-          console.log(result);
-          this.editMode = false; 
-          this.ismodel = true;
-          this.loadProductDetails();
-
-          if (result.status === 200) {
-        await this.getdata();
-      }
     } catch (error) {
       console.log(error);
-      }
-      },
+    } finally {
+      this.isLoading = false;
+    }
+  },
+  
+  async loadProductDetails() {
 
-    async addBranch() {
-      this.isLoading = true;
-      try {
-        const response = await AxiosInstance.post('/Course', this.newBranch);
-        this.ismodel = true; 
-      if (response.status === 200) {
-        console.log("Branch added successfully");
+      const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
+    if (selectedProduct) {
+      this.selectedProduct = { ...selectedProduct };
+      //this.newBranch.semesterId = this.selectedProduct.id; 
+
+    }
+  
+  },
+
+    enableEditMode() {
+    this.editMode = true;
+    this.editedProduct.id = this.selectedProduct.id;
+    this.editedProduct.name = this.selectedProduct.name;
+    this.editedProduct.description = this.selectedProduct.description;
+    this.editedProduct.actualPrice = this.selectedProduct.actualPrice;
+    this.editedProduct.discountPrice = this.selectedProduct.discountPrice;
+    this.editedProduct.semesterId = this.selectedProduct.semesterId;
+    this.editedProduct.courseName = this.selectedProduct.courseName;
+    this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
+    this.editedProduct.facultyId = this.selectedProduct.facultyId;
+
+
+  },
+
+  async updateProduct(id) {
+    try {
+      const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+      console.log(res);
+
+      if (res.status === 200) {
         await this.loadData();
+        this.editMode = false; // Disable edit mode after successful update
+        this.ismodel = true; 
         this.loadProductDetails();
-
-          // this.gridApi.refreshCells({ force: true });
-
-        alert("Insert Successful");
-        this.formVisible = false;
-
-      } else {
-        alert("Insert Fail");
       }
-          
       } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
-             this.isLoading = false;
+        console.error(error);
       }
     },
-    // async getdata() {
-    //    this.isLoading = true;
-    //    try {
-    //     const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
-    //     this.products = res.data;
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
+
+    async updatePrice(id) {
+      this.showDialog = false;
+        try {
+              const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
+              console.log(res);
+              this.editMode = false; // Disable edit mode after successful update
+              this.ismodel = true;
+              this.loadProductDetails();
+
+          if (res.status === 200) {
+            await this.getdata();
+          }
+        } catch (error) {
+          console.log(error);
+          }
+    },
+
+     async updateWorkFlow(id) {
+      this.showDialog = false;
+      try {
+        const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
+        console.log(result);
+        this.editMode = false; 
+        this.ismodel = true;
+        this.loadProductDetails();
+
+        if (result.status === 200) {
+      await this.getdata();
+    }
+  } catch (error) {
+    console.log(error);
+    }
+    },
+
+  async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/Course', this.newBranch);
+      this.ismodel = true; 
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+
+        // this.gridApi.refreshCells({ force: true });
+
+      alert("Insert Successful");
+      this.formVisible = false;
+
+    } else {
+      alert("Insert Fail");
+    }
         
-    // },
+    } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding branch:", error);
+    }
+    finally {
+           this.isLoading = false;
+    }
   },
+  // async getdata() {
+  //    this.isLoading = true;
+  //    try {
+  //     const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
+  //     this.products = res.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+      
+  // },
+},
 };
 </script>
-  <style scoped>
+<style scoped>
 .frm{
-        padding: 20px;
-    border: 1px solid black;
-    width: 90%;
-    background-color: #fff;
-     }
-    
+      padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+  background-color: #fff;
+   }
+  
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+  .frm {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
-    input {
-      width: 100%;
-      padding: 0px;
-      margin-bottom: 4px;
-      box-sizing: border-box;
-    }
+  input {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 4px;
+    box-sizing: border-box;
+  }
 
     button {
         color: #fff;
@@ -411,32 +411,32 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .modal-dialog {
-    position: relative;
-    bottom: 25px;
-    /* margin: 10% auto; */
-  }
+.modal-dialog {
+  position: relative;
+  bottom: 25px;
+  /* margin: 10% auto; */
+}
 
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .modal-header {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
+.modal-header {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
 
-  .modal-body {
-    padding: 15px;
-  }
-  .modal-header .close {
-    padding: 12px 14px;
-    margin: -9px -10px -10px auto;
+.modal-body {
+  padding: 15px;
+}
+.modal-header .close {
+  padding: 12px 14px;
+  margin: -9px -10px -10px auto;
 }
 .size{
   width: 470px;

@@ -68,192 +68,192 @@
                     <label for="branchName"><b>Branch Name:</b></label>
                     <input id="branchName" v-model="newBranch.branchName" type="text" required>
 
-                    <button class="btn2" type="submit">Add Branch</button>
-                </form>
-                </div>
-                </div>
-                </div>
-                </div>
-        </div>
+                  <button class="btn2" type="submit">Add Branch</button>
+              </form>
+              </div>
+              </div>
+              </div>
+              </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import AxiosInstance from '../config/axiosInstance';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
-  export default {
-    name: "AddBranch",
-    props: ['selectedacademic'],
-    data() {
-      return {
-        formVisible: false,
-        products: [],
-        selectedbranch:'',
-        selectedProduct: { id: null, name: '', description: '',academiaId:null },
-        isLoading: false,
-        editMode: false,
-        editedProduct: {
-        id: null,
-        name: '',
-        description: '',
-        academiaId: null,
-      },
-        newBranch: {
-        name: '',
-        description: '',
-        academiaId: this.selectedacademic,
-        branchName: '',
-       },
-      };
+  </div>
+</template>
+
+<script>
+import AxiosInstance from '../config/axiosInstance';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
+export default {
+  name: "AddBranch",
+  props: ['selectedacademic'],
+  data() {
+    return {
+      formVisible: false,
+      products: [],
+      selectedbranch:'',
+      selectedProduct: { id: null, name: '', description: '',academiaId:null },
+      isLoading: false,
+      editMode: false,
+      editedProduct: {
+      id: null,
+      name: '',
+      description: '',
+      academiaId: null,
     },
-    computed: {
-    isTableVisible() {
-      return !!this.selectedbranch; // Show table if a type is selected
-    },
+      newBranch: {
+      name: '',
+      description: '',
+      academiaId: this.selectedacademic,
+      branchName: '',
+     },
+    };
   },
-  watch: {
-    selectedacademic: {
-      immediate: true,
-      handler(newVal, oldVal) {
-        this.loadData();
-      },
-    },
+  computed: {
+  isTableVisible() {
+    return !!this.selectedbranch; // Show table if a type is selected
   },
-    created() {
+},
+watch: {
+  selectedacademic: {
+    immediate: true,
+    handler(newVal, oldVal) {
       this.loadData();
     },
-    methods: {
-      emitSelectedType() {
-        this.$emit('selected-branches-changed', this.selectedbranch);
-        this.loadData(); 
-        this.loadProductDetails();
-
-      },
-      toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-
-      async loadData() {
-        this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
-        this.products = res.data;
-        this.loadProductDetails();
-  
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    
-    async loadProductDetails() {
-   
-    const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
-  
-  if (selectedProduct) {
-    this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
-  }
-    },
-
-      enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.academiaId = this.selectedProduct.academiaId;
+  },
+},
+  created() {
+    this.loadData();
+  },
+  methods: {
+    emitSelectedType() {
+      this.$emit('selected-branches-changed', this.selectedbranch);
+      this.loadData(); 
+      this.loadProductDetails();
 
     },
-
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-        console.log(res);
-
-        if (res.status === 200) {
-          await this.loadData();
-          this.editMode = false; 
-          this.ismodel = true; 
-          this.loadProductDetails();
-
-        }
-        } catch (error) {
-          console.error(error);
-        }
+    toggleForm() {
+        this.formVisible = !this.formVisible;
       },
 
-      async addBranch() {
-    this.isLoading = true;
+    async loadData() {
+      this.isLoading = true;
     try {
-
-      const response = await AxiosInstance.post('/Branches', this.newBranch);
-      this.ismodel = true;
-
-      if (response.status === 200) {
-        console.log("Branch added successfully");
-        await this.loadData();
-        this.loadProductDetails();
-        alert("Insert Successful");
-        this.formVisible = false;
-
-      } else {
-        alert("Insert Fail");
-      }
+      const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
+      this.products = res.data;
+      this.loadProductDetails();
 
     } catch (error) {
-      this.isLoading = false;
-      console.error("Error adding branch:", error);
+      console.log(error);
     } finally {
       this.isLoading = false;
     }
   },
-    // async getdata() {
-    //    this.isLoading = true;
-    //    try {
-    //     const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
-    //     this.products = res.data;
-    //     // console.log(this.selectedAcademics);
   
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
-        
-    // },
+  async loadProductDetails() {
+ 
+  const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
 
+if (selectedProduct) {
+  this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
+}
+  },
+
+    enableEditMode() {
+    this.editMode = true;
+    this.editedProduct.id = this.selectedProduct.id;
+    this.editedProduct.name = this.selectedProduct.name;
+    this.editedProduct.description = this.selectedProduct.description;
+    this.editedProduct.academiaId = this.selectedProduct.academiaId;
+
+  },
+
+  async updateProduct(id) {
+    try {
+      const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+      console.log(res);
+
+      if (res.status === 200) {
+        await this.loadData();
+        this.editMode = false; 
+        this.ismodel = true; 
+        this.loadProductDetails();
+
+      }
+      } catch (error) {
+        console.error(error);
+      }
     },
+
+    async addBranch() {
+  this.isLoading = true;
+  try {
+
+    const response = await AxiosInstance.post('/Branches', this.newBranch);
+    this.ismodel = true;
+
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+      alert("Insert Successful");
+      this.formVisible = false;
+
+    } else {
+      alert("Insert Fail");
+    }
+
+  } catch (error) {
+    this.isLoading = false;
+    console.error("Error adding branch:", error);
+  } finally {
+    this.isLoading = false;
+  }
+},
+  // async getdata() {
+  //    this.isLoading = true;
+  //    try {
+  //     const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
+  //     this.products = res.data;
+  //     // console.log(this.selectedAcademics);
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+      
+  // },
+
+  },
 };
 </script>
-  <style scoped>
+<style scoped>
 .frm{
-        padding: 20px;
-    border: 1px solid black;
-    width: 90%;
-    background-color: #fff;
-     }
-    
+      padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+  background-color: #fff;
+   }
+  
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+  .frm {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
-    input {
-      width: 100%;
-      padding: 1px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+  input {
+    width: 100%;
+    padding: 1px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
 
     button {
         color: #fff;
@@ -305,38 +305,38 @@
     }
 }
 
-    button:hover {
-        background-color: #007bff;
-    }
-
-    .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+  button:hover {
+      background-color: #007bff;
   }
 
-  .modal-dialog {
-    position: relative;
-    margin: 10% auto;
-  }
+  .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+}
 
-  .modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
 
   .modal-body {
     padding: 15px;

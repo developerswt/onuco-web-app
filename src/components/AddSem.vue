@@ -62,196 +62,196 @@
                     <label for="description">Description:</label>
                     <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
-                    <label for="universityId">University Id:</label>
-                    <input id="universityId" v-model="this.selecteduniversity" type="text" required><br>
+                  <label for="universityId">University Id:</label>
+                  <input id="universityId" v-model="this.selecteduniversity" type="text" required><br>
 
-                    <label for="semesterName"><b>Semester Name:</b></label>
-                    <input id="semesterName" v-model="newBranch.semesterName" type="text" required>
+                  <label for="semesterName"><b>Semester Name:</b></label>
+                  <input id="semesterName" v-model="newBranch.semesterName" type="text" required>
 
-                    <button class="btn2" type="submit">Add Semester</button>
-                </form>
-                </div>
-                </div>
-                </div>
-                </div>
-        </div>
+                  <button class="btn2" type="submit">Add Semester</button>
+              </form>
+              </div>
+              </div>
+              </div>
+              </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import AxiosInstance from '../config/axiosInstance';
-  
-  export default {
-    name: "AddSem",
-    props: ['selecteduniversity'],
-    data() {
-      return {
-        formVisible: false,
-        products: [],
-        selectedSem: '',
-        selectedProduct: { id: null, name: '', description: '',universityId:null },
-        isLoading: false,
-        editMode: false,
-        editedProduct: {
-        id: null,
-        name: '',
-        description: '',
-        universityId: null,
-      },
-        newBranch: {
-        name: '',
-        description: '',
-        universityId: this.selecteduniversity,
-        semesterName: '',
-       },
-      };
+  </div>
+</template>
+
+<script>
+import AxiosInstance from '../config/axiosInstance';
+
+export default {
+  name: "AddSem",
+  props: ['selecteduniversity'],
+  data() {
+    return {
+      formVisible: false,
+      products: [],
+      selectedSem: '',
+      selectedProduct: { id: null, name: '', description: '',universityId:null },
+      isLoading: false,
+      editMode: false,
+      editedProduct: {
+      id: null,
+      name: '',
+      description: '',
+      universityId: null,
     },
-    computed: {
-    isTableVisible() {
-      return !!this.selectedSem; // Show table if a type is selected
-    },
+      newBranch: {
+      name: '',
+      description: '',
+      universityId: this.selecteduniversity,
+      semesterName: '',
+     },
+    };
   },
-  watch: {
-    selecteduniversity: {
-      immediate: true,
-      handler(newVal, oldVal) {
-        this.loadData();
-      },
-    },
+  computed: {
+  isTableVisible() {
+    return !!this.selectedSem; // Show table if a type is selected
   },
-    created() {
+},
+watch: {
+  selecteduniversity: {
+    immediate: true,
+    handler(newVal, oldVal) {
       this.loadData();
     },
-    methods: {
-        emitSelectedType() {
-            this.$emit('selected-semester-changed', this.selectedSem);
-            this.loadData(); 
-            this.loadProductDetails();
-        },
-      toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-
-      async loadData() {
-        this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
-        this.products = res.data;
-        this.loadProductDetails();
-
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    
-    async loadProductDetails() {
-    
-        const selectedProduct = this.products.find(product => product.id === this.selectedSem);
-         if (selectedProduct) {
-        this.selectedProduct = { ...selectedProduct };
-        //this.newBranch.universityId = this.selectedProduct.id; 
-
-      }
-    },
-
-      enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.universityId = this.selectedProduct.universityId;
-
-    },
-
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-        console.log(res);
-
-        if (res.status === 200) {
-          await this.getdata();
-          this.editMode = false; 
-          this.ismodel = true;
+  },
+},
+  created() {
+    this.loadData();
+  },
+  methods: {
+      emitSelectedType() {
+          this.$emit('selected-semester-changed', this.selectedSem);
+          this.loadData(); 
           this.loadProductDetails();
-        }
-        } catch (error) {
-          console.error(error);
-        }
+      },
+    toggleForm() {
+        this.formVisible = !this.formVisible;
       },
 
-    async addBranch() {
+    async loadData() {
       this.isLoading = true;
-      try {
-        const response = await AxiosInstance.post('/Semester', this.newBranch);
-        this.ismodel = true; 
-      if (response.status === 200) {
-        console.log("Branch added successfully");
-        await this.loadData();
-        this.loadProductDetails();
-          // this.gridApi.refreshCells({ force: true });
+    try {
+      const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
+      this.products = res.data;
+      this.loadProductDetails();
 
-        alert("Insert Successful");
-        this.formVisible = false;
-
-      } else {
-        alert("Insert Fail");
-      }
-          
-      } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
-             this.isLoading = false;
-      }
-    },
-    // async getdata() {
-    //    this.isLoading = true;
-    //    try {
-    //     const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
-    //     this.products = res.data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
   
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
-        
-    // },
+  async loadProductDetails() {
+  
+      const selectedProduct = this.products.find(product => product.id === this.selectedSem);
+       if (selectedProduct) {
+      this.selectedProduct = { ...selectedProduct };
+      //this.newBranch.universityId = this.selectedProduct.id; 
 
+    }
+  },
+
+    enableEditMode() {
+    this.editMode = true;
+    this.editedProduct.id = this.selectedProduct.id;
+    this.editedProduct.name = this.selectedProduct.name;
+    this.editedProduct.description = this.selectedProduct.description;
+    this.editedProduct.universityId = this.selectedProduct.universityId;
+
+  },
+
+  async updateProduct(id) {
+    try {
+      const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+      console.log(res);
+
+      if (res.status === 200) {
+        await this.getdata();
+        this.editMode = false; 
+        this.ismodel = true;
+        this.loadProductDetails();
+      }
+      } catch (error) {
+        console.error(error);
+      }
     },
+
+  async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/Semester', this.newBranch);
+      this.ismodel = true; 
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+        // this.gridApi.refreshCells({ force: true });
+
+      alert("Insert Successful");
+      this.formVisible = false;
+
+    } else {
+      alert("Insert Fail");
+    }
+        
+    } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding branch:", error);
+    }
+    finally {
+           this.isLoading = false;
+    }
+  },
+  // async getdata() {
+  //    this.isLoading = true;
+  //    try {
+  //     const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
+  //     this.products = res.data;
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+      
+  // },
+
+  },
 };
 </script>
-  <style scoped>
+<style scoped>
 .frm{
-        padding: 20px;
-    border: 1px solid black;
-    width: 90%;
-    background-color: #fff;
-     }
-    
+      padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+  background-color: #fff;
+   }
+  
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+  .frm {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
-    input {
-      width: 100%;
-      padding: 1px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+  input {
+    width: 100%;
+    padding: 1px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
 
     button {
         color: #fff;
@@ -303,37 +303,37 @@
     }
 }
 
-    button:hover {
-        background-color: #007bff;
-    }
-    .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+  button:hover {
+      background-color: #007bff;
   }
+  .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .modal-dialog {
-    position: relative;
-    margin: 10% auto;
-  }
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+}
 
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
 
   .modal-body {
     padding: 15px;

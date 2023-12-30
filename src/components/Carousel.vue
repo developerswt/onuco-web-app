@@ -1,7 +1,6 @@
 <template>
   <div class="container-fluid mt-5 carousel_header">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators (optional) -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -9,7 +8,6 @@
         <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
       </ol>
-
       <div class=" carousel-inner" style="margin-top: -33px; border-radius: none;">
         <!-- Slide 1 -->
         <div class=" carousel-item active ">
@@ -92,6 +90,7 @@ export default {
 .carousel_header {
   padding-top: 4%;
 }
+
 #carousel_input {
   width: 50%;
   border: none;
@@ -145,7 +144,6 @@ export default {
 .right_carousel_block {
   text-align: center;
   color: white;
-  /* margin-left: 200px; */
   margin-bottom: 20px;
 }
 
@@ -361,12 +359,12 @@ export default {
 
 .img-fluid1 {
   /* width: 153%; */
-  width:100%;
-    height: 633px;
-    opacity: 1;
-    position: relative;
-    bottom: 174px;
-    /* right: 284px; */
+  width: 100%;
+  height: 633px;
+  opacity: 1;
+  position: relative;
+  bottom: 174px;
+  /* right: 284px; */
 }
 
 .img-fluid2 {

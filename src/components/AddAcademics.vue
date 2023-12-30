@@ -47,9 +47,9 @@
                 </tr>
               </tbody>
 
-            </table>
-            
-            <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+          </table>
+          
+          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
 <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
   <div class="modal-dialog" role="document">
@@ -130,141 +130,141 @@
     created() {
       this.loadData();
 
+  },
+  methods: {
+    emitSelectedType() {
+      this.$emit('selected-academic-changed', this.selectedAcademics);
+      this.loadData(); 
+      this.loadProductDetails();
     },
-    methods: {
-      emitSelectedType() {
-        this.$emit('selected-academic-changed', this.selectedAcademics);
-        this.loadData(); 
-        this.loadProductDetails();
-      },
-      async loadData() {
-  this.isLoading = true;
-  try {
-    const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
-    this.products = res.data;
-    console.log('Data loaded:', this.products);
-  } catch (error) {
-    console.error('Error loading data:', error);
-  } finally {
-    this.isLoading = false;
-  }
+    async loadData() {
+this.isLoading = true;
+try {
+  const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
+  this.products = res.data;
+  console.log('Data loaded:', this.products);
+} catch (error) {
+  console.error('Error loading data:', error);
+} finally {
+  this.isLoading = false;
+}
 },
 
-      
-      enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.typeId = this.selectedProduct.typeId
-      this.editedProduct.academiaName = this.selectedProduct.academiaName
-    },
-
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-
-        console.log(res);
-
-        if (res.status === 200) {
-          await this.loadData();
-          this.editMode = false; 
-          this.ismodel = true; 
-          this.loadProductDetails();
-          // this.gridApi.refreshCells({ force: true });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    },
-
-      toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-
-        async loadProductDetails(res) {
-        
-        const selectedProduct = this.products.find(product => product.id === this.selectedAcademics);
-        
-        if (selectedProduct) {
-          this.selectedProduct = { ...selectedProduct };
-         // this.newBranch.typeId  = this.selectedProduct.typeId;
- 
-        }
-      },
-      async addBranch() {
-      this.isLoading = true;
-      try {
-        const response = await AxiosInstance.post('/Academia', this.newBranch);
-        if (response.status === 200) {
-          console.log("Branch added successfully");
-          await this.loadData(); // Update dropdown data
-          this.loadProductDetails();
-          alert("Insert Successful");
-          this.formVisible = false;
-
-        } else {
-          alert("Insert Fail");
-        }
-      } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-  
-        //   async getdata() {
-        //       this.isLoading = true;
-        //       try {
-        //         const res = await AxiosInstance.get(`/Academia`);
-        //         this.products = res.data;
-        //         this.loadProductDetails();
-
-        //       } catch (error) {
-        //         console.log(error);
-        //       } finally {
-        //         this.isLoading = false;
-        //       }
-        //     },
-          
-    },
-    beforeRouteLeave(to, from, next) {
-  console.log('Before leaving the route. Refreshing the table...');
-  this.loadData(); // Add this line to refresh the table
-  next();
-},
-
-  };
-  </script>
-  
-  <style scoped>
-  .frm{
-        padding: 20px;
-    border: 1px solid black;
-    width: 90%;
-    background-color: #fff;
-     }
     
+    enableEditMode() {
+    this.editMode = true;
+    this.editedProduct.id = this.selectedProduct.id;
+    this.editedProduct.name = this.selectedProduct.name;
+    this.editedProduct.description = this.selectedProduct.description;
+    this.editedProduct.typeId = this.selectedProduct.typeId
+    this.editedProduct.academiaName = this.selectedProduct.academiaName
+  },
 
-    .frm {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 80px;
-    }
+  async updateProduct(id) {
+    try {
+      const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+      console.log(res);
 
-    input {
-      width: 100%;
-      padding: 1px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
+      if (res.status === 200) {
+        await this.loadData();
+        this.editMode = false; 
+        this.ismodel = true; 
+        this.loadProductDetails();
+        // this.gridApi.refreshCells({ force: true });
+      }
+    } catch (error) {
+      console.error(error);
     }
+  },
+
+    toggleForm() {
+        this.formVisible = !this.formVisible;
+      },
+
+      async loadProductDetails(res) {
+      
+      const selectedProduct = this.products.find(product => product.id === this.selectedAcademics);
+      
+      if (selectedProduct) {
+        this.selectedProduct = { ...selectedProduct };
+       // this.newBranch.typeId  = this.selectedProduct.typeId;
+
+      }
+    },
+    async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/Academia', this.newBranch);
+      if (response.status === 200) {
+        console.log("Branch added successfully");
+        await this.loadData(); // Update dropdown data
+        this.loadProductDetails();
+        alert("Insert Successful");
+        this.formVisible = false;
+
+      } else {
+        alert("Insert Fail");
+      }
+    } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding branch:", error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
+
+      //   async getdata() {
+      //       this.isLoading = true;
+      //       try {
+      //         const res = await AxiosInstance.get(`/Academia`);
+      //         this.products = res.data;
+      //         this.loadProductDetails();
+
+      //       } catch (error) {
+      //         console.log(error);
+      //       } finally {
+      //         this.isLoading = false;
+      //       }
+      //     },
+        
+  },
+  beforeRouteLeave(to, from, next) {
+console.log('Before leaving the route. Refreshing the table...');
+this.loadData(); // Add this line to refresh the table
+next();
+},
+
+};
+</script>
+
+<style scoped>
+.frm{
+      padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+  background-color: #fff;
+   }
+  
+
+  .frm {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input {
+    width: 100%;
+    padding: 1px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
 
     button {
         color: #fff;
@@ -329,24 +329,24 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .modal-dialog {
-    position: relative;
-    margin: 10% auto;
-  }
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+}
 
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
 
   .modal-body {
     padding: 15px;
@@ -355,5 +355,4 @@
     width: 470px;
   }
 
-  </style>
-  
+</style>

@@ -24,9 +24,10 @@
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title" data-placement="top" :title="facult.name">{{ facult.name.slice(0,20) }}..</div>
-                            <div class="card-text"> {{ facult.description.slice(0,50) }}...</div>
-                            
+                            <div class="card-title" data-placement="top" :title="facult.name">{{ facult.name.slice(0, 20)
+                            }}..</div>
+                            <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
+
                             <div class="mn text-left">
                                 <p>
                                     ({{ facult.ratingCount || 0 }} Reviews)
@@ -42,7 +43,6 @@
         </div>
     </div>
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
-    <!-- <img :src="this.faculty[1].imageUrl" style="border-radius: 50%; width: 50%; height: 50%;"> -->
 </template>
 
 <script>
@@ -96,11 +96,7 @@ export default {
         },
     }
 }
-
-
 </script>
-
-
 
 <style scoped>
 .category-test a {
@@ -183,7 +179,6 @@ export default {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/18px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-707070);
-    /* text-align: center; */
     font: normal normal normal 14px/18px Segoe UI;
     letter-spacing: 0px;
     color: #707070;
@@ -271,18 +266,15 @@ export default {
 
 ::-webkit-scrollbar {
     width: 0.5em;
-    /* Adjust this to change the width of the scrollbar track */
 }
 
-/* Firefox */
+
 * {
     scrollbar-width: none;
-    /* "thin" or "none" depending on your preference */
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: transparent;
-    /* Hide the thumb on webkit-based browsers */
 }
 
 .fa {

@@ -1,5 +1,3 @@
-<!-- 
-
 <template>
      <div class="container" ><p>Dashbord > Active Student </p>
     <div class="container" style="margin-top: 72px;">
@@ -218,25 +216,24 @@
           if (Array.isArray(req.activeStudents)) {
         this.rowData = req.activeStudents;
       } else {
-        // Handle the case where completedStudents is not an array
         console.error('completedStudents is not an array:', req.activeStudents);
       }
-
+      this.processChartData();
       const result = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
-            this.person = result.data;
-            console.log(this.person);
-          
-          } catch (error) {
-            this.isLoading = false;
-          console.log(error);
-          this.showDialog = true;  
-          this.dialogTitle= "Error";
-          this.dialogMessage= "Not get data";
-        }
-        finally {
-          this.isLoading = false;
-        }
-        this.rowSelection = 'single'; 
+      this.person = result.data;
+      console.log(this.person);
+
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
+    }
+    finally {
+      this.isLoading = false;
+    }
+    this.rowSelection = 'single';
     console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
