@@ -19,8 +19,8 @@
         </div>
         <div class="content-container" v-if="selectedContent === 'viewDetails'">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">view details</span>
-          <ViewDetails />
-          <FacultyViewDetails />
+          <ViewDetails v-if="isUserAdmin || isUserSuperadmin"/>
+          <FacultyViewDetails v-if="isUserfaculty" />
         </div>
         <div class="content-container" v-if="selectedContent === 'branches'">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Branches</span>
@@ -99,7 +99,7 @@ export default {
       },
       isUserfaculty() {
         return Array.isArray(this.isuser?.['cognito:groups']) &&
-          this.isuser['cognito:groups'][1] === 'Faculty';
+          this.isuser['cognito:groups'][0] === 'Faculty';
       },
       isUserSuperadmin() {
         return Array.isArray(this.isuser?.['cognito:groups']) &&

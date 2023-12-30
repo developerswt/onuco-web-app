@@ -60,7 +60,7 @@ export default {
       },
       isUserfaculty() {
         return Array.isArray(this.isuser?.['cognito:groups']) &&
-          this.isuser['cognito:groups'][1] === 'Faculty';
+          this.isuser['cognito:groups'][0] === 'Faculty';
       },
       isUserSuperadmin() {
         return Array.isArray(this.isuser?.['cognito:groups']) &&
