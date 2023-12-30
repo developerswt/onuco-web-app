@@ -63,6 +63,7 @@ import DataCreation from './components/DataCreation.vue'
 import AddAcademics from './components/AddAcademics.vue'
 import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vue'
 import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
+import AdminPage from './components/AdminPage.vue'
 
 let user = null; // Initialize user as null
 
@@ -525,6 +526,15 @@ const routes = [
     component: LectureVsSubjectFaculty,
     meta: {
         title: 'Lecture Details',
+    },
+
+  },
+  {
+    path: "/AdminPage",
+    name: "AdminPage",
+    component: AdminPage,
+    meta: {
+        title: 'Admin Page',
     },
 
   },

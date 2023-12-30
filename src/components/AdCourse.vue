@@ -1,16 +1,26 @@
 <template>
   <div class="container">
-    <p>Dashbord > Branchs Update </p>
-    <div style="padding: 20px;">
-      <div class="example-wrapper">
-        <div style="height: 100%;">
-          <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
-            :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
-            :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
-            :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
-            @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
-          </ag-grid-vue>
+    <div class="row pt-2">    
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card-box">
+          <div class="card-head">
+            <header>Total Course Details</header>
+            <div class="card-body ">
+              <div style="padding: 20px;">
+                <div class="example-wrapper">
+                  <div style="height: 100%;">
+                    <ag-grid-vue
+                      :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+                      :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
+                      :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
+                      :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
+                      @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
+                    </ag-grid-vue>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,7 +57,7 @@ export default {
       req: [],
       columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Semester Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'Actual Price', field: 'actualPrice' }, { name: 'Discount Price', field: 'discountPrice' }, { name: 'WorkFlow Statement', field: 'workFlowStatement' }],
       gridApi: null,
-      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      defaultColDef: { sortable: true, filter: true, width: 170, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
       editType: null,
       showChildRow: false,
@@ -95,7 +105,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 80%;
+  width: 100%;
 }
 
 #myGrid {
@@ -223,5 +233,60 @@ export default {
 
 button:hover {
   background-color: #007bff;
+}
+.card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
+}
+.card-head header {
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
+}.card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
+}
+.card-head header {
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
 }
 </style>
