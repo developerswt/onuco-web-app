@@ -40,33 +40,31 @@
             <div class="container bg-light">
                                 <div v-if="ismodel" class="row">
                                     <div class="col-sm-12">
-                                      <p><b>ID: </b> {{childPara.id  }}</p>
-                                      <p><b>Course ID :</b>{{ childPara.courseId }}</p>
-                                         <p><b>Subject Name:</b>{{childPara.name }}</p>
-                                         <p><b>Price:</b> {{ childPara.price }}</p>
-                                         <p><b>Start Date:</b> {{ childPara.startdate }}</p>
-                                         <p><b>End Date:</b> {{ childPara.enddate }}</p>
-                                         <p><b>Status:</b> {{ childPara.state }}</p>
+                                      <p><b>ID: </b> {{ childPara.id  }}</p>
+                                      <p><b>Course ID:</b> {{ childPara.courseId }}</p>
+                                      <p><b>User CognitoId:</b> <a :href="getUserLink(childPara.userCognitoId)">{{ childPara.userCognitoId }}</a></p>
+                                         <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
+                                         <p><b>Start Date:</b> {{ formatDate( childPara.startdate) }}</p>
+                                         <p><b>End Date:</b> {{ formatDate( childPara.enddate ) }}</p>
+                                         <!-- <p><b>Status:</b> {{ childPara.state }}</p> -->
                                          
                                      </div>
                                 </div>
                                 <div v-else class="row">
                                   <div class="col-sm-12">
-                                         <p><b>ID: </b> {{childPara.id  }}</p>
-                                         <p><b>Course ID :</b>{{ childPara.courseId }}</p>
-                                         <p><b>Subject Name:</b>{{childPara.name }}</p>
-                                         <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
-                                         <div class="">
-                                          <label><b>Price:</b></label><br>
-                                          <input v-model="childPara.price" type="text" />
-                                        </div>
+                                         <p><b>ID: </b> {{ childPara.id  }}</p>
+                                         <p><b>Course ID: </b> {{ childPara.courseId }}</p>
+                                         <!-- <p><b>User CognitoId:</b> {{ childPara.userCognitoId }}</p>
+                                        
+                                         <p><b>Price:</b> {{ childPara.price }}</p> -->
+
                                         <div class="">
                                           <label><b>Start Date:</b></label><br>
-                                          <input v-model="childPara.startdate" type="text" />
+                                          <Datepicker  v-model="childPara.startdate"></Datepicker>
                                         </div> 
                                         <div class="">
                                           <label><b>End Date:</b></label><br>
-                                          <input v-model="childPara.enddate" type="text" />
+                                          <Datepicker v-model="childPara.enddate"></Datepicker>
                                         </div>
                                         <!-- <p><b>Status:</b> {{ childPara.state }}</p>
                                         <div class="">
@@ -102,15 +100,21 @@
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue3";
   // import AlertDialog from './AlertDialog.vue';
+  import moment from 'moment';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
+  import Datepicker from '@vuepic/vue-datepicker';
+  import '@vuepic/vue-datepicker/dist/main.css'
+
+
   export default {
     name: "StudentDetails",
     components: {
       AgGridVue,
       Loading,
       // AlertDialog
+      Datepicker,
+      
     },
     data: function () {
       return {
@@ -123,7 +127,7 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{name:'Course Id', field:'courseId',suppressSizeToFit: true },{ name:'Subject Name', field: 'name' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,}],
+        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'Course Name',field:'courseName'},{ name:'User CognitoId', field: 'userCognitoId' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',valueFormatter: this.dateFormat.bind(this),filterType: 'date'},{name:'End Date',field:'enddate',valueFormatter: this.dateFormats.bind(this),filterType: 'date'}],
         gridApi: null,
         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
         columnApi: null,
@@ -140,6 +144,7 @@
       };
     },
     computed: {
+
       isLoggedIn() {
         return this.$store.state.IsLoggedIn;
       },
@@ -149,18 +154,11 @@
       this.domLayout = 'autoHeight'; 
       this.isLoading = true;
       try {
-        const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
+        const res = await AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
         let req = res.data;
         this.Orders = req;
-        if (Array.isArray(req.completedStudents)) {
-      this.rowData = req.completedStudents;
-    } else {
-      // Handle the case where completedStudents is not an array
-      console.error('completedStudents is not an array:', req.completedStudents);
-    }
         
-        } catch (error) {
-          this.isLoading = false;
+      } catch (error) {
         console.log(error);
         this.showDialog = true;  
         this.dialogTitle= "Error";
@@ -169,16 +167,44 @@
       finally {
         this.isLoading = false;
       }
+      this.rowData = this.Orders;
       this.rowSelection = 'single'; 
-  console.log(this.rowData);
-  this.popupParent = document.body;
-  this.paginationPageSize = 10;
-  
+      console.log(this.rowData);
+      this.popupParent = document.body;
+      this.paginationPageSize = 10;
+
     },
     
     
     methods: {
+
+      getUserLink(userCognitoId) {
+      return `/user-profile/${userCognitoId}`;
+    },
+
+      formatDate(date) {
+      return moment(date).format('DD-MM-YYYY T HH:mm:ss');
+    },
+    dateFormat(params) {
+      let value = params.data.startdate;
+      // let value2=params.data.enddate;
+      console.log(value);
+      if(value) {
+        return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+      }
+      // if(value2) {
+      //   return moment(String(value2)).format('DD/MM/YYYY');
+      // }
+    },
+    dateFormats(params) {
       
+      let value2=params.data.enddate;
+      console.log(value2);
+     
+      if(value2) {
+        return moment(String(value2)).format('DD/MM/YYYY T HH:mm:ss');
+      }
+    },
     onCellClicked(params) {
             this.childPara = params.node.data
         console.log(this.childPara);
@@ -225,13 +251,15 @@
       update(id) {
         this.showDialog = false;
         try {
-          const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(this.childPara.startdate) + '&newEndDate=' +encodeURIComponent (this.childPara.enddate));
+          const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
+          const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
+          const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(formattedStartDate) + '&newEndDate=' + encodeURIComponent(formattedEndDate));
           console.log(res);
           
           // this.gridApi.refreshCells({force : true});
           if (res.status === 200) {
-            const newData = AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
-            this.rowData = newData.data.completedStudents;
+            const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
+            this.rowData = newData.data;
         }
 
           this.ismodel = true;
@@ -286,7 +314,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
+  width: 85%;
   }
   
   #myGrid {
@@ -370,8 +398,8 @@
       overflow-y: auto;
     }
     .mc{
-      height: 300px;
-      width: 550px;
+      height: 350px;
+      width: 650px;
       overflow: hidden;
     }
     .modal-body {

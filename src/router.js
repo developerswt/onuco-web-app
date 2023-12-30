@@ -61,6 +61,7 @@ import AddSem from './components/AddSem.vue'
 import AddCourse from './components/AddCourse.vue'
 import DataCreation from './components/DataCreation.vue'
 import AddAcademics from './components/AddAcademics.vue'
+import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
 
 let user = null; // Initialize user as null
 
@@ -579,6 +580,11 @@ const routes = [
         name: "AddAcademics",
         component: AddAcademics, 
       },
+      {
+        path:"/FacultyProfileUpdate",
+        name: "FacultyProfileUpdate",
+        component: FacultyProfileUpdate, 
+      }
 
      ],
     meta: {

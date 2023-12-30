@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-      <h5>Courses Update & Create</h5>
+      <h5>Subject Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select Course :</label>
+          <label for="productDropdown">Subject Name :</label>
           <select v-model="selectedCourse" @change="loadProductDetails">
-            <option value="" disabled selected hidden>Choose a Name</option>
+            <option value="" disabled selected hidden>Please Select</option>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
@@ -16,7 +16,7 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Subject Name</th>
                 <th>Description</th>
                 <th>Actual Price</th>
                 <th>Discount Price</th>
@@ -35,7 +35,7 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <input v-model="editedProduct.description" type="text" required>
+                    <textarea  v-model="editedProduct.description" type="text" required></textarea>
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.actualPrice }}</td>
                   <td v-if="editMode">
@@ -70,7 +70,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add New Course</h5>
+        <h5 class="modal-title">Add New Subject</h5>
         <button type="button" class="close" @click="toggleForm">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -78,11 +78,11 @@
       <div class="modal-body">
         <form @submit.prevent="addBranch"> 
                     <p><b></b> {{newBranch.id}}</p>
-                    <label for="branchName"> Name:</label>
+                    <label for="branchName">Subject Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <input id="description" v-model="newBranch.description" type="text" required><br>
+                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
                     <label for="actualPrice">Actual Price:</label>
                     <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
@@ -90,19 +90,23 @@
                     <label for="discountPrice">Discount Price:</label>
                     <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
 
-                    <label for="semesterId">SemesterId:</label>
+                    <label for="semesterId">Semester Id:</label>
                     <input id="semesterId" v-model="this.selectedsemester" type="text" required><br>
 
-                    <label for="courseName">Course Name:</label>
+                    <label for="courseName">Subject Name:</label>
                     <input id="courseName" v-model="newBranch.courseName" type="text" required><br>
 
                     <label for="workFlowStatement">Work Flow:</label>
-                    <input id="workFlowStatement" v-model="newBranch.workFlowStatement" type="text" required><br>
+                    <select class="size" id="workFlowStatement" v-model="newBranch.workFlowStatement" type="text" required><br>
+                      <option value="Draft">Draft</option>
+                        <option value="Review">Review</option>
+                        <option value="Release">Release</option>
+                      </select>
 
                     <label for="facultyId"><b>FacultyId:</b></label>
                     <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
 
-                    <button class="btn2" type="submit">Add Course</button>
+                    <button class="btn2" type="submit">Add Subject</button>
                 </form>
                 </div>
                 </div>
@@ -352,7 +356,7 @@
       cursor: pointer;
       margin-top: 8px;
      }
-    .btn1{
+    /* .btn1{
         color: #fff;
     background-color: #007bff;
     border-color: #007bff;
@@ -362,9 +366,38 @@
       cursor: pointer;
       margin-bottom: 80px; 
       margin-top: 20px;
+    } */
+    .btn1{
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 6px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 80px; 
+        position: relative;
+        top: 67px;
+        left: 830px;
+        font-weight: 600;
+        font-size: 15px;
+        }
+@media (max-width: 520px) {
+  .btn1{
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 7px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 80px; 
+      position: relative;
+      top: 68px;
+    left: 73px;
+
     }
-
-
+}
     button:hover {
         background-color: #007bff;
     }
@@ -404,5 +437,8 @@
   .modal-header .close {
     padding: 12px 14px;
     margin: -9px -10px -10px auto;
+}
+.size{
+  width: 470px;
 }
 </style>

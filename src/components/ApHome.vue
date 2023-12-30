@@ -1,7 +1,3 @@
-
-
-
-
 <template>
   <div class="container ">
     <section class="main" >
@@ -30,9 +26,8 @@
   <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
-      <div v-if="count" class="content">
-      <h3 class="head"><router-link to="/StudentDetails">Complete Students </router-link></h3>
-      <span style=" font-size:26px"> {{count.completedStudentsCount }}</span>      
+      <div class="content">
+      <h3 class="head"><router-link to="/StudentDetails">All Subscribed Students </router-link></h3>
     </div>
     </div>
   </div>
@@ -260,104 +255,18 @@
   </div>
   </div> -->
 </div>
-
-
-  <!-- <div class="row">
-<div class="col-sm-8">
-    <div class="card view">
-    <div class="box">
-      <div class="content">
-        <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="50px" cellspacing="0">
-                    <thead>
-                      <header style="color: cornflowerblue; font-size:large;">Subject_Information</header>
-                        <tr>
-                            <th>Subject Name</th>
-                            <th>Lecturer Name</th>
-                          
-                        </tr>
-                    </thead>
-                        
-                </table>
-            </div>
-    </div>
-   </div>
-  </div>
-</div>
-<div class="col-sm-4">
-    <div class="card view vv">
-    <div class="box">
-      <div class="content">
-        
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-        <img src="../assets/images/reva.jpg" class="d-block w-100" alt="..." style="height: 200px ;">
-    </div>
-    <div class="carousel-item">
-      <img src="../assets/images/vtu.jpg" class="d-block w-100" alt="..." style="height: 200px ;">
-    </div>
-    <div class="carousel-item">
-      <img src="../assets/images/chirst.jpg" class="d-block w-100" alt="..." style="height: 200px ;">
-    </div>
-  </div>
-</div>
-       
-    </div>
-   </div>
-  </div>
-</div>
-  </div> -->
-
-
 </section>
 
 </div>
-<!-- <form-wizard @on-complete="onComplete" step-size="xs">
-    <tab-content title="Types">
-      <AddTypes />
-    </tab-content>
-    <tab-content title="Academics" >
-      <AcademicsUpdate />
-    </tab-content>
-    <tab-content title="Branches" >
-      <AddBranches />
-    </tab-content>
-    <tab-content title="University" >
-      <AddUni />
-    </tab-content>
-    <tab-content title="Semester">
-      <AddSem />
-    </tab-content>
-    <tab-content title="Courses" >
-      <AddCourse />
-    </tab-content>
-  
-  </form-wizard> -->
 </template>
 <script>
-// import AddTypes from './AddTypes.vue'
-// import AcademicsUpdate from './AcademicsUpdate.vue'
-// import AddBranches from './AddBranches.vue'
-// import AddUni from './AddUni.vue'
-// import AddSem from './AddSem.vue'
-// import AddCourse from './AddCourse.vue'
-// import {FormWizard,TabContent} from "vue3-form-wizard";
-// import 'vue3-form-wizard/dist/style.css'
+
 import AxiosInstance  from '../config/axiosInstance';
   
   export default {
 
   name: "Aphome",
   components: {
-    // FormWizard,
-    // TabContent,
-    // AddTypes,
-    // AcademicsUpdate,
-    // AddBranches,
-    // AddUni,
-    // AddCourse,
-    // AddSem,
     AxiosInstance
   },
   data() {        
@@ -404,9 +313,9 @@ import AxiosInstance  from '../config/axiosInstance';
       this.student = result.data;
       console.log(this.student);
 
-      const resl = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
-      this.count = resl.data;
-      console.log(this.count);
+      // const resl = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
+      // this.count = resl.data;
+      // console.log(this.count);
 
       const results = await AxiosInstance.get(`/Course`);
       this.counts = results.data;
@@ -425,9 +334,6 @@ import AxiosInstance  from '../config/axiosInstance';
 
 </script>
 <style scoped>
-/* .cardpd{
-  padding: 0px !important;
-} */
  .card {
   position: relative;
   min-width: 260px;

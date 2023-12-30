@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-      <h5>Academia Update & Create</h5>
+      <h5>Course Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select Academia :</label>
+          <label for="productDropdown">Course Name :</label>
           <select v-model="selectedAcademics" @change="emitSelectedType">
-            <option value="" disabled selected hidden>Choose a Name</option>
+            <option value="" disabled selected hidden>Please Select</option>
 
         <option v-for="product in products" :key="product.id" :value="product.id">
           {{ product.name }}
@@ -17,9 +17,9 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Name</th>
+                  <th>Course Name</th>
                   <th>Description</th>
-                  <th>Academia Name</th>
+                  <th>Course Name</th>
                   <th>Type Id</th>
                   <th>Action</th>
                 </tr>
@@ -33,7 +33,7 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <input v-model="editedProduct.description" type="text" required>
+                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.academiaName }}</td>
                   <td v-if="editMode">
@@ -55,7 +55,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add New Academia</h5>
+        <h5 class="modal-title">Add New Course</h5>
         <button type="button" class="close" @click="toggleForm">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,19 +63,19 @@
       <div class="modal-body">
         <form @submit.prevent="addBranch">      
               <p><b></b> {{newBranch.id}}</p>
-              <label for="branchName"> Name:</label>
+              <label for="branchName">Course Name:</label>
               <input id="branchName" v-model="newBranch.name" type="text" required><br>
         
               <label for="description">Description:</label>
-              <input id="description" v-model="newBranch.description" type="text" required><br>
+              <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
     
               <label for="typeId">TypeId:</label>
               <input id="typeId" v-model="this.selectedtype" type="text" required><br>
               
-              <label for="academiaName"><b>Academia Name:</b></label>
+              <label for="academiaName"><b>Course Name:</b></label>
               <input id="academiaName" v-model="newBranch.academiaName" type="text" required> 
 
-              <button class="btn2" type="submit">Add Academia</button>
+              <button class="btn2" type="submit">Add Course</button>
             </form>
             </div>
             </div>
@@ -284,20 +284,39 @@
       border-radius: 4px;
       cursor: pointer;
      }
-    .btn1{
+     .btn1{
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 6px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 80px; 
+        position: relative;
+        top: 67px;
+        left: 830px;
+        font-weight: 600;
+        font-size: 15px;
+        }
+@media (max-width: 520px) {
+  .btn1{
         color: #fff;
     background-color: #007bff;
     border-color: #007bff;
-      padding: 10px 15px;
+      padding: 7px 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
-      margin-top: 20px;
+      position: relative;
+      top: 68px;
+    left: 73px;
+
     }
+}
 
-
-    button:hover {
+ button:hover {
         background-color: #007bff;
     }
     .modal {
@@ -332,7 +351,9 @@
   .modal-body {
     padding: 15px;
   }
- 
+  .size{
+    width: 470px;
+  }
 
   </style>
   

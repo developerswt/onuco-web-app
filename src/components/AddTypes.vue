@@ -3,9 +3,9 @@
     <h5>Types Update & Create</h5>
     <div class="container" style="margin-top: 72px;">
       <div>
-        <label for="productDropdown">Select Types :</label>
+        <label for="productDropdown">Course Type :</label>
         <select v-model="selectedTypes" @change="emitSelectedType">
-          <option value="" disabled selected hidden>Choose a Name</option>
+          <option value="" disabled selected hidden>Please Select</option>
           <option v-for="product in products" :key="product.id" :value="product.id">
             {{ product.name }}
           </option>
@@ -30,7 +30,7 @@
               </td>
               <td v-if="!editMode">{{ selectedProduct.description }}</td>
               <td v-if="editMode">
-                <input v-model="editedProduct.description" type="text" required>
+                <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
               </td>
               <td>
                 <button v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -46,20 +46,20 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Add New Type</h5>
+                  <h5 class="modal-title">Add New Course Type</h5>
                   <button type="button" class="close" @click="toggleForm">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <form @submit.prevent="addBranch">
-                    <label for="branchName">Name:</label>
+                    <label for="branchName">Course Type Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
     
                     <label for="description">Description:</label>
-                    <input id="description" v-model="newBranch.description" type="text" required><br>
+                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
     
-                    <button class="btn2" type="submit">Add Type</button>
+                    <button class="btn2" type="submit">Add Course Type</button>
                   </form>
                 </div>
               </div>
@@ -245,14 +245,33 @@ export default {
         color: #fff;
     background-color: #007bff;
     border-color: #007bff;
-      padding: 10px 15px;
+      padding: 6px 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
-      margin-top: 20px;
+      position: relative;
+    top: 67px;
+    left: 830px;
+    font-weight: 600;
+font-size: 15px;
     }
+@media (max-width: 520px) {
+  .btn1{
+        color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+      padding: 7px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 80px; 
+      position: relative;
+      top: 68px;
+    left: 69px;
 
+    }
+}
 
     button:hover {
         background-color: #007bff;
@@ -288,5 +307,8 @@ export default {
 
   .modal-body {
     padding: 15px;
+  }
+  .size{
+    width: 470px;
   }
 </style>

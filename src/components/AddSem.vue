@@ -3,9 +3,9 @@
       <h5>Semester Update & Create</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
-          <label for="productDropdown">Select Semester :</label>
+          <label for="productDropdown">Semester Name :</label>
           <select v-model="selectedSem"  @change="emitSelectedType">
-            <option value="" disabled selected hidden>Choose a Name</option>
+            <option value="" disabled selected hidden>Please Select</option>
             <option v-for="product in products" :key="product.id" :value="product.id">
               {{ product.name }}
             </option>
@@ -16,7 +16,7 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Semester Name</th>
                 <th>Description</th>
                 <th>University Id</th>
                 <th>Action</th>
@@ -31,7 +31,7 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <input v-model="editedProduct.description" type="text" required>
+                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
                   </td>
                   <td>{{ selectedProduct.universityId }}</td>
                   <td>
@@ -56,11 +56,11 @@
       <div class="modal-body">
         <form @submit.prevent="addBranch"> 
                     <p><b></b> {{newBranch.id}}</p>
-                    <label for="branchName"> Name:</label>
+                    <label for="branchName">Semester Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <input id="description" v-model="newBranch.description" type="text" required><br>
+                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
                     <label for="universityId">University Id:</label>
                     <input id="universityId" v-model="this.selecteduniversity" type="text" required><br>
@@ -271,18 +271,37 @@
       border-radius: 4px;
       cursor: pointer;
      }
-    .btn1{
+     .btn1{
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 6px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 80px; 
+        position: relative;
+        top: 67px;
+        left: 830px;
+        font-weight: 600;
+        font-size: 15px;
+        }
+@media (max-width: 520px) {
+  .btn1{
         color: #fff;
     background-color: #007bff;
     border-color: #007bff;
-      padding: 10px 15px;
+      padding: 7px 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
-      margin-top: 20px;
-    }
+      position: relative;
+      top: 68px;
+    left: 73px;
 
+    }
+}
 
     button:hover {
         background-color: #007bff;
@@ -318,5 +337,8 @@
 
   .modal-body {
     padding: 15px;
+  }
+  .size{
+    width: 470px;
   }
 </style>

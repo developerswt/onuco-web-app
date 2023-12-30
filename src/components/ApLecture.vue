@@ -43,7 +43,7 @@
     <input id="facuiltyCognitoId" v-model="newBranch.facuiltyCognitoId" type="text" required><br>
 
     <label for="paymentDate">Payment Date:</label>
-    <input id="paymentDate" v-model="newBranch.paymentDate" type="text" required><br>
+    <Datepicker id="paymentDate" v-model="newBranch.paymentDate" type="text" required><br></Datepicker>
 
     <label for="amountPaid">Amount Paid:</label>
     <input id="amountPaid" v-model="newBranch.amountPaid" type="text" required><br>
@@ -128,8 +128,11 @@
  import "ag-grid-community/styles/ag-grid.css";
  import "ag-grid-community/styles/ag-theme-alpine.css";
  import { AgGridVue } from "ag-grid-vue3";
- import Loading from 'vue3-loading-overlay';
- import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+ import moment from 'moment';
+  import Loading from 'vue3-loading-overlay';
+  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  import Datepicker from '@vuepic/vue-datepicker';
+  import '@vuepic/vue-datepicker/dist/main.css'
  
  export default {
    name: "OrdersPage",
@@ -137,6 +140,7 @@
      AgGridVue,
      Loading,
      // AlertDialog
+     Datepicker,
    },
    data: function () {
      return {

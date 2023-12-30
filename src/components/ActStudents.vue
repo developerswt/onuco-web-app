@@ -121,7 +121,6 @@
               :row-selection="rowSelection"
               :default-col-def="defaultColDef"
               :suppress-excel-export="true"
-              :popup-parent="popupParent"
               cache-quick-filter = true
               :pagination = "true"
               :pagination-page-size="paginationPageSize"
@@ -166,7 +165,8 @@
     import AxiosInstance  from '../config/axiosInstance';
     import Loading from 'vue3-loading-overlay';
     import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-    
+    import moment from 'moment';
+
     export default {
       name: "ActStudents",
       components: {
@@ -186,7 +186,7 @@
           domLayout: null,
           Orders: [],
           req: [],
-          columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Subject Name', field: 'name' },{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,},{name:'Actual Price',field:'actualPrice'},{name:'Discounted Price',field:'discountedPrice'},{name:'Status',field:'state'},{name:'CognitoId',field:'userCognitoId'}],
+          columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Subject Name', field: 'name' },{name:'Start Date',field:'startdate',valueFormatter: this.dateFormat.bind(this),filterType: 'date'},{name:'End Date',field:'enddate',valueFormatter: this.dateFormats.bind(this),filterType: 'date'},{name:'Actual Price',field:'actualPrice'},{name:'Discounted Price',field:'discountedPrice'},{name:'Status',field:'state'},{name:'CognitoId',field:'userCognitoId',}],
           gridApi: null,
           defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
           columnApi: null,
@@ -242,33 +242,55 @@
     this.paginationPageSize = 10;
     
       },
+      methods:{
+        dateFormat(params) {
+      let value = params.data.startdate;
+      // let value2=params.data.enddate;
+      console.log(value);
+      if(value) {
+        return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+      }
+      // if(value2) {
+      //   return moment(String(value2)).format('DD/MM/YYYY');
+      // }
+    },
+    dateFormats(params) {
+      
+      let value2=params.data.enddate;
+      console.log(value2);
+     
+      if(value2) {
+        return moment(String(value2)).format('DD/MM/YYYY T HH:mm:ss');
+      }
+    },
+      }
       
     };
-    var filterParams = {
-    comparator: (filterLocalDateAtMidnight, cellValue) => {
-      var dateAsString = cellValue;
-      if (dateAsString == null) return -1;
-      var dateParts = dateAsString.split('/');
-      var cellDate = new Date(
-        Number(dateParts[2]),
-        Number(dateParts[1]) - 1,
-        Number(dateParts[0])
-      );
-      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-        return 0;
-      }
-      if (cellDate < filterLocalDateAtMidnight) {
-        return -1;
-      }
-      if (cellDate > filterLocalDateAtMidnight) {
-        return 1;
-      }
-      return 0;
-    },
-    minValidYear: 2000,
-    maxValidYear: 2023,
-    inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
-  };
+  //   var filterParams = {
+  //   comparator: (filterLocalDateAtMidnight, cellValue) => {
+  //     var dateAsString = cellValue;
+  //     if (dateAsString == null) return -1;
+  //     var dateParts = dateAsString.split('/');
+  //     var cellDate = new Date(
+  //       Number(dateParts[2]),
+  //       Number(dateParts[1]) - 1,
+  //       Number(dateParts[0])
+  //     );
+  //     if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+  //       return 0;
+  //     }
+  //     if (cellDate < filterLocalDateAtMidnight) {
+  //       return -1;
+  //     }
+  //     if (cellDate > filterLocalDateAtMidnight) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   },
+  //   minValidYear: 2000,
+  //   maxValidYear: 2023,
+  //   inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
+  // };
   
    
     </script>
