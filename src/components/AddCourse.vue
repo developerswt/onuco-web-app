@@ -377,8 +377,8 @@
         cursor: pointer;
         margin-bottom: 80px; 
         position: relative;
-        top: 67px;
-        left: 830px;
+        top: 65px;
+        left: 780px;
         font-weight: 600;
         font-size: 15px;
         }

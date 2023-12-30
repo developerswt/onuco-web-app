@@ -90,7 +90,7 @@ id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             <router-link class="dropdown-item" to="/UpdatedProfile"><i
 class="fa fa-user"
                                     aria-hidden="true"></i> Profile</router-link>
-                                    <router-link v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item" to="/ApHome"><i class="fa fa-user" aria-hidden="true"></i>
+                                    <router-link v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item" to="/AdminPage"><i class="fa fa-user" aria-hidden="true"></i>
                                 Admin</router-link>
                                     <router-link class="dropdown-item" to="UserNotification"><i
 class="fa fa-bell"

@@ -64,6 +64,8 @@ import AddAcademics from './components/AddAcademics.vue'
 import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vue'
 import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
 import AdminPage from './components/AdminPage.vue'
+import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
+
 
 let user = null; // Initialize user as null
 

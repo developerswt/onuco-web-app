@@ -15,7 +15,7 @@
     "@aws-sdk/client-s3": "^3.347.0",
     "@element-plus/icons-vue": "^2.1.0",
     "@gtm-support/vue-gtm": "^2.2.0",
-    "@vuepic/vue-datepicker": "^4.0.1",
+    "@vuepic/vue-datepicker": "^4.5.1",
     "ag-grid-community": "^30.2.1",
     "ag-grid-react": "^30.2.1",
     "ag-grid-vue3": "^30.2.1",

@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{ this.lectureSubject.courseName }}</td>
                                         <td>{{ this.lectureSubject.totalPrice }}</td>
-                                        <td>{{ this.lectureStudent.totalStudentsSubscribed }}</td>
+                                        <td>{{ this.lectureSubject.totalStudentsSubscribed }}</td>
                                     </tr>		
                                 </tbody>
                             </table>

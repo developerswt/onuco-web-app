@@ -12,7 +12,7 @@
             </div>
         </li>
           <li>
-            <div class="sidebar-item" @click="selectContent('addUpdate')">
+            <div class="sidebar-item" @click="selectContent('addUpdate')" v-if="isUserSuperadmin">
               <span class="icon"><i class="fa fa-edit"></i></span>
               <span class="title">Add / Update</span>
             </div>
@@ -24,7 +24,7 @@
             </div>
           </li>
           <li>
-            <div class="sidebar-item">
+            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
               <span class="icon" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file"></i></span>
               <span class="title" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Course Details</span>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
