@@ -63,9 +63,6 @@ export default {
             const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
             console.log(this.academia);
-            // const result = await axiosInstance.get(`Branches/GetBranchesByAcademiaCount?academyId=1`);
-            // this.branches = result.data;
-            // console.log(this.branches);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -108,6 +105,7 @@ export default {
     position: relative;
     left: 15%;
 }
+
 .mb .box1 {
     width: 118px;
     cursor: pointer;

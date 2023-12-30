@@ -1,7 +1,5 @@
-
-
 <template>
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div id="offer_block" class="container-fluid">
             <h4 class="academic_head_text">
 
@@ -15,16 +13,16 @@
                             <h2>Refer A Friend</h2>
                             <p>Get 20% OFF on all Courses</p>
                             <div class="offer_inside_block">
-                              
-                                    <p>Offers Ends on<br>June 30 2023</p>
-                           
-                               
-                                    <button class="btn btn-primary">Refer now</button>
-                               
+
+                                <p>Offers Ends on<br>June 30 2023</p>
+
+
+                                <button class="btn btn-primary">Refer now</button>
+
                             </div>
                         </div>
                     </div>
-                
+
                     <div class=" container col-md-5">
                         <div class="add">
                             <img src="../assets/images/add2.png">
@@ -48,22 +46,21 @@ export default {
 
 
 <style scoped>
-
- .container-fluid {
+.container-fluid {
     background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
     background-size: cover !important;
 
-} 
+}
 
 .box {
-  
+
     background-color: #FF9900;
     margin-bottom: 3%;
     background: #FF9900 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
-    
-    padding:15px;
+
+    padding: 15px;
     text-align: left;
     color: white;
 }
@@ -92,8 +89,8 @@ export default {
 
 @media screen and (max-width: 768px) {
     .box {
-       
-        padding:10px !important;
+
+        padding: 10px !important;
         background-color: #FF9900;
         margin-bottom: 3%;
         background: #FF9900 0% 0% no-repeat padding-box;
@@ -103,7 +100,7 @@ export default {
         height: 146px;
         text-align: left;
         color: white;
-      
+
     }
 
     .box p {
@@ -113,16 +110,20 @@ export default {
         opacity: 0.8;
         font-size: 15px;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         font-size: 16px !important;
     }
-    .offer_block{
-        padding:20px 20px 20px 20px !important;
+
+    .offer_block {
+        padding: 20px 20px 20px 20px !important;
     }
-    .box h2{
+
+    .box h2 {
         font-size: 18px;
-    }   
-    .container-fluid{
+    }
+
+    .container-fluid {
         background: none !important;
 
     }
@@ -130,23 +131,26 @@ export default {
 
 .add img {
     position: relative;
-    
-   
+
+
 }
 
 @media screen and (max-width: 912px) {
-    .add{
+    .add {
         text-align: center !important;
     }
 }
+
 @media (min-width: 768px) and (max-width: 991.92px) {
-    .academic_head_text{
-        font-size: 20px ;
+    .academic_head_text {
+        font-size: 20px;
     }
-    .offer_block{
-        padding:20px 0px 20px 20px !important;
+
+    .offer_block {
+        padding: 20px 0px 20px 20px !important;
     }
 }
+
 h2 {
     font-size: 17px;
 }
@@ -166,73 +170,73 @@ h2 {
 }
 
 #offer_block {
-   
+
     padding: 20px 0px 20px 15px;
-   
+
 }
-.add{
-    
+
+.add {
+
     text-align: right;
 }
-.offer_inside_block{
+
+.offer_inside_block {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 @media (max-width: 600px) {
-    #offer_block{
-        padding:20px 0px 33px 15px;
-    }   
-    
+    #offer_block {
+        padding: 20px 0px 33px 15px;
+    }
+
 }
+
 @media (max-width: 1024px) {
-    #offer_block{
-        padding:20px 0px 40px 0px;
-    }   
-   
-    
+    #offer_block {
+        padding: 20px 0px 40px 0px;
+    }
+
+
 }
+
 @media screen and (max-width: 280px) {
     .add img {
-    position: relative;
-    right: 9px;
-    
+        position: relative;
+        right: 9px;
+
+    }
 }
-}
-@media (max-width:520px){
-    .add{
+
+@media (max-width:520px) {
+    .add {
         padding-bottom: 70px !important;
         display: none;
     }
-    /* #offer_block{
-    border: 1px solid #00000029;
-    border-radius: 4%;
-    margin-top: 5px !IMPORTANT;
-    margin-bottom: 106px;
-    background: #EEEAE4 !important;
-    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important; */
 
     #offer_block {
-    border: 1px solid #00000029;
-    border-radius: 4%;
-    margin-top: -43px !IMPORTANT;
-    margin-bottom: 106px;
-    background: #EEEAE4 !important;
-    background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important;
-    position: relative;
-    top: 42px;
-    
+        border: 1px solid #00000029;
+        border-radius: 4%;
+        margin-top: -43px !IMPORTANT;
+        margin-bottom: 106px;
+        background: #EEEAE4 !important;
+        background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important;
+        position: relative;
+        top: 42px;
+
     }
-    .container-fluid{
+
+    .container-fluid {
         padding: 0px !important;
     }
-    .box{
+
+    .box {
         z-index: 999;
     }
-    .academic_head_text{
+
+    .academic_head_text {
         margin-top: 20px !important;
     }
 }
-
 </style>

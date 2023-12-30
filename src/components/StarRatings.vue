@@ -1,59 +1,55 @@
 <!-- StarRating.vue -->
 <template>
-    <div class="star-rating">
-      <span
-        v-for="star in stars"
-        :key="star"
-        :class="{ filled: star <= rating }"
-      >
-        {{ starIcon(star) }}
-      </span>
-    </div>
-  </template>
+  <div class="star-rating">
+    <span v-for="star in stars" :key="star" :class="{ filled: star <= rating }">
+      {{ starIcon(star) }}
+    </span>
+  </div>
+</template>
   
-  <script>
-  export default {
-    props: {
-      rating: {
-        type: Number,
-        required: true,
-      },
-      maxRating: {
-        type: Number,
-        default: 5,
-      },
+<script>
+export default {
+  props: {
+    rating: {
+      type: Number,
+      required: true,
     },
-    computed: {
-      stars() {
-        return Array.from({ length: this.maxRating }, (_, index) => index + 1);
-      },
+    maxRating: {
+      type: Number,
+      default: 5,
     },
-    methods: {
-      starIcon(star) {
-        return star <= this.rating ? '\u2605' : '\u2606'; // Filled or empty star
-      },
+  },
+  computed: {
+    stars() {
+      return Array.from({ length: this.maxRating }, (_, index) => index + 1);
     },
-  };
-  </script>
+  },
+  methods: {
+    starIcon(star) {
+      return star <= this.rating ? '\u2605' : '\u2606'; // Filled or empty star
+    },
+  },
+};
+</script>
   
-  <style scoped>
-  .star-rating {
-    font-size: 20px;
-  }
-  
-  .star-rating span {
-    margin-right: 5px;
-    color: gold;
-  }
-  
-  .star-rating span.filled {
-    color: gold; 
-  }
+<style scoped>
+.star-rating {
+  font-size: 20px;
+}
 
-  @media (max-width: 520px) {
-    .star-rating span {
+.star-rating span {
+  margin-right: 5px;
+  color: gold;
+}
+
+.star-rating span.filled {
+  color: gold;
+}
+
+@media (max-width: 520px) {
+  .star-rating span {
     margin-right: 0px;
     color: gold;
   }
-  }
-  </style>
+}
+</style>

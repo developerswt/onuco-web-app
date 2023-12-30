@@ -55,77 +55,96 @@ export default {
     position: relative;
     top: 400px;
 }
-.error_image_block{
+
+.error_image_block {
     text-align: center;
-    /* margin:70px; */
-}
-.button_block{
-    margin:40px;
-}
-.button_block .btn{
-    width:20%;
-  padding:10px;
-}
-/* #top_text{
-    margin-top: 200px;
-} */
 
-@media (min-width: 320px) and (max-width: 575.98px){
-    #top_text,#below_text{
-        font-size:20px;
-    }
-    .button_block{
-        margin:0;
-        margin-top: 35px;
-        padding:0;
-        margin-bottom:30px;
-    }
-    .button_block .btn{
-        width:auto;
-    }
-    .error_image_block{
-        margin:20px;
-    }
-    #top_text{
-        margin-top:30px;
-    }
+}
+
+.button_block {
+    margin: 40px;
+}
+
+.button_block .btn {
+    width: 20%;
+    padding: 10px;
 }
 
 
-@media (min-width: 576px) and (max-width: 767.98px){
-    #top_text,#below_text{
-        font-size:20px;
+@media (min-width: 320px) and (max-width: 575.98px) {
+
+    #top_text,
+    #below_text {
+        font-size: 20px;
     }
-    .button_block{
-        margin:0;
+
+    .button_block {
+        margin: 0;
         margin-top: 35px;
-        padding:0;
-        margin-bottom:30px;
+        padding: 0;
+        margin-bottom: 30px;
     }
-    .button_block .btn{
-        width:50%;
+
+    .button_block .btn {
+        width: auto;
     }
-    .error_image_block{
-        margin:20px;
+
+    .error_image_block {
+        margin: 20px;
+    }
+
+    #top_text {
+        margin-top: 30px;
     }
 }
-@media (min-width: 768px) and (max-width: 992px){
-    #top_text,#below_text{
-        font-size:25px;
+
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    #top_text,
+    #below_text {
+        font-size: 20px;
     }
-    .button_block{
-        margin:0;
+
+    .button_block {
+        margin: 0;
         margin-top: 35px;
-        padding:0;
-        margin-bottom:30px;
+        padding: 0;
+        margin-bottom: 30px;
     }
-    .button_block .btn{
-        width:50%;
+
+    .button_block .btn {
+        width: 50%;
     }
-    .error_image_block{
-        margin:20px;
+
+    .error_image_block {
+        margin: 20px;
     }
 }
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+    #top_text,
+    #below_text {
+        font-size: 25px;
+    }
+
+    .button_block {
+        margin: 0;
+        margin-top: 35px;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .button_block .btn {
+        width: 50%;
+    }
+
+    .error_image_block {
+        margin: 20px;
+    }
+}
+
 .container-fluid {
     width: 100%;
     height: 520px;

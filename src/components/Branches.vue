@@ -25,7 +25,9 @@
             </div>
         </div>
         <div v-else class="">
-            <h2 style="text-align: center;margin-bottom: 10%; margin-top: 10%;">Comming Soon ...</h2>
+            <div v-if="!isLoading" class="">
+                <h2 style="text-align: center;margin-bottom: 10%; margin-top: 10%;">Comming Soon ...</h2>
+            </div>
         </div>
 
     </div>
@@ -75,11 +77,6 @@ export default {
         }
     }
 }
-
-// $(document).ready(function () {
-//     $('[data-toggle="tooltip"]').tooltip();
-// });
-
 </script>
 
 <style scoped>

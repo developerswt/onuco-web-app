@@ -13,7 +13,8 @@
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="item in academia" :key="item.id">
                 <div class="box1">
-                    <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                    <router-link
+:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                         style="color: white;text-decoration: none;">
                         <div class="box">
                             <img src="../assets/images/book.png" class="icon">
@@ -42,7 +43,6 @@
 
     </div>
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
-
 </template>    
 
 <script>
@@ -121,10 +121,6 @@ export default defineComponent({
         try {
             const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
-            console.log(this.academia);
-            // const result = await axiosInstance.get(`Branches/GetBranchesByAcademiaCount?academyId=1`);
-            // this.branches = result.data;
-            // console.log(this.branches);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -391,7 +387,6 @@ router-link {
 #academy_container {
     padding: 0px 0px 0px 0px;
 }
-
 </style>
 
 

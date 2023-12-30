@@ -3,7 +3,8 @@
         <div class="container" style="margin-top: 70px;">
             <Breadcrumbs />
             <h4 class="academic_head_text pt-4">
-                <span id="aca_text">Top</span>Rated Courses</h4>
+                <span id="aca_text">Top</span>Rated Courses
+            </h4>
         </div>
     </div>
     <div class="container mb ">
@@ -23,9 +24,10 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -33,13 +35,13 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
-                  
+                    </div>
+
+
                 </router-link>
             </div>
             <div class="box">
@@ -53,15 +55,16 @@
                             <font class="card-image-top"><b>20 % OFF</b></font>
                         </div>
                     </div>
-                    
+
                     <div class="card-body">
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -69,46 +72,12 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
-                        </div>
- 
-                </router-link>
-            </div>
-            <div class="box">
-                <router-link to="/Universities" style="text-decoration: none;">
-                    <div class="wer">
-                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
-                        <div class="offer">
-                            <img class="card-img-top" src="../assets/images/offer.png">
-                        </div>
-                        <div class="offer-details">
-                            <font class="card-image-top"><b>20 % OFF</b></font>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <!-- <h5 class="card-title">JAVA Language</h5> -->
-                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
-                        <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
-                            <div class="col-sm-6  star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
-                            </div>
-                           </div>
-                        </div>
- 
+
                 </router-link>
             </div>
             <div class="box">
@@ -126,10 +95,11 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -137,12 +107,12 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
+                    </div>
+
                 </router-link>
             </div>
             <div class="box">
@@ -160,10 +130,11 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -171,12 +142,12 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
+                    </div>
+
                 </router-link>
             </div>
             <div class="box">
@@ -194,10 +165,11 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -205,12 +177,12 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
+                    </div>
+
                 </router-link>
             </div>
             <div class="box">
@@ -228,10 +200,11 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -239,12 +212,12 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
+                    </div>
+
                 </router-link>
             </div>
             <div class="box">
@@ -262,10 +235,11 @@
                         <!-- <h5 class="card-title">JAVA Language</h5> -->
                         <p class="card-text">Data Management Sysyems & Visualization software developement</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b style="margin-right: 2px; color:black">&#8377;1999</b></p>                                
-                                
-                            </div> <br>
-                           <div class="row">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
                             <div class="col-sm-6  star">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -273,12 +247,47 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="col-sm-6" >
-                                <a href="#" class="btn btn-primary" >Buy Now</a>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                           </div>
                         </div>
- 
+                    </div>
+
+                </router-link>
+            </div>
+            <div class="box">
+                <router-link to="/Universities" style="text-decoration: none;">
+                    <div class="wer">
+                        <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap">
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
+                        </div>
+                        <div class="offer-details">
+                            <font class="card-image-top"><b>20 % OFF</b></font>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">JAVA Language</h5> -->
+                        <p class="card-text">Data Management Sysyems & Visualization software developement</p>
+                        <div class="text-left price" style="float: right;">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">2099</del><b
+                                    style="margin-right: 2px; color:black">&#8377;1999</b></p>
+
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-sm-6  star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </router-link>
             </div>
         </div>
@@ -308,61 +317,8 @@ export default {
     color: #0d4b7e;
     font-size: 17px;
     font-family: 'Noto Sans', sans-serif;
-  
-}
 
-/* .box .offer {
-    width: 100px;
-    height: 20px;
-    position: relative;
-    top: -177px;
-    left: -5px;
-    font-size: 12px;
-} */
-/* .offer-details {
-    font-size: 12px;
-    color: white;
-    position: relative;
-    top: -179px;
-    left: -85px;
-} */
-/* .btn-warning {
-    color: #fff;
-    background-color: #f0ad4e;
-    border-color: #eea236;
 }
-.btn {
-    position: relative;
-    left: 15%;
-} */
-/* .wr {
-    position: relative;
-    left: 9px;
-    top: -4px;
-    font-size: 12px;
-} */
-/* .box  offer {
-    position: absolute;
-    width: 10%;
-    height: 7%;
-    top: -10px;
-    left: -4px;
-    font-size: 12px;
-} */
-
-/* .box .card-text {
-    font-size: 16px;
-    font-family: 'Times New Roman', Times, serif;
-    color: black;
-} */
-/* 
-.box .card-title {
-    font-size: 18px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-    color: black;
-    margin-top: -20px;
-} */
 
 .box .star {
     color: orange;
@@ -395,7 +351,7 @@ export default {
     border-radius: 4px;
     opacity: 1;
     margin-bottom: 3%;
-    
+
 
 }
 
@@ -500,6 +456,7 @@ export default {
     font-weight: bold;
     padding-right: 10px;
 }
+
 .box .card-text {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -509,6 +466,7 @@ export default {
     color: #666666;
     opacity: 1;
 }
+
 .box .card-title {
     margin-top: -20px;
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
@@ -519,57 +477,62 @@ export default {
     color: #666666;
     opacity: 1;
 }
-.btn{
-    width: 120px; 
+
+.btn {
+    width: 120px;
     height: 37px;
-    margin-left: 10px; 
+    margin-left: 10px;
     margin-left: 28px;
 }
 
-.card-body{
+.card-body {
     padding: 1rem;
 }
+
 @media screen and(max-width: 1024px) {
-.btn{
-   
-    margin-left: 115px;
-    margin-top: 0px;
+    .btn {
+
+        margin-left: 115px;
+        margin-top: 0px;
+    }
+
+    .box {
+        height: 392px;
+    }
+
 }
 
-.box{
-height: 392px;
-}
-
-}
 @media only screen and (min-width: 280px) and (max-width: 700px) {
-    .btn{ 
-    margin-left: 169px;
-    margin-top: -30px;
+    .btn {
+        margin-left: 169px;
+        margin-top: -30px;
 
-} 
-.box{
-height: 382px;
+    }
+
+    .box {
+        height: 382px;
+    }
+
+    .box .star {
+        color: orange;
+        position: relative;
+        top: 8px;
+        left: -12px;
+        letter-spacing: 2px;
+        display: flex;
+    }
 }
-.box .star {
-    color: orange;
-    position: relative;
-    top: 8px;
-    left: -12px;
-    letter-spacing: 2px;
-    display: flex;
-}
-}
-.container{
+
+.container {
     padding-bottom: 20px;
 }
+
 @media(mix-width: 920px) {
-.container{
-    padding-bottom: 9rem;
-max-width: 0px;
-}
+    .container {
+        padding-bottom: 9rem;
+        max-width: 0px;
+    }
 
 }
-
-
 </style>
 

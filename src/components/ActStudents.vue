@@ -1,397 +1,361 @@
-<!-- 
-
 <template>
-     <div class="container" ><p>Dashbord > Active Student </p>
-    <div class="container" style="margin-top: 72px;">
-      
-   <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                            <th>ID</th>
-                           <th>Course Name</th> 
-                           <th>status</th>
-                           <th>Start Date</th>
-                           <th>End Date</th>
-                           <th>Actual Price</th>
-                           <th>Discounted Pric</th>
-                           
-                           
-                          
-                       </tr>
-                   </thead>
-                    <tbody v-for="persons in persons.activeStudents" :key="persons.id">
-                        <tr>
-                        <td>{{persons.id }}</td>
-                        <td>{{persons.name }}</td> 
-                        <td>{{ persons.state }}</td>
-                        <td>{{ persons.startdate }}</td>
-                        <td>{{ persons.enddate}}</td>
-                        <td>{{ persons.actualPrice }}</td>
-                        <td>{{ persons.discountedPrice }}</td>
-                        
-                    </tr>
-                    </tbody>   
-               </table>
-           </div>
-           <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                           
-                           <th>Active Students</th>
-                           <th>Total Amount</th>
-                           <th> Paid Amount</th>
-                           
-                           
-                          
-                       </tr>
-                   </thead>
-                    <tbody v-if="person">
-                        <tr>
-                        
-                        <td>{{this.person.activeStudentsCount }}</td>
-                        <td>{{ this.person.totalAmount }}</td>
-                        <td>{{ this.person.discountedAmount }}</td>
-                    </tr>
-                    </tbody>   
-               </table>
-           </div>
-           </div>
+  <div class="container">
+    <p>Dashbord > Complete Students </p>
+    <div style="padding: 20px;">
+
+      <div class="example-wrapper">
+
+        <div style="height: 100%;">
+          <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+            :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
+            :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
+            :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
+            @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
+          </ag-grid-vue>
         </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Active Students</th>
+            <th>Total Amount</th>
+            <th> Paid Amount</th>
+          </tr>
+        </thead>
+        <tbody v-if="person">
+          <tr>
+            <td>{{ person.activeStudentsCount }}</td>
+            <td>{{ person.totalAmount }}</td>
+            <td>{{ person.discountedAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-6 pt-5">
+      <apexchart width="500" class="pt-5" :options="options" :series="series"></apexchart>
+    </div>
+  </div>
 </template>
+    
 <script>
-  import axios from 'axios';
-  import Loading from 'vue3-loading-overlay';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  export default {
 
-  name: "Actstudent",
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { AgGridVue } from "ag-grid-vue3";
+import AxiosInstance from '../config/axiosInstance';
+import VueApexCharts from "vue3-apexcharts";
+
+
+export default {
+  name: "ActStudents",
   components: {
-          Loading,
-          
+    AgGridVue,
+    apexchart: VueApexCharts,
+  },
+  data: function () {
+    return {
+      person: null,
+      userName: '',
+      ismodel: true,
+      isLoading: false,
+      showDialog: false,
+      dialogTitle: '',
+      dialogMessage: '',
+      domLayout: null,
+      Orders: [],
+      req: [],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Subject Name', field: 'name' }, { name: 'Start Date', field: 'startdate', filter: 'agDateColumnFilter', filterParams: filterParams, }, { name: 'End Date', field: 'enddate', filter: 'agDateColumnFilter', filterParams: filterParams, }, { name: 'Actual Price', field: 'actualPrice' }, { name: 'Discounted Price', field: 'discountedPrice' }, { name: 'Status', field: 'state' }, { name: 'CognitoId', field: 'userCognitoId' }],
+      gridApi: null,
+      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      columnApi: null,
+      editType: null,
+      showChildRow: false,
+      childPara: null,
+      rowData: null,
+      rowSelection: null,
+      paginationPageSize: null,
+      rightAligned: {
+        headerClass: 'ag-right-aligned-header',
+        cellClass: 'ag-right-aligned-cell'
       },
-  data() {        
-          return {
-            person:null,
-            persons:[],
-          }
+      options: {
+        chart: {
+          id: 'vuechart-example'
         },
-        async created() { 
-            this.isLoading = true;  
-        try {
-            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetActiveStudentsCount`);
-            this.person = res.data;
-            console.log(this.person);
+        xaxis: {
+          categories: [],
+          title: {
+            text: "Number Of Active and Total Price",
+          },
+        },
+        yaxis: [
+          {
+            title: {
+              text: "Active Students",
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: "Total Price",
+            },
+          },
+        ],
+        dataLabels: {
+          enabled: true,
+          enabledOnSeries: [1]
 
-            const result = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/UserCourseSubscription/GetActiveStudentsCount`);
-            this.persons = result.data;
-            console.log(this.persons);  
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        }
-        finally {
-            this.isLoading = false;
-        }
+        },
+        
+      },
+      series: [{
+          name: 'ActiveUser',
+          data: [],
+          type: 'bar',
+        },
+        {
+          name: 'Price',
+          data: [],
+          type: 'line',
+        },
+      ]
+    };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
     },
+  },
+
+  methods: {
+    processChartData() {
+      console.log(this.Orders.activeStudents);
+      if (this.Orders) {
+        this.Orders.activeStudents.forEach(order => {
+          const dataPoint = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: 1,
+          };
+          const Price = {
+            x: this.getMonthYear(order.startdate), // Assuming you have a function to get the month
+            y: order.price,
+          };
+          this.options.xaxis.categories = this.getMonthYear(order.startdate);
+          this.series[0].data.push(dataPoint);
+          this.series[1].data.push(Price);
+
+        });
+      }
+    },
+  
+    getMonthYear(date) {
+      const d = new Date(date);
+      const month = d.toLocaleString("en-US", { month: "short" });
+      return month;
+    },
+
+  },
+  async created() {
+    this.domLayout = 'autoHeight';
+    this.isLoading = true;
+    try {
+      const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
+      let req = res.data;
+      this.Orders = req;
+      console.log(this.Orders);
+      if (Array.isArray(req.activeStudents)) {
+        this.rowData = req.activeStudents;
+      } else {
+        console.error('completedStudents is not an array:', req.activeStudents);
+      }
+      this.processChartData();
+      const result = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
+      this.person = result.data;
+      console.log(this.person);
+
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
     }
+    finally {
+      this.isLoading = false;
+    }
+    this.rowSelection = 'single';
+    console.log(this.rowData);
+    this.popupParent = document.body;
+    this.paginationPageSize = 10;
+
+  },
+
+};
+var filterParams = {
+  comparator: (filterLocalDateAtMidnight, cellValue) => {
+    var dateAsString = cellValue;
+    if (dateAsString == null) return -1;
+    var dateParts = dateAsString.split('/');
+    var cellDate = new Date(
+      Number(dateParts[2]),
+      Number(dateParts[1]) - 1,
+      Number(dateParts[0])
+    );
+    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      return 0;
+    }
+    if (cellDate < filterLocalDateAtMidnight) {
+      return -1;
+    }
+    if (cellDate > filterLocalDateAtMidnight) {
+      return 1;
+    }
+    return 0;
+  },
+  minValidYear: 2000,
+  maxValidYear: 2023,
+  inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
+};
 
 
 </script>
 <style scoped>
-
-</style> -->
-
-
-
-<template>
-    <div class="container" ><p>Dashbord > Complete Students </p>
-      <div style="padding: 20px;"  >
-        
-        <div class="example-wrapper" >
-          
-          <div style="height: 100%;">
-            <ag-grid-vue 
-              :dom-layout="domLayout"
-              class="ag-theme-alpine"
-              :column-defs="columnDefs"
-              :row-data="rowData"
-              :edit-type="editType"
-              :row-selection="rowSelection"
-              :default-col-def="defaultColDef"
-              :suppress-excel-export="true"
-              :popup-parent="popupParent"
-              cache-quick-filter = true
-              :pagination = "true"
-              :pagination-page-size="paginationPageSize"
-              is-loding ="true"
-              @grid-ready="onGridReady"
-              @cell-value-changed="onCellValueChanged"
-              @row-clicked='onCellClicked'
-            >
-            </ag-grid-vue>
-          </div>  
-        </div> 
-      </div>
-    
-      <div class="table-responsive">
-               <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                           <th>Active Students</th>
-                           <th>Total Amount</th>
-                           <th> Paid Amount</th>
-                        </tr>
-                   </thead>
-                    <tbody v-if="person">
-                        <tr>
-                            <td>{{person.activeStudentsCount }}</td>
-                            <td>{{ person.totalAmount }}</td>
-                            <td>{{ person.discountedAmount }}</td>
-                        </tr>
-                    </tbody>   
-               </table>
-           </div>
-    
-      <Loading v-model:active="isLoading"></Loading>
-      </div>
-    </template>
-    
-    <script>
-    
-    import "ag-grid-community/styles/ag-grid.css";
-    import "ag-grid-community/styles/ag-theme-alpine.css";
-    import { AgGridVue } from "ag-grid-vue3";
-    import AxiosInstance  from '../config/axiosInstance';
-    import Loading from 'vue3-loading-overlay';
-    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-    
-    export default {
-      name: "ActStudents",
-      components: {
-        AgGridVue,
-        Loading,
-        // AlertDialog
-      },
-      data: function () {
-        return {
-            person:null,
-          userName: '',
-          ismodel: true,
-          isLoading: false,
-          showDialog: false,
-          dialogTitle: '',
-          dialogMessage: '',
-          domLayout: null,
-          Orders: [],
-          req: [],
-          columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Subject Name', field: 'name' },{name:'Start Date',field:'startdate',filter: 'agDateColumnFilter',filterParams: filterParams,},{name:'End Date',field:'enddate',filter: 'agDateColumnFilter', filterParams: filterParams,},{name:'Actual Price',field:'actualPrice'},{name:'Discounted Price',field:'discountedPrice'},{name:'Status',field:'state'},{name:'CognitoId',field:'userCognitoId'}],
-          gridApi: null,
-          defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
-          columnApi: null,
-          editType: null,
-          showChildRow: false,
-          childPara: null,
-          rowData: null,
-          rowSelection: null,
-          paginationPageSize: null,
-          rightAligned: {
-            headerClass: 'ag-right-aligned-header',
-            cellClass: 'ag-right-aligned-cell'
-          },
-        };
-      },
-      computed: {
-        isLoggedIn() {
-          return this.$store.state.IsLoggedIn;
-        },
-      },
-    
-      async created() {
-        this.domLayout = 'autoHeight'; 
-        this.isLoading = true;
-        try {
-          const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
-          let req = res.data;
-          this.Orders = req;
-          if (Array.isArray(req.activeStudents)) {
-        this.rowData = req.activeStudents;
-      } else {
-        // Handle the case where completedStudents is not an array
-        console.error('completedStudents is not an array:', req.activeStudents);
-      }
-
-      const result = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
-            this.person = result.data;
-            console.log(this.person);
-          
-          } catch (error) {
-            this.isLoading = false;
-          console.log(error);
-          this.showDialog = true;  
-          this.dialogTitle= "Error";
-          this.dialogMessage= "Not get data";
-        }
-        finally {
-          this.isLoading = false;
-        }
-        this.rowSelection = 'single'; 
-    console.log(this.rowData);
-    this.popupParent = document.body;
-    this.paginationPageSize = 10;
-    
-      },
-      
-    };
-    var filterParams = {
-    comparator: (filterLocalDateAtMidnight, cellValue) => {
-      var dateAsString = cellValue;
-      if (dateAsString == null) return -1;
-      var dateParts = dateAsString.split('/');
-      var cellDate = new Date(
-        Number(dateParts[2]),
-        Number(dateParts[1]) - 1,
-        Number(dateParts[0])
-      );
-      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-        return 0;
-      }
-      if (cellDate < filterLocalDateAtMidnight) {
-        return -1;
-      }
-      if (cellDate > filterLocalDateAtMidnight) {
-        return 1;
-      }
-      return 0;
-    },
-    minValidYear: 2000,
-    maxValidYear: 2023,
-    inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
-  };
-  
-   
-    </script>
-    <style scoped>
-       
-    .example-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    }
-    
-    #myGrid {
-    flex: 1 1 0px;
-    width: 100%;
-    }
-    
-    .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 13px;
-    margin-bottom: 5px;
-    }
-    
-    .ag-theme-alpine {
-      --ag-header-height: 30px;
-      --ag-header-foreground-color: black;
-      --ag-header-background-color: white;
-    
-    --ag-font-size: 15px;
-      --ag-font-family: 'Times New Roman';
-      
-    }
-    .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-      font-size: 14px;
-    }
-    .ag-theme-alpine .ag-header-group-cell {
-      font-weight: normal;
-      font-size: 22px;
-    }
-    .ag-theme-alpine .ag-header-cell {
-      font-size: 16px;
-      text-align: center;
-    }
-    .ag-header-cell-label {
-     justify-content: center;
-    }
-    @media (max-width: 912px) {
-    .ag-grid-vue {
-      height: 20%;
-    }
-    }
-    .ag-grid-vue {
-      width: 100%;
-      height: 80%;
-    }
-    .kl {
-    text-align: center;
-    }
-    .sd {
-    width: 15%;
-    font-size: 1em;
-    }
-    .sd1 {
-    width: 15%;
-    font-size: 1em;
-    }
-    @media screen and (max-width: 600px) {
-    .kl {
-      text-align: left;
-    }
-    .sd {
-      width: 55%;
-      font-size: 1em;
-    }
-    .sd1 {
-      width: 42%;
-      font-size: 1em;
-    }
-    }
-    
-    .modal-dialog {
-      max-width: 900px;
-      
-      margin: 1.75rem auto;
-    }
-    .modal-dialog {
-        max-width: 900px;
-        margin: 1.75rem auto;
-        height: 630px; /* Set the height as needed */
-        overflow-y: auto;
-      }
-      .mc{
-        height: 300px;
-        width: 550px;
-        overflow: hidden;
-      }
-      .modal-body {
-        max-height: 400px; /* Adjust the max-height as needed */
-        overflow-y: auto;
-      }
-  
-      @media (max-width:520px) {
-        /* .mc{
-          height: 0px;
-          width: 0px;
-        } */
-        .example-wrapper {
+.example-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
-        }
-      }
-      button {
-          color: #fff;
-      background-color: #007bff;
-      border-color: #007bff;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 20px;
-      }
-  
-      button:hover {
-          background-color: #007bff;
-      }
-    </style>
+}
+
+#myGrid {
+  flex: 1 1 0px;
+  width: 100%;
+}
+
+.example-header {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.ag-theme-alpine {
+  --ag-header-height: 30px;
+  --ag-header-foreground-color: black;
+  --ag-header-background-color: white;
+
+  --ag-font-size: 15px;
+  --ag-font-family: 'Times New Roman';
+
+}
+
+.ag-theme-alpine .ag-header {
+  font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+}
+
+.ag-theme-alpine .ag-header-group-cell {
+  font-weight: normal;
+  font-size: 22px;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  font-size: 16px;
+  text-align: center;
+}
+
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+@media (max-width: 912px) {
+  .ag-grid-vue {
+    height: 20%;
+  }
+}
+
+.ag-grid-vue {
+  width: 100%;
+  height: 80%;
+}
+
+.kl {
+  text-align: center;
+}
+
+.sd {
+  width: 15%;
+  font-size: 1em;
+}
+
+.sd1 {
+  width: 15%;
+  font-size: 1em;
+}
+
+@media screen and (max-width: 600px) {
+  .kl {
+    text-align: left;
+  }
+
+  .sd {
+    width: 55%;
+    font-size: 1em;
+  }
+
+  .sd1 {
+    width: 42%;
+    font-size: 1em;
+  }
+}
+
+.modal-dialog {
+  max-width: 900px;
+
+  margin: 1.75rem auto;
+}
+
+.modal-dialog {
+  max-width: 900px;
+  margin: 1.75rem auto;
+  height: 630px;
+  /* Set the height as needed */
+  overflow-y: auto;
+}
+
+.mc {
+  height: 300px;
+  width: 550px;
+  overflow: hidden;
+}
+
+.modal-body {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+@media (max-width:520px) {
+
+  .example-wrapper {
+    width: 100%;
+  }
+}
+
+button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #007bff;
+}
+</style>

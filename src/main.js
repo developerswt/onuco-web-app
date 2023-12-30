@@ -12,6 +12,7 @@ import {Amplify, Auth } from 'aws-amplify';
 import '@aws-amplify/ui-vue/styles.css';
 import awsconfig from './aws-exports';
 import VueGtm from '@gtm-support/vue-gtm';
+import VueApexCharts from "vue3-apexcharts";
 //import VueBreadcrumbs from 'vue2-breadcrumbs';
 
 // import customAmplifyTheme from './config/amplify-theme';
@@ -32,6 +33,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(store);
 app.use(AmplifyVue);
 app.use(ElementPlus);
+app.component('apexchart', VueApexCharts);
 // app.use(breadcrumbs, {
 //   includeComponent: false // {boolean} [includeComponent=false] - Include global breadcrumbs component or not
 // })

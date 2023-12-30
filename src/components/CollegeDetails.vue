@@ -47,7 +47,8 @@ id="sub_text" class="mb-0"
                                                                             </div>
                                                                             <div class="col-lg-12 col-9 col-sm-9 col-md-9">
                                                                                 <p id="code_text" style=" color: #6A4343;">
-                                                                                    <small>18CS81 &nbsp;240 hrs</small></p>
+                                                                                    <small>18CS81 &nbsp;240 hrs</small>
+                                                                                </p>
                                                                             </div>
                                                                         </div>
 
@@ -105,16 +106,20 @@ src="../assets/images/Path4025.png"
                             </div>
                         </div>
                         <div
-v-else :id="'collapse-example' + index"
-                            :class="index == 0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse" style="background-color: #EFF5FC;">
-                            <h2 class="comming_soons">Comming Soon ...</h2>
+v-else :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
+                            aria-labelledby="heading-collapse" style="background-color: #EFF5FC;">
+                            <div v-if="!isLoading" class="">
+                                <h2 class="comming_soons">Comming Soon ...</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div v-else class="">
-            <h2 class="comming_soon">Comming Soon ...</h2>
+            <div v-if="!isLoading" class="">
+                <h2 class="comming_soon">Comming Soon ...</h2>
+            </div>
         </div>
     </div>
 

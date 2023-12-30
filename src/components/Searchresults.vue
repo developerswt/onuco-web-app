@@ -52,7 +52,8 @@
                                 </div>
                                 <p id="review_text">(23 Reviews)</p>
                                 <p id="amount_text"><span id="strike_text"> &#8377;1999</span>
-                                    &#8377;947 <router-link to="/login"> <button id="search_button">buy now</button></router-link></p>
+                                    &#8377;947 <router-link to="/login"> <button id="search_button">buy
+                                            now</button></router-link></p>
 
                             </div>
                         </div>
@@ -76,11 +77,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <section id="tab_block">
-                            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" >
-                                <el-tab-pane label="Subject" name="first" >
+                            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+                                <el-tab-pane label="Subject" name="first">
                                     <div class="row">
                                         <div class="col-lg-5">
-                                            <div id="accordion" >
+                                            <div id="accordion">
                                                 <div class="card">
                                                     <div
 id="headingOne" class="card-header" data-toggle="collapse"
@@ -95,7 +96,7 @@ id="headingOne" class="card-header" data-toggle="collapse"
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="action"><i
-                                                                        id="sem_icon"
+id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
@@ -139,14 +140,15 @@ class="fa-solid fa-check"
                                                                             <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
-                                                                                    <div
+                                                                                        <div
 class="progress-bar"
-                                                                                        role="progressbar" aria-valuenow="0"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                            role="progressbar"
+                                                                                            aria-valuenow="0"
+                                                                                            aria-valuemin="0"
+                                                                                            aria-valuemax="100"></div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                </div>
-                                                                               
+
                                                                             </div>
 
                                                                         </div>
@@ -154,12 +156,16 @@ class="progress-bar"
 
                                                                     <div class="col-lg-4">
                                                                         <div class="inside_block">
-                                                                         
-                                                                                <img src="../assets/images/Group1318@2x.png" class="img-fluid">
-                                                                        
-                                                                           
-                                                                                <img src="../assets/images/Iconionic-ios-bookmark@2x.png" class="img-fluid">
-                                                                          
+
+                                                                            <img
+src="../assets/images/Group1318@2x.png"
+                                                                                class="img-fluid">
+
+
+                                                                            <img
+src="../assets/images/Iconionic-ios-bookmark@2x.png"
+                                                                                class="img-fluid">
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -180,14 +186,15 @@ class="fa-solid fa-check"
                                                                             <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
-                                                                                    <div
+                                                                                        <div
 class="progress-bar"
-                                                                                        role="progressbar" aria-valuenow="0"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                            role="progressbar"
+                                                                                            aria-valuenow="0"
+                                                                                            aria-valuemin="0"
+                                                                                            aria-valuemax="100"></div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                </div>
-                                                                               
+
                                                                             </div>
 
                                                                         </div>
@@ -195,12 +202,16 @@ class="progress-bar"
 
                                                                     <div class="col-lg-4">
                                                                         <div class="inside_block">
-                                                                         
-                                                                                <img src="../assets/images/Group1318@2x.png" class="img-fluid">
-                                                                        
-                                                                           
-                                                                                <img src="../assets/images/Iconionic-ios-bookmark@2x.png" class="img-fluid">
-                                                                          
+
+                                                                            <img
+src="../assets/images/Group1318@2x.png"
+                                                                                class="img-fluid">
+
+
+                                                                            <img
+src="../assets/images/Iconionic-ios-bookmark@2x.png"
+                                                                                class="img-fluid">
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -222,7 +233,7 @@ id="headingTwo" class="card-header" data-toggle="collapse"
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="action"><i
-                                                                        id="sem_icon"
+id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
@@ -264,7 +275,7 @@ id="headingThree" class="card-header" data-toggle="collapse"
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="action"><i
-                                                                        id="sem_icon"
+id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
@@ -296,19 +307,9 @@ id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                         </div>
 
                                         <div class="col-lg-6">
-                                          <img src="../assets/images/Group1303@2x.png" class="img-fluid">
+                                            <img src="../assets/images/Group1303@2x.png" class="img-fluid">
                                         </div>
                                     </div>
-                                    
-
-
-
-
-
-
-
-
-
                                 </el-tab-pane>
                                 <el-tab-pane label="Description" name="second">Description</el-tab-pane>
                                 <el-tab-pane label="Question Bank" name="third">Question Bank</el-tab-pane>
@@ -331,8 +332,8 @@ export default {
     name: 'SearchresultsView',
     components: {
 
-Offer
-},
+        Offer
+    },
 }
 </script>
 
@@ -450,7 +451,7 @@ Offer
 
 #search_container {
     background: #EFF5FC 0% 0% no-repeat padding-box;
-    padding-left:32px;
+    padding-left: 32px;
 }
 
 .search_inner_block {
@@ -502,42 +503,47 @@ Offer
     padding: 5px;
 }
 
-.chapters_block{
-    padding-left:20px;
-    padding-right:20px;
-   
+.chapters_block {
+    padding-left: 20px;
+    padding-right: 20px;
+
 }
 
-#duration_text_one{
+#duration_text_one {
     font-size: 12px;
-    color:#9E9E9E;
+    color: #9E9E9E;
 }
 
-#intro_text{
+#intro_text {
     margin-bottom: 0;
     font-size: 16px;
-    color:#0066CC;
+    color: #0066CC;
 }
-.progress{
-    height:5px;
-    margin-top:7px;
+
+.progress {
+    height: 5px;
+    margin-top: 7px;
     background: #FF9900;
 }
-.inside_block{
+
+.inside_block {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     margin-left: 54px;
 }
-.inside_block img{
+
+.inside_block img {
 
     height: 30px;
-    margin:5px;
+    margin: 5px;
 }
-.card-body{
+
+.card-body {
     background: #E5EFF9;
 }
-#accordion{
-    margin-bottom:40px;
+
+#accordion {
+    margin-bottom: 40px;
 }
 </style>
