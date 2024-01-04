@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Subject Update & Create</h5>
+      <h5>Add & Update Subject</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Subject Name :</label>
@@ -20,6 +20,7 @@
                 <th>Description</th>
                 <th>Actual Price</th>
                 <th>Discount Price</th>
+                <th>Subject Rout Name</th>
                 <th>Semester Id</th>
                 <th>Work Flow</th>
                 <th>Faculty Id</th>
@@ -45,6 +46,7 @@
                   <td v-if="editMode">
                     <input v-model="editedProduct.discountPrice" type="text" @change="updatePrice(editedProduct.id, editedProduct.discountPrice)">
                   </td>
+                  <td>{{ selectedProduct.courseName }}</td>
                   <td>{{ selectedProduct.semesterId }}</td>
                   <td>
                     <span v-if="!editMode">{{ selectedProduct.workFlowStatement }}</span>
@@ -57,9 +59,12 @@
 
                 <td>{{ selectedProduct.facultyId }}</td>
                 <td>
+                <div class="button-row">
                   <button v-if="!editMode" @click="enableEditMode()">Edit</button>
                   <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                </td>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
+              </td>
               </tr>
             </tbody>
         </table>
@@ -91,10 +96,21 @@
                   <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
 
                     <label for="semesterId">Semester Id:</label>
-                    <input id="semesterId" v-model="this.selectedsemester" type="text" required><br>
+                    <input id="semesterId" v-model="this.selectedsemester" type="text" readonly required><br>
 
-                    <label for="courseName">Subject Name:</label>
-                    <input id="courseName" v-model="newBranch.courseName" type="text" required><br>
+                    <!-- <label for="courseName">Subject Name:</label>
+                    <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
+                    <label for="courseName"><b>Subject Rout Name:</b></label>
+    <input
+      id="courseName"
+      v-model="newBranch.courseName"
+      type="text"
+      required
+      pattern="[a-z]+(-[a-z]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
+
 
                     <label for="workFlowStatement">Work Flow:</label>
                     <select class="size" id="workFlowStatement" v-model="newBranch.workFlowStatement" type="text" required><br>
@@ -118,18 +134,22 @@
   </template>
   
   <script>
+  import Confirmation from './Confirmation.vue';
   import AxiosInstance from '../config/axiosInstance';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   
   export default {
     name: "ActstdBycourse",
     props: ['selectedsemester'],
+    components: {
+    Confirmation,
+  },
     data() {
       return {
         formVisible: false,
         products: [],
         selectedCourse: '',
-        selectedProduct: { id: null, name: '', description: '',actualPrice:'',discountPrice:'', semesterId:null, courseName:'',workFlowStatement:'',facultyId:null },
+        selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' },
         isLoading: false,
         editMode: false,
         editedProduct: {
@@ -173,6 +193,13 @@
       this.loadData();
     },
     methods: {
+
+      isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
       toggleForm() {
           this.formVisible = !this.formVisible;
         },
@@ -279,7 +306,20 @@
 
         // this.gridApi.refreshCells({ force: true });
 
-      alert("Insert Successful");
+        this.$refs.Confirmation.open("Subject Added successfully.");
+
+      this.newBranch = {
+        name: '',
+        description: '',
+        academiaId: '',
+        actualPrice:'',
+        discountPrice:'',
+        semesterId: this.selectedsemester, 
+        courseName:'',
+        workFlowStatement:'',
+        facultyId: '',
+       };
+
       this.formVisible = false;
 
     } else {
@@ -289,23 +329,46 @@
     } catch (error) {
       this.isLoading = false;
       console.error("Error adding branch:", error);
+      this.$refs.Confirmation.open("Error Adding Subject.");
+
     }
     finally {
            this.isLoading = false;
     }
   },
-  // async getdata() {
-  //    this.isLoading = true;
-  //    try {
-  //     const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
-  //     this.products = res.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     this.isLoading = false;
-  //   }
-      
-  // },
+  async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Subject?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
+
+        const res = await AxiosInstance.delete(`/Course?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Subject deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedCourse = '';
+        this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Subject deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Subject:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Subject.");
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
 },
 };
 </script>

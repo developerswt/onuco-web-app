@@ -1,10 +1,5 @@
 <template>
   <div class="container">
-    <div class="card card-box">
-          <div class="card-head">
-            <header>Course Creation</header>
-          </div>
-          <div class="card-body">
     <form-wizard
       @on-complete="onComplete"
       back-button-text="Go Back!"
@@ -52,9 +47,6 @@
       Please select values for all fields.
     </div>
   </div>
-  </div>
-  </div>
-
 </template>
 
 <script>
@@ -120,13 +112,6 @@ export default {
     handleSelectedTypeChange(selectedType) {
     this.selectedType = selectedType;
     console.log(this.selectedType);
-
-    // Your validation logic for the "Types" tab
-    if (this.selectedType !== null && this.selectedType !== undefined) {
-      this.validationErrors.types = false;
-    } else {
-      this.validationErrors.types = true;
-    }
   },
   handleSelectedAcademicChange(selectedAcademic) {
     this.selectedAcademic = selectedAcademic;
@@ -154,45 +139,4 @@ export default {
     color: red;
     margin-top: 10px;
   }
-  .card-box {
-    background-color: #fff;
-    border-radius: 10px;
-    position: relative;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    border: 1px solid #deebfd;
-    box-shadow: -8px 12px 18px 0 #dadee8;
-}
-.card-head {
-    border-radius: 2px 2px 0 0;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-    padding: 2px;
-    /* text-transform: uppercase; */
-    color: #3a405b;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 40px;
-    min-height: 40px;
-}
-.card-head header {
-    display: inline-block;
-    padding: 11px 20px;
-    vertical-align: middle;
-    line-height: 17px;
-    font-size: 17px;
-    letter-spacing: 1px;
-}
-
-.card-body:last-child {
-    border-radius: 0 0 2px 2px;
-}
-.card-body {
-    padding: 10px 24px 14px 24px;
-    position: relative;
-}
-.card-body {
-    flex: 1 1 auto;
-    padding: 1rem 1rem;
-}
-
 </style>

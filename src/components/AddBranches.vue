@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Branches Update & Create</h5>
+      <h5>Add & Update Branch</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Branch Name :</label>
@@ -18,6 +18,7 @@
                 <th>Id</th>
                 <th>Branch Name</th>
                 <th>Description</th>
+                <th>Branch Rout Name</th>
                 <th>Course Id</th>
                 <th>Action</th>
               </tr>
@@ -33,11 +34,15 @@
                   <td v-if="editMode">
                     <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
                   </td>
+                  <td>{{this.selectedProduct.branchName }}</td>
                   <td>{{ this.selectedProduct.id }}</td>
                   <td>
-                    <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                  </td>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
+              </td>
                 </tr>
               </tbody>
           </table>
@@ -63,10 +68,20 @@
                     <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
                     <label for="academiaId">course Id:</label>
-                    <input id="academiaId" v-model="this.selectedacademic" type="text" required><br>
+                    <input id="academiaId" v-model="this.selectedacademic" type="text" readonly required><br>
 
-                    <label for="branchName"><b>Branch Name:</b></label>
-                    <input id="branchName" v-model="newBranch.branchName" type="text" required>
+                    <!-- <label for="branchName"><b>Branch Name:</b></label>
+                    <input id="branchName" v-model="newBranch.branchName" type="text" required> -->
+                    <label for="branchName"><b>Branch Rout Name:</b></label>
+    <input
+      id="branchName"
+      v-model="newBranch.branchName"
+      type="text"
+      required
+      pattern="[a-z]+(-[a-z]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.branchName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
 
                   <button class="btn2" type="submit">Add Branch</button>
               </form>
@@ -76,22 +91,27 @@
               </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
+import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
   name: "AddBranch",
   props: ['selectedacademic'],
+  components: {
+    Confirmation,
+  },
   data() {
     return {
       formVisible: false,
       products: [],
       selectedbranch:'',
-      selectedProduct: { id: null, name: '', description: '',academiaId:null },
+      selectedProduct: { id: '', name: '', description: '',academiaId:'' },
       isLoading: false,
       editMode: false,
       editedProduct: {
@@ -99,6 +119,7 @@ export default {
       name: '',
       description: '',
       academiaId: null,
+      branchName:'',
     },
       newBranch: {
       name: '',
@@ -125,6 +146,12 @@ watch: {
     this.loadData();
   },
   methods: {
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
     emitSelectedType() {
       this.$emit('selected-branches-changed', this.selectedbranch);
       this.loadData(); 
@@ -164,7 +191,7 @@ if (selectedProduct) {
     this.editedProduct.name = this.selectedProduct.name;
     this.editedProduct.description = this.selectedProduct.description;
     this.editedProduct.academiaId = this.selectedProduct.academiaId;
-
+this.editedProduct.branchName = this.selectedProduct.branchName;
   },
 
   async updateProduct(id) {
@@ -177,10 +204,13 @@ if (selectedProduct) {
         this.editMode = false; 
         this.ismodel = true; 
         this.loadProductDetails();
+        this.$refs.Confirmation.open("Branch Updated successfully.");
 
       }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating Branch.");
+
       }
     },
 
@@ -195,34 +225,61 @@ if (selectedProduct) {
       console.log("Branch added successfully");
       await this.loadData();
       this.loadProductDetails();
-      alert("Insert Successful");
+      this.$refs.Confirmation.open("Branch Added successfully.");
+
+     
+      this.newBranch = {
+      name: '',
+      description: '',
+      academiaId: this.selectedacademic,
+      branchName: '',
+     };
+
       this.formVisible = false;
 
-    } else {
-      alert("Insert Fail");
     }
 
   } catch (error) {
     this.isLoading = false;
     console.error("Error adding branch:", error);
+    this.$refs.Confirmation.open("Error Adding Branch.");
+
   } finally {
     this.isLoading = false;
   }
 },
-  // async getdata() {
-  //    this.isLoading = true;
-  //    try {
-  //     const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
-  //     this.products = res.data;
-  //     // console.log(this.selectedAcademics);
+async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Branch?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     this.isLoading = false;
-  //   }
-      
-  // },
+        const res = await AxiosInstance.delete(`/Branches?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Branch deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedbranch = '';
+        this.selectedProduct = { id: '', name: '', description: '',academiaId:'' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Branch deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Branch", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Branch.");
+      } finally {
+        this.isLoading = false;
+      }
+    },
 
   },
 };
@@ -344,4 +401,11 @@ if (selectedProduct) {
   .size{
     width: 470px;
   }
+  .button-row {
+  display: flex;
+}
+
+.button-row button {
+  margin-right: 10px; 
+}
 </style>
