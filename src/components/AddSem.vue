@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Semester Update & Create</h5>
+      <h5>Add & Update Semester </h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Semester Name :</label>
@@ -18,6 +18,7 @@
                 <th>Id</th>
                 <th>Semester Name</th>
                 <th>Description</th>
+                <th>Semester Rout Name</th>
                 <th>University Id</th>
                 <th>Action</th>
               </tr>
@@ -33,11 +34,16 @@
                   <td v-if="editMode">
                     <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
                   </td>
+                  <td>{{ selectedProduct.semesterName }}</td>
+
                   <td>{{ selectedProduct.universityId }}</td>
                   <td>
-                    <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                  </td>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
+              </td>
                 </tr>
               </tbody>
           </table>
@@ -63,10 +69,21 @@
                     <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
 
                   <label for="universityId">University Id:</label>
-                  <input id="universityId" v-model="this.selecteduniversity" type="text" required><br>
+                  <input id="universityId" v-model="this.selecteduniversity" type="text" readonly required><br>
 
-                  <label for="semesterName"><b>Semester Name:</b></label>
-                  <input id="semesterName" v-model="newBranch.semesterName" type="text" required>
+                  <!-- <label for="semesterName"><b>Semester Name:</b></label>
+                  <input id="semesterName" v-model="newBranch.semesterName" type="text" required> -->
+                  <label for="semesterName"><b>Semester Rout Name:</b></label>
+    <input
+      id="semesterName"
+      v-model="newBranch.semesterName"
+      type="text"
+      required
+      pattern="[a-z]+(-[a-z]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.semesterName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+
 
                   <button class="btn2" type="submit">Add Semester</button>
               </form>
@@ -76,21 +93,26 @@
               </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
+import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 
 export default {
   name: "AddSem",
   props: ['selecteduniversity'],
+  components: {
+    Confirmation,
+  },
   data() {
     return {
       formVisible: false,
       products: [],
       selectedSem: '',
-      selectedProduct: { id: null, name: '', description: '',universityId:null },
+      selectedProduct: { id:'', name: '', description: '',universityId:'' },
       isLoading: false,
       editMode: false,
       editedProduct: {
@@ -124,6 +146,18 @@ watch: {
     this.loadData();
   },
   methods: {
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
       emitSelectedType() {
           this.$emit('selected-semester-changed', this.selectedSem);
           this.loadData(); 
@@ -172,13 +206,16 @@ watch: {
       console.log(res);
 
       if (res.status === 200) {
-        await this.getdata();
+        await this.loadData();
         this.editMode = false; 
         this.ismodel = true;
         this.loadProductDetails();
+        this.$refs.Confirmation.open("Semester Updated successfully.");
+
       }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating Semester.");
       }
     },
 
@@ -193,34 +230,61 @@ watch: {
       this.loadProductDetails();
         // this.gridApi.refreshCells({ force: true });
 
-      alert("Insert Successful");
+        this.$refs.Confirmation.open("Semester Added successfully.");
+
+      this.newBranch = {
+      name: '',
+      description: '',
+      universityId: this.selecteduniversity,
+      semesterName: '',
+     };
+
       this.formVisible = false;
 
-    } else {
-      alert("Insert Fail");
     }
         
     } catch (error) {
       this.isLoading = false;
       console.error("Error adding branch:", error);
+      this.$refs.Confirmation.open("Error Adding Semester.");
+
     }
     finally {
            this.isLoading = false;
     }
   },
-  // async getdata() {
-  //    this.isLoading = true;
-  //    try {
-  //     const res = await AxiosInstance.get(`/Semester/GetSemesterByUniversityId/` + this.selecteduniversity);
-  //     this.products = res.data;
+  async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this ?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     this.isLoading = false;
-  //   }
-      
-  // },
+        const res = await AxiosInstance.delete(`/Semester?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Semester deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedSem = '';
+        this.selectedProduct = { id:'', name: '', description: '',universityId:'' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Semester deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Semester:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Semester.");
+      } finally {
+        this.isLoading = false;
+      }
+    },
 
   },
 };
@@ -255,12 +319,12 @@ watch: {
 
     button {
         color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
      }
      .btn2 {
         color: #fff;
@@ -289,16 +353,16 @@ watch: {
 @media (max-width: 520px) {
   .btn1{
         color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 7px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 80px; 
-      position: relative;
-      top: 68px;
-    left: 73px;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 7px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 80px; 
+        position: relative;
+        top: 68px;
+        left: 73px;
 
     }
 }
@@ -307,13 +371,13 @@ watch: {
       background-color: #007bff;
   }
   .modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-dialog {
@@ -341,4 +405,11 @@ watch: {
   .size{
     width: 470px;
   }
+  .button-row {
+    display: flex;
+}
+
+.button-row button {
+  margin-right: 10px; 
+}
 </style>

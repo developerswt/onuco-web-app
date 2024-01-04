@@ -1,6 +1,6 @@
 <template>
  <div class="container">
-    <h5>Types Update & Create</h5>
+    <h5>Add & Update Course Type </h5>
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Course Type :</label>
@@ -18,7 +18,7 @@
               <th>Id</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Action</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +33,11 @@
                 <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
               </td>
               <td>
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -67,14 +70,19 @@
         </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
 import AxiosInstance from '../config/axiosInstance';
+import Confirmation from './Confirmation.vue';
 
 export default {
   name: "AddTypes",
+  components: {
+    Confirmation,
+  },
   data() {
     return {
       products: [],
@@ -134,9 +142,13 @@ export default {
           this.editMode = false; 
           this.ismodel = true;
           this.loadProductDetails();
+          this.$refs.Confirmation.open("Course Type Updated successfully.");
+
         }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating Course Type.");
+
       }
     },
     toggleForm() {
@@ -160,30 +172,63 @@ export default {
           await this.loadData();
           this.loadProductDetails();
 
-        alert("Insert Successful");
+        // alert("Insert Successful");
+        this.$refs.Confirmation.open("Course Type Added successfully.");
+
+        this.newBranch = {
+        name: '',
+        description: '',
+      };
+
         this.formVisible = false;
-    } else {
-      alert("Insert Fail");
-    }
+    } 
+    // else {
+    //   alert("Insert Fail");
+    // }
+
         } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
+
+        this.$refs.Confirmation.open("Error Adding Course Type.");
+
       }
       finally {
              this.isLoading = false;
              }
     },
-    // async getdata() {
-    //     this.isLoading = true;
-    //     try {
-    //       const res = await AxiosInstance.get(`/Types`);
-    //       this.products = res.data;
-    //     } catch (error) {
-    //       console.log(error);
-    //     } finally {
-    //       this.isLoading = false;
-    //     }
-    //   },
+    async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Course Type?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
+
+        const res = await AxiosInstance.delete(`/Types?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Course Type deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedTypes = '';
+          this.selectedProduct = { id: '', name: '', description: '' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Course Type deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Course Type:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Course Type.");
+      } finally {
+        this.isLoading = false;
+      }
+    },
     },
   
     beforeRouteLeave(to, from, next) {
@@ -311,4 +356,12 @@ font-size: 15px;
   .size{
     width: 470px;
   }
+  
+.button-row {
+  display: flex;
+}
+
+.button-row button {
+  margin-right: 10px; 
+}
 </style>

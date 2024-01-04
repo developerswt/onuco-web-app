@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Course Update & Create</h5>
+      <h5>Add & Update Course Name </h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Course Name :</label>
@@ -19,9 +19,9 @@
                   <th>Id</th>
                   <th>Course Name</th>
                   <th>Description</th>
-                  <th>Course Name</th>
+                  <th>Course Rout Name</th>
                   <th>Type Id</th>
-                  <th>Action</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -35,15 +35,16 @@
                   <td v-if="editMode">
                     <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
                   </td>
-                  <td v-if="!editMode">{{ selectedProduct.academiaName }}</td>
-                  <td v-if="editMode">
-                    <input v-model="editedProduct.academiaName" type="text" required>
-                  </td>
+                  <td >{{this.selectedProduct.academiaName }}</td>
+                 
                   <td>{{ selectedProduct.typeId }}</td>
                   <td>
-                    <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                  </td>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
+              </td>
                 </tr>
               </tbody>
 
@@ -70,10 +71,19 @@
               <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
     
               <label for="typeId">TypeId:</label>
-              <input id="typeId" v-model="this.selectedtype" type="text" required><br>
+              <input id="typeId" v-model="this.selectedtype" type="text" readonly required><br>
               
-              <label for="academiaName"><b>Course Name:</b></label>
-              <input id="academiaName" v-model="newBranch.academiaName" type="text" required> 
+              <label for="academiaName"><b>Course Rout Name:</b></label>
+    <input
+      id="academiaName"
+      v-model="newBranch.academiaName"
+      type="text"
+      required
+      pattern="[a-z]+(-[a-z]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+  
 
               <button class="btn2" type="submit">Add Course</button>
             </form>
@@ -83,21 +93,26 @@
             </div>
       </div>
       </div>
+      <Confirmation ref="Confirmation" />
     </div>
   </template>
   
   <script>
   import AxiosInstance from '../config/axiosInstance';
-  
+  import Confirmation from './Confirmation.vue';
+
   export default {
     name: "AddTypes",
     props: ['selectedtype'],
+    components: {
+    Confirmation,
+  },
     data() {
       return {
         products: [],
         selectedAcademics: '',
         formVisible: false,
-        selectedProduct: { id: null, name: '', description: '' ,typeId: null},
+        selectedProduct: { id: null, name: '', description: '' ,typeId: ''},
         editMode: false,
         editedProduct: {
         id: null,
@@ -132,6 +147,12 @@
 
   },
   methods: {
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
     emitSelectedType() {
       this.$emit('selected-academic-changed', this.selectedAcademics);
       this.loadData(); 
@@ -171,10 +192,14 @@ try {
         this.editMode = false; 
         this.ismodel = true; 
         this.loadProductDetails();
+        this.$refs.Confirmation.open("Course Updated successfully.");
+
         // this.gridApi.refreshCells({ force: true });
       }
     } catch (error) {
       console.error(error);
+      this.$refs.Confirmation.open("Error Updating Course.");
+
     }
   },
 
@@ -200,34 +225,59 @@ try {
         console.log("Branch added successfully");
         await this.loadData(); // Update dropdown data
         this.loadProductDetails();
-        alert("Insert Successful");
-        this.formVisible = false;
+        this.$refs.Confirmation.open("Course Added successfully.");
 
-      } else {
-        alert("Insert Fail");
+        this.newBranch = {
+          name: '',
+          description: '',
+          typeId: this.selectedtype,
+          academiaName: '',
+        };
+
+        this.formVisible = false;
       }
     } catch (error) {
       this.isLoading = false;
-      console.error("Error adding branch:", error);
+      console.error("Error adding Name:", error);
+      this.$refs.Confirmation.open("Error Adding Course.");
+
     } finally {
       this.isLoading = false;
     }
   },
 
-      //   async getdata() {
-      //       this.isLoading = true;
-      //       try {
-      //         const res = await AxiosInstance.get(`/Academia`);
-      //         this.products = res.data;
-      //         this.loadProductDetails();
+  async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Course ?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
 
-      //       } catch (error) {
-      //         console.log(error);
-      //       } finally {
-      //         this.isLoading = false;
-      //       }
-      //     },
-        
+        const res = await AxiosInstance.delete(`/Academia?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Course deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedAcademics = '';
+        this.selectedProduct = { id:'', name: '', description: '' ,typeId:''};
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Course deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Course :", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Course.");
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
   beforeRouteLeave(to, from, next) {
 console.log('Before leaving the route. Refreshing the table...');
@@ -354,5 +404,11 @@ next();
   .size{
     width: 470px;
   }
+  .button-row {
+  display: flex;
+}
 
+.button-row button {
+  margin-right: 10px; 
+}
 </style>
