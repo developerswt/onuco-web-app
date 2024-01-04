@@ -170,6 +170,10 @@ export default {
 </script>
 
 <style scoped>
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
 .card-box {
     background-color: #fff;
     border-radius: 10px;
@@ -206,5 +210,22 @@ b, strong {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
+/* @media screen and (max-width: 600px) {
+    .col-lg-9 {
+        flex: 0 0 auto;
+        width: 70%;
+    }
+    .col-lg-5 {
+        flex: 0 0 auto;
+        width: 70%;
+    }
+    .col-lg-7 {
+        flex: 0 0 auto;
+        width: 70%;
+    }
+    .col-lg-3 {
+        flex: 0 0 auto;
+        width: 70%;
+    }
+} */
 </style>

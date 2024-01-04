@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="activeStudentOptions" :series="activeStudentSeries"></apexchart>
+                        <apexchart class="pt-5" :options="activeStudentOptions" :series="activeStudentSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="subjectStudentOptions" :series="subjectStudentSeries"></apexchart>
+                        <apexchart class="pt-5" :options="subjectStudentOptions" :series="subjectStudentSeries"></apexchart>
                     </div>
                 </div>
             </div> 
@@ -67,12 +67,10 @@ export default {
                             text: "No Of Active Student",
                         },
                     },
-
                 ],
                 // DataLabels configuration for the entire chart
                 dataLabels: {
                     enabled: true,
-
                 },
             },
             activeStudentSeries: [
@@ -143,8 +141,10 @@ export default {
         try {
             const result = await AxiosInstance.get(`/CoursesFacultyJ/GetActiveStudents`);
             this.activeStudents = result.data;
+            console.log(this.activeStudents);
             const resul = await AxiosInstance.get(`/CoursesFacultyJ/GetCourseDetails`);
             this.subjectStudent = resul.data;
+            console.log(this.subjectStudent);
             this.processChartData();
             this.subjectStudentChartData();
         } catch (error) {

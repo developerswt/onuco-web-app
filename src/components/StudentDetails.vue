@@ -1,182 +1,197 @@
 <template>
   <div class="container">
-    <p>Dashbord > Complete Students </p>
-    <div style="padding: 20px;">
+    <div class="row pt-2">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card-box">
+          <div class="card-head">
+            <header>Student Info Details</header>
+            <div class="card-body ">
 
-      <div class="example-wrapper">
+              <div style="padding: 20px;">
 
-        <div style="height: 100%;">
-          <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
-            :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
-            :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
-            :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
-            @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
-          </ag-grid-vue>
-        </div>
-      </div>
-    </div>
-  
-  <div v-if="showChildRow">
-  <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content mc">
-        
-        <div class="modal-body" style="overflow: auto !important;">
-          
-            <div class="container bg-light">
-                                <div v-if="ismodel" class="row">
-                                    <div class="col-sm-12">
-                                      <p><b>ID: </b> {{ childPara.id  }}</p>
-                                      <p><b>Course ID:</b> {{ childPara.courseId }}</p>
-                                      <p><b>User CognitoId:</b> <a :href="getUserLink(childPara.userCognitoId)">{{ childPara.userCognitoId }}</a></p>
-                                         <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
-                                         <p><b>Start Date:</b> {{ formatDate( childPara.startdate) }}</p>
-                                         <p><b>End Date:</b> {{ formatDate( childPara.enddate ) }}</p>
-                                         <!-- <p><b>Status:</b> {{ childPara.state }}</p> -->
-                                         
-                                     </div>
-                                </div>
-                                <div v-else class="row">
-                                  <div class="col-sm-12">
-                                         <p><b>ID: </b> {{ childPara.id  }}</p>
-                                         <p><b>Course ID: </b> {{ childPara.courseId }}</p>
-                                         <!-- <p><b>User CognitoId:</b> {{ childPara.userCognitoId }}</p>
+                <div class="example-wrapper">
+
+                  <div style="height: 100%;">
+                    <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                      :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
+                      :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
+                      cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
+                      is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
+                      @row-clicked='onCellClicked'>
+                    </ag-grid-vue>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="showChildRow">
+                <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+                  aria-modal="true" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content mc">
+
+                      <div class="modal-body" style="overflow: auto !important;">
+
+                        <div class="container bg-light">
+                          <div v-if="ismodel" class="row">
+                            <div class="col-sm-12">
+                              <p><b>ID: </b> {{ childPara.id }}</p>
+                              <p><b>Course ID:</b> {{ childPara.courseId }}</p>
+                              <p><b>User CognitoId:</b> <a :href="getUserLink(childPara.userCognitoId)">{{
+                                childPara.userCognitoId }}</a></p>
+                              <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
+                              <p><b>Start Date:</b> {{ formatDate(childPara.startdate) }}</p>
+                              <p><b>End Date:</b> {{ formatDate(childPara.enddate) }}</p>
+                              <!-- <p><b>Status:</b> {{ childPara.state }}</p> -->
+
+                            </div>
+                          </div>
+                          <div v-else class="row">
+                            <div class="col-sm-12">
+                              <p><b>ID: </b> {{ childPara.id }}</p>
+                              <p><b>Course ID: </b> {{ childPara.courseId }}</p>
+                              <!-- <p><b>User CognitoId:</b> {{ childPara.userCognitoId }}</p>
                                         
                                          <p><b>Price:</b> {{ childPara.price }}</p> -->
 
-                                        <div class="">
-                                          <label><b>Start Date:</b></label><br>
-                                          <Datepicker  v-model="childPara.startdate"></Datepicker>
-                                        </div> 
-                                        <div class="">
-                                          <label><b>End Date:</b></label><br>
-                                          <Datepicker v-model="childPara.enddate"></Datepicker>
-                                        </div>
-                                        <!-- <p><b>Status:</b> {{ childPara.state }}</p>
+                              <div class="">
+                                <label><b>Start Date:</b></label><br>
+                                <Datepicker v-model="childPara.startdate"></Datepicker>
+                              </div>
+                              <div class="">
+                                <label><b>End Date:</b></label><br>
+                                <Datepicker v-model="childPara.enddate"></Datepicker>
+                              </div>
+                              <!-- <p><b>Status:</b> {{ childPara.state }}</p>
                                         <div class="">
                                           <label><b>Status:</b></label><br>
                                           <input type="text" v-model="this.childPara.state" />
                                         </div>  -->
-                                    </div>
-                                        
-                                </div>
-                               </div>
-                               
+                            </div>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                          @click="update(childPara.id)">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                          @click="OpenCloseFun()">Close</button>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
+              <Loading v-model:active="isLoading"></Loading>
+            </div>
           </div>
-          <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(childPara.id)">Update</button>
-           <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button> 
         </div>
-          
-  </div>
-      
       </div>
-    </div>
-  </div>
-   <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
-    <Loading v-model:active="isLoading"></Loading>
-  </div>
+    </div>        
+  </div>  
 </template>
   
-  <script>
-  
-  import AxiosInstance  from '../config/axiosInstance';
-  import "ag-grid-community/styles/ag-grid.css";
-  import "ag-grid-community/styles/ag-theme-alpine.css";
-  import { AgGridVue } from "ag-grid-vue3";
-  // import AlertDialog from './AlertDialog.vue';
-  import moment from 'moment';
-  import Loading from 'vue3-loading-overlay';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  import Datepicker from '@vuepic/vue-datepicker';
-  import '@vuepic/vue-datepicker/dist/main.css'
+<script>
+
+import AxiosInstance from '../config/axiosInstance';
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { AgGridVue } from "ag-grid-vue3";
+// import AlertDialog from './AlertDialog.vue';
+import moment from 'moment';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 
-  export default {
-    name: "StudentDetails",
-    components: {
-      AgGridVue,
-      Loading,
-      // AlertDialog
-      Datepicker,
-      
-    },
-    data: function () {
-      return {
-        userName: '',
-        ismodel: true,
-        isLoading: false,
-        showDialog: false,
-        dialogTitle: '',
-        dialogMessage: '',
-        domLayout: null,
-        Orders: [],
-        req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'Course Name',field:'courseName'},{ name:'User CognitoId', field: 'userCognitoId' },{name:'Price',field:'price'},{name:'Start Date',field:'startdate',valueFormatter: this.dateFormat.bind(this),filterType: 'date'},{name:'End Date',field:'enddate',valueFormatter: this.dateFormats.bind(this),filterType: 'date'}],
-        gridApi: null,
-        defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
-        columnApi: null,
-        editType: null,
-        showChildRow: false,
-        childPara: null,
-        rowData: null,
-        rowSelection: null,
-        paginationPageSize: null,
-        rightAligned: {
-          headerClass: 'ag-right-aligned-header',
-          cellClass: 'ag-right-aligned-cell'
-        },
-      };
-    },
-    computed: {
+export default {
+  name: "StudentDetails",
+  components: {
+    AgGridVue,
+    Loading,
+    // AlertDialog
+    Datepicker,
 
-      isLoggedIn() {
-        return this.$store.state.IsLoggedIn;
+  },
+  data: function () {
+    return {
+      userName: '',
+      ismodel: true,
+      isLoading: false,
+      showDialog: false,
+      dialogTitle: '',
+      dialogMessage: '',
+      domLayout: null,
+      Orders: [],
+      req: [],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Course Name', field: 'courseName' }, { name: 'User CognitoId', field: 'userCognitoId' }, { name: 'Price', field: 'price' }, { name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
+      gridApi: null,
+      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      columnApi: null,
+      editType: null,
+      showChildRow: false,
+      childPara: null,
+      rowData: null,
+      rowSelection: null,
+      paginationPageSize: null,
+      rightAligned: {
+        headerClass: 'ag-right-aligned-header',
+        cellClass: 'ag-right-aligned-cell'
       },
-    },
-  
-    async created() {
-      this.domLayout = 'autoHeight'; 
-      this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
-        let req = res.data;
-        this.Orders = req;
-        
-      } catch (error) {
-        console.log(error);
-        this.showDialog = true;  
-        this.dialogTitle= "Error";
-        this.dialogMessage= "Not get data";
-      }
-      finally {
-        this.isLoading = false;
-      }
-      this.rowData = this.Orders;
-      this.rowSelection = 'single'; 
-      console.log(this.rowData);
-      this.popupParent = document.body;
-      this.paginationPageSize = 10;
+    };
+  },
+  computed: {
 
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
     },
-    
-    
-    methods: {
+  },
 
-      getUserLink(userCognitoId) {
+  async created() {
+    this.domLayout = 'autoHeight';
+    this.isLoading = true;
+    try {
+      const res = await AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
+      let req = res.data;
+      this.Orders = req;
+
+    } catch (error) {
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
+    }
+    finally {
+      this.isLoading = false;
+    }
+    this.rowData = this.Orders;
+    this.rowSelection = 'single';
+    console.log(this.rowData);
+    this.popupParent = document.body;
+    this.paginationPageSize = 10;
+
+  },
+
+
+  methods: {
+
+    getUserLink(userCognitoId) {
       return `/user-profile/${userCognitoId}`;
     },
 
-      formatDate(date) {
+    formatDate(date) {
       return moment(date).format('DD-MM-YYYY T HH:mm:ss');
     },
     dateFormat(params) {
       let value = params.data.startdate;
       // let value2=params.data.enddate;
       console.log(value);
-      if(value) {
+      if (value) {
         return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
       }
       // if(value2) {
@@ -184,69 +199,69 @@
       // }
     },
     dateFormats(params) {
-      
-      let value2=params.data.enddate;
+
+      let value2 = params.data.enddate;
       console.log(value2);
-     
-      if(value2) {
+
+      if (value2) {
         return moment(String(value2)).format('DD/MM/YYYY T HH:mm:ss');
       }
     },
     onCellClicked(params) {
-            this.childPara = params.node.data
-        console.log(this.childPara);
-        this.showChildRow= true;
-  
-        },
-  
-        OpenCloseFun(){
-           this.showChildRow=false;
-           this.ismodel = true;
-        },
-  
-      onCellValueChanged(event) {
-        console.log('Data after change is', event.data);
-      },
-      onGridReady(params) {
-        this.gridApi = params.api;
-        this.gridColumnApi = params.columnApi;
-      },
-     
-      onBtnExport() {
-        this.gridApi.exportDataAsCsv();
-      },
-      onFilterTextBoxChanged() {
-        this.gridApi.setQuickFilter(
-          document.getElementById('filter-text-box').value
+      this.childPara = params.node.data
+      console.log(this.childPara);
+      this.showChildRow = true;
+
+    },
+
+    OpenCloseFun() {
+      this.showChildRow = false;
+      this.ismodel = true;
+    },
+
+    onCellValueChanged(event) {
+      console.log('Data after change is', event.data);
+    },
+    onGridReady(params) {
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+    },
+
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
+    onFilterTextBoxChanged() {
+      this.gridApi.setQuickFilter(
+        document.getElementById('filter-text-box').value
+      );
+    },
+    onPrintQuickFilterTexts() {
+      this.gridApi.forEachNode(function (rowNode, index) {
+        console.log(
+          'Row ' +
+          index +
+          ' quick filter text is ' +
+          rowNode.quickFilterAggregateText
         );
-      },
-      onPrintQuickFilterTexts() {
-        this.gridApi.forEachNode(function (rowNode, index) {
-          console.log(
-            'Row ' +
-              index +
-              ' quick filter text is ' +
-              rowNode.quickFilterAggregateText
-          );
-        });
-      },
-     
-      edit() {
-        this.ismodel = false;
-      },
-      
-      update(id) {
-        this.showDialog = false;
-        try {
-          const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
-          const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
-          const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id='+ id + '&courseId='+ this.childPara.courseId + '&newStartDate=' + encodeURIComponent(formattedStartDate) + '&newEndDate=' + encodeURIComponent(formattedEndDate));
-          console.log(res);
-          
-          // this.gridApi.refreshCells({force : true});
-          if (res.status === 200) {
-            const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
-            this.rowData = newData.data;
+      });
+    },
+
+    edit() {
+      this.ismodel = false;
+    },
+
+    update(id) {
+      this.showDialog = false;
+      try {
+        const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
+        const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
+        const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newStartDate=' + encodeURIComponent(formattedStartDate) + '&newEndDate=' + encodeURIComponent(formattedEndDate));
+        console.log(res);
+
+        // this.gridApi.refreshCells({force : true});
+        if (res.status === 200) {
+          const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
+          this.rowData = newData.data;
         }
 
         this.ismodel = true;
@@ -300,10 +315,10 @@ var filterParams = {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 85%;
-  }
-  
-  #myGrid {
+  width: 100%;
+}
+
+#myGrid {
   flex: 1 1 0px;
   width: 100%;
 }
@@ -381,28 +396,33 @@ var filterParams = {
     width: 42%;
     font-size: 1em;
   }
-  }
-  
-  .modal-dialog {
-    max-width: 900px;
-    
-    margin: 1.75rem auto;
-  }
-  .modal-dialog {
-      max-width: 900px;
-      margin: 1.75rem auto;
-      height: 630px; /* Set the height as needed */
-      overflow-y: auto;
-    }
-    .mc{
-      height: 350px;
-      width: 650px;
-      overflow: hidden;
-    }
-    .modal-body {
-      max-height: 400px; /* Adjust the max-height as needed */
-      overflow-y: auto;
-    }
+}
+
+.modal-dialog {
+  max-width: 900px;
+
+  margin: 1.75rem auto;
+}
+
+.modal-dialog {
+  max-width: 900px;
+  margin: 1.75rem auto;
+  height: 630px;
+  /* Set the height as needed */
+  overflow-y: auto;
+}
+
+.mc {
+  height: 350px;
+  width: 650px;
+  overflow: hidden;
+}
+
+.modal-body {
+  max-height: 400px;
+  /* Adjust the max-height as needed */
+  overflow-y: auto;
+}
 
 @media (max-width:520px) {
 
@@ -424,5 +444,60 @@ button {
 
 button:hover {
   background-color: #007bff;
+}
+.card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
+}
+.card-head header {
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
+}.card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
+}
+.card-head header {
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
 }
 </style>

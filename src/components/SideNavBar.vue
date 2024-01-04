@@ -25,17 +25,42 @@
           </li>
           <li>
             <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
-              <span class="icon" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file"></i></span>
-              <span class="title" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Course Details</span>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <span class="dropdown-item" @click="selectContent('branches')">Branches</span>
-                <span class="dropdown-item" @click="selectContent('university')">University</span>
-                <span class="dropdown-item" @click="selectContent('semester')">Semester</span>
-                <span class="dropdown-item" @click="selectContent('academics')">Academics</span>
-                <span class="dropdown-item" @click="selectContent('types')">Types</span>
-                <span class="dropdown-item" @click="selectContent('courses')">Courses</span>
-              </div>
+              <span class="icon user" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                User Details&nbsp;&nbsp;
+                <span class="action user"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
+              </span>
+
             </div>
+          </li>
+          <li>
+            <div class="collapse hj" id="collapseExample1">
+              <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
+              <span class="subtitle" @click="selectContent('facultyInfo')">Faculty Info</span>
+            </div>
+          </li>
+          <li>
+            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
+              <span class="icon course" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-file"></i>
+              </span>
+              <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Course Details&nbsp;&nbsp;
+                <span class="action course"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="collapse hj" id="collapseExample">
+              <span class="subtitle" @click="selectContent('branches')">Branches</span>
+              <span class="subtitle" @click="selectContent('university')">University</span>
+              <span class="subtitle" @click="selectContent('semester')">Semester</span>
+              <span class="subtitle" @click="selectContent('academics')">Academics</span>
+              <span class="subtitle" @click="selectContent('types')">Types</span>
+              <span class="subtitle" @click="selectContent('courses')">Courses</span>
+           </div>
           </li>
         </ul>
       </div>
@@ -80,6 +105,23 @@ export default {
 
 <style scoped>
 
+.action {
+  font-size: 15px;
+  width: 1.2em;
+  color: darkblue;
+  opacity: 1;
+  margin-left: 5px; /* Adjusted margin-left instead of padding-left */
+}
+
+.title .rotate-icon {
+  transition: transform 0.3s ease; /* Added smooth transition effect */
+}
+
+.title:not(.collapsed) .rotate-icon {
+  transform: rotate(90deg);
+}
+
+
 .sidebar {
   background: #FFF;
   color: #9b59b6;
@@ -112,6 +154,21 @@ li {
     padding-top: 7%;
   
 }
+.title.user {
+  padding-left: 3%;
+}
+.title.course {
+  padding-left: 4%;
+}
+.action.user {
+  margin-left: 23px;
+}
+.icon.user {
+  padding-left: 6%;
+}
+.icon.course {
+  padding-left: 6%;
+}
 .sidebar-collapse .icon {
     margin-left: -60%;
 
@@ -126,8 +183,19 @@ li {
   margin-left: -20px;
   cursor: pointer;
 }
-
+.subtitle {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 50px;
+  color: #9b59b6;
+  margin-left: 12px;
+  cursor: pointer;
+}
 .sidebar-collapse .title {
+  display: none; /* Hide the title when collapsed */
+}
+.sidebar-collapse .subtitle {
   display: none; /* Hide the title when collapsed */
 }
 .sidebar-item {

@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="activeStudentOptions" :series="activeStudentSeries"></apexchart>
+                        <apexchart class="pt-5" :options="activeStudentOptions" :series="activeStudentSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="subjectOptions" :series="subjectSeries"></apexchart>
+                        <apexchart  class="pt-5" :options="subjectOptions" :series="subjectSeries"></apexchart>
                     </div>
                 </div>
             </div> 
@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="lectureStudentsOptions" :series="lectureStudentsSeries"></apexchart>
+                        <apexchart  class="pt-5" :options="lectureStudentsOptions" :series="lectureStudentsSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart width="500" class="pt-5" :options="lectureSubjectOptions" :series="lectureSubjectSeries"></apexchart>
+                        <apexchart  class="pt-5" :options="lectureSubjectOptions" :series="lectureSubjectSeries"></apexchart>
                     </div>
                 </div>
             </div> 
@@ -78,6 +78,9 @@ export default {
                 },
                 xaxis: {
                     categories: [],
+                    labels: {
+                        rotate: 0
+                    },
                     title: {
                         text: "No Of Active Students and Total Price",
                     },
@@ -184,7 +187,7 @@ export default {
                     categories: [],
                     labels: {
                         show: true,
-                        rotate: -20,
+                        rotate: 0,
                     },
                     title: {
                         text: "Lecture VS Students"
@@ -227,7 +230,7 @@ export default {
                     categories: [],
                     labels: {
                         show: true,
-                        rotate: -20,
+                        rotate: 0,
                     },
                     title: {
                         text: "Lecture Vs Course",
@@ -305,25 +308,33 @@ export default {
                 });
             }
         },
+        
         subjectChartData() {
             if (this.course) {
                 this.course.forEach(course => {
+                        // Split the subjectName into an array of words
+                    const subjectNameArray = course.subjectName.split(' ');
+
+                        // Add line breaks based on a certain condition (e.g., length of the label)
+                    const formattedSubjectName = subjectNameArray.join('\n');
+
                     const dataPoint = {
-                        x: course.subjectName,
+                        x: subjectNameArray,
                         y: course.totalSubscribedStudents,
                     };
-    
+
                     const priceAmount = {
-                        x: course.subjectName,
+                        x: subjectNameArray,
                         y: course.totalAmountCollected,
                     };
-    
-                    this.subjectOptions.xaxis.categories.push(course.subjectName);
+
+                    this.subjectOptions.xaxis.categories.push(subjectNameArray);
                     this.subjectSeries[0].data.push(dataPoint);
                     this.subjectSeries[1].data.push(priceAmount);
                 });
             }
         },
+
         lectureStudentChartData() {
             if (this.lectureStudent) {
                 this.lectureStudent.forEach(lecture => {
@@ -364,6 +375,10 @@ export default {
 
 
 <style scoped>
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
 .card-box {
     background-color: #fff;
     border-radius: 10px;
@@ -402,6 +417,11 @@ export default {
 .card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
+}
+@media screen and (max-width: 600px) {
+  .apexcharts-canvas {
+    overflow-x: auto; /* or overflow-x: scroll; */
+  }
 }
 @media (min-width: 576px) {
 .col-sm-6 {

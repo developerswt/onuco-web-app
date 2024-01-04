@@ -46,6 +46,14 @@
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Courses</span>
           <AdCourse />
         </div>
+        <div class="content-container" v-if="selectedContent === 'facultyInfo'">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Faculty Info</span>
+          <ApLecture />
+        </div>
+        <div class="content-container" v-if="selectedContent === 'studentInfo'">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Student Info</span>
+          <StudentDetails />
+        </div>
       </div>
     </div>
   </div>  
@@ -65,6 +73,8 @@ import AdSem from './AdSem.vue';
 import AdAcademics from './AdAcademics.vue';
 import AdTypes from './AdTypes.vue';
 import AdCourse from './AdCourse.vue';
+import ApLecture from './ApLecture.vue';
+import StudentDetails from './StudentDetails.vue'
 
 export default {
     name: 'AdminPage',
@@ -82,6 +92,8 @@ export default {
         AdAcademics,
         AdTypes,
         AdCourse,
+        ApLecture,
+        StudentDetails
     },
     data() {
       return {
@@ -141,10 +153,13 @@ export default {
   .main-container {
     flex: 1;
     transition: margin-left 0.3s ease;
+    padding: 20px;
+    background-color: #EFF5FC; /* Set the background color */
   }
   
   .content-container {
     padding: 20px;
+    width: 100%;
   }
   
   .placeholder-content {
@@ -185,15 +200,78 @@ export default {
     height: 3px;
     background-color: #fff;
   }
-  
+  .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.bars_icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.page_title {
+  color: #666;
+  font-size: 24px;
+  font-weight: bold;
+}
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    padding-top: 3%;
+  }
+}
+
+
   @media (max-width: 768px) {
     .sidebar {
-      width: 80px; /* Adjusted width for mobile */
+      width: 190px; /* Adjusted width for mobile */
     }
   
     .sidebar-collapse .main-container {
       margin-left: 0; /* No margin when collapsed on mobile */
     }
+    .header {
+    flex-direction: row; /* Display items in a row for mobile */
+    justify-content: space-between; /* Add space between items */
   }
+
+  .bars_icon {
+    margin-left: 0;
+  }
+
+  .content-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .main-container {
+    flex-direction: column; /* Stack items in a column for mobile */
+  }
+  .sidebar-collapse .main-container {
+      margin-left: 0; /* No margin when collapsed on mobile */
+    }
+  }
+  @media screen and (max-width: 600px) {
+  .sidebar {
+    padding-top: 6%;
+    width: 220px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .sidebar {
+    padding-top: 11%;
+  }
+  .main-container {
+    padding-top: 9%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .sidebar {
+    padding-top: 11%;
+  }
+  .main-container {
+    padding-top: 9%;
+  }
+}
 
 </style>

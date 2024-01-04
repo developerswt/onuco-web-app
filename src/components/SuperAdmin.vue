@@ -84,6 +84,10 @@ export default {
     flex: 0 0 auto;
     width: 25%;
 }
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
 .bg-b-green {
     background: linear-gradient(45deg, #2ed8b6, #59e0c5);
 }
@@ -152,10 +156,11 @@ export default {
     font-size: 21px;
 }
 
-@media (min-width: 768px) {
-.col-md-6 {
+
+/* @media screen and (max-width: 600px) {
+.col-xl-3 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 25%;
 }
-}
+} */
 </style>
