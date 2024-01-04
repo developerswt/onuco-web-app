@@ -83,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
 .card-box {
     background-color: #fff;
     border-radius: 10px;
