@@ -91,8 +91,8 @@
           </div>
         </div>
       </div>
-    </div>        
-  </div>  
+    </div>
+  </div>
 </template>
   
 <script>
@@ -282,31 +282,31 @@ export default {
 
 
 };
-var filterParams = {
-  comparator: (filterLocalDateAtMidnight, cellValue) => {
-    var dateAsString = cellValue;
-    if (dateAsString == null) return -1;
-    var dateParts = dateAsString.split('/');
-    var cellDate = new Date(
-      Number(dateParts[2]),
-      Number(dateParts[1]) - 1,
-      Number(dateParts[0])
-    );
-    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-      return 0;
-    }
-    if (cellDate < filterLocalDateAtMidnight) {
-      return -1;
-    }
-    if (cellDate > filterLocalDateAtMidnight) {
-      return 1;
-    }
-    return 0;
-  },
-  minValidYear: 2000,
-  maxValidYear: 2023,
-  inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
-};
+// var filterParams = {
+//   comparator: (filterLocalDateAtMidnight, cellValue) => {
+//     var dateAsString = cellValue;
+//     if (dateAsString == null) return -1;
+//     var dateParts = dateAsString.split('/');
+//     var cellDate = new Date(
+//       Number(dateParts[2]),
+//       Number(dateParts[1]) - 1,
+//       Number(dateParts[0])
+//     );
+//     if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+//       return 0;
+//     }
+//     if (cellDate < filterLocalDateAtMidnight) {
+//       return -1;
+//     }
+//     if (cellDate > filterLocalDateAtMidnight) {
+//       return 1;
+//     }
+//     return 0;
+//   },
+//   minValidYear: 2000,
+//   maxValidYear: 2023,
+//   inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
+// };
 
 
 </script>
@@ -445,59 +445,64 @@ button {
 button:hover {
   background-color: #007bff;
 }
+
 .card-box {
-    background-color: #fff;
-    border-radius: 10px;
-    position: relative;
-    margin-bottom: 20px;
-    border: 1px solid #deebfd;
-    box-shadow: -8px 12px 18px 0 #dadee8;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  border: 1px solid #deebfd;
+  box-shadow: -8px 12px 18px 0 #dadee8;
 }
 
 .card-head {
-    border-radius: 2px 2px 0 0;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-    padding: 2px;
-    /* text-transform: uppercase; */
-    color: #3a405b;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 40px;
-    min-height: 40px;
+  border-radius: 2px 2px 0 0;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+  padding: 2px;
+  /* text-transform: uppercase; */
+  color: #3a405b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 40px;
+  min-height: 40px;
 }
+
 .card-head header {
-    display: inline-block;
-    padding: 11px 20px;
-    vertical-align: middle;
-    line-height: 17px;
-    font-size: 17px;
-    letter-spacing: 1px;
-}.card-box {
-    background-color: #fff;
-    border-radius: 10px;
-    position: relative;
-    margin-bottom: 20px;
-    border: 1px solid #deebfd;
-    box-shadow: -8px 12px 18px 0 #dadee8;
+  display: inline-block;
+  padding: 11px 20px;
+  vertical-align: middle;
+  line-height: 17px;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.card-box {
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  border: 1px solid #deebfd;
+  box-shadow: -8px 12px 18px 0 #dadee8;
 }
 
 .card-head {
-    border-radius: 2px 2px 0 0;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-    padding: 2px;
-    /* text-transform: uppercase; */
-    color: #3a405b;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 40px;
-    min-height: 40px;
+  border-radius: 2px 2px 0 0;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+  padding: 2px;
+  /* text-transform: uppercase; */
+  color: #3a405b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 40px;
+  min-height: 40px;
 }
+
 .card-head header {
-    display: inline-block;
-    padding: 11px 20px;
-    vertical-align: middle;
-    line-height: 17px;
-    font-size: 17px;
-    letter-spacing: 1px;
+  display: inline-block;
+  padding: 11px 20px;
+  vertical-align: middle;
+  line-height: 17px;
+  font-size: 17px;
+  letter-spacing: 1px;
 }
 </style>

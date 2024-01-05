@@ -25,28 +25,28 @@
                                         <td>{{ Student.enddate }}</td>
                                         <td>{{ Student.actualPrice }}</td>
                                         <td>{{ Student.discountedPrice }}</td>
-                                    </tr>		
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card-box">
                 <div class="card-head">
                     <header>Active Student Result</header>
                     <div class="card-body ">
-                        <div class="h6">ActiveStudentsCount</div><b> {{ this.activeStudents.activeStudentsCount }}</b>
-                        <div class="h6">DiscountedAmount</div><b>{{ this.activeStudents.discountedAmount }}</b>
-                        <div class="h6">Total Amount</div><b>{{ this.activeStudents.totalAmount }}</b>
+                        <div class="h6">ActiveStudentsCount</div><b> {{ activeStudents.activeStudentsCount }}</b>
+                        <div class="h6">DiscountedAmount</div><b>{{ activeStudents.discountedAmount }}</b>
+                        <div class="h6">Total Amount</div><b>{{ activeStudents.totalAmount }}</b>
                     </div>
                 </div>
             </div>
-        </div>                
+        </div>
     </div>
-    <div class="row pt-2">    
+    <div class="row pt-2">
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card-box">
                 <div class="card-head">
@@ -71,8 +71,8 @@
                                         <td>{{ student.subjectId }}</td>
                                         <td>{{ student.semesterId }}</td>
                                         <td>{{ student.totalAmountCollected }}</td>
-                                        <td>{{ student.totalSubscribedStudents }}</td>	
-                                    </tr>		
+                                        <td>{{ student.totalSubscribedStudents }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="row pt-2">    
+    <div class="row pt-2">
         <div class="col-lg-5 col-md-12 col-sm-12 col-12">
             <div class="card-box">
                 <div class="card-head">
@@ -99,7 +99,7 @@
                                     <tr v-for="student in lectureStudent" :key="student.id">
                                         <td>{{ student.facultycognitoid }}</td>
                                         <td>{{ student.completesubscribedcount }}</td>
-                                    </tr>		
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -126,7 +126,7 @@
                                         <td>{{ student.facultyCognitoId }}</td>
                                         <td>{{ student.totalCourseNameCount }}</td>
                                         <td>{{ student.totalPrice }}</td>
-                                    </tr>		
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -134,8 +134,7 @@
                 </div>
             </div>
         </div>
-    </div>    
-
+    </div>
 </template>
 
 <script>
@@ -162,9 +161,9 @@ export default {
             this.lectureStudent = resu.data;
             const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
             this.lectureSubject = resul.data;
-        } catch {
+        } catch (error) {
             console.log(error);
-        }    
+        }
     }
 }
 </script>
@@ -174,6 +173,7 @@ export default {
     flex: 0 0 auto;
     width: 100%;
 }
+
 .card-box {
     background-color: #fff;
     border-radius: 10px;
@@ -194,6 +194,7 @@ export default {
     line-height: 40px;
     min-height: 40px;
 }
+
 .card-head header {
     display: inline-block;
     padding: 11px 20px;
@@ -202,30 +203,16 @@ export default {
     font-size: 17px;
     letter-spacing: 1px;
 }
-b, strong {
+
+b,
+strong {
     font-weight: bolder;
 }
-.h6, h6 {
+
+.h6,
+h6 {
     font-size: 1rem;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-/* @media screen and (max-width: 600px) {
-    .col-lg-9 {
-        flex: 0 0 auto;
-        width: 70%;
-    }
-    .col-lg-5 {
-        flex: 0 0 auto;
-        width: 70%;
-    }
-    .col-lg-7 {
-        flex: 0 0 auto;
-        width: 70%;
-    }
-    .col-lg-3 {
-        flex: 0 0 auto;
-        width: 70%;
-    }
-} */
 </style>

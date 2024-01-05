@@ -83,8 +83,7 @@
                                         <div class="col-lg-5">
                                             <div id="accordion">
                                                 <div class="card">
-                                                    <div
-id="headingOne" class="card-header" data-toggle="collapse"
+                                                    <div id="headingOne" class="card-header" data-toggle="collapse"
                                                         data-target="#collapseOne" aria-expanded="true"
                                                         aria-controls="collapseOne">
                                                         <div class="row">
@@ -95,22 +94,19 @@ id="headingOne" class="card-header" data-toggle="collapse"
                                                                 </button>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="action"><i
-id="sem_icon"
+                                                                <div class="action"><i id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div
-id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                         data-parent="#accordion">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="accordion_block_one">
-                                                                        <i
-class="fa-solid fa-check"
+                                                                        <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
                                                                         <p id="check_text"> Chapter-1</p>
                                                                     </div>
@@ -127,8 +123,7 @@ class="fa-solid fa-check"
                                                             <div class="chapters_block">
                                                                 <div class="row">
                                                                     <div class="col-lg-1">
-                                                                        <i
-class="fa-solid fa-check"
+                                                                        <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
                                                                     </div>
                                                                     <div class="col-lg-7">
@@ -140,8 +135,7 @@ class="fa-solid fa-check"
                                                                             <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
-                                                                                        <div
-class="progress-bar"
+                                                                                        <div class="progress-bar"
                                                                                             role="progressbar"
                                                                                             aria-valuenow="0"
                                                                                             aria-valuemin="0"
@@ -157,13 +151,11 @@ class="progress-bar"
                                                                     <div class="col-lg-4">
                                                                         <div class="inside_block">
 
-                                                                            <img
-src="../assets/images/Group1318@2x.png"
+                                                                            <img src="../assets/images/Group1318@2x.png"
                                                                                 class="img-fluid">
 
 
-                                                                            <img
-src="../assets/images/Iconionic-ios-bookmark@2x.png"
+                                                                            <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
                                                                                 class="img-fluid">
 
                                                                         </div>
@@ -173,8 +165,7 @@ src="../assets/images/Iconionic-ios-bookmark@2x.png"
                                                             <div class="chapters_block">
                                                                 <div class="row">
                                                                     <div class="col-lg-1">
-                                                                        <i
-class="fa-solid fa-check"
+                                                                        <i class="fa-solid fa-check"
                                                                             style="color: #08ab44;"></i>
                                                                     </div>
                                                                     <div class="col-lg-7">
@@ -186,8 +177,7 @@ class="fa-solid fa-check"
                                                                             <div class="col-lg-6">
                                                                                 <div class="progress_block">
                                                                                     <div class="progress">
-                                                                                        <div
-class="progress-bar"
+                                                                                        <div class="progress-bar"
                                                                                             role="progressbar"
                                                                                             aria-valuenow="0"
                                                                                             aria-valuemin="0"
@@ -203,13 +193,11 @@ class="progress-bar"
                                                                     <div class="col-lg-4">
                                                                         <div class="inside_block">
 
-                                                                            <img
-src="../assets/images/Group1318@2x.png"
+                                                                            <img src="../assets/images/Group1318@2x.png"
                                                                                 class="img-fluid">
 
 
-                                                                            <img
-src="../assets/images/Iconionic-ios-bookmark@2x.png"
+                                                                            <img src="../assets/images/Iconionic-ios-bookmark@2x.png"
                                                                                 class="img-fluid">
 
                                                                         </div>
@@ -220,8 +208,7 @@ src="../assets/images/Iconionic-ios-bookmark@2x.png"
                                                     </div>
                                                 </div>
                                                 <div class="card">
-                                                    <div
-id="headingTwo" class="card-header" data-toggle="collapse"
+                                                    <div id="headingTwo" class="card-header" data-toggle="collapse"
                                                         data-target="#collapseTwo" aria-expanded="false"
                                                         aria-controls="collapseTwo">
                                                         <div class="row">
@@ -232,14 +219,12 @@ id="headingTwo" class="card-header" data-toggle="collapse"
                                                                 </button>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="action"><i
-id="sem_icon"
+                                                                <div class="action"><i id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div
-id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                                         data-parent="#accordion">
                                                         <div class="card-body">
                                                             Anim pariatur cliche reprehenderit, enim eiusmod high life
@@ -262,8 +247,7 @@ id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                                     </div>
                                                 </div>
                                                 <div class="card">
-                                                    <div
-id="headingThree" class="card-header" data-toggle="collapse"
+                                                    <div id="headingThree" class="card-header" data-toggle="collapse"
                                                         data-target="#collapseThree" aria-expanded="false"
                                                         aria-controls="collapseThree">
                                                         <div class="row">
@@ -274,14 +258,12 @@ id="headingThree" class="card-header" data-toggle="collapse"
                                                                 </button>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="action"><i
-id="sem_icon"
+                                                                <div class="action"><i id="sem_icon"
                                                                         class="fa fa-chevron-right rotate-icon"></i></div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div
-id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                                         data-parent="#accordion">
                                                         <div class="card-body">
                                                             Anim pariatur cliche reprehenderit, enim eiusmod high life

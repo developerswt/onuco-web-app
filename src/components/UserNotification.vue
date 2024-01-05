@@ -296,4 +296,5 @@ h3 {
     .card {
         padding-bottom: 70px !important;
     }
-}</style>
+}
+</style>

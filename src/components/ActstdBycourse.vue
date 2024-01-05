@@ -9,8 +9,6 @@
                             <th>Id</th>
                             <th>FacultyCognitoId</th>
                             <th>CompleteSubscribedCount</th>
-                            
-
                         </tr>
                     </thead>
                     <tbody v-for="items in item" :key="items.id">
@@ -33,9 +31,7 @@ import AxiosInstance from '../config/axiosInstance';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VueApexCharts from "vue3-apexcharts";
 
-
 export default {
-
     name: "ActstdBycourse",
     components: {
         apexchart: VueApexCharts,
@@ -63,19 +59,10 @@ export default {
                             text: "Number Of Syudents Subscribed",
                         },
                     },
-                    // {
-                    //     opposite: true,
-                    //     title: {
-                    //         text: "Total Amount Collected",
-                    //     },
-                    // },
                 ],
-                // DataLabels configuration for the entire chart
-                
                 // DataLabels configuration for the entire chart
                 dataLabels: {
                     enabled: true,
-                
                 },
             },
             series: [
@@ -84,14 +71,7 @@ export default {
                     type: 'bar',
                     data: [],
                 },
-                // {
-                //     name: 'Lecture Subjects Price',
-                //     type: 'line',
-                //     data: [],
-                // },
             ],
-
-
         }
     },
     computed: {
@@ -123,18 +103,13 @@ export default {
                         x: lecture.facultycognitoid,
                         y: lecture.completesubscribedcount,
                     };
-
-
-                    // this.options.xaxis.categories = this.getMonthYear(this.item.startDate);
                     this.series[0].data.push(dataPoint);
                 })
             }
         },
-
     },
-
 }
-
-
 </script>
-<style scoped></style>
+
+<style scoped>
+</style>

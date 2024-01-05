@@ -8,8 +8,7 @@
           <div class="example-wrapper">
 
             <div style="height: 100%;">
-              <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -51,62 +50,64 @@
         </form>
       </div>
     </div>
-   <div v-if="showChildRow">
-   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
-     <div class="modal-dialog" role="document">
-       <div class="modal-content mc">
-         
-         <div class="modal-body" style="overflow: auto !important;">
-           
-             <div class="container bg-light">
-                                 <div v-if="ismodel" class="row">
-                                     <div class="col-sm-12">
-                                       <p><b>ID: </b> {{childPara.id  }}</p>
-                                          <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                          <p><b>Course Name:</b>{{childPara.name }}</p>
-                                          <p><b>Description:</b> {{ childPara.description }}</p>
-                                          <p><b>Actual Price:</b> {{ childPara.actualPrice }}</p>
-                                         <p><b>Discount Price:</b> {{ childPara.discountPrice }}</p>
-                                          <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
-                                          
-                                      </div>
-                                 </div>
-                                 <div v-else class="row">
-                                   <div class="col-sm-12">
-                                          <p><b>ID: </b> {{childPara.id  }}</p>
-                                          <div class="">
-                                           <label><b>Course Name:</b></label><br>
-                                           <input v-model="childPara.name" type="text" />
-                                         </div> 
-                                         <div class="">
-                                           <label><b>Description:</b></label><br>
-                                           <input v-model="childPara.description" type="text" />
-                                         </div> 
-                                         <div>
-                                         <label><b>Actual Price:</b></label><br>
-                                          <input v-model="childPara.actualPrice" type="text" @change="updatePrice(childPara.id, childPara.actualPrice)" />
-                                        </div>
+    <div v-if="showChildRow">
+      <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content mc">
 
-                                        <div class="">
-                                        <label><b>Discount Price:</b></label><br>
-                                        <input v-model="childPara.discountPrice" type="text" @change="updatePrice(childPara.id, childPara.discountPrice)" />
-                                        </div>  
-                                         <div>
-                                           <label><b>Work Flow:</b></label><br>
-                                           <select v-model="childPara.workFlowStatement" @change="updateWorkFlow(childPara.id)">
-                                             <option value="Draft">Draft</option>
-                                             <option value="Review">Review</option>
-                                             <option value="Release">Release</option>
-                                           </select>
-                                        </div>
-                                       </div>       
-                                 </div>
-                                </div>
+            <div class="modal-body" style="overflow: auto !important;">
+
+              <div class="container bg-light">
+                <div v-if="ismodel" class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b> {{ childPara.id }}</p>
+                    <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
+                    <p><b>Course Name:</b>{{ childPara.name }}</p>
+                    <p><b>Description:</b> {{ childPara.description }}</p>
+                    <p><b>Actual Price:</b> {{ childPara.actualPrice }}</p>
+                    <p><b>Discount Price:</b> {{ childPara.discountPrice }}</p>
+                    <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
+
+                  </div>
+                </div>
+                <div v-else class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b> {{ childPara.id }}</p>
+                    <div class="">
+                      <label><b>Course Name:</b></label><br>
+                      <input v-model="childPara.name" type="text" />
+                    </div>
+                    <div class="">
+                      <label><b>Description:</b></label><br>
+                      <input v-model="childPara.description" type="text" />
+                    </div>
+                    <div>
+                      <label><b>Actual Price:</b></label><br>
+                      <input v-model="childPara.actualPrice" type="text"
+                        @change="updatePrice(childPara.id, childPara.actualPrice)" />
+                    </div>
+
+                    <div class="">
+                      <label><b>Discount Price:</b></label><br>
+                      <input v-model="childPara.discountPrice" type="text"
+                        @change="updatePrice(childPara.id, childPara.discountPrice)" />
+                    </div>
+                    <div>
+                      <label><b>Work Flow:</b></label><br>
+                      <select v-model="childPara.workFlowStatement" @change="updateWorkFlow(childPara.id)">
+                        <option value="Draft">Draft</option>
+                        <option value="Review">Review</option>
+                        <option value="Release">Release</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-              <button
-type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
                 @click="update(childPara.id)">Update</button>
               <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
@@ -149,164 +150,164 @@ export default {
         facultyId: '',
       },
       formVisible: false,
-         userName: '',
-         ismodel: true,
-         isLoading: false,
-         showDialog: false,
-         dialogTitle: '',
-         dialogMessage: '',
-         domLayout: null,
-         Orders: [],
-         req: [],
-         columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true  },{ name:'Semester Name', field: 'name' },{name:'Description',field:'description'},{name:'Actual Price',field:'actualPrice'},{name:'Discount Price',field:'discountPrice'},{name:'WorkFlow', field:'workFlowStatement'}],
-         gridApi: null,
-         defaultColDef:{sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping : true},
-         columnApi: null,
-         editType: null,
-         showChildRow: false,
-         childPara: null,
-         rowData: null,
-         rowSelection: null,
-         paginationPageSize: null,
-         rightAligned: {
-           headerClass: 'ag-right-aligned-header',
-           cellClass: 'ag-right-aligned-cell'
-         },
-       };
-     },
-     computed: {
-       isLoggedIn() {
-         return this.$store.state.IsLoggedIn;
-       },
-     },
-   
-     async created() {
-       this.domLayout = 'autoHeight'; 
-       this.isLoading = true;
-       try {
-         const res = await AxiosInstance.get(`/Course`);
-         let req = res.data;
-    this.Orders = req;
-    if (Array.isArray(req.courses)) {
-      this.rowData = req.courses;
-    } else {
-      console.error('completedStudents is not an array:', req.courses);
+      userName: '',
+      ismodel: true,
+      isLoading: false,
+      showDialog: false,
+      dialogTitle: '',
+      dialogMessage: '',
+      domLayout: null,
+      Orders: [],
+      req: [],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Semester Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'Actual Price', field: 'actualPrice' }, { name: 'Discount Price', field: 'discountPrice' }, { name: 'WorkFlow', field: 'workFlowStatement' }],
+      gridApi: null,
+      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      columnApi: null,
+      editType: null,
+      showChildRow: false,
+      childPara: null,
+      rowData: null,
+      rowSelection: null,
+      paginationPageSize: null,
+      rightAligned: {
+        headerClass: 'ag-right-aligned-header',
+        cellClass: 'ag-right-aligned-cell'
+      },
+    };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
+    },
+  },
+
+  async created() {
+    this.domLayout = 'autoHeight';
+    this.isLoading = true;
+    try {
+      const res = await AxiosInstance.get(`/Course`);
+      let req = res.data;
+      this.Orders = req;
+      if (Array.isArray(req.courses)) {
+        this.rowData = req.courses;
+      } else {
+        console.error('completedStudents is not an array:', req.courses);
+      }
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
     }
-  } catch (error) {
-          this.isLoading = false;
+    finally {
+      this.isLoading = false;
+    }
+    this.rowSelection = 'single';
+    console.log(this.rowData);
+    this.popupParent = document.body;
+    this.paginationPageSize = 10;
+  },
+
+  methods: {
+    toggleForm() {
+      this.formVisible = !this.formVisible;
+    },
+
+    onCellClicked(params) {
+      this.childPara = params.node.data
+      console.log(this.childPara);
+      this.showChildRow = true;
+
+    },
+
+    OpenCloseFun() {
+      this.showChildRow = false;
+      this.ismodel = true;
+    },
+
+    onCellValueChanged(event) {
+      console.log('Data after change is', event.data);
+    },
+    onGridReady(params) {
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+    },
+
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
+    onFilterTextBoxChanged() {
+      this.gridApi.setQuickFilter(
+        document.getElementById('filter-text-box').value
+      );
+    },
+    onPrintQuickFilterTexts() {
+      this.gridApi.forEachNode(function (rowNode, index) {
+        console.log(
+          'Row ' +
+          index +
+          ' quick filter text is ' +
+          rowNode.quickFilterAggregateText
+        );
+      });
+    },
+
+    edit() {
+      this.ismodel = false;
+    },
+
+    async update(id) {
+      this.showDialog = false;
+      try {
+        const res = await AxiosInstance.put(`/Course` + '?' + 'id=' + id + '&name=' + encodeURIComponent(this.childPara.name) + '&desc=' + encodeURIComponent(this.childPara.description));
+        console.log(res);
+        this.ismodel = true;
+
+        if (res.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+        }
+      } catch (error) {
         console.log(error);
-        this.showDialog = true;  
-        this.dialogTitle= "Error";
-        this.dialogMessage= "Not get data";
       }
-      finally {
-        this.isLoading = false;
-      }
-      this.rowSelection = 'single'; 
-  console.log(this.rowData);
-  this.popupParent = document.body;
-  this.paginationPageSize = 10;
-},
-     
-     methods: {
-        toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
-       
-     onCellClicked(params) {
-             this.childPara = params.node.data
-         console.log(this.childPara);
-         this.showChildRow= true;
-   
-         },
-   
-         OpenCloseFun(){
-            this.showChildRow=false;
-            this.ismodel = true;
-         },
-   
-       onCellValueChanged(event) {
-         console.log('Data after change is', event.data);
-       },
-       onGridReady(params) {
-         this.gridApi = params.api;
-         this.gridColumnApi = params.columnApi;
-       },
-     
-       onBtnExport() {
-         this.gridApi.exportDataAsCsv();
-       },
-       onFilterTextBoxChanged() {
-         this.gridApi.setQuickFilter(
-           document.getElementById('filter-text-box').value
-         );
-       },
-       onPrintQuickFilterTexts() {
-         this.gridApi.forEachNode(function (rowNode, index) {
-           console.log(
-             'Row ' +
-               index +
-               ' quick filter text is ' +
-               rowNode.quickFilterAggregateText
-           );
-         });
-       },
-      
-       edit() {
-         this.ismodel = false;
-       },
-     
-       async update(id) {
-         this.showDialog = false;
-           try {
-                 const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+encodeURIComponent( this.childPara.name) + '&desc=' +encodeURIComponent( this.childPara.description) );
-                 console.log(res);
-                 this.ismodel = true;
-      
-      if (res.status === 200) {
-        await this.getdata();
-        this.gridApi.refreshCells({ force: true });
-      }
-    } catch (error) {
-      console.log(error);
-      }
-       },
+    },
 
-       async updatePrice(id) {
-        this.showDialog = false;
-          try {
-                const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
-                console.log(res);
-                this.ismodel = true;
-      
-            if (res.status === 200) {
-              await this.getdata();
-              this.gridApi.refreshCells({ force: true });
-            }
-          } catch (error) {
-            console.log(error);
-            }
-      },
+    async updatePrice(id) {
+      this.showDialog = false;
+      try {
+        const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' + 'id=' + id + '&coursename=' + this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
+        console.log(res);
+        this.ismodel = true;
 
-       async updateWorkFlow(id) {
-        this.showDialog = false;
-        try {
-          const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.childPara.workFlowStatement );
-          console.log(result);
-          this.ismodel = true;
+        if (res.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
-          if (result.status === 200) {
-        await this.getdata();
-        this.gridApi.refreshCells({ force: true });
+    async updateWorkFlow(id) {
+      this.showDialog = false;
+      try {
+        const result = await AxiosInstance.put(`/Course/UpdateWorkflow/` + id + '/' + this.childPara.workFlowStatement);
+        console.log(result);
+        this.ismodel = true;
+
+        if (result.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-      }
-      },
-      
- 
-       async addBranch() {
-        this.isLoading = true;
+    },
+
+
+    async addBranch() {
+      this.isLoading = true;
       try {
         const response = await AxiosInstance.post('/Course', this.newBranch);
         this.ismodel = true;

@@ -11,8 +11,7 @@
         <!-- <div class="row pt-5"> -->
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="facult in faculty" :key="facult.id">
-                <router-link
-:to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }"
+                <router-link :to="{ name: 'Instructor', params: { name: facult.facultyDynamicRouting } }"
                     style="cursor: pointer; text-decoration: none;">
                     <div class="card">
                         <div class="user-follower">

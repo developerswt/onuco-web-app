@@ -218,4 +218,5 @@ export default {
     width: 100%;
     height: 120px;
     background-image: url('../assets/images/Group 246.png');
-}</style>
+}
+</style>

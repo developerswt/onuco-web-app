@@ -54,8 +54,7 @@
             <div class="text-right">
                 <p id="amount_text"><span id="strike_text"> &#8377;1,999</span>
                     &#8377; 499<br>
-                    <button
-id="search_button"
+                    <button id="search_button"
                         style=" color: #BDC6CE; border: 1px solid; position: inherit;left: 20px;">CANCEL</button>
                     <button id="search_button" style="background-color: #0177FB; color: white;">Renew</button>
                 </p>

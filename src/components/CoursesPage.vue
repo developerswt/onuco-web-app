@@ -14,8 +14,7 @@
 
               <div v-if="academi.academia.id == branch.academiaId" class="box">
 
-                <router-link
-:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                <router-link :to="{ name: 'Universities', params: { name: branch.branchName } }"
                   style="color: white;text-decoration: none;">
 
                   <div class="row">

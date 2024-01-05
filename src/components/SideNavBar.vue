@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" id="app">
+  <div id="app" class="sidebar">
     <!-- Sidebar content -->
     <nav>
       <!-- Sidebar items go here -->
@@ -10,9 +10,9 @@
               <span class="icon"><i class="fa fa-home"></i></span>
               <span class="title">Dashboard</span>
             </div>
-        </li>
+          </li>
           <li>
-            <div class="sidebar-item" @click="selectContent('addUpdate')" v-if="isUserSuperadmin">
+            <div v-if="isUserSuperadmin" class="sidebar-item" @click="selectContent('addUpdate')">
               <span class="icon"><i class="fa fa-edit"></i></span>
               <span class="title">Add / Update</span>
             </div>
@@ -24,11 +24,13 @@
             </div>
           </li>
           <li>
-            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
-              <span class="icon user" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+              <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1"
+                aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-user"></i>
               </span>
-              <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+              <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
+                aria-controls="collapseExample">
                 User Details&nbsp;&nbsp;
                 <span class="action user"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
               </span>
@@ -36,31 +38,33 @@
             </div>
           </li>
           <li>
-            <div class="collapse hj" id="collapseExample1">
+            <div id="collapseExample1" class="collapse hj">
               <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
               <span class="subtitle" @click="selectContent('facultyInfo')">Faculty Info</span>
             </div>
           </li>
           <li>
-            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
-              <span class="icon course" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+              <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
               </span>
-              <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+                aria-controls="collapseExample">
                 Course Details&nbsp;&nbsp;
                 <span class="action course"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
               </span>
             </div>
           </li>
           <li>
-            <div class="collapse hj" id="collapseExample">
+            <div id="collapseExample" class="collapse hj">
               <span class="subtitle" @click="selectContent('branches')">Branches</span>
               <span class="subtitle" @click="selectContent('university')">University</span>
               <span class="subtitle" @click="selectContent('semester')">Semester</span>
               <span class="subtitle" @click="selectContent('academics')">Academics</span>
               <span class="subtitle" @click="selectContent('types')">Types</span>
               <span class="subtitle" @click="selectContent('courses')">Courses</span>
-           </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -71,27 +75,28 @@
 
 <script>
 export default {
-    name: 'SideNavBar',
-    props: {
-      isCollapsed: Boolean,
+  name: 'SideNavBar',
+  props: {
+    isCollapsed: Boolean,
+  },
+  emits: ['toggleSidebar', 'selectContent'],
+  computed: {
+    isuser() {
+      return this.$store.state.user?.signInUserSession?.idToken?.payload;
     },
-    computed: {
-      isuser() {
-        return this.$store.state.user?.signInUserSession?.idToken?.payload;
-      },
-      isUserAdmin() {
-        return Array.isArray(this.isuser?.['cognito:groups']) &&
-          this.isuser['cognito:groups'][0] === 'Admin';
-      },
-      isUserfaculty() {
-        return Array.isArray(this.isuser?.['cognito:groups']) &&
-          this.isuser['cognito:groups'][0] === 'Faculty';
-      },
-      isUserSuperadmin() {
-        return Array.isArray(this.isuser?.['cognito:groups']) &&
-          this.isuser['cognito:groups'][0] === 'SuperAdmin';
-      },
+    isUserAdmin() {
+      return Array.isArray(this.isuser?.['cognito:groups']) &&
+        this.isuser['cognito:groups'][0] === 'Admin';
     },
+    isUserfaculty() {
+      return Array.isArray(this.isuser?.['cognito:groups']) &&
+        this.isuser['cognito:groups'][0] === 'Faculty';
+    },
+    isUserSuperadmin() {
+      return Array.isArray(this.isuser?.['cognito:groups']) &&
+        this.isuser['cognito:groups'][0] === 'SuperAdmin';
+    },
+  },
   methods: {
     toggleSidebar() {
       this.$emit('toggleSidebar');
@@ -104,17 +109,18 @@ export default {
 </script>
 
 <style scoped>
-
 .action {
   font-size: 15px;
   width: 1.2em;
   color: darkblue;
   opacity: 1;
-  margin-left: 5px; /* Adjusted margin-left instead of padding-left */
+  margin-left: 5px;
+  /* Adjusted margin-left instead of padding-left */
 }
 
 .title .rotate-icon {
-  transition: transform 0.3s ease; /* Added smooth transition effect */
+  transition: transform 0.3s ease;
+  /* Added smooth transition effect */
 }
 
 .title:not(.collapsed) .rotate-icon {
@@ -142,7 +148,8 @@ ul {
 li {
   display: flex;
   cursor: pointer;
-  align-items: center; /* Align items vertically */
+  align-items: center;
+  /* Align items vertically */
 }
 
 .icon {
@@ -151,30 +158,37 @@ li {
   min-width: 60px;
   height: 60px;
   margin-left: -20%;
-    padding-top: 7%;
-  
+  padding-top: 7%;
+
 }
+
 .title.user {
   padding-left: 3%;
 }
+
 .title.course {
   padding-left: 4%;
 }
+
 .action.user {
   margin-left: 23px;
 }
+
 .icon.user {
   padding-left: 6%;
 }
+
 .icon.course {
   padding-left: 6%;
 }
+
 .sidebar-collapse .icon {
-    margin-left: -60%;
+  margin-left: -60%;
 
 }
+
 .title {
-    padding-top: 7%;
+  padding-top: 7%;
   position: relative;
   display: block;
   min-width: 60px;
@@ -183,6 +197,7 @@ li {
   margin-left: -20px;
   cursor: pointer;
 }
+
 .subtitle {
   position: relative;
   display: block;
@@ -192,23 +207,28 @@ li {
   margin-left: 12px;
   cursor: pointer;
 }
+
 .sidebar-collapse .title {
-  display: none; /* Hide the title when collapsed */
+  display: none;
+  /* Hide the title when collapsed */
 }
+
 .sidebar-collapse .subtitle {
-  display: none; /* Hide the title when collapsed */
+  display: none;
+  /* Hide the title when collapsed */
 }
+
 .sidebar-item {
   display: flex;
   cursor: pointer !important;
   align-items: center;
 }
+
 .sidebar-item .icon {
-    color: #9b59b6;
-}
-#app{
-  display: flex;
-  height: auto !important;
+  color: #9b59b6;
 }
 
-</style>
+#app {
+  display: flex;
+  height: auto !important;
+}</style>

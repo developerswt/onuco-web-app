@@ -8,8 +8,7 @@
             <div class=" parent_blocks">
                 <div class="row pt-4">
                     <div v-for="college in university" :key="college.id" class="box">
-                        <router-link
-:to="{ name: 'Semester', params: { name: college.universityName } }"
+                        <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
                             style="text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
@@ -17,7 +16,8 @@
                                 </div>
                                 <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 12px;">
                                     <h5 data-placement="top" :title="college.name">{{ college.name }}</h5>
-                                    <p style="margin-top: -8px;" v-html="college.description.slice(0, 60)"></p>
+                                    <p style="margin-top: -8px;" :title="college.description"
+                                        v-html="college.description.slice(0, 60)"></p>
                                 </div>
                                 <div class="col-md-2 col-2 col-sm-2">
                                     <div class="course_block ">
@@ -174,23 +174,32 @@ export default {
 
 
 .box h5 {
-
-    font-family: 'Times New Roman', Times, serif;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/24px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
     text-align: left;
-    font: normal normal 600 17px/24px Segoe UI;
+    font: normal normal 600 18px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .box p {
-    font-size: 13px;
-
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
     text-align: left;
-
+    font: normal normal normal 16px/21px Segoe UI;
     letter-spacing: 0px;
-    color: #000000;
-    opacity: 0.49;
+    color: #707070;
+    opacity: 1;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

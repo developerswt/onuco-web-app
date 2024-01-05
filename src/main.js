@@ -33,7 +33,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(store);
 app.use(AmplifyVue);
 app.use(ElementPlus);
-app.component('apexchart', VueApexCharts);
+app.component('ApexChart', VueApexCharts);
 // app.use(breadcrumbs, {
 //   includeComponent: false // {boolean} [includeComponent=false] - Include global breadcrumbs component or not
 // })

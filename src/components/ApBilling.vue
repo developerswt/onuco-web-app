@@ -170,6 +170,7 @@
   background: #fff;
   color: #000;
 }
+
 @media screen and (max-width:520px) {
   .card .box .content h2 {
     position: absolute;

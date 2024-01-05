@@ -48,11 +48,11 @@ export default {
                     // },
                 ],
                 // DataLabels configuration for the entire chart
-                
+
                 // DataLabels configuration for the entire chart
                 dataLabels: {
                     enabled: true,
-                
+
                 },
             },
             series: [

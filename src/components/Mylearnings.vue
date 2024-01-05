@@ -21,8 +21,7 @@
                                             <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount
                                             }} Topics</span></p>
 
-                                            <button id="course_button">Start Course <i
-class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -34,8 +33,7 @@ class="fa-solid fa-play"
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <div
-v-for="item in myLearning" :key="item.id" class="radio-item"
+                            <div v-for="item in myLearning" :key="item.id" class="radio-item"
                                 :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
                                 <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
@@ -117,8 +115,7 @@ v-for="item in myLearning" :key="item.id" class="radio-item"
                         <el-tab-pane label="LIVE" name="third">
                             <div v-if="!selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div
-id="home" class="tab-pane fade show active" role="tabpanel"
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="home-tab">
                                         <span id="aca_text">Live</span> Courses
                                         <div class="row mt-4 ">
@@ -131,16 +128,14 @@ id="home" class="tab-pane fade show active" role="tabpanel"
                                                         <p>{{ selectedItem.instructorName[0].name }}</p>
                                                     </div>
                                                     <div class="asset_image info1">
-                                                        <img
-src="../assets/images/Iconionic-ios-timer@2x.png"
+                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 17px;">
                                                         {{ calculateTime(selectedItem).timeInHours }}:{{
                                                             calculateTime(selectedItem).timeInMinutes }}:{{
         calculateTime(selectedItem).remainingSeconds }}
                                                     </div>
                                                     <div class="asset_image info2">
-                                                        <img
-src="../assets/images/Iconmap-school@2x.png"
+                                                        <img src="../assets/images/Iconmap-school@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 18px;">
                                                         {{ selectedItem.modules }}<br>
                                                     </div>
@@ -150,8 +145,7 @@ src="../assets/images/Iconmap-school@2x.png"
                                             </div>
                                             <div class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                                    <video-player
-v-if="renderComponent" ref="videoPlayer"
+                                                    <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
@@ -176,8 +170,7 @@ v-if="renderComponent" ref="videoPlayer"
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                     <div class="progress_block">
                                                         <div>
-                                                            <progress
-:value="calculatePercentage(selectedItem)"
+                                                            <progress :value="calculatePercentage(selectedItem)"
                                                                 max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                         </div>
                                                     </div>
@@ -196,8 +189,7 @@ v-if="renderComponent" ref="videoPlayer"
                         <el-tab-pane label="COMPLETED" name="fourth">
                             <div v-if="selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div
-id="home" class="tab-pane fade show active" role="tabpanel"
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="home-tab">
                                         <div class="">
                                             <div class="row mt-3">
@@ -228,8 +220,7 @@ id="home" class="tab-pane fade show active" role="tabpanel"
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <div class="progress_block">
                                                                     <div>
-                                                                        <progress
-:value="calculatePercentage(selectedItem)"
+                                                                        <progress :value="calculatePercentage(selectedItem)"
                                                                             max="100">{{ getWatchTime(selectedItem)
                                                                             }}</progress>
                                                                     </div>
@@ -421,7 +412,7 @@ export default {
             const hours = Math.floor(remainingTime / 3600);
             const minutes = Math.floor((remainingTime % 3600) / 60);
             const seconds = Math.floor((totalTime % 3600) % 60);
-        
+
             return `${hours}:${minutes}:${seconds}`;
         },
 
@@ -430,7 +421,7 @@ export default {
             const watchTime = this.getWatchTime(selectedItem);
             return this.calculateRemainingTime(totalTime, watchTime);
         },
-        
+
         calculatePercentage(selectedItem) {
             const totalTime = this.getTotalTime(selectedItem);
             const watchTime = this.getWatchTime(selectedItem);
@@ -462,7 +453,7 @@ export default {
         },
 
         getTotalTime(selectedItem) {
-             const subject = this.findSubjectById(selectedItem);
+            const subject = this.findSubjectById(selectedItem);
             return subject ? parseFloat(subject.totalTimeVideo) : 0;
         },
     }
@@ -553,6 +544,7 @@ progress::-moz-progress-bar {
     mix-blend-mode: normal;
 
 }
+
 .academic_head_text {
     color: #006acd;
     /* padding-left: 20px; */
@@ -878,6 +870,7 @@ input[type="radio"]:checked {
         top: 10px;
     }
 }
+
 @media (max-width:520px) {
     .jk {
         padding-bottom: 45px !important;
