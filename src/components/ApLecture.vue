@@ -1,15 +1,14 @@
 <template>
   <div class="container">
-    <div class="row pt-2">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card-box">
+    <div class="card-box">
           <div class="card-head">
             <header>Faculty Info Details</header>
             <div class="card-body ">
               <div style="padding: 20px;">
                 <div class="example-wrapper">
                   <div style="height: 100%;">
-                    <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                    <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -20,12 +19,22 @@
                 </div>
               </div>
               <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <form v-show="formVisible" class="frm" style="margin-top:23px" @submit.prevent="addBranch">
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Course</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addBranch">  
                 <p><b></b> {{ newBranch.id }}</p>
                 <label for="userCourseSubscriptionId"> UserCourse Subscription Id:</label>
-                <input id="userCourseSubscriptionId" v-model="newBranch.userCourseSubscriptionId" type="text"
+                <input
+id="userCourseSubscriptionId" v-model="newBranch.userCourseSubscriptionId" type="text"
                   required><br>
 
                 <label for="facuiltyCognitoId">Facuilty CognitoId:</label>
@@ -48,10 +57,16 @@
 
                 <button class="btn2" type="submit">Add Payment Data</button>
               </form>
+              </div>
+              </div>
+              </div>
+              </div>
+              
             </div>
           </div>
           <div v-if="showChildRow">
-            <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+            <div
+class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
               aria-modal="true" role="dialog">
               <div class="modal-dialog" role="document">
                 <div class="modal-content mc">
@@ -95,11 +110,18 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                      @click="update(childPara.id)">Update</button>
+                      @click="update(childPara.id)">Update</button> -->
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="addBranch(this.childPara)">Add Branch</button> -->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()">
+      {{ ismodel ? 'Edit' : 'Update' }}
+    </button>
+    <button v-if="!ismodel" type="button" class="btn btn-danger" @click="deleteUserSubscription">
+        Delete
+    </button>
+                    <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
                       @click="OpenCloseFun()">Close</button>
                   </div>
 
@@ -112,13 +134,12 @@
           </div>
           <Loading v-model:active="isLoading"></Loading>
         </div>
-      </div>
-    </div>
+        <Confirmation ref="Confirmation" />    
   </div>      
 </template>
  
 <script>
-
+import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -134,7 +155,7 @@ export default {
   components: {
     AgGridVue,
     Loading,
-    // AlertDialog
+    Confirmation,
     Datepicker,
   },
   data: function () {
@@ -159,7 +180,7 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate' }, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }, { name: 'IsActive', field: 'isActive' }],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'  }, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }, { name: 'IsActive', field: 'isActive' }],
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
@@ -209,13 +230,41 @@ export default {
   },
 
   methods: {
+    
     toggleForm() {
+      // Toggle the visibility of the form modal
       this.formVisible = !this.formVisible;
+
+      // If the form is being closed, reset the newBranch data
+      if (!this.formVisible) {
+        this.resetForm();
+      }
+    },
+
+    resetForm() {
+      // Reset the newBranch data to clear the form fields
+      this.newBranch = {
+        userCourseSubscriptionId: '',
+        facuiltyCognitoId: '',
+        paymentDate: '',
+        amountPaid: '',
+        balanceAmount: '',
+        modeofPay: '',
+        isActive: '',
+      };
+    },
+    dateFormat(params) {
+      let value = params.data.paymentDate;
+      console.log(value);
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+      }
     },
     onCellClicked(params) {
       this.childPara = params.node.data
       console.log(this.childPara);
       this.showChildRow = true;
+      this.edit()
 
     },
 
@@ -254,20 +303,33 @@ export default {
     edit() {
       this.ismodel = false;
     },
-
+    editUpdateAction() {
+      if (this.ismodel) {
+        // If in edit mode, switch to update mode
+        this.ismodel = false;
+      } else {
+        // If in update mode, perform the update logic
+        this.update(this.childPara.id);
+      }
+    },
     async update(id) {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/FacultyCourseSubscriptionPayment` + '?' + 'id=' + id + '&amountpaid=' + this.childPara.amountPaid + '&balanceamount=' + this.childPara.balanceAmount + '&mode=' + this.childPara.modeofPay + '&isActive=' + this.childPara.isActive);
         console.log(res);
-        this.ismodel = true;
-
+       
         if (res.status === 200) {
           await this.getdata();
-          this.gridApi.refreshCells({ force: true });
         }
+        this.ismodel = true;
+        this.gridApi.refreshCells({ force: true });
+        this.OpenCloseFun();
+        this.$refs.Confirmation.open("Updated successfully.");
       } catch (error) {
         console.log(error);
+        this.OpenCloseFun();
+        this.$refs.Confirmation.open(" Updating Error");
+
       }
     },
 
@@ -277,24 +339,55 @@ export default {
         const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
         this.ismodel = true;
         if (response.status === 200) {
-          console.log("Branch added successfully");
+          console.log(" added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
-
-          alert("Insert Successful");
-        } else {
-          // Show failure message
-          alert("Insert Fail");
+          this.toggleForm();
+          this.$refs.Confirmation.open("Payment Details Added successfully.");
         }
-
-      } catch (error) {
+    } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
+        this.$refs.Confirmation.open("Error Adding Payment Details.");
+
       }
       finally {
         this.isLoading = false;
       }
     },
+
+    async deleteUserSubscription() {
+        try {
+          this.OpenCloseFun();
+
+            const confirmed = await this.$refs.Confirmation.open(
+                "Are you sure you want to delete this Payment Details?"
+            );
+
+            if (!confirmed) {
+                return; // If the user cancels, do nothing
+            }
+
+            const id = this.childPara.id;
+
+            const res = await AxiosInstance.delete(`/FacultyCourseSubscriptionPayment?id=${id}`);
+
+            if (res.status === 200) {
+                this.ismodel = true;
+                this.gridApi.refreshCells({ force: true });
+                this.OpenCloseFun();
+                this.$refs.Confirmation.open(" Payment Details deleted successfully.");
+                await this.getdata() ;
+            } else {
+                console.error('Failed to delete Payment Details ');
+                this.$refs.Confirmation.open("Error deleting");
+            }
+        } catch (error) {
+            console.error("Error deleting Payment Details:", error);
+            this.$refs.Confirmation.open("Error deleting Payment Details.");
+        }
+    },
+
 
     async getdata() {
       this.domLayout = 'autoHeight';
@@ -307,9 +400,7 @@ export default {
       } catch (error) {
         this.isLoading = false;
         console.log(error);
-        this.showDialog = true;
-        this.dialogTitle = "Error";
-        this.dialogMessage = "Not get data";
+        
       }
       finally {
         this.isLoading = false;
@@ -433,8 +524,8 @@ export default {
 }
 
 .mc {
-  height: 300px;
-  width: 550px;
+  height: 500px;
+  width: 750px;
   overflow: hidden;
 }
 
@@ -571,5 +662,40 @@ button:hover {
     line-height: 17px;
     font-size: 17px;
     letter-spacing: 1px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
+
+  .modal-body {
+    padding: 15px;
+  }
+  .button-row button {
+  margin-right: 10px; 
 }
 </style>

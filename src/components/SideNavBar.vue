@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" id="app">
+    <div id="app" class="sidebar">
     <!-- Sidebar content -->
     <nav>
       <!-- Sidebar items go here -->
@@ -12,7 +12,7 @@
             </div>
         </li>
           <li>
-            <div class="sidebar-item" @click="selectContent('addUpdate')" v-if="isUserSuperadmin">
+            <div v-if="isUserSuperadmin" class="sidebar-item" @click="selectContent('addUpdate')">
               <span class="icon"><i class="fa fa-edit"></i></span>
               <span class="title">Add / Update</span>
             </div>
@@ -24,8 +24,8 @@
             </div>
           </li>
           <li>
-            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
-              <span class="icon user" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+              <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-user"></i>
               </span>
               <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
@@ -36,14 +36,14 @@
             </div>
           </li>
           <li>
-            <div class="collapse hj" id="collapseExample1">
+            <div id="collapseExample1" class="collapse hj">
               <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
               <span class="subtitle" @click="selectContent('facultyInfo')">Faculty Info</span>
             </div>
           </li>
           <li>
-            <div class="sidebar-item" v-if="isUserAdmin || isUserSuperadmin">
-              <span class="icon course" id="dropdownMenuButton" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+              <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
               </span>
               <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -53,7 +53,7 @@
             </div>
           </li>
           <li>
-            <div class="collapse hj" id="collapseExample">
+            <div id="collapseExample" class="collapse hj">
               <span class="subtitle" @click="selectContent('branches')">Branches</span>
               <span class="subtitle" @click="selectContent('university')">University</span>
               <span class="subtitle" @click="selectContent('semester')">Semester</span>
@@ -75,6 +75,7 @@ export default {
     props: {
       isCollapsed: Boolean,
     },
+    emits: ['toggleSidebar', 'selectContent'],
     computed: {
       isuser() {
         return this.$store.state.user?.signInUserSession?.idToken?.payload;

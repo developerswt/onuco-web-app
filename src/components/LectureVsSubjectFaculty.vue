@@ -15,9 +15,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ this.item.courseName }}</td>
-              <td>{{ this.item.totalPrice }}</td>
-              <td>{{ this.item.totalStudentsSubscribed }}</td>
+              <td>{{ item.courseName }}</td>
+              <td>{{ item.totalPrice }}</td>
+              <td>{{ item.totalStudentsSubscribed }}</td>
             </tr>
           </tbody>
         </table>

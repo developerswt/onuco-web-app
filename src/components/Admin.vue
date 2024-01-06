@@ -44,7 +44,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Active Students</span>
-                        <span class="info-box-number">{{ this.activeStudents.activeStudentsCount || 0 }}</span>
+                        <span class="info-box-number">{{ activeStudents.activeStudentsCount || 0 }}</span>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Course Vs Subject</span>
-                        <span class="info-box-number">{{ this.subject.length || 0 }}</span>
+                        <span class="info-box-number">{{ subject.length || 0 }}</span>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Faculty Vs Students</span>
-                        <span class="info-box-number">{{ this.lectureStudent.length || 0 }}</span>
+                        <span class="info-box-number">{{ lectureStudent.length || 0 }}</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Faculty Vs Subjects</span>
-                        <span class="info-box-number">{{ this.lectureSubject.length || 0 }}</span>
+                        <span class="info-box-number">{{ lectureSubject.length || 0 }}</span>
                     </div>
                 </div>
             </div>     

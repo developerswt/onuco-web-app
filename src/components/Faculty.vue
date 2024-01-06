@@ -6,7 +6,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Faculty - Active Students By Course</span>
-                        <span class="info-box-number">{{ this.activeStudents.length }}</span>
+                        <span class="info-box-number">{{ activeStudents.length }}</span>
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Faculty - List Of Subjects</span>
-                        <span class="info-box-number">{{ this.subjectStudent.totalStudentsSubscribed || 0 }}</span>
+                        <span class="info-box-number">{{ subjectStudent.totalStudentsSubscribed || 0 }}</span>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@ import AxiosInstance from '../config/axiosInstance';
 import FacultyGraph from './FacultyGraph.vue'
 
 export default {
-    name: 'Faculty',
+    name: 'FacultyName',
     components: {
         FacultyGraph
     },

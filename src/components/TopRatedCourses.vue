@@ -70,8 +70,7 @@ class="card-img-top offer1"
 
 
 <script>
-import axiosInstance from '../config/axiosInstance'
-import axios from 'axios';
+import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import StarRatings from './StarRatings.vue';
@@ -140,7 +139,7 @@ export default {
 
     async created() {
         try {
-            const res = await axios.get(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/TopRatedCourses`);
+            const res = await AxiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
             console.log(this.courses);
             for (const course of this.courses) {
@@ -154,7 +153,7 @@ export default {
     methods: {
         async getByRatings(courseId) {
             try {
-                const result = await axiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
+                const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
                 return result.data;
             } catch (error) {
                 console.error(error);

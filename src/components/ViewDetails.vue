@@ -38,9 +38,9 @@
                 <div class="card-head">
                     <header>Active Student Result</header>
                     <div class="card-body ">
-                        <div class="h6">ActiveStudentsCount</div><b> {{ this.activeStudents.activeStudentsCount }}</b>
-                        <div class="h6">DiscountedAmount</div><b>{{ this.activeStudents.discountedAmount }}</b>
-                        <div class="h6">Total Amount</div><b>{{ this.activeStudents.totalAmount }}</b>
+                        <div class="h6">ActiveStudentsCount</div><b> {{ activeStudents.activeStudentsCount }}</b>
+                        <div class="h6">DiscountedAmount</div><b>{{ activeStudents.discountedAmount }}</b>
+                        <div class="h6">Total Amount</div><b>{{ activeStudents.totalAmount }}</b>
                     </div>
                 </div>
             </div>
@@ -162,8 +162,8 @@ export default {
             this.lectureStudent = resu.data;
             const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
             this.lectureSubject = resul.data;
-        } catch {
-            console.log(error);
+        } catch (error) {
+        console.error(error);
         }    
     }
 }

@@ -32,7 +32,7 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
+                    <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                   </td>
                   <td>{{ selectedProduct.semesterName }}</td>
 
@@ -60,13 +60,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form @submit.prevent="addBranch"> 
+        <form ref="form" @submit.prevent="addBranch">
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName">Semester Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
 
                   <label for="universityId">University Id:</label>
                   <input id="universityId" v-model="this.selecteduniversity" type="text" readonly required><br>
@@ -79,7 +79,7 @@
       v-model="newBranch.semesterName"
       type="text"
       required
-      pattern="[a-z]+(-[a-z]+)*"
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
       title="Please enter a valid Kebab Case."
     >
     <span v-if="!isKebabCase(newBranch.semesterName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
@@ -103,10 +103,16 @@ import AxiosInstance from '../config/axiosInstance';
 
 export default {
   name: "AddSem",
-  props: ['selecteduniversity'],
   components: {
     Confirmation,
   },
+  // props: ['selecteduniversity'],
+  props:{selecteduniversity : {
+    type: Number,
+    required: true,
+  }
+},
+emits: ['selected-semester-changed'],
   data() {
     return {
       formVisible: false,
@@ -134,10 +140,18 @@ export default {
     return !!this.selectedSem; // Show table if a type is selected
   },
 },
+// watch: {
+//   selecteduniversity: {
+//     immediate: true,
+//     handler(newVal, oldVal) {
+//       this.loadData();
+//     },
+//   },
+// },
 watch: {
   selecteduniversity: {
     immediate: true,
-    handler(newVal, oldVal) {
+    handler() {
       this.loadData();
     },
   },
@@ -148,13 +162,7 @@ watch: {
   methods: {
     isKebabCase(input) {
       // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
-      return kebabCaseRegex.test(input);
-    },
-
-    isKebabCase(input) {
-      // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
       return kebabCaseRegex.test(input);
     },
 
@@ -228,8 +236,6 @@ watch: {
       console.log("Branch added successfully");
       await this.loadData();
       this.loadProductDetails();
-        // this.gridApi.refreshCells({ force: true });
-
         this.$refs.Confirmation.open("Semester Added successfully.");
 
       this.newBranch = {
@@ -238,8 +244,7 @@ watch: {
       universityId: this.selecteduniversity,
       semesterName: '',
      };
-
-      this.formVisible = false;
+     this.$refs.form.reset(); 
 
     }
         
@@ -251,6 +256,8 @@ watch: {
     }
     finally {
            this.isLoading = false;
+           this.formVisible = false;
+
     }
   },
   async deleteProduct(id) {

@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <form-wizard
-      @on-complete="onComplete"
       back-button-text="Go Back!"
       next-button-text="Go Next!"
       finish-button-text="Finish"
       color="#007bff"
+      @on-complete="onComplete"
       @on-next="validateNext"
     >
       <tab-content title="Types">
@@ -13,44 +13,45 @@
       </tab-content>
       <tab-content title="Academics">
         <AddAcademics
+          v-if="selectedType"
           :selectedtype="selectedType"
           @selected-academic-changed="handleSelectedAcademicChange"
-          v-if="selectedType"
         />
       </tab-content>
       <tab-content title="Branches">
         <AddBranches
+          v-if="selectedAcademic"
           :selectedacademic="selectedAcademic"
           @selected-branches-changed="handleSelectedBranchesChange"
-          v-if="selectedAcademic"
         />
       </tab-content>
       <tab-content title="University">
         <AddUni
+          v-if="selectedBranch"
           :selectedbranch="selectedBranch"
           @selected-university-changed="handleSelectedUniversityChange"
-          v-if="selectedBranch"
         />
       </tab-content>
       <tab-content title="Semester">
         <AddSem
+          v-if="selectedUniversity"
           :selecteduniversity="selectedUniversity"
           @selected-semester-changed="handleSelectedSemesterChange"
-          v-if="selectedUniversity"
         />
       </tab-content>
       <tab-content title="Courses" >
-    <AddCourse :selectedsemester="selectedSemester" v-if="selectedSemester" />
+    <AddCourse v-if="selectedSemester" :selectedsemester="selectedSemester" />
   </tab-content>
     </form-wizard>
     <div v-if="validationError" class="error-message">
       Please select values for all fields.
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
-//import { mapState } from 'vuex';
+import Confirmation from './Confirmation.vue';
 import AddTypes from './AddTypes.vue'
 import AddAcademics from './AddAcademics.vue'
 import AddBranches from './AddBranches.vue'
@@ -62,6 +63,19 @@ import 'vue3-form-wizard/dist/style.css'
 // import AxiosInstance  from '../config/axiosInstance';
 export default {
   name: 'DataCreation',
+  components: {
+  FormWizard,
+  TabContent,
+  AddTypes,
+  AddAcademics,
+  AddBranches,
+  AddUni,
+  AddCourse,
+  AddSem,
+  Confirmation,
+},
+  emits: ['toggle-favorite'],
+  
   data() {
     return {
       selectedType: null,
@@ -72,23 +86,33 @@ export default {
       validationError: false,
     };
   },
-  components: {
-  FormWizard,
-  TabContent,
-  AddTypes,
-  AddAcademics,
-  AddBranches,
-  AddUni,
-  AddCourse,
-  AddSem
-},
   methods: {
-    onComplete() {
-      if (this.validateForm()) {
-        alert('Completed');
-        this.$router.push('/Aphome');
-      } else {
-        this.validationError = true;
+    async onComplete() {
+      try {
+        await this.$nextTick();
+        const confirmationRef = this.$refs.Confirmation;
+
+        if (confirmationRef && confirmationRef.open) {
+          if (this.validateForm()) {
+            const result = await confirmationRef.open("Course Create successfully.");
+            
+            if (result) {
+              this.$emit('toggle-favorite', 'dashboard');
+
+            } else {
+              // Cancel button pressed or dialog closed
+              // Handle accordingly
+            }
+          } else {
+            this.validationError = true;
+          }
+        } else {
+          console.error("Confirmation component or its open method not found in refs.");
+        }
+      } catch (error) {
+        console.error(error);
+        const confirmationRef = this.$refs.Confirmation;
+        confirmationRef?.open("Error Course Creation.");
       }
     },
     validateNext() {

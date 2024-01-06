@@ -33,6 +33,7 @@
         </div>
         <div>
             <apexchart class="mb-5" width="500" :options="options" :series="series"></apexchart>
+            <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
         </div>
     </div>
 </template>

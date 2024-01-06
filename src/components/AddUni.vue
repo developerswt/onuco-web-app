@@ -32,9 +32,9 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
+                    <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                   </td>
-                  <td>{{ this.selectedProduct.universityName }}</td>
+                  <td>{{ selectedProduct.universityName }}</td>
                   <td>{{ selectedProduct.branchesId }}</td>
                   <td>
                 <div class="button-row">
@@ -59,13 +59,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form @submit.prevent="addBranch"> 
+        <form ref="form" @submit.prevent="addBranch"> 
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName">University Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
 
                   <label for="branchesId">Branches Id:</label>
                   <input id="branchesId" v-model="this.selectedbranch" type="text" readonly required><br>
@@ -78,7 +78,7 @@
       v-model="newBranch.universityName"
       type="text"
       required
-      pattern="[a-z]+(-[a-z]+)*"
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
       title="Please enter a valid Kebab Case."
     >
     <span v-if="!isKebabCase(newBranch.universityName)" style="color: red; position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
@@ -103,10 +103,15 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
   name: "AddUni",
-  props:['selectedbranch'],
   components: {
     Confirmation,
   },
+  props:{selectedbranch : {
+    type: Number,
+    required: true,
+  }
+},
+  emits: ['selected-university-changed'],
   data() {
     return {
       formVisible: false,
@@ -137,7 +142,7 @@ export default {
 watch: {
   selectedbranch: {
     immediate: true,
-    handler(newVal, oldVal) {
+    handler() {
       this.loadData();
       this.loadProductDetails();
 
@@ -150,7 +155,7 @@ watch: {
   methods: {
     isKebabCase(input) {
       // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
       return kebabCaseRegex.test(input);
     },
 
@@ -226,7 +231,6 @@ watch: {
       console.log("Branch added successfully");
       await this.loadData();
       this.loadProductDetails();
-        // this.gridApi.refreshCells({ force: true });
 
         this.$refs.Confirmation.open("University Added successfully.");
 
@@ -236,25 +240,24 @@ watch: {
       branchesId: this.selectedbranch,
       universityName: '',
      };
-
-      this.formVisible = false;
-
+     this.$refs.form.reset(); 
     } 
         
     } catch (error) {
       this.isLoading = false;
-      console.error("Error adding branch:", error);
+      console.error("Error adding University:", error);
       this.$refs.Confirmation.open("Error Adding University.");
 
     }
     finally {
            this.isLoading = false;
+           this.formVisible = false;
     }
   },
   async deleteProduct(id) {
       try {
         const confirmed = await this.$refs.Confirmation.open(
-          "Are you sure you want to delete this ?"
+          "Are you sure you want to delete this University ?"
         );
         if (!confirmed) {
           return; // If the user cancels, do nothing

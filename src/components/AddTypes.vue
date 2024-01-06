@@ -30,7 +30,7 @@
               </td>
               <td v-if="!editMode">{{ selectedProduct.description }}</td>
               <td v-if="editMode">
-                <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
+                <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
               </td>
               <td>
                 <div class="button-row">
@@ -55,12 +55,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form @submit.prevent="addBranch">
+                  <form ref="form" @submit.prevent="addBranch">
                     <label for="branchName">Course Type Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
     
                     <label for="description">Description:</label>
-                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
     
                     <button class="btn2" type="submit">Add Course Type</button>
                   </form>
@@ -83,6 +83,8 @@ export default {
   components: {
     Confirmation,
   },
+  emits: ['selected-type-changed'],
+
   data() {
     return {
       products: [],
@@ -104,6 +106,14 @@ export default {
   computed: {
     isTableVisible() {
       return !!this.selectedTypes; 
+    },
+  },
+  watch: {
+    selectedtype: {
+      immediate: true,
+      handler() {
+        this.loadData();
+      },
     },
   },
   created() {
@@ -168,7 +178,7 @@ export default {
         const response = await AxiosInstance.post('/Types', this.newBranch);
         this.ismodel = true; 
         if (response.status === 200) {
-          console.log("Branch added successfully");
+          console.log("Course Type added successfully");
           await this.loadData();
           this.loadProductDetails();
 
@@ -179,8 +189,7 @@ export default {
         name: '',
         description: '',
       };
-
-        this.formVisible = false;
+      this.$refs.form.reset(); 
     } 
     // else {
     //   alert("Insert Fail");
@@ -188,13 +197,15 @@ export default {
 
         } catch (error) {
         this.isLoading = false;
-        console.error("Error adding branch:", error);
+        console.error("Error adding Course Type:", error);
 
         this.$refs.Confirmation.open("Error Adding Course Type.");
 
       }
       finally {
              this.isLoading = false;
+             this.formVisible = false;
+
              }
     },
     async deleteProduct(id) {
@@ -230,12 +241,6 @@ export default {
       }
     },
     },
-  
-    beforeRouteLeave(to, from, next) {
-  console.log('Before leaving the route. Refreshing the table...');
-  this.loadData(); // Add this line to refresh the table
-  next();
-},
 
 };
 </script>

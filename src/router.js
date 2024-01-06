@@ -37,7 +37,6 @@ import StudentDetails from "./components/StudentDetails.vue"
 import ActStudents from "./components/ActStudents.vue"
 import InactStudents from "./components/InactStudents.vue"
 import ApBilling from "./components/ApBilling.vue"
-import AlertDialog from './components/AlertDialog.vue';
 import ApFaculty from './components/ApFaculty.vue'
 import ActstdBycourse from './components/ActstdBycourse.vue'
 import AddTypes from './components/AddTypes.vue'
@@ -65,8 +64,9 @@ import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vu
 import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
 import AdminPage from './components/AdminPage.vue'
 import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
-import Toast from './components/Toast.vue'
+
 import Confirmation from './components/Confirmation.vue'
+import FacultyPayment from './components/FacultyPayment.vue'
 
 let user = null; // Initialize user as null
 
@@ -505,31 +505,31 @@ const routes = [
         name: "FacultyProfileUpdate",
         component: FacultyProfileUpdate, 
       },
-      {
-        path:"/Toast",
-        name: "Toast",
-        component: Toast, 
-      },
 
       {
         path: "/Confirmation",
         name: "Confirmation",
         component: Confirmation, 
       },
+{
+  path: '/FacultyPayment',
+    name: 'FacultyPayment',
+    component: FacultyPayment,
+},
 
      ],
     meta: {
       title: 'Unoco Application',
     },
   },
-  {
-    path: '/Alert',
-    name: 'AlertDialog',
-    component: AlertDialog,
-    meta: {
-      title: 'Unoco Application'
-    }
-  },
+  // {
+  //   path: '/Dialog',
+  //   name: 'Dialog',
+  //   component: Dialog,
+  //   meta: {
+  //     title: 'Unoco Application'
+  //   }
+  // },
   {
     path: "/LectureVsActiveStdFaculty",
     name: "LectureVsActiveStdFaculty",

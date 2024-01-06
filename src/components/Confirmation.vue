@@ -15,6 +15,13 @@
   
   <script>
   export default {
+    name: 'ConformationName',
+    props: {
+      dialogStyle: {
+        type: Object,
+        default: () => ({}),
+      },
+    },
     data() {
       return {
         show: false,
@@ -22,12 +29,6 @@
         reject: null,
         message: "Are you sure?",
       };
-    },
-    props: {
-      dialogStyle: {
-        type: Object,
-        default: () => ({}),
-      },
     },
     methods: {
       open(message = "Are you sure?") {
@@ -86,5 +87,8 @@
     border-radius: 4px;
     cursor: pointer;
   }
+  .button-row button {
+  margin-right: 10px; 
+}
   </style>
   

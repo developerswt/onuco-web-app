@@ -25,17 +25,17 @@
             </thead>
             <tbody>
                 <tr>
-                  <td>{{ this.selectedProduct.id }}</td>
-                  <td v-if="!editMode">{{ this.selectedProduct.name }}</td>
+                  <td>{{ selectedProduct.id }}</td>
+                  <td v-if="!editMode">{{ selectedProduct.name }}</td>
                   <td v-if="editMode">
-                    <input v-model="this.selectedProduct.name" type="text" required>
+                    <input v-model="selectedProduct.name" type="text" required>
                   </td>
-                  <td v-if="!editMode">{{ this.selectedProduct.description }}</td>
+                  <td v-if="!editMode">{{ selectedProduct.description }}</td>
                   <td v-if="editMode">
-                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
+                    <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                   </td>
-                  <td>{{this.selectedProduct.branchName }}</td>
-                  <td>{{ this.selectedProduct.id }}</td>
+                  <td>{{selectedProduct.branchName }}</td>
+                  <td>{{ selectedProduct.id }}</td>
                   <td>
                 <div class="button-row">
                   <button v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -59,13 +59,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form @submit.prevent="addBranch">  
+        <form ref="form" @submit.prevent="addBranch">
                     <p><b></b> {{newBranch.id}}</p>
                     <label for="branchName">Branch Name:</label>
                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
                     <label for="description">Description:</label>
-                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
 
                     <label for="academiaId">course Id:</label>
                     <input id="academiaId" v-model="this.selectedacademic" type="text" readonly required><br>
@@ -78,7 +78,7 @@
       v-model="newBranch.branchName"
       type="text"
       required
-      pattern="[a-z]+(-[a-z]+)*"
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
       title="Please enter a valid Kebab Case."
     >
     <span v-if="!isKebabCase(newBranch.branchName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
@@ -102,10 +102,17 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
   name: "AddBranch",
-  props: ['selectedacademic'],
   components: {
     Confirmation,
   },
+  // props: ['selectedacademic'],
+  props:{selectedacademic : {
+    type: Number,
+    required: true,
+  }
+},
+emits: ['selected-branches-changed'],
+
   data() {
     return {
       formVisible: false,
@@ -137,7 +144,7 @@ export default {
 watch: {
   selectedacademic: {
     immediate: true,
-    handler(newVal, oldVal) {
+    handler() {
       this.loadData();
     },
   },
@@ -148,7 +155,7 @@ watch: {
   methods: {
     isKebabCase(input) {
       // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
       return kebabCaseRegex.test(input);
     },
 
@@ -234,9 +241,7 @@ this.editedProduct.branchName = this.selectedProduct.branchName;
       academiaId: this.selectedacademic,
       branchName: '',
      };
-
-      this.formVisible = false;
-
+     this.$refs.form.reset(); 
     }
 
   } catch (error) {
@@ -246,6 +251,8 @@ this.editedProduct.branchName = this.selectedProduct.branchName;
 
   } finally {
     this.isLoading = false;
+    this.formVisible = false;
+
   }
 },
 async deleteProduct(id) {

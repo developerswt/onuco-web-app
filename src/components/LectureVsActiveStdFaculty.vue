@@ -15,9 +15,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ this.item[0].activeStudentsCount }}</td>
-              <td>{{ this.item[0].startdate }}</td>
-              <td>{{ this.item[0].enddate }}</td>
+              <td>{{ item[0].activeStudentsCount }}</td>
+              <td>{{ item[0].startdate }}</td>
+              <td>{{ item[0].enddate }}</td>
             </tr>
           </tbody>
         </table>

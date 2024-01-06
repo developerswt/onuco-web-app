@@ -12,7 +12,8 @@
                 <div class="example-wrapper">
 
                   <div style="height: 100%;">
-                    <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                    <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -24,7 +25,8 @@
               </div>
 
               <div v-if="showChildRow">
-                <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+                <div
+class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
                   aria-modal="true" role="dialog">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content mc">
@@ -73,10 +75,17 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                          @click="update(childPara.id)">Update</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                          @click="update(childPara.id)">Update</button> -->
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()">
+      {{ ismodel ? 'Edit' : 'Update' }}
+    </button>
+    <!-- <button v-if="!ismodel" type="button" class="btn btn-danger" @click="deleteUserSubscription">
+        Delete
+    </button> -->
+                        <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
                           @click="OpenCloseFun()">Close</button>
                       </div>
 
@@ -91,7 +100,8 @@
           </div>
         </div>
       </div>
-    </div>        
+    </div>    
+    <Confirmation ref="Confirmation" />    
   </div>  
 </template>
   
@@ -101,7 +111,7 @@ import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue3";
-// import AlertDialog from './AlertDialog.vue';
+import Confirmation from './Confirmation.vue';
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -114,7 +124,7 @@ export default {
   components: {
     AgGridVue,
     Loading,
-    // AlertDialog
+    Confirmation,
     Datepicker,
 
   },
@@ -161,10 +171,8 @@ export default {
       this.Orders = req;
 
     } catch (error) {
+      console.error(error);
       console.log(error);
-      this.showDialog = true;
-      this.dialogTitle = "Error";
-      this.dialogMessage = "Not get data";
     }
     finally {
       this.isLoading = false;
@@ -189,14 +197,10 @@ export default {
     },
     dateFormat(params) {
       let value = params.data.startdate;
-      // let value2=params.data.enddate;
       console.log(value);
       if (value) {
         return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
       }
-      // if(value2) {
-      //   return moment(String(value2)).format('DD/MM/YYYY');
-      // }
     },
     dateFormats(params) {
 
@@ -211,7 +215,7 @@ export default {
       this.childPara = params.node.data
       console.log(this.childPara);
       this.showChildRow = true;
-
+      this.edit()
     },
 
     OpenCloseFun() {
@@ -249,7 +253,15 @@ export default {
     edit() {
       this.ismodel = false;
     },
-
+    editUpdateAction() {
+      if (this.ismodel) {
+        // If in edit mode, switch to update mode
+        this.ismodel = false;
+      } else {
+        // If in update mode, perform the update action
+        this.update(this.childPara.id);
+      }
+    },
     update(id) {
       this.showDialog = false;
       try {
@@ -263,49 +275,77 @@ export default {
           const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
           this.rowData = newData.data;
         }
-
         this.ismodel = true;
         this.gridApi.refreshCells({ force: true });
+        this.OpenCloseFun();
+        this.$refs.Confirmation.open("Updated successfully.");
+
 
       } catch (error) {
         console.log(error);
+        this.$refs.Confirmation.open(" Updating Error");
+
       }
     },
 
-    onLogOut() {
-      this.$store.commit('isLoggedIn', false);
-      this.$router.push('/Loginpage');
-    },
+  //   async deleteUserSubscription() {
+  //       try {
+  //         this.OpenCloseFun();
 
+  //           const confirmed = await this.$refs.Confirmation.open(
+  //               "Are you sure you want to delete this User?"
+  //           );
+
+  //           if (!confirmed) {
+  //               return; 
+  //           }
+
+  //           const id = this.childPara.id;
+
+  //           const res = await AxiosInstance.delete(`/UserCourseSubscription?id=${id}`);
+
+  //           if (res.status === 200) {
+  //               this.gridApi.refreshCells({ force: true });
+  //               this.OpenCloseFun();
+  //               this.$refs.Confirmation.open(" Subscribe User deleted successfully.");
+  //               await this.getdata() ;
+
+  //           } else {
+  //               console.error('Failed to delete Subscribe User');
+  //               this.$refs.Confirmation.open("Error deleting Subscribe User.");
+  //           }
+  //       } catch (error) {
+  //           console.error("Error deleting Subscribe User:", error);
+  //           this.$refs.Confirmation.open("Error deleting Subscribe User.");
+  //       }
+  //   },
+  //   async getData() {
+  //   this.domLayout = 'autoHeight';
+  //   this.isLoading = true;
+  //   try {
+  //     const res = await AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
+  //     let req = res.data;
+  //     this.Orders = req;
+
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.showDialog = true;
+      
+  //   }
+  //   finally {
+  //     this.isLoading = false;
+  //   }
+  //   this.rowData = this.Orders;
+  //   this.rowSelection = 'single';
+  //   console.log(this.rowData);
+  //   this.popupParent = document.body;
+  //   this.paginationPageSize = 10;
+
+  // },
 
   },
 
 
-};
-var filterParams = {
-  comparator: (filterLocalDateAtMidnight, cellValue) => {
-    var dateAsString = cellValue;
-    if (dateAsString == null) return -1;
-    var dateParts = dateAsString.split('/');
-    var cellDate = new Date(
-      Number(dateParts[2]),
-      Number(dateParts[1]) - 1,
-      Number(dateParts[0])
-    );
-    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-      return 0;
-    }
-    if (cellDate < filterLocalDateAtMidnight) {
-      return -1;
-    }
-    if (cellDate > filterLocalDateAtMidnight) {
-      return 1;
-    }
-    return 0;
-  },
-  minValidYear: 2000,
-  maxValidYear: 2023,
-  inRangeFloatingFilterDateFormat: 'YYYY MMM Do',
 };
 
 
@@ -413,7 +453,7 @@ var filterParams = {
 }
 
 .mc {
-  height: 350px;
+  height: 450px;
   width: 650px;
   overflow: hidden;
 }
