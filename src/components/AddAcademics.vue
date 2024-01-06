@@ -93,11 +93,14 @@
         </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
   
 <script>
 import AxiosInstance from '../config/axiosInstance';
+import Confirmation from './Confirmation.vue';
+
 
   export default {
     name: "AddTypes",
