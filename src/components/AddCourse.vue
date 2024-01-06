@@ -66,72 +66,94 @@
           </tbody>
         </table>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Add New Subject</h5>
-                <button type="button" class="close" @click="toggleForm">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form @submit.prevent="addBranch">
-                  <p><b></b> {{ newBranch.id }}</p>
-                  <label for="branchName">Subject Name:</label>
-                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
-                  <label for="description">Description:</label>
-                  <textarea id="description" v-model="newBranch.description" class="size" type="text"
-                    required></textarea><br>
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Subject</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form ref="form" @submit.prevent="addBranch"> 
+                    <p><b></b> {{newBranch.id}}</p>
+                    <label for="branchName">Subject Name:</label>
+                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
+
                   <label for="actualPrice">Actual Price:</label>
                   <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
                   <label for="discountPrice">Discount Price:</label>
                   <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
-                  <label for="semesterId">Semester Id:</label>
-                  <input id="semesterId" :value="selectedsemester" type="text" required><br>
-                  <label for="courseName">Subject Name:</label>
-                  <input id="courseName" v-model="newBranch.courseName" type="text" required><br>
-                  <label for="workFlowStatement">Work Flow:</label>
-                  <select id="workFlowStatement" v-model="newBranch.workFlowStatement" class="size" type="text"
-                    required><br>
-                    <option value="Draft">Draft</option>
-                    <option value="Review">Review</option>
-                    <option value="Release">Release</option>
-                  </select>
+
+                    <label for="semesterId">Semester Id:</label>
+                    <input id="semesterId" v-model="this.selectedsemester" type="text" readonly required><br>
+
+                    <!-- <label for="courseName">Subject Name:</label>
+                    <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
+                    <label for="courseName"><b>Subject Rout Name:</b></label>
+    <input
+      id="courseName"
+      v-model="newBranch.courseName"
+      type="text"
+      required
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
+
+
+                    <label for="workFlowStatement">Work Flow:</label>
+                    <select id="workFlowStatement" v-model="newBranch.workFlowStatement" class="size" type="text" required><br>
+                      <option value="Draft">Draft</option>
+                        <option value="Review">Review</option>
+                        <option value="Release">Release</option>
+                      </select>
+
                   <label for="facultyId"><b>FacultyId:</b></label>
                   <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
                   <button class="btn2" type="submit">Add Subject</button>
                 </form>
-              </div>
-            </div>
-          </div>
+                </div>
+                </div>
+                </div>
+                </div>
         </div>
       </div>
-    </div>
-  </div>
-</template>
-  
-<script>
-import AxiosInstance from '../config/axiosInstance';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+      <Confirmation ref="Confirmation" />
 
-export default {
-  name: "ActstdBycourse",
-  props: {
-    selectedsemester: {
-      type: Number, // Adjust the type based on your use case
-      required: true,
-    }
+    </div>
+  </template>
+  
+  <script>
+  import Confirmation from './Confirmation.vue';
+  import AxiosInstance from '../config/axiosInstance';
+  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  
+  export default {
+    name: "ActstdBycourse",
+    components: {
+    Confirmation,
   },
-  data() {
-    return {
-      formVisible: false,
-      products: [],
-      selectedCourse: '',
-      selectedProduct: { id: null, name: '', description: '', actualPrice: '', discountPrice: '', semesterId: null, courseName: '', workFlowStatement: '', facultyId: null },
-      isLoading: false,
-      editMode: false,
-      editedProduct: {
+    // props: ['selectedsemester'],
+    props:{selectedsemester : {
+    type: Number,
+    required: true,
+  }
+},
+    data() {
+      return {
+        formVisible: false,
+        products: [],
+        selectedCourse: '',
+        selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' },
+        isLoading: false,
+        editMode: false,
+        editedProduct: {
         id: null,
         name: '',
         description: '',
@@ -168,13 +190,21 @@ export default {
       },
     },
   },
-  created() {
-    this.loadData();
-  },
-  methods: {
-    toggleForm() {
-      this.formVisible = !this.formVisible;
+    created() {
+      this.loadData();
     },
+    methods: {
+
+      isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
+      toggleForm() {
+          this.formVisible = !this.formVisible;
+        },
+
     async loadData() {
       this.isLoading = true;
       try {
@@ -249,25 +279,76 @@ export default {
         console.log(error);
       }
     },
-    async addBranch() {
-      this.isLoading = true;
+
+  async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/Course', this.newBranch);
+      this.ismodel = true; 
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+
+        // this.gridApi.refreshCells({ force: true });
+
+        this.$refs.Confirmation.open("Subject Added successfully.");
+
+      this.newBranch = {
+        name: '',
+        description: '',
+        academiaId: '',
+        actualPrice:'',
+        discountPrice:'',
+        semesterId: this.selectedsemester, 
+        courseName:'',
+        workFlowStatement:'',
+        facultyId: '',
+       };
+       this.$refs.form.reset();
+        
+    } 
+  } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding branch:", error);
+      this.$refs.Confirmation.open("Error Adding Subject.");
+
+    }
+    finally {
+           this.isLoading = false;
+           this.formVisible = false;
+
+    }
+  },
+  async deleteProduct(id) {
       try {
-        const response = await AxiosInstance.post('/Course', this.newBranch);
-        this.ismodel = true;
-        if (response.status === 200) {
-          console.log("Branch added successfully");
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Subject?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
+
+        const res = await AxiosInstance.delete(`/Course?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Subject deleted successfully");
           await this.loadData();
           this.loadProductDetails();
-          alert("Insert Successful");
-          this.formVisible = false;
-        } else {
-          alert("Insert Fail");
+
+          this.selectedCourse = '';
+        this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Subject deleted successfully.");
         }
       } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
+        console.error("Error deleting Subject:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Subject.");
+      } finally {
         this.isLoading = false;
       }
     },
@@ -385,5 +466,12 @@ button:hover {
 }
 .size {
   width: 470px;
+}
+.button-row {
+  display: flex;
+}
+
+.button-row button {
+  margin-right: 10px; 
 }
 </style>

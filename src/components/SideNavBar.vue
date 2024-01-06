@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="sidebar">
+    <div id="app" class="sidebar">
     <!-- Sidebar content -->
     <nav>
       <!-- Sidebar items go here -->
@@ -25,8 +25,7 @@
           </li>
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
-              <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1"
-                aria-expanded="false" aria-controls="collapseExample">
+              <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-user"></i>
               </span>
               <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
@@ -45,8 +44,7 @@
           </li>
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
-              <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">
+              <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
               </span>
               <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
@@ -75,28 +73,28 @@
 
 <script>
 export default {
-  name: 'SideNavBar',
-  props: {
-    isCollapsed: Boolean,
-  },
-  emits: ['toggleSidebar', 'selectContent'],
-  computed: {
-    isuser() {
-      return this.$store.state.user?.signInUserSession?.idToken?.payload;
+    name: 'SideNavBar',
+    props: {
+      isCollapsed: Boolean,
     },
-    isUserAdmin() {
-      return Array.isArray(this.isuser?.['cognito:groups']) &&
-        this.isuser['cognito:groups'][0] === 'Admin';
+    emits: ['toggleSidebar', 'selectContent'],
+    computed: {
+      isuser() {
+        return this.$store.state.user?.signInUserSession?.idToken?.payload;
+      },
+      isUserAdmin() {
+        return Array.isArray(this.isuser?.['cognito:groups']) &&
+          this.isuser['cognito:groups'][0] === 'Admin';
+      },
+      isUserfaculty() {
+        return Array.isArray(this.isuser?.['cognito:groups']) &&
+          this.isuser['cognito:groups'][0] === 'Faculty';
+      },
+      isUserSuperadmin() {
+        return Array.isArray(this.isuser?.['cognito:groups']) &&
+          this.isuser['cognito:groups'][0] === 'SuperAdmin';
+      },
     },
-    isUserfaculty() {
-      return Array.isArray(this.isuser?.['cognito:groups']) &&
-        this.isuser['cognito:groups'][0] === 'Faculty';
-    },
-    isUserSuperadmin() {
-      return Array.isArray(this.isuser?.['cognito:groups']) &&
-        this.isuser['cognito:groups'][0] === 'SuperAdmin';
-    },
-  },
   methods: {
     toggleSidebar() {
       this.$emit('toggleSidebar');

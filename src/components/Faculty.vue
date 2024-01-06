@@ -41,7 +41,7 @@ import AxiosInstance from '../config/axiosInstance';
 import FacultyGraph from './FacultyGraph.vue'
 
 export default {
-    name: 'FacultyView',
+    name: 'FacultyName',
     components: {
         FacultyGraph
     },

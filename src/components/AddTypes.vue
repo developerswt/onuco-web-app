@@ -43,27 +43,29 @@
           </tbody>
         </table>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Add New Course Type</h5>
-                <button type="button" class="close" @click="toggleForm">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form @submit.prevent="addBranch">
-                  <label for="branchName">Course Type Name:</label>
-                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
-                  <label for="description">Description:</label>
-                  <textarea id="description" v-model="newBranch.description" class="size" type="text"
-                    required></textarea><br>
-                  <button class="btn2" type="submit">Add Course Type</button>
-                </form>
+
+          <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add New Course Type</h5>
+                  <button type="button" class="close" @click="toggleForm">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form ref="form" @submit.prevent="addBranch">
+                    <label for="branchName">Course Type Name:</label>
+                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
+    
+                    <label for="description">Description:</label>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
+    
+                    <button class="btn2" type="submit">Add Course Type</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -77,12 +79,11 @@ import Confirmation from './Confirmation.vue';
 
 export default {
   name: "AddTypes",
-  beforeRouteLeave(to, from, next) {
-    console.log('Before leaving the route. Refreshing the table...');
-    this.loadData(); // Add this line to refresh the table
-    next();
+  components: {
+    Confirmation,
   },
   emits: ['selected-type-changed'],
+
   data() {
     return {
       products: [],
@@ -104,6 +105,14 @@ export default {
   computed: {
     isTableVisible() {
       return !!this.selectedTypes;
+    },
+  },
+  watch: {
+    selectedtype: {
+      immediate: true,
+      handler() {
+        this.loadData();
+      },
     },
   },
   created() {
@@ -166,26 +175,69 @@ export default {
         const response = await AxiosInstance.post('/Types', this.newBranch);
         this.ismodel = true;
         if (response.status === 200) {
-          console.log("Branch added successfully");
+          console.log("Course Type added successfully");
           await this.loadData();
           this.loadProductDetails();
-          alert("Insert Successful");
-          this.formVisible = false;
-        } else {
-          alert("Insert Fail");
-        }
-      } catch (error) {
+
+        // alert("Insert Successful");
+        this.$refs.Confirmation.open("Course Type Added successfully.");
+
+        this.newBranch = {
+        name: '',
+        description: '',
+      };
+      this.$refs.form.reset(); 
+    } 
+    // else {
+    //   alert("Insert Fail");
+    // }
+
+        } catch (error) {
         this.isLoading = false;
-        console.error("Error adding branch:", error);
+        console.error("Error adding Course Type:", error);
 
         this.$refs.Confirmation.open("Error Adding Course Type.");
 
       }
       finally {
+             this.isLoading = false;
+             this.formVisible = false;
+
+             }
+    },
+    async deleteProduct(id) {
+      try {
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this Course Type?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
+
+        const res = await AxiosInstance.delete(`/Types?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("Course Type deleted successfully");
+          await this.loadData();
+          this.loadProductDetails();
+
+          this.selectedTypes = '';
+          this.selectedProduct = { id: '', name: '', description: '' };
+
+          // Show success dialog
+          this.$refs.Confirmation.open("Course Type deleted successfully.");
+        }
+      } catch (error) {
+        console.error("Error deleting Course Type:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting Course Type.");
+      } finally {
         this.isLoading = false;
       }
     },
-  },
+    },
 
 };
 </script>

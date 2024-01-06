@@ -162,8 +162,8 @@ export default {
             const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
             this.lectureSubject = resul.data;
         } catch (error) {
-            console.log(error);
-        }
+        console.error(error);
+        }    
     }
 }
 </script>

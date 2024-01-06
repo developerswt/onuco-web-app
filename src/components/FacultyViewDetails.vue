@@ -46,7 +46,7 @@
                                         <td>{{ lectureSubject.courseName }}</td>
                                         <td>{{ lectureSubject.totalPrice }}</td>
                                         <td>{{ lectureSubject.totalStudentsSubscribed }}</td>
-                                    </tr>
+                                    </tr>		
                                 </tbody>
                             </table>
                         </div>
@@ -75,8 +75,8 @@ export default {
             const resul = await AxiosInstance.get(`/CoursesFacultyJ/GetCourseDetails`);
             this.lectureSubject = resul.data;
         } catch (error) {
-            console.log(error);
-        }
+        console.error(error);
+        }    
     }
 }
 </script>

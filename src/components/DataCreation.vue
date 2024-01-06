@@ -1,45 +1,57 @@
 <template>
   <div class="container">
-    <div class="card card-box">
-      <div class="card-head">
-        <header>Course Creation</header>
-      </div>
-      <div class="card-body">
-        <form-wizard back-button-text="Go Back!" next-button-text="Go Next!" finish-button-text="Finish" color="#007bff"
-          @on-complete="onComplete" @on-next="validateNext">
-          <tab-content title="Types">
-            <AddTypes @selected-type-changed="handleSelectedTypeChange" />
-          </tab-content>
-          <tab-content title="Academics">
-            <AddAcademics v-if="selectedType" :selectedtype="selectedType"
-              @selected-academic-changed="handleSelectedAcademicChange" />
-          </tab-content>
-          <tab-content title="Branches">
-            <AddBranches v-if="selectedAcademic" :selectedacademic="selectedAcademic"
-              @selected-branches-changed="handleSelectedBranchesChange" />
-          </tab-content>
-          <tab-content title="University">
-            <AddUni v-if="selectedBranch" :selectedbranch="selectedBranch"
-              @selected-university-changed="handleSelectedUniversityChange" />
-          </tab-content>
-          <tab-content title="Semester">
-            <AddSem v-if="selectedUniversity" :selecteduniversity="selectedUniversity"
-              @selected-semester-changed="handleSelectedSemesterChange" />
-          </tab-content>
-          <tab-content title="Courses">
-            <AddCourse v-if="selectedSemester" :selectedsemester="selectedSemester" />
-          </tab-content>
-        </form-wizard>
-        <div v-if="validationError" class="error-message">
-          Please select values for all fields.
-        </div>
-      </div>
+    <form-wizard
+      back-button-text="Go Back!"
+      next-button-text="Go Next!"
+      finish-button-text="Finish"
+      color="#007bff"
+      @on-complete="onComplete"
+      @on-next="validateNext"
+    >
+      <tab-content title="Types">
+        <AddTypes @selected-type-changed="handleSelectedTypeChange"  />
+      </tab-content>
+      <tab-content title="Academics">
+        <AddAcademics
+          v-if="selectedType"
+          :selectedtype="selectedType"
+          @selected-academic-changed="handleSelectedAcademicChange"
+        />
+      </tab-content>
+      <tab-content title="Branches">
+        <AddBranches
+          v-if="selectedAcademic"
+          :selectedacademic="selectedAcademic"
+          @selected-branches-changed="handleSelectedBranchesChange"
+        />
+      </tab-content>
+      <tab-content title="University">
+        <AddUni
+          v-if="selectedBranch"
+          :selectedbranch="selectedBranch"
+          @selected-university-changed="handleSelectedUniversityChange"
+        />
+      </tab-content>
+      <tab-content title="Semester">
+        <AddSem
+          v-if="selectedUniversity"
+          :selecteduniversity="selectedUniversity"
+          @selected-semester-changed="handleSelectedSemesterChange"
+        />
+      </tab-content>
+      <tab-content title="Courses" >
+    <AddCourse v-if="selectedSemester" :selectedsemester="selectedSemester" />
+  </tab-content>
+    </form-wizard>
+    <div v-if="validationError" class="error-message">
+      Please select values for all fields.
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
-//import { mapState } from 'vuex';
+import Confirmation from './Confirmation.vue';
 import AddTypes from './AddTypes.vue'
 import AddAcademics from './AddAcademics.vue'
 import AddBranches from './AddBranches.vue'
@@ -52,15 +64,18 @@ import 'vue3-form-wizard/dist/style.css'
 export default {
   name: 'DataCreation',
   components: {
-    FormWizard,
-    TabContent,
-    AddTypes,
-    AddAcademics,
-    AddBranches,
-    AddUni,
-    AddCourse,
-    AddSem
-  },
+  FormWizard,
+  TabContent,
+  AddTypes,
+  AddAcademics,
+  AddBranches,
+  AddUni,
+  AddCourse,
+  AddSem,
+  Confirmation,
+},
+  emits: ['toggle-favorite'],
+  
   data() {
     return {
       selectedType: null,
@@ -72,12 +87,32 @@ export default {
     };
   },
   methods: {
-    onComplete() {
-      if (this.validateForm()) {
-        alert('Completed');
-        this.$router.push('/Aphome');
-      } else {
-        this.validationError = true;
+    async onComplete() {
+      try {
+        await this.$nextTick();
+        const confirmationRef = this.$refs.Confirmation;
+
+        if (confirmationRef && confirmationRef.open) {
+          if (this.validateForm()) {
+            const result = await confirmationRef.open("Course Create successfully.");
+            
+            if (result) {
+              this.$emit('toggle-favorite', 'dashboard');
+
+            } else {
+              // Cancel button pressed or dialog closed
+              // Handle accordingly
+            }
+          } else {
+            this.validationError = true;
+          }
+        } else {
+          console.error("Confirmation component or its open method not found in refs.");
+        }
+      } catch (error) {
+        console.error(error);
+        const confirmationRef = this.$refs.Confirmation;
+        confirmationRef?.open("Error Course Creation.");
       }
     },
     validateNext() {

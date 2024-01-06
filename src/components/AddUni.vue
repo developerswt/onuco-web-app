@@ -1,70 +1,91 @@
 <template>
-  <div class="container">
-    <h5>Universities Update & Create</h5>
-    <div class="container" style="margin-top: 72px;">
-      <div>
-        <label for="productDropdown">University Name :</label>
-        <select v-model="selectedUni" @change="emitSelectedType">
-          <option value="" disabled selected hidden>Please Select</option>
-          <option v-for="product in products" :key="product.id" :value="product.id">
-            {{ product.name }}
-          </option>
-        </select>
+    <div class="container">
+      <h5>Add & Update Universities </h5>
+      <div class="container" style="margin-top: 72px;">
+        <div>
+          <label for="productDropdown">University Name :</label>
+          <select v-model="selectedUni" @change="emitSelectedType">
+            <option value="" disabled selected hidden>Please Select</option>
+            <option v-for="product in products" :key="product.id" :value="product.id">
+              {{ product.name }}
+            </option>
+          </select>
+        </div>
+        <div  class="table-responsive">
+          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>University Name</th>
+                <th>Description</th>
+                <th>University Rout Name</th>
+                <th>Branches Id</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>{{ selectedProduct.id }}</td>
+                  <td v-if="!editMode">{{ selectedProduct.name }}</td>
+                  <td v-if="editMode">
+                    <input v-model="editedProduct.name" type="text" required>
+                  </td>
+                  <td v-if="!editMode">{{ selectedProduct.description }}</td>
+                  <td v-if="editMode">
+                    <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
+                  </td>
+                  <td>{{ selectedProduct.universityName }}</td>
+                  <td>{{ selectedProduct.branchesId }}</td>
+                  <td>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
+              </td>
+                </tr>
+              </tbody>
+          </table>
+          
+          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New University</h5>
+        <button type="button" class="close" @click="toggleForm">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="table-responsive">
-        <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>University Name</th>
-              <th>Description</th>
-              <th>Branches Id</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ selectedProduct.id }}</td>
-              <td v-if="!editMode">{{ selectedProduct.name }}</td>
-              <td v-if="editMode">
-                <input v-model="editedProduct.name" type="text" required>
-              </td>
-              <td v-if="!editMode">{{ selectedProduct.description }}</td>
-              <td v-if="editMode">
-                <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
-              </td>
-              <td>{{ selectedProduct.branchesId }}</td>
-              <td>
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Add New University</h5>
-                <button type="button" class="close" @click="toggleForm">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form @submit.prevent="addBranch">
-                  <p><b></b> {{ newBranch.id }}</p>
-                  <label for="branchName">University Name:</label>
-                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
-                  <label for="description">Description:</label>
-                  <textarea id="description" v-model="newBranch.description" class="size" type="text"
-                    required></textarea><br>
+      <div class="modal-body">
+        <form ref="form" @submit.prevent="addBranch"> 
+                    <p><b></b> {{newBranch.id}}</p>
+                    <label for="branchName">University Name:</label>
+                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
+
                   <label for="branchesId">Branches Id:</label>
-                  <input id="branchesId" :value="selectedbranch" type="text" required><br>
-                  <label for="universityName"><b>University Name:</b></label>
-                  <input id="universityName" v-model="newBranch.universityName" type="text" required>
-                  <button class="btn2" type="submit">Add University</button>
-                </form>
+                  <input id="branchesId" v-model="this.selectedbranch" type="text" readonly required><br>
+
+                  <!-- <label for="universityName"><b>University Name:</b></label>
+                  <input id="universityName" v-model="newBranch.universityName" type="text" required> -->
+                  <label for="universityName"><b>University Rout Name:</b></label>
+    <input
+      id="universityName"
+      v-model="newBranch.universityName"
+      type="text"
+      required
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
+      title="Please enter a valid Kebab Case."
+    >
+    <span v-if="!isKebabCase(newBranch.universityName)" style="color: red; position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+
+
+              <button class="btn2" type="submit">Add University</button>
+              </form>
               </div>
             </div>
           </div>
@@ -82,12 +103,14 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
   name: "AddUni",
-  props: {
-    selectedbranch: {
-      type: Number, // Adjust the type based on your use case
-      required: true, // Specify if the prop is required
-    },
+  components: {
+    Confirmation,
   },
+  props:{selectedbranch : {
+    type: Number,
+    required: true,
+  }
+},
   emits: ['selected-university-changed'],
   data() {
     return {
@@ -112,25 +135,27 @@ export default {
     };
   },
   computed: {
-    isTableVisible() {
-      return !!this.selectedUni; // Show table if a type is selected
+  isTableVisible() {
+    return !!this.selectedUni; // Show table if a type is selected
+  },
+},
+watch: {
+  selectedbranch: {
+    immediate: true,
+    handler() {
+      this.loadData();
+      this.loadProductDetails();
+
     },
   },
-  watch: {
-    selectedbranch: {
-      immediate: true,
-      handler() {
-        this.loadData();
-      },
-    },
-  },
+},
   created() {
     this.loadData();
   },
   methods: {
     isKebabCase(input) {
       // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
       return kebabCaseRegex.test(input);
     },
 
@@ -182,25 +207,68 @@ export default {
 
       }
     },
-    async addBranch() {
-      this.isLoading = true;
+
+  async addBranch() {
+    this.isLoading = true;
+    try {
+      const response = await AxiosInstance.post('/University', this.newBranch);
+      this.ismodel = true; 
+    if (response.status === 200) {
+      console.log("Branch added successfully");
+      await this.loadData();
+      this.loadProductDetails();
+
+        this.$refs.Confirmation.open("University Added successfully.");
+
+      this.newBranch = {
+      name: '',
+      description: '',
+      branchesId: this.selectedbranch,
+      universityName: '',
+     };
+     this.$refs.form.reset(); 
+    } 
+        
+    } catch (error) {
+      this.isLoading = false;
+      console.error("Error adding University:", error);
+      this.$refs.Confirmation.open("Error Adding University.");
+
+    }
+    finally {
+           this.isLoading = false;
+           this.formVisible = false;
+    }
+  },
+  async deleteProduct(id) {
       try {
-        const response = await AxiosInstance.post('/University', this.newBranch);
-        this.ismodel = true;
-        if (response.status === 200) {
-          console.log("Branch added successfully");
+        const confirmed = await this.$refs.Confirmation.open(
+          "Are you sure you want to delete this University ?"
+        );
+        if (!confirmed) {
+          return; // If the user cancels, do nothing
+        }
+
+        const res = await AxiosInstance.delete(`/University?id=${id}`);
+        console.log(res);
+
+        if (res.status === 200) {
+          console.log("University deleted successfully");
           await this.loadData();
           this.loadProductDetails();
-          alert("Insert Successful");
-          this.formVisible = false;
-        } else {
-          alert("Insert Fail");
+
+          this.selectedUni = '';
+        this.selectedProduct = { id:'', name: '', description: '' , branchesId:''};
+
+          // Show success dialog
+          this.$refs.Confirmation.open("University deleted successfully.");
         }
       } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
+        console.error("Error deleting University:", error);
+
+        // Show error dialog
+        this.$refs.Confirmation.open("Error deleting University.");
+      } finally {
         this.isLoading = false;
       }
     },

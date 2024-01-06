@@ -17,46 +17,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div>
-                            <div class="purple_block">
-                                <p id="new_text">NEW</p>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="right_block">
-                                            <p id="subject_text">Math 1(NEP Series)</p>
-                                            <p class="mb-0">123 Hrs Video Course</p>
-                                            <p>2 Quiz and 3 Question Banks</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="left_block">
-                                            <p>5 Modules <span id="span_text">32 Topics</span></p>
-
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
-                                                    style="color: #ffffff;"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-12 justify-content-center">
-                        <div class="radio_checkbox" style="text-align: center;">
-                            <input id="myRadio" type="radio" checked="checked" name="radio">&nbsp;
-                            <input type="radio" name="radio">
-                        </div>
-                    </div>
                     <div class="col-sm-12 users">
                         <div v-if="!editing" class="User_Name">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div v-if="!editing" class="icon_bg_color">
                                         <img :src="updatedAttribute.picture">
-                                    </div>
-                                    <div class="User_details pl-2">
-                                        <h2>Welcome</h2>
-                                        <h3>{{ updatedAttribute.name }}</h3>
                                     </div>
                                 </div>
 
@@ -97,68 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2  mm">
-                    <div class="col-sm-6 user">
-                        <div class="card user_profile_details">
-                            <div class="card-body">
-                                <h2>User details</h2>
-                                <h3>Email address</h3>
-                                <!-- <p>userName@email.com</p> -->
-                                <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text"
-                                    style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 not1">
-                        <div class="card notification_details">
-                            <div class="card-body">
-                                <h2>Notifications</h2>
-                                <p>Item 1</p>
-                                <p>Item 2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-sm-6 user">
-                        <div class="card course_details">
-                            <div class="card-body">
-                                <h2>Course details</h2>
-                                <p>Semester I > Maths</p>
-                                <p>Semester II > Maths</p>
-                                <p>Semester III > Maths</p>
-                                <p>Semester II > Some course</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 not2">
-                        <div class="card notification_details">
-                            <div class="card-body">
-                                <h2>Notifications</h2>
-                                <p>Item 1</p>
-                                <p>Item 2</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-1">
-                        <div class="card login_details">
-                            <div class="card-body">
-                                <h2>Login details</h2>
-                                <p>Last access to application</p>
-                                <div v-for="(login, index) in visibleLoginDetails" :key="index">
-                                    <p>{{ formatCreationDate(login.creationDate) }}</p>
-                                </div>
-                                <p v-if="shouldShowViewAll">
-                                    <router-link class="va" to="" style="text-decoration: underline;"
-                                        @click="toggleViewAll">
-                                        View all
-                                    </router-link>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
 
 
             </div>
@@ -171,7 +81,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -180,7 +89,8 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 export default {
     name: 'UpdatedProfile',
     components: {
-        Loading
+        Loading,
+       
     },
     data() {
         return {
@@ -192,6 +102,7 @@ export default {
             userName: '',
             userEmail: '',
             selectedFile: null,
+            
             // isuser: localStorage.getItem("username"),
         }
     },
@@ -220,8 +131,7 @@ export default {
         },
     },
     async created() {
-        this.update();
-        this.loginHistory();
+        this.getData();
     },
     methods: {
         editProfile() {
@@ -270,56 +180,34 @@ export default {
                 console.error('Error:', error);
             }
         },
-        async update() {
-            this.isLoading = true;
-            try {
-                const res = await axiosInstance.get('/UploadS3Files/profile');
-                this.updatedAttribute = res.data;
-                console.log(this.updatedAttribute);
-            } catch (error) {
-                console.log(error);
-                this.isLoading = false;
-            } finally {
-                this.isLoading = false;
-            }
-        },
-        async loginHistory() {
-            this.isLoading = true;
-            try {
-                const res = await axiosInstance.get('/UserLoginHistory/history');
-                this.loginHistorys = res.data;
-                console.log(this.loginHistorys);
-            } catch (error) {
-                console.log(error);
-                this.isLoading = false;
-            } finally {
-                this.isLoading = false;
-            }
-        },
-        formatCreationDate(creationDate) {
-            const formattedDate = moment(creationDate).utcOffset('+05:30').format('dddd, D MMMM YYYY, h:mm A');
-            const currentDate = moment();
-
-            if (moment(creationDate).isSame(currentDate, 'minute')) {
-                return `${formattedDate} (Now)`;
-            } else {
-                return formattedDate;
-            }
-        },
+        async getData() {
+        this.isLoading = true;
+        try {
+            const res = await axiosInstance.get(`/ImageUrl/get-by-key?key=`+'manjunath.jpg');
+            this.updatedAttribute = res.data;
+            console.log(this.updatedAttribute);    
+        } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+        } finally {
+            this.isLoading = false;
+        }
+    },
+        // async update() {
+        //     this.isLoading = true;
+        //     try {
+        //         const res = await axiosInstance.get('/UploadS3Files/profile');
+        //         this.updatedAttribute = res.data;
+        //         console.log(this.updatedAttribute);    
+        //     } catch (error) {
+        //         console.log(error);
+        //         this.isLoading = false;
+        //     } finally {
+        //         this.isLoading = false;
+        //     }
+        // },
     }
-    // async created() {
-    //     this.isLoading = true;
-    //     try {
-    //         const res = await axiosInstance.get('/UploadS3Files/profile');
-    //         this.updatedAttribute = res.data;
-    //         console.log(this.updatedAttribute);    
-    //     } catch (error) {
-    //         console.log(error);
-    //         this.isLoading = false;
-    //     } finally {
-    //         this.isLoading = false;
-    //     }
-    // },
+   
 
 
 }

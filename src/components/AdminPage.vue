@@ -13,7 +13,7 @@
            <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Add and Update</span>
            <div class="row">
               <div class="col-sm-12">
-                <DataCreation />
+                <DataCreation @toggle-favorite="dataCreation"/>
               </div>  
            </div>
         </div>
@@ -125,7 +125,10 @@ export default {
         selectContent(content) {
           this.selectedContent = content;
         },
-    },
+        dataCreation(dataValue) {
+          this.selectedContent = dataValue;
+        }
+      },
 }
 </script>
 

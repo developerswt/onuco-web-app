@@ -282,7 +282,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+        <div v-if="isUserAdmin"  class="col-sm-3 cardpd">
    <div class="card color" >
     <div class="box">
       <div class="content">
@@ -410,11 +410,13 @@
 // import AddCourse from './AddCourse.vue'
 // import {FormWizard,TabContent} from "vue3-form-wizard";
 // import 'vue3-form-wizard/dist/style.css'
-import AxiosInstance from '../config/axiosInstance';
+// import AxiosInstance from '../config/axiosInstance';
 
 export default {
-
-  name: "AphomeView",
+ name: "AphomeName",
+  // components: {
+  //   AxiosInstance
+  // },
   data() {
     return {
       person: null,
@@ -442,33 +444,33 @@ export default {
     },
 
   },
-  async created() {
-    this.isLoading = true;
-    console.log(this.isuser)
-    try {
-      const res = await AxiosInstance.get('/UserCourseSubscription/GetActiveStudentsCount');
-      this.person = res.data;
-      console.log(this.person);
+  // async created() {
+  //   this.isLoading = true;
+  //   console.log(this.isuser)
+  //   try {
+  //     const res = await AxiosInstance.get('/UserCourseSubscription/GetActiveStudentsCount');
+  //     this.person = res.data;
+  //     console.log(this.person);
 
-      const result = await AxiosInstance.get('/UserCourseSubscription/GetInactiveStudentsCount');
-      this.student = result.data;
-      console.log(this.student);
+  //     const result = await AxiosInstance.get('/UserCourseSubscription/GetInactiveStudentsCount');
+  //     this.student = result.data;
+  //     console.log(this.student);
 
-      const resl = await AxiosInstance.get('/UserCourseSubscription/GetCompletedStudentsCount');
-      this.count = resl.data;
-      console.log(this.count);
+  //     const resl = await AxiosInstance.get('/UserCourseSubscription/GetCompletedStudentsCount');
+  //     this.count = resl.data;
+  //     console.log(this.count);
 
-      const results = await AxiosInstance.get('/Course');
-      this.counts = results.data;
-      console.log(this.count);
-    } catch (error) {
-      console.log(error);
-      this.isLoading = false;
-    }
-    finally {
-      this.isLoading = false;
-    }
-  },
+  //     const results = await AxiosInstance.get('/Course');
+  //     this.counts = results.data;
+  //     console.log(this.count);
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.isLoading = false;
+  //   }
+  //   finally {
+  //     this.isLoading = false;
+  //   }
+  // },
   methods: {
     onComplete() {
       alert("Yay. Done!");
