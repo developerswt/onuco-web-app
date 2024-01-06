@@ -211,7 +211,7 @@ export default {
           "Are you sure you want to delete this Course Type?"
         );
         if (!confirmed) {
-          return; // If the user cancels, do nothing
+          return; 
         }
 
         const res = await AxiosInstance.delete(`/Types?id=${id}`);
