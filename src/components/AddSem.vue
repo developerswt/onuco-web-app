@@ -71,10 +71,12 @@
         </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
+import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 
 export default {
@@ -170,6 +172,7 @@ export default {
         }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating Semester.");
       }
     },
     async addBranch() {

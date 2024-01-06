@@ -18,7 +18,7 @@
               <th>Id</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Action</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +33,11 @@
                 <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
               </td>
               <td>
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                <div class="button-row">
+                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -64,11 +67,13 @@
         </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
 import AxiosInstance from '../config/axiosInstance';
+import Confirmation from './Confirmation.vue';
 
 export default {
   name: "AddTypes",
@@ -137,9 +142,13 @@ export default {
           this.editMode = false;
           this.ismodel = true;
           this.loadProductDetails();
+          this.$refs.Confirmation.open("Course Type Updated successfully.");
+
         }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating Course Type.");
+
       }
     },
     toggleForm() {
@@ -168,6 +177,9 @@ export default {
       } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
+
+        this.$refs.Confirmation.open("Error Adding Course Type.");
+
       }
       finally {
         this.isLoading = false;

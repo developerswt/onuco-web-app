@@ -71,10 +71,12 @@
         </div>
       </div>
     </div>
+    <Confirmation ref="Confirmation" />
   </div>
 </template>
 
 <script>
+import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
@@ -126,6 +128,12 @@ export default {
     this.loadData();
   },
   methods: {
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
     emitSelectedType() {
       this.$emit('selected-university-changed', this.selectedUni);
       this.loadData();
@@ -170,6 +178,8 @@ export default {
         }
       } catch (error) {
         console.error(error);
+        this.$refs.Confirmation.open("Error Updating University.");
+
       }
     },
     async addBranch() {

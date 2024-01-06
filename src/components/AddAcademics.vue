@@ -135,6 +135,12 @@ export default {
     this.loadData();
   },
   methods: {
+    isKebabCase(input) {
+      // Check if the input follows the Kebab Case pattern
+      const kebabCaseRegex = /^[a-z]+(-[a-z]+)*$/;
+      return kebabCaseRegex.test(input);
+    },
+
     emitSelectedType() {
       this.$emit('selected-academic-changed', this.selectedAcademics);
       this.loadData();

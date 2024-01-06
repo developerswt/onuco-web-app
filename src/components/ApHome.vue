@@ -282,17 +282,16 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
+        <div class="col-sm-3 cardpd"  v-if="isUserAdmin">
    <div class="card color" >
     <div class="box">
-      <div class="content" v-if="person">
+      <div class="content">
 
-      <h3 class="head"> <router-link to="/ActStudents"> Active Students </router-link></h3>
-        <span style=" font-size:26px"> {{this.person.activeStudentsCount }}</span>
+      <h3 class="head"> <router-link to="/ApLecture">Lecturer payment</router-link></h3>
     </div>
     </div>
   </div>
-  </div> -->
+  </div>
         <!-- <div class="col-sm-3 cardpd">
   <div class="card color vv" >
     <div class="box">

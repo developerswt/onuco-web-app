@@ -65,7 +65,8 @@ import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vu
 import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
 import AdminPage from './components/AdminPage.vue'
 import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
-
+import Toast from './components/Toast.vue'
+import Confirmation from './components/Confirmation.vue'
 
 let user = null; // Initialize user as null
 
@@ -503,7 +504,18 @@ const routes = [
         path:"/FacultyProfileUpdate",
         name: "FacultyProfileUpdate",
         component: FacultyProfileUpdate, 
-      }
+      },
+      {
+        path:"/Toast",
+        name: "Toast",
+        component: Toast, 
+      },
+
+      {
+        path: "/Confirmation",
+        name: "Confirmation",
+        component: Confirmation, 
+      },
 
      ],
     meta: {
