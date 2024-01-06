@@ -55,13 +55,18 @@
             </div>
         </div>
     </div>
+    <FacultyPayment />
 </template>
 
 <script>
 import AxiosInstance from '../config/axiosInstance';
+import FacultyPayment from './FacultyPayment.vue';
 
 export default {
     name: 'ViewDetails',
+    components: {
+        FacultyPayment,
+    },
     data() {
         return {
             lectureStudent: [],

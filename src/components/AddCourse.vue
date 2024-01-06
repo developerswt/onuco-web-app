@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h5>Subject Update & Create</h5>
+    <h5>Add & Update Subject</h5>
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Subject Name :</label>
@@ -20,6 +20,7 @@
               <th>Description</th>
               <th>Actual Price</th>
               <th>Discount Price</th>
+              <th>Subject Rout Name</th>
               <th>Semester Id</th>
               <th>Work Flow</th>
               <th>Faculty Id</th>
@@ -27,341 +28,364 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{{ selectedProduct.id }}</td>
-              <td v-if="!editMode">{{ selectedProduct.name }}</td>
-              <td v-if="editMode">
-                <input v-model="editedProduct.name" type="text" required>
-              </td>
-              <td v-if="!editMode">{{ selectedProduct.description }}</td>
-              <td v-if="editMode">
-                <textarea v-model="editedProduct.description" type="text" required></textarea>
-              </td>
-              <td v-if="!editMode">{{ selectedProduct.actualPrice }}</td>
-              <td v-if="editMode">
-                <input v-model="editedProduct.actualPrice" type="text"
-                  @change="updatePrice(editedProduct.id, editedProduct.actualPrice)">
-              </td>
-              <td v-if="!editMode">{{ selectedProduct.discountPrice }}</td>
-              <td v-if="editMode">
-                <input v-model="editedProduct.discountPrice" type="text"
-                  @change="updatePrice(editedProduct.id, editedProduct.discountPrice)">
-              </td>
-              <td>{{ selectedProduct.semesterId }}</td>
-              <td>
-                <span v-if="!editMode">{{ selectedProduct.workFlowStatement }}</span>
-                <select v-if="editMode" v-model="editedProduct.workFlowStatement"
-                  @change="updateWorkFlow(editedProduct.id)">
-                  <option value="Draft">Draft</option>
-                  <option value="Review">Review</option>
-                  <option value="Release">Release</option>
-                </select>
-              </td>
+              <tr>
+                <td>{{ selectedProduct.id }}</td>
+                <td v-if="!editMode">{{ selectedProduct.name }}</td>
+                <td v-if="editMode">
+                  <input v-model="editedProduct.name" type="text" required>
+                </td>
+                <td v-if="!editMode">{{ selectedProduct.description }}</td>
+                <td v-if="editMode">
+                  <textarea  v-model="editedProduct.description" type="text" required></textarea>
+                </td>
+                <td v-if="!editMode">{{ selectedProduct.actualPrice }}</td>
+                <td v-if="editMode">
+                  <input v-model="editedProduct.actualPrice" type="text" @change="updatePrice(editedProduct.id, editedProduct.actualPrice)" >
+                </td>
+                <td v-if="!editMode">{{ selectedProduct.discountPrice }}</td>
+                <td v-if="editMode">
+                  <input v-model="editedProduct.discountPrice" type="text" @change="updatePrice(editedProduct.id, editedProduct.discountPrice)">
+                </td>
+                <td>{{ selectedProduct.courseName }}</td>
+                <td>{{ selectedProduct.semesterId }}</td>
+                <td>
+                  <span v-if="!editMode">{{ selectedProduct.workFlowStatement }}</span>
+                  <select v-if="editMode" v-model="editedProduct.workFlowStatement" @change="updateWorkFlow(editedProduct.id)">
+                      <option value="Draft">Draft</option>
+                      <option value="Review">Review</option>
+                      <option value="Release">Release</option>
+                  </select>
+                </td>
+
               <td>{{ selectedProduct.facultyId }}</td>
               <td>
+              <div class="button-row">
                 <button v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-              </td>
+                <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+              </div>
+            </td>
             </tr>
           </tbody>
-        </table>
-        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+      </table>
+      
+      <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
 <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add New Subject</h5>
-        <button type="button" class="close" @click="toggleForm">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form ref="form" @submit.prevent="addBranch"> 
-                    <p><b></b> {{newBranch.id}}</p>
-                    <label for="branchName">Subject Name:</label>
-                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
-
-                    <label for="description">Description:</label>
-                    <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
-
-                  <label for="actualPrice">Actual Price:</label>
-                  <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
-                  <label for="discountPrice">Discount Price:</label>
-                  <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
-
-                    <label for="semesterId">Semester Id:</label>
-                    <input id="semesterId" v-model="this.selectedsemester" type="text" readonly required><br>
-
-                    <!-- <label for="courseName">Subject Name:</label>
-                    <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
-                    <label for="courseName"><b>Subject Rout Name:</b></label>
-    <input
-      id="courseName"
-      v-model="newBranch.courseName"
-      type="text"
-      required
-      pattern="[a-z0-9]+(-[a-z0-9]+)*"
-      title="Please enter a valid Kebab Case."
-    >
-    <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
-
-
-                    <label for="workFlowStatement">Work Flow:</label>
-                    <select id="workFlowStatement" v-model="newBranch.workFlowStatement" class="size" type="text" required><br>
-                      <option value="Draft">Draft</option>
-                        <option value="Review">Review</option>
-                        <option value="Release">Release</option>
-                      </select>
-
-                  <label for="facultyId"><b>FacultyId:</b></label>
-                  <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
-                  <button class="btn2" type="submit">Add Subject</button>
-                </form>
-                </div>
-                </div>
-                </div>
-                </div>
-        </div>
-      </div>
-      <Confirmation ref="Confirmation" />
-
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Add New Subject</h5>
+      <button type="button" class="close" @click="toggleForm">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </template>
-  
-  <script>
-  import Confirmation from './Confirmation.vue';
-  import AxiosInstance from '../config/axiosInstance';
-  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
-  export default {
-    name: "ActstdBycourse",
-    components: {
-    Confirmation,
-  },
-    // props: ['selectedsemester'],
-    props:{selectedsemester : {
-    type: Number,
-    required: true,
-  }
+    <div class="modal-body">
+      <form ref="form" @submit.prevent="addBranch"> 
+                  <p><b></b> {{newBranch.id}}</p>
+                  <label for="branchName">Subject Name:</label>
+                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
+
+                  <label for="description">Description:</label>
+                  <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
+
+                <label for="actualPrice">Actual Price:</label>
+                <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
+                
+                <label for="discountPrice">Discount Price:</label>
+                <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
+
+                  <label for="semesterId">Semester Id:</label>
+                  <input id="semesterId" v-model="this.selectedsemester" type="text" readonly required><br>
+
+                  <!-- <label for="courseName">Subject Name:</label>
+                  <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
+                  <label for="courseName"><b>Subject Rout Name:</b></label>
+  <input
+    id="courseName"
+    v-model="newBranch.courseName"
+    type="text"
+    required
+    pattern="[a-z0-9]+(-[a-z0-9]+)*"
+    title="Please enter a valid Kebab Case."
+  >
+  <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
+
+
+                  <label for="workFlowStatement">Work Flow:</label>
+                  <select id="workFlowStatement" v-model="newBranch.workFlowStatement" class="size" type="text" required><br>
+                    <option value="Draft">Draft</option>
+                      <option value="Review">Review</option>
+                      <option value="Release">Release</option>
+                    </select>
+
+                <label for="facultyId"><b>FacultyId:</b></label>
+                <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
+
+                  <button class="btn2" type="submit">Add Subject</button>
+              </form>
+              </div>
+              </div>
+              </div>
+              </div>
+      </div>
+    </div>
+    <Confirmation ref="Confirmation" />
+
+  </div>
+</template>
+
+<script>
+import Confirmation from './Confirmation.vue';
+import AxiosInstance from '../config/axiosInstance';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
+export default {
+  name: "ActstdBycourse",
+  components: {
+  Confirmation,
 },
-    data() {
-      return {
-        formVisible: false,
-        products: [],
-        selectedCourse: '',
-        selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' },
-        isLoading: false,
-        editMode: false,
-        editedProduct: {
-        id: null,
-        name: '',
-        description: '',
-        actualPrice: '',
-        discountPrice: '',
-        semesterId: null,
-        courseName: '',
-        workFlowStatement: '',
-        facultyId: null
-      },
+  // props: ['selectedsemester'],
+  props:{selectedsemester : {
+  type: Number,
+  required: true,
+}
+},
+  data() {
+    return {
+      formVisible: false,
+      products: [],
+      selectedCourse: '',
+      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' },
+      isLoading: false,
+      editMode: false,
+      editedProduct: {
+      id: null,
+      name: '',
+      description: '',
+      actualPrice:'',
+      discountPrice:'',
+      semesterId:null, 
+      courseName:'',
+      workFlowStatement:'',
+      facultyId:null
+    },
       newBranch: {
-        name: '',
-        description: '',
-        academiaId: '',
-        actualPrice: '',
-        discountPrice: '',
-        semesterId: this.selectedsemester,
-        courseName: '',
-        workFlowStatement: '',
-        facultyId: '',
-      },
+      name: '',
+      description: '',
+      academiaId: '',
+      actualPrice:'',
+      discountPrice:'',
+      semesterId: this.selectedsemester, 
+      courseName:'',
+      workFlowStatement:'',
+      facultyId: '',
+     },
     };
   },
   computed: {
-    isTableVisible() {
-      return !!this.selectedCourse; // Show table if a type is selected
-    },
+  isTableVisible() {
+    return !!this.selectedCourse; // Show table if a type is selected
   },
-  watch: {
-    selectedsemester: {
-      immediate: true,
-      handler() {
-        this.loadData();
-      },
-    },
-  },
-    created() {
+},
+watch: {
+  selectedsemester: {
+    immediate: true,
+    handler() {
       this.loadData();
     },
-    methods: {
+  },
+},
+  created() {
+    this.loadData();
+  },
+  methods: {
 
-      isKebabCase(input) {
-      // Check if the input follows the Kebab Case pattern
-      const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-      return kebabCaseRegex.test(input);
-    },
+    isKebabCase(input) {
+    // Check if the input follows the Kebab Case pattern
+    const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+    return kebabCaseRegex.test(input);
+  },
 
-      toggleForm() {
-          this.formVisible = !this.formVisible;
-        },
+    toggleForm() {
+        this.formVisible = !this.formVisible;
+      },
 
-    async loadData() {
-      this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
-        this.products = res.data;
-        this.loadProductDetails();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    async loadProductDetails() {
-      const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
-      if (selectedProduct) {
-        this.selectedProduct = { ...selectedProduct };
-      }
-    },
-    enableEditMode() {
-      this.editMode = true;
-      this.editedProduct.id = this.selectedProduct.id;
-      this.editedProduct.name = this.selectedProduct.name;
-      this.editedProduct.description = this.selectedProduct.description;
-      this.editedProduct.actualPrice = this.selectedProduct.actualPrice;
-      this.editedProduct.discountPrice = this.selectedProduct.discountPrice;
-      this.editedProduct.semesterId = this.selectedProduct.semesterId;
-      this.editedProduct.courseName = this.selectedProduct.courseName;
-      this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
-      this.editedProduct.facultyId = this.selectedProduct.facultyId;
-    },
-    async updateProduct(id) {
-      try {
-        const res = await AxiosInstance.put(`/Course` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description);
-        console.log(res);
-        if (res.status === 200) {
-          await this.loadData();
-          this.editMode = false; // Disable edit mode after successful update
-          this.ismodel = true;
-          this.loadProductDetails();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async updatePrice(id) {
-      this.showDialog = false;
-      try {
-        const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' + 'id=' + id + '&coursename=' + this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
-        console.log(res);
-        this.editMode = false; // Disable edit mode after successful update
-        this.ismodel = true;
-        this.loadProductDetails();
-        if (res.status === 200) {
-          await this.getdata();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async updateWorkFlow(id) {
-      this.showDialog = false;
-      try {
-        const result = await AxiosInstance.put(`/Course/UpdateWorkflow/` + id + '/' + this.editedProduct.workFlowStatement);
-        console.log(result);
-        this.editMode = false;
-        this.ismodel = true;
-        this.loadProductDetails();
-        if (result.status === 200) {
-          await this.getdata();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-  async addBranch() {
+  async loadData() {
     this.isLoading = true;
-    try {
-      const response = await AxiosInstance.post('/Course', this.newBranch);
-      this.ismodel = true; 
-    if (response.status === 200) {
-      console.log("Branch added successfully");
+  try {
+    const res = await AxiosInstance.get(`/Course/GetCourseBySemesterId/` + this.selectedsemester);
+    this.products = res.data;
+    this.loadProductDetails();
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    this.isLoading = false;
+  }
+},
+
+async loadProductDetails() {
+
+    const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
+  if (selectedProduct) {
+    this.selectedProduct = { ...selectedProduct };
+    //this.newBranch.semesterId = this.selectedProduct.id; 
+
+  }
+
+},
+
+  enableEditMode() {
+  this.editMode = true;
+  this.editedProduct.id = this.selectedProduct.id;
+  this.editedProduct.name = this.selectedProduct.name;
+  this.editedProduct.description = this.selectedProduct.description;
+  this.editedProduct.actualPrice = this.selectedProduct.actualPrice;
+  this.editedProduct.discountPrice = this.selectedProduct.discountPrice;
+  this.editedProduct.semesterId = this.selectedProduct.semesterId;
+  this.editedProduct.courseName = this.selectedProduct.courseName;
+  this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
+  this.editedProduct.facultyId = this.selectedProduct.facultyId;
+
+
+},
+
+async updateProduct(id) {
+  try {
+    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+    console.log(res);
+
+    if (res.status === 200) {
       await this.loadData();
+      this.editMode = false; // Disable edit mode after successful update
+      this.ismodel = true; 
+      this.loadProductDetails();
+    }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  async updatePrice(id) {
+    this.showDialog = false;
+      try {
+            const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
+            console.log(res);
+            this.editMode = false; // Disable edit mode after successful update
+            this.ismodel = true;
+            this.loadProductDetails();
+
+        if (res.status === 200) {
+          await this.getdata();
+        }
+      } catch (error) {
+        console.log(error);
+        }
+  },
+
+   async updateWorkFlow(id) {
+    this.showDialog = false;
+    try {
+      const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
+      console.log(result);
+      this.editMode = false; 
+      this.ismodel = true;
       this.loadProductDetails();
 
-        // this.gridApi.refreshCells({ force: true });
-
-        this.$refs.Confirmation.open("Subject Added successfully.");
-
-      this.newBranch = {
-        name: '',
-        description: '',
-        academiaId: '',
-        actualPrice:'',
-        discountPrice:'',
-        semesterId: this.selectedsemester, 
-        courseName:'',
-        workFlowStatement:'',
-        facultyId: '',
-       };
-       this.$refs.form.reset();
-        
-    } 
-  } catch (error) {
-      this.isLoading = false;
-      console.error("Error adding branch:", error);
-      this.$refs.Confirmation.open("Error Adding Subject.");
-
-    }
-    finally {
-           this.isLoading = false;
-           this.formVisible = false;
-
-    }
+      if (result.status === 200) {
+    await this.getdata();
+  }
+} catch (error) {
+  console.log(error);
+  }
   },
-  async deleteProduct(id) {
-      try {
-        const confirmed = await this.$refs.Confirmation.open(
-          "Are you sure you want to delete this Subject?"
-        );
-        if (!confirmed) {
-          return; // If the user cancels, do nothing
-        }
 
-        const res = await AxiosInstance.delete(`/Course?id=${id}`);
-        console.log(res);
+async addBranch() {
+  this.isLoading = true;
+  try {
+    const response = await AxiosInstance.post('/Course', this.newBranch);
+    this.ismodel = true; 
+  if (response.status === 200) {
+    console.log("Branch added successfully");
+    await this.loadData();
+    this.loadProductDetails();
 
-        if (res.status === 200) {
-          console.log("Subject deleted successfully");
-          await this.loadData();
-          this.loadProductDetails();
+      // this.gridApi.refreshCells({ force: true });
 
-          this.selectedCourse = '';
-        this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' };
+      this.$refs.Confirmation.open("Subject Added successfully.");
 
-          // Show success dialog
-          this.$refs.Confirmation.open("Subject deleted successfully.");
-        }
-      } catch (error) {
-        console.error("Error deleting Subject:", error);
+    this.newBranch = {
+      name: '',
+      description: '',
+      academiaId: '',
+      actualPrice:'',
+      discountPrice:'',
+      semesterId: this.selectedsemester, 
+      courseName:'',
+      workFlowStatement:'',
+      facultyId: '',
+     };
+     this.$refs.form.reset();
+      
+  } 
+} catch (error) {
+    this.isLoading = false;
+    console.error("Error adding branch:", error);
+    this.$refs.Confirmation.open("Error Adding Subject.");
 
-        // Show error dialog
-        this.$refs.Confirmation.open("Error deleting Subject.");
-      } finally {
-        this.isLoading = false;
+  }
+  finally {
+         this.isLoading = false;
+         this.formVisible = false;
+
+  }
+},
+async deleteProduct(id) {
+    try {
+      const confirmed = await this.$refs.Confirmation.open(
+        "Are you sure you want to delete this Subject?"
+      );
+      if (!confirmed) {
+        return; // If the user cancels, do nothing
       }
-    },
+
+      const res = await AxiosInstance.delete(`/Course?id=${id}`);
+      console.log(res);
+
+      if (res.status === 200) {
+        console.log("Subject deleted successfully");
+        await this.loadData();
+        this.loadProductDetails();
+
+        this.selectedCourse = '';
+      this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' };
+
+        // Show success dialog
+        this.$refs.Confirmation.open("Subject deleted successfully.");
+      }
+    } catch (error) {
+      console.error("Error deleting Subject:", error);
+
+      // Show error dialog
+      this.$refs.Confirmation.open("Error deleting Subject.");
+    } finally {
+      this.isLoading = false;
+    }
   },
+
+},
 };
 </script>
 <style scoped>
-.frm {
-  padding: 20px;
-  border: 1px solid black;
-  width: 90%;
-  background-color: #fff;
-}
+.frm{
+    padding: 20px;
+border: 1px solid black;
+width: 90%;
+background-color: #fff;
+ }
+
+
 .frm {
   max-width: 400px;
   margin: 0 auto;
@@ -381,58 +405,71 @@ input {
   box-sizing: border-box;
 }
 
-button {
-  color: #fff;
+  button {
+      color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.btn2 {
-  color: #fff;
+    /* padding: 8px 12px; */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+   }
+   .btn2 {
+      color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 8px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 8px;
-}
-.btn1 {
-  color: #fff;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+   }
+  /* .btn1{
+      color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 6px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 80px;
-  position: relative;
-  top: 65px;
-  left: 780px;
-  font-weight: 600;
-  font-size: 15px;
-}
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px; 
+    margin-top: 20px;
+  } */
+  .btn1{
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      padding: 6px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 80px; 
+      position: relative;
+      top: 65px;
+      left: 780px;
+      font-weight: 600;
+      font-size: 15px;
+      }
 @media (max-width: 520px) {
-  .btn1 {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+.btn1{
+      color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
     padding: 7px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 80px;
+    margin-bottom: 80px; 
     position: relative;
     top: 68px;
-    left: 73px;
+  left: 73px;
+
   }
 }
-button:hover {
-  background-color: #007bff;
-}
-.modal {
+  button:hover {
+      background-color: #007bff;
+  }
+  .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -441,37 +478,42 @@ button:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-dialog {
-  position: relative;
-  bottom: 25px;
+position: relative;
+bottom: 25px;
+/* margin: 10% auto; */
 }
+
 .modal-content {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+position: relative;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .modal-header {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  background-color: #f8f9fa;
+padding: 10px;
+border-bottom: 1px solid #ccc;
+background-color: #f8f9fa;
 }
+
 .modal-body {
-  padding: 15px;
+padding: 15px;
 }
 .modal-header .close {
-  padding: 12px 14px;
-  margin: -9px -10px -10px auto;
+padding: 12px 14px;
+margin: -9px -10px -10px auto;
 }
-.size {
-  width: 470px;
+.size{
+width: 470px;
 }
 .button-row {
-  display: flex;
+display: flex;
 }
 
 .button-row button {
-  margin-right: 10px; 
+margin-right: 10px; 
 }
 </style>
