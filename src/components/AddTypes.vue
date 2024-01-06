@@ -182,7 +182,6 @@
            await this.loadData();
            this.loadProductDetails();
  
-         // alert("Insert Successful");
          this.$refs.Confirmation.open("Course Type Added successfully.");
  
          this.newBranch = {
