@@ -6,7 +6,8 @@
                 <b>CalOPPA</b> or <b>PIPEDA</b> or <b>Australia's Privacy Act</b> provisions. If you are not a lawyer or
                 someone who is familiar to Privacy Policies, you will be clueless. Some people might even take advantage of
                 you because of this. Some people may even extort money from you. These are some examples that we want to
-                stop from happening to you.</p>
+                stop from happening to you.
+            </p>
 
             <p>We will help you protect yourself by generating a Privacy Policy.</p>
 

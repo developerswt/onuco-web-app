@@ -1,31 +1,31 @@
 <!-- App.vue -->
 <template>
     <div class="container">
-    <p>Dashbord > Active Student By Course </p>
-    <div class="container" style="margin-top: 72px;">
-      <div class="table-responsive">
-        <br>
-        <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>CourseName</th>
-              <th>TotalPrice</th>
-              <th>TotalStudentsSubscribed</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ this.item.courseName }}</td>
-              <td>{{ this.item.totalPrice }}</td>
-              <td>{{ this.item.totalStudentsSubscribed }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-        <div>
-            <apexchart class="mb-5" width="500" :options="options" :series="series"></apexchart>
+        <p>Dashbord > Active Student By Course </p>
+        <div class="container" style="margin-top: 72px;">
+            <div class="table-responsive">
+                <br>
+                <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>CourseName</th>
+                            <th>TotalPrice</th>
+                            <th>TotalStudentsSubscribed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ item.courseName }}</td>
+                            <td>{{ item.totalPrice }}</td>
+                            <td>{{ item.totalStudentsSubscribed }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <apexchart class="mb-5" width="500" :options="options" :series="series"></apexchart>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -105,7 +105,7 @@ export default {
     methods: {
         processChartData() {
             if (this.item) {
-            
+
                 const dataPoint = {
                     x: this.item.courseName,
                     y: this.item.totalStudentsSubscribed,
@@ -116,8 +116,8 @@ export default {
                     y: this.item.totalPrice,
                 };
 
-                    this.series[0].data.push(dataPoint);
-                    this.series[1].data.push(priceAmount);
+                this.series[0].data.push(dataPoint);
+                this.series[1].data.push(priceAmount);
 
             }
         },

@@ -10,7 +10,8 @@
                     <p>Communities | Courses | Trainers | FAQs | Blog |<router-link
                             style="text-decoration: none; color: white;" to="/Privacy"> Privacy </router-link> |
                         <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms of Service
-                        </router-link></p>
+                        </router-link>
+                    </p>
                     <p>Email: name@example.com Call: 9845098450</p>
                     <p>Connect with Us:
                         <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>&nbsp;
@@ -30,8 +31,7 @@
                 <router-link to="/" exact-active-class="activeButton" @click="setActiveButton('home')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'home' }">
                         <div class="box">
-                            <img
-src="../assets/images/home.png" class="icon"
+                            <img src="../assets/images/home.png" class="icon"
                                 style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
@@ -39,13 +39,11 @@ src="../assets/images/home.png" class="icon"
                 <h2 class="txt">HOME</h2>
             </div>
             <div class="col-md-3">
-                <router-link
-to="/UserNotification" exact-active-class="activeButton"
+                <router-link to="/UserNotification" exact-active-class="activeButton"
                     @click="setActiveButton('UserNotification')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
                         <div class="box">
-                            <img
-src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
+                            <img src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
                                 style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
@@ -56,8 +54,7 @@ src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
                 <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
                     <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
                         <div class="box">
-                            <img
-src="../assets/images/myLEarn.png" class="icon"
+                            <img src="../assets/images/myLEarn.png" class="icon"
                                 style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
@@ -65,13 +62,11 @@ src="../assets/images/myLEarn.png" class="icon"
                 <h2 class="txt" style="  position: relative; left: 8px;">MY_LEARNING</h2>
             </div>
             <div class="col-md-3" style="color: white;">
-                <router-link
-to="/UpdatedProfile" exact-active-class="activeButton"
+                <router-link to="/UpdatedProfile" exact-active-class="activeButton"
                     @click="setActiveButton('UpdatedProfile')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'UpdatedProfile' }">
                         <div class="box">
-                            <img
-src="../assets/images/Icon-awesome-user.png" class="icon"
+                            <img src="../assets/images/Icon-awesome-user.png" class="icon"
                                 style="width: 15px; height: 15px; position: relative;bottom: 2px;">
                         </div>
                     </button>
@@ -176,6 +171,7 @@ export default {
         display: none !important;
     }
 }
+
 .btn {
     border-radius: 50%;
     display: flex !important;

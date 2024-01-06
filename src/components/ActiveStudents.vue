@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
@@ -19,10 +19,10 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart  class="pt-5" :options="subjectOptions" :series="subjectSeries"></apexchart>
+                        <apexchart class="pt-5" :options="subjectOptions" :series="subjectSeries"></apexchart>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <div class="row">
@@ -33,11 +33,12 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart  class="pt-5" :options="lectureStudentsOptions" :series="lectureStudentsSeries"></apexchart>
+                        <apexchart class="pt-5" :options="lectureStudentsOptions" :series="lectureStudentsSeries">
+                        </apexchart>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
@@ -45,10 +46,10 @@
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart  class="pt-5" :options="lectureSubjectOptions" :series="lectureSubjectSeries"></apexchart>
+                        <apexchart class="pt-5" :options="lectureSubjectOptions" :series="lectureSubjectSeries"></apexchart>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </template>
@@ -102,18 +103,18 @@ export default {
                     enabled: true,
                     enabledOnSeries: [1]
                 },
-        
+
             },
             activeStudentSeries: [{
-                    name: 'ActiveUser',
-                    data: [],
-                    type: 'bar',
-                },
-                {
-                    name: 'Price',
-                    data: [],
-                    type: 'line',
-                },
+                name: 'ActiveUser',
+                data: [],
+                type: 'bar',
+            },
+            {
+                name: 'Price',
+                data: [],
+                type: 'line',
+            },
             ],
             // Course Vs Subject
             course: [],
@@ -168,7 +169,6 @@ export default {
                     data: [],
                 },
             ],
-
             // Lecture Vs Students
             lectureStudent: [],
             lectureStudentsOptions: {
@@ -211,7 +211,6 @@ export default {
                     data: [],
                 },
             ],
-
             // Lecture vs Subject
             lectureSubject: [],
             lectureSubjectOptions: {
@@ -249,8 +248,6 @@ export default {
                         },
                     },
                 ],
-                // DataLabels configuration for the entire chart
-                
                 // DataLabels configuration for the entire chart
                 dataLabels: {
                     enabled: true,
@@ -308,33 +305,24 @@ export default {
                 });
             }
         },
-        
         subjectChartData() {
             if (this.course) {
                 this.course.forEach(course => {
-                        // Split the subjectName into an array of words
                     const subjectNameArray = course.subjectName.split(' ');
-
-                        // Add line breaks based on a certain condition (e.g., length of the label)
-                    const formattedSubjectName = subjectNameArray.join('\n');
-
                     const dataPoint = {
                         x: subjectNameArray,
                         y: course.totalSubscribedStudents,
                     };
-
                     const priceAmount = {
                         x: subjectNameArray,
                         y: course.totalAmountCollected,
                     };
-
                     this.subjectOptions.xaxis.categories.push(subjectNameArray);
                     this.subjectSeries[0].data.push(dataPoint);
                     this.subjectSeries[1].data.push(priceAmount);
                 });
             }
         },
-
         lectureStudentChartData() {
             if (this.lectureStudent) {
                 this.lectureStudent.forEach(lecture => {
@@ -353,12 +341,10 @@ export default {
                         x: lecture.facultyCognitoId,
                         y: lecture.totalCourseNameCount,
                     };
-
                     const priceAmount = {
-                        x: lecture.facultyCognitoId,   
+                        x: lecture.facultyCognitoId,
                         y: lecture.totalPrice,
                     };
-
                     this.lectureSubjectSeries[0].data.push(dataPoint);
                     this.lectureSubjectSeries[1].data.push(priceAmount);
                 })
@@ -391,7 +377,6 @@ export default {
     border-radius: 2px 2px 0 0;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
     padding: 2px;
-    /* text-transform: uppercase; */
     color: #3a405b;
     font-size: 14px;
     font-weight: 600;
@@ -406,27 +391,26 @@ export default {
     font-size: 17px;
     letter-spacing: 1px;
 }
-
-/* .card-body:last-child {
-    border-radius: 0 0 2px 2px;
-} */
 .card-body {
     padding: 10px 24px 14px 24px;
     position: relative;
 }
+
 .card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
 }
+
 @media screen and (max-width: 600px) {
-  .apexcharts-canvas {
-    overflow-x: auto; /* or overflow-x: scroll; */
-  }
+    .apexcharts-canvas {
+        overflow-x: auto;
+    }
 }
+
 @media (min-width: 576px) {
-.col-sm-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}
+    .col-sm-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
 }
 </style>

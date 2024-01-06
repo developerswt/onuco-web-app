@@ -31,8 +31,7 @@
                                         <div class="left_block">
                                             <p>5 Modules <span id="span_text">32 Topics</span></p>
 
-                                            <button id="course_button">Start Course <i
-class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -46,7 +45,7 @@ class="fa-solid fa-play"
                         <div class="radio_checkbox" style="text-align: center;">
                             <input id="myRadio" type="radio" checked="checked" name="radio">&nbsp;
                             <input type="radio" name="radio">
-                        </div>    
+                        </div>
                     </div>
                     <div class="col-sm-12 users">
                         <div v-if="!editing" class="User_Name">
@@ -60,39 +59,40 @@ class="fa-solid fa-play"
                                         <h3>{{ updatedAttribute.name }}</h3>
                                     </div>
                                 </div>
-                            
-                            </div>    
+
+                            </div>
                         </div>
                         <div v-else class="editing_users_details">
                             <div class="row pt-4">
                                 <!-- <div class="col-sm-12"> -->
-                                    <div class="col-sm-4">
-                                        <div class="edit_user">
-                                            <input v-model="userName" placeholder="User Name" type="text" class="un">
-                                        </div>  
+                                <div class="col-sm-4">
+                                    <div class="edit_user">
+                                        <input v-model="userName" placeholder="User Name" type="text" class="un">
                                     </div>
-                                    <div class="col-sm-8"> 
-                                        <div class="col-sm-2">
-                                            <div class="choose_file">
-                                                <div class="icon_bg_colors">
-                                                    <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input id="input_file" type="file" class="input_file" @change="handleFileChange" >
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="col-sm-2">
+                                        <div class="choose_file">
+                                            <div class="icon_bg_colors">
+                                                <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
+
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <input id="input_file" type="file" class="input_file"
+                                                @change="handleFileChange">
+                                        </div>
+                                    </div>
                                     <!-- </div> -->
                                 </div>
-                                
-                            
-                            </div>    
+
+
+                            </div>
                         </div>
                         <div class="esdit_profile">
                             <!-- <button class="button button1">Edit Profile</button> -->
                             <button v-if="!editing" class="button button1" @click="editProfile">EDIT PROFILE</button>
-                            <button v-else  class="buttons button2" @click="saveProfile">SAVE</button>
+                            <button v-else class="buttons button2" @click="saveProfile">SAVE</button>
 
                         </div>
                     </div>
@@ -105,7 +105,8 @@ class="fa-solid fa-play"
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
                                 <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text" style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
+                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text"
+                                    style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
                     </div>
@@ -149,7 +150,8 @@ class="fa-solid fa-play"
                                     <p>{{ formatCreationDate(login.creationDate) }}</p>
                                 </div>
                                 <p v-if="shouldShowViewAll">
-                                    <router-link class="va" to="" style="text-decoration: underline;" @click="toggleViewAll">
+                                    <router-link class="va" to="" style="text-decoration: underline;"
+                                        @click="toggleViewAll">
                                         View all
                                     </router-link>
                                 </p>
@@ -165,8 +167,7 @@ class="fa-solid fa-play"
 
 
     </div>
-    <Loading v-model:active="isLoading"  loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
-
+    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
 <script>
@@ -241,19 +242,19 @@ export default {
             // this.selectedFile = event.target.files[0];
         },
         async uploadImage() {
-            const headers = { 
+            const headers = {
                 // Authorization:  this.authorizationHeader,
                 'Content-Type': 'multipart/form-data'
             };
             const formData = new FormData();
-            
+
             formData.append('Email', this.userEmail);
             formData.append('Name', this.userName);
             formData.append('file', this.selectedFile);
 
             try {
                 const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
-                    headers 
+                    headers
                 });
 
                 // Handle the API response as needed
@@ -263,7 +264,7 @@ export default {
                 this.userName = '';
                 this.selectedFile = null;
                 this.$refs.fileInput.value = ''; // Clear the file input
-                
+
             } catch (error) {
                 // Handle errors
                 console.error('Error:', error);
@@ -274,7 +275,7 @@ export default {
             try {
                 const res = await axiosInstance.get('/UploadS3Files/profile');
                 this.updatedAttribute = res.data;
-                console.log(this.updatedAttribute);    
+                console.log(this.updatedAttribute);
             } catch (error) {
                 console.log(error);
                 this.isLoading = false;
@@ -287,7 +288,7 @@ export default {
             try {
                 const res = await axiosInstance.get('/UserLoginHistory/history');
                 this.loginHistorys = res.data;
-                console.log(this.loginHistorys);    
+                console.log(this.loginHistorys);
             } catch (error) {
                 console.log(error);
                 this.isLoading = false;
@@ -298,7 +299,7 @@ export default {
         formatCreationDate(creationDate) {
             const formattedDate = moment(creationDate).utcOffset('+05:30').format('dddd, D MMMM YYYY, h:mm A');
             const currentDate = moment();
-      
+
             if (moment(creationDate).isSame(currentDate, 'minute')) {
                 return `${formattedDate} (Now)`;
             } else {
@@ -328,7 +329,6 @@ export default {
 .learning_block {
     padding-top: 100px;
 }
-
 .purple_block {
     background: transparent url('../assets/images/Untitled.png') 30% 0% no-repeat padding-box !important;
     background-size: cover !important;
@@ -338,38 +338,33 @@ export default {
     height: 193px;
     mix-blend-mode: normal;
     margin-bottom: 2%;
-
 }
 .button {
-  color: blue;
-  padding: 6px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 18px 0px;
-  cursor: pointer;
+    color: blue;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 18px 0px;
+    cursor: pointer;
 }
 .buttons {
-  color: blue;
-  padding: 6px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 18px 0px;
-  cursor: pointer;
+    color: blue;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 18px 0px;
+    cursor: pointer;
 }
-/* .users .editing_users_details {
-    float: left;
-} */
 .users .esdit_profile .buttons {
     float: right;
     position: relative;
     bottom: 63px;
 }
 .button1 {
-    /* border: 1px solid var(--unnamed-color-0177fb); */
     border: 1px solid #0177FB;
     border-radius: 4px;
     opacity: 1;
@@ -377,53 +372,11 @@ export default {
     background-color: white;
 }
 .button2 {
-    /* border: 1px solid var(--unnamed-color-0177fb); */
     border: 1px solid #0177FB;
     border-radius: 4px;
     opacity: 1;
-    /* margin-top: -26px; */
     background-color: white;
-    
 }
-/* .edit_user {
-    float: left;
-} */
-/* .choose_file {
-    margin-right: 520px;
-    float: right;
-    padding-left: 35px;
-} */
-/* .choose_file .icon_bg_colors {
-    
-    float: left;
-    float: left;
-    position: relative;
-    bottom: 34px;
-    left: 32px;
-}
-.choose_file .input_file {
-    position: relative;
-    top: -35px;
-    left: 40px;
-}
-.input_file {
-    margin-top: 4px;
-    width: 245px;
-} */
-
-/* @media (max-width: 520px) {
-    .choose_file .input_file {
-    position: relative;
-    top: -1px;
-    left: -3px;
-    width: 275px;
-}  
-
-} */
-
-
-
-
 .icon_bg_colors {
     float: right;
     width: 36px;
@@ -442,7 +395,8 @@ export default {
     border: 0.5px solid #0066CC;
     opacity: 1;
     border-radius: 50%;
-} 
+}
+
 .icon_bg_colors i {
     float: left;
     width: 10%;
@@ -450,30 +404,29 @@ export default {
     padding-left: 9px;
     font-size: 20px;
 }
- .User_details {
+
+.User_details {
     position: absolute;
     top: 8px;
     left: 87px;
     width: 40%;
 }
+
 .User_details h2 {
-    
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
-    /* text-align: left; */
     font: normal normal normal 14px/19px Segoe UI;
-    /* letter-spacing: 0px; */
     color: #FF9924;
     opacity: 1;
 }
 .User_details h3 {
     font-size: 16px;
     letter-spacing: var(--unnamed-character-spacing-0);
-    /* text-align: left; */
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
 }
+
 .User_Name {
     float: left;
     width: 88%;
@@ -483,22 +436,20 @@ export default {
 }
 
 input[type="radio"] {
-   appearance: none; /* Hide the default radio button */
-    width: 12px; /* Adjust size as needed */
+    appearance: none;
+    width: 12px;
     height: 12px;
-    border-radius: 50%; /* Make it circular */
-    border: 2px solid #FF9900; /* Border color (blue in this example) */
-    margin-right: 5px; /* Add spacing between the button and label */
+    border-radius: 50%;
+    border: 2px solid #FF9900;
+    margin-right: 5px;
     background: #FF9900 0% 0% no-repeat padding-box;
     opacity: 1;
     cursor: pointer;
 }
 
 input[type="radio"]:checked {
-  background-color: white; /* Background color when selected */
+    background-color: white;
 }
-
-
 
 #course_button {
     width: 139px;
@@ -509,7 +460,6 @@ input[type="radio"]:checked {
     opacity: 1;
     font-size: 12px;
     text-transform: uppercase;
-    /* bottom: 0; */
     position: absolute;
     bottom: -11px;
     right: 12px;
@@ -518,23 +468,17 @@ input[type="radio"]:checked {
 
 #course_button i {
     padding-left: 10px;
-
 }
-
 .left_block {
     text-align: right;
-
 }
-
 #subject_text {
     font-size: 20px;
     font-weight: 500;
 }
-
 #span_text {
     padding-left: 20px;
 }
-
 #new_text {
     position: relative;
     left: -5px;
@@ -598,6 +542,7 @@ input[type="radio"]:checked {
     color: #000000;
     opacity: 1;
 }
+
 .notification_details p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -608,6 +553,7 @@ input[type="radio"]:checked {
     color: #0066CC;
     opacity: 1;
 }
+
 .course_details h2 {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/24px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -617,6 +563,7 @@ input[type="radio"]:checked {
     color: #000000;
     opacity: 1;
 }
+
 .course_details p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -627,6 +574,7 @@ input[type="radio"]:checked {
     color: #0066CC;
     opacity: 1;
 }
+
 .login_details h2 {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/24px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -636,6 +584,7 @@ input[type="radio"]:checked {
     color: #000000;
     opacity: 1;
 }
+
 .login_details p {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -675,37 +624,44 @@ input[type="radio"]:checked {
         left: 10px;
     }
 }
+
 @media only screen and (max-width: 1280px) {
     .choose_file {
         padding-left: 12px;
     }
-    
+
 }
-@media (min-width: 768px) and (max-width: 920px){
+
+@media (min-width: 768px) and (max-width: 920px) {
     .choose_file {
         padding-top: 13px;
     }
 }
-@media (min-width: 768px) and (max-width: 1024px){
-    .left_block{
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .left_block {
         text-align: right;
     }
+
     /* .choose_file {
         float: right;
         margin-right: 330px;
     } */
 
 }
+
 @media screen and (min-width: 200px) and (max-width: 540px) {
     .user {
         margin-bottom: 2%;
     }
 }
-@media only screen  and (max-width: 1024px) {
+
+@media only screen and (max-width: 1024px) {
     .User_Name {
         float: left;
         width: 86%;
     }
+
     .choose_file {
         /* float: right; */
         padding-left: 13px;
@@ -713,34 +669,40 @@ input[type="radio"]:checked {
 
 
 }
+
 @media only screen and (max-width: 540px) {
     .User_Name {
         float: left;
         width: 73%;
     }
+
     .choose_file {
         /* float: right;
         margin-right: 116px; */
         padding-top: 12px;
     }
-    
+
 }
-@media screen  and (min-width: 750px) and (max-width: 912px) {
+
+@media screen and (min-width: 750px) and (max-width: 912px) {
     .User_Name {
         float: left;
         width: 81%;
     }
+
     .input_file {
         margin-top: -34px;
         margin-left: 53px;
     }
 }
-@media screen  and (min-width: 100px) and (max-width: 500px) {
+
+@media screen and (min-width: 100px) and (max-width: 500px) {
     .button1 {
         position: relative;
-    left: 170px;
-    bottom: 78px;
+        left: 170px;
+        bottom: 78px;
     }
+
     /* .button2 {
         margin-left: 0px;
     margin-right: 16px;
@@ -748,18 +710,20 @@ input[type="radio"]:checked {
     bottom: 132px;
     left: 250px;
     } */
-    .input_file{
+    .input_file {
         position: relative;
-    top: 39px;
-    right: 26px;
+        top: 39px;
+        right: 26px;
     }
 }
-@media screen and (min-width: 400px) and (max-width: 500px){
+
+@media screen and (min-width: 400px) and (max-width: 500px) {
     .choose_file {
         float: right;
         margin-right: 2px;
         padding-top: 12px;
     }
+
     /* .choose_file .icon_bg_colors {
         float: left;
     } */
@@ -772,18 +736,21 @@ input[type="radio"]:checked {
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
-    
+
 }
-@media screen and (min-width: 380px) and (max-width: 400px){
+
+@media screen and (min-width: 380px) and (max-width: 400px) {
     .choose_file {
         /* float: right;
         margin-right: 2px; */
         padding-top: 12px;
     }
+
     /* .choose_file .icon_bg_colors {
         float: left;
         margin-left: -6px;
@@ -797,22 +764,26 @@ input[type="radio"]:checked {
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
-    .un [data-v-36fde92e]{
-position: relative;
-    top: 0px;
-}
+
+    .un [data-v-36fde92e] {
+        position: relative;
+        top: 0px;
+    }
 
 }
-@media screen and (min-width: 360px) and (max-width: 379px){
+
+@media screen and (min-width: 360px) and (max-width: 379px) {
     .choose_file {
         /* float: right;
         margin-right: 2px; */
         padding-top: 12px;
     }
+
     /* .choose_file .icon_bg_colors {
         float: left;
         margin-left: -8%;
@@ -827,19 +798,22 @@ position: relative;
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
-  
 
-.un[data-v-36fde92e] {
-    position: relative;
-    top: 0px;
-    right: 11px;
+
+    .un[data-v-36fde92e] {
+        position: relative;
+        top: 0px;
+        right: 11px;
+    }
 }
-}
+
 @media only screen and (max-width: 360px) {
+
     /* .choose_file {
         float: right;
         margin-right: 2px;
@@ -859,17 +833,20 @@ position: relative;
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
 }
-@media screen and (min-width: 100px) and (max-width: 360px){
+
+@media screen and (min-width: 100px) and (max-width: 360px) {
     .choose_file {
         /* float: right;
         margin-right: 2px; */
         padding-top: 12px;
     }
+
     /* .choose_file .icon_bg_colors {
         float: left;
         margin-left: -6%;
@@ -883,22 +860,25 @@ position: relative;
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
 
-    .un{
-position: relative;
-    top: 0px;
+    .un {
+        position: relative;
+        top: 0px;
+    }
 }
-}
+
 @media only screen and (max-width: 280px) {
     .choose_file {
         float: none;
         margin-right: 0x;
         padding-top: 12px;
     }
+
     /* .choose_file .icon_bg_colors {
         float: left;
         margin-left: -35px;
@@ -913,29 +893,33 @@ position: relative;
         /* float: left; */
         width: 100%;
     }
+
     .users .esdit_profile .buttons {
         float: none;
         margin-top: 12px;
     }
-    .un{
-position: relative;
-    top: 0px;
-}
+
+    .un {
+        position: relative;
+        top: 0px;
+    }
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 /* Style the label as an icon or button */
 .file-icon {
-  display: inline-block;
-  padding: 0px 0px; /* Adjust the padding as needed */
-  /* background-color: #0074d9; */
-color: #fff; /* Button text color */
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    display: inline-block;
+    padding: 0px 0px;
+    /* Adjust the padding as needed */
+    /* background-color: #0074d9; */
+    color: #fff;
+    /* Button text color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 /* Change button color on hover */
@@ -948,6 +932,7 @@ input[type="text"] {
     border-radius: 4px;
     opacity: 1;
 }
+
 ::placeholder {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -967,6 +952,7 @@ input[type="text"] {
     outline: none;
     width: 312px;
 }
+
 ::-webkit-file-upload-button {
     color: #707070;
     background: #DEDEDE 0% 0% no-repeat padding-box;
@@ -982,44 +968,51 @@ position: relative;
 @media (max-width:520px) {
     .learning_block {
         padding-bottom: 100px;
-    } 
-    .mm{
+    }
+
+    .mm {
         margin-top: -54px;
-    } 
+    }
+
     .learning_block {
-    padding-top: 70px;
-}
-.va{
-    display: none;
-}
-.not1{
-    display: none;  
-}
-.not2{
-    display: block !important;
-}
-.users .esdit_profile .buttons{
-    float: right;
-    position: relative;
-    /* bottom: 63px; */
-    position: relative;
-    bottom: 160px;
-    
-}
-.icon_bg_colors{
-    position: relative;
-    right: 263px;
-    top: 10px;
-}
-.input_file{
-    position: relative;
-    top: -22px;
-    width: 273px;
-    left: 40px;
-}
-}
-.not2{
-    display: none;
+        padding-top: 70px;
+    }
+
+    .va {
+        display: none;
+    }
+
+    .not1 {
+        display: none;
+    }
+
+    .not2 {
+        display: block !important;
+    }
+
+    .users .esdit_profile .buttons {
+        float: right;
+        position: relative;
+        /* bottom: 63px; */
+        position: relative;
+        bottom: 160px;
+
+    }
+
+    .icon_bg_colors {
+        position: relative;
+        right: 263px;
+        top: 10px;
+    }
+
+    .input_file {
+        position: relative;
+        top: -22px;
+        width: 273px;
+        left: 40px;
+    }
 }
 
-</style>
+.not2 {
+    display: none;
+}</style>

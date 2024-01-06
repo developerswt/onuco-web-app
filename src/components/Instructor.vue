@@ -25,8 +25,7 @@
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
-                                                            <a
-class="rating_icons" style="cursor: pointer;"
+                                                            <a class="rating_icons" style="cursor: pointer;"
                                                                 @click="showPopup()">({{ ratingCount || 0 }}
                                                                 reviews)</a>
                                                         </p>
@@ -83,10 +82,12 @@ class="rating_icons" style="cursor: pointer;"
                         <div class="col-sm-12 col-lg-12">
                             <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
                                 faculty.description.slice(0, 168) : '' }}
-                                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
+                                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
+                                        more</span></span>
                             </p>
                             <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
-                                <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read less</span></span>
+                                <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read
+                                        less</span></span>
                             </p>
                         </div>
                     </div>
@@ -118,8 +119,7 @@ class="rating_icons" style="cursor: pointer;"
                                                 </div>
 
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img
-src="../assets/images/Union193.png"
+                                                    <img src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -137,8 +137,7 @@ src="../assets/images/Union193.png"
 
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
-                                                        <img
-src="../assets/images/Path4025.png"
+                                                        <img src="../assets/images/Path4025.png"
                                                             style="width: 30px; height:30px;" class="video">
                                                     </div>
                                                 </div>
@@ -149,8 +148,7 @@ src="../assets/images/Path4025.png"
                                                                 <StarRatings :rating="ratings" :max-rating="5" />
                                                             </p>
                                                         </div>
-                                                        <div
-class="col-lg-6 col-6"
+                                                        <div class="col-lg-6 col-6"
                                                             style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
                                                             <p> (23 reviews) </p>
                                                         </div>
@@ -211,8 +209,7 @@ class="col-lg-6 col-6"
                                                 </div>
 
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img
-src="../assets/images/Union193.png"
+                                                    <img src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -232,8 +229,7 @@ src="../assets/images/Union193.png"
 
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
-                                                        <img
-src="../assets/images/Path4025.png"
+                                                        <img src="../assets/images/Path4025.png"
                                                             style="width: 30px; height:30px;" class="video">
                                                     </div>
                                                 </div>

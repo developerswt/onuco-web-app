@@ -1,15 +1,15 @@
 <template>
   <div class="admin-page">
     <div id="app" :class="{ 'sidebar-collapse': isSidebarCollapsed }">
-      <SideNavBar :isCollapsed="isSidebarCollapsed" @selectContent="selectContent"  />
+      <SideNavBar :is-collapsed="isSidebarCollapsed" @select-content="selectContent"  />
       <div class="main-container" :style="{ 'margin-left': sidebarMargin }">
-        <div class="content-container" v-if="selectedContent === 'dashboard'">
+        <div v-if="selectedContent === 'dashboard'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Dashboard</span>
           <SuperAdmin v-if="isUserSuperadmin" />
           <Admin v-if="isUserAdmin" />
           <Faculty v-if="isUserfaculty" />
         </div>
-        <div class="content-container" v-if="selectedContent === 'addUpdate'">
+        <div v-if="selectedContent === 'addUpdate'" class="content-container">
            <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Add and Update</span>
            <div class="row">
               <div class="col-sm-12">
@@ -17,40 +17,40 @@
               </div>  
            </div>
         </div>
-        <div class="content-container" v-if="selectedContent === 'viewDetails'">
+        <div v-if="selectedContent === 'viewDetails'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">view details</span>
           <ViewDetails v-if="isUserAdmin || isUserSuperadmin"/>
           <FacultyViewDetails v-if="isUserfaculty" />
         </div>
-        <div class="content-container" v-if="selectedContent === 'branches'">
+        <div v-if="selectedContent === 'branches'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Branches</span>
           <AdBranches />
         </div>
-        <div class="content-container" v-if="selectedContent === 'academics'">
+        <div v-if="selectedContent === 'academics'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Academics</span>
           <AdAcademics />
         </div>
-        <div class="content-container" v-if="selectedContent === 'university'">
+        <div v-if="selectedContent === 'university'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">University</span>
           <AdUni />
         </div>
-        <div class="content-container" v-if="selectedContent === 'semester'">
+        <div v-if="selectedContent === 'semester'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Semester</span>
           <AdSem />
         </div>
-        <div class="content-container" v-if="selectedContent === 'types'">
+        <div v-if="selectedContent === 'types'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Types</span>
           <AdTypes />
         </div>
-        <div class="content-container" v-if="selectedContent === 'courses'">
+        <div v-if="selectedContent === 'courses'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Courses</span>
           <AdCourse />
         </div>
-        <div class="content-container" v-if="selectedContent === 'facultyInfo'">
+        <div v-if="selectedContent === 'facultyInfo'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Faculty Info</span>
           <ApLecture />
         </div>
-        <div class="content-container" v-if="selectedContent === 'studentInfo'">
+        <div v-if="selectedContent === 'studentInfo'" class="content-container">
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Student Info</span>
           <StudentDetails />
         </div>

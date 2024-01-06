@@ -4,12 +4,9 @@
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div style="padding: 20px;">
-
           <div class="example-wrapper">
-
             <div style="height: 100%;">
-              <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -20,82 +17,65 @@
         </div>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
       </div>
-
-
       <div class="col-lg-6 col-sm-12">
-
         <form v-show="formVisible" class="frm" style="margin-top:25px" @submit.prevent="addBranch">
           <p><b></b> {{ newBranch.id }}</p>
           <label for="branchName"> Name:</label>
           <input id="branchName" v-model="newBranch.name" type="text" required><br>
-
           <label for="description">Description:</label>
           <input id="description" v-model="newBranch.description" type="text" required><br>
-
           <label for="typeId">TypeId:</label>
           <input id="typeId" v-model="newBranch.typeId" type="text" required><br>
-
           <label for="academiaName"><b>Academia Name:</b></label>
           <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
-
-                    <button class="btn2" type="submit">Add Academics</button>
-                </form>
-            </div>
-        </div>
-   <div v-if="showChildRow">
-   <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog" >
-     <div class="modal-dialog" role="document">
-       <div class="modal-content mc">
-         
-         <div class="modal-body" style="overflow: auto !important;">
-           
-             <div class="container bg-light">
-                                 <div v-if="ismodel" class="row">
-                                     <div class="col-sm-12">
-                                       <p><b>ID: </b> {{childPara.id  }}</p>
-                                          <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                                          <p><b>Academia Name:</b>{{childPara.name }}</p>
-                                          <p><b>Description:</b> {{ childPara.description }}</p>
-                                          
-                                      </div>
-                                 </div>
-                                 <div v-else class="row">
-                                   <div class="col-sm-12">
-                                          <p><b>ID: </b>{{childPara.id}}</p>
-                                          
-                                          <div class="">
-                                           <label><b>Academia Name:</b></label><br>
-                                           <input v-model="childPara.name" type="text"/>
-                                         </div> 
-                                         <div class="">
-                                           <label><b>Description:</b></label><br>
-                                           <input v-model="childPara.description" type="text"/>
-                                         </div>  
-                                     </div>
-                                 </div>
-                                </div>
+          <button class="btn2" type="submit">Add Academics</button>
+        </form>
+      </div>
+    </div>
+    <div v-if="showChildRow">
+      <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content mc">
+            <div class="modal-body" style="overflow: auto !important;">
+              <div class="container bg-light">
+                <div v-if="ismodel" class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b> {{ childPara.id }}</p>
+                    <p><b>Academia Name:</b>{{ childPara.name }}</p>
+                    <p><b>Description:</b> {{ childPara.description }}</p>
+                  </div>
+                </div>
+                <div v-else class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b>{{ childPara.id }}</p>
+                    <div class="">
+                      <label><b>Academia Name:</b></label><br>
+                      <input v-model="childPara.name" type="text" />
+                    </div>
+                    <div class="">
+                      <label><b>Description:</b></label><br>
+                      <input v-model="childPara.description" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-              <button
-type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
                 @click="update(childPara.id)">Update</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
             </div>
-
           </div>
-
-
         </div>
       </div>
-
     </div>
     <Loading v-model:active="isLoading"></Loading>
   </div>
 </template>
    
 <script>
-
 import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -108,7 +88,6 @@ export default {
   components: {
     AgGridVue,
     Loading,
-    // AlertDialog
   },
   data: function () {
     return {
@@ -117,7 +96,6 @@ export default {
         description: '',
         typeId: '',
         academiaName: '',
-        // Add other properties as needed
       },
       formVisible: false,
       userName: '',
@@ -150,7 +128,6 @@ export default {
       return this.$store.state.IsLoggedIn;
     },
   },
-
   async created() {
     this.domLayout = 'autoHeight';
     this.isLoading = true;
@@ -172,26 +149,20 @@ export default {
     finally {
       this.isLoading = false;
     }
-
   },
-
   methods: {
     toggleForm() {
       this.formVisible = !this.formVisible;
     },
-
     onCellClicked(params) {
       this.childPara = params.node.data
       console.log(this.childPara);
       this.showChildRow = true;
-
     },
-
     OpenCloseFun() {
       this.showChildRow = false;
       this.ismodel = true;
     },
-
     onCellValueChanged(event) {
       console.log('Data after change is', event.data);
     },
@@ -199,7 +170,6 @@ export default {
       this.gridApi = params.api;
       this.gridColumnApi = params.columnApi;
     },
-
     onBtnExport() {
       this.gridApi.exportDataAsCsv();
     },
@@ -218,18 +188,15 @@ export default {
         );
       });
     },
-
     edit() {
       this.ismodel = false;
     },
-
     async update(id) {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/Academia` + '?' + 'id=' + id + '&name=' + this.childPara.name + '&desc=' + this.childPara.description);
         console.log(res);
         this.ismodel = true;
-
         if (res.status === 200) {
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
@@ -238,7 +205,6 @@ export default {
         console.log(error);
       }
     },
-
     async addBranch() {
       this.isLoading = true;
       try {
@@ -248,13 +214,10 @@ export default {
           console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
-
           alert("Insert Successful");
         } else {
-          // Show failure message
           alert("Insert Fail");
         }
-
       } catch (error) {
         this.isLoading = false;
         console.error("Error adding branch:", error);
@@ -288,14 +251,11 @@ export default {
       finally {
         this.isLoading = false;
       }
-
     }
   },
-
 };
-
-
 </script>
+
 <style scoped>
 .example-wrapper {
   display: flex;
@@ -303,49 +263,37 @@ export default {
   height: 100%;
   width: 100%;
 }
-
 #myGrid {
   flex: 1 1 0px;
   width: 100%;
 }
-
 .example-header {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px;
   margin-bottom: 5px;
 }
-
 .ag-theme-alpine {
   --ag-header-height: 30px;
   --ag-header-foreground-color: black;
   --ag-header-background-color: white;
-  /* --ag-header-cell-hover-background-color: #0d4b7e;
-     --ag-header-cell-moving-background-color: #0d4b7e; */
-
   --ag-font-size: 15px;
   --ag-font-family: 'Times New Roman';
-
 }
-
 .ag-theme-alpine .ag-header {
   font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
 }
-
 .ag-theme-alpine .ag-header-group-cell {
   font-weight: normal;
   font-size: 22px;
 }
-
 .ag-theme-alpine .ag-header-cell {
   font-size: 16px;
   text-align: center;
 }
-
 .ag-header-cell-label {
   justify-content: center;
 }
-
 @media (max-width: 912px) {
   .ag-grid-vue {
     height: 20%;
@@ -360,74 +308,57 @@ export default {
 .kl {
   text-align: center;
 }
-
 .sd {
   width: 15%;
   font-size: 1em;
 }
-
 .sd1 {
   width: 15%;
   font-size: 1em;
 }
-
 @media screen and (max-width: 600px) {
   .kl {
     text-align: left;
   }
-
   .sd {
     width: 55%;
     font-size: 1em;
   }
-
   .sd1 {
     width: 42%;
     font-size: 1em;
   }
 }
-
 .modal-dialog {
   max-width: 900px;
-
   margin: 1.75rem auto;
 }
-
 .modal-dialog {
   max-width: 900px;
   margin: 1.75rem auto;
   height: 630px;
-  /* Set the height as needed */
   overflow-y: auto;
 }
-
 .mc {
   height: 300px;
   width: 550px;
   overflow: hidden;
 }
-
 .modal-body {
   max-height: 400px;
-  /* Adjust the max-height as needed */
   overflow-y: auto;
 }
-
 @media (max-width:520px) {
-
   .example-wrapper {
     width: 100%;
   }
 }
-
 .frm {
   padding: 20px;
   border: 1px solid black;
   width: 90%;
   background-color: #fff;
 }
-
-
 .frm {
   max-width: 400px;
   margin: 0 auto;
@@ -481,4 +412,5 @@ button {
 
 button:hover {
   background-color: #007bff;
-}</style>
+}
+</style>

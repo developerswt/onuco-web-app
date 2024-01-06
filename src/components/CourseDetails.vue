@@ -13,8 +13,7 @@
                         </div>
                         <div v-if="isMobile" class="container-fluid">
                             <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                <video-player
-ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+                                <video-player ref="videoPlayer" class="mobileVideo" :options="videoOptions"
                                     :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
                                     :is-subscribed="userIsSubscribed" />
                             </div>
@@ -28,8 +27,7 @@ ref="videoPlayer" class="mobileVideo" :options="videoOptions"
 
                                     </h4>
                                     <div class="">
-                                        <p
-v-for="instructor in book.instructorName" id="professor_text"
+                                        <p v-for="instructor in book.instructorName" id="professor_text"
                                             :key="instructor.id"> {{ instructor.name }}</p>
                                     </div>
                                     <div class="row">
@@ -99,46 +97,39 @@ v-for="instructor in book.instructorName" id="professor_text"
                                                 <div v-for="(topic, index) in book.subject" :key="topic.id" class="card">
                                                     <div class="accordion-item">
                                                         <h5 class="card-header">
-                                                            <div
-id="heading-example"
+                                                            <div id="heading-example"
                                                                 :class="index === 0 ? 'd-block kj' : 'collapsed d-block kj'"
                                                                 data-toggle="collapse" :href="'#collapse-example' + index"
                                                                 aria-expanded="true" aria-controls="collapse-example">
 
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <button
-class="btn btn-link"
+                                                                        <button class="btn btn-link"
                                                                             style="text-decoration: none; border: none;">
                                                                             {{ topic.heading }}
                                                                         </button>
                                                                     </div>
                                                                     <div class="col-lg-6 col-6 col-sm-6">
-                                                                        <div class="action"><i
-id="sem_icon"
+                                                                        <div class="action"><i id="sem_icon"
                                                                                 class="fa fa-chevron-right rotate-icon"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </h5>
-                                                        <div
-:id="'collapse-example' + index"
+                                                        <div :id="'collapse-example' + index"
                                                             :class="index === 0 ? 'collapse show' : 'collapse'"
                                                             aria-labelledby="heading-collapsed">
-                                                            <div
-v-for="lessons in topic.values" :key="lessons.id"
+                                                            <div v-for="lessons in topic.values" :key="lessons.id"
                                                                 class="cards_body_color">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-6 col-sm-6 ">
                                                                         <div class="accordion_block_one">
-                                                                            <i
-class="fa" aria-hidden="true" :class="{
+                                                                            <i class="fa" aria-hidden="true" :class="{
                                                                                 'fa-circle-o': !hasAnySubjectComplete(lessons),
                                                                                 'fa-check': hasAnySubjectComplete(lessons),
                                                                             }" style="margin-right: 10px;"></i>
-                                                                            <p
-id="check_text" data-palcement="top"
+                                                                            <p id="check_text" data-palcement="top"
                                                                                 :title="lessons.heading"> {{
                                                                                     lessons.heading.slice(0, 16) }}...</p>
                                                                         </div>
@@ -149,24 +140,20 @@ id="check_text" data-palcement="top"
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div
-v-for="(subject, lessonIndex) in lessons.values"
+                                                                <div v-for="(subject, lessonIndex) in lessons.values"
                                                                     :key="lessonIndex.id"
                                                                     :class="{ 'playing-subject': playingSubject === subject }"
                                                                     class="chapters_block">
-                                                                    <div
-class="row sub"
+                                                                    <div class="row sub"
                                                                         :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
-                                                                            <i
-class="fa" aria-hidden="true" :class="{
+                                                                            <i class="fa" aria-hidden="true" :class="{
                                                                                 'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                 'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                 'fa-circle': playingSubject === subject
                                                                             }" style="margin-top: 6px;"></i>
                                                                         </div>
-                                                                        <div
-class="col-lg-7 col-10 col-sm-10"
+                                                                        <div class="col-lg-7 col-10 col-sm-10"
                                                                             style="cursor: pointer;"
                                                                             @click="switchVideo(subject.url, subject)">
                                                                             <p id="intro_text">{{ subject.lession }}</p>
@@ -189,8 +176,7 @@ class="col-lg-7 col-10 col-sm-10"
                                                                                                 }}</progress>
                                                                                         </div>
                                                                                         <div v-else>
-                                                                                            <progress
-value="0"
+                                                                                            <progress value="0"
                                                                                                 max="100">0</progress>
                                                                                         </div>
                                                                                     </div>
@@ -200,22 +186,18 @@ value="0"
                                                                         </div>
                                                                         <div class="col-lg-4 col-12 col-sm-12">
                                                                             <div class="inside_block">
-                                                                                <div
-class="progress-container"
+                                                                                <div class="progress-container"
                                                                                     @click="switchVideo(subject.url, subject)">
-                                                                                    <div
-v-if="hasMatchingVideoId(subject.id)"
+                                                                                    <div v-if="hasMatchingVideoId(subject.id)"
                                                                                         class="progress_block">
-                                                                                        <el-progress
-type="circle"
+                                                                                        <el-progress type="circle"
                                                                                             :show-text="false"
                                                                                             :percentage="calculatePercentage(subject.id)"
                                                                                             :color="'#FF9924'" :width="30"
                                                                                             :stroke-width="2"></el-progress>
                                                                                     </div>
                                                                                     <div v-else class="progress_block">
-                                                                                        <el-progress
-type="circle"
+                                                                                        <el-progress type="circle"
                                                                                             :show-text="false"
                                                                                             :percentage="0"
                                                                                             :color="'#FF9924'" :width="30"
@@ -224,8 +206,7 @@ type="circle"
 
                                                                                 </div>
 
-                                                                                <i
-class="fa" aria-hidden="true" :class="{
+                                                                                <i class="fa" aria-hidden="true" :class="{
                                                                                     'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
                                                                                     'fa-bookmark': isProgressBarComplete(subject.id) || playingSubject === subject,
                                                                                 }" style=" font-size: 26px;"></i>
@@ -241,8 +222,7 @@ class="fa" aria-hidden="true" :class="{
                                             </div>
                                             <div v-if="!isMobile" class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                                    <video-player
-v-if="renderComponent" ref="videoPlayer"
+                                                    <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
                                                         :video-id="videoId" :course-id="courseId" :watch-time="watchTime" />
                                                 </div>

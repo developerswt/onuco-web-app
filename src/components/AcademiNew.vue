@@ -12,8 +12,7 @@
             <div class="parent_blocks">
                 <div v-for="item in academia" :key="item.id">
                     <div class="box1">
-                        <router-link
-:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                             style="color: white;text-decoration: none;">
                             <div class="box">
                                 <img src="../assets/images/book.png" class="icon">
@@ -30,10 +29,7 @@
                         <p class="ty">{{ item.academia.name }}</p>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
         <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     </div>
@@ -43,7 +39,6 @@ import axiosInstance from '../config/axiosInstance'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-
 
 export default {
     name: 'AcademiNewView',
@@ -78,7 +73,6 @@ export default {
 .category-test a {
     text-decoration: none;
 }
-
 .category-test h4 a {
     float: right;
     color: #0d4b7e;
@@ -86,7 +80,6 @@ export default {
     font-family: 'Noto Sans', sans-serif;
     padding-right: 20px;
 }
-
 .kkj img {
     width: 30%;
     height: auto;
@@ -94,18 +87,15 @@ export default {
     left: 36%;
 
 }
-
 .btn-warning {
     color: #fff;
     background-color: #f0ad4e;
     border-color: #eea236;
 }
-
 .btn {
     position: relative;
     left: 15%;
 }
-
 .mb .box1 {
     width: 118px;
     cursor: pointer;
@@ -114,22 +104,18 @@ export default {
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
     margin: 20px;
-    /* background: rgb(2,0,36); */
     background: #F6F6F6;
     background: #F6F6F6;
     background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
-
     margin-bottom: 67%;
     transition: 0.3s;
 }
-
 .mb .card-title {
     text-align: center;
     font-size: 20px;
     color: white;
     font-family: cursive-serif;
 }
-
 .mb .box1:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
@@ -143,52 +129,38 @@ export default {
     margin-left: 0px;
     margin-right: 0px;
 }
-
 .card {
     width: 28rem;
     height: 28rem;
 }
-
 @media screen and (max-width: 1000px) {
     .mb .box1 {
-        /* width:48%; */
         margin-bottom: 55px;
     }
-
 }
-
 @media screen and (max-width: 510px) {
     .mb .box1 {
         width: 90%;
         margin: 30px 0px 30px 0px;
     }
-
     .ty1 {
         margin-top: 0px;
         font-size: 12px;
     }
-
     .academic_head_text {
         font-size: 15px !important;
         padding-left: 39px !important;
         position: relative;
         left: -48px;
-
     }
-
     .category-test h4 a {
         padding-right: 0;
         font-size: 15px !important;
     }
-
     .ty {
         margin-top: -88px;
-
     }
-
-
 }
-
 @media only screen and (max-width: 912px) {
     .card {
         width: 21rem;
@@ -196,28 +168,20 @@ export default {
         border: none;
     }
 }
-
 @media (min-width: 768px) and (max-width: 991.92px) {
     .academic_head_text {
         font-size: 20px;
     }
-
-
 }
-
 @media (min-width: 600px) and (max-width: 768px) {
     .academic_head_text {
         font-size: 18px !important;
         padding-left: 39px !important;
     }
-
     #home_container {
         margin-top: 0;
-
     }
-
 }
-
 .dot {
     height: 70px;
     width: 70px;
@@ -226,7 +190,6 @@ export default {
     border-radius: 50%;
     display: inline-block;
 }
-
 .wr {
     position: relative;
     left: 28px;
@@ -237,14 +200,12 @@ export default {
     color: #FFFFFF;
     opacity: 1;
 }
-
 .ty {
     margin-top: -108px;
     font-size: 12px;
     color: black;
     text-align: center;
 }
-
 .ty1 {
     margin-top: 0px;
     font-size: 14px;
@@ -253,27 +214,20 @@ export default {
     top: -86px;
     text-align: center;
 }
-
 router-link {
     text-decoration: none;
 }
-
 .icon {
     position: relative;
     left: 18%;
     top: -22px;
 }
-
 @media screen and (min-width: 100px) and (max-width: 450px) {
     .wr {
         position: relative;
-
         top: -87px;
     }
-
 }
-
-
 @media screen and (min-width: 450px) and (max-width: 650px) {
     .wr {
         position: relative;
@@ -281,29 +235,22 @@ router-link {
         top: -87px;
     }
 }
-
 .academic_head_text {
     color: #006acd;
     padding-left: 0px;
-
     font-size: 20px;
-
 }
-
-
 #aca_text {
     color: #006acd;
     font-weight: bold;
     padding-right: 10px;
 }
-
 .parent_blocks {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 30px 0px 30px 0px;
 }
-
 .num {
     color: white;
     font-size: 35px;

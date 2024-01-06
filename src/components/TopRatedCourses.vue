@@ -14,13 +14,11 @@
                 <slide v-for="course in courses" :key="course.id">
 
                     <div class="box">
-                        <router-link
-:to="{ name: 'CourseDetails', params: { name: course.courseName } }"
+                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
                             style="text-decoration: none;">
                             <div class="wer">
                                 <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
-                                <div
-class="card-img-top offer1"
+                                <div class="card-img-top offer1"
                                     style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
                                     <p>{{ course.name }}</p>
@@ -168,7 +166,6 @@ export default {
 
 
 <style scoped>
-
 .category-test a {
     text-decoration: none;
 }

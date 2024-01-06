@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-2">    
+    <div class="row pt-2">
         <div class="col-lg-6 col-md-12 col-sm-12 col-12">
             <div class="card-box">
                 <div class="card-head">
@@ -19,7 +19,7 @@
                                         <td>{{ student.activeStudentsCount }}</td>
                                         <td>{{ student.startdate }}</td>
                                         <td>{{ student.enddate }}</td>
-                                    </tr>		
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -43,10 +43,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ this.lectureSubject.courseName }}</td>
-                                        <td>{{ this.lectureSubject.totalPrice }}</td>
-                                        <td>{{ this.lectureSubject.totalStudentsSubscribed }}</td>
-                                    </tr>		
+                                        <td>{{ lectureSubject.courseName }}</td>
+                                        <td>{{ lectureSubject.totalPrice }}</td>
+                                        <td>{{ lectureSubject.totalStudentsSubscribed }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -54,8 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>    
-
+    </div>
 </template>
 
 <script>
@@ -75,9 +74,9 @@ export default {
             this.lectureStudent = resu.data;
             const resul = await AxiosInstance.get(`/CoursesFacultyJ/GetCourseDetails`);
             this.lectureSubject = resul.data;
-        } catch {
+        } catch (error) {
             console.log(error);
-        }    
+        }
     }
 }
 </script>
@@ -87,6 +86,7 @@ export default {
     flex: 0 0 auto;
     width: 100%;
 }
+
 .card-box {
     background-color: #fff;
     border-radius: 10px;
@@ -107,6 +107,7 @@ export default {
     line-height: 40px;
     min-height: 40px;
 }
+
 .card-head header {
     display: inline-block;
     padding: 11px 20px;
@@ -115,13 +116,15 @@ export default {
     font-size: 17px;
     letter-spacing: 1px;
 }
-b, strong {
+
+b,
+strong {
     font-weight: bolder;
 }
-.h6, h6 {
+
+.h6,
+h6 {
     font-size: 1rem;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-</style>
+}</style>

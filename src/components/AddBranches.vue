@@ -1,100 +1,79 @@
 <template>
-    <div class="container">
-      <h5>Add & Update Branch</h5>
-      <div class="container" style="margin-top: 72px;">
-        <div>
-          <label for="productDropdown">Branch Name :</label>
-          <select v-model="selectedbranch" @change="emitSelectedType">
-            <option value="" disabled selected hidden>Please Select</option>
-            <option v-for="product in products" :key="product.id" :value="product.id">
-              {{ product.name }}
-            </option>
-          </select>
-        </div>
-        <div  class="table-responsive">
-          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Branch Name</th>
-                <th>Description</th>
-                <th>Branch Rout Name</th>
-                <th>Course Id</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td>{{ this.selectedProduct.id }}</td>
-                  <td v-if="!editMode">{{ this.selectedProduct.name }}</td>
-                  <td v-if="editMode">
-                    <input v-model="this.selectedProduct.name" type="text" required>
-                  </td>
-                  <td v-if="!editMode">{{ this.selectedProduct.description }}</td>
-                  <td v-if="editMode">
-                    <textarea class="size" v-model="editedProduct.description" type="text" required></textarea>
-                  </td>
-                  <td>{{this.selectedProduct.branchName }}</td>
-                  <td>{{ this.selectedProduct.id }}</td>
-                  <td>
-                <div class="button-row">
-                  <button v-if="!editMode" @click="enableEditMode()">Edit</button>
-                  <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                  <button @click="deleteProduct(selectedProduct.id)">Delete</button>
-                </div>
-              </td>
-                </tr>
-              </tbody>
-          </table>
-          
-          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add New Branch</h5>
-        <button type="button" class="close" @click="toggleForm">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="container">
+    <h5>Branches Update & Create</h5>
+    <div class="container" style="margin-top: 72px;">
+      <div>
+        <label for="productDropdown">Branch Name :</label>
+        <select v-model="selectedbranch" @change="emitSelectedType">
+          <option value="" disabled selected hidden>Please Select</option>
+          <option v-for="product in products" :key="product.id" :value="product.id">
+            {{ product.name }}
+          </option>
+        </select>
       </div>
-      <div class="modal-body">
-        <form @submit.prevent="addBranch">  
-                    <p><b></b> {{newBranch.id}}</p>
-                    <label for="branchName">Branch Name:</label>
-                    <input id="branchName" v-model="newBranch.name" type="text" required><br>
-
-                    <label for="description">Description:</label>
-                    <textarea class="size" id="description" v-model="newBranch.description" type="text" required></textarea><br>
-
-                    <label for="academiaId">course Id:</label>
-                    <input id="academiaId" v-model="this.selectedacademic" type="text" readonly required><br>
-
-                    <!-- <label for="branchName"><b>Branch Name:</b></label>
-                    <input id="branchName" v-model="newBranch.branchName" type="text" required> -->
-                    <label for="branchName"><b>Branch Rout Name:</b></label>
-    <input
-      id="branchName"
-      v-model="newBranch.branchName"
-      type="text"
-      required
-      pattern="[a-z]+(-[a-z]+)*"
-      title="Please enter a valid Kebab Case."
-    >
-    <span v-if="!isKebabCase(newBranch.branchName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
+      <div class="table-responsive">
+        <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Branch Name</th>
+              <th>Description</th>
+              <th>Course Id</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ selectedProduct.id }}</td>
+              <td v-if="!editMode">{{ selectedProduct.name }}</td>
+              <td v-if="editMode">
+                <input v-model="selectedProduct.name" type="text" required>
+              </td>
+              <td v-if="!editMode">{{ selectedProduct.description }}</td>
+              <td v-if="editMode">
+                <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
+              </td>
+              <td>{{ selectedProduct.id }}</td>
+              <td>
+                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add New Branch</h5>
+                <button type="button" class="close" @click="toggleForm">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="addBranch">
+                  <p><b></b> {{ newBranch.id }}</p>
+                  <label for="branchName">Branch Name:</label>
+                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
+                  <label for="description">Description:</label>
+                  <textarea id="description" v-model="newBranch.description" class="size" type="text"
+                    required></textarea><br>
+                  <label for="academiaId">course Id:</label>
+                  <input id="academiaId" :value="selectedacademic" type="text" required><br>
+                  <label for="branchName"><b>Branch Name:</b></label>
+                  <input id="branchName" v-model="newBranch.branchName" type="text" required>
                   <button class="btn2" type="submit">Add Branch</button>
-              </form>
+                </form>
               </div>
-              </div>
-              </div>
-              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <Confirmation ref="Confirmation" />
   </div>
 </template>
-
 <script>
 import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
@@ -102,46 +81,48 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
   name: "AddBranch",
-  props: ['selectedacademic'],
-  components: {
-    Confirmation,
+  props: {
+    selectedacademic: {
+      type: Number, // Adjust the type based on your use case
+      required: true,
+    }
   },
+  emits: ['selected-branches-changed'],
   data() {
     return {
       formVisible: false,
       products: [],
-      selectedbranch:'',
-      selectedProduct: { id: '', name: '', description: '',academiaId:'' },
+      selectedbranch: '',
+      selectedProduct: { id: null, name: '', description: '', academiaId: null },
       isLoading: false,
       editMode: false,
       editedProduct: {
-      id: null,
-      name: '',
-      description: '',
-      academiaId: null,
-      branchName:'',
-    },
+        id: null,
+        name: '',
+        description: '',
+        academiaId: null,
+      },
       newBranch: {
-      name: '',
-      description: '',
-      academiaId: this.selectedacademic,
-      branchName: '',
-     },
+        name: '',
+        description: '',
+        academiaId: this.selectedacademic,
+        branchName: '',
+      },
     };
   },
   computed: {
-  isTableVisible() {
-    return !!this.selectedbranch; // Show table if a type is selected
-  },
-},
-watch: {
-  selectedacademic: {
-    immediate: true,
-    handler(newVal, oldVal) {
-      this.loadData();
+    isTableVisible() {
+      return !!this.selectedbranch; // Show table if a type is selected
     },
   },
-},
+  watch: {
+    selectedacademic: {
+      immediate: true,
+      handler() {
+        this.loadData();
+      },
+    },
+  },
   created() {
     this.loadData();
   },
@@ -154,219 +135,152 @@ watch: {
 
     emitSelectedType() {
       this.$emit('selected-branches-changed', this.selectedbranch);
-      this.loadData(); 
+      this.loadData();
       this.loadProductDetails();
-
     },
     toggleForm() {
-        this.formVisible = !this.formVisible;
-      },
-
+      this.formVisible = !this.formVisible;
+    },
     async loadData() {
       this.isLoading = true;
-    try {
-      const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
-      this.products = res.data;
-      this.loadProductDetails();
-
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.isLoading = false;
-    }
-  },
-  
-  async loadProductDetails() {
- 
-  const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
-
-if (selectedProduct) {
-  this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
-}
-  },
-
-    enableEditMode() {
-    this.editMode = true;
-    this.editedProduct.id = this.selectedProduct.id;
-    this.editedProduct.name = this.selectedProduct.name;
-    this.editedProduct.description = this.selectedProduct.description;
-    this.editedProduct.academiaId = this.selectedProduct.academiaId;
-this.editedProduct.branchName = this.selectedProduct.branchName;
-  },
-
-  async updateProduct(id) {
-    try {
-      const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-      console.log(res);
-
-      if (res.status === 200) {
-        await this.loadData();
-        this.editMode = false; 
-        this.ismodel = true; 
+      try {
+        const res = await AxiosInstance.get(`/Branches/Branches/` + this.selectedacademic);
+        this.products = res.data;
         this.loadProductDetails();
-        this.$refs.Confirmation.open("Branch Updated successfully.");
-
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.isLoading = false;
       }
+    },
+    async loadProductDetails() {
+      const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
+      if (selectedProduct) {
+        this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
+      }
+    },
+    enableEditMode() {
+      this.editMode = true;
+      this.editedProduct.id = this.selectedProduct.id;
+      this.editedProduct.name = this.selectedProduct.name;
+      this.editedProduct.description = this.selectedProduct.description;
+      this.editedProduct.academiaId = this.selectedProduct.academiaId;
+    },
+    async updateProduct(id) {
+      try {
+        const res = await AxiosInstance.put(`/Branches` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description);
+        console.log(res);
+        if (res.status === 200) {
+          await this.loadData();
+          this.editMode = false;
+          this.ismodel = true;
+          this.loadProductDetails();
+        }
       } catch (error) {
         console.error(error);
         this.$refs.Confirmation.open("Error Updating Branch.");
 
       }
     },
-
     async addBranch() {
-  this.isLoading = true;
-  try {
-
-    const response = await AxiosInstance.post('/Branches', this.newBranch);
-    this.ismodel = true;
-
-    if (response.status === 200) {
-      console.log("Branch added successfully");
-      await this.loadData();
-      this.loadProductDetails();
-      this.$refs.Confirmation.open("Branch Added successfully.");
-
-     
-      this.newBranch = {
-      name: '',
-      description: '',
-      academiaId: this.selectedacademic,
-      branchName: '',
-     };
-
-      this.formVisible = false;
-
-    }
-
-  } catch (error) {
-    this.isLoading = false;
-    console.error("Error adding branch:", error);
-    this.$refs.Confirmation.open("Error Adding Branch.");
-
-  } finally {
-    this.isLoading = false;
-  }
-},
-async deleteProduct(id) {
+      this.isLoading = true;
       try {
-        const confirmed = await this.$refs.Confirmation.open(
-          "Are you sure you want to delete this Branch?"
-        );
-        if (!confirmed) {
-          return; // If the user cancels, do nothing
-        }
-
-        const res = await AxiosInstance.delete(`/Branches?id=${id}`);
-        console.log(res);
-
-        if (res.status === 200) {
-          console.log("Branch deleted successfully");
+        const response = await AxiosInstance.post('/Branches', this.newBranch);
+        this.ismodel = true;
+        if (response.status === 200) {
+          console.log("Branch added successfully");
           await this.loadData();
           this.loadProductDetails();
-
-          this.selectedbranch = '';
-        this.selectedProduct = { id: '', name: '', description: '',academiaId:'' };
-
-          // Show success dialog
-          this.$refs.Confirmation.open("Branch deleted successfully.");
+          alert("Insert Successful");
+          this.formVisible = false;
+        } else {
+          alert("Insert Fail");
         }
       } catch (error) {
-        console.error("Error deleting Branch", error);
-
-        // Show error dialog
-        this.$refs.Confirmation.open("Error deleting Branch.");
+        this.isLoading = false;
+        console.error("Error adding branch:", error);
       } finally {
         this.isLoading = false;
       }
     },
-
   },
 };
 </script>
 <style scoped>
-.frm{
-      padding: 20px;
+.frm {
+  padding: 20px;
   border: 1px solid black;
   width: 90%;
   background-color: #fff;
-   }
-  
-
-  .frm {
-    max-width: 400px;
-    margin: 0 auto;
-    margin-bottom: 80px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-
-  input {
-    width: 100%;
-    padding: 1px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-  }
-
-    button {
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-     }
-     .btn2 {
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-     }
-     .btn1{
-        color: #fff;
-        background-color: #007bff;
-        border-color: #007bff;
-        padding: 6px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 80px; 
-        position: relative;
-        top: 65px;
-        left: 780px;
-        font-weight: 600;
-        font-size: 15px;
-        }
-@media (max-width: 520px) {
-  .btn1{
-        color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-      padding: 7px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 80px; 
-      position: relative;
-      top: 68px;
-    left: 73px;
-
-    }
 }
-
-  button:hover {
-      background-color: #007bff;
+.frm {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+input {
+  width: 100%;
+  padding: 1px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn2 {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn1 {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 80px;
+  position: relative;
+  top: 65px;
+  left: 780px;
+  font-weight: 600;
+  font-size: 15px;
+}
+@media (max-width: 520px) {
+  .btn1 {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px;
+    position: relative;
+    top: 68px;
+    left: 73px;
   }
-
-  .modal {
+}
+button:hover {
+  background-color: #007bff;
+}
+.modal {
   display: none;
   position: fixed;
   top: 0;
@@ -375,12 +289,10 @@ async deleteProduct(id) {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .modal-dialog {
   position: relative;
   margin: 10% auto;
 }
-
 .modal-content {
   position: relative;
   background-color: #fff;
@@ -388,24 +300,15 @@ async deleteProduct(id) {
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #ccc;
   background-color: #f8f9fa;
 }
-
-  .modal-body {
-    padding: 15px;
-  }
-  .size{
-    width: 470px;
-  }
-  .button-row {
-  display: flex;
+.modal-body {
+  padding: 15px;
 }
-
-.button-row button {
-  margin-right: 10px; 
+.size {
+  width: 470px;
 }
 </style>

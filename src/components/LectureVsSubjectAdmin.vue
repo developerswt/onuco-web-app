@@ -45,7 +45,7 @@ export default {
                     },
                 ],
                 // DataLabels configuration for the entire chart
-                
+
                 // DataLabels configuration for the entire chart
                 dataLabels: {
                     enabled: true,
@@ -93,7 +93,7 @@ export default {
                     };
 
                     const priceAmount = {
-                        x: lecture.facultyCognitoId,   
+                        x: lecture.facultyCognitoId,
                         y: lecture.totalPrice,
                     };
 

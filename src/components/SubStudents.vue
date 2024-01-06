@@ -39,7 +39,7 @@
 
 <script>
 import AxiosInstance from '../config/axiosInstance';
-import Loading from 'vue3-loading-overlay';
+// import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VueApexCharts from "vue3-apexcharts";
 
@@ -47,7 +47,7 @@ export default {
 
     name: "SubStudent",
     components: {
-        Loading,
+
         apexchart: VueApexCharts,
     },
     data() {

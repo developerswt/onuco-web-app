@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
@@ -22,7 +22,7 @@
                         <apexchart class="pt-5" :options="subjectStudentOptions" :series="subjectStudentSeries"></apexchart>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </template>
@@ -167,7 +167,7 @@ export default {
         },
         subjectStudentChartData() {
             if (this.subjectStudent) {
-            
+
                 const dataPoint = {
                     x: this.subjectStudent.courseName,
                     y: this.subjectStudent.totalStudentsSubscribed,
@@ -178,8 +178,8 @@ export default {
                     y: this.subjectStudent.totalPrice,
                 };
 
-                    this.subjectStudentSeries[0].data.push(dataPoint);
-                    this.subjectStudentSeries[1].data.push(priceAmount);
+                this.subjectStudentSeries[0].data.push(dataPoint);
+                this.subjectStudentSeries[1].data.push(priceAmount);
 
             }
         },
@@ -203,6 +203,7 @@ export default {
     border: 1px solid #deebfd;
     box-shadow: -8px 12px 18px 0 #dadee8;
 }
+
 .card-head {
     border-radius: 2px 2px 0 0;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
@@ -214,6 +215,7 @@ export default {
     line-height: 40px;
     min-height: 40px;
 }
+
 .card-head header {
     display: inline-block;
     padding: 11px 20px;
@@ -226,18 +228,20 @@ export default {
 .card-body:last-child {
     border-radius: 0 0 2px 2px;
 }
+
 .card-body {
     padding: 10px 24px 14px 24px;
     position: relative;
 }
+
 .card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
 }
+
 @media (min-width: 576px) {
-.col-sm-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}
-}
-</style>
+    .col-sm-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}</style>

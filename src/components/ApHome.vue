@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 cardpd" v-if="isUserSuperadmin">
+        <div v-if="isUserSuperadmin" class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
               <div class="content">
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 cardpd" v-if="isUserSuperadmin">
+        <div v-if="isUserSuperadmin" class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
               <div class="content">
@@ -76,7 +76,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- <div class="row" style="justify-items: center;">
         
         <div class="col-sm-3 cardpd">
@@ -120,7 +120,7 @@
             </div>
           </div>
         </div> -->
-        <!-- <div class="col-sm-3 cardpd">
+      <!-- <div class="col-sm-3 cardpd">
   <div v-if="isUserSuperadmin" class="card color " >
     <div class="box">
       <div class="content">
@@ -217,7 +217,7 @@
         </div>
       </div>
       <div class="row" style="justify-items: center;">
-        
+
         <div v-if="isUserAdmin" class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
@@ -239,7 +239,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 cardpd" v-if="isUserAdmin">
+        <div v-if="isUserAdmin" class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
               <div class="content">
@@ -249,7 +249,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 cardpd" v-if="isUserAdmin">
+        <div v-if="isUserAdmin" class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
               <div class="content">
@@ -259,7 +259,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
       <div class="row" style="justify-items: center;">
         <!-- <div class="col-sm-3 cardpd" >
@@ -351,9 +351,9 @@
   </div>
 </div>
   </div> -->
-  <div v-if="isUserfaculty" class="row" style="justify-items: center;">
+      <div v-if="isUserfaculty" class="row" style="justify-items: center;">
 
-  <div class="col-sm-3 cardpd">
+        <div class="col-sm-3 cardpd">
           <div class="card color">
             <div class="box">
               <div class="content">
@@ -373,8 +373,8 @@
               </div>
             </div>
           </div>
-        </div> 
-      </div>  
+        </div>
+      </div>
 
     </section>
 
@@ -414,10 +414,7 @@ import AxiosInstance from '../config/axiosInstance';
 
 export default {
 
-  name: "Aphome",
-  components: {
-    AxiosInstance
-  },
+  name: "AphomeView",
   data() {
     return {
       person: null,
@@ -445,11 +442,6 @@ export default {
     },
 
   },
-  methods: {
-    onComplete() {
-      alert("Yay. Done!");
-    },
-  },
   async created() {
     this.isLoading = true;
     console.log(this.isuser)
@@ -476,6 +468,11 @@ export default {
     finally {
       this.isLoading = false;
     }
+  },
+  methods: {
+    onComplete() {
+      alert("Yay. Done!");
+    },
   },
 
 }
@@ -654,4 +651,5 @@ export default {
   background: #EEEAE4;
   background: radial-gradient(at left top, #EEEAE4 50%, #D3E4F6 80%);
   border: 1px solid #F0F6FC;
-}</style>
+}
+</style>
