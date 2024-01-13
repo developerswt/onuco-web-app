@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Branch Name :</label>
-        <select v-model="selectedbranch" @change="emitSelectedType">
+        <select v-model="selectedbranch" @change="emitSelectedType" style="padding: 4px;">
           <option value="" disabled selected hidden>Please Select</option>
           <option v-for="product in products" :key="product.id" :value="product.id">
             {{ product.name }}
@@ -20,6 +20,7 @@
               <th>Description</th>
               <th>Branch Rout Name</th>
               <th>Course Id</th>
+              <th>IsActive</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -36,9 +37,10 @@
                 </td>
                 <td>{{selectedProduct.branchName }}</td>
                 <td>{{ selectedProduct.id }}</td>
+                <td>{{ selectedProduct.isActive }}</td>
                 <td>
               <div class="button-row">
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -46,45 +48,41 @@
               </tr>
             </tbody>
         </table>
-        
+        <div>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Branch</h5>
+          <button type="button" class="close" @click="toggleForm">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form ref="form" @submit.prevent="addBranch">
+            <p><b></b> {{newBranch.id}}</p>
+            <label for="branchName">Branch Name:</label>
+            <input id="branchName" v-model="newBranch.name" type="text" required><br>
 
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Add New Branch</h5>
-      <button type="button" class="close" @click="toggleForm">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form ref="form" @submit.prevent="addBranch">
-                  <p><b></b> {{newBranch.id}}</p>
-                  <label for="branchName">Branch Name:</label>
-                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
+            <label for="description">Description:</label>
+            <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
 
-                  <label for="description">Description:</label>
-                  <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
-
-                  <label for="academiaId">course Id:</label>
-                  <input id="academiaId" v-model="this.selectedacademic" type="text" readonly required><br>
+            <label for="academiaId">course Id:</label>
+            <input id="academiaId" v-model="this.selectedacademic" type="text" readonly required><br>
 
                   <!-- <label for="branchName"><b>Branch Name:</b></label>
                   <input id="branchName" v-model="newBranch.branchName" type="text" required> -->
-                  <label for="branchName"><b>Branch Rout Name:</b></label>
-  <input
-    id="branchName"
-    v-model="newBranch.branchName"
-    type="text"
-    required
-    pattern="[a-z0-9]+(-[a-z0-9]+)*"
-    title="Please enter a valid Kebab Case."
-  >
-  <span v-if="!isKebabCase(newBranch.branchName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
+            <label for="branchName"><b>Branch Rout Name:</b></label>
+            <input id="branchName" v-model="newBranch.branchName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+            <span v-if="!isKebabCase(newBranch.branchName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+        
+            <label for="isActive">IsActive:</label>
+            <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
+ 
                 <button class="btn2" type="submit">Add Branch</button>
             </form>
+            </div>
             </div>
             </div>
             </div>
@@ -118,7 +116,7 @@ data() {
     formVisible: false,
     products: [],
     selectedbranch:'',
-    selectedProduct: { id: '', name: '', description: '',academiaId:'' },
+    selectedProduct: { id: '', name: '', description: '',academiaId:'', isActive:'' },
     isLoading: false,
     editMode: false,
     editedProduct: {
@@ -127,12 +125,14 @@ data() {
     description: '',
     academiaId: null,
     branchName:'',
+    isActive:'',
   },
     newBranch: {
     name: '',
     description: '',
     academiaId: this.selectedacademic,
     branchName: '',
+    isActive: 1,
    },
   };
 },
@@ -176,19 +176,22 @@ methods: {
     this.products = res.data;
     this.loadProductDetails();
 
-  } catch (error) {
-    console.log(error);
-  } finally {
+  } 
+   catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      } 
+       finally {
     this.isLoading = false;
   }
 },
 
 async loadProductDetails() {
-
 const selectedProduct = this.products.find(product => product.id === this.selectedbranch);
 
 if (selectedProduct) {
-this.selectedProduct = { ...selectedProduct }; // Use the nested academia property
+this.selectedProduct = { ...selectedProduct }; 
 }
 },
 
@@ -198,26 +201,25 @@ this.selectedProduct = { ...selectedProduct }; // Use the nested academia proper
   this.editedProduct.name = this.selectedProduct.name;
   this.editedProduct.description = this.selectedProduct.description;
   this.editedProduct.academiaId = this.selectedProduct.academiaId;
-this.editedProduct.branchName = this.selectedProduct.branchName;
+  this.editedProduct.branchName = this.selectedProduct.branchName;
+  this.editedProduct.isActive = this.selectedProduct.isActive;
 },
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+    const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
     console.log(res);
 
-    if (res.status === 200) {
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("Branch Updated successfully.");
-
-    }
-    } catch (error) {
-      console.error(error);
-      this.$refs.Confirmation.open("Error Updating Branch.");
-
+    }   
+    catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
     }
   },
 
@@ -225,29 +227,26 @@ async updateProduct(id) {
 this.isLoading = true;
 try {
 
-  const response = await AxiosInstance.post('/Branches', this.newBranch);
+  const response = await AxiosInstance.post(`/Branches`, this.newBranch);
   this.ismodel = true;
 
-  if (response.status === 200) {
-    console.log("Branch added successfully");
+    console.log(response);
     await this.loadData();
     this.loadProductDetails();
     this.$refs.Confirmation.open("Branch Added successfully.");
-
-   
     this.newBranch = {
-    name: '',
-    description: '',
-    academiaId: this.selectedacademic,
-    branchName: '',
+      name: '',
+      description: '',
+      academiaId: this.selectedacademic,
+      branchName: '',
+      isActive: 1,
    };
    this.$refs.form.reset(); 
-  }
-
-} catch (error) {
-  this.isLoading = false;
-  console.error("Error adding branch:", error);
-  this.$refs.Confirmation.open("Error Adding Branch.");
+  }   
+  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
 
 } finally {
   this.isLoading = false;
@@ -258,32 +257,31 @@ try {
 async deleteProduct(id) {
     try {
       const confirmed = await this.$refs.Confirmation.open(
-        "Are you sure you want to delete this Branch?"
+        "Are you sure?"
       );
       if (!confirmed) {
-        return; // If the user cancels, do nothing
+        return; 
       }
+      this.editedProduct.isActive = '0';
+         const res = await AxiosInstance.put(`/Branches/SoftUpdateBranches` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+        console.log(res);
 
-      const res = await AxiosInstance.delete(`/Branches?id=${id}`);
-      console.log(res);
-
-      if (res.status === 200) {
         console.log("Branch deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 
         this.selectedbranch = '';
-      this.selectedProduct = { id: '', name: '', description: '',academiaId:'' };
+        this.selectedProduct = { id: '', name: '', description: '',academiaId:'' ,isActive:''};
 
-        // Show success dialog
         this.$refs.Confirmation.open("Branch deleted successfully.");
-      }
-    } catch (error) {
-      console.error("Error deleting Branch", error);
-
-      // Show error dialog
-      this.$refs.Confirmation.open("Error deleting Branch.");
-    } finally {
+      
+    }  
+    catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
+    finally {
       this.isLoading = false;
     }
   },
@@ -341,14 +339,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 6px 15px;
+      padding: 6px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
       top: 65px;
-      left: 780px;
+      left: 842px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -415,4 +413,8 @@ display: flex;
 .button-row button {
 margin-right: 10px; 
 }
+
+.bn{
+  padding: 10px 25px;
+ }
 </style>
