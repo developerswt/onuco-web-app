@@ -234,6 +234,7 @@
                                     </el-tab-pane>
                                     <el-tab-pane label="Question Bank" name="third">
                                         <div class="" v-html="book.questionBank"></div>
+                                        <PdfViewer />
                                     </el-tab-pane>
                                     <el-tab-pane label="Quiz" name="fourth">
                                         <div class="" v-html="book.quiz"></div>
@@ -257,8 +258,8 @@ import VideoPlayer from './VideoPlayer.vue';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import StarRatings from './StarRatings.vue'
-
 import AxiosInstance from '../config/axiosInstance'
+import PdfViewer from './PdfViewer.vue'
 
 export default {
     name: 'SemesterDetails',
@@ -266,7 +267,8 @@ export default {
         VideoPlayer,
         Loading,
         Breadcrumbs,
-        StarRatings
+        StarRatings,
+        PdfViewer
     },
     data() {
         return {
@@ -371,7 +373,7 @@ export default {
 
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                    src: "https://dgoa3lo2n1ork.cloudfront.net/ffmpegDetails/Problem.m3u8",
                     type: this.videoType,
                     withCredentials: false,
                 }

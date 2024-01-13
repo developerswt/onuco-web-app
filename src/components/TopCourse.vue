@@ -11,13 +11,10 @@
         <div class="container mb">
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="course in courses" :key="course.id">
-
                     <div class="box">
-                        <router-link
-:to="{ name: 'CourseDetails', params: { name: course.courseName } }"
+                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
                             style="text-decoration: none;">
                             <div class="wer">
-                                <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
                                 <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
                                     <p>{{ course.name }}</p>
@@ -32,10 +29,7 @@
                             <div class="card-body">
                                 <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
                                 <div class="text-left price" style="float: right;">
-                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
-                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{
-        course.discountPrice }}</b></p>
-
+                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{course.discountPrice }}</b></p>
                                 </div> <br>
                                 <div class="row">
                                     <div class="col-sm-6  star">
@@ -68,14 +62,14 @@
                 <span id="aca_text">All</span>Courses
             </h4>
         <div class="row">
-        <div v-for="person in persons.courses" :key="person.id" class="col-sm-4">
+        <div v-for="allCourse in allCourses.courses" :key="allCourse.id" class="col-sm-4">
             <div class="box ">
-                <router-link to="/Universities" style="text-decoration: none;">
+                <router-link :to="{ name: 'CourseDetails', params: { name: allCourse.courseName } }" style="text-decoration: none;">
                     <div class="wer">
                         <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap"> -->
                         <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
-                                    <p>{{ person.name }}</p>
+                                    <p>{{ allCourse.name }}</p>
                                 </div>
                         <div class="offer">
                             <img class="card-img-top" src="../assets/images/offer.png">
@@ -85,31 +79,19 @@
                         </div>
                     </div>
                     <div class="card-body" >
-                        <p class="card-text">{{ person.description.slice(0, 65) }}...</p>
+                        <p class="card-text">{{ allCourse.description.slice(0, 65) }}...</p>
                         <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{person.actualPrice}}</del><b
-                                    style="margin-right: 2px; color:black">&#8377;{{ person.discountPrice}}</b></p>
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{ allCourse.actualPrice}}</del><b
+                                    style="margin-right: 2px; color:black">&#8377;{{ allCourse.discountPrice}}</b></p>
                         </div> <br>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-sm-6  star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <StarRatings :rating="allCourse.starRating || 0" :max-rating="5" />
                             </div>
                             <div class="col-sm-6">
                                 <a href="#" class="btn btn-primary">Buy Now</a>
                             </div>
-                        </div> -->
-                        <div class="row">
-                                    <div class="col-sm-6  star">
-                                        <StarRatings :rating="person.starRating || 0" :max-rating="5" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <a href="#" class="btn btn-primary">Buy Now</a>
-                                    </div>
-                                </div>
+                        </div>
                     </div>
                  </router-link>
             </div>
@@ -138,7 +120,7 @@ Breadcrumbs
 data() {
         return {
             ratings: [],
-            persons: [],
+            allCourses: [],
             isLoading: false,
             courses: [],
             settings: {
@@ -200,8 +182,12 @@ data() {
                 course.starRating = res.averageRating;
             }
             const result = await AxiosInstance.get(`/Course`);
-            this.persons = result.data;
-            console.log(this.persons);
+            this.allCourses = result.data;
+            console.log(this.allCourses);
+            for (const allcourse of this.allCourses.courses) {
+                const resu = await this.getByRatings(allcourse.id);
+                allcourse.starRating = resu.averageRating;
+            }
 
         } catch (error) {
             console.log(error);

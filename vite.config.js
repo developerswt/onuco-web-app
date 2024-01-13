@@ -30,9 +30,10 @@ export default defineConfig({
       },
     }),
   ],
-  define: process.env.NODE_ENV === 'development' ? { global: 'window' } : {},
+  define: process.env.NODE_ENV === 'development' ? { global: 'window' } : {
+    'process.env.PDFJS_GLOBAL': 'globalThis',
+  },
   base: './',
-  
 })
 
 
