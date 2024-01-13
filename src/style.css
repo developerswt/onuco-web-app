@@ -4,7 +4,6 @@
 
 
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   line-height: 1.5;
   font-weight: 400;
 
@@ -103,7 +102,6 @@ button:focus-visible {
 
  .amplify-authenticator__tabs-wrapper .amplify-tabs-item{
   color: #0066CC !important;
-  /* border-color: #0066CC !important; */
 }
 .amplify-tabs-item[data-state=active]
 {
@@ -144,8 +142,6 @@ h4 {
     background-color: #f9f9f9;
   }
 }
-
-/* Shiva's css */
 
 .instructor_head_text,.course_text{
 
@@ -243,8 +239,14 @@ background-color: #00000029;
   background-color: transparent;
   font-size: 16px;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 12px 12px;
   min-width: 100px !important;
   position: relative;
   bottom: 60px;
+  left: 16px;
+
+}
+.wizard-tab-content {
+  min-height: 100px;
+  padding: 30px 2px 10px;
 }

@@ -4,7 +4,7 @@
      <div class="container" style="margin-top: 72px;">
        <div>
          <label for="productDropdown">Course Type :</label>
-         <select v-model="selectedTypes" @change="emitSelectedType">
+         <select v-model="selectedTypes" @change="emitSelectedType" style="padding: 4px;">
            <option value="" disabled selected hidden>Please Select</option>
            <option v-for="product in products" :key="product.id" :value="product.id">
              {{ product.name }}
@@ -18,6 +18,7 @@
                <th>Id</th>
                <th>Name</th>
                <th>Description</th>
+               <th>IsActive</th>
                <th>Actions</th>
              </tr>
            </thead>
@@ -32,9 +33,11 @@
                <td v-if="editMode">
                  <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                </td>
+               <td >{{ selectedProduct.isActive }}</td>
+              
                <td>
                  <div class="button-row">
-                   <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                   <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                    <button @click="deleteProduct(selectedProduct.id)">Delete</button>
                  </div>
@@ -62,6 +65,10 @@
                      <label for="description">Description:</label>
                      <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
      
+                     <label for="isActive">Is Active:</label>
+                     <textarea id="isActive" v-model="newBranch.isActive" class="size" type="text" readonly required></textarea><br>
+     
+
                      <button class="btn2" type="submit">Add Course Type</button>
                    </form>
                  </div>
@@ -90,16 +97,18 @@
        products: [],
        selectedTypes: '',
        formVisible: false,
-       selectedProduct: { id:'', name: '', description: '' },
+       selectedProduct: { id:'', name: '', description: '',isActive: '' },
        editMode: false,
        editedProduct: {
          id: null,
          name: '',
          description: '',
+         isActive: 1 ,
        },
        newBranch: {
          name: '',
          description: '',
+         isActive: 1 
        },
      };
    },
@@ -127,13 +136,14 @@
      },
      async loadData() {
        try {
-         const res = await AxiosInstance.get('/Types');
+         const res = await AxiosInstance.get(`/Types`);
          this.products = res.data;
+         this.loadProductDetails();
          console.log(this.products);
  
        } catch (error) {
          console.log("hi");
-         console.log(error);
+         console.error(error);
        }
      },
      enableEditMode() {
@@ -141,10 +151,11 @@
        this.editedProduct.id = this.selectedProduct.id;
        this.editedProduct.name = this.selectedProduct.name;
        this.editedProduct.description = this.selectedProduct.description;
+       this.editedProduct.isActive = this.selectedProduct.isActive
      },
      async updateProduct(id) {
        try {
-         const res = await AxiosInstance.put('/Types' + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description);
+         const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
          console.log(res);
  
          if (res.status === 200) {
@@ -152,12 +163,12 @@
            this.editMode = false; 
            this.ismodel = true;
            this.loadProductDetails();
-           this.$refs.Confirmation.open("Course Type Updated successfully.");
+           this.$refs.Confirmation.open("Updated successfully.");
  
          }
        } catch (error) {
          console.error(error);
-         this.$refs.Confirmation.open("Error Updating Course Type.");
+         this.$refs.Confirmation.open("Error Updating.");
  
        }
      },
@@ -175,14 +186,14 @@
        async addBranch() {
          this.isLoading = true;
        try {
-         const response = await AxiosInstance.post('/Types', this.newBranch);
+         const response = await AxiosInstance.post(`/Types`, this.newBranch);
          this.ismodel = true; 
          if (response.status === 200) {
-           console.log("Course Type added successfully");
+           console.log("Added successfully");
            await this.loadData();
            this.loadProductDetails();
  
-         this.$refs.Confirmation.open("Course Type Added successfully.");
+         this.$refs.Confirmation.open("Added successfully.");
  
          this.newBranch = {
          name: '',
@@ -190,15 +201,12 @@
        };
        this.$refs.form.reset(); 
      } 
-     // else {
-     //   alert("Insert Fail");
-     // }
  
          } catch (error) {
          this.isLoading = false;
-         console.error("Error adding Course Type:", error);
+         console.error("Error adding", error);
  
-         this.$refs.Confirmation.open("Error Adding Course Type.");
+         this.$refs.Confirmation.open("Error Adding.");
  
        }
        finally {
@@ -210,31 +218,32 @@
      async deleteProduct(id) {
        try {
          const confirmed = await this.$refs.Confirmation.open(
-           "Are you sure you want to delete this Course Type?"
+           "Are you sure?"
          );
          if (!confirmed) {
            return; 
          }
- 
-         const res = await AxiosInstance.delete('/Types?id=${id}');
+         this.editedProduct.isActive = '0';
+         const res = await AxiosInstance.put(`/Types/SoftUpdateTypes` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+        //  const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
+
          console.log(res);
  
-         if (res.status === 200) {
-           console.log("Course Type deleted successfully");
+           console.log("deleted successfully");
            await this.loadData();
            this.loadProductDetails();
  
            this.selectedTypes = '';
-           this.selectedProduct = { id: '', name: '', description: '' };
+           this.selectedProduct = { id: '', name: '', description: '',isActive:''};
  
            // Show success dialog
-           this.$refs.Confirmation.open("Course Type deleted successfully.");
-         }
+           this.$refs.Confirmation.open("deleted successfully.");
+         
        } catch (error) {
-         console.error("Error deleting Course Type:", error);
+         console.error("Error deleting:", error);
  
          // Show error dialog
-         this.$refs.Confirmation.open("Error deleting Course Type.");
+         this.$refs.Confirmation.open("Error deleting.");
        } finally {
          this.isLoading = false;
        }
@@ -273,51 +282,51 @@
      }
  
      button {
-         color: #fff;
-     background-color: #007bff;
-     border-color: #007bff;
-       padding: 10px 15px;
-       border: none;
-       border-radius: 4px;
-       cursor: pointer;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
       }
       .btn2 {
-         color: #fff;
-     background-color: #007bff;
-     border-color: #007bff;
-       padding: 10px 15px;
-       border: none;
-       border-radius: 4px;
-       cursor: pointer;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
       }
      .btn1{
-         color: #fff;
-     background-color: #007bff;
-     border-color: #007bff;
-       padding: 6px 15px;
-       border: none;
-       border-radius: 4px;
-       cursor: pointer;
-       margin-bottom: 80px; 
-       position: relative;
-     top: 65px;
-     left: 780px;
-     font-weight: 600;
- font-size: 15px;
-     }
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 6px 18px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 80px; 
+        position: relative;
+        top: 65px;
+        left: 842px;
+        font-weight: 600;
+        font-size: 15px;
+      }
  @media (max-width: 520px) {
    .btn1{
          color: #fff;
      background-color: #007bff;
      border-color: #007bff;
-       padding: 7px 15px;
+       padding: 8px 15px;
        border: none;
        border-radius: 4px;
        cursor: pointer;
        margin-bottom: 80px; 
        position: relative;
-       top: 68px;
-     left: 69px;
+       top: 67px;
+     left: 2px;
  
      }
  }
@@ -367,5 +376,8 @@
  
  .button-row button {
    margin-right: 10px; 
+ }
+ .bn{
+  padding: 10px 25px;
  }
  </style>

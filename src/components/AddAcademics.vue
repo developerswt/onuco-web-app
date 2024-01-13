@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Course Name :</label>
-        <select v-model="selectedAcademics" @change="emitSelectedType">
+        <select v-model="selectedAcademics" @change="emitSelectedType" style="padding: 4px;">
           <option value="" disabled selected hidden>Please Select</option>
 
       <option v-for="product in products" :key="product.id" :value="product.id">
@@ -21,6 +21,7 @@
                 <th>Description</th>
                 <th>Course Rout Name</th>
                 <th>Type Id</th>
+                <th>IsActive</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -35,12 +36,16 @@
                 <td v-if="editMode">
                   <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                 </td>
+               
                 <td >{{selectedProduct.academiaName }}</td>
                
                 <td>{{ selectedProduct.typeId }}</td>
+
+                <td>{{ selectedProduct.isActive }}</td>
+
                 <td>
               <div class="button-row">
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -49,7 +54,7 @@
             </tbody>
 
         </table>
-        
+        <div>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
 <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
@@ -72,6 +77,9 @@
   
             <label for="typeId">TypeId:</label>
             <input id="typeId" v-model="this.selectedtype" type="text" readonly required><br>
+
+            <label for="isActive">IsActive:</label>
+            <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
             
             <label for="academiaName"><b>Course Rout Name:</b></label>
   <input
@@ -91,6 +99,7 @@
           </div>
           </div>
           </div>
+        </div>
     </div>
     </div>
     <Confirmation ref="Confirmation" />
@@ -106,12 +115,6 @@ export default {
   components: {
   Confirmation,
 },
-beforeRouteLeave(to, from, next) {
-console.log('Before leaving the route. Refreshing the table...');
-this.loadData(); // Add this line to refresh the table
-next();
-},
-  // props: ['selectedtype'],
   props:{selectedtype : {
   type: Number,
   required: true,
@@ -124,7 +127,7 @@ emits: ['selected-academic-changed'],
       products: [],
       selectedAcademics: '',
       formVisible: false,
-      selectedProduct: { id: null, name: '', description: '' ,typeId: ''},
+      selectedProduct: { id: null, name: '', description: '', typeId: '', isActive:''},
       editMode: false,
       editedProduct: {
       id: null,
@@ -132,18 +135,21 @@ emits: ['selected-academic-changed'],
       description: '',
       typeId: null,
       academiaName: '',
+      isActive:'',
     },
       newBranch: {
       name: '',
       description: '',
       typeId: this.selectedtype,
       academiaName:'',
+      isActive:1,
+
     },
     };
   },
   computed: {
   isTableVisible() {
-    return !!this.selectedAcademics; // Show table if a type is selected
+    return !!this.selectedAcademics; 
   },
 },
 watch: {
@@ -171,17 +177,21 @@ methods: {
     this.loadProductDetails();
   },
   async loadData() {
-this.isLoading = true;
-try {
-const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
-this.products = res.data;
-console.log('Data loaded:', this.products);
-} catch (error) {
-console.error('Error loading data:', error);
-} finally {
-this.isLoading = false;
-}
-},
+      this.isLoading = true;
+      try {
+        const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
+        this.products = res.data;
+        console.log('Data loaded:', this.products);
+      } 
+      catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      } 
+      finally {
+        this.isLoading = false;
+      }
+    },
 
 enableEditMode() {
   this.editMode = true;
@@ -190,26 +200,26 @@ enableEditMode() {
   this.editedProduct.description = this.selectedProduct.description;
   this.editedProduct.typeId = this.selectedProduct.typeId
   this.editedProduct.academiaName = this.selectedProduct.academiaName
+  this.editedProduct.isActive = this.selectedProduct.isActive
 },
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
-
-    console.log(res);
-
-    if (res.status === 200) {
+    const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
+      console.log(res);
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("Course Updated successfully.");
+    
+    }catch(error){
+    this.isLoading = false;
+    console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
     }
-  } catch (error) {
-    console.error(error);
-    this.$refs.Confirmation.open("Error Updating Course.");
-
-  }
+  this.editMode = false;
 },
 
   toggleForm() {
@@ -217,22 +227,18 @@ async updateProduct(id) {
     },
 
     async loadProductDetails() {
-    
     const selectedProduct = this.products.find(product => product.id === this.selectedAcademics);
     
     if (selectedProduct) {
       this.selectedProduct = { ...selectedProduct };
-     // this.newBranch.typeId  = this.selectedProduct.typeId;
-
     }
   },
   async addBranch() {
   this.isLoading = true;
   try {
-    const response = await AxiosInstance.post('/Academia', this.newBranch);
-    if (response.status === 200) {
-      console.log("Course added successfully");
-      await this.loadData(); // Update dropdown data
+    const response = await AxiosInstance.post(`/Academia`, this.newBranch);
+      console.log(response);
+      await this.loadData();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Course Added successfully.");
 
@@ -241,13 +247,15 @@ async updateProduct(id) {
         description: '',
         typeId: this.selectedtype,
         academiaName: '',
+        isActive:1,
       };
       this.$refs.form.reset(); 
-    }
-  } catch (error) {
+    
+  } catch(error){
     this.isLoading = false;
-    console.error("Error adding Course:", error);
-    this.$refs.Confirmation.open("Error Adding Course.");
+    console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
 
   } finally {
     this.isLoading = false;
@@ -256,34 +264,35 @@ async updateProduct(id) {
   }
 },
 
+
 async deleteProduct(id) {
     try {
       const confirmed = await this.$refs.Confirmation.open(
-        "Are you sure you want to delete this Course ?"
+        "Are you sure?"
       );
       if (!confirmed) {
         return; // If the user cancels, do nothing
       }
 
-      const res = await AxiosInstance.delete(`/Academia?id=${id}`);
-      console.log(res);
+      this.editedProduct.isActive = '0';
+         const res = await AxiosInstance.put(`/Academia/SoftUpdateAcademia` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+        console.log(res);
 
-      if (res.status === 200) {
         console.log("Course deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 
         this.selectedAcademics = '';
-      this.selectedProduct = { id:'', name: '', description: '' ,typeId:''};
+        this.selectedProduct = { id:'', name: '', description: '' ,typeId:'', isActive:''};
 
-        // Show success dialog
         this.$refs.Confirmation.open("Course deleted successfully.");
-      }
-    } catch (error) {
-      console.error("Error deleting Course :", error);
 
-      // Show error dialog
-      this.$refs.Confirmation.open("Error deleting Course.");
+    } catch(error){
+    this.isLoading = false;
+    console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
+  
     } finally {
       this.isLoading = false;
     }
@@ -343,14 +352,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 6px 15px;
+      padding: 6px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
       top: 65px;
-      left: 780px;
+      left: 842px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -416,4 +425,7 @@ display: flex;
 .button-row button {
 margin-right: 10px; 
 }
+.bn{
+  padding: 10px 25px;
+ }
 </style>

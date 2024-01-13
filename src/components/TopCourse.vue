@@ -17,7 +17,7 @@
                             <div class="wer">
                                 <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
-                                    <p>{{ course.name }}</p>
+                                    <p  data-palcement="top" :title="course.name"> {{ course.name.slice(0,20) }}...</p>
                                 </div>
                                 <div class="offer">
                                     <img class="card-img-top" src="../assets/images/offer.png">
@@ -44,9 +44,7 @@
 
                         </router-link>
                     </div>
-
-
-                </slide>
+                 </slide>
                 <template #addons>
                     <navigation>
                     </navigation>
@@ -241,8 +239,8 @@ data() {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
+    /* margin-left: 0px;
+    margin-right: 0px; */
 }
 
 .box {
@@ -260,7 +258,7 @@ data() {
 }
 
 .box .row {
-    padding: 12px 10px;
+    padding: 12px 30px;
 }
 
 @media screen and (max-width: 400px) {
@@ -328,6 +326,8 @@ data() {
     color: black;
     float: left;
     width: 35%;
+    position: relative;
+    right: 15px;
 }
 
 .price a {
@@ -393,10 +393,9 @@ data() {
 }
 
 .btn {
-    width: 120px;
+    width: 110px;
     height: 37px;
-    margin-left: 10px;
-    margin-left: 28px;
+    margin-left: 45px;
 }
 
 .card-body {
@@ -478,7 +477,13 @@ data() {
     .col-sm-4 {
       flex: 0 0 100%;
       max-width: 100%;
+      padding: 18px 0 25px 25px;
     }
+  }
+
+  .align{
+    padding-left: 20px;
+    margin: -14px;
   }
 </style>
 

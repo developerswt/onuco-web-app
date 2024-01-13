@@ -6,8 +6,8 @@
           <slot></slot>
         </div>
         <div class="button-row">
-          <button @click="confirm">OK</button>
-          <button @click="cancel">Cancel</button>
+          <button class="bn1" @click="confirm">OK</button>
+          <button  class="bn2" @click="cancel">Cancel</button>
         </div>
       </div>
     </div>
@@ -67,9 +67,10 @@
   .dialog {
     background-color: #fff;
     border: 1px solid black;
-    padding: 20px;
+    padding: 40px;
     text-align: center;
     max-width: 500px;
+    border-radius: 10px;
   }
   
   .button-row {
@@ -88,7 +89,16 @@
     cursor: pointer;
   }
   .button-row button {
-  margin-right: 10px; 
+    margin: 15px 25px 2px 25px;
+}
+.bn1 {
+    padding: 0px 27px;
+    position: relative;
+    left: 76px;
+}
+.bn2{
+  position: relative;
+    left: 34px;
 }
   </style>
   

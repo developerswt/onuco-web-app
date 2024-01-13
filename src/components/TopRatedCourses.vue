@@ -214,7 +214,7 @@ export default {
 }
 
 .box .row {
-    padding: 12px 10px;
+    padding: 0px 19px;
 }
 
 @media screen and (max-width: 400px) {
@@ -282,6 +282,8 @@ export default {
     color: black;
     float: left;
     width: 35%;
+    position: relative;
+    right: 10px;
 }
 
 .price a {
@@ -347,10 +349,9 @@ export default {
 }
 
 .btn {
-    width: 120px;
+    width: 110px;
     height: 37px;
-    margin-left: 10px;
-    margin-left: 28px;
+    margin-left: 44px;
 }
 
 .card-body {
