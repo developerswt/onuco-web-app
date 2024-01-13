@@ -40,17 +40,17 @@
                 </td>
                 <td v-if="!editMode">{{ selectedProduct.actualPrice }}</td>
                 <td v-if="editMode">
-                  <input v-model="editedProduct.actualPrice" type="text" @change="updatePrice(editedProduct.id, editedProduct.actualPrice)" >
+                  <input v-model="editedProduct.actualPrice" type="text" required >
                 </td>
                 <td v-if="!editMode">{{ selectedProduct.discountPrice }}</td>
                 <td v-if="editMode">
-                  <input v-model="editedProduct.discountPrice" type="text" @change="updatePrice(editedProduct.id, editedProduct.discountPrice)">
+                  <input v-model="editedProduct.discountPrice" type="text" required>
                 </td>
                 <td>{{ selectedProduct.courseName }}</td>
                 <td>{{ selectedProduct.semesterId }}</td>
                 <td>
                   <span v-if="!editMode">{{ selectedProduct.workFlowStatement }}</span>
-                  <select v-if="editMode" v-model="editedProduct.workFlowStatement" @change="updateWorkFlow(editedProduct.id)">
+                  <select v-if="editMode" v-model="editedProduct.workFlowStatement" required>
                       <option value="Draft">Draft</option>
                       <option value="Review">Review</option>
                       <option value="Release">Release</option>
@@ -68,7 +68,7 @@
             </tr>
           </tbody>
       </table>
-      
+      <div>
       <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
 <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
@@ -124,6 +124,7 @@
 
                   <button class="btn2" type="submit">Add Subject</button>
               </form>
+              </div>
               </div>
               </div>
               </div>
@@ -253,7 +254,7 @@ async loadProductDetails() {
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement );
     console.log(res);
 
     if (res.status === 200) {
@@ -261,50 +262,54 @@ async updateProduct(id) {
       this.editMode = false; // Disable edit mode after successful update
       this.ismodel = true; 
       this.loadProductDetails();
+      this.$refs.Confirmation.open("Subject Updated successfully.");
+
     }
     } catch (error) {
       console.error(error);
+      this.$refs.Confirmation.open("Error Updating Subject.");
+
     }
   },
 
-  async updatePrice(id) {
-    this.showDialog = false;
-      try {
-            const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
-            console.log(res);
-            this.editMode = false; // Disable edit mode after successful update
-            this.ismodel = true;
-            this.loadProductDetails();
+//   async updatePrice(id) {
+//     this.showDialog = false;
+//       try {
+//             const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
+//             console.log(res);
+//             this.editMode = false; // Disable edit mode after successful update
+//             this.ismodel = true;
+//             this.loadProductDetails();
 
-        if (res.status === 200) {
-          await this.getdata();
-        }
-      } catch (error) {
-        console.log(error);
-        }
-  },
+//         if (res.status === 200) {
+//           await this.getdata();
+//         }
+//       } catch (error) {
+//         console.log(error);
+//         }
+//   },
 
-   async updateWorkFlow(id) {
-    this.showDialog = false;
-    try {
-      const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
-      console.log(result);
-      this.editMode = false; 
-      this.ismodel = true;
-      this.loadProductDetails();
+//    async updateWorkFlow(id) {
+//     this.showDialog = false;
+//     try {
+//       const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
+//       console.log(result);
+//       this.editMode = false; 
+//       this.ismodel = true;
+//       this.loadProductDetails();
 
-      if (result.status === 200) {
-    await this.getdata();
-  }
-} catch (error) {
-  console.log(error);
-  }
-  },
+//       if (result.status === 200) {
+//     await this.getdata();
+//   }
+// } catch (error) {
+//   console.log(error);
+//   }
+//   },
 
 async addBranch() {
   this.isLoading = true;
   try {
-    const response = await AxiosInstance.post('/Course', this.newBranch);
+    const response = await AxiosInstance.post(`/Course`, this.newBranch);
     this.ismodel = true; 
   if (response.status === 200) {
     console.log("Branch added successfully");
@@ -344,7 +349,7 @@ async addBranch() {
 async deleteProduct(id) {
     try {
       const confirmed = await this.$refs.Confirmation.open(
-        "Are you sure you want to delete this Subject?"
+        "Are you sure?"
       );
       if (!confirmed) {
         return; // If the user cancels, do nothing
@@ -439,13 +444,13 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 6px 15px;
+      padding: 7px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 65px;
+      top: 80px;
       left: 780px;
       font-weight: 600;
       font-size: 15px;

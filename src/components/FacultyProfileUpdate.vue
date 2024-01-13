@@ -23,24 +23,10 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-12 users">
-                        <div v-if="!editing" class="User_Name">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div v-if="!editing" class="icon_bg_color">
-                                        <img :src="updatedAttribute.picture">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div v-else class="editing_users_details">
+                        
+                        <div class="editing_users_details">
                             <div class="row pt-4">
-                                <!-- <div class="col-sm-12"> -->
-                                <div class="col-sm-4">
-                                    <div class="edit_user">
-                                        <input v-model="userName" placeholder="User Name" type="text" class="un">
-                                    </div>
-                                </div>
+                               
                                 <div class="col-sm-8">
                                     <div class="col-sm-2">
                                         <div class="choose_file">
@@ -50,20 +36,17 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input id="input_file" type="file" class="input_file"
-                                                @change="handleFileChange">
+                                                <input id="input_file" type="file" class="input_file" @change="handleFileChange">
+
                                         </div>
                                     </div>
-                                    <!-- </div> -->
                                 </div>
 
 
                             </div>
                         </div>
                         <div class="esdit_profile">
-                            <!-- <button class="button button1">Edit Profile</button> -->
-                            <button v-if="!editing" class="button button1" @click="editProfile">EDIT PROFILE</button>
-                            <button v-else class="buttons button2" @click="saveProfile">SAVE</button>
+                            <button class="buttons button2" @click="putData">SAVE</button>
 
                         </div>
                     </div>
@@ -81,7 +64,7 @@
 </template>
 
 <script>
-import axiosInstance from '../config/axiosInstance'
+import AxiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
@@ -97,14 +80,9 @@ export default {
             showViewAll: false,
             isLoading: false,
             updatedAttribute: [],
-            loginHistorys: [],
-            editing: false,
-            userName: '',
-            userEmail: '',
-            selectedFile: null,
-            
-            // isuser: localStorage.getItem("username"),
-        }
+            FileName: '',
+            fileInput: null
+            }
     },
     computed: {
         authorizationHeader() {
@@ -112,100 +90,60 @@ export default {
             if (this.isLoggedIn) {
                 return `Bearer ${this.isuser}`;
             } else {
-                return ''; // Set your dummy value here
+                return ''; 
             }
         },
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
-        isuser() {
+          isuser() {
             console.log(this.$store.state.user);
-            return this.$store.state.user.signInUserSession.idToken;
+            return this.$store.state.user.signInUserSession.idToken.payload;
         },
-        visibleLoginDetails() {
-            // Show the first two login details by default or all details if showViewAll is true
-            return this.showViewAll ? this.loginHistorys : this.loginHistorys.slice(0, 2);
-        },
-        shouldShowViewAll() {
-            return this.loginHistorys.length > 2 && !this.showViewAll;
-        },
-    },
-    async created() {
-        this.getData();
     },
     methods: {
-        editProfile() {
-            this.editing = true;
-        },
-        saveProfile() {
-            this.uploadImage();
-            this.editing = false;
-
-        },
-        toggleViewAll() {
-            this.showViewAll = !this.showViewAll;
-        },
         handleFileChange(event) {
-            if (event && event.target && event.target.files.length > 0) {
-                this.selectedFile = event.target.files[0];
-            }
-            // this.selectedFile = event.target.files[0];
-        },
-        async uploadImage() {
-            const headers = {
-                // Authorization:  this.authorizationHeader,
-                'Content-Type': 'multipart/form-data'
-            };
-            const formData = new FormData();
-
-            formData.append('Email', this.userEmail);
-            formData.append('Name', this.userName);
-            formData.append('file', this.selectedFile);
-
-            try {
-                const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
-                    headers
-                });
-
-                // Handle the API response as needed
-                console.log('Response from API:', response.data);
-                await this.update();
-                this.userEmail = '';
-                this.userName = '';
-                this.selectedFile = null;
-                this.$refs.fileInput.value = ''; // Clear the file input
-
-            } catch (error) {
-                // Handle errors
-                console.error('Error:', error);
-            }
-        },
-        async getData() {
-        this.isLoading = true;
-        try {
-            const res = await axiosInstance.get(`/ImageUrl/get-by-key?key=`+'manjunath.jpg');
-            this.updatedAttribute = res.data;
-            console.log(this.updatedAttribute);    
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        } finally {
-            this.isLoading = false;
-        }
+      if (event && event.target && event.target.files.length > 0) {
+        this.FileName = event.target.files[0].name;
+        this.fileInput = event.target; // Save a reference to the input element
+      }
     },
-        // async update() {
-        //     this.isLoading = true;
-        //     try {
-        //         const res = await axiosInstance.get('/UploadS3Files/profile');
-        //         this.updatedAttribute = res.data;
-        //         console.log(this.updatedAttribute);    
-        //     } catch (error) {
-        //         console.log(error);
-        //         this.isLoading = false;
-        //     } finally {
-        //         this.isLoading = false;
-        //     }
-        // },
+
+    async putData() {
+  this.isLoading = true;
+  try {
+    if (!this.fileInput) {
+      console.error('No file chosen');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.fileInput.files[0]);
+
+    console.log('Form Data:', formData);
+
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+    };
+
+    console.log('Request Headers:', headers);
+
+    const res = await AxiosInstance.put('/ImageUrl', formData, {
+      headers,
+    });
+
+    this.updatedAttribute = res.data;
+    console.log('Response:', this.updatedAttribute);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    this.isLoading = false;
+  }
+}
+
+        
+
+
     }
    
 

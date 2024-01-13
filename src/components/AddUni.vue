@@ -46,10 +46,9 @@
               </tr>
             </tbody>
         </table>
-        
+        <div>
         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+        <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
@@ -90,6 +89,7 @@
             </div>
             </div>
             </div>
+          </div>
     </div>
   </div>
   <Confirmation ref="Confirmation" />
@@ -225,7 +225,7 @@ async updateProduct(id) {
 async addBranch() {
   this.isLoading = true;
   try {
-    const response = await AxiosInstance.post('/University', this.newBranch);
+    const response = await AxiosInstance.post(`/University`, this.newBranch);
     this.ismodel = true; 
   if (response.status === 200) {
     console.log("Branch added successfully");
@@ -340,13 +340,13 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 6px 15px;
+      padding: 7px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 65px;
+      top: 68px;
       left: 780px;
       font-weight: 600;
       font-size: 15px;

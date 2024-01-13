@@ -371,7 +371,8 @@ export default {
 
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                  //  src: this.book.videoUrl,
+                    src: "https://dgoa3lo2n1ork.cloudfront.net/CheckingVideo/problem.m3u8",
                     type: this.videoType,
                     withCredentials: false,
                 }
@@ -545,7 +546,8 @@ export default {
 
                 this.videoOptions.sources = [
                     {
-                        src: newVideoUrl,
+                        // src: newVideoUrl,
+                        src:"https://dgoa3lo2n1ork.cloudfront.net/CheckingVideo/problem.m3u8",
                         type: this.videoType,
                         withCredentials: false,
                     }

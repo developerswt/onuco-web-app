@@ -20,7 +20,7 @@
                                 <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
                                 <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
-                                    <p>{{ course.name }}</p>
+                                    <p  data-palcement="top" :title="course.name"> {{ course.name.slice(0,20) }}...</p>
                                 </div>
                                 <div class="offer">
                                     <img class="card-img-top" src="../assets/images/offer.png">
@@ -33,8 +33,7 @@
                                 <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
                                 <div class="text-left price" style="float: right;">
                                     <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
-                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{
-        course.discountPrice }}</b></p>
+                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
 
                                 </div> <br>
                                 <div class="row">
@@ -50,9 +49,7 @@
 
                         </router-link>
                     </div>
-
-
-                </slide>
+                 </slide>
                 <template #addons>
                     <navigation>
                     </navigation>
@@ -67,7 +64,7 @@
         <h4 class="academic_head_text pt-4">
                 <span id="aca_text">All</span>Courses
             </h4>
-        <div class="row">
+        <div class="row align" >
         <div v-for="person in persons.courses" :key="person.id" class="col-sm-4">
             <div class="box ">
                 <router-link to="/Universities" style="text-decoration: none;">
@@ -75,7 +72,7 @@
                         <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap"> -->
                         <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
-                                    <p>{{ person.name }}</p>
+                                    <p data-palcement="top" :title="person.name" style="position:relative; left: 20px;">{{ person.name.slice(0,20) }}...</p>
                                 </div>
                         <div class="offer">
                             <img class="card-img-top" src="../assets/images/offer.png">
@@ -255,8 +252,8 @@ data() {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
+    /* margin-left: 0px;
+    margin-right: 0px; */
 }
 
 .box {
@@ -274,7 +271,7 @@ data() {
 }
 
 .box .row {
-    padding: 12px 10px;
+    padding: 12px 30px;
 }
 
 @media screen and (max-width: 400px) {
@@ -342,6 +339,8 @@ data() {
     color: black;
     float: left;
     width: 35%;
+    position: relative;
+    right: 15px;
 }
 
 .price a {
@@ -407,10 +406,9 @@ data() {
 }
 
 .btn {
-    width: 120px;
+    width: 110px;
     height: 37px;
-    margin-left: 10px;
-    margin-left: 28px;
+    margin-left: 45px;
 }
 
 .card-body {
@@ -492,7 +490,13 @@ data() {
     .col-sm-4 {
       flex: 0 0 100%;
       max-width: 100%;
+      padding: 18px 0 25px 25px;
     }
+  }
+
+  .align{
+    padding-left: 20px;
+    margin: -14px;
   }
 </style>
 
