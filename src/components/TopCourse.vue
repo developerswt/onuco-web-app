@@ -13,8 +13,7 @@
                 <slide v-for="course in courses" :key="course.id">
 
                     <div class="box">
-                        <router-link
-:to="{ name: 'CourseDetails', params: { name: course.courseName } }"
+                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
                             style="text-decoration: none;">
                             <div class="wer">
                                 <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
@@ -26,7 +25,7 @@
                                     <img class="card-img-top" src="../assets/images/offer.png">
                                 </div>
                                 <div class="offer-details">
-                                    <span class="card-image-top"><b>20% OFF</b></span>
+                                    <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -78,7 +77,7 @@
                             <img class="card-img-top" src="../assets/images/offer.png">
                         </div>
                         <div class="offer-details">
-                            <font class="card-image-top"><b>20 % OFF</b></font>
+                            <span class="card-image-top"><b>{{ calculateDiscountPercentage(person.actualPrice, person.discountPrice) }}% OFF</b></span>
                         </div>
                     </div>
                     <div class="card-body" >
@@ -218,11 +217,18 @@ data() {
                 return 0; // or handle error accordingly
             }
         },
+        calculateDiscountPercentage(actualPrice, discountPrice) {
+      if (actualPrice === 0) {
+        return 0;
+      }
+
+      const discountPercentage = ((actualPrice - discountPrice) / actualPrice) * 100;
+      return Math.round(discountPercentage);
+    },
     }
 
 };
 </script>
-
 
 
 <style scoped>
