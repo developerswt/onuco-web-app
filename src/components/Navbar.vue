@@ -463,7 +463,16 @@ li>a:before {
     width: 200px;
     /* Adjust the width as needed */
 }
-
+.dropdown-item {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/12px var(--unnamed-font-family-segoe-ui);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-707070);
+    text-align: left;
+    font: normal normal normal 16px/12px Segoe UI;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
 .demo-autocomplete .autocomplete-input {
     background-color: blue;
 }

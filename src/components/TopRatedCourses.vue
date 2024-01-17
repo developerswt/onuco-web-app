@@ -27,15 +27,14 @@
                                     <img class="card-img-top" src="../assets/images/offer.png">
                                 </div>
                                 <div class="offer-details">
-                                    <span class="card-image-top"><b>20% OFF</b></span>
+                                    <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
                                 <div class="text-left price" style="float: right;">
                                     <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
-                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{
-        course.discountPrice }}</b></p>
+                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
 
                                 </div> <br>
                                 <div class="row">
@@ -149,6 +148,16 @@ export default {
         }
     },
     methods: {
+
+        calculateDiscountPercentage(actualPrice, discountPrice) {
+      if (actualPrice === 0) {
+        return 0;
+      }
+
+      const discountPercentage = ((actualPrice - discountPrice) / actualPrice) * 100;
+      return Math.round(discountPercentage);
+    },
+
         async getByRatings(courseId) {
             try {
                 const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
@@ -417,4 +426,3 @@ export default {
     font-size: 16px;
 }
 </style>
-

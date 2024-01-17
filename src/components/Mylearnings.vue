@@ -167,7 +167,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
                                                     <div class="progress_block">
                                                         <div>
                                                             <progress :value="calculatePercentage(selectedItem)"
@@ -175,7 +175,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4 time">
                                                     <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
                                                 </div>
                                                 <!-- <button class="bt">BUY NOW</button> -->
@@ -938,7 +938,14 @@ input[type="radio"]:checked {
     left: 90px;
     bottom: 15px;
 }
-
+.prog{
+    position: relative;
+    left: 90px;
+}
+.time{
+    position: relative;
+    bottom: 10px;
+}
 .text {
     position: relative;
     right: 160px;

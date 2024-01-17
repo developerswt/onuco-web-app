@@ -77,22 +77,14 @@
   
             <label for="typeId">TypeId:</label>
             <input id="typeId" v-model="this.selectedtype" type="text" readonly required><br>
+            
+            <label for="academiaName"><b>Course Rout Name:</b></label>
+            <input id="academiaName" v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+            <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
 
             <label for="isActive">IsActive:</label>
             <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
             
-            <label for="academiaName"><b>Course Rout Name:</b></label>
-  <input
-    id="academiaName"
-    v-model="newBranch.academiaName"
-    type="text"
-    required
-    pattern="[a-z0-9]+(-[a-z0-9]+)*"
-    title="Please enter a valid Kebab Case."
-  >
-  <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
-
             <button class="btn2" type="submit">Add Course</button>
           </form>
           </div>
@@ -288,8 +280,8 @@ async deleteProduct(id) {
         this.$refs.Confirmation.open("Course deleted successfully.");
 
     } catch(error){
-    this.isLoading = false;
-    console.log(error.response.data.Message);
+        this.isLoading = false;
+        console.log(error.response.data.Message);
     
         this.$refs.Confirmation.open(error.response.data.Message);
   
@@ -334,10 +326,12 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    padding: 10px 15px;
+    padding: 10px 22px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
    }
    .btn2 {
       color: #fff;
@@ -352,7 +346,7 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 6px 18px;
+      padding: 10px 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -426,6 +420,8 @@ display: flex;
 margin-right: 10px; 
 }
 .bn{
-  padding: 10px 25px;
+  padding: 10px 31px;
+  font-weight: 600;
+    font-size: 15px;
  }
 </style>

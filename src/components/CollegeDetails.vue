@@ -4,7 +4,7 @@
         <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
                 <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
-                <router-link to="/login"><button class="bt">BUY NOW</button></router-link>
+                <button class="bt">BUY NOW</button>
             </h4>
 
             <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
@@ -456,7 +456,7 @@ export default {
 
 .card {
     width: 100%;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 #sem_card {

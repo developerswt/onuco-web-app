@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">University Name :</label>
-        <select v-model="selectedUni" @change="emitSelectedType">
+        <select v-model="selectedUni" @change="emitSelectedType" style="padding: 4px;">
           <option value="" disabled selected hidden>Please Select</option>
           <option v-for="product in products" :key="product.id" :value="product.id">
             {{ product.name }}
@@ -20,6 +20,7 @@
               <th>Description</th>
               <th>University Rout Name</th>
               <th>Branches Id</th>
+              <th>IsActive</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -36,9 +37,11 @@
                 </td>
                 <td>{{ selectedProduct.universityName }}</td>
                 <td>{{ selectedProduct.branchesId }}</td>
+                <td>{{ selectedProduct.isActive }}</td>
+
                 <td>
               <div class="button-row">
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -72,16 +75,11 @@
                 <!-- <label for="universityName"><b>University Name:</b></label>
                 <input id="universityName" v-model="newBranch.universityName" type="text" required> -->
                 <label for="universityName"><b>University Rout Name:</b></label>
-  <input
-    id="universityName"
-    v-model="newBranch.universityName"
-    type="text"
-    required
-    pattern="[a-z0-9]+(-[a-z0-9]+)*"
-    title="Please enter a valid Kebab Case."
-  >
-  <span v-if="!isKebabCase(newBranch.universityName)" style="color: red; position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
+                <input id="universityName" v-model="newBranch.universityName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+                <span v-if="!isKebabCase(newBranch.universityName)" style="color: red; position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+ 
+                <label for="isActive">IsActive:</label>
+                <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
 
             <button class="btn2" type="submit">Add University</button>
             </form>
@@ -117,7 +115,7 @@ data() {
     formVisible: false,
     products: [],
     selectedUni: '',
-    selectedProduct: { id:'', name: '', description: '', branchesId:'' },
+    selectedProduct: { id:'', name: '', description: '', branchesId:'',isActive:'' },
     isLoading: false,
     editMode: false,
     editedProduct: {
@@ -125,12 +123,14 @@ data() {
     name: '',
     description: '',
     branchesId: null,
+    isActive:'' ,
   },
     newBranch: {
     name: '',
     description: '',
     branchesId: this.selectedbranch,
     universityName: '',
+    isActive: 1,
    },
   };
 },
@@ -173,13 +173,17 @@ methods: {
   try {
     const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
     this.products = res.data;
-    // console.log(this.selectedbranch);
-    // this.loadProductDetails();
+    console.log(this.selectedbranch);
+    this.loadProductDetails();
 
-  } catch (error) {
-    console.log(error);
-  } finally {
-    this.isLoading = false;
+  } 
+  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      }  
+      finally {
+      this.isLoading = false;
   }
 },
 
@@ -188,9 +192,7 @@ async loadProductDetails() {
   if (selectedProduct) {
     this.selectedProduct = { ...selectedProduct };
   // this.newBranch.branchesId = this.selectedProduct.id; 
-
-  }
-  
+ }
 },
 
   enableEditMode() {
@@ -199,25 +201,25 @@ async loadProductDetails() {
   this.editedProduct.name = this.selectedProduct.name;
   this.editedProduct.description = this.selectedProduct.description;
   this.editedProduct.branchesId = this.selectedProduct.branchesId;
+  this.editedProduct.isActive = this.selectedProduct.isActive
 
 },
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+    const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive);
     console.log(res);
 
-    if (res.status === 200) {
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("University Updated successfully.");
 
-    }
-    } catch (error) {
-      console.error(error);
-      this.$refs.Confirmation.open("Error Updating University.");
+ } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
 
     }
   },
@@ -227,7 +229,7 @@ async addBranch() {
   try {
     const response = await AxiosInstance.post(`/University`, this.newBranch);
     this.ismodel = true; 
-  if (response.status === 200) {
+  
     console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
@@ -239,16 +241,15 @@ async addBranch() {
     description: '',
     branchesId: this.selectedbranch,
     universityName: '',
+    isActive: 1,
    };
    this.$refs.form.reset(); 
-  } 
       
-  } catch (error) {
-    this.isLoading = false;
-    console.error("Error adding University:", error);
-    this.$refs.Confirmation.open("Error Adding University.");
-
-  }
+  } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
   finally {
          this.isLoading = false;
          this.formVisible = false;
@@ -263,26 +264,26 @@ async deleteProduct(id) {
         return; // If the user cancels, do nothing
       }
 
-      const res = await AxiosInstance.delete(`/University?id=${id}`);
+      this.editedProduct.isActive = '0';
+      const res = await AxiosInstance.put(`/Semester/SoftUpdateUniversity`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
       console.log(res);
 
-      if (res.status === 200) {
         console.log("University deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 
         this.selectedUni = '';
-      this.selectedProduct = { id:'', name: '', description: '' , branchesId:''};
+      this.selectedProduct = { id:'', name: '', description: '' , branchesId:'',isActive:''};
 
         // Show success dialog
         this.$refs.Confirmation.open("University deleted successfully.");
-      }
-    } catch (error) {
-      console.error("Error deleting University:", error);
-
-      // Show error dialog
-      this.$refs.Confirmation.open("Error deleting University.");
-    } finally {
+     
+    } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
+  finally {
       this.isLoading = false;
     }
   },
@@ -340,14 +341,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 7px 18px;
+      padding: 6px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 68px;
-      left: 780px;
+      top: 65px;
+      left: 842px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -415,4 +416,7 @@ display: flex;
 .button-row button {
 margin-right: 10px; 
 }
+.bn{
+  padding: 10px 25px;
+ }
 </style>

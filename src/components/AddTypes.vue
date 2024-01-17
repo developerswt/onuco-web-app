@@ -60,7 +60,7 @@
                  <div class="modal-body">
                    <form ref="form" @submit.prevent="addBranch">
                      <label for="branchName">Course Type Name:</label>
-                     <input id="branchName" v-model="newBranch.name" type="text" required><br>
+                     <input id="branchName" v-model="newBranch.name" type="text" required @input="validateFirstLetterCapital"><br>
      
                      <label for="description">Description:</label>
                      <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
@@ -129,6 +129,13 @@
      this.loadData();
    },
    methods: {
+
+    validateFirstLetterCapital() {
+      if (/^[a-z]/.test(this.newBranch.name)) {
+        this.newBranch.name = this.newBranch.name.charAt(0).toUpperCase() + this.newBranch.name.slice(1);
+      }
+    },
+
      emitSelectedType() {
        this.$emit('selected-type-changed', this.selectedTypes);
        this.loadData();
@@ -142,9 +149,15 @@
          console.log(this.products);
  
        } catch (error) {
-         console.log("hi");
-         console.error(error);
-       }
+      //    console.log("hi");
+      //    console.error(error);
+      //  }
+      this.isLoading = false;
+        console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
+  
+    }
      },
      enableEditMode() {
        this.editMode = true;
@@ -155,6 +168,12 @@
      },
      async updateProduct(id) {
        try {
+        const confirmed = await this.$refs.Confirmation.open(
+           "Are You Sure Update this?"
+         );
+         if (!confirmed) {
+           return; 
+         }
          const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
          console.log(res);
  
@@ -167,8 +186,12 @@
  
          }
        } catch (error) {
-         console.error(error);
-         this.$refs.Confirmation.open("Error Updating.");
+        //  console.error(error);
+        //  this.$refs.Confirmation.open("Error Updating.");
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
  
        }
      },
@@ -203,10 +226,10 @@
      } 
  
          } catch (error) {
-         this.isLoading = false;
-         console.error("Error adding", error);
- 
-         this.$refs.Confirmation.open("Error Adding.");
+          this.isLoading = false;
+        console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
  
        }
        finally {
@@ -240,10 +263,11 @@
            this.$refs.Confirmation.open("deleted successfully.");
          
        } catch (error) {
-         console.error("Error deleting:", error);
- 
-         // Show error dialog
-         this.$refs.Confirmation.open("Error deleting.");
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
+  
        } finally {
          this.isLoading = false;
        }
@@ -285,10 +309,12 @@
         color: #fff;
         background-color: #007bff;
         border-color: #007bff;
-        padding: 10px 15px;
+        padding: 10px 22px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-weight: 600;
+    font-size: 15px;
       }
       .btn2 {
         color: #fff;
@@ -303,7 +329,7 @@
         color: #fff;
         background-color: #007bff;
         border-color: #007bff;
-        padding: 6px 18px;
+        padding: 10px 16px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -378,6 +404,8 @@
    margin-right: 10px; 
  }
  .bn{
-  padding: 10px 25px;
+  padding: 10px 31px;
+  font-weight: 600;
+    font-size: 15px;
  }
  </style>

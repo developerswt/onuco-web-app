@@ -110,8 +110,8 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <router-link to="/login"><button id="buy_button">Buy
-                                                                            now</button></router-link>
+                                                                    <button id="buy_button">Buy
+                                                                            now</button>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
@@ -253,8 +253,8 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <router-link to="/login"><button id="buy_button">Buy
-                                                                            now</button></router-link>
+                                                                    <button id="buy_button">Buy
+                                                                            now</button>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>

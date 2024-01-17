@@ -55,8 +55,8 @@
                                 </div>
 
                                 <p id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
-                                    &#8377;{{ book.discountedPrice }} <router-link to="/login"> <button
-                                            id="search_button">buy now</button></router-link></p>
+                                    &#8377;{{ book.discountedPrice }}  <button
+                                            id="search_button">buy now</button></p>
                             </div>
                         </div>
                         <div class="app1">
@@ -373,8 +373,7 @@ export default {
 
             this.videoOptions.sources = [
                 {
-                  //  src: this.book.videoUrl,
-                    src: "https://dgoa3lo2n1ork.cloudfront.net/CheckingVideo/problem.m3u8",
+                    src: this.book.videoUrl,
                     type: this.videoType,
                     withCredentials: false,
                 }

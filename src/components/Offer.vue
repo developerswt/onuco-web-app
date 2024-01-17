@@ -17,7 +17,7 @@
                                 <p>Offers Ends on<br>June 30 2023</p>
 
 
-                                <button class="btn btn-primary">Refer now</button>
+                                <router-link to="/Announcement"><button class="btn btn-primary">Refer now</button></router-link>
 
                             </div>
                         </div>

@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Semester Name :</label>
-        <select v-model="selectedSem"  @change="emitSelectedType">
+        <select v-model="selectedSem"  @change="emitSelectedType" style="padding: 4px;">
           <option value="" disabled selected hidden>Please Select</option>
           <option v-for="product in products" :key="product.id" :value="product.id">
             {{ product.name }}
@@ -20,6 +20,7 @@
               <th>Description</th>
               <th>Semester Rout Name</th>
               <th>University Id</th>
+              <th>IsActive</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -37,9 +38,12 @@
                 <td>{{ selectedProduct.semesterName }}</td>
 
                 <td>{{ selectedProduct.universityId }}</td>
+
+                <td >{{ selectedProduct.isActive }}</td>
+
                 <td>
               <div class="button-row">
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -74,16 +78,11 @@
                 <!-- <label for="semesterName"><b>Semester Name:</b></label>
                 <input id="semesterName" v-model="newBranch.semesterName" type="text" required> -->
                 <label for="semesterName"><b>Semester Rout Name:</b></label>
-  <input
-    id="semesterName"
-    v-model="newBranch.semesterName"
-    type="text"
-    required
-    pattern="[a-z0-9]+(-[a-z0-9]+)*"
-    title="Please enter a valid Kebab Case."
-  >
-  <span v-if="!isKebabCase(newBranch.semesterName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
+                <input id="semesterName" v-model="newBranch.semesterName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case." >
+                <span v-if="!isKebabCase(newBranch.semesterName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
+  
+                <label for="isActive">IsActive:</label>
+                <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
 
                 <button class="btn2" type="submit">Add Semester</button>
             </form>
@@ -119,7 +118,7 @@ data() {
     formVisible: false,
     products: [],
     selectedSem: '',
-    selectedProduct: { id:'', name: '', description: '',universityId:'' },
+    selectedProduct: { id:'', name: '', description: '',universityId:'',isActive:'' },
     isLoading: false,
     editMode: false,
     editedProduct: {
@@ -127,12 +126,14 @@ data() {
     name: '',
     description: '',
     universityId: null,
+    isActive: '',
   },
     newBranch: {
     name: '',
     description: '',
     universityId: this.selecteduniversity,
     semesterName: '',
+    isActive: 1,
    },
   };
 },
@@ -162,7 +163,6 @@ created() {
 },
 methods: {
   isKebabCase(input) {
-    // Check if the input follows the Kebab Case pattern
     const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
     return kebabCaseRegex.test(input);
   },
@@ -183,9 +183,12 @@ methods: {
     this.products = res.data;
     this.loadProductDetails();
 
-  } catch (error) {
-    console.log(error);
-  } finally {
+  } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
+    finally {
     this.isLoading = false;
   }
 },
@@ -206,26 +209,26 @@ async loadProductDetails() {
   this.editedProduct.name = this.selectedProduct.name;
   this.editedProduct.description = this.selectedProduct.description;
   this.editedProduct.universityId = this.selectedProduct.universityId;
+  this.editedProduct.isActive = this.selectedProduct.isActive
 
 },
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description );
+    const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
     console.log(res);
 
-    if (res.status === 200) {
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true;
       this.loadProductDetails();
       this.$refs.Confirmation.open("Semester Updated successfully.");
 
-    }
-    } catch (error) {
-      console.error(error);
-      this.$refs.Confirmation.open("Error Updating Semester.");
-    }
+    }  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
   },
 
 async addBranch() {
@@ -233,7 +236,6 @@ async addBranch() {
   try {
     const response = await AxiosInstance.post(`/Semester`, this.newBranch);
     this.ismodel = true; 
-  if (response.status === 200) {
     console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
@@ -244,17 +246,15 @@ async addBranch() {
     description: '',
     universityId: this.selecteduniversity,
     semesterName: '',
+    isActive: 1,
    };
    this.$refs.form.reset(); 
-
-  }
       
-  } catch (error) {
-    this.isLoading = false;
-    console.error("Error adding branch:", error);
-    this.$refs.Confirmation.open("Error Adding Semester.");
-
-  }
+  }  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
   finally {
          this.isLoading = false;
          this.formVisible = false;
@@ -264,32 +264,31 @@ async addBranch() {
 async deleteProduct(id) {
     try {
       const confirmed = await this.$refs.Confirmation.open(
-        "Are you sure you want to delete this ?"
+        "Are you sure ?"
       );
       if (!confirmed) {
         return; 
       }
-
-      const res = await AxiosInstance.delete(`/Semester?id=${id}`);
+      this.editedProduct.isActive = '0';
+      const res = await AxiosInstance.put(`/Semester/SoftUpdateSemester`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
       console.log(res);
 
-      if (res.status === 200) {
         console.log("Semester deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 
         this.selectedSem = '';
-      this.selectedProduct = { id:'', name: '', description: '',universityId:'' };
+      this.selectedProduct = { id:'', name: '', description: '',universityId:'',isActive: '' };
 
         // Show success dialog
         this.$refs.Confirmation.open("Semester deleted successfully.");
-      }
-    } catch (error) {
-      console.error("Error deleting Semester:", error);
-
-      // Show error dialog
-      this.$refs.Confirmation.open("Error deleting Semester.");
-    } finally {
+   
+    }  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+    } 
+    finally {
       this.isLoading = false;
     }
   },
@@ -347,14 +346,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 7px 18px;
+      padding: 6px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 68px;
-      left: 780px;
+      top: 65px;
+      left: 842px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -420,4 +419,8 @@ background-color: #f8f9fa;
 .button-row button {
 margin-right: 10px; 
 }
+
+.bn{
+  padding: 10px 25px;
+ }
 </style>

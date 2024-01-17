@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Subject Name :</label>
-        <select v-model="selectedCourse" @change="loadProductDetails">
+        <select v-model="selectedCourse" @change="loadProductDetails" style="padding: 4px;">
           <option value="" disabled selected hidden>Please Select</option>
           <option v-for="product in products" :key="product.id" :value="product.id">
             {{ product.name }}
@@ -24,6 +24,7 @@
               <th>Semester Id</th>
               <th>Work Flow</th>
               <th>Faculty Id</th>
+              <th>IsActive</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -58,9 +59,11 @@
                 </td>
 
               <td>{{ selectedProduct.facultyId }}</td>
+              <td>{{ selectedProduct.isActive }}</td>
+
               <td>
               <div class="button-row">
-                <button v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -101,15 +104,8 @@
                   <!-- <label for="courseName">Subject Name:</label>
                   <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
                   <label for="courseName"><b>Subject Rout Name:</b></label>
-  <input
-    id="courseName"
-    v-model="newBranch.courseName"
-    type="text"
-    required
-    pattern="[a-z0-9]+(-[a-z0-9]+)*"
-    title="Please enter a valid Kebab Case."
-  >
-  <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
+                  <input id="courseName" v-model="newBranch.courseName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+                  <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
 
 
                   <label for="workFlowStatement">Work Flow:</label>
@@ -121,6 +117,10 @@
 
                 <label for="facultyId"><b>FacultyId:</b></label>
                 <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
+
+                <label for="isActive">IsActive:</label>
+               <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
+ 
 
                   <button class="btn2" type="submit">Add Subject</button>
               </form>
@@ -157,7 +157,7 @@ export default {
       formVisible: false,
       products: [],
       selectedCourse: '',
-      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' },
+      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '' },
       isLoading: false,
       editMode: false,
       editedProduct: {
@@ -169,7 +169,8 @@ export default {
       semesterId:null, 
       courseName:'',
       workFlowStatement:'',
-      facultyId:null
+      facultyId:null,
+      isActive: '',
     },
       newBranch: {
       name: '',
@@ -181,6 +182,7 @@ export default {
       courseName:'',
       workFlowStatement:'',
       facultyId: '',
+      isActive: 1,
      },
     };
   },
@@ -219,10 +221,13 @@ watch: {
     this.products = res.data;
     this.loadProductDetails();
 
-  } catch (error) {
-    console.log(error);
-  } finally {
-    this.isLoading = false;
+  }  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      } 
+       finally {
+       this.isLoading = false;
   }
 },
 
@@ -248,28 +253,27 @@ async loadProductDetails() {
   this.editedProduct.courseName = this.selectedProduct.courseName;
   this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
   this.editedProduct.facultyId = this.selectedProduct.facultyId;
+  this.editedProduct.isActive = this. selectedProduct.isActive
 
 
 },
 
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement );
+    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement +'&isActive=' + this.editedProduct.isActive );
     console.log(res);
 
-    if (res.status === 200) {
       await this.loadData();
       this.editMode = false; // Disable edit mode after successful update
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("Subject Updated successfully.");
 
-    }
-    } catch (error) {
-      console.error(error);
-      this.$refs.Confirmation.open("Error Updating Subject.");
-
-    }
+    }  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      } 
   },
 
 //   async updatePrice(id) {
@@ -311,7 +315,7 @@ async addBranch() {
   try {
     const response = await AxiosInstance.post(`/Course`, this.newBranch);
     this.ismodel = true; 
-  if (response.status === 200) {
+
     console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
@@ -330,16 +334,15 @@ async addBranch() {
       courseName:'',
       workFlowStatement:'',
       facultyId: '',
+      isActive: 1,
      };
      this.$refs.form.reset();
-      
-  } 
-} catch (error) {
-    this.isLoading = false;
-    console.error("Error adding branch:", error);
-    this.$refs.Confirmation.open("Error Adding Subject.");
-
-  }
+    
+}  catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+      } 
   finally {
          this.isLoading = false;
          this.formVisible = false;
@@ -354,9 +357,9 @@ async deleteProduct(id) {
       if (!confirmed) {
         return; // If the user cancels, do nothing
       }
-
-      const res = await AxiosInstance.delete(`/Course?id=${id}`);
-      console.log(res);
+        this.editedProduct.isActive = '0';
+         const res = await AxiosInstance.put(`/Branches/SoftUpdateCourse` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+        console.log(res);
 
       if (res.status === 200) {
         console.log("Subject deleted successfully");
@@ -364,7 +367,7 @@ async deleteProduct(id) {
         this.loadProductDetails();
 
         this.selectedCourse = '';
-      this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'' };
+      this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '' };
 
         // Show success dialog
         this.$refs.Confirmation.open("Subject deleted successfully.");
@@ -521,4 +524,8 @@ display: flex;
 .button-row button {
 margin-right: 10px; 
 }
+
+.bn{
+  padding: 10px 25px;
+ }
 </style>
