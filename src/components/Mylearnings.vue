@@ -941,10 +941,11 @@ input[type="radio"]:checked {
 .prog{
     position: relative;
     left: 90px;
+    bottom: 10px;
 }
 .time{
     position: relative;
-    bottom: 10px;
+    bottom: 20px;
 }
 .text {
     position: relative;

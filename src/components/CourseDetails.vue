@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="search_container" class="container-fluid jk">
+        <div id="search_container" class="container-fluid jk" v-if="this.book">
             <div class="first_block">
                 <div class="container">
                     <div class="search_inner_block">
@@ -246,7 +246,12 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div v-else class="">
+            <div v-if="!isLoading" class="">
+                <h2 class="courseDetails-else-part">Comming Soon ...</h2>
+            </div>
+        </div>
+    </div>    
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <div class="container-fluid cf"></div>
 </template>
@@ -347,6 +352,7 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
+            console.log(this.book);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             console.log(this.courseDetails);
@@ -547,8 +553,7 @@ export default {
 
                 this.videoOptions.sources = [
                     {
-                        // src: newVideoUrl,
-                        src:"https://dgoa3lo2n1ork.cloudfront.net/CheckingVideo/problem.m3u8",
+                        src: newVideoUrl,
                         type: this.videoType,
                         withCredentials: false,
                     }
@@ -1312,5 +1317,12 @@ input[type=submit] {
         margin-left: -7%;
     }
 
+}
+.courseDetails-else-part {
+    font: normal normal 600 22px/30px Segoe UI;
+    letter-spacing: 0px;
+    color: #0066CC;
+    text-align: center;
+    padding-top: 19%;
 }
 </style>

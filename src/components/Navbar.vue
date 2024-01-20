@@ -1,32 +1,19 @@
 <template>
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <button
-class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="color:black; font-size:28px;"></i></span>
             </button>
             <a class="navbar-brand " href="/"><img src="../assets/images/logo1.png" class="logo"></a>
 
-            <el-icon
-class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 13px;"
-                @click="toggleSearchBoxVisibility">
+            <el-icon class="el-input__icon search2" style="color: blue;cursor: pointer;margin-right: 13px;" @click="toggleSearchBoxVisibility">
                 <Search />
             </el-icon>
-            <el-row
-v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2"
-                style="width: 280px; position: relative; right: 9px;">
+            <el-row v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;">
                 <el-col :span="23">
-                    <el-autocomplete
-v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
-                        value-key="title" size="large"
-                        style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;"
-                        class="w-100 search" clearable placeholder="Search..." @select="handleSelect"
-                        @keydown.enter="handleKeyEnter(searchTerm)">
+                    <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false" value-key="title" size="large" style="background-color: color: blue; font-size: 12px; position: relative;left: 52px;" class="w-100 search" clearable placeholder="Search..." @select="handleSelect" @keydown.enter="handleKeyEnter(searchTerm)">
                         <template #suffix>
-                            <el-icon
-class="el-input__icon" style="color: blue; cursor: pointer;"
-                                @click="handleKeyEnter(searchTerm)">
+                            <el-icon class="el-input__icon" style="color: blue; cursor: pointer;" @click="handleKeyEnter(searchTerm)">
                                 <Search />
                             </el-icon>
                         </template>
@@ -60,19 +47,15 @@ class="el-input__icon" style="color: blue; cursor: pointer;"
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row
-v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
+                    <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
                         style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
-                            <el-autocomplete
-v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
                                 class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter.prevent="handleKeyEnter(searchTerm)">
                                 <template #suffix>
-                                    <el-icon
-class="el-input__icon" style="color: blue;cursor: pointer;"
-                                        @click="handleKeyEnter(searchTerm)">
+                                    <el-icon class="el-input__icon" style="color: blue;cursor: pointer;" @click="handleKeyEnter(searchTerm)">
                                         <Search />
                                     </el-icon>
                                 </template>
@@ -81,37 +64,20 @@ class="el-input__icon" style="color: blue;cursor: pointer;"
                     </el-row>
 
                     <li v-if="isLoggedIn" class="nav-item dropdown ">
-                        <a
-id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ isuser.name }}
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Hi {{ isuser.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/UpdatedProfile"><i
-class="fa fa-user"
-                                    aria-hidden="true"></i> Profile</router-link>
-                            <router-link
-v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item"
-                                to="/AdminPage"><i class="fa fa-user" aria-hidden="true"></i>
-                                Admin</router-link>
-                            <router-link class="dropdown-item" to="UserNotification"><i
-class="fa fa-bell"
-                                    aria-hidden="true"></i> Notifications</router-link>
-                            <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i>
-                                Setting</router-link>
+                            <router-link class="dropdown-item" to="/UpdatedProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</router-link>
+                            <router-link v-if="isUserAdmin || isUserSuperadmin || isUserfaculty" class="dropdown-item" to="/AdminPage"><i class="fa fa-user" aria-hidden="true"></i> Admin</router-link>
+                            <router-link class="dropdown-item" to="UserNotification"><i class="fa fa-bell" aria-hidden="true"></i> Notifications</router-link>
+                            <!-- <router-link class="dropdown-item" to=""><i class="fa fa-cog" aria-hidden="true"></i> Setting</router-link> -->
 
-                            <router-link class="dropdown-item" to="" @click="logout()"><i
-class="fa fa-sign-out"
-                                    aria-hidden="true"></i> Logout</router-link>
+                            <router-link class="dropdown-item" to="" @click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</router-link>
                         </div>
                     </li>
                     <li v-else class="nav-item" :class="{ 'active': isActive('/Login') }">
-                        <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign
-                                Up</span></router-link>
+                        <router-link to="/Login" class="nav-link">Login<span style="padding-left:5px;">/ Sign Up</span></router-link>
                     </li>
-
-
-
                 </ul>
             </div>
         </div>

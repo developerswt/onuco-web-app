@@ -37,6 +37,8 @@ export default {
 
 <style scoped>
 .jk {
-    margin-top: 8%;
+    position: relative;
+    top: 81px;
+    margin-bottom: 100px;
 }
 </style>

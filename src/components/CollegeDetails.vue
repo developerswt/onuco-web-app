@@ -3,8 +3,8 @@
         <Breadcrumbs class="container" />
         <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
-                <span id="aca_text"><b>Available</b></span> Semesters ({{ semester.length }})
-                <button class="bt">BUY NOW</button>
+                <span id="aca_text"><b>Available</b></span>Semesters ({{ semester.length }})
+            <router-link to="/Announcement"> <button class="bt">BUY NOW</button></router-link>
             </h4>
 
             <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
@@ -26,8 +26,7 @@
                                 <div class="">
                                     <div class="row kl">
                                         <div v-for="cou in filteredCourses(sem.id)" :key="cou.id" class="col-md-4 mb-2">
-                                            <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }"
-                                                style="color: white; text-decoration: none;">
+                                            <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }" style="color: white; text-decoration: none;">
                                                 <div id="sem_card" class="card mt-3">
                                                     <div class="card-title">
                                                         <div class="row">

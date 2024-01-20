@@ -98,13 +98,11 @@
     </div>
     <section id="Course_section">
         <div class="container">
-            <h5 class="course_text"><span id="course_text">Courses</span> (230)</h5>
-
+            <h5 class="course_text"><span id="course_text">Courses</span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="person in persons" :key="person.id">
 
-                    <router-link to="/SemesterDetails">
-
+                    <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName} }"  style="color: white; text-decoration: none;" >
                         <div id="instructor_card" class="card">
                             <div class="card-title">
                                 <div class="row">
@@ -184,16 +182,10 @@
     </section>
     <section id="non_course_section">
         <div class="container">
-            <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (10)</h5>
-
-
+            <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
             <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="slide in 5" :key="slide">
 
-
-
-
-                    <!-- <div class="col-md-6 col-lg-4"> -->
                     <router-link to="/SemesterDetails">
 
                         <div id="instructor_card" class="card">
@@ -285,7 +277,7 @@
 </template>
 
 <script>
-import axiosInstance from '../config/axiosInstance'
+import AxiosInstance from '../config/axiosInstance'
 import Breadcrumbs from "./Breadcrumbs.vue"
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -384,14 +376,14 @@ export default {
     async created() {
         this.isLoading = true;
         try {
-            const res = await axiosInstance.get(`/Faculty/` + this.$route.params.name);
+            const res = await AxiosInstance.get(`/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
             this.activeName = this.faculty.attributue[0].heading;
-            const result = await axiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
+            const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
             this.ratings = result.data.averageRating;
             this.ratingCount = result.data.ratingCount;
             console.log(this.ratings);
-            const results = await axiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
+            const results = await AxiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
             this.persons = results.data;
             console.log(this.persons);
 

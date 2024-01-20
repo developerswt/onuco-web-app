@@ -168,9 +168,7 @@
      },
      async updateProduct(id) {
        try {
-        const confirmed = await this.$refs.Confirmation.open(
-           "Are You Sure Update this?"
-         );
+        const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
          if (!confirmed) {
            return; 
          }
@@ -324,6 +322,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        
       }
      .btn1{
         color: #fff;

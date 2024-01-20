@@ -417,10 +417,12 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    /* padding: 8px 12px; */
+    padding: 10px 22px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: 600;
+      font-size: 15px;
    }
    .btn2 {
       color: #fff;
@@ -447,7 +449,7 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 7px 18px;
+      padding: 10px 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -526,6 +528,8 @@ margin-right: 10px;
 }
 
 .bn{
-  padding: 10px 25px;
+  padding: 10px 31px;
+  font-weight: 600;
+    font-size: 15px;
  }
 </style>

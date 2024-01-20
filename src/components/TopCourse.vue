@@ -66,7 +66,7 @@
         <div class="row align" >
         <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4">
             <div class="box ">
-                <router-link to="/Universities" style="text-decoration: none;">
+                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
                     <div class="wer">
                         <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap"> -->
                         <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">

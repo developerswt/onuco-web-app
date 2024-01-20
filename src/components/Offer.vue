@@ -1,11 +1,11 @@
 <template>
     <div class="container-fluid">
         <div id="offer_block" class="container-fluid">
+            <div class="container">
             <h4 class="academic_head_text">
-
                 <span id="aca_text">Refer</span>And Learn Free
-
             </h4>
+        </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-lg-7">
@@ -158,7 +158,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
-    padding-left: 4.5em;
+    padding-left: 0px;
 
 }
 
@@ -238,5 +238,8 @@ h2 {
     .academic_head_text {
         margin-top: 20px !important;
     }
+}
+.container{
+    padding : 0px;
 }
 </style>

@@ -11,27 +11,27 @@
       <div class="carousel-inner">
         <!-- Slide 1 -->
         <div class="carousel-item active">
-          <img src="../assets/images/B_1.png" alt="Banner 1" class="d-block w-100 img-fluid">
+          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_1.png" alt="Banner 1" class="d-block w-100 img-fluid">
         </div>
 
         <!-- Slide 2 -->
         <div class="carousel-item">
-          <img src="../assets/images/B_2.png" alt="Banner 2" class="d-block w-100 img-fluid">
+          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_2.png" alt="Banner 2" class="d-block w-100 img-fluid">
         </div>
 
         <!-- Slide 3 -->
         <div class="carousel-item">
-          <img src="../assets/images/B_3.png" alt="Banner 3" class="d-block w-100 img-fluid">
+          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_3.png" alt="Banner 3" class="d-block w-100 img-fluid">
         </div>
 
         <!-- Slide 4 -->
         <div class="carousel-item">
-          <img src="../assets/images/B_4.png" alt="Banner 4" class="d-block w-100 img-fluid">
+          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_4.png" alt="Banner 4" class="d-block w-100 img-fluid">
         </div>
 
         <!-- Slide 5 -->
         <div class="carousel-item">
-          <img src="../assets/images/B_5.png" alt="Banner 5" class="d-block w-100 img-fluid">
+          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_5.png" alt="Banner 5" class="d-block w-100 img-fluid">
         </div>
       </div>
     </div>
@@ -41,6 +41,17 @@
 <script>
 export default {
   name: 'CarouselView',
+  data() {
+    return {
+      bannerImg: [
+        'https://dev.skillmeridiandev.tech/public/assets/images/B_1.png',
+        'https://dev.skillmeridiandev.tech/public/assets/images/B_2.png',
+        'https://dev.skillmeridiandev.tech/public/assets/images/B_3.png',
+        'https://dev.skillmeridiandev.tech/public/assets/images/B_4.png',
+        'https://dev.skillmeridiandev.tech/public/assets/images/B_5.png',
+      ]
+    }
+  }
 }
 </script>
 
@@ -55,6 +66,9 @@ export default {
   position: relative;
   top: 10%;
   border-radius: 100%;
+}
+.img-fluid {
+  height: 250px;
 }
 
 .carousel-indicators .active {
