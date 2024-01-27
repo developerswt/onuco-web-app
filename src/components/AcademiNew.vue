@@ -103,11 +103,11 @@ export default {
     border: 1px solid #ccc;
     border-radius: 25px;
     border-top-left-radius: 160px 130px;
-    margin: 20px;
+    margin: 11px;
     background: #F6F6F6;
     background: #F6F6F6;
     background: radial-gradient(ellipse farthest-corner at top right, #F6F6F6 5%, #0077FF 67%);
-    margin-bottom: 67%;
+    margin-bottom: 35%;
     transition: 0.3s;
 }
 .mb .card-title {

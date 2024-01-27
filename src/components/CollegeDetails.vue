@@ -8,6 +8,9 @@
             </h4>
 
             <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
+            <div v-if="showShareButton"  class="overlay">
+                <ShareButton :url="currentRoute" @close="closeShareOption"  />
+            </div>
             <div class="pt-2">
                 <div v-for="(sem, index) in semester" :key="index" class="row">
                     <div id="main_card" class="card">
@@ -26,13 +29,13 @@
                                 <div class="">
                                     <div class="row kl">
                                         <div v-for="cou in filteredCourses(sem.id)" :key="cou.id" class="col-md-4 mb-2">
-                                            <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }" style="color: white; text-decoration: none;">
-                                                <div id="sem_card" class="card mt-3">
-                                                    <div class="card-title">
-                                                        <div class="row">
-                                                            <div class="col-lg-12 mn">
-                                                                <div class="row">
-                                                                    <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                            <div id="sem_card" class="card mt-3">
+                                                <div class="card-title">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 mn">
+                                                            <div class="row">
+                                                                <div class="col-lg-8 col-9 col-sm-9 col-md-9">
+                                                                    <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }" style="color: white; text-decoration: none;">
                                                                         <div class="row">
                                                                             <div class="col-lg-12 col-9 col-sm-9 col-md-9">
                                                                                 <p id="sub_text" class="mb-0"
@@ -47,15 +50,16 @@
                                                                             </div>
                                                                         </div>
 
-
-                                                                    </div>
-                                                                    <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                                        <img src="../assets/images/Union193.png"
-                                                                            style="width: 16px; height: 20px;" class="icon">
-                                                                    </div>
+                                                                    </router-link>
+                                                                </div>
+                                                                <div class="col-lg-4 col-3 col-sm-3 col-md-3">
+                                                                    <img @click.stop="showShareOption(cou.courseName)" src="../assets/images/Union193.png"
+                                                                        style="width: 16px; height: 20px;" class="icon">
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }" style="color: white; text-decoration: none;">
                                                         <div class="row">
                                                             <div class="col-lg-12 mn">
                                                                 <div class="row">
@@ -76,21 +80,18 @@
                                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
                                                                         <StarRatings :rating="cou.starRating || 0"
                                                                             :max-rating="5" />
-                                                                        <!-- <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                    <i class="fa fa-star-o"></i> -->
                                                                     </div>
                                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                                         <p id="review_text" style="color: #828282;">({{
-                                                                            cou.ratingCount || 0 }} reviews)</p>
+                                                                                cou.ratingCount || 0 }} reviews)</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </router-link>    
                                                 </div>
-                                            </router-link>
+                                            </div>
+                                            <!-- </router-link> -->
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +113,6 @@
             </div>
         </div>
     </div>
-
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
@@ -124,6 +124,7 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Breadcrumbs from './Breadcrumbs.vue';
 import StarRatings from './StarRatings.vue';
+import ShareButton from './ShareButton.vue';
 
 export default {
     name: 'CollegeDetails',
@@ -131,10 +132,13 @@ export default {
         Offer,
         Loading,
         Breadcrumbs,
-        StarRatings
+        StarRatings,
+        ShareButton
     },
     data() {
         return {
+            currentRoute: "",
+            showShareButton: false,
             ratingCount: '',
             isLoading: false,
             semester: [],
@@ -163,6 +167,15 @@ export default {
         }
     },
     methods: {
+        showShareOption(courseName) {
+            console.log(courseName);
+            this.showShareButton = true;
+            this.currentRoute = `https://dev.skillmeridiandev.tech/CourseDetails/${courseName}`;
+        },
+        closeShareOption() {
+            this.showShareButton = false;
+            this.currentCourseIndex = null;
+        },        
         async getByRatings(courseId) {
             try {
                 const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
@@ -621,5 +634,13 @@ export default {
     #sem_icon {
         font-size: 25px;
     }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
 }
 </style>

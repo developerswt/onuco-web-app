@@ -401,8 +401,6 @@ export default {
         try {
             const response = await fetch(`https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/GlobalSearch?searchTerm=${this.searchQuery}`);
             const data = await response.json();
-
-            // Assuming your API returns an array of objects with a "name" property
             this.searchResults = data;
         } catch (error) {
             console.error('Error fetching search results:', error);

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="" style="padding-left: 20%;">
     <button style="margin-top: 10%;margin-bottom: 20%;align-items: center;" @click="redirectToPayU">Pay with PayU</button>
   </div>
@@ -44,4 +44,36 @@ export default {
   },
 };
 </script>
-  
+   -->
+
+<!-- PaymentComponent.vue -->
+<template>
+  <div>
+    <button @click="initiatePayment" style="padding-top: 5%;">Pay with PhonePe</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PayuPage',
+  methods: {
+    initiatePayment() {
+      // Make API call to initiate payment
+      // Use Axios to make a POST request to your server
+      axios.post('https://developer.phonepe.com/v1/reference/pay-api#pay-request-for-web-flow', { amount: 0 })
+        .then(response => {
+          // Handle the response
+          const paymentUrl = response.data.paymentUrl;
+          window.location.href = paymentUrl; // Redirect the user to PhonePe payment page
+        })
+        .catch(error => {
+          console.error('Error initiating payment:', error);
+        });
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Add your component styles here */
+</style>

@@ -5,6 +5,11 @@
         <div class="card-box">
           <div class="card-head">
             <header>Student Info Details</header>
+            <div class="filter-box">
+          <span for="filter-text-box">Search Here : </span>
+          <input  class="search-box" id="filter-text-box" type="text" placeholder="Search...." />
+          <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
+        </div>
             <div class="card-body ">
 
               <div style="padding: 20px;">
@@ -13,7 +18,8 @@
 
                   <div style="height: 100%;">
                     <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                    v-if="hasSearched"
+                      :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -55,10 +61,12 @@ class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style=
                                         
                                          <p><b>Price:</b> {{ childPara.price }}</p> -->
 
-                              <div class="">
+                              <!-- <div class="">
                                 <label><b>Start Date:</b></label><br>
                                 <Datepicker v-model="childPara.startdate"></Datepicker>
-                              </div>
+                              </div> -->
+                              <p><b>Start Date: </b> {{ childPara.startdate }}</p>
+
                               <div class="">
                                 <label><b>End Date:</b></label><br>
                                 <Datepicker v-model="childPara.enddate"></Datepicker>
@@ -78,15 +86,11 @@ class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style=
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                           @click="update(childPara.id)">Update</button> -->
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()">
-      {{ ismodel ? 'Edit' : 'Update' }}
-    </button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()"> {{ ismodel ? 'Edit' : 'Update' }}</button>
     <!-- <button v-if="!ismodel" type="button" class="btn btn-danger" @click="deleteUserSubscription">
         Delete
     </button> -->
-                        <button
-type="button" class="btn btn-secondary" data-dismiss="modal"
-                          @click="OpenCloseFun()">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
                       </div>
 
                     </div>
@@ -130,6 +134,10 @@ export default {
   },
   data: function () {
     return {
+      hasSearched: false,
+      gridApi: null, // Ensure gridApi is initialized to null
+      gridColumnApi: null,
+      filterText: '',
       userName: '',
       ismodel: true,
       isLoading: false,
@@ -184,9 +192,39 @@ export default {
     this.paginationPageSize = 10;
 
   },
-
+  watch: {
+  filterText: {
+    handler: function (newFilterText) {
+      // Ensure gridApi is available before setting quick filter
+      if (this.gridApi) {
+        this.gridApi.setQuickFilter(newFilterText);
+      }
+    },
+    deep: true, // Watch changes deeply
+  },
+},
 
   methods: {
+
+    onFilterButtonClick() {
+  this.filterText = document.getElementById('filter-text-box').value.trim();
+  this.hasSearched = true;
+
+  console.log('Filter Text:', this.filterText);
+  this.rowData = this.Orders.filter(order => {
+  const lowerCaseFilter = this.filterText.toLowerCase();
+  const includescourseName = order.courseName.toLowerCase().includes(lowerCaseFilter);
+  const includesuserCognitoId = order.userCognitoId.toLowerCase() === lowerCaseFilter;
+
+  // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
+  return includescourseName || includesuserCognitoId;
+});
+
+
+
+  console.log('Filtered Data:', this.rowData);
+},
+
 
     getUserLink(userCognitoId) {
       return `/user-profile/${userCognitoId}`;
@@ -265,9 +303,9 @@ export default {
     update(id) {
       this.showDialog = false;
       try {
-        const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
+        // const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
         const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
-        const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newStartDate=' + encodeURIComponent(formattedStartDate) + '&newEndDate=' + encodeURIComponent(formattedEndDate));
+        const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newEndDate=' + encodeURIComponent(formattedEndDate));
         console.log(res);
 
         // this.gridApi.refreshCells({force : true});
@@ -453,8 +491,8 @@ export default {
 }
 
 .mc {
-  height: 450px;
-  width: 650px;
+  height: 480px;
+  width: 750px;
   overflow: hidden;
 }
 
@@ -475,11 +513,10 @@ button {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 10px 15px;
+  padding: 11px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 20px;
 }
 
 button:hover {
@@ -544,5 +581,17 @@ button:hover {
   line-height: 17px;
   font-size: 17px;
   letter-spacing: 1px;
+}
+.bg-light{
+  height: 370px;
+}
+.search-box{
+  width:70%;
+  padding: 0px;
+}
+.filter-box{
+  position: relative;
+    left: 22px;
+    top: 20px;
 }
 </style>

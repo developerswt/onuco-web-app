@@ -1,37 +1,12 @@
 <template>
-  <div class="container-fluid  carousel_header">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div class="container-fluid carousel_header">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li v-for="(img, index) in bannerImg" :key="index" :data-target="'#myCarousel'" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
       </ol>
       <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_1.png" alt="Banner 1" class="d-block w-100 img-fluid">
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_2.png" alt="Banner 2" class="d-block w-100 img-fluid">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_3.png" alt="Banner 3" class="d-block w-100 img-fluid">
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="carousel-item">
-          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_4.png" alt="Banner 4" class="d-block w-100 img-fluid">
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="carousel-item">
-          <img src="https://dev.skillmeridiandev.tech/public/assets/images/B_5.png" alt="Banner 5" class="d-block w-100 img-fluid">
+        <div v-for="(img, index) in bannerImg" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
+          <img :src="img" :alt="'Banner ' + (index + 1)" class="d-block w-100 img-fluid">
         </div>
       </div>
     </div>
@@ -44,11 +19,11 @@ export default {
   data() {
     return {
       bannerImg: [
-        'https://dev.skillmeridiandev.tech/public/assets/images/B_1.png',
-        'https://dev.skillmeridiandev.tech/public/assets/images/B_2.png',
-        'https://dev.skillmeridiandev.tech/public/assets/images/B_3.png',
-        'https://dev.skillmeridiandev.tech/public/assets/images/B_4.png',
-        'https://dev.skillmeridiandev.tech/public/assets/images/B_5.png',
+        'https://dev.skillmeridiandev.tech/assets/images/B_1.png',
+        'https://dev.skillmeridiandev.tech/assets/images/B_2.png',
+        'https://dev.skillmeridiandev.tech/assets/images/B_3.png',
+        'https://dev.skillmeridiandev.tech/assets/images/B_4.png',
+        'https://dev.skillmeridiandev.tech/assets/images/B_5.png',
       ]
     }
   }

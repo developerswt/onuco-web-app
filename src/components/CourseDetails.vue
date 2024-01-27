@@ -136,7 +136,7 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-6 col-sm-6">
                                                                         <div class="accordion_block_two">
-                                                                            <p id="duration_text">40m 13s</p>
+                                                                            <p id="duration_text">{{ lessons.chapterTime }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -379,7 +379,7 @@ export default {
 
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                    src: "https://dgoa3lo2n1ork.cloudfront.net/CheckingVideo/problem.m3u8",
                     type: this.videoType,
                     withCredentials: false,
                 }
