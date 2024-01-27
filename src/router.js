@@ -67,6 +67,9 @@ import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
 
 import Confirmation from './components/Confirmation.vue'
 import FacultyPayment from './components/FacultyPayment.vue'
+import ShareButton from './components/ShareButton.vue'
+import PayuPage from './components/PayuPage.vue'
+
 
 let user = null; // Initialize user as null
 
@@ -552,6 +555,24 @@ const routes = [
     path: "/AdminPage",
     name: "AdminPage",
     component: AdminPage,
+    meta: {
+        title: 'Admin Page',
+    },
+
+  },
+  {
+    path: "/PayuPage",
+    name: "PayuPage",
+    component: PayuPage,
+    meta: {
+        title: 'PayU Page',
+    },
+
+  },
+  {
+    path: "/ShareButton",
+    name: "ShareButton",
+    component: ShareButton,
     meta: {
         title: 'Admin Page',
     },

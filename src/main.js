@@ -13,6 +13,7 @@ import '@aws-amplify/ui-vue/styles.css';
 import awsconfig from './aws-exports';
 import VueGtm from '@gtm-support/vue-gtm';
 import VueApexCharts from "vue3-apexcharts";
+import VueSocialSharing from 'vue-social-sharing'
 //import VueBreadcrumbs from 'vue2-breadcrumbs';
 
 // import customAmplifyTheme from './config/amplify-theme';
@@ -30,6 +31,7 @@ app.use(router);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
   }
+app.use(VueSocialSharing);  
 app.use(store);
 app.use(AmplifyVue);
 app.use(ElementPlus);

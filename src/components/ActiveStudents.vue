@@ -1,13 +1,14 @@
 <template>
+    <h2 class="page_title">For Students</h2>
     <div class="row">
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
-                    <header>Active Students Survey</header>
+                    <header>No Of Register User Survey</header>
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="activeStudentOptions" :series="activeStudentSeries"></apexchart>
+                        <apexchart class="pt-5" :options="registerUserOptions" :series="registerUserSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -15,11 +16,11 @@
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
-                    <header>Course Vs Students Survey</header>
+                    <header>No Of Subscribed Students Survey</header>
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="subjectOptions" :series="subjectSeries"></apexchart>
+                        <apexchart class="pt-5" :options="subScribedStdOptions" :series="subScribedStdSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -29,12 +30,27 @@
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
-                    <header>Faculty Vs Students Survey</header>
+                    <header>No Of ActiveSubscription Survey</header>
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="lectureStudentsOptions" :series="lectureStudentsSeries">
+                        <apexchart class="pt-5" :options="activeSubscriptionOptions" :series="activeSubscriptionSeries">
                         </apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="page_title">For Faculty</h2>
+    <div class="row">    
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of faculties entrolled Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="facultiesEntrolledOptions" :series="facultiesEntrolledSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -42,11 +58,79 @@
         <div class="col-sm-6">
             <div class="card card-box">
                 <div class="card-head">
-                    <header>Faculty Vs Subjects Survey</header>
+                    <header>No Of Active Faculties Survey</header>
                 </div>
                 <div class="card-body">
                     <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="lectureSubjectOptions" :series="lectureSubjectSeries"></apexchart>
+                        <apexchart class="pt-5" :options="activeFacultiesOptions" :series="activeFacultiesSeries"></apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="page_title">For Courses</h2>
+    <div class="row">    
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of Courses Available In System Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="coursesAvailableOptions" :series="coursesAvailableSeries"></apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of Active Courses Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="activeCoursesOptions" :series="activeCoursesSeries"></apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">    
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of Courses Subscribed Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="coursesSubscribedOptions" :series="coursesSubscribedSeries"></apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <h2 class="page_title">Course Details</h2>
+    <div class="row">    
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of Courses Subscribed Every Year Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="couSubEveryYearOptions" :series="couSubEveryYearSeries"></apexchart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card card-box">
+                <div class="card-head">
+                    <header>No Of Active/In Active Courses Survey</header>
+                </div>
+                <div class="card-body">
+                    <div class="recent-report__chart">
+                        <apexchart class="pt-5" :options="actInactCouOptions" :series="actInactCouSeries"></apexchart>
                     </div>
                 </div>
             </div>
@@ -65,7 +149,8 @@ export default {
     },
     data() {
         return {
-            activeStudentOptions: {
+            // For Students :
+            registerUserOptions: {
                 chart: {
                     id: 'vuechart-example',
                 },
@@ -83,7 +168,7 @@ export default {
                         rotate: 0
                     },
                     title: {
-                        text: "No Of Active Students and Total Price",
+                        text: "No Of Register User",
                     },
                 },
                 yaxis: [
@@ -105,7 +190,7 @@ export default {
                 },
 
             },
-            activeStudentSeries: [{
+            registerUserSeries: [{
                 name: 'ActiveUser',
                 data: [],
                 type: 'bar',
@@ -116,9 +201,9 @@ export default {
                 type: 'line',
             },
             ],
-            // Course Vs Subject
-            course: [],
-            subjectOptions: {
+            // No Of Subscribed Students Survey
+            subscribedStd: [],
+            subScribedStdOptions: {
                 chart: {
                     id: 'vuechart-example'
                 },
@@ -135,6 +220,48 @@ export default {
                     labels: {
                         show: true,
                         rotate: -40,
+                    },
+                    title: {
+                        text: "No Of Subscribed Students",
+                    },
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "Subscribed Students",
+                        },
+                    },
+                ],
+            },
+            subScribedStdSeries: [
+                {
+                    name: 'Subscribed Students',
+                    type: 'bar',
+                    data: [],
+                },
+            ],
+            // No Of ActiveSubscription Survey
+            course: [],
+            activeSubscriptionOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "30%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: -40,
+                    },
+                    title: {
+                        text: "No Of ActiveSubscription",
                     }
                 },
                 yaxis: [
@@ -157,7 +284,7 @@ export default {
 
                 },
             },
-            subjectSeries: [
+            activeSubscriptionSeries: [
                 {
                     name: 'Subscribed Students',
                     type: 'bar',
@@ -169,9 +296,10 @@ export default {
                     data: [],
                 },
             ],
-            // Lecture Vs Students
+            // For Faculty :
+            // No Of faculties entrolled
             lectureStudent: [],
-            lectureStudentsOptions: {
+            facultiesEntrolledOptions: {
                 chart: {
                     id: 'vuechart-example'
                 },
@@ -190,7 +318,7 @@ export default {
                         rotate: 0,
                     },
                     title: {
-                        text: "Lecture VS Students"
+                        text: "No Of Faculties Entrolled"
                     }
                 },
                 yaxis: [
@@ -204,16 +332,16 @@ export default {
                     enabled: true,
                 },
             },
-            lectureStudentsSeries: [
+            facultiesEntrolledSeries: [
                 {
                     name: 'Lecture VS Students',
                     type: 'bar',
                     data: [],
                 },
             ],
-            // Lecture vs Subject
+            // No Of Active Faculties
             lectureSubject: [],
-            lectureSubjectOptions: {
+            activeFacultiesOptions: {
                 chart: {
                     id: 'vuechart-example'
                 },
@@ -232,7 +360,7 @@ export default {
                         rotate: 0,
                     },
                     title: {
-                        text: "Lecture Vs Course",
+                        text: "No Of Active Faculties",
                     }
                 },
                 yaxis: [
@@ -255,7 +383,272 @@ export default {
 
                 },
             },
-            lectureSubjectSeries: [
+            activeFacultiesSeries: [
+                {
+                    name: 'Lecture Subjects',
+                    type: 'bar',
+                    data: [],
+                },
+                {
+                    name: 'Lecture Subjects Price',
+                    type: 'line',
+                    data: [],
+                },
+            ],
+            // For Courses
+            // No Of Courses Available In System
+            coursesAvailable: [],
+            coursesAvailableOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: 0,
+                    },
+                    title: {
+                        text: "No Of Courses Available In System",
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "No Of Course",
+                        },
+                    },
+                ],
+            },
+            coursesAvailableSeries: [
+                {
+                    name: 'Course available',
+                    type: 'bar',
+                    data: [],
+                },
+            ],
+            // No Of Active Courses
+            lectureSubject: [],
+            activeCoursesOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: 0,
+                    },
+                    title: {
+                        text: "No Of Active Courses",
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "No Of Course",
+                        },
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: "Total Amount Collected",
+                        },
+                    },
+                ],
+                // DataLabels configuration for the entire chart
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+
+                },
+            },
+            activeCoursesSeries: [
+                {
+                    name: 'Lecture Subjects',
+                    type: 'bar',
+                    data: [],
+                },
+                {
+                    name: 'Lecture Subjects Price',
+                    type: 'line',
+                    data: [],
+                },
+            ],
+            // No Of Courses Subscribed
+            lectureSubject: [],
+            coursesSubscribedOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: 0,
+                    },
+                    title: {
+                        text: "No Of Courses Subscribed",
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "No Of Course",
+                        },
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: "Total Amount Collected",
+                        },
+                    },
+                ],
+                // DataLabels configuration for the entire chart
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+
+                },
+            },
+            coursesSubscribedSeries: [
+                {
+                    name: 'Lecture Subjects',
+                    type: 'bar',
+                    data: [],
+                },
+                {
+                    name: 'Lecture Subjects Price',
+                    type: 'line',
+                    data: [],
+                },
+            ],
+            //  Course Details :
+            // No Of Courses Subscribed Every Year
+            lectureSubject: [],
+            couSubEveryYearOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: 0,
+                    },
+                    title: {
+                        text: "No Of Courses Subscribed Every Year",
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "No Of Course",
+                        },
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: "Total Amount Collected",
+                        },
+                    },
+                ],
+                // DataLabels configuration for the entire chart
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+
+                },
+            },
+            couSubEveryYearSeries: [
+                {
+                    name: 'Lecture Subjects',
+                    type: 'bar',
+                    data: [],
+                },
+                {
+                    name: 'Lecture Subjects Price',
+                    type: 'line',
+                    data: [],
+                },
+            ],
+            // No Of Active In Active Courses
+            lectureSubject: [],
+            actInactCouOptions: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%",
+                        barWidth: "2%",
+                        group: 'group',
+                        barHeight: "80%" // Adjust the width of the bars as needed
+                    },
+                },
+                xaxis: {
+                    categories: [],
+                    labels: {
+                        show: true,
+                        rotate: 0,
+                    },
+                    title: {
+                        text: "No Of Active In Active Courses",
+                    }
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "No Of Course",
+                        },
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: "Total Amount Collected",
+                        },
+                    },
+                ],
+                // DataLabels configuration for the entire chart
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+
+                },
+            },
+            actInactCouSeries: [
                 {
                     name: 'Lecture Subjects',
                     type: 'bar',
@@ -271,15 +664,17 @@ export default {
     },
     async created() {
         try {
-            const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
-            this.Orders = res.data;
-            const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
-            this.course = result.data;
+            const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
+            this.subscribedStd = res.data;
+            console.log(this.subscribedStd);
+            const result = await AxiosInstance.get(`/Course`);
+            this.coursesAvailable = result.data;
+            console.log(this.coursesAvailable);
             const resu = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
             this.lectureStudent = resu.data;
             const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
             this.lectureSubject = resul.data;
-            this.activeChartData();
+            this.subscribedStdChartData();
             this.subjectChartData();
             this.lectureStudentChartData();
             this.lectureSubjectChartData();
@@ -288,23 +683,51 @@ export default {
         }
     },
     methods: {
-        activeChartData() {
-            if (this.Orders) {
-                this.Orders.activeStudents.forEach(order => {
-                    const dataPoint = {
-                        x: this.getMonthYear(order.startdate),
-                        y: 1,
-                    };
-                    const Price = {
-                        x: this.getMonthYear(order.startdate),
-                        y: order.price,
-                    };
-                    this.activeStudentOptions.xaxis.categories.push(this.getMonthYear(order.startdate));
-                    this.activeStudentSeries[0].data.push(dataPoint);
-                    this.activeStudentSeries[1].data.push(Price);
-                });
-            }
-        },
+        subscribedStdChartData() {
+  if (this.subscribedStd) {
+    const yearCounts = {};
+
+    this.subscribedStd.completedStudents.forEach((order, index) => {
+      const year = new Date(order.startdate).getFullYear();
+      const monthYear = this.getMonthYear(order.startdate);
+
+      if (index > 0) {
+        const prevOrder = this.subscribedStd.completedStudents[index - 1];
+        const prevYear = new Date(prevOrder.startdate).getFullYear();
+
+        if (prevYear === year) {
+          // If the current year is the same as the previous, increment the count
+          const dataIndex = yearCounts[prevYear].index;
+          yearCounts[prevYear].count++;
+          this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
+          return; // Skip adding a new data point for the current order
+        }
+      }
+
+      if (!yearCounts[year]) {
+        yearCounts[year] = {
+          count: 1,
+          index: this.subScribedStdOptions.xaxis.categories.length,
+        };
+        this.subScribedStdOptions.xaxis.categories.push(monthYear);
+      } else {
+        // If the year already exists, increment the count and update the corresponding y-axis value
+        yearCounts[year].count++;
+        const dataIndex = yearCounts[year].index;
+        this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[year].count;
+      }
+
+      const dataPoint = {
+        x: monthYear,
+        y: yearCounts[year].count,
+      };
+
+      this.subScribedStdSeries[0].data.push(dataPoint);
+    });
+  }
+},
+
+
         subjectChartData() {
             if (this.course) {
                 this.course.forEach(course => {
@@ -353,14 +776,20 @@ export default {
         getMonthYear(date) {
             const d = new Date(date);
             const month = d.toLocaleString("en-US", { month: "short" });
-            return month;
-        },
+            const year = d.getFullYear();
+            return `${month} ${year}`;
+        }
     },
 }
 </script>
 
 
 <style scoped>
+.page_title {
+    color: #666;
+    font-size: 24px;
+    font-weight: bold;
+}
 .col-12 {
     flex: 0 0 auto;
     width: 100%;

@@ -39,17 +39,17 @@ export default {
 
 .star-rating span {
   margin-right: 5px;
-  color: gold;
+  color: #FF9900;
 }
 
 .star-rating span.filled {
-  color: gold;
+  color: #FF9900;
 }
 
 @media (max-width: 520px) {
   .star-rating span {
     margin-right: 0px;
-    color: gold;
+    color: #FF9900;
   }
 }
 </style>
