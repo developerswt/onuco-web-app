@@ -69,7 +69,7 @@ import Confirmation from './components/Confirmation.vue'
 import FacultyPayment from './components/FacultyPayment.vue'
 import ShareButton from './components/ShareButton.vue'
 import PayuPage from './components/PayuPage.vue'
-
+import FailurePayment from './components/FailurePayment.vue'
 
 let user = null; // Initialize user as null
 
@@ -583,12 +583,22 @@ const routes = [
     },
 
   },
+  {
+    path: "/FailurePayment",
+    name: "FailurePayment",
+    component: FailurePayment,
+    meta: {
+        title: 'FailurePayment Page',
+    },
+
+  }
 
 ];
 
 const router = createRouter({
 	history: createWebHistory(),
   // base: '',
+  mode: 'hash',
 	routes,
   breadcrumbs: {
     separator: " / ", // Customize the separator

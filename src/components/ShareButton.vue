@@ -18,6 +18,8 @@
               :description="network.description"
               :quote="network.quote"
               :hashtags="network.hashtags"
+              :titleClass="network.titleClass"  
+              :descriptionClass="network.descriptionClass" 
               style="text-decoration: none; display: inline-block; margin-right: 5px;"
             >
               <i :class="network.icon" class="share-icon"></i>&nbsp;&nbsp;
@@ -44,13 +46,7 @@
     data() {
       return {
         networks: [
-          { network: 'email', name: 'Email', icon: 'far fa-envelope', color: '#333333' },
-          { network: 'facebook', name: 'Facebook', icon: 'fab fa-facebook-f', color: '#1877f2' },
-          { network: 'linkedin', name: 'LinkedIn', icon: 'fab fa-linkedin', color: '#007bb5' },
-          { network: 'messenger', name: 'Messenger', icon: 'fab fa-facebook-messenger', color: '#0084ff' },
-          { network: 'telegram', name: 'Telegram', icon: 'fab fa-telegram-plane', color: '#0088cc' },
-          { network: 'twitter', name: 'Twitter', icon: 'fab fa-twitter', color: '#1da1f2' },
-          { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fa-whatsapp', color: '#25d366', title: 'Hi Welcome', description: 'Googd Product' },
+          { network: 'email', name: 'Email', icon: 'far fa-envelope', color: '#333333', title: "Course Details Url", description: "Use above url to continue the learning", titleClass: 'custom-title-class', descriptionClass: 'custom-description-class' },
         ],
       };
     },
@@ -125,6 +121,18 @@ header .fa {
 .share-text {
     font-size: 26px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.custom-title-class {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  /* Add more styles as needed */
+}
+
+.custom-description-class {
+  font-size: 16px;
+  color: #666;
+  /* Add more styles as needed */
 }
   </style>
   
