@@ -54,6 +54,14 @@
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Student Info</span>
           <StudentDetails />
         </div>
+        <div v-if="selectedContent === 'bestFaculty'" class="content-container">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Best Faculty</span>
+          <ApBestFaculty />
+        </div>
+        <div v-if="selectedContent === 'bestCourse'" class="content-container">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Best Course</span>
+          <ApBestCourse />
+        </div>
       </div>
     </div>
   </div>  
@@ -75,6 +83,8 @@ import AdTypes from './AdTypes.vue';
 import AdCourse from './AdCourse.vue';
 import ApLecture from './ApLecture.vue';
 import StudentDetails from './StudentDetails.vue'
+import ApBestFaculty from './ApBestFaculty.vue';
+import ApBestCourse from './ApBestCourse.vue';
 
 export default {
     name: 'AdminPage',
@@ -93,7 +103,9 @@ export default {
         AdTypes,
         AdCourse,
         ApLecture,
-        StudentDetails
+        StudentDetails,
+        ApBestFaculty,
+        ApBestCourse,
     },
     data() {
       return {

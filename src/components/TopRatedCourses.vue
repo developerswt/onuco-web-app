@@ -21,7 +21,7 @@
                                 <div class="card-img-top offer1"
                                     style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
                                     <br>
-                                    <p>{{ course.name }}</p>
+                                    <p style="position: absolute; left: 20px;">{{ course.name }}</p>
                                 </div>
                                 <div class="offer">
                                     <img class="card-img-top" src="../assets/images/offer.png">

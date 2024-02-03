@@ -1,10 +1,20 @@
 <template>
     <div class="container-fluid jk">
         <Breadcrumbs class="container" />
-        <div v-if="branches.length > 0 || academia.length > 0" class="container">
-            <h2 id="available_text"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
+        <div class="container">
+        <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
+                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
+            </p>
+            <p v-if="academia.readMore" class="professor-details_text">{{ academia.description }}
+                <span @click="toggleReadMore"><span style="color:blue;cursor: pointer;">Read less</span></span>
+            </p>
+        </div>
+        <div v-if="branches.length > 0 || academia.length > 0" class="container pb-3">
+            <h2 id="available_text" style="margin-top: -25px;"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
+
+            
             <div class="parent_blocks">
-                <div class="row pt-4">
+                <div class="row ">
                     <div v-for="branch in branches" :key="branch.id" class="box">
                         <router-link :to="{ name: 'Universities', params: { name: branch.branchName } }"
                             style="cursor: pointer; color: white; text-decoration: none;">
@@ -12,9 +22,9 @@
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
                                     <img src="../assets/images/book1.png" style="height: 65px;">
                                 </div>
-                                <div class="col-md-9 col-9 col-sm-9 " style="position: relative;right: 0px;">
-                                    <h5 data-placement="top" :title="branch.name">{{ branch.name }}</h5>
-                                    <p style="margin-top: -8px;" :title="branch.description">{{ branch.description }}</p>
+                                <div class="col-md-9 col-9 col-sm-9 " style="position: relative;right: 0px;top:10px">
+                                    <h5 data-placement="top" :title="branch.name">{{ branch.name.slice(0,25) }}...</h5>
+                                    <p style="margin-top: -8px;" :title="branch.description">{{ branch.description.slice(0,25) }}...</p>
 
                                 </div>
                             </div>
@@ -53,7 +63,11 @@ export default {
         return {
             isLoading: false,
             branches: [],
-            academia: [],
+            academia: {
+            name: '',
+            description: '',
+            readMore: false,  
+        },
         }
     },
     async created() {
@@ -73,7 +87,12 @@ export default {
         finally {
             this.isLoading = false;
         }
-    }
+    },
+    methods: {
+    toggleReadMore() {
+        this.academia.readMore = !this.academia.readMore;
+    },
+},
 }
 </script>
 
@@ -219,5 +238,18 @@ h2 {
 .col-md-9 {
     /* padding-right: 5px; */
     padding-left: 1px;
+}
+.professor-details_text{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal normal 16px/21px Segoe UI;
+letter-spacing: 0px;
+color: #828282;
+opacity: 1;
+    position: relative;
+    bottom: 18px;
+    right: 25px;
+
 }
 </style>

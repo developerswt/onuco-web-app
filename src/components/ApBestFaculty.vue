@@ -1,14 +1,22 @@
 <template>
   <div class="container">
-    <p>Dashbord > Branchs Update </p>
-    <div class="row">
-      <div class="col-lg-8 col-sm-12">
+    <div class="card-box">
+     <div class="card-head">
+       <header>Add Best Faculty</header>
+       <div class="filter-box">
+         <span for="filter-text-box">Search Here : </span>
+         <input  class="search-box" id="filter-text-box" type="text" placeholder="Search...." />
+         <button class="btn3 btn-primary" @click="onFilterButtonClick">Search</button>
+       </div>
+       <!-- ... other code ... -->
+     </div>
+     <div class="card-body">
         <div style="padding: 20px;">
 
           <div class="example-wrapper">
 
             <div style="height: 100%;">
-              <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue   v-if="hasSearched" :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -17,15 +25,19 @@
             </div>
           </div>
         </div>
-        <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
-      </div>
+        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
 
-
-      <div class="col-lg-4 col-sm-12">
-
-        <form v-show="formVisible" class="frm" style="margin-top:25px" @submit.prevent="addBranch">
-          <!-- <label for="id"> Id:</label>
-                    <input id="id" v-model="newBranch.id" type="text" required><br> -->
+<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title">Add New Course</h5>
+       <button type="button" class="close" @click="toggleForm">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <form @submit.prevent="addBranch"> 
           <p><b></b> {{ newBranch.id }}</p>
           <label for="branchName"> Name:</label>
           <input id="branchName" v-model="newBranch.name" type="text" required><br>
@@ -46,8 +58,12 @@
         </form>
       </div>
     </div>
-
+    </div>
+    </div>
+    </div>
+</div>
     <Loading v-model:active="isLoading"></Loading>
+    <Confirmation ref="Confirmation" />    
   </div>
 </template>
    
@@ -57,7 +73,7 @@ import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue3";
-// import AlertDialog from './AlertDialog.vue';
+import Confirmation from './Confirmation.vue';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
@@ -66,10 +82,14 @@ export default {
   components: {
     AgGridVue,
     Loading,
-    // AlertDialog
+    Confirmation,
   },
   data: function () {
     return {
+      hasSearched: false,
+     gridApi: null, // Ensure gridApi is initialized to null
+     gridColumnApi: null,
+     filterText: '',
       newBranch: {
 
         name: '',
@@ -136,8 +156,56 @@ export default {
     this.paginationPageSize = 10;
 
   },
-
+  watch: {
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
   methods: {
+    onFilterButtonClick() {
+   this.filterText = document.getElementById('filter-text-box').value;
+   this.hasSearched = true;
+
+   console.log('Filter Text:', this.filterText);
+
+   this.rowData = this.Orders.filter(order => {
+ const lowerCaseFilter = this.filterText.toLowerCase();
+ const includesname = order.name.toLowerCase().includes(lowerCaseFilter);
+
+ // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
+ return includesname;
+});
+
+
+   console.log('Filtered Data:', this.rowData);
+ },
+
+    toggleForm() {
+     // Toggle the visibility of the form modal
+     this.formVisible = !this.formVisible;
+
+     // If the form is being closed, reset the newBranch data
+     if (!this.formVisible) {
+       this.resetForm();
+     }
+   },
+
+   resetForm() {
+     // Reset the newBranch data to clear the form fields
+     this.newBranch = {
+      name: '',
+        description: '',
+        facultyId: '',
+        facultyDynamicRouting: '',
+        image: '',
+     };
+   },
     toggleForm() {
       this.formVisible = !this.formVisible;
     },
@@ -191,20 +259,18 @@ export default {
           console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
+          this.toggleForm();
+         this.$refs.Confirmation.open("Payment Details Added successfully.");
+       }
+   } catch (error) {
+       this.isLoading = false;
+       console.error("Error adding branch:", error);
+       this.$refs.Confirmation.open("Error Adding Payment Details.");
 
-          alert("Insert Successful");
-        } else {
-          // Show failure message
-          alert("Insert Fail");
-        }
-
-      } catch (error) {
-        this.isLoading = false;
-        console.error("Error adding branch:", error);
-      }
-      finally {
-        this.isLoading = false;
-      }
+     }
+     finally {
+       this.isLoading = false;
+     }
     },
     onLogOut() {
       this.$store.commit('isLoggedIn', false);
@@ -391,20 +457,32 @@ button {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 10px 15px;
+  padding: 10px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
+.btn3 {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 3px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+ font-size: 15px;
+}
 .btn2 {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 10px 15px;
+  padding: 12px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 600;
+ font-size: 15px;
 }
 
 .btn1 {
@@ -416,10 +494,79 @@ button {
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 80px;
+  position: relative;
+ top: 15px;
+ left: 21px;
+ font-weight: 600;
+ font-size: 15px;
 }
 
 
 button:hover {
   background-color: #007bff;
+}
+.card-box {
+   background-color: #fff;
+   border-radius: 10px;
+   position: relative;
+   margin-bottom: 20px;
+   border: 1px solid #deebfd;
+   box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+   border-radius: 2px 2px 0 0;
+   border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+   padding: 2px;
+   /* text-transform: uppercase; */
+   color: #3a405b;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 40px;
+   min-height: 40px;
+}
+.card-head header {
+   display: inline-block;
+   padding: 11px 20px;
+   vertical-align: middle;
+   line-height: 17px;
+   font-size: 17px;
+   letter-spacing: 1px;
+}.card-box {
+   background-color: #fff;
+   border-radius: 10px;
+   position: relative;
+   margin-bottom: 20px;
+   border: 1px solid #deebfd;
+   box-shadow: -8px 12px 18px 0 #dadee8;
+}
+
+.card-head {
+   border-radius: 2px 2px 0 0;
+   border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+   padding: 2px;
+   /* text-transform: uppercase; */
+   color: #3a405b;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 40px;
+   min-height: 40px;
+}
+.card-head header {
+   display: inline-block;
+   padding: 11px 20px;
+   vertical-align: middle;
+   line-height: 17px;
+   font-size: 17px;
+   letter-spacing: 1px;
+}
+.search-box{
+ width:70%;
+ padding: 0px;
+}
+.filter-box{
+ position: relative;
+   left: 22px;
+   top: 11px;
 }
 </style>

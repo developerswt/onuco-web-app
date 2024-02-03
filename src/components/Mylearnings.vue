@@ -131,8 +131,7 @@
                                                         <img src="../assets/images/Iconionic-ios-timer@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 17px;">
                                                         {{ calculateTime(selectedItem).timeInHours }}:{{
-                                                            calculateTime(selectedItem).timeInMinutes }}:{{
-        calculateTime(selectedItem).remainingSeconds }}
+                                                            calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
                                                     </div>
                                                     <div class="asset_image info2">
                                                         <img src="../assets/images/Iconmap-school@2x.png"
@@ -226,7 +225,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <div class="comp col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <p id="text_three">{{ remainingTimes(selectedItem) }}
                                                                     Completed</p>
                                                             </div>
@@ -950,5 +949,8 @@ input[type="radio"]:checked {
 .text {
     position: relative;
     right: 160px;
+}
+.comp{
+    height: 500px;
 }
 </style>

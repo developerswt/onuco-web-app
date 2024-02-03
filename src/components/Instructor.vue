@@ -104,9 +104,10 @@
             <h5 class="course_text"><span id="course_text">Courses</span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="person in persons" :key="person.id">
-                    <div id="instructor_card" class="card">
-                        <div class="card-title">
-                            <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
+                        <div id="instructor_card" class="card">
+                            <div class="card-title">
+                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
+
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <div class="card_top_text">
@@ -153,8 +154,9 @@
                                     </div>
                                 </div>
                             </router-link>
+                            </div>
                         </div>
-                    </div>
+                
                 </slide>
                 <template #addons>
 

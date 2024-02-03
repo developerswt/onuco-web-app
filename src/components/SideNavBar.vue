@@ -40,6 +40,8 @@
             <div id="collapseExample1" class="collapse hj">
               <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
               <span class="subtitle" @click="selectContent('facultyInfo')">Faculty Info</span>
+              <span class="subtitle" @click="selectContent('bestFaculty')">Add Best Faculty</span>
+              <span class="subtitle" @click="selectContent('bestCourse')">Add Best Course</span>
             </div>
           </li>
           <li>

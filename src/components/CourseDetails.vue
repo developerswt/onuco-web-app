@@ -26,15 +26,21 @@
                                         <span id="aca_text">{{ book.title }} </span>
 
                                     </h4>
-                                    <div class="">
+                                    <!-- <div class="">
                                         <p v-for="instructor in book.instructorName" id="professor_text"
                                             :key="instructor.id"> {{ instructor.name }}</p>
+                                    </div> -->
+                                    <div class="">
+                                        <router-link v-for="instructor in book.instructorName" :key="instructor.id" :to="{ name: 'Instructor', params: { name: instructor.facultyDyanamicRouting } }" style="color: white; text-decoration: none;">
+                                            <p id="professor_text">{{ instructor.name }}</p>
+                                        </router-link>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
                                             <p id="duration_text" class="mb-2"><img
-                                                    src="../assets/images/Iconionic-ios-timer@2x.png">{{
-                                                        book.videoDemand }}
+                                                    src="../assets/images/Iconionic-ios-timer@2x.png">    
+                                                     {{ formatDuration(book.videoDemand) }}
                                             </p>
                                         </div>
                                         <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
@@ -159,21 +165,14 @@
                                                                             <p id="intro_text">{{ subject.lession }}</p>
                                                                             <div class="row">
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
-                                                                                    <p id="duration_text_one">{{
-                                                                                        calculateTime(subject.id).timeInMinutes
-                                                                                    }}:{{
-    calculateTime(subject.id).remainingSeconds
-}}</p>
+                                                                                    <p id="duration_text_one">{{calculateRemainingTime(subject.id).timeInMinutes }}:{{  calculateRemainingTime(subject.id).remainingSeconds }} / {{ calculateTime(subject.id).timeInMinutes }}:{{ calculateTime(subject.id).remainingSeconds }}</p>
                                                                                 </div>
+  
                                                                                 <div class="col-lg-6 col-6 col-sm-6">
                                                                                     <div class="progress_block">
                                                                                         <div
                                                                                             v-if="hasMatchingVideoId(subject.id)">
-                                                                                            <progress
-                                                                                                :value="calculatePercentage(subject.id)"
-                                                                                                max="100">{{
-                                                                                                    getWatchTime(subject.id)
-                                                                                                }}</progress>
+                                                                                            <progress :value="calculatePercentage(subject.id)" max="100">{{ getWatchTime(subject.id) }}</progress>
                                                                                         </div>
                                                                                         <div v-else>
                                                                                             <progress value="0"
@@ -382,7 +381,7 @@ export default {
 
             this.videoOptions.sources = [
                 {
-                    src: this.book.videoUrl,
+                    src:  this.book.videoUrl,
                     type: this.videoType,
                     withCredentials: false,
                 }
@@ -400,6 +399,13 @@ export default {
         }
     },
     methods: {
+
+        formatDuration(duration) {
+        // Assuming the input is in hh:mm:ss format
+        const [hours, minutes, seconds] = duration.split(':');
+        return `${hours}h ${minutes}min`;
+    },
+
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -462,6 +468,27 @@ export default {
             }
         },
 
+
+        calculateRemainingTime(subjectId) {
+        const totalTime = this.getTotalTime(subjectId);
+        const watchTime = this.getWatchTime(subjectId);
+
+        if (totalTime && watchTime != 0) {
+
+            const remainingTimeInMinutes = Math.floor(watchTime / 60);
+            const remainingSeconds = Math.floor(watchTime % 60);
+
+            return {
+                timeInMinutes: remainingTimeInMinutes,
+                remainingSeconds: remainingSeconds,
+            };
+        } else {
+            return {
+                timeInMinutes: 0,
+                remainingSeconds: 0,
+            };
+        }
+    },
 
         getTotalTime(subjectId) {
             const subject = this.findSubjectById(subjectId);
@@ -1098,7 +1125,7 @@ progress {
     width: 171px;
     height: 10px;
     /* background: #fff; */
-    margin-left: -76px;
+    margin-left: -60px;
 }
 
 @media screen and (min-width: 760px) and (max-width: 915px) {

@@ -71,8 +71,8 @@ export default {
             imageSources: [
                 "../assets/images/foodadd.png",
                 "../assets/images/acadd.jpg",
-                "../assets/images/ac2.jpg",
-                "../assets/images/ac4.jpg",
+                "../assets/images/pfadd.jpg",
+                // "../assets/images/ac4.jpg",
             ],
             currentIndex: 0,
             username: localStorage.getItem('username')

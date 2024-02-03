@@ -282,7 +282,7 @@
                                 </div>
                             </el-tab-pane>
                             <!-- <el-tab-pane label="Course" name="second">Config</el-tab-pane> -->
-                            <el-tab-pane label="Author" name="third">
+                            <el-tab-pane label="Professor" name="third">
 
                                 <div class="row">
                                     <div class="col-lg-8 col-12 col-sm-12 col-md-8">

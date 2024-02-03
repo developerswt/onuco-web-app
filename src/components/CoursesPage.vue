@@ -14,7 +14,7 @@
 
               <div v-if="academi.academia.id == branch.academiaId" class="box">
 
-                <router-link :to="{ name: 'Universities', params: { name: branch.branchName } }"
+                <router-link :to="{ name: 'Universities', params: { name: branch.branchName }}"
                   style="color: white;text-decoration: none;">
 
                   <div class="row">
@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 10px;">
                       <div class="course_block_one">
-                        <h5 :title="branch.name">{{ branch.name.slice(0, 19) }}...</h5>
-                        <p style="margin-top: -8px;">{{ branch.description }}</p>
+                        <h5 :title="branch.name">{{ branch.name.slice(0, 15) }}...</h5>
+                        <p style="margin-top: -8px;"  :title="branch.description">{{ branch.description.slice(0, 20) }}...</p>
                       </div>
                     </div>
                     <div class="col-md-2 col-2 col-sm-2">
@@ -163,17 +163,17 @@ export default {
 
 
 .box h5 {
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'Times New Roman', Times, serif;
   text-align: left;
-  font: normal normal 600 17px/24px Segoe UI;
+  font: normal normal 600 18px/24px Segoe UI;
   letter-spacing: 0px;
   color: #0066CC;
   opacity: 1;
 }
 
 .box p {
-  font-size: 13px;
+  font-size: 16px;
 
   text-align: left;
 

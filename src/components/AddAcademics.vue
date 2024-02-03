@@ -4,15 +4,16 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Course Name :</label>
-        <select v-model="selectedAcademics" @change="emitSelectedType" style="padding: 4px;">
-          <option value="" disabled selected hidden>Please Select</option>
-
-      <option v-for="product in products" :key="product.id" :value="product.id">
-        {{ product.name }}
-      </option>
-    </select>
-      </div>
-      <div  class="table-responsive">
+        <el-select v-model="selectedAcademics" @change="emitSelectedType" style="padding: 4px;">
+              <el-option 
+                  v-for="product in products"
+                  :key="product.id"
+                  :value="product.id"
+                  :label="product.name"
+              ></el-option>
+            </el-select>
+        </div>
+      <div class="table-responsive" style="background-color: white;">
           <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
             <thead>
               <tr>
@@ -54,45 +55,36 @@
             </tbody>
 
         </table>
-        <div>
-        <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+      </div>
+        <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Add New Course</h5>
-      <button type="button" class="close" @click="toggleForm">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form ref="form" @submit.prevent="addBranch">
-            <p><b></b> {{newBranch.id}}</p>
-            <label for="branchName">Course Name:</label>
-            <input id="branchName" v-model="newBranch.name" type="text" required><br>
-      
-            <label for="description">Description:</label>
-            <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
-  
-            <label for="typeId">TypeId:</label>
-            <input id="typeId" v-model="this.selectedtype" type="text" readonly required><br>
-            
-            <label for="academiaName"><b>Course Rout Name:</b></label>
-            <input id="academiaName" v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
-            <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;position:relative; bottom:12px;">Please enter a valid Kebab Case.</span><br>
-
-            <label for="isActive">IsActive:</label>
-            <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
-            
-            <button class="btn2" type="submit">Add Course</button>
-          </form>
-          </div>
-          </div>
-          </div>
-          </div>
-        </div>
-    </div>
+        <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
+    <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+      <el-form-item>{{ newBranch.id }}</el-form-item>
+      <el-form-item label="Course Name" prop="name">
+        <el-input v-model="newBranch.name" @input="validateFirstLetterCapital" type="text" required></el-input>
+      </el-form-item>
+      <el-form-item label="Description" prop="description">
+        <el-input type="textarea" v-model="newBranch.description" class="size" required></el-input>
+      </el-form-item>
+      <el-form-item label="TypeId">
+        <el-input v-model="this.selectedtype" readonly required></el-input>
+      </el-form-item>
+      <el-form-item label="Course Rout Name" prop="academiaName">
+        <el-input v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+        </el-input>
+        <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;">
+          Please enter a valid Kebab Case.
+        </span>
+      </el-form-item>
+      <el-form-item label="IsActive">
+        <el-input v-model="newBranch.isActive" type="text" readonly required></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button class="btn2" type="submit" @click="addCourse">Add Course</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
     </div>
     <Confirmation ref="Confirmation" />
   </div>
@@ -101,11 +93,19 @@
 <script>
 import AxiosInstance from '../config/axiosInstance';
 import Confirmation from './Confirmation.vue';
+import { ElSelect, ElOption, ElButton, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus';
 
 export default {
   name: "AddTypes",
   components: {
   Confirmation,
+  ElSelect,
+    ElOption,
+    ElButton,
+    ElDialog,
+    ElForm,
+    ElFormItem,
+    ElInput,
 },
   props:{selectedtype : {
   type: Number,
@@ -157,6 +157,13 @@ watch: {
 
 },
 methods: {
+
+  validateFirstLetterCapital() {
+      if (/^[a-z]/.test(this.newBranch.name)) {
+        this.newBranch.name = this.newBranch.name.charAt(0).toUpperCase() + this.newBranch.name.slice(1);
+      }
+    },
+
   isKebabCase(input) {
     // Check if the input follows the Kebab Case pattern
     const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -303,11 +310,11 @@ background-color: #fff;
  }
 
 
-.frm {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-bottom: 80px;
-}
+ .frm {
+       max-width: 400px;
+       margin-left: 20px;
+       margin-top: -20px;
+     }
 
 label {
   display: block;
@@ -337,7 +344,7 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    padding: 10px 15px;
+    padding: 22px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -346,14 +353,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 10px 16px;
+      padding: 22px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
       top: 65px;
-      left: 842px;
+      left: 94px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -424,4 +431,18 @@ margin-right: 10px;
   font-weight: 600;
     font-size: 15px;
  }
+ .custom-form {
+  padding: 20px;
+}
+
+/* Custom button styling */
+.custom-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+.table {
+    width: 100%;
+    margin-bottom:0px !important;
+    color: #212529;
+}
 </style>

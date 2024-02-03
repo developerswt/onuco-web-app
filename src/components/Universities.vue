@@ -1,10 +1,14 @@
 <template>
     <div class="container jk">
         <Breadcrumbs class="container" />
+        <div class="container">
+            <p class="desc" style="color: #777777;" v-html="branches[0]?.description"></p>
+            </div>
         <div v-if="university.length > 0" class="parent_block">
             <h4 class="academic_head_text">
                 <span id="aca_text"><b>Offering</b></span> Universities ({{ university.length }})
-            </h4>
+            </h4> 
+            
             <div class=" parent_blocks">
                 <div class="row pt-4">
                     <div v-for="college in university" :key="college.id" class="box">
@@ -59,6 +63,7 @@ export default {
         return {
             isLoading: false,
             university: [],
+            branches:[],
         }
     },
     async created() {
@@ -67,6 +72,10 @@ export default {
             const result = await AxiosInstance.get(`/University/GetBranchListByName/` + this.$route.params.name);
             this.university = result.data;
             console.log(this.university);
+
+            const res = await AxiosInstance.get(`/Branches/GetBranchByName/` + this.$route.params.name);
+            this.branches = res.data;
+            console.log(this.branches);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -235,7 +244,7 @@ export default {
 
 .parent_block {
     max-width: 1300px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 
 }
 
@@ -308,5 +317,17 @@ export default {
     .jk {
         margin-bottom: 61px;
     }
+}
+.desc{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal normal 16px/21px Segoe UI;
+letter-spacing: 0px;
+color: #828282;
+opacity: 1;
+    position: relative;
+    bottom: 10px;
+    right: 12px;    
 }
 </style>

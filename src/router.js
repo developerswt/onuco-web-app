@@ -64,7 +64,7 @@ import LectureVsActiveStdFaculty from './components/LectureVsActiveStdFaculty.vu
 import LectureVsSubjectFaculty from './components/LectureVsSubjectFaculty.vue'
 import AdminPage from './components/AdminPage.vue'
 import FacultyProfileUpdate from './components/FacultyProfileUpdate.vue'
-
+import ApBestCourse from './components/ApBestCourse.vue'
 import Confirmation from './components/Confirmation.vue'
 import FacultyPayment from './components/FacultyPayment.vue'
 import ShareButton from './components/ShareButton.vue'
@@ -514,11 +514,16 @@ const routes = [
         name: "Confirmation",
         component: Confirmation, 
       },
-{
-  path: '/FacultyPayment',
-    name: 'FacultyPayment',
-    component: FacultyPayment,
-},
+      {
+        path: '/FacultyPayment',
+        name: 'FacultyPayment',
+        component: FacultyPayment,
+      },
+      {
+        path: '/ApBestCourse',
+        name: 'ApBestCourse',
+        component: ApBestCourse,
+      },
 
      ],
     meta: {
