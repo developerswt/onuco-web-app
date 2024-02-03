@@ -1,5 +1,8 @@
 <template>
     <div class="container-fluid">
+        <div v-if="showShareButton">
+            <ShareButton :url="currentRoute" @close="closeShareOption"  />
+        </div>
         <div id="offer_block" class="container-fluid">
             <div class="container">
             <h4 class="academic_head_text">
@@ -17,7 +20,7 @@
                                 <p>Offers Ends on<br>June 30 2023</p>
 
 
-                                <router-link to="/Announcement"><button class="btn btn-primary">Refer now</button></router-link>
+                                <button class="btn btn-primary" @click="showShareOption">Refer now</button>
 
                             </div>
                         </div>
@@ -38,9 +41,28 @@
 
 
 <script>
+import ShareButton from './ShareButton.vue'
 
 export default {
     name: 'OfferView',
+    components: {
+        ShareButton
+    },
+    data() {
+        return {
+            showShareButton: false,
+        }
+    },
+    methods: {
+        showShareOption() {
+            const referPath = this.$route.path;
+            this.showShareButton = true;
+            this.currentRoute = `https://dev.skillmeridiandev.tech${referPath}`;
+        },
+        closeShareOption() {
+            this.showShareButton = false;
+        },
+    }
 }
 </script>
 
