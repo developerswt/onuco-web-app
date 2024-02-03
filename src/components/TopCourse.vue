@@ -40,7 +40,7 @@
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
                                     <div class="col-sm-6">
-                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                        <a href="#" class="btn btn-primary" @click="makePayment(course.discountPrice)">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                         <StarRatings :rating="person.starRating || 0" :max-rating="5" />
                                     </div>
                                     <div class="col-sm-6">
-                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                        <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
                                     </div>
                                 </div>
                     </div>
@@ -115,6 +115,9 @@
 </template>
 
 <script>
+import sha256 from "crypto-js/sha256";
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 import Breadcrumbs from './Breadcrumbs.vue'
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
@@ -225,6 +228,56 @@ data() {
       const discountPercentage = ((actualPrice - discountPrice) / actualPrice) * 100;
       return Math.round(discountPercentage);
     },
+    generateUUID() {
+            return uuidv4().toString(36).slice(-6);
+        },
+        async makePayment(amount) {
+            const transactionId = "Tr-" + this.generateUUID();
+            const merchantId = "PGTESTPAYUAT";
+
+            const payload = {
+                merchantId: merchantId,
+                merchantTransactionId: transactionId,
+                merchantUserId: 'MUID-' + this.generateUUID(),
+                amount: amount * 100,
+                redirectUrl: `https://localhost:7007/api/Payment`,
+                redirectMode: "POST",
+                callbackUrl: `https://localhost:7007/api/Payment`,
+                mobileNumber: '9999999999',
+                paymentInstrument: {
+                    type: "PAY_PAGE"
+                },
+                message: "Introduction Computer Sciensce",
+                shortName: "Vijay",
+                instrumentType: 'web'
+            };
+
+            const dataPayload = JSON.stringify(payload);
+            const dataBase64 = btoa(dataPayload);
+            console.log("Request Payload:", dataBase64);
+
+            const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+            const dataSha256 = sha256(dataBase64 + fullURL);
+            const checksum = dataSha256 + "###" + "1";
+            const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+
+            try {
+                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-VERIFY": checksum,
+                    },
+                });
+
+                const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
+                window.location.href = redirectURL;
+
+            } catch (error) {
+                console.error("Error making payment:", error);
+                // Handle payment processing errors here
+            }
+        },
     }
 
 };
