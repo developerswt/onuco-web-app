@@ -3,6 +3,9 @@
         <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
+            <div v-if="showShareButton">
+                <ShareButton :url="currentRoute" @close="closeShareOption"  />
+            </div>
             <section>
                 <div class="instructor-details">
                     <div class="professor-block">
@@ -46,7 +49,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="share_icon_block" style="color: aliceblue;">
-                                            <img src="../assets/images/Union193.png" class="share-icon">
+                                            <img style="cursor: pointer;" @click="showShareOption" src="../assets/images/Union193.png" class="share-icon">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -101,22 +104,19 @@
             <h5 class="course_text"><span id="course_text">Courses</span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="person in persons" :key="person.id">
-                    <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
-                        <div id="instructor_card" class="card">
-                            <div class="card-title">
+                    <div id="instructor_card" class="card">
+                        <div class="card-title">
+                            <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
                                 <div class="row">
                                     <div class="col-md-12 ">
-
                                         <div class="card_top_text">
                                             <div class="row">
-
                                                 <div class="col-lg-10 col-9 col-sm-9">
                                                     <p class="ft" data-placement="top" :title="person.name"> {{
                                                         person.name.slice(0, 18) }}...</p>
                                                 </div>
-
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img src="../assets/images/Union193.png"
+                                                    <img @click.prevent="showShareCourseUrlOption(person.courseName)" src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -126,12 +126,9 @@
                                                     <p id="small_text" class="ft">240
                                                         hrs</p>
                                                 </div>
-
                                                 <div class="col-lg-9 col-9 col-sm-9">
-
                                                     <p class="ft">{{ person.description.slice(0, 50) }}...</p>
                                                 </div>
-
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
                                                         <img src="../assets/images/Path4025.png"
@@ -155,9 +152,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </router-link>
                         </div>
-                    </router-link>
+                    </div>
                 </slide>
                 <template #addons>
 
@@ -274,6 +271,7 @@
 </template>
 
 <script>
+import ShareButton from './ShareButton.vue'
 import AxiosInstance from '../config/axiosInstance'
 import Breadcrumbs from "./Breadcrumbs.vue"
 import Loading from 'vue3-loading-overlay';
@@ -292,10 +290,12 @@ export default {
         Slide,
         StarRatings,
         Navigation,
-
+        ShareButton
     },
     data() {
         return {
+            currentRoute: "",
+            showShareButton: false,
             ratingCount: '',
             rating: '',
             isPopupVisible: false,
@@ -395,6 +395,19 @@ export default {
         }
     },
     methods: {
+        showShareCourseUrlOption(courseName) {
+            this.showShareButton = true;
+            this.currentRoute = `https://dev.skillmeridiandev.tech/CourseDetails/${courseName}`;
+        },
+        showShareOption() {
+            const instructorPath = this.$route.path;
+            this.showShareButton = true;
+            this.currentRoute = `https://dev.skillmeridiandev.tech${instructorPath}`;
+        },
+        closeShareOption() {
+            this.showShareButton = false;
+
+        },       
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -888,7 +901,6 @@ export default {
     border-radius: 4%;
     text-align: left;
     position: relative;
-    left: 145px;
 }
 
 .ft {
@@ -910,7 +922,6 @@ export default {
     flex-shrink: 0;
     margin: -2px;
     position: relative !important;
-    right: 113px !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1151,5 +1162,13 @@ input[type=submit] {
         top: 7px;
         right: 20px;
     }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
 }
 </style>

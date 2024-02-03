@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <Navbar :show-search-box-prop="true" />
-    <router-view :key="$route.fullPath" />
+  <div id="app">
+    <div class="content-wrapper">
+      <Navbar :show-search-box-prop="true" />
+      <router-view :key="$route.fullPath" />
+    </div>
     <AppFooter />
   </div>
 </template>
@@ -71,6 +73,23 @@ export default {
 </script>
 
 <style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Your other styling for Navbar and AppFooter goes here */
+
+AppFooter {
+  margin-top: auto; /* Push AppFooter to the bottom */
+}
 .logo {
   height: 6em;
   padding: 1.5em;
