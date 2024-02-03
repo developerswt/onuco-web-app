@@ -4,14 +4,15 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Subject Name :</label>
-        <select v-model="selectedCourse" @change="loadProductDetails" style="padding: 4px;">
-          <option value="" disabled selected hidden>Please Select</option>
-          <option v-for="product in products" :key="product.id" :value="product.id">
-            {{ product.name }}
-          </option>
-        </select>
+        <el-select v-model="selectedCourse" @change="loadProductDetails" style="padding: 4px;">
+  <el-option :label="''" :value="null" disabled selected hidden>Please Select</el-option>
+  <el-option v-for="product in products" :key="product.id" :label="product.name" :value="product.id">
+    {{ product.name }}
+  </el-option>
+</el-select>
+
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive" style="background-color: white;">
         <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -25,6 +26,7 @@
               <th>Work Flow</th>
               <th>Faculty Id</th>
               <th>IsActive</th>
+              <th>ImageFile.................</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -60,7 +62,10 @@
 
               <td>{{ selectedProduct.facultyId }}</td>
               <td>{{ selectedProduct.isActive }}</td>
-
+              <td v-if="!editMode">{{ selectedProduct.imageUrl }}</td>
+              <td v-if="editMode">
+                <input type="file" accept="image/*" @change="handleFileChange" required>
+              </td>
               <td>
               <div class="button-row">
                 <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -71,65 +76,61 @@
             </tr>
           </tbody>
       </table>
-      <div>
-      <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Add New Subject</h5>
-      <button type="button" class="close" @click="toggleForm">
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
-    <div class="modal-body">
-      <form ref="form" @submit.prevent="addBranch"> 
-                  <p><b></b> {{newBranch.id}}</p>
-                  <label for="branchName">Subject Name:</label>
-                  <input id="branchName" v-model="newBranch.name" type="text" required><br>
+        <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
-                  <label for="description">Description:</label>
-                  <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
+<el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '1060px' }">
+    <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+        <el-form-item>{{ newBranch.id }}</el-form-item>
+        <el-form-item label="Subject Name:" prop="name">
+          <el-input v-model="newBranch.name" @input="validateFirstLetterCapital"  required></el-input>
+        </el-form-item>
 
-                <label for="actualPrice">Actual Price:</label>
-                <input id="actualPrice" v-model="newBranch.actualPrice" type="text" required><br>
-                
-                <label for="discountPrice">Discount Price:</label>
-                <input id="discountPrice" v-model="newBranch.discountPrice" type="text" required><br>
+        <el-form-item label="Description:" prop="desc">
+          <el-input v-model="newBranch.desc" type="textarea" required></el-input>
+        </el-form-item>
 
-                  <label for="semesterId">Semester Id:</label>
-                  <input id="semesterId" v-model="this.selectedsemester" type="text" readonly required><br>
+        <el-form-item label="Actual Price:" prop="ActualPrice">
+          <el-input v-model="newBranch.ActualPrice" required></el-input>
+        </el-form-item>
 
-                  <!-- <label for="courseName">Subject Name:</label>
-                  <input id="courseName" v-model="newBranch.courseName" type="text" required><br> -->
-                  <label for="courseName"><b>Subject Rout Name:</b></label>
-                  <input id="courseName" v-model="newBranch.courseName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
-                  <span v-if="!isKebabCase(newBranch.courseName)" style="color: red; position:relative; bottom:6px;">Please enter a valid Kebab Case.</span>
+        <el-form-item label="Discount Price:" prop="DiscountedPrice">
+          <el-input v-model="newBranch.DiscountedPrice" required></el-input>
+        </el-form-item>
 
+        <el-form-item label="Semester Id:" prop="SemesterId">
+          <el-input v-model="this.selectedsemester" readonly required></el-input>
+        </el-form-item>
 
-                  <label for="workFlowStatement">Work Flow:</label>
-                  <select id="workFlowStatement" v-model="newBranch.workFlowStatement" class="size" type="text" required><br>
-                    <option value="Draft">Draft</option>
-                      <option value="Review">Review</option>
-                      <option value="Release">Release</option>
-                    </select>
+        <el-form-item label="Subject Rout Name:" prop="CourseName">
+          <el-input v-model="newBranch.CourseName" required pattern="[a-z0-9]+(-[a-z0-9]+)*"></el-input>
+          <span v-if="!isKebabCase(newBranch.CourseName)" style="color: red;">Please enter a valid Kebab Case.</span>
+        </el-form-item>
 
-                <label for="facultyId"><b>FacultyId:</b></label>
-                <input id="facultyId" v-model="newBranch.facultyId" type="text" required>
+        <el-form-item label="Work Flow:" prop="WorkFlowStatement">
+          <el-select v-model="newBranch.WorkFlowStatement" required>
+            <el-option label="Draft" value="Draft"></el-option>
+            <el-option label="Review" value="Review"></el-option>
+            <el-option label="Release" value="Release"></el-option>
+          </el-select>
+        </el-form-item>
 
-                <label for="isActive">IsActive:</label>
-               <input id="isActive" v-model="newBranch.isActive" type="text" readonly required><br>
- 
+        <el-form-item label="FacultyId:" prop="FacultyId">
+          <el-input v-model="newBranch.FacultyId" required></el-input>
+        </el-form-item>
 
-                  <button class="btn2" type="submit">Add Subject</button>
-              </form>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-      </div>
+        <el-form-item label="IsActive:" prop="IsActive">
+          <el-input v-model="newBranch.IsActive" readonly required></el-input>
+        </el-form-item>
+
+        <!-- <el-form-item label="Image File:" prop="ImageUrl">
+          <el-input type="file" @change="imageFileChange"  required></el-input>
+        </el-form-item> -->
+        <input id="input_file" type="file" class="input_file" @change="imageFileChange">
+
+        <el-button class="btn2" type="primary" @click="addBranch">Add Subject</el-button>
+      </el-form>
+    </el-dialog>
     </div>
     <Confirmation ref="Confirmation" />
 
@@ -139,12 +140,19 @@
 <script>
 import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import { ElSelect, ElOption, ElButton, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus';
 
 export default {
   name: "ActstdBycourse",
   components: {
   Confirmation,
+  ElSelect,
+    ElOption,
+    ElButton,
+    ElDialog,
+    ElForm,
+    ElFormItem,
+    ElInput,
 },
   // props: ['selectedsemester'],
   props:{selectedsemester : {
@@ -154,10 +162,11 @@ export default {
 },
   data() {
     return {
+      selectedFile: null,
       formVisible: false,
       products: [],
       selectedCourse: '',
-      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '' },
+      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '',imageUrl: '' },
       isLoading: false,
       editMode: false,
       editedProduct: {
@@ -169,20 +178,20 @@ export default {
       semesterId:null, 
       courseName:'',
       workFlowStatement:'',
-      facultyId:null,
-      isActive: '',
+      facultyId: '',
+      isActive: 1,
+      imageUrl:'',
     },
       newBranch: {
       name: '',
-      description: '',
-      academiaId: '',
-      actualPrice:'',
-      discountPrice:'',
-      semesterId: this.selectedsemester, 
-      courseName:'',
-      workFlowStatement:'',
-      facultyId: '',
-      isActive: 1,
+      desc: '',
+      ActualPrice:'',
+      DiscountedPrice:'',
+      SemesterId: this.selectedsemester, 
+      CourseName:'',
+      WorkFlowStatement:'',
+      FacultyId: '',
+      IsActive: 1,
      },
     };
   },
@@ -203,6 +212,21 @@ watch: {
     this.loadData();
   },
   methods: {
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      this.editedProduct.imageUrl = file;
+    },
+    imageFileChange(event) {
+      if (event && event.target && event.target.files.length > 0) {
+        this.selectedFile = event.target.files[0];
+      }
+    },
+
+validateFirstLetterCapital() {
+      if (/^[a-z]/.test(this.newBranch.name)) {
+        this.newBranch.name = this.newBranch.name.charAt(0).toUpperCase() + this.newBranch.name.slice(1);
+      }
+    },
 
     isKebabCase(input) {
     // Check if the input follows the Kebab Case pattern
@@ -232,17 +256,16 @@ watch: {
 },
 
 async loadProductDetails() {
-
-    const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
+  const selectedProduct = this.products.find(product => product.id === this.selectedCourse);
   if (selectedProduct) {
     this.selectedProduct = { ...selectedProduct };
-    //this.newBranch.semesterId = this.selectedProduct.id; 
-
+    // this.selectedProduct.imageUrl = this.editedProduct.imageUrl;
   }
-
 },
 
+
   enableEditMode() {
+  console.log(this.selectedProduct);
   this.editMode = true;
   this.editedProduct.id = this.selectedProduct.id;
   this.editedProduct.name = this.selectedProduct.name;
@@ -253,88 +276,71 @@ async loadProductDetails() {
   this.editedProduct.courseName = this.selectedProduct.courseName;
   this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
   this.editedProduct.facultyId = this.selectedProduct.facultyId;
-  this.editedProduct.isActive = this. selectedProduct.isActive
-
-
+  this.editedProduct.imageUrl = this.selectedProduct.imageUrl;
 },
-
 async updateProduct(id) {
   try {
-    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement +'&isActive=' + this.editedProduct.isActive );
+    let formData = new FormData();
+    formData.append('ImageUrl', this.editedProduct.imageUrl);
+
+    const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&Name='+ this.editedProduct.name + '&Description=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement ,
+    formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     console.log(res);
 
       await this.loadData();
-      this.editMode = false; // Disable edit mode after successful update
+      this.editMode = false; 
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("Subject Updated successfully.");
 
-    }  catch(error){
+    } catch (error) {
         this.isLoading = false;
+        console.log(error);
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
-      } 
+ 
+       }
   },
-
-//   async updatePrice(id) {
-//     this.showDialog = false;
-//       try {
-//             const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' +'id='+ id + '&coursename='+ this.editedProduct.courseName + '&NewActualPrice=' + this.editedProduct.actualPrice + '&NewDiscountedPrice=' + this.editedProduct.discountPrice);
-//             console.log(res);
-//             this.editMode = false; // Disable edit mode after successful update
-//             this.ismodel = true;
-//             this.loadProductDetails();
-
-//         if (res.status === 200) {
-//           await this.getdata();
-//         }
-//       } catch (error) {
-//         console.log(error);
-//         }
-//   },
-
-//    async updateWorkFlow(id) {
-//     this.showDialog = false;
-//     try {
-//       const result = await AxiosInstance.put(`/Course/UpdateWorkflow/`+ id  + '/' + this.editedProduct.workFlowStatement );
-//       console.log(result);
-//       this.editMode = false; 
-//       this.ismodel = true;
-//       this.loadProductDetails();
-
-//       if (result.status === 200) {
-//     await this.getdata();
-//   }
-// } catch (error) {
-//   console.log(error);
-//   }
-//   },
 
 async addBranch() {
   this.isLoading = true;
   try {
-    const response = await AxiosInstance.post(`/Course`, this.newBranch);
+    let formData = new FormData();
+    formData.append('ImageUrl', this.selectedFile);
+
+    const response = await AxiosInstance.post(`/Course` + '?' + 'name=' + encodeURIComponent(this.newBranch.name) + '&desc=' + encodeURIComponent(this.newBranch.desc) + '&ActualPrice=' + this.newBranch.ActualPrice + '&DiscountedPrice=' + this.newBranch.DiscountedPrice + '&SemesterId=' + this.newBranch.SemesterId + '&CourseName=' + encodeURIComponent(this.newBranch.CourseName) + '&FacultyId=' + this.newBranch.FacultyId + '&WorkFlowStatement=' + encodeURIComponent(this.newBranch.WorkFlowStatement) + '&IsActive=' + this.newBranch.IsActive,
+    formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    console.log(response)
     this.ismodel = true; 
 
     console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
-
-      // this.gridApi.refreshCells({ force: true });
-
-      this.$refs.Confirmation.open("Subject Added successfully.");
+    this.$refs.Confirmation.open("Subject Added successfully.");
 
     this.newBranch = {
       name: '',
-      description: '',
-      academiaId: '',
-      actualPrice:'',
-      discountPrice:'',
-      semesterId: this.selectedsemester, 
-      courseName:'',
-      workFlowStatement:'',
-      facultyId: '',
-      isActive: 1,
+      desc: '',
+      ActualPrice:'',
+      DiscountedPrice:'',
+      SemesterId: this.selectedsemester, 
+      CourseName:'',
+      WorkFlowStatement:'',
+      FacultyId: '',
+      IsActive: 1,
+      ImageUrl: '',
      };
      this.$refs.form.reset();
     
@@ -394,11 +400,11 @@ background-color: #fff;
  }
 
 
-.frm {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-bottom: 80px;
-}
+ .frm {
+       max-width: 400px;
+       margin-left: 20px;
+       margin-top: -20px;
+     }
 
 label {
   display: block;
@@ -428,7 +434,7 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    padding: 8px 10px;
+    padding: 22px 13px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -449,14 +455,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 10px 16px;
+      padding: 22px 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 80px;
-      left: 780px;
+      top: 65px;
+      left: 94px;
       font-weight: 600;
       font-size: 15px;
       }
@@ -532,4 +538,18 @@ margin-right: 10px;
   font-weight: 600;
     font-size: 15px;
  }
+ .custom-form {
+  padding: 20px;
+}
+
+/* Custom button styling */
+.custom-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+.table {
+    width: 100%;
+    margin-bottom:0px !important;
+    color: #212529;
+}
 </style>

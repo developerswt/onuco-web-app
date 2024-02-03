@@ -2,16 +2,18 @@
   <div class="container">
      <h5>Add & Update Course Type </h5>
      <div class="container" style="margin-top: 72px;">
-       <div>
-         <label for="productDropdown">Course Type :</label>
-         <select v-model="selectedTypes" @change="emitSelectedType" style="padding: 4px;">
-           <option value="" disabled selected hidden>Please Select</option>
-           <option v-for="product in products" :key="product.id" :value="product.id">
-             {{ product.name }}
-           </option>
-         </select>
-       </div>
-       <div  class="table-responsive">
+          <div>
+              <label for="productDropdown">Course Type :</label>
+              <el-select v-model="selectedTypes" @change="emitSelectedType" placeholder="Please Select">
+                  <el-option
+                      v-for="product in products"
+                      :key="product.id"
+                      :value="product.id"
+                      :label="product.name"
+                    ></el-option>
+                </el-select>
+            </div>
+        <div  class="table-responsive" style="background-color: white;">
          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
            <thead>
              <tr>
@@ -45,50 +47,50 @@
              </tr>
            </tbody>
          </table>
+        </div>
+         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
  
-         <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
- 
-           <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
-             <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <h5 class="modal-title">Add New Course Type</h5>
-                   <button type="button" class="close" @click="toggleForm">
-                     <span aria-hidden="true">&times;</span>
-                   </button>
-                 </div>
-                 <div class="modal-body">
-                   <form ref="form" @submit.prevent="addBranch">
-                     <label for="branchName">Course Type Name:</label>
-                     <input id="branchName" v-model="newBranch.name" type="text" required @input="validateFirstLetterCapital"><br>
-     
-                     <label for="description">Description:</label>
-                     <textarea id="description" v-model="newBranch.description" class="size" type="text" required></textarea><br>
-     
-                     <label for="isActive">Is Active:</label>
-                     <textarea id="isActive" v-model="newBranch.isActive" class="size" type="text" readonly required></textarea><br>
-     
+         <el-dialog v-model="formVisible" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
+            <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+              <el-form-item label="Course Type Name" prop="name">
+                <el-input v-model="newBranch.name" required @input="validateFirstLetterCapital"></el-input>
+              </el-form-item>
 
-                     <button class="btn2" type="submit">Add Course Type</button>
-                   </form>
-                 </div>
-               </div>
-             </div>
-         </div>
+              <el-form-item label="Description" prop="description">
+                <el-input type="textarea" v-model="newBranch.description" required></el-input>
+              </el-form-item>
+  
+              <el-form-item label="Is Active" prop="isActive">
+                <el-input v-model="newBranch.isActive" readonly></el-input>
+              </el-form-item>
+  
+              <el-form-item>
+                <el-button type="primary" class="btn2" @click="addBranch">Add Course Type</el-button>
+              </el-form-item>
+            </el-form>
+        </el-dialog>
        </div>
-     </div>
-     <Confirmation ref="Confirmation" />
+      <Confirmation ref="Confirmation" />
    </div>
  </template>
  
  <script>
  import AxiosInstance from '../config/axiosInstance';
  import Confirmation from './Confirmation.vue';
+ import { ElSelect, ElOption, ElButton, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus';
+
  
  export default {
    name: "AddTypes",
    components: {
-     Confirmation,
+    Confirmation,
+    ElSelect,
+    ElOption,
+    ElButton,
+    ElDialog,
+    ElForm,
+    ElFormItem,
+    ElInput,
    },
    emits: ['selected-type-changed'],
  
@@ -286,8 +288,8 @@
  
      .frm {
        max-width: 400px;
-       margin: 0 auto;
-       margin-bottom: 80px;
+       margin-left: 20px;
+       margin-top: -20px;
      }
  
      label {
@@ -318,7 +320,7 @@
         color: #fff;
         background-color: #007bff;
         border-color: #007bff;
-        padding: 10px 15px;
+        padding: 22px 15px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -328,14 +330,14 @@
         color: #fff;
         background-color: #007bff;
         border-color: #007bff;
-        padding: 10px 16px;
+        padding: 22px 18px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         margin-bottom: 80px; 
         position: relative;
-        top: 65px;
-        left: 842px;
+        top: 64px;
+        left: 0px;
         font-weight: 600;
         font-size: 15px;
       }
@@ -407,4 +409,24 @@
   font-weight: 600;
     font-size: 15px;
  }
+ .form-container {
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Custom form styling */
+.custom-form {
+  padding: 20px;
+}
+
+/* Custom button styling */
+.custom-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+.table {
+    width: 100%;
+    margin-bottom:0px !important;
+    color: #212529;
+}
  </style>

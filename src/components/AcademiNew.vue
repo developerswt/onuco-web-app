@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </router-link>
-                        <p class="ty">{{ item.academia.name }}</p>
+                        <p class="ty" :title="item.academia.name">{{ item.academia.name.slice(0,10) }}...</p>
                     </div>
                 </div>
             </div>

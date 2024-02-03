@@ -101,9 +101,10 @@
             <h5 class="course_text"><span id="course_text">Courses</span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="person in persons" :key="person.id">
-                    <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
                         <div id="instructor_card" class="card">
                             <div class="card-title">
+                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
+
                                 <div class="row">
                                     <div class="col-md-12 ">
 
@@ -155,9 +156,10 @@
                                         </div>
                                     </div>
                                 </div>
+                            </router-link>
                             </div>
                         </div>
-                    </router-link>
+                
                 </slide>
                 <template #addons>
 
@@ -888,7 +890,7 @@ export default {
     border-radius: 4%;
     text-align: left;
     position: relative;
-    left: 145px;
+    /* left: 105px; */
 }
 
 .ft {
@@ -910,7 +912,6 @@ export default {
     flex-shrink: 0;
     margin: -2px;
     position: relative !important;
-    right: 113px !important;
     display: flex;
     justify-content: center;
     align-items: center;
