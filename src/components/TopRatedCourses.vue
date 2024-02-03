@@ -182,9 +182,9 @@ export default {
                 merchantTransactionId: transactionId,
                 merchantUserId: 'MUID-' + this.generateUUID(),
                 amount: amount * 100,
-                redirectUrl: `https://localhost:7007/api/Payment`,
+                redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
                 redirectMode: "POST",
-                callbackUrl: `https://localhost:7007/api/Payment`,
+                callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
                 mobileNumber: '9999999999',
                 paymentInstrument: {
                     type: "PAY_PAGE"
