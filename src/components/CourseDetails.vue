@@ -13,7 +13,7 @@
                         </div>
                         <div v-if="isMobile" class="container-fluid">
                             <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                <video-player ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+                                <video-player v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOptions"
                                     :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
                                     :is-subscribed="userIsSubscribed" />
                             </div>
@@ -60,9 +60,13 @@
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
 
-                                <p id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                <p v-if="isLoggedIn" id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
                                     &#8377;{{ book.discountedPrice }}  <button
                                             id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
+                                <p v-else id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                    &#8377;{{ book.discountedPrice }} <a href="/Login"><button
+                                            id="search_button">buy now</button></a></p>
+
                             </div>
                         </div>
                         <div class="app1">
@@ -154,10 +158,12 @@
                                                                         :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
                                                                             <i class="fa" aria-hidden="true" :class="{
-                                                                                'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                'fa-circle': playingSubject === subject
-                                                                            }" style="margin-top: 6px;"></i>
+                                                                                'fa-check': isProgressBarComplete(subject.id),
+                                                                                'fa-circle-o': !isProgressBarComplete(subject.id) && !isProgressBarHalfComplete(subject.id) && playingSubject !== subject,
+                                                                                'fa-circle': (!isProgressBarComplete(subject.id) && isProgressBarHalfComplete(subject.id)) || playingSubject === subject
+                                                                            }" :style="{ color: (playingSubject === subject) ? 'orange' : '' }" style="margin-top: 6px;"></i>
+
+
                                                                         </div>
                                                                         <div class="col-lg-7 col-10 col-sm-10"
                                                                             style="cursor: pointer;"
@@ -223,7 +229,7 @@
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
                                                     <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :course-id="courseId" :watch-time="watchTime" />
+                                                        :video-id="videoId" :courseDisPrice = "courseDisPrice" :course-id="courseId" :watch-time="watchTime" />
                                                 </div>
                                             </div>
                                         </div>
@@ -279,6 +285,7 @@ export default {
     },
     data() {
         return {
+            courseDisPrice: '',
             watchTime: null,
             ratingCount: '',
             isMobile: window.innerWidth <= 767,
@@ -533,6 +540,20 @@ export default {
                 this.makeVideoFullscreen();
             }
         },
+        makeVideoFullscreen() {
+            const videoPlayer = this.$refs.videoPlayer;
+
+            // Check if Fullscreen API is supported
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen();
+            } else if (videoPlayer.mozRequestFullScreen) {
+                videoPlayer.mozRequestFullScreen();
+            } else if (videoPlayer.webkitRequestFullscreen) {
+                videoPlayer.webkitRequestFullscreen();
+            } else if (videoPlayer.msRequestFullscreen) {
+                videoPlayer.msRequestFullscreen();
+            }
+        },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
@@ -555,9 +576,10 @@ export default {
 
             if (this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
-
+                
                 this.videoId = subject.id;
                 console.log(this.videoId);
+                this.courseDisPrice = this.book.discountedPrice;
                 player.pause();
                 console.log('Player paused.');
 
@@ -596,6 +618,17 @@ export default {
 
             return false;
         },
+        isProgressBarHalfComplete(subjectId) {
+            const totalTime = parseFloat(this.findSubjectById(subjectId).time);
+            const watchTime = this.getWatchTime(subjectId);
+
+            if (totalTime && watchTime) {
+                const percentage = Math.round((watchTime / totalTime) * 100);
+                return percentage > 0;
+            }
+    
+            return false;
+        },        
         handleClick(tab, event) {
             console.log(tab, event);
         },

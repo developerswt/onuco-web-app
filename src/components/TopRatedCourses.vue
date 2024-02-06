@@ -41,8 +41,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +139,11 @@ export default {
             },
         }
     },
-
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+    },
     async created() {
         try {
             const res = await AxiosInstance.get(`/TopRatedCourses`);
@@ -151,6 +158,10 @@ export default {
         }
     },
     methods: {
+        redirectToLogin() {
+        // Programmatically navigate to the /Login route
+        this.$router.push('/Login');
+    },
 
         calculateDiscountPercentage(actualPrice, discountPrice) {
       if (actualPrice === 0) {

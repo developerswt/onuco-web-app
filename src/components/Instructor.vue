@@ -423,22 +423,21 @@ export default {
             console.log(tab, event);
         },
         submitRating() {
-            axiosInstance.post('/Ratings', {
+            AxiosInstance.post('/Ratings', {
                 userId: this.isuser['cognito:username'],
                 objectId: this.faculty.id,
                 objectTypeId: 4,
                 ratingScore: this.rating
+            }).then(response => {
+                // Handle success (if needed)
+                console.log(response.data);
+                this.rating = '';
+                this.closePopup();
             })
-                .then(response => {
-                    // Handle success (if needed)
-                    console.log(response.data);
-                    this.rating = '';
-                    this.closePopup();
-                })
-                .catch(error => {
-                    // Handle error (if needed)
-                    console.error(error);
-                });
+            .catch(error => {
+                // Handle error (if needed)
+                console.error(error);
+            });
         }
     }
 }

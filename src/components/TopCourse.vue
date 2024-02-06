@@ -39,8 +39,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click="makePayment(course.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +106,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="person.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" v-if="isLoggedIn">
                                         <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                     </div>
@@ -188,7 +194,12 @@ data() {
             },
         }
     },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
 
+    },
 
     async created() {
         try {
@@ -212,6 +223,10 @@ data() {
         }
     },
     methods: {
+        redirectToLogin() {
+        // Programmatically navigate to the /Login route
+        this.$router.push('/Login');
+    },
     async getByRatings(courseId) {
             try {
                 const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);

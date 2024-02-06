@@ -110,8 +110,10 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <button id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
+                                                                        <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
+                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                            now</button></a>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
@@ -253,8 +255,10 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <button id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
+                                                                    <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
+                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                            now</button></a>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
@@ -399,6 +403,13 @@ export default {
 
         }
     },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+
+    },
+
     async created() {
         this.isLoading = true;
         try {
@@ -414,6 +425,10 @@ export default {
         }
     },
     methods: {
+        redirectToLogin() {
+            // Programmatically navigate to the /Login route
+            this.$router.push('/Login');
+        },
 
         performSearch() {
             this.isLoading = true;
