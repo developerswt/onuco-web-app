@@ -76,7 +76,6 @@ export default {
     },
     computed: {
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
@@ -85,7 +84,6 @@ export default {
         try {
             const result = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
             this.item = result.data;
-            console.log(this.item);
             this.processChartData();
         } catch (error) {
             console.log(error);

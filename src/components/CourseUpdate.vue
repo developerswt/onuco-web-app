@@ -204,7 +204,6 @@ export default {
       this.isLoading = false;
     }
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
   },
@@ -216,7 +215,6 @@ export default {
 
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
 
     },
@@ -261,7 +259,6 @@ export default {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/Course` + '?' + 'id=' + id + '&name=' + encodeURIComponent(this.childPara.name) + '&desc=' + encodeURIComponent(this.childPara.description));
-        console.log(res);
         this.ismodel = true;
 
         if (res.status === 200) {
@@ -277,7 +274,6 @@ export default {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/Course/UpdateCoursePrice` + '?' + 'id=' + id + '&coursename=' + this.childPara.courseName + '&NewActualPrice=' + this.childPara.actualPrice + '&NewDiscountedPrice=' + this.childPara.discountPrice);
-        console.log(res);
         this.ismodel = true;
 
         if (res.status === 200) {
@@ -293,7 +289,6 @@ export default {
       this.showDialog = false;
       try {
         const result = await AxiosInstance.put(`/Course/UpdateWorkflow/` + id + '/' + this.childPara.workFlowStatement);
-        console.log(result);
         this.ismodel = true;
 
         if (result.status === 200) {
@@ -312,7 +307,6 @@ export default {
         const response = await AxiosInstance.post('/Course', this.newBranch);
         this.ismodel = true;
         if (response.status === 200) {
-          console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
 
@@ -348,7 +342,6 @@ export default {
         }
       } catch (error) {
         this.isLoading = false;
-        console.log(error);
         this.showDialog = true;
         this.dialogTitle = "Error";
         this.dialogMessage = "Not get data";
@@ -357,7 +350,6 @@ export default {
         this.isLoading = false;
       }
       this.rowSelection = 'single';
-      console.log(this.rowData);
       this.popupParent = document.body;
       this.paginationPageSize = 10;
     },

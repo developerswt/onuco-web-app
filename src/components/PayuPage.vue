@@ -358,13 +358,6 @@ export default {
   const transactionId = "Tr-" + this.generateUUID();
   const merchantId = "PGTESTPAYUAT";
 
-  // Assuming you have the response data stored in a variable named responseData
-  const responseData = {
-    "code": "PAYMENT_SUCCESS",
-    "merchantId": "PGTESTPAYUAT",
-    "param1": "Introduction User",
-    // ... (other response parameters)
-  };
 
   const payload = {
     merchantId: merchantId,
@@ -376,8 +369,9 @@ export default {
     redirectMode: "POST",
     callbackUrl: `http://localhost:5000/SemesterDetails`,
     mobileNumber: '9999999999',
-    param1: responseData.param1 !== undefined ? responseData.param1 : undefined,
-    // ... (include other parameters as needed)
+    shortName: 'vijay',
+    message: 'introduction video',
+    email: 'vijaya.kumarQuantumberg.com',
     paymentInstrument: {
       type: "PAY_PAGE"
     },
@@ -405,10 +399,21 @@ export default {
         "X-VERIFY": checksum,
       },
     });
-
     const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-    window.location.href = redirectURL;
 
+    if(response.status === 200) {
+
+      const jsonData = {
+        UserId: "2345676",
+        CourseId: 1,
+        TransactionId: transactionId,
+        NumberOfMonth: 30
+      };
+      const SubscriptionApi = await axios.post("http://localhost:5000/StateManagement",jsonData);
+      if(SubscriptionApi.status === 201) {
+        window.location.href = redirectURL;
+      }
+    }
   } catch (error) {
     console.error("Error making payment:", error);
     // Handle payment processing errors here

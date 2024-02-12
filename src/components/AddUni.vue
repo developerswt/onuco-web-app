@@ -182,7 +182,6 @@ methods: {
   try {
     const res = await AxiosInstance.get(`/University/GetUniversitiesBySemesterId/` + this.selectedbranch);
     this.products = res.data;
-    console.log(this.selectedbranch);
     this.loadProductDetails();
 
   } 
@@ -217,7 +216,6 @@ async loadProductDetails() {
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/University` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive);
-    console.log(res);
 
       await this.loadData();
       this.editMode = false; 
@@ -239,7 +237,6 @@ async addBranch() {
     const response = await AxiosInstance.post(`/University`, this.newBranch);
     this.ismodel = true; 
   
-    console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
 
@@ -275,9 +272,7 @@ async deleteProduct(id) {
 
       this.editedProduct.isActive = '0';
       const res = await AxiosInstance.put(`/Semester/SoftUpdateUniversity`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-      console.log(res);
 
-        console.log("University deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 

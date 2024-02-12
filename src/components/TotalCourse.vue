@@ -37,7 +37,6 @@ export default {
     try {
       const res = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
       this.courseData = res.data;
-      console.log(this.courseData);
       this.processChartData();
     } catch (error) {
       console.error("Error fetching data:", error);

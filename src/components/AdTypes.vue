@@ -97,7 +97,6 @@ export default {
     }
     this.rowData = this.Orders;
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
 

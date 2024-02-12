@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p>Dashbord > Branchs Update </p>
+
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div style="padding: 20px;">
@@ -137,11 +137,10 @@ export default {
       this.Orders = dataArray.map(item => item.academia);
       this.rowData = this.Orders;
       this.rowSelection = 'single';
-      console.log(this.rowData);
+
     }
     catch (error) {
       this.isLoading = false;
-      console.log(error);
       this.showDialog = true;
       this.dialogTitle = "Error";
       this.dialogMessage = "Not get data";
@@ -156,7 +155,6 @@ export default {
     },
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
     },
     OpenCloseFun() {
@@ -164,7 +162,7 @@ export default {
       this.ismodel = true;
     },
     onCellValueChanged(event) {
-      console.log('Data after change is', event.data);
+
     },
     onGridReady(params) {
       this.gridApi = params.api;
@@ -180,12 +178,7 @@ export default {
     },
     onPrintQuickFilterTexts() {
       this.gridApi.forEachNode(function (rowNode, index) {
-        console.log(
-          'Row ' +
-          index +
-          ' quick filter text is ' +
-          rowNode.quickFilterAggregateText
-        );
+        
       });
     },
     edit() {
@@ -195,7 +188,6 @@ export default {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/Academia` + '?' + 'id=' + id + '&name=' + this.childPara.name + '&desc=' + this.childPara.description);
-        console.log(res);
         this.ismodel = true;
         if (res.status === 200) {
           await this.getdata();
@@ -211,7 +203,6 @@ export default {
         const res = await AxiosInstance.post(`/Academia`, this.newBranch);
         this.ismodel = true;
         if (res.status === 200) {
-          console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
           alert("Insert Successful");
@@ -239,7 +230,6 @@ export default {
         this.Orders = dataArray.map(item => item.academia);
         this.rowData = this.Orders;
         this.rowSelection = 'single';
-        console.log(this.rowData);
       }
       catch (error) {
         this.isLoading = false;

@@ -98,7 +98,7 @@ Hub.listen("auth", async data => {
     store.commit('isLoggedIn', true); 
     // Access the entire user attribute details
     const attributes = user.attributes;
-    console.log(attributes);
+
     // Store the user data in your state, for example:
     store.commit('setUser', user); // Commit user data to the store
 
@@ -136,7 +136,7 @@ const routes = [
   },
   {
     path: "/Login",
-    name: "LoginPage",
+    name: "Login / Sign Up",
     component: LoginPage,
     meta: {
         title: 'Log In And Start Learning',
@@ -186,7 +186,7 @@ const routes = [
   },
   {
     path: "/Courses",
-    name: "CoursesPage",
+    name: "Courses",
     component: CoursesPage,
     meta: {
         title: 'Courses Page',
@@ -259,7 +259,7 @@ const routes = [
   },
   {
     path: "/Contact",
-    name: "Contact",
+    name: "Contact Us",
     component: GetSupport,
     meta: {
         title: 'ContactUs Page',
@@ -596,60 +596,53 @@ const routes = [
 ];
 
 const router = createRouter({
-	history: createWebHistory(),
-  // base: '',
-  mode: 'hash',
-	routes,
+  history: createWebHistory(),
+  routes,
   breadcrumbs: {
-    separator: " / ", // Customize the separator
+    separator: " / ",
   },
-	scrollBehavior(to) {
-		if (to.hash) {
-			return {
-				el: to.hash,
-				behavior: 'smooth',
-
-			}
-		} else {
-			return { 
-				top: 0 
-			}
-		}
-	}
+  scrollBehavior(to) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
+    } else {
+      return {
+        top: 0,
+      };
+    }
+  },
 });
+
 router.beforeEach((to, from, next) => {
-    const title = to.meta.title
+  const title = to.meta.title;
+  const titleFromParams = to.params.name;
 
-    //Take the title from the parameters
-    const titleFromParams = to.params.name;
-    // If the route has a title, set it as the page title of the document/page
-    if (title) {
-      document.title = title
-    }
-    // If we have a title from the params, extend the title with the title
-    // from our params
-    if (titleFromParams) {
-      document.title = `${titleFromParams} - ${document.title}`;
-    }
-    // sessionStorage.setItem('previousRoute', from.fullPath + ':' + from.name);
-    sessionStorage.setItem('previousRoute', from.fullPath);
-    sessionStorage.setItem('previousRouteName', from.name);
+  if (title) {
+    document.title = title;
+  }
 
-    //Vue.$gtm.trackView(to.name, to.path);
-	next();
+  if (titleFromParams) {
+    document.title = `${titleFromParams} - ${document.title}`;
+  }
+
+  sessionStorage.setItem("previousRoute", from.fullPath);
+  sessionStorage.setItem("previousRouteName", from.name);
+
+  next();
 });
 
 router.beforeResolve(async (to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-      user = await getUser();
-      if (!user) {
-          return next({
-              path: '/login'
-          });
-      } 
-      return next()
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    user = await getUser();
+    if (!user) {
+      return next({
+        path: "/login",
+      });
+    }
   }
-  return next()
+  next();
 });
 
 export default router;

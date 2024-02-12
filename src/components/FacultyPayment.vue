@@ -147,7 +147,6 @@
     },
     computed: {
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         }
     },
@@ -173,7 +172,6 @@
       }
       this.rowData = this.Orders;
       this.rowSelection = 'single';
-      console.log(this.rowData);
       this.popupParent = document.body;
       this.paginationPageSize = 10;
   

@@ -1,6 +1,5 @@
 <template>
     <div class="container jk">
-        <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
             <div v-if="showShareButton">
@@ -368,7 +367,6 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
@@ -381,11 +379,10 @@ export default {
             const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
             this.ratings = result.data.averageRating;
             this.ratingCount = result.data.ratingCount;
-            console.log(this.ratings);
             const results = await AxiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
             this.persons = results.data;
-            console.log(this.persons);
-
+          
+          
 
 
         } catch (error) {
@@ -422,23 +419,33 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
-        submitRating() {
-            AxiosInstance.post('/Ratings', {
+        async submitRating() {
+            try {
+                await AxiosInstance.post('/Ratings', {
                 userId: this.isuser['cognito:username'],
                 objectId: this.faculty.id,
                 objectTypeId: 4,
                 ratingScore: this.rating
-            }).then(response => {
-                // Handle success (if needed)
-                console.log(response.data);
-                this.rating = '';
+            });
+
+                // Clear the rating value
+                this.rating = null;
+
+                // Close the popup (if needed)
                 this.closePopup();
-            })
-            .catch(error => {
+
+                // Retrieve updated ratings
+                const result = await AxiosInstance.get(`/Ratings?id=${this.faculty.id}&objectTypeId=4`);
+                this.ratings = result.data.averageRating;
+                this.ratingCount = result.data.ratingCount;
+
+                // Handle success (if needed)
+            } catch (error) {
                 // Handle error (if needed)
                 console.error(error);
-            });
+            }
         }
+
     }
 }
 </script>
@@ -447,7 +454,7 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top: 5%;
+    padding-top: 0%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

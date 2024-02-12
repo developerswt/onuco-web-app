@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid jk">
-    <Breadcrumbs class="brm" />
+    <!-- <Breadcrumbs class="brm" /> -->
     <div v-for="academi in academia" :key="academi.id" class="container ">
       <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
       <div>
@@ -82,8 +82,6 @@ export default {
       const branchesResponse = await axiosInstance.get(`/Branches`);
       this.branches = branchesResponse.data;
 
-      console.log(this.academia);
-      console.log(this.branches);
     } catch (error) {
       console.log(error);
     } finally {
@@ -106,7 +104,7 @@ export default {
 }
 
 .jk {
-  padding-top: 70px;
+  padding-top: 0px;
   background: #EFF5FC 0% 0% no-repeat padding-box;
   opacity: 1;
 }

@@ -256,3 +256,9 @@ background-color: #00000029;
     left: 400px !important;
     transform: translateX(-50%);
 }
+.breadcrumb-item+.breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: ">";
+}

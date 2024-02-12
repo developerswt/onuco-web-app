@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs class="container" />
+        <!-- <Breadcrumbs class="container" /> -->
         <div class="container">
         <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
                 <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
@@ -75,11 +75,11 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Academia/GetAcademiaByName/` + this.$route.params.name);
             this.academia = res.data;
-            console.log(this.academia);
+
 
             const result = await AxiosInstance.get(`/Branches/GetBranchListByName/` + this.$route.params.name);
             this.branches = result.data;
-            console.log(this.branches);
+
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top: 70px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

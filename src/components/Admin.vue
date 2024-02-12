@@ -122,7 +122,6 @@ export default {
         try {
             const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
             this.activeStudents = res.data;
-            console.log(this.activeStudents);
             const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
             this.subject = result.data;
             const resu = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);

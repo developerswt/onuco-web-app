@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid header_padding">
-        <p>Home>Profile>Notification</p>
         <h2 class="pp"><b>Maths 1</b> (NEP Series)</h2>
         <h4>Dr. Ashoka P R</h4>
         <div class="row">
@@ -50,13 +49,19 @@
 <script>
 
 export default {
-    name: 'UserNotification'
+    name: 'UserNotification',
+    data() {
+        return {
+            value2: 0, // Define the value2 property and set its initial value
+            colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
+        }
+    }
 }
 </script>
 
 <style scoped>
 .header_padding {
-    padding-top: 7%;
+    padding-top: 0%;
     padding-left: 10%;
     padding-right: 10%;
 }

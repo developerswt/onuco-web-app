@@ -466,16 +466,12 @@ export default {
         },
 
         querySearch(queryString, cb) {
-            console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
-            console.log(results);
-            cb(results);
+             cb(results);
         },
         createFilter(queryString) {
-            console.log("queryString", queryString)
             axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
                 .then((res) => (this.dataarray = res.data));
-            console.log(this.dataarray);
             return this.dataarray;
 
         },
@@ -508,8 +504,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+       
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";

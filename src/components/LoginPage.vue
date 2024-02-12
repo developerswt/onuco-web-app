@@ -107,8 +107,7 @@ export default {
 <template>
   <div class="login_class">
     <authenticator class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms="['username']"
-      :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']"
-      style=" padding: 40px 40px 152px !important;">
+      :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
 
       <template #icon-facebook>
         <div style="padding: var(--amplify-space-large);">
@@ -192,7 +191,7 @@ export default {
 }
 
 .login_class {
-  padding-top: 4%;
+  padding-top: 0%;
   z-index: 1;
 }
 

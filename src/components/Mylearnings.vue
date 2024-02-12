@@ -2,7 +2,6 @@
     <div class="container-fluid jk">
         <div class="container jk">
             <div class="learning_block">
-                <Breadcrumbs />
                 <div class="row">
                     <div class="col-lg-12">
                         <div>
@@ -289,7 +288,6 @@ export default {
     },
     computed: {
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         videoType() {
@@ -318,7 +316,6 @@ export default {
         try {
             const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
             this.myLearning = res.data;
-            console.log(this.myLearning);
             if (this.myLearning.length > 0) {
                 // Set the default selected item to the first item in myLearnin
                 this.selectedItem = this.myLearning[0];
@@ -330,8 +327,6 @@ export default {
                     withCredentials: false,
                 }
             ];
-            console.log(this.Learning);
-            console.log(this.videoOptions);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -353,10 +348,8 @@ export default {
 
                 // Pause the current video
                 player.pause();
-                console.log('Player paused.');
-
+              
                 this.renderComponent = false;
-                console.log(this.renderComponent);
                 await this.$nextTick();
                 this.renderComponent = true;
 
@@ -369,8 +362,7 @@ export default {
                     }
                 ];
 
-                console.log('Video source updated.');
-
+              
                 // Set the new sources
                 player.src(this.videoOptions.sources);
             }
@@ -427,7 +419,6 @@ export default {
 
             if (totalTime && watchTime && isFinite(totalTime) && isFinite(watchTime)) {
                 const percentage = (watchTime / totalTime) * 100;
-                console.log(percentage);
                 return percentage;
             } else {
                 return 0;
@@ -437,7 +428,6 @@ export default {
             if (this.myLearning && Array.isArray(this.myLearning)) {
                 for (const topic of this.myLearning) {
                     if (topic && topic.id && topic.id === selectedItem.id) {
-                        console.log(topic);
                         return topic;  // If you want to return the matching topic
                     }
                 }
@@ -530,7 +520,7 @@ progress::-moz-progress-bar {
 
 /* Style your radio buttons as needed */
 .learning_block {
-    padding-top: 80px;
+    padding-top: 0px;
 }
 
 .purple_block {

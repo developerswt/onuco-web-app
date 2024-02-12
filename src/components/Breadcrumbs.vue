@@ -1,11 +1,12 @@
+<!-- BreadcrumbsView.vue -->
 <template>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li>
-        <router-link :to="previousPath">{{ previousPathName }} > </router-link>
-      </li> &nbsp;
       <li v-for="(crumb, index) in breadcrumbs" :key="index" class="breadcrumb-item">
-        <router-link to="">{{ crumb.label }}</router-link>
+        <router-link v-if="shouldRenderLink(crumb)" :to="crumb.to" class="breadcrumb-link">
+          {{ crumb.label }}
+        </router-link>
+        <span v-else class="breadcrumb-label">{{ crumb.label }}</span>
       </li>
     </ol>
   </nav>
@@ -17,63 +18,226 @@ export default {
   data() {
     return {
       breadcrumbs: [],
-      previousPath: sessionStorage.getItem('previousRoute'),
-      previousPathName: sessionStorage.getItem('previousRouteName')
+      breadcrumbKey: 0,
+      dynamicValue: '',
     };
   },
-  created() {
-    this.updateBreadcrumbs();
-  },
   methods: {
-    updateBreadcrumbs() {
-      const routeHistory = this.$route.matched.map((route) => ({
-        to: route.path,
-        label: route.name,
+    updateBreadcrumbs(toRoute, fromRoute) {
+      if (this.$route.name !== 'Home') {
+        if (toRoute.matched.some(route => route.path.includes('/:'))) {
+          this.updateDynamicBreadcrumbs(toRoute);
+        } else {
+          this.updateNonDynamicBreadcrumbs(toRoute, fromRoute);
+        }
+      }
+    },
+
+    updateDynamicBreadcrumbs(toRoute) {
+      const dynamicValue = this.updateDynamicValue();
+  
+      // Create dynamic breadcrumbs
+      const dynamicBreadcrumbs = toRoute.matched.map((route) => ({
+        to: route.path.includes('/:') ? `${dynamicValue}` : route.path,
+        label: this.getBreadcrumbLabel(route),
       }));
 
-      // Ensure unique breadcrumb paths, only adding them once
-      const breadcrumbPaths = new Set();
-      this.breadcrumbs = routeHistory.filter((route) => {
-        if (!breadcrumbPaths.has(route.to)) {
-          breadcrumbPaths.add(route.to);
-          return true;
+      // Check if navigating back within dynamic route
+      const navigatingBackDynamic = this.breadcrumbs.some(
+        (crumb) => dynamicBreadcrumbs.findIndex((db) => db.to === crumb.to) === -1
+      );
+  
+      if (navigatingBackDynamic) {
+        // Remove breadcrumbs after the current dynamic breadcrumb
+        const indexOfCurrentBreadcrumb = this.breadcrumbs.findIndex(
+          (crumb) => crumb.to === dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].to
+        );
+        if (indexOfCurrentBreadcrumb !== -1) {
+          this.breadcrumbs.splice(indexOfCurrentBreadcrumb + 1);
         }
-        return false;
-      });
+      }
+
+      // Avoid duplicate "Home" entries in dynamic breadcrumbs
+      if (this.breadcrumbs.length === 0 || this.breadcrumbs[0].label !== 'Home') {
+        this.breadcrumbs = [
+          {
+            to: '/',
+            label: 'Home',
+          },
+          ...this.breadcrumbs,
+        ];
+      }
+
+      // Check if navigating to a non-dynamic page from a dynamic page
+      if (toRoute.matched.every(route => !route.path.includes('/:'))) {
+        this.breadcrumbs = [
+          {
+            to: '/',
+            label: 'Home',
+          },
+          {
+            to: toRoute.path,
+            label: this.getBreadcrumbLabel(toRoute),
+          },
+        ];
+      } else {
+        // Set dynamic breadcrumbs
+        this.breadcrumbs = [
+          ...this.breadcrumbs,
+          ...dynamicBreadcrumbs,
+        ];
+      }
+
+      // Navigating back logic
+      const navigatingBack = this.breadcrumbs.length > toRoute.matched.length;
+
+      if (navigatingBack) {
+        // Find the index of the current breadcrumb
+        const indexOfCurrentBreadcrumb = this.breadcrumbs.findIndex(crumb => crumb.to === toRoute.path);
+        if (indexOfCurrentBreadcrumb !== -1) {
+          // Remove the breadcrumb after the current breadcrumb
+          this.breadcrumbs.splice(indexOfCurrentBreadcrumb + 1);
+        }
+      }
+
+      this.breadcrumbKey += 1;
     },
+
+
+    // navigateBack() {
+    //   if (this.breadcrumbs.length > 1) {
+    //     this.breadcrumbs.pop(); // Remove the current breadcrumb
+    //     const lastBreadcrumb = this.breadcrumbs[this.breadcrumbs.length - 1];
+    //     this.$router.push(lastBreadcrumb.to);
+    //   }
+    // },
+
+
+
+    updateNonDynamicBreadcrumbs(toRoute, fromRoute) {
+      const nonDynamicBreadcrumbs = [
+        {
+          to: '/',
+          label: 'Home',
+        },
+        {
+          to: toRoute.path,
+          label: this.getBreadcrumbLabel(toRoute),
+        },
+      ];
+
+      if (fromRoute && fromRoute.matched.some(route => route.path.includes('/:'))) {
+        // Reset breadcrumbs when navigating from dynamic to non-dynamic
+        this.breadcrumbs = nonDynamicBreadcrumbs;
+      } else if (toRoute.matched.some(route => route.path.includes('/:') && route.path.includes('/:pathMatch(.*)*'))) {
+        // Reset breadcrumbs when navigating from non-dynamic to dynamic
+        this.breadcrumbs = [
+          {
+            to: '/',
+            label: 'Home',
+          },
+          {
+            to: toRoute.path,
+            label: this.getBreadcrumbLabel(toRoute),
+          },
+        ];
+      } else {
+        // Update breadcrumbs for non-dynamic routes
+        this.breadcrumbs = nonDynamicBreadcrumbs;
+      }
+
+      this.breadcrumbKey += 1;
+    },
+
+
+    
+
+    getBreadcrumbLabel(route) {
+      if (route.path.includes('/:')) {
+        const urlPath = window.location.pathname;
+        const pathAfterPort = urlPath.replace(/.*:\d+/, '');
+        const dynamicParam = pathAfterPort.split('/').pop(); // Extract the last segment after the last '/'
+        return this.processLabel(dynamicParam);
+      } else {
+        return route.name;
+      }
+    },
+
+    processLabel(label) {
+      const formattedLabel = label.replace(/-/g, ' ').replace(/\b\w/, c => c.toUpperCase());
+      return formattedLabel;
+    },
+
+    updateDynamicValue() {
+      const urlPath = window.location.pathname; // Get the path part of the URL
+
+      // Extract the part of the path after the port number
+      const pathAfterPort = urlPath.replace(/.*:\d+/, '');
+
+      // Update the dynamicValue property
+      this.dynamicValue = pathAfterPort;
+
+      // Return the value if needed
+      return pathAfterPort;
+    },
+
+    isHomeRoute() {
+      return this.$route.name === 'Home';
+    },
+    shouldRenderLink(crumb) {
+      // Check if the crumb corresponds to the current route
+      const currentRoutePath = this.$route.path;
+      const crumbRoute = crumb.to;
+
+      // Function to remove dynamic parameters and wildcards from the route path
+      const removeDynamicParamsAndWildcards = (path) => path.replace(/\/:\w+/g, '').replace(/\*$/, '');
+
+      return removeDynamicParamsAndWildcards(crumbRoute) !== removeDynamicParamsAndWildcards(currentRoutePath);
+    },
+  },
+  watch: {
+    $route(to, from) {
+      this.updateBreadcrumbs(to, from);
+    },
+  },
+  created() {
+    if (this.$route.matched.some(route => route.path.includes('/:'))) {
+      this.updateDynamicBreadcrumbs(this.$route);
+    } else {
+      this.updateNonDynamicBreadcrumbs(this.$route);
+    }
   },
 };
 </script>
 
 <style scoped>
 .breadcrumb {
-  background: transparent;
-  margin-left: -22px;
+  margin-top: 7%;
+  background-color: transparent;
 }
 
-.breadcrumb-item a {
-  color: #888888;
-  font-size: 16px;
-}
-
-a {
-  color: #888888;
+.breadcrumb-item {
   text-decoration: none;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
-  content: ">";
+.breadcrumb-link {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 16px/21px Segoe UI;
+  letter-spacing: 0px;
   color: #888888;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-ol {
-  margin-top: 0;
-
-}
-
-@media screen and (max-width: 1000px) {
-  .breadcrumb {
-    display: none;
-  }
+.breadcrumb-label {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font-weight: 600;
+  color: #888888;
+  opacity: 1;
 }
 </style>

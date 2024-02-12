@@ -2,6 +2,10 @@
   <div id="app">
     <div class="content-wrapper">
       <Navbar :show-search-box-prop="true" />
+      <!-- Conditionally render Breadcrumbs based on the route -->
+      <div class="container">
+        <Breadcrumbs v-if="!isHomeRoute" />
+      </div>  
       <router-view :key="$route.fullPath" />
     </div>
     <AppFooter />
@@ -13,7 +17,7 @@ import Navbar from './components/Navbar.vue';
 import AppFooter from './components/AppFooter.vue';
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-
+import Breadcrumbs from './components/Breadcrumbs.vue'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD4NRQ4QQHijRJYkMyHghh1tHFg0AI4ODw",
@@ -57,11 +61,17 @@ export default {
   components: {
     Navbar,
     AppFooter,
+    Breadcrumbs
   },
   data() {
     return {
       showSearchBox: true,
     }
+  },
+  computed: {
+    isHomeRoute() {
+      return this.$route.name === 'Home' || this.$route.name == 'AdminPage';
+    },
   },
   // computed: {
   //   showSearchBox() {

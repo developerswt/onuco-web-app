@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs class="container" />
+        <!-- <Breadcrumbs class="container" /> -->
         <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
                 <span id="aca_text"><b>Available</b></span>Semesters ({{ semester.length }})
@@ -151,13 +151,10 @@ export default {
         try {
             const universe = await AxiosInstance.get(`/University/GetUniversityGroupByName/` + this.$route.params.name);
             this.university = universe.data;
-            console.log(this.university)
             const res = await AxiosInstance.get(`/Semester/GetSemesterListByName/` + this.$route.params.name);
             this.semester = res.data;
-            console.log(this.semester);
             const result = await AxiosInstance.get(`/Course`);
             this.course = result.data;
-            console.log(this.course)
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -168,7 +165,6 @@ export default {
     },
     methods: {
         showShareOption(courseName) {
-            console.log(courseName);
             this.showShareButton = true;
             this.currentRoute = `https://dev.skillmeridiandev.tech/CourseDetails/${courseName}`;
         },
@@ -196,9 +192,7 @@ export default {
             for (const course of filteredCourses) {
                 const res = await this.getByRatings(course.id);
                 course.starRating = res.averageRating;
-                console.log(course.starRating);
                 course.ratingCount = res.ratingCount;
-                console.log(course.ratingCount);
             }
         },
     }
@@ -305,7 +299,7 @@ export default {
 
 
 .jk {
-    padding-top: 70px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

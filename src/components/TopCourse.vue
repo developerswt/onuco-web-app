@@ -1,7 +1,7 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container" style="margin-top: 70px;">
-            <Breadcrumbs />
+        <div class="container" >
+            <!-- <Breadcrumbs /> -->
             <h4 class="academic_head_text pt-4">
                 <span id="aca_text">Top</span>Rated Courses
             </h4>
@@ -205,14 +205,12 @@ data() {
         try {
             const res = await AxiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
-            console.log(this.courses);
             for (const course of this.courses) {
                 const res = await this.getByRatings(course.id);
                 course.starRating = res.averageRating;
             }
             const result = await AxiosInstance.get(`/Course`);
             this.allCourses = result.data;
-            console.log(this.allCourses);
             for (const allcourse of this.allCourses.courses) {
                 const resu = await this.getByRatings(allcourse.id);
                 allcourse.starRating = resu.averageRating;
@@ -270,8 +268,7 @@ data() {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+       
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";

@@ -135,23 +135,18 @@ export default {
   
     handleSelectedTypeChange(selectedType) {
     this.selectedType = selectedType;
-    console.log(this.selectedType);
   },
   handleSelectedAcademicChange(selectedAcademic) {
     this.selectedAcademic = selectedAcademic;
-    console.log(this.selectedAcademic);
   },
   handleSelectedBranchesChange(selectedBranch) {
       this.selectedBranch = selectedBranch;
-      console.log(this.selectedBranch);
   },
   handleSelectedUniversityChange(selectedUniversity) {
       this.selectedUniversity = selectedUniversity;
-      console.log(this.selectedUniversity);
   },
   handleSelectedSemesterChange(selectedSemester) {
       this.selectedSemester = selectedSemester;
-      console.log(this.selectedSemester);
   }
   },
 };

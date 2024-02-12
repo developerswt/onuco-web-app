@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <Breadcrumbs />
+                                    <!-- <Breadcrumbs /> -->
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
 
 
                                 <div class="icon_blck">
-                                    <StarRatings :rating="ratings !== undefined ? ratings : 0" :max-rating="5" />
+                                    <StarRatings :rating="ratings" :max-rating="5" />
 
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
@@ -212,8 +212,8 @@
                                                                                 </div>
 
                                                                                 <i class="fa" aria-hidden="true" :class="{
-                                                                                    'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                    'fa-bookmark': isProgressBarComplete(subject.id) || playingSubject === subject,
+                                                                                    'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject && !isProgressBarHalfComplete(subject.id),
+                                                                                    'fa-bookmark': isProgressBarHalfComplete(subject.id) || isProgressBarComplete(subject.id) || playingSubject === subject,
                                                                                 }" style=" font-size: 26px;"></i>
                                                                             </div>
                                                                         </div>
@@ -229,7 +229,7 @@
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
                                                     <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :courseDisPrice = "courseDisPrice" :course-id="courseId" :watch-time="watchTime" />
+                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" />
                                                 </div>
                                             </div>
                                         </div>
@@ -321,11 +321,9 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isusers() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user;
         },
         videoType() {
@@ -361,15 +359,11 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
-            console.log(this.book);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
-            console.log(this.courseDetails);
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
             this.ratings = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
-            console.log(this.ratings);
-            // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
                 this.userIsSubscribed = true;
             } else {
@@ -379,10 +373,8 @@ export default {
                 try {
                     const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
                     this.watchTimeDatas = result.data;
-                    console.log(this.watchTimeDatas);
                 } catch {
                     this.watchTimeDatas = { "id": 0, "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08", "courseId": 0, "watchTimeData": [] };
-                    console.log(this.watchTimeDatas);
                 }
             }
 
@@ -395,8 +387,7 @@ export default {
             ]
             this.courseId = this.book.id;
 
-            console.log(this.book.id);
-            console.log(this.videoOptions);
+        
         } catch (err) {
             console.error(err);
             this.isLoading = false;
@@ -408,10 +399,15 @@ export default {
     methods: {
 
         formatDuration(duration) {
-        // Assuming the input is in hh:mm:ss format
-        const [hours, minutes, seconds] = duration.split(':');
-        return `${hours}h ${minutes}min`;
-    },
+            // Check if duration is undefined or null
+            if (!duration) {
+                return 'N/A'; // or any default value you prefer
+            }
+
+            // Assuming the input is in hh:mm:ss format
+            const [hours, minutes, seconds] = duration.split(':');
+            return `${hours}h ${minutes}min`;
+        },
 
         showPopup() {
             this.isPopupVisible = true;
@@ -448,8 +444,9 @@ export default {
             const watchTime = this.getWatchTime(subjectId);
 
             if (totalTime && watchTime) {
-                console.log((watchTime / totalTime) * 100);
-                return (watchTime / totalTime) * 100;
+                const rawPercentage = (watchTime / totalTime) * 100;
+                const roundedPercentage = Math.floor(rawPercentage); // rounding down to the nearest integer
+                return roundedPercentage;
             } else {
                 return 0;
             }
@@ -578,14 +575,11 @@ export default {
                 const player = this.$refs.videoPlayer.player;
                 
                 this.videoId = subject.id;
-                console.log(this.videoId);
                 this.courseDisPrice = this.book.discountedPrice;
                 player.pause();
-                console.log('Player paused.');
-
+          
 
                 this.renderComponent = false;
-                console.log(this.renderComponent);
                 await this.$nextTick();
                 this.renderComponent = true;
 
@@ -598,11 +592,9 @@ export default {
                 ];
 
                 this.playingSubject = subject;
-                console.log('Video source updated.');
-
+          
                 this.watchTime = this.getWatchTime(subject.id);
-                console.log(this.watchTime);
-
+          
                 player.src(this.videoOptions.sources);
             }
         },
@@ -641,7 +633,6 @@ export default {
             })
                 .then(response => {
                     // Handle success (if needed)
-                    console.log(response.data);
                     this.rating = '';
                     this.closePopup();
                 })
@@ -676,8 +667,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+          
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
@@ -751,7 +741,7 @@ progress::-webkit-progress-value {
 }
 
 .jk {
-    padding-top: 68px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

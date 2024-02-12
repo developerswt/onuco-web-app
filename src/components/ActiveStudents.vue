@@ -666,10 +666,8 @@ export default {
         try {
             const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
             this.subscribedStd = res.data;
-            console.log(this.subscribedStd);
             const result = await AxiosInstance.get(`/Course`);
             this.coursesAvailable = result.data;
-            console.log(this.coursesAvailable);
             const resu = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
             this.lectureStudent = resu.data;
             const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);

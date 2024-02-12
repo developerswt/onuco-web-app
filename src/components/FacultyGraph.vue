@@ -141,10 +141,8 @@ export default {
         try {
             const result = await AxiosInstance.get(`/CoursesFacultyJ/GetActiveStudents`);
             this.activeStudents = result.data;
-            console.log(this.activeStudents);
             const resul = await AxiosInstance.get(`/CoursesFacultyJ/GetCourseDetails`);
             this.subjectStudent = resul.data;
-            console.log(this.subjectStudent);
             this.processChartData();
             this.subjectStudentChartData();
         } catch (error) {

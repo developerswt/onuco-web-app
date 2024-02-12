@@ -132,7 +132,6 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         istoken() {
@@ -147,19 +146,14 @@ export default {
                 if (parts.length === 3) {
                     const payload = parts[1];
                     const decodedPayload = atob(payload);
-                    console.log(decodedPayload);
                     const jwtPayload = JSON.parse(decodedPayload);
                     if (jwtPayload.email) {
                         this.name = jwtPayload.name;
-                        console.log(this.name);
                     } else {
-                        console.log('JWT payload does not contain the "name" property.');
                     }
                 } else {
-                    console.log('Invalid JWT format.');
                 }
             } else {
-                console.log('JWT token not found in local storage.');
             }
         } catch (error) {
             console.error('Error decoding JWT:', error);
@@ -173,7 +167,6 @@ export default {
             if (item.length >= 2) {
                 this.$router.push({ path: '/search', query: { data: item } });
             }
-            console.log(item)
             // document.querySelector(".search").addEventListener("keyup", function(event) {
             //     if (event.key === "Enter") {
             //         handleKeyEnter(this.value); // Assuming this.value holds the current search term
@@ -183,24 +176,18 @@ export default {
         handleSelect(item) {
             if (item.title.length >= 2) {
                 this.$router.push({ path: '/search', query: { data: item.title } });
-                console.log(item);
             }
-            console.log(item);
             // this.$router.push({path:'/GlobalSearchPage',query:{Search:item}});
 
         },
         querySearch(queryString, cb) {
-            console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
-            console.log(results);
             cb(results);
 
         },
         createFilter(queryString) {
-            console.log("queryString", queryString)
             axiosInstance.get("/GlobalSearch?searchTerm=" + this.searchTerm)
                 .then((res) => (this.dataarray = res.data));
-            console.log(this.dataarray);
             return this.dataarray;
 
         },

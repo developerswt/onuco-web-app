@@ -2,6 +2,7 @@
   <div class="video-container">
     <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered"></video>
   </div>
+  
 </template>
 
 
@@ -61,7 +62,6 @@ export default {
       this.player.log('onPlayerReady', this);
       this.player.currentTime(this.watchTime || 0);
       this.player.qualityLevels();
-      console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });
 
       this.player.on('pause', this.pauseVideo);
@@ -69,7 +69,6 @@ export default {
     this.initVideoPlayer();
 
     this.player.on('timeupdate', () => {
-      console.log(this.player.currentTime());
       if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
         this.showPosterOverlay();
@@ -186,7 +185,6 @@ export default {
 
           const response = await AxiosInstance.put('/StateManagement', requestBody);
 
-          console.log('Update successful:', response.data);
           this.prevCourseId = courseId;
           this.prevVideoId = videoId;
         } catch (error) {
@@ -226,8 +224,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+    
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
