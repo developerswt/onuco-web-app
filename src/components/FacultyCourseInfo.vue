@@ -1,0 +1,338 @@
+<template>
+    <div class="container">
+      <div class="row pt-2 ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card-box">
+            <div class="card-head">
+              <header>Faculty Course Details</header>
+              <div class="filter-box">
+  <span for="filter-text-box">Search Here : </span>
+  <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Faculty Name/Course Name/E-mail Id" />
+  <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
+  <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+</div>
+<div class="card-body " style="padding: 0px 30px 30px 30px;">
+               <div class="example-wrapper">
+                    <div style="height: 100%;">
+                      <ag-grid-vue v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                        :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
+                        :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
+                        cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
+                        is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
+                        @row-clicked='onCellClicked'>
+                      </ag-grid-vue>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Loading v-model:active="isLoading"></Loading>
+    </div>
+  </template>
+     
+  <script>
+  import "ag-grid-community/styles/ag-grid.css";
+  import "ag-grid-community/styles/ag-theme-alpine.css";
+  import { AgGridVue } from "ag-grid-vue3";
+  import AxiosInstance from '../config/axiosInstance';
+  import Loading from 'vue3-loading-overlay';
+  import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+  
+  export default {
+    name: "AdSem",
+    components: {
+      AgGridVue,
+      Loading,
+    },
+    data: function () {
+      return {
+        showRequiredMessage: false,
+     hasSearched: false,
+     gridApi: null, // Ensure gridApi is initialized to null
+     gridColumnApi: null,
+     filterText: '',
+        formVisible: false,
+        userName: '',
+        ismodel: true,
+        isLoading: false,
+        showDialog: false,
+        dialogTitle: '',
+        dialogMessage: '',
+        domLayout: null,
+        Orders: [],
+        req: [],
+        columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
+        gridApi: null,
+        defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
+        columnApi: null,
+        editType: null,
+        showChildRow: false,
+        childPara: null,
+        rowData: null,
+        rowSelection: null,
+        paginationPageSize: null,
+        rightAligned: {
+          headerClass: 'ag-right-aligned-header',
+          cellClass: 'ag-right-aligned-cell'
+        },
+      };
+    },
+    computed: {
+      isLoggedIn() {
+        return this.$store.state.IsLoggedIn;
+      },
+    },
+  
+    async created() {
+      this.domLayout = 'autoHeight';
+      this.isLoading = true;
+      try {
+        const res = await AxiosInstance.get(`/CoursesFacultyJ/Getfacultydetailcourse`);
+        let req = res.data;
+        this.Orders = req;
+  
+      } catch (error) {
+        this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;
+        this.dialogTitle = "Error";
+        this.dialogMessage = "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowData = this.Orders;
+      this.rowSelection = 'single';
+      console.log(this.rowData);
+      this.popupParent = document.body;
+      this.paginationPageSize = 10;
+  
+    },
+    watch: {
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
+
+ methods: {
+
+   onFilterButtonClick() {
+    this.filterText = this.filterText.trim();
+    
+    if (this.filterText === '') {
+      this.showRequiredMessage = true;
+      this.hasSearched = false;
+      this.rowData = []; // or reset to the initial state
+      console.log('Input field is required.');
+    } else {
+      this.showRequiredMessage = false;
+      this.hasSearched = true;
+
+   console.log('Filter Text:', this.filterText);
+
+   this.rowData = this.Orders.filter(order => {
+ const lowerCaseFilter = this.filterText.toLowerCase();
+ const includesuserName = order.userName.toLowerCase().includes(lowerCaseFilter);
+ const includescourseName = order.courseName.toLowerCase().includes(lowerCaseFilter);
+ const includesuserEmail = order.userEmail.toLowerCase().includes(lowerCaseFilter);
+//  const includesphone_number = order.phone_number;
+
+ // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
+ return includesuserName || includescourseName || includesuserEmail;
+});
+
+
+   console.log('Filtered Data:', this.rowData);
+ }
+}
+ },
+  };
+  
+  
+  </script>
+  <style scoped>
+  .example-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  
+  #myGrid {
+    flex: 1 1 0px;
+    width: 100%;
+  }
+  
+  .example-header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  
+  .ag-theme-alpine {
+    --ag-header-height: 30px;
+    --ag-header-foreground-color: black;
+    --ag-header-background-color: white;
+    --ag-font-size: 15px;
+    --ag-font-family: 'Times New Roman';
+  
+  }
+  
+  .ag-theme-alpine .ag-header {
+    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+  }
+  
+  .ag-theme-alpine .ag-header-group-cell {
+    font-weight: normal;
+    font-size: 22px;
+  }
+  
+  .ag-theme-alpine .ag-header-cell {
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .ag-header-cell-label {
+    justify-content: center;
+  }
+  
+  @media (max-width: 912px) {
+    .ag-grid-vue {
+      height: 20%;
+    }
+  }
+  
+  .ag-grid-vue {
+    width: 100%;
+    height: 80%;
+  }
+  
+  .kl {
+    text-align: center;
+  }
+  
+  .sd {
+    width: 15%;
+    font-size: 1em;
+  }
+  
+  .sd1 {
+    width: 15%;
+    font-size: 1em;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .kl {
+      text-align: left;
+    }
+  
+    .sd {
+      width: 55%;
+      font-size: 1em;
+    }
+  
+    .sd1 {
+      width: 42%;
+      font-size: 1em;
+    }
+  }
+  
+  .modal-dialog {
+    max-width: 900px;
+  
+    margin: 1.75rem auto;
+  }
+  
+  .modal-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+    height: 630px;
+    /* Set the height as needed */
+    overflow-y: auto;
+  }
+  
+  .mc {
+    height: 300px;
+    width: 550px;
+    overflow: hidden;
+  }
+  
+  .modal-body {
+    max-height: 400px;
+    /* Adjust the max-height as needed */
+    overflow-y: auto;
+  }
+  
+  @media (max-width:520px) {
+    .example-wrapper {
+      width: 100%;
+    }
+  }
+  
+  .btn1 {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 3px 19px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px;
+  }
+  
+  
+  button:hover {
+    background-color: #007bff;
+  }
+  
+  .card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
+  }
+  
+  .card-head {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 36px;
+    min-height: 40px;
+  }
+  
+  .card-head header {
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+  .button-row button {
+ margin-right: 10px; 
+}
+.search-box{
+ width:70%;
+ padding: 0px;
+}
+.filter-box{
+ position: relative;
+   left: 22px;
+   top: 25px;
+}
+  </style>

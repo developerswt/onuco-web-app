@@ -43,8 +43,8 @@
           <label for="workFlowStatement"><b>WorkFlow Statement:</b></label>
           <input id="workFlowStatement" v-model="newBranch.workFlowStatement" type="text" required><br>
 
-          <label for="facultyId"><b>Faculty Id:</b></label>
-          <input id="facultyId" v-model="newBranch.facultyId" type="text" required><br>
+          <!-- <label for="facultyId"><b>Faculty Id:</b></label>
+          <input id="facultyId" v-model="newBranch.facultyId" type="text" required><br> -->
 
           <button class="btn2" type="submit" style="border: 1px solid;">Add Course</button>
         </form>
@@ -147,7 +147,7 @@ export default {
         semesterId: '',
         courseName: '',
         workFlowStatement: '',
-        facultyId: '',
+        // facultyId: '',
       },
       formVisible: false,
       userName: '',

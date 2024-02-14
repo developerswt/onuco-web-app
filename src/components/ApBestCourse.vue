@@ -25,13 +25,13 @@
    <div class="modal-dialog" role="document">
      <div class="modal-content">
        <div class="modal-header">
-         <h5 class="modal-title">Add New Course</h5>
+         <h5 class="modal-title">Add Best Course</h5>
          <button type="button" class="close" @click="toggleForm">
            <span aria-hidden="true">&times;</span>
          </button>
        </div>
        <div class="modal-body">
-         <el-form @submit.prevent="addBranch"> 
+         <el-form ref="form" @submit.prevent="addBranch"> 
             <div>
               <label for="productDropdown">Subject Name :</label>
               <el-select v-model="selectedOption" @change="loadProductDetails" placeholder="Please Select">
@@ -43,11 +43,8 @@
                     ></el-option>
                 </el-select>
             </div>
-            <!-- <div>
-      <label for="name">Branch Name:</label>
-      <input type="text" v-model="newBranch.name" id="name" />
-    </div> -->
-            <button class="btn2" type="submit">Add Course</button>
+          
+            <button class="btn2" type="submit"> Add </button>
           </el-form>
         </div>
       </div>
@@ -120,7 +117,7 @@
       this.domLayout = 'autoHeight';
       this.isLoading = true;
       try {
-        const res = await AxiosInstance.get(`/TopRatedCourses/getTopRatedCourses`);
+        const res = await AxiosInstance.get(`/TopRatedCourses`);
         let req = res.data;
         this.Orders = req;
 
@@ -150,8 +147,7 @@
     const selectedProduct = this.Products.courses.find(product => product.id === this.selectedOption);
     if (selectedProduct) {
       // Update properties of newBranch with the selected product details
-      this.newBranch = {
-        ...this.newBranch,
+      this.newBranch = {...this.newBranch,
         name: selectedProduct.name,
       };
     }
@@ -168,9 +164,9 @@
         Name: '',
        };
      },
-      toggleForm() {
-        this.formVisible = !this.formVisible;
-      },
+      // toggleForm() {
+      //   this.formVisible = !this.formVisible;
+      // },
   
       onCellClicked(params) {
         this.childPara = params.node.data
@@ -219,16 +215,21 @@
     if (response.status === 200) {
       console.log("Branch added successfully");
       await this.getdata();
-      this.gridApi.refreshCells({ force: true });
-      this.toggleForm();
+      this.loadProductDetails();
       this.$refs.Confirmation.open("Top Course Added successfully.");
+      this.newBranch = {
+        name: '',
+      };
+      this.$refs.form.reset(); 
     }
-  } catch (error) {
-    this.isLoading = false;
-    console.error("Error adding Top Course:", error);
-    this.$refs.Confirmation.open("Error Adding Top Course.");
+  } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+
   } finally {
     this.isLoading = false;
+    this.formVisible = false;
   }
 },
     

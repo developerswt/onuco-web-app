@@ -368,14 +368,14 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    padding: 7px 15px;
+    padding: 18px 17px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 80px; 
     position: relative;
-    top: 68px;
-  left: 73px;
+    top: 63px;
+  left: -20px;
 
   }
 }

@@ -1,27 +1,23 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" id="offer_block">
         <div v-if="showShareButton">
             <ShareButton :url="currentRoute" @close="closeShareOption"  />
         </div>
-        <div id="offer_block" class="container-fluid">
+        <div  class="container-fluid cont">
             <div class="container">
-            <h4 class="academic_head_text">
-                <span id="aca_text">Refer</span>And Learn Free
-            </h4>
-        </div>
+                <h4 class="academic_head_text">
+                    <span id="aca_text">Refer</span>And Learn Free
+                </h4>
+            </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7 col-lg-7">
+                    <div class="col-md-7 col-lg-7 design">
                         <div class="box mt-3">
                             <h2>Refer A Friend</h2>
                             <p>Get 20% OFF on all Courses</p>
                             <div class="offer_inside_block">
-
                                 <p>Offers Ends on<br>June 30 2023</p>
-
-
                                 <button class="btn btn-primary" @click="showShareOption">Refer now</button>
-
                             </div>
                         </div>
                     </div>
@@ -109,20 +105,26 @@ export default {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 512px) {
     .box {
 
-        padding: 10px !important;
+        /* padding: 10px !important; */
         background-color: #FF9900;
-        margin-bottom: 3%;
+        /* margin-bottom: 3%; */
         background: #FF9900 0% 0% no-repeat padding-box;
         border-radius: 6px;
         opacity: 1;
         width: 100%;
-        height: 146px;
+        height: auto;
         text-align: left;
         color: white;
 
+    }
+    .design{
+        position: relative;
+    width: 100%;
+    padding-right: 30px !important;
+    padding-left: 30px !important;
     }
 
     .box p {
@@ -180,7 +182,7 @@ h2 {
 .academic_head_text {
     color: #006acd;
     font-size: 20px;
-    padding-left: 0px;
+    padding-left: 15px;
 
 }
 
@@ -240,16 +242,16 @@ h2 {
     #offer_block {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: -43px !IMPORTANT;
-        margin-bottom: 106px;
+        /* margin-top: -43px !IMPORTANT; */
+        margin-bottom: 85px;
         background: #EEEAE4 !important;
         background: radial-gradient(at left top, #EEEAE4 30%, #D3E4F6 80%) !important;
-        position: relative;
-        top: 42px;
+        /* position: relative;
+        top: 42px; */
 
     }
 
-    .container-fluid {
+   #offer_block {
         padding: 0px !important;
     }
 

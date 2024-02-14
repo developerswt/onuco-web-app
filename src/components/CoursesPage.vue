@@ -24,10 +24,12 @@
                         <img class="cb" src="../assets/images/book1.png">
                       </div>
                     </div>
-                    <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 10px;">
+                    <div class="col-md-7 col-7 col-sm-7" style="position: relative; right: 10px;">
                       <div class="course_block_one">
-                        <h5 :title="branch.name">{{ branch.name.slice(0, 15) }}...</h5>
-                        <p style="margin-top: -8px;"  :title="branch.description">{{ branch.description.slice(0, 20) }}...</p>
+                        <h5 :title="shortenText(branch.name)">{{ shortenText(branch.name, 18) }}</h5>
+                        <p style="margin-top: -8px;" :title="shortenText(branch.description)">
+                          {{ shortenText(branch.description, 20) }}
+                        </p>
                       </div>
                     </div>
                     <div class="col-md-2 col-2 col-sm-2">
@@ -94,7 +96,10 @@ export default {
     getSecondArrayLength(id) {
       const filteredItems = this.branches.filter(item => item.academyId === id);
       return filteredItems.length;
-    }
+    },
+    shortenText(text, maxLength) {
+      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    },
   }
 }
 </script>
@@ -102,7 +107,7 @@ export default {
 
 <style scoped>
 .cb {
-  height: 65px !important;
+  height: 60px !important;
 }
 
 .jk {
@@ -153,6 +158,8 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 16%;
+  position: relative;
+    bottom: 10px;
 
 }
 
@@ -166,14 +173,14 @@ export default {
   font-size: 16px;
   font-family: 'Times New Roman', Times, serif;
   text-align: left;
-  font: normal normal 600 18px/24px Segoe UI;
+  font: normal normal 600 16px/24px Segoe UI;
   letter-spacing: 0px;
   color: #0066CC;
   opacity: 1;
 }
 
 .box p {
-  font-size: 16px;
+  font-size: 15px;
 
   text-align: left;
 
@@ -253,7 +260,7 @@ h2 {
 
 @media (max-width: 520px) {
   .cb1 {
-    height: 25px;
+    height: 22px;
     position: relative;
     top: 20px;
     display: block;

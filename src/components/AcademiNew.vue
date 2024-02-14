@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="mb">
-            <div class="parent_blocks">
+            <div class="row mt-4">
                 <div v-for="item in academia" :key="item.id">
                     <div class="box1">
                         <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </router-link>
-                        <p class="ty" :title="item.academia.name">{{ item.academia.name.slice(0,10) }}...</p>
+                        <p class="ty" :title="item.academia.name">{{ shortenText(item.academia.name ,11) }}</p>
                     </div>
                 </div>
             </div>
@@ -66,6 +66,11 @@ export default {
             this.isLoading = false;
         }
     },
+    methods:{
+        shortenText(text, maxLength) {
+      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    },
+    }
 }
 </script>
 
@@ -124,10 +129,10 @@ export default {
 .mb .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
+    /* margin-left: 15px;
+    margin-right: 0px !important; */
 }
 .card {
     width: 28rem;
@@ -138,7 +143,7 @@ export default {
         margin-bottom: 55px;
     }
 }
-@media screen and (max-width: 510px) {
+@media screen and (max-width: 520px) {
     .mb .box1 {
         width: 90%;
         margin: 30px 0px 30px 0px;
@@ -160,6 +165,14 @@ export default {
     .ty {
         margin-top: -88px;
     }
+    .mb .row {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    margin-left: 15px;
+    margin-right: 0px !important;
+}
 }
 @media only screen and (max-width: 912px) {
     .card {
@@ -248,8 +261,8 @@ router-link {
 .parent_blocks {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 30px 0px 30px 0px;
+    flex-direction: row;
+    /* margin: 30px 0px 30px 0px; */
 }
 .num {
     color: white;

@@ -18,11 +18,10 @@
                             style="text-decoration: none;">
                             <div class="wer">
                                 <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
-                                <div class="card-img-top offer1"
-                                    style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
-                                    <br>
-                                    <p style="position: absolute; left: 20px;">{{ course.name }}</p>
-                                </div>
+                                <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
+                            <br>
+                            <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;" >{{ course.name}}</p>
+                        </div>
                                 <div class="offer">
                                     <img class="card-img-top" src="../assets/images/offer.png">
                                 </div>
@@ -465,8 +464,8 @@ export default {
     }
 
     .btn {
-        margin-left: 90px;
-        margin-top: -30px;
+        margin-left: 72px;
+    margin-top: -46px;
     }
 
     .fa {

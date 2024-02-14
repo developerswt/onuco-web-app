@@ -97,7 +97,7 @@
   import { AgGridVue } from "ag-grid-vue3";
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
+  import moment from 'moment';
   
   export default {
     name: "OrdersPage",
@@ -129,7 +129,7 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate' }, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
+        columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
         gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
@@ -178,6 +178,15 @@
       this.paginationPageSize = 10;
   
     }, 
+    methods:{
+      dateFormat(params) {
+     let value = params.data.paymentDate;
+     console.log(value);
+     if (value) {
+       return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+     }
+   },
+    }
   };
   
   

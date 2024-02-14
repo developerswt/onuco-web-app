@@ -241,9 +241,9 @@ export default defineComponent({
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
-    width: 90%;
+    width: 94%;
     padding: 0px;
-    margin: 0 14px 30px;
+    margin: 0px 9px 23px;
 }
 
 .academic_head_text {

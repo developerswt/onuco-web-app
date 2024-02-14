@@ -6,19 +6,17 @@
           <div class="card-head">
             <header>Student Info Details</header>
             <div class="filter-box">
-          <span for="filter-text-box">Search Here : </span>
-          <input  class="search-box" id="filter-text-box" type="text" placeholder="Search...." />
-          <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
-        </div>
+              <span for="filter-text-box">Search Here : </span>
+              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Name/E-mail Id/Phone_Number" />
+              <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
+              <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+            </div>
             <div class="card-body ">
-
               <div style="padding: 20px;">
-
                 <div class="example-wrapper">
-
                   <div style="height: 100%;">
                     <ag-grid-vue
-                    v-if="hasSearched"
+                      v-if="hasSearched"
                       :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
@@ -31,74 +29,43 @@
               </div>
 
               <div v-if="showChildRow">
-                <div
-class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
-                  aria-modal="true" role="dialog">
+                <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content mc">
-
                       <div class="modal-body" style="overflow: auto !important;">
-
                         <div class="container bg-light">
                           <div v-if="ismodel" class="row">
                             <div class="col-sm-12">
                               <p><b>ID: </b> {{ childPara.id }}</p>
                               <p><b>Course ID:</b> {{ childPara.courseId }}</p>
-                              <p><b>User CognitoId:</b> <a :href="getUserLink(childPara.userCognitoId)">{{
-                                childPara.userCognitoId }}</a></p>
-                              <!-- <p><b>Price:</b> {{ childPara.price }}</p> -->
+                              <p><b>User CognitoId:</b> <a :href="getUserLink(childPara.userCognitoId)">{{ childPara.userCognitoId }}</a></p>
                               <p><b>Start Date:</b> {{ formatDate(childPara.startdate) }}</p>
                               <p><b>End Date:</b> {{ formatDate(childPara.enddate) }}</p>
-                              <!-- <p><b>Status:</b> {{ childPara.state }}</p> -->
-
                             </div>
                           </div>
                           <div v-else class="row">
                             <div class="col-sm-12">
                               <p><b>ID: </b> {{ childPara.id }}</p>
                               <p><b>Course ID: </b> {{ childPara.courseId }}</p>
-                              <!-- <p><b>User CognitoId:</b> {{ childPara.userCognitoId }}</p>
-                                        
-                                         <p><b>Price:</b> {{ childPara.price }}</p> -->
-
-                              <!-- <div class="">
-                                <label><b>Start Date:</b></label><br>
-                                <Datepicker v-model="childPara.startdate"></Datepicker>
-                              </div> -->
-                              <p><b>Start Date: </b> {{ childPara.startdate }}</p>
-
+                              <p><b>Start Date: </b>{{ formatDate(childPara.startdate) }}</p>
                               <div class="">
                                 <label><b>End Date:</b></label><br>
-                                <Datepicker v-model="childPara.enddate"></Datepicker>
-                              </div>
-                              <!-- <p><b>Status:</b> {{ childPara.state }}</p>
-                                        <div class="">
-                                          <label><b>Status:</b></label><br>
-                                          <input type="text" v-model="this.childPara.state" />
-                                        </div>  -->
-                            </div>
+                                <!-- <Datepicker v-model="childPara.enddate"></Datepicker> -->
+                                <el-date-picker v-model="childPara.enddate" type="datetime"></el-date-picker>
 
+                              </div>
+                            </div>
                           </div>
                         </div>
-
                       </div>
                       <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                          @click="update(childPara.id)">Update</button> -->
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()"> {{ ismodel ? 'Edit' : 'Update' }}</button>
-    <!-- <button v-if="!ismodel" type="button" class="btn btn-danger" @click="deleteUserSubscription">
-        Delete
-    </button> -->
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="editUpdateAction()"> {{ ismodel ? 'Edit' : 'Update' }}</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
                       </div>
-
                     </div>
-
                   </div>
                 </div>
               </div>
-              <!-- <AlertDialog v-if="showDialog" :title="dialogTitle" :message="dialogMessage"/>   -->
               <Loading v-model:active="isLoading"></Loading>
             </div>
           </div>
@@ -134,8 +101,9 @@ export default {
   },
   data: function () {
     return {
+      showRequiredMessage: false,
       hasSearched: false,
-      gridApi: null, // Ensure gridApi is initialized to null
+      gridApi: null, 
       gridColumnApi: null,
       filterText: '',
       userName: '',
@@ -147,7 +115,7 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Course Name', field: 'courseName' }, { name: 'User CognitoId', field: 'userCognitoId' }, { name: 'Price', field: 'price' }, { name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'name',field:'userName'},{name:'e_mailId', field:'e_mailId'},{name:'phone_Number', field:'phone_Number'},{ name: 'Course Name', field: 'courseName' }, { name: 'Price', field: 'price' },{ name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
@@ -207,27 +175,34 @@ export default {
   methods: {
 
     onFilterButtonClick() {
-  this.filterText = document.getElementById('filter-text-box').value.trim();
-  this.hasSearched = true;
+    this.filterText = this.filterText.trim();
+    
+    if (this.filterText === '') {
+      this.showRequiredMessage = true;
+      this.hasSearched = false;
+      this.rowData = []; // or reset to the initial state
+      console.log('Input field is required.');
+    } else {
+      this.showRequiredMessage = false;
+      this.hasSearched = true;
+      
+      console.log('Filter Text:', this.filterText);
+      this.rowData = this.Orders.filter(order => {
+        const lowerCaseFilter = this.filterText.toLowerCase();
+        const includescourseName = order.courseName.toLowerCase().includes(lowerCaseFilter);
+        const includesuserName = order.userName.toLowerCase() === lowerCaseFilter;
+        const includese_mailId = order.e_mailId.toLowerCase() === lowerCaseFilter;
+        const includesphone_Number = order.phone_Number;
 
-  console.log('Filter Text:', this.filterText);
-  this.rowData = this.Orders.filter(order => {
-  const lowerCaseFilter = this.filterText.toLowerCase();
-  const includescourseName = order.courseName.toLowerCase().includes(lowerCaseFilter);
-  const includesuserCognitoId = order.userCognitoId.toLowerCase() === lowerCaseFilter;
+        return includescourseName || includesuserName || includese_mailId || includesphone_Number ;
+      });
 
-  // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
-  return includescourseName || includesuserCognitoId;
-});
+      console.log('Filtered Data:', this.rowData);
+    }
+  },
 
-
-
-  console.log('Filtered Data:', this.rowData);
-},
-
-
-    getUserLink(userCognitoId) {
-      return `/user-profile/${userCognitoId}`;
+    getUserLink(userName) {
+      return `/user-profile/${userName}`;
     },
 
     formatDate(date) {
@@ -513,7 +488,7 @@ button {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 11px 25px;
+  padding: 10px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -540,7 +515,7 @@ button:hover {
   color: #3a405b;
   font-size: 14px;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 36px;
   min-height: 40px;
 }
 

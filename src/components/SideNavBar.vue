@@ -28,22 +28,42 @@
               <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-user"></i>
               </span>
-              <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
-                aria-controls="collapseExample">
+              <span class="title user collapsed" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                 User Details&nbsp;&nbsp;
                 <span class="action user"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
               </span>
-
             </div>
           </li>
           <li>
             <div id="collapseExample1" class="collapse hj">
+                <li>
+                <span id="dropdownMenuButton" class="icon faculty" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2"></span>
+                <span class="title faculty collapsed" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                Faculty Info&nbsp;&nbsp;
+                <span class="action faculty"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
+              </span>
+          </li>
+          <li>
+            <div id="collapseExample2" class="collapse pl-3">
+              <span class="subtitle" @click="selectContent('facultyInfo')">Payment Info</span>
+              <span class="subtitle" @click="selectContent('facultyCourse')">Course Info</span>
+            </div>
+          </li>
               <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
-              <span class="subtitle" @click="selectContent('facultyInfo')">Faculty Info</span>
               <span class="subtitle" @click="selectContent('bestFaculty')">Add Best Faculty</span>
               <span class="subtitle" @click="selectContent('bestCourse')">Add Best Course</span>
             </div>
           </li>
+
+          <li>
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+            <div class="sidebar-item" @click="selectContent('CourseInfo')">
+              <span class="icon"><i class="fa fa-book"></i></span>
+              <span class="title">Course Info</span>
+            </div>
+            </div>
+          </li>
+
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
               <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -231,4 +251,6 @@ li {
 #app {
   display: flex;
   height: auto !important;
-}</style>
+}
+
+</style>
