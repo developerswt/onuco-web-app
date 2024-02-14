@@ -1,6 +1,6 @@
 <template>
   <div class="admin-page">
-    <div id="app" :class="{ 'sidebar-collapse': isSidebarCollapsed }">
+    <div class="app" :class="{ 'sidebar-collapse': isSidebarCollapsed }">
       <SideNavBar :is-collapsed="isSidebarCollapsed" @select-content="selectContent"  />
       <div class="main-container" :style="{ 'margin-left': sidebarMargin }">
         <div v-if="selectedContent === 'dashboard'" class="content-container">
@@ -20,7 +20,8 @@
         <div v-if="selectedContent === 'viewDetails'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">view details</span>
           <ViewDetails v-if="isUserAdmin || isUserSuperadmin"/>
-          <FacultyViewDetails v-if="isUserfaculty" />
+          <FacultySubStudents v-if="isUserfaculty" />
+          <FacultyPayment v-if="isUserfaculty" />
         </div>
         <div v-if="selectedContent === 'branches'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Branches</span>
@@ -47,7 +48,7 @@
           <AdCourse />
         </div>
         <div v-if="selectedContent === 'facultyInfo'" class="content-container">
-        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Faculty Info</span>
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Faculty Payment Info</span>
           <ApLecture />
         </div>
         <div v-if="selectedContent === 'studentInfo'" class="content-container">
@@ -62,6 +63,14 @@
         <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Best Course</span>
           <ApBestCourse />
         </div>
+        <div v-if="selectedContent === 'facultyCourse'" class="content-container">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Course Info</span>
+          <FacultyCourseInfo />
+          </div>
+          <div v-if="selectedContent === 'CourseInfo'" class="content-container">
+        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Course Info</span>
+          <CourseInfo />
+        </div>
       </div>
     </div>
   </div>  
@@ -74,7 +83,7 @@ import Admin from './Admin.vue';
 import Faculty from './Faculty.vue';
 import DataCreation from './DataCreation.vue';
 import ViewDetails from './ViewDetails.vue';
-import FacultyViewDetails from './FacultyViewDetails.vue';
+import FacultySubStudents from './FacultySubStudents.vue';
 import AdBranches from './AdBranches.vue';
 import AdUni from './AdUni.vue';
 import AdSem from './AdSem.vue';
@@ -85,6 +94,10 @@ import ApLecture from './ApLecture.vue';
 import StudentDetails from './StudentDetails.vue'
 import ApBestFaculty from './ApBestFaculty.vue';
 import ApBestCourse from './ApBestCourse.vue';
+import FacultyCourseInfo from './FacultyCourseInfo.vue'
+import CourseInfo from './CourseInfo.vue'
+import FacultyPayment from './FacultyPayment.vue';
+
 
 export default {
     name: 'AdminPage',
@@ -96,7 +109,7 @@ export default {
         Faculty,
         DataCreation,
         ViewDetails,
-        FacultyViewDetails,
+        FacultySubStudents,
         AdUni,
         AdSem,
         AdAcademics,
@@ -106,6 +119,9 @@ export default {
         StudentDetails,
         ApBestFaculty,
         ApBestCourse,
+        FacultyCourseInfo,
+        CourseInfo,
+        FacultyPayment,
     },
     data() {
       return {
@@ -156,7 +172,7 @@ export default {
     height: 100%;
     width: 100%;
   }
-  #app {
+  .app {
     display: flex;
     height: 100%;
   }
@@ -245,6 +261,7 @@ export default {
   
     .sidebar-collapse .main-container {
       margin-left: 0; /* No margin when collapsed on mobile */
+      margin-bottom: 40px;
     }
     .header {
     flex-direction: row; /* Display items in a row for mobile */
@@ -262,6 +279,8 @@ export default {
 
   .main-container {
     flex-direction: column; /* Stack items in a column for mobile */
+    margin-bottom: 40px;
+
   }
   .sidebar-collapse .main-container {
       margin-left: 0; /* No margin when collapsed on mobile */
@@ -273,12 +292,18 @@ export default {
     width: 220px;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 520px) {
   .sidebar {
     padding-top: 11%;
   }
   .main-container {
     padding-top: 9%;
+    margin-bottom: 40px;
+
+  }
+  .app {
+    display: flow;
+    height: 100%;
   }
 }
 @media screen and (max-width: 400px) {
@@ -287,6 +312,8 @@ export default {
   }
   .main-container {
     padding-top: 9%;
+    margin-bottom: 40px;
+
   }
 }
 

@@ -246,6 +246,21 @@ background-color: #00000029;
   left: 16px;
 
 }
+@media (max-width:520px){
+  .vue-form-wizard .wizard-btn {
+    box-sizing: border-box;
+    border-width: 2px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 10px !important;
+    min-width: 100px !important;
+    position: relative;
+    bottom: 16px !important;
+    left: 9px;
+  
+  }
+}
 .wizard-tab-content {
   min-height: 100px;
   padding: 30px 2px 10px;

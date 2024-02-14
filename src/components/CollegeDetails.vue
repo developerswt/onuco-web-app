@@ -1,13 +1,15 @@
 <template>
     <div class="container-fluid jk">
-        <!-- <Breadcrumbs class="container" /> -->
+        <Breadcrumbs class="container" />
+        <div class="container">
+            <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
+        </div>
         <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
                 <span id="aca_text"><b>Available</b></span>Semesters ({{ semester.length }})
             <router-link to="/Announcement"> <button class="bt">BUY NOW</button></router-link>
             </h4>
 
-            <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
             <div v-if="showShareButton"  class="overlay">
                 <ShareButton :url="currentRoute" @close="closeShareOption"  />
             </div>
@@ -347,7 +349,7 @@ export default {
     }
 
     .jk {
-        padding-top: 65px !important;
+        padding-top: 82px !important;
     }
 
     .kj .action[data-v-723afcf3] {
@@ -361,9 +363,11 @@ export default {
     }
 
     #sem_card {
-        height: 160px;
-        opacity: 1;
-        padding: 8%;
+        border-radius: 5%;
+    height: auto;
+    opacity: 1;
+    padding: 5%;
+    width: auto;
     }
 
     #review_text {
@@ -446,8 +450,9 @@ export default {
     }
 
     @media only screen and (max-width: 600px) and (min-width: 100px) {
-        #sem_card[data-v-723afcf3] {
-            height: 155px;
+        #sem_card {
+            border-radius: 5%;
+            height: auto;
             opacity: 1;
             padding: 5%;
             width: auto;
@@ -477,10 +482,10 @@ export default {
     box-shadow: 0px 0px 9px #00000005; 
     border: 1px solid #F0F6FC; */
     width: auto;
-    height: 179px;
+    height: 185px;
     opacity: 1;
     padding: 6%;
-
+border-radius: 3%;
 
 }
 

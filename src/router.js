@@ -70,6 +70,11 @@ import FacultyPayment from './components/FacultyPayment.vue'
 import ShareButton from './components/ShareButton.vue'
 import PayuPage from './components/PayuPage.vue'
 import FailurePayment from './components/FailurePayment.vue'
+import QuizDesign from './components/QuizDesign.vue'
+import FacultyCourseInfo from './components/FacultyCourseInfo.vue'
+import CourseInfo from './components/CourseInfo.vue'
+import FacultySubStudents from './components/FacultySubStudents.vue'
+import StudentSubDetails from './components/StudentSubDetails.vue'
 
 let user = null; // Initialize user as null
 
@@ -591,7 +596,52 @@ const routes = [
         title: 'FailurePayment Page',
     },
 
-  }
+  },
+  {
+    path: "/QuizDesign",
+    name: "QuizDesign",
+    component: QuizDesign,
+    meta: {
+        title: 'QuizDesign',
+    },
+
+  },
+  {
+    path: "/FacultyCourseInfo",
+    name: "FacultyCourseInfo",
+    component: FacultyCourseInfo,
+    meta: {
+        title: 'FacultyCourseInfo',
+    },
+
+  },
+  {
+    path: "/CourseInfo",
+    name: "CourseInfo",
+    component: CourseInfo,
+    meta: {
+        title: 'CourseInfo',
+    },
+
+  },
+  {
+    path: "/FacultySubStudents",
+    name: "FacultySubStudents",
+    component: FacultySubStudents,
+    meta: {
+        title: 'FacultySubStudents',
+    },
+
+  },
+  {
+    path: "/StudentSubDetails",
+    name: "StudentSubDetails",
+    component: StudentSubDetails,
+    meta: {
+        title: 'StudentSubDetails',
+    },
+
+  },
 
 ];
 

@@ -98,7 +98,7 @@ export default {
 }
 
 .jk {
-    padding-top: 0px;
+    padding-top: 90px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -130,7 +130,7 @@ export default {
     }
 
     .jk {
-        padding-top: 65px !important;
+        padding-top: 90px !important;
     }
 }
 
@@ -181,10 +181,10 @@ export default {
 
 
 .box h5 {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/24px var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 16px/24px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
+    font: normal normal 600 16px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
@@ -195,11 +195,11 @@ export default {
 }
 
 .box p {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-707070);
     text-align: left;
-    font: normal normal normal 16px/21px Segoe UI;
+    font: normal normal normal 15px/21px Segoe UI;
     letter-spacing: 0px;
     color: #707070;
     opacity: 1;
@@ -302,7 +302,7 @@ export default {
 
 @media (max-width:520px) {
     .cb1 {
-        width: 25px;
+        width: 22px;
         display: block;
         position: relative;
         top: 13px;
@@ -311,21 +311,37 @@ export default {
     .box {
         margin: 1px 0px 5px 0px !important;
     }
+    .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -2px !important;
+}
 
-    .jk {
+    /* .jk {
         margin-bottom: 61px;
-    }
+    } */
 }
 .desc{
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
 letter-spacing: var(--unnamed-character-spacing-0);
 text-align: left;
-font: normal normal normal 16px/21px Segoe UI;
+font: normal normal normal 15px/21px Segoe UI;
 letter-spacing: 0px;
 color: #828282;
 opacity: 1;
     position: relative;
     bottom: 10px;
     right: 12px;    
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
 }
 </style>

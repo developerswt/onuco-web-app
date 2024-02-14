@@ -2,7 +2,7 @@
     <div class="container-fluid jk">
         <!-- <Breadcrumbs class="container" /> -->
         <div class="container">
-        <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
+            <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
                 <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
             </p>
             <p v-if="academia.readMore" class="professor-details_text">{{ academia.description }}
@@ -11,8 +11,6 @@
         </div>
         <div v-if="branches.length > 0 || academia.length > 0" class="container pb-3">
             <h2 id="available_text" style="margin-top: -25px;"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
-
-            
             <div class="parent_blocks">
                 <div class="row ">
                     <div v-for="branch in branches" :key="branch.id" class="box">
@@ -20,12 +18,20 @@
                             style="cursor: pointer; color: white; text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
-                                    <img src="../assets/images/book1.png" style="height: 65px;">
+                                    <div class="course_block ">
+                                        <img class="cb" src="../assets/images/book1.png">
+                                    </div>
                                 </div>
-                                <div class="col-md-9 col-9 col-sm-9 " style="position: relative;right: 0px;top:10px">
-                                    <h5 data-placement="top" :title="branch.name">{{ branch.name.slice(0,25) }}...</h5>
-                                    <p style="margin-top: -8px;" :title="branch.description">{{ branch.description.slice(0,25) }}...</p>
-
+                                <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 10px;">
+                                    <div class="course_block_one mt-2">
+                                        <h5 :title="(branch.name)">{{ shortenText(branch.name, 18) }}</h5>
+                                        <p style="margin-top: -8px;" :title="(branch.description)">{{ shortenText(branch.description, 20) }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-2 col-sm-2">
+                                    <div class="course_block ">
+                                        <img class="cb1" src="../assets/images/Path4024.png">
+                                    </div>
                                 </div>
                             </div>
                         </router-link>
@@ -38,9 +44,7 @@
                 <h2 style="text-align: center;margin-bottom: 10%; margin-top: 10%;">Comming Soon ...</h2>
             </div>
         </div>
-
     </div>
-
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
     <Offer />
 </template>
@@ -92,6 +96,9 @@ export default {
     toggleReadMore() {
         this.academia.readMore = !this.academia.readMore;
     },
+    shortenText(text, maxLength) {
+      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    },
 },
 }
 </script>
@@ -118,7 +125,7 @@ export default {
     }
 
     #available_text {
-        font-size: 16px !important;
+        font-size: 18px !important;
     }
 
     .jk {
@@ -171,10 +178,10 @@ export default {
 
 
 .box h5 {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/24px var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 16px/24px var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     text-align: left;
-    font: normal normal 600 18px/24px Segoe UI;
+    font: normal normal 600 16px/24px Segoe UI;
     letter-spacing: 0px;
     color: #0066CC;
     opacity: 1;
@@ -185,11 +192,11 @@ export default {
 }
 
 .box p {
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-707070);
     text-align: left;
-    font: normal normal normal 16px/21px Segoe UI;
+    font: normal normal normal 15px/21px Segoe UI;
     letter-spacing: 0px;
     color: #707070;
     opacity: 1;
@@ -240,10 +247,10 @@ h2 {
     padding-left: 1px;
 }
 .professor-details_text{
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
 letter-spacing: var(--unnamed-character-spacing-0);
 text-align: left;
-font: normal normal normal 16px/21px Segoe UI;
+font: normal normal normal 15px/21px Segoe UI;
 letter-spacing: 0px;
 color: #828282;
 opacity: 1;
@@ -251,5 +258,20 @@ opacity: 1;
     bottom: 18px;
     right: 25px;
 
+}
+.cb1 {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .cb1 {
+    height: 22px;
+    position: relative;
+    top: 20px;
+    display: block;
+  }
+}
+.cb {
+  height: 60px !important;
 }
 </style>

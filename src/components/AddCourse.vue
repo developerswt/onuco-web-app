@@ -24,7 +24,7 @@
               <th>Subject Rout Name</th>
               <th>Semester Id</th>
               <th>Work Flow</th>
-              <th>Faculty Id</th>
+              <!-- <th>Faculty Id</th> -->
               <th>IsActive</th>
               <th>ImageFile.................</th>
               <th>Action</th>
@@ -60,7 +60,7 @@
                   </select>
                 </td>
 
-              <td>{{ selectedProduct.facultyId }}</td>
+              <!-- <td>{{ selectedProduct.facultyId }}</td> -->
               <td>{{ selectedProduct.isActive }}</td>
               <td v-if="!editMode">{{ selectedProduct.imageUrl }}</td>
               <td v-if="editMode">
@@ -79,7 +79,7 @@
     </div>
         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
-<el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '1060px' }">
+<el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '965px' }">
     <el-form :model="newBranch" ref="form" label-position="top" class="frm">
         <el-form-item>{{ newBranch.id }}</el-form-item>
         <el-form-item label="Subject Name:" prop="name">
@@ -115,9 +115,9 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="FacultyId:" prop="FacultyId">
+        <!-- <el-form-item label="FacultyId:" prop="FacultyId">
           <el-input v-model="newBranch.FacultyId" required></el-input>
-        </el-form-item>
+        </el-form-item> -->
 
         <el-form-item label="IsActive:" prop="IsActive">
           <el-input v-model="newBranch.IsActive" readonly required></el-input>
@@ -126,8 +126,10 @@
         <!-- <el-form-item label="Image File:" prop="ImageUrl">
           <el-input type="file" @change="imageFileChange"  required></el-input>
         </el-form-item> -->
-        <input id="input_file" type="file" class="input_file" @change="imageFileChange">
-
+        <div>
+          <label for="ImageUrl">Image File:</label>
+          <input id="input_file" type="file" class="input_file" @change="imageFileChange">
+        </div>
         <el-button class="btn2" type="primary" @click="addBranch">Add Subject</el-button>
       </el-form>
     </el-dialog>
@@ -166,7 +168,7 @@ export default {
       formVisible: false,
       products: [],
       selectedCourse: '',
-      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '',imageUrl: '' },
+      selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',imageUrl: '' },
       isLoading: false,
       editMode: false,
       editedProduct: {
@@ -178,7 +180,6 @@ export default {
       semesterId:null, 
       courseName:'',
       workFlowStatement:'',
-      facultyId: '',
       isActive: 1,
       imageUrl:'',
     },
@@ -190,7 +191,6 @@ export default {
       SemesterId: this.selectedsemester, 
       CourseName:'',
       WorkFlowStatement:'',
-      FacultyId: '',
       IsActive: 1,
      },
     };
@@ -274,7 +274,7 @@ async loadProductDetails() {
   this.editedProduct.semesterId = this.selectedProduct.semesterId;
   this.editedProduct.courseName = this.selectedProduct.courseName;
   this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
-  this.editedProduct.facultyId = this.selectedProduct.facultyId;
+  // this.editedProduct.facultyId = this.selectedProduct.facultyId;
   this.editedProduct.imageUrl = this.selectedProduct.imageUrl;
 },
 async updateProduct(id) {
@@ -311,7 +311,7 @@ async addBranch() {
     let formData = new FormData();
     formData.append('ImageUrl', this.selectedFile);
 
-    const response = await AxiosInstance.post(`/Course` + '?' + 'name=' + encodeURIComponent(this.newBranch.name) + '&desc=' + encodeURIComponent(this.newBranch.desc) + '&ActualPrice=' + this.newBranch.ActualPrice + '&DiscountedPrice=' + this.newBranch.DiscountedPrice + '&SemesterId=' + this.newBranch.SemesterId + '&CourseName=' + encodeURIComponent(this.newBranch.CourseName) + '&FacultyId=' + this.newBranch.FacultyId + '&WorkFlowStatement=' + encodeURIComponent(this.newBranch.WorkFlowStatement) + '&IsActive=' + this.newBranch.IsActive,
+    const response = await AxiosInstance.post(`/Course` + '?' + 'name=' + encodeURIComponent(this.newBranch.name) + '&desc=' + encodeURIComponent(this.newBranch.desc) + '&ActualPrice=' + this.newBranch.ActualPrice + '&DiscountedPrice=' + this.newBranch.DiscountedPrice + '&SemesterId=' + this.newBranch.SemesterId + '&CourseName=' + encodeURIComponent(this.newBranch.CourseName) + '&WorkFlowStatement=' + encodeURIComponent(this.newBranch.WorkFlowStatement) + '&IsActive=' + this.newBranch.IsActive,
     formData,
       {
         headers: {
@@ -333,7 +333,6 @@ async addBranch() {
       SemesterId: this.selectedsemester, 
       CourseName:'',
       WorkFlowStatement:'',
-      FacultyId: '',
       IsActive: 1,
       ImageUrl: '',
      };
@@ -365,7 +364,7 @@ async deleteProduct(id) {
         this.loadProductDetails();
 
         this.selectedCourse = '';
-      this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',facultyId:'',isActive: '' };
+      this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '' };
 
         // Show success dialog
         this.$refs.Confirmation.open("Subject deleted successfully.");
@@ -463,14 +462,14 @@ input {
       color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-    padding: 7px 15px;
+    padding: 18px 17px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 80px; 
     position: relative;
-    top: 68px;
-  left: 73px;
+    top: 63px;
+  left: -20px;
 
   }
 }

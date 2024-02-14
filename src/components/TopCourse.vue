@@ -11,15 +11,11 @@
         <div class="container mb">
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="course in courses" :key="course.id">
-
                     <div class="box">
-                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
-                            style="text-decoration: none;">
+                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }" style="text-decoration: none;">
                             <div class="wer">
-                                <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
-                                <div class="card-img-top offer1" style="height: 155px !important; background-color: rgb(75, 130, 146); color: white;">
-                                    <br>
-                                    <p  style="position: absolute; left: 20px;"> {{ course.name}}</p>
+                                <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }"> <br>
+                                    <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;" >{{ course.name}}</p>
                                 </div>
                                 <div class="offer">
                                     <img class="card-img-top" src="../assets/images/offer.png">
@@ -31,9 +27,7 @@
                             <div class="card-body">
                                 <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
                                 <div class="text-left price" style="float: right;">
-                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
-                                        course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
-
+                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{ course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
                                 </div> <br>
                                 <div class="row">
                                     <div class="col-sm-6  star">
@@ -47,76 +41,52 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </router-link>
                     </div>
                  </slide>
                 <template #addons>
                     <navigation>
                     </navigation>
-
                 </template>
             </carousel>
         </div>
-
-
     </section>
     <div class="container mb ">
         <h4 class="academic_head_text pt-4">
-                <span id="aca_text">All</span>Courses
-            </h4>
+            <span id="aca_text">All</span>Courses
+        </h4>
         <div class="row align" >
-        <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4">
-            <div class="box ">
-                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
-                    <div class="wer">
-                        <div class="card-img-top offer1" :style="{ 'background-image': person.imageUrl ? 'url(' + person.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: person.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
-                            <br>
-                            <p data-placement="top" :title="person.name" style="position: relative; left: 20px;">{{ person.name}}</p>
-                        </div>
-                        <div class="offer">
-                            <img class="card-img-top" src="../assets/images/offer.png">
-                        </div>
-                        <div class="offer-details">
-                            <span class="card-image-top"><b>{{ calculateDiscountPercentage(person.actualPrice, person.discountPrice) }}% OFF</b></span>
-                        </div>
-                    </div>
-        
-
-                    <div class="card-body" >
-                        <p class="card-text">{{ person.description.slice(0, 65) }}...</p>
-                        <div class="text-left price" style="float: right;">
-                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{person.actualPrice}}</del><b
-                                    style="margin-right: 2px; color:black">&#8377;{{ person.discountPrice}}</b></p>
-                        </div> <br>
-                        <!-- <div class="row">
-                            <div class="col-sm-6  star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+            <div class="col-sm-4" v-for="person in allCourses.courses" :key="person.id" >
+                <div class="box ">
+                    <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
+                        <div class="wer">
+                            <div class="card-img-top offer1" :style="{ 'background-image': person.imageUrl ? 'url(' + person.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: person.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }"> <br>
+                                <p data-placement="top" :title="person.name" style="position: absolute; left: 20px;">{{ person.name}}</p>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="#" class="btn btn-primary">Buy Now</a>
+                            <div class="offer">
+                                <img class="card-img-top" src="../assets/images/offer.png">
                             </div>
-                        </div> -->
-                        <div class="row">
-                                    <div class="col-sm-6  star">
-                                        <StarRatings :rating="person.starRating || 0" :max-rating="5" />
-                                    </div>
-                                    <div class="col-sm-6" v-if="isLoggedIn">
-                                        <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
-                                    </div>
-                                    <div class="col-sm-6" v-else>
-                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
-                                    </div>
+                            <div class="offer-details">
+                                <span class="card-image-top"><b>{{ calculateDiscountPercentage(person.actualPrice, person.discountPrice) }}% OFF</b></span>
+                            </div>
+                        </div>
+                        <div class="card-body" >
+                            <p class="card-text">{{ person.description.slice(0, 65) }}...</p>
+                            <div class="text-left price" style="float: right;">
+                                <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{person.actualPrice}}</del><b style="margin-right: 2px; color:black">&#8377;{{ person.discountPrice}}</b></p>
+                            </div> <br>
+                            <div class="row">
+                                <div class="col-sm-6  star">
+                                    <StarRatings :rating="person.starRating || 0" :max-rating="5" />
                                 </div>
-                    </div>
-                 </router-link>
+                                <div class="col-sm-6">
+                                    <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </template>
@@ -326,10 +296,11 @@ data() {
 .mb .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
     /* margin-left: 0px;
     margin-right: 0px; */
+    margin-bottom: 80px;
 }
 
 .box {
@@ -558,7 +529,7 @@ data() {
   .col-sm-4 {
     flex: 0 0 33.333%;
     max-width: 33.333%;
-    padding: 15px; /* Adjust padding based on your design */
+    /* padding: 15px;  */
   }
 
   /* Adjust media queries as needed */
@@ -566,7 +537,10 @@ data() {
     .col-sm-4 {
       flex: 0 0 100%;
       max-width: 100%;
-      padding: 18px 0 25px 25px;
+      padding: 0px 0 0px 23px;
+      position: relative;
+      top: 10px;  
+
     }
   }
 

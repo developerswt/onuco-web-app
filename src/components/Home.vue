@@ -2,7 +2,7 @@
     <Carousel />
 
     <!-- <Carouseltwo /> -->
-    <!-- <div class="container-fluid jk "> -->
+     <!-- <div class="container-fluid jk ">  -->
     <div id="first_container" class="container-fluid ">
         <div id="home_container" class="container">
             <Academics />
@@ -18,7 +18,7 @@
             <BestLecture />
         </div>
     </div>
-    <!-- </div> -->
+    
 
 
     <Offer />
@@ -45,6 +45,7 @@
     <div id="ban " class="container-fluid text-center ">
         <img :src="currentImage" class="banner">
     </div>
+<!-- </div>  -->
 </template>
 
 <script>
@@ -119,7 +120,7 @@ export default {
 }
 
 .jk {
-    background: white 0% 0% no-repeat padding-box;
+    /* background: white 0% 0% no-repeat padding-box; */
     opacity: 1;
 }
 
@@ -245,9 +246,9 @@ export default {
 
     }
 
-    .jk {
+    /* .jk {
         padding-top: 0 !important;
-    }
+    } */
 }
 
 
@@ -293,16 +294,16 @@ export default {
     #home_container {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: 5px !IMPORTANT;
+        margin-top: 3px !IMPORTANT;
         /* box-shadow: 38px 14px 32px 50px #00000029; */
-        margin-bottom: 3px;
+        /* margin-bottom: 3px; */
         background-color: #EFF5FC;
     }
 
     #second_container {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: 5px !IMPORTANT;
+        margin-top: 3px !IMPORTANT;
         background-color: #D4DEE7;
         margin-bottom: 3px;
     }
@@ -310,7 +311,7 @@ export default {
     #third_container {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: 5px !IMPORTANT;
+        margin-top: 1px !IMPORTANT;
         /* box-shadow: 38px 14px 32px 0px #00000029; */
         margin-bottom: 3px;
         background: #EEEAE4;
@@ -320,19 +321,19 @@ export default {
     .content {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: -59px !IMPORTANT;
-        box-shadow: 38px 14px 32px 0px #00000029;
+        margin-top: -83px !IMPORTANT;
+        /* box-shadow: 38px 14px 32px 0px #00000029; */
         margin-bottom: 34px;
     }
 
     .text-center {
         border: 1px solid #00000029;
         border-radius: 4%;
-        margin-top: 8px !IMPORTANT;
-        box-shadow: 38px 14px 32px 0px #00000029;
+        /* margin-top: 8px !IMPORTANT; */
+        /* box-shadow: 38px 14px 32px 0px #00000029; */
         position: relative;
-        bottom: 26px;
-        margin-bottom: 46px;
+        bottom: 29px;
+        margin-bottom: 42px;
     }
 
     .add {

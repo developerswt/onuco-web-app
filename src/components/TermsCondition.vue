@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="jk">
-            <h2>Terms of Service</h2>
+            <h2>Terms and Condition</h2>
             <p>Every website needs a Terms and Conditions. Even if your website is not for your business or any commercial
                 structure, you will be better off with a Terms and Conditions agreemnent. All websites are advised to have
                 their own agreements for their own protection.</p>

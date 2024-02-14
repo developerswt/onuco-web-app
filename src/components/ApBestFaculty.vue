@@ -3,12 +3,6 @@
     <div class="card-box">
      <div class="card-head">
        <header>Add Best Faculty</header>
-       <div class="filter-box">
-         <span for="filter-text-box">Search Here : </span>
-         <input  class="search-box" id="filter-text-box" type="text" placeholder="Search...." />
-         <button class="btn3 btn-primary" @click="onFilterButtonClick">Search</button>
-       </div>
-       <!-- ... other code ... -->
      </div>
      <div class="card-body">
         <div style="padding: 20px;">
@@ -16,7 +10,7 @@
           <div class="example-wrapper">
 
             <div style="height: 100%;">
-              <ag-grid-vue   v-if="hasSearched" :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -31,31 +25,27 @@
  <div class="modal-dialog" role="document">
    <div class="modal-content">
      <div class="modal-header">
-       <h5 class="modal-title">Add New Course</h5>
+       <h5 class="modal-title">Add Best Faculty</h5>
        <button type="button" class="close" @click="toggleForm">
          <span aria-hidden="true">&times;</span>
        </button>
      </div>
      <div class="modal-body">
-       <form @submit.prevent="addBranch"> 
-          <p><b></b> {{ newBranch.id }}</p>
-          <label for="branchName"> Name:</label>
-          <input id="branchName" v-model="newBranch.name" type="text" required><br>
-
-          <label for="description">Description:</label>
-          <input id="description" v-model="newBranch.description" type="text" required><br>
-
-          <label for="facultyId">FacultyId:</label>
-          <input id="facultyId" v-model="newBranch.facultyId" type="text" required><br>
-
-          <label for="facultyDynamicRouting"><b>FacultyDynamicRouting:</b></label>
-          <input id="facultyDynamicRouting" v-model="newBranch.facultyDynamicRouting" type="text" required>
-
-          <label for="image">image:</label>
-          <input id="facultyId" v-model="newBranch.image" type="text" required><br>
-
-          <button class="btn2" type="submit">Add Branch</button>
-        </form>
+      <el-form ref="form" @submit.prevent="addBranch"> 
+            <div>
+              <label for="productDropdown">Faculty Name :</label>
+              <el-select v-model="selectedOption" @change="loadProductDetails" placeholder="Please Select">
+                  <el-option
+                      v-for="product in Products"
+                      :key="product.id"
+                      :value="product.facultyDyanamicRouting"
+                      :label="product.facultyDyanamicRouting"
+                    ></el-option>
+                </el-select>
+            </div>
+          
+            <button class="btn2" type="submit"> Add </button>
+          </el-form>
       </div>
     </div>
     </div>
@@ -86,19 +76,11 @@ export default {
   },
   data: function () {
     return {
-      hasSearched: false,
-     gridApi: null, // Ensure gridApi is initialized to null
-     gridColumnApi: null,
-     filterText: '',
       newBranch: {
-
-        name: '',
-        description: '',
-        facultyId: '',
         facultyDynamicRouting: '',
-        image: '',
-        // Add other properties as needed
       },
+      selectedName: null,
+      selectedOption: '',
       formVisible: false,
       userName: '',
       ismodel: true,
@@ -109,7 +91,8 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'Faculty Id', field: 'id', suppressSizeToFit: true }, { name: 'Faculty Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'facultyDyanamicRouting', field: 'facultyDyanamicRouting' }],
+      Products: [],
+      columnDefs: [{ name: 'Faculty Id', field: 'facultyId', suppressSizeToFit: true }, { name: 'Faculty Name', field: 'name' }, { name: 'Course Name', field: 'courseName' },  { name: 'facultyDynamicRouting', field: 'facultyDynamicRouting' },{ name: 'Description', field: 'description' },],
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
@@ -135,9 +118,12 @@ export default {
     this.domLayout = 'autoHeight';
     this.isLoading = true;
     try {
-      const res = await AxiosInstance.get(`/Faculty`);
+      const res = await AxiosInstance.get(`/Bestfaculty`);
       let req = res.data;
       this.Orders = req;
+
+      const response = await AxiosInstance.get('/Faculty');
+        this.Products = response.data;
 
     } catch (error) {
       this.isLoading = false;
@@ -155,31 +141,18 @@ export default {
     this.paginationPageSize = 10;
 
   },
-  watch: {
- filterText: {
-   handler: function (newFilterText) {
-     // Ensure gridApi is available before setting quick filter
-     if (this.gridApi) {
-       this.gridApi.setQuickFilter(newFilterText);
-     }
-   },
-   deep: true, // Watch changes deeply
- },
-},
+
   methods: {
-    onFilterButtonClick() {
-   this.filterText = document.getElementById('filter-text-box').value;
-   this.hasSearched = true;
-   this.rowData = this.Orders.filter(order => {
- const lowerCaseFilter = this.filterText.toLowerCase();
- const includesname = order.name.toLowerCase().includes(lowerCaseFilter);
-
- // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
- return includesname;
-});
-
-
- },
+    async loadProductDetails() {
+    const selectedProduct = this.Products.find(product => product.id === this.selectedOption);
+    if (selectedProduct) {
+      // Update properties of newBranch with the selected product details
+      this.newBranch = {
+        ...this.newBranch,
+        facultyDynamicRouting: selectedProduct.facultyDynamicRouting,
+      };
+    }
+  },
 
     toggleForm() {
      // Toggle the visibility of the form modal
@@ -195,10 +168,6 @@ export default {
      // Reset the newBranch data to clear the form fields
      this.newBranch = {
       name: '',
-        description: '',
-        facultyId: '',
-        facultyDynamicRouting: '',
-        image: '',
      };
    },
     toggleForm() {
@@ -244,55 +213,65 @@ export default {
         );
       });
     },
+    
     async addBranch() {
-      this.isLoading = true;
-      try {
-        const response = await AxiosInstance.post(`/Bestfaculty/AddBestFaculty`, this.newBranch);
-        this.ismodel = true;
-        if (response.status === 200) {
-          await this.getdata();
-          this.gridApi.refreshCells({ force: true });
-          this.toggleForm();
-         this.$refs.Confirmation.open("Payment Details Added successfully.");
-       }
-   } catch (error) {
-       this.isLoading = false;
-       console.error("Error adding branch:", error);
-       this.$refs.Confirmation.open("Error Adding Payment Details.");
+  this.isLoading = true;
+  try {
 
-     }
-     finally {
-       this.isLoading = false;
-     }
-    },
-    onLogOut() {
-      this.$store.commit('isLoggedIn', false);
-      this.$router.push('/Loginpage');
-    },
+    const dyanamicName = this.selectedOption;
+    const response = await AxiosInstance.post(`/Bestfaculty/AddBestFaculty`,{facultyDynamicRouting: dyanamicName}, 
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    this.ismodel = true;
+
+    if (response.status === 200) {
+      console.log("Best faculty added successfully");
+      await this.getdata();
+      this.loadProductDetails();
+      this.$refs.Confirmation.open("Faculty Added successfully.");
+  
+      this.$refs.form.reset(); 
+    }
+  } catch(error){
+        this.isLoading = false;
+        console.log(error.response.data.Message);
+        this.$refs.Confirmation.open(error.response.data.Message);
+
+  } finally {
+    this.isLoading = false;
+    this.formVisible = false;
+  }
+},
+    
     async getdata() {
       this.domLayout = 'autoHeight';
-      this.isLoading = true;
-      try {
-        const res = await AxiosInstance.get(`/Faculty`);
-        let req = res.data;
-        this.Orders = req;
+    this.isLoading = true;
+    try {
+      const res = await AxiosInstance.get(`/Bestfaculty`);
+      let req = res.data;
+      this.Orders = req;
 
-      } catch (error) {
-        this.isLoading = false;
-        console.log(error);
-        this.showDialog = true;
-        this.dialogTitle = "Error";
-        this.dialogMessage = "Not get data";
-      }
-      finally {
-        this.isLoading = false;
-      }
-      this.rowData = this.Orders;
-      this.rowSelection = 'single';
-      console.log(this.rowData);
-      this.popupParent = document.body;
-      this.paginationPageSize = 10;
+      const response = await AxiosInstance.get('/Faculty');
+        this.Products = response.data;
 
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
+    }
+    finally {
+      this.isLoading = false;
+    }
+    this.rowData = this.Orders;
+    this.rowSelection = 'single';
+    console.log(this.rowData);
+    this.popupParent = document.body;
+    this.paginationPageSize = 10;
     }
   },
 
@@ -395,11 +374,13 @@ export default {
 }
 
 .modal-dialog {
-  max-width: 900px;
-  margin: 1.75rem auto;
-  height: 630px;
-  overflow-y: auto;
-}
+    max-width: 644px;
+    margin: 1.75rem auto;
+    height: 692px;
+    overflow-y: auto;
+    position: relative;
+    top: 145px;
+  }
 
 .mc {
   height: 300px;
@@ -467,32 +448,35 @@ button {
  font-size: 15px;
 }
 .btn2 {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 12px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
- font-size: 15px;
-}
+    bottom: 32px;
+    left: 224px;
+    position: relative;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 5px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+  }
 
 .btn1 {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 80px;
-  position: relative;
- top: 15px;
- left: 21px;
- font-weight: 600;
- font-size: 15px;
-}
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px;
+    position: relative;
+   top: 15px;
+   left: 21px;
+   font-weight: 600;
+   font-size: 15px;
+  }
 
 
 button:hover {

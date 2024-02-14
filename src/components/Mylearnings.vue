@@ -17,11 +17,10 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="left_block">
-                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount
-                                            }} Topics</span></p>
-
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
-                                                    style="color: #ffffff;"></i></button>
+                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount}} Topics</span></p>
+                                            <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }">
+                                                <button id="course_button">Start Course <i class="fa-solid fa-play" style="color: #ffffff;"></i></button>
+                                            </router-link>
                                         </div>
                                     </div>
                                 </div>
@@ -119,8 +118,7 @@
                                         <span id="aca_text">Live</span> Courses
                                         <div class="row mt-4 ">
                                             <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}
-                                                </h6>
+                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}</h6>
                                                 <p class="text_line">{{ selectedItem.title }}</p>
                                                 <div class="row ml-0">
                                                     <div class=" info">
@@ -137,12 +135,14 @@
                                                             class="img-fluid ml-2" style="width: 17px; height: 18px;">
                                                         {{ selectedItem.modules }}<br>
                                                     </div>
-                                                    <p class="pp" style="color: #666666; font-size: 12px; float: left;">{{
-                                                        selectedItem.courseDescription }}</p>
+                                                    <div>
+                                                        <p class="pp" style="color: #666666; font-size: 12px; float: left;">
+                                                        {{ selectedItem.courseDescription }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
+                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
                                                     <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
@@ -164,7 +164,7 @@
                                                     <p id="text_two">stacks</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row line">
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
                                                     <div class="progress_block">
                                                         <div>
@@ -174,7 +174,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4 time">
-                                                    <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                    <p class="text_three">{{ remainingTimes(selectedItem) }} left</p>
                                                 </div>
                                                 <!-- <button class="bt">BUY NOW</button> -->
                                             </div>
@@ -208,13 +208,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <router-link
-                                                            :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                        <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
                                                             style="text-decoration: none;">
                                                             <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                         </router-link>
                                                         <p id="text_two">stacks</p>
-                                                        <div class="row">
+                                                        <div class="row line">
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <div class="progress_block">
                                                                     <div>
@@ -225,7 +224,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="comp col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <p id="text_three">{{ remainingTimes(selectedItem) }}
+                                                                <p class="text_three">{{ remainingTimes(selectedItem) }}
                                                                     Completed</p>
                                                             </div>
                                                             <!-- <button class="bt">BUY NOW</button> -->
@@ -455,7 +454,7 @@ progress {
     -moz-appearance: none;
     appearance: none;
 
-    width: 200px;
+    width: 200px !important;
     height: 20px;
     border-radius: 20px;
 
@@ -466,7 +465,7 @@ progress::-webkit-progress-bar {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
     border-radius: 6px;
     height: 4px;
-    width: 171px;
+    width: 170px; 
 }
 
 progress::-webkit-progress-value {
@@ -587,12 +586,6 @@ progress::-moz-progress-bar {
     background: transparent linear-gradient(180deg, #EEF4FB 0%, #AED4FF 100%) 0% 0% no-repeat padding-box !important;
 }
 
-.progress {
-    height: 5px;
-    background: #FF9900;
-    margin-top: 7px;
-}
-
 #asset_image img {
     width: 30px;
     height: 55px;
@@ -634,10 +627,17 @@ progress::-moz-progress-bar {
     margin-bottom: 0px;
 }
 
+.text_three {
+    font-size: 12px;
+    position: relative;
+    top: 11px;
+    right: 141px; 
+}
 #text_three {
     font-size: 12px;
-
-
+    position: relative;
+    bottom: 8px;
+    
 }
 
 #text_one {
@@ -754,13 +754,30 @@ progress::-moz-progress-bar {
     }
 
     #text_one,
-    #text_two,
-    #text_three {
+    #text_two
+     {
         font-size: 12px;
+        color: #000000;
+        font-weight: 400;
+    }
+
+    #text_three{
+        font-size: 12px;
+    position: relative;
+    bottom: 8px !important;
+    right: 20px !important; 
+    }
+
+    .text_three{
+        font-size: 12px;
+    position: relative;
+    bottom: 13px !important;
+    left: 106px !important; 
     }
 
     .inner_block {
         height: 90px;
+        
     }
 
 }
@@ -842,7 +859,7 @@ input[type="radio"]:checked {
         color: #666666;
         margin-top: 11px;
         position: relative;
-        right: 111px;
+        right: 144px;
     }
 
     .info2 {
@@ -850,25 +867,52 @@ input[type="radio"]:checked {
         color: #666666;
         margin-top: 8px;
         position: relative;
-        right: 109px;
+        right: 4px;
         top: 2px;
     }
 
     .pp {
         position: relative;
         top: 10px;
+        width:176%;
     }
-}
 
-@media (max-width:520px) {
+    progress::-webkit-progress-bar {
+    background: #CCCCCC;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+    border-radius: 6px;
+    height: 4px !important;
+    width: 50% !important; 
+}
+#text_three{
+        font-size: 12px;
+    position: relative;
+    bottom: 8px !important;
+    right: 20px !important; 
+    }
+    .text_three{
+        font-size: 12px;
+    position: relative;
+    bottom: 13px !important;
+    left: 106px !important; 
+    top:0px !important
+    }
+    
+    .line {
+        position: relative !important;
+    left: 110px !important;
+    bottom: 15px !important;
+    }
+    
     .jk {
         padding-bottom: 45px !important;
         padding-top: 20px;
     }
 
     .inner_block {
-        height: 100px;
-        height: 100px;
+        height: 90px;
+        padding: 10px;
+        margin: 0px;
     }
 
     #asset_image img {
@@ -876,12 +920,6 @@ input[type="radio"]:checked {
         height: 70px;
     }
 
-    .line {
-        position: relative;
-        left: 90px;
-        bottom: 28px !important;
-    }
-
     .text {
         position: relative;
         right: 23px !important;
@@ -891,22 +929,11 @@ input[type="radio"]:checked {
         vertical-align: baseline;
         width: 100%;
     }
-
-    .line {
-        position: relative;
-        left: 90px;
-        bottom: 28px !important;
-    }
-
     .text {
         position: relative;
         right: 23px !important;
     }
 
-    progress {
-        vertical-align: baseline;
-        width: 100%;
-    }
 }
 
 @media(min-width: 1280px) {
@@ -927,11 +954,11 @@ input[type="radio"]:checked {
     left: 90px;
     bottom: 15px;
 }
-.prog{
+/* .prog{
     position: relative;
     left: 90px;
     bottom: 10px;
-}
+} */
 .time{
     position: relative;
     bottom: 20px;

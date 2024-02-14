@@ -9,7 +9,7 @@
                 <div class="col-md-7 social-link">
                     <p>Communities | Courses | Trainers | FAQs | Blog |<router-link
                             style="text-decoration: none; color: white;" to="/Privacy"> Privacy </router-link> |
-                        <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms of Service
+                        <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms and Condition
                         </router-link>
                     </p>
                     <p>Email: name@example.com Call: 9845098450</p>

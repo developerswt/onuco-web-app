@@ -1,89 +1,72 @@
 <template>
   <div class="container">
-   <div class="card-box">
-     <div class="card-head">
-       <header>Faculty Info Details</header>
-       <div class="filter-box">
-         <span for="filter-text-box">Search Here : </span>
-         <input  class="search-box" id="filter-text-box" type="text" placeholder="Search...." />
-         <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
-       </div>
-       <!-- ... other code ... -->
-     </div>
-     <div class="card-body">
-       <!-- Only render the grid if there are search results -->
-         <div style="padding: 20px;">
-           <div class="example-wrapper">
-             <div style="height: 100%;">
-               <ag-grid-vue
-               v-if="hasSearched"
-                 :dom-layout="domLayout"
-                 class="ag-theme-alpine"
-                 :column-defs="columnDefs"
-                 :row-data="rowData"
-                 :edit-type="editType"
-                 :row-selection="rowSelection"
-                 :default-col-def="defaultColDef"
-                 :suppress-excel-export="true"
-                 :popup-parent="popupParent"
-                 cache-quick-filter="true"
-                 :pagination="true"
-                 :pagination-page-size="paginationPageSize"
-                 is-loding="true"
-                 @grid-ready="onGridReady"
-                 @cell-value-changed="onCellValueChanged"
-                 @row-clicked="onCellClicked"
-               ></ag-grid-vue>
-             </div>
-           </div>
-       
-       
-             <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
-
-<div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
- <div class="modal-dialog" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <h5 class="modal-title">Add New Course</h5>
-       <button type="button" class="close" @click="toggleForm">
-         <span aria-hidden="true">&times;</span>
-       </button>
-     </div>
-     <div class="modal-body">
-       <form @submit.prevent="addBranch">  
-               <p><b></b> {{ newBranch.id }}</p>
-               <label for="userCourseSubscriptionId"> UserCourse Subscription Id:</label>
-               <input
-id="userCourseSubscriptionId" v-model="newBranch.userCourseSubscriptionId" type="text"
-                 required><br>
-
-               <label for="facuiltyCognitoId">Facuilty CognitoId:</label>
-               <input id="facuiltyCognitoId" v-model="newBranch.facuiltyCognitoId" type="text" required><br>
-
-               <label for="paymentDate">Payment Date:</label>
-               <Datepicker id="paymentDate" v-model="newBranch.paymentDate" type="text" required><br></Datepicker>
-
-               <label for="amountPaid">Amount Paid:</label>
-               <input id="amountPaid" v-model="newBranch.amountPaid" type="text" required><br>
-
-               <label for="balanceAmount">Balance Amount:</label>
-               <input id="balanceAmount" v-model="newBranch.balanceAmount" type="text" required><br>
-
-               <label for="modeofPay">Mode Of Pay:</label>
-               <input id="modeofPay" v-model="newBranch.modeofPay" type="text" required><br>
-
-               <label for="isActive">IsActive:</label>
-               <input id="isActive" v-model="newBranch.isActive" type="text" required><br>
-
-               <button class="btn2" type="submit">Add Payment Data</button>
-             </form>
-             </div>
-             </div>
-             </div>
-             </div>
-             
-           </div>
-         </div>
+    <div class="card-box">
+      <div class="card-head">
+        <header>Faculty Payment Info</header>
+          <div class="filter-box">
+            <span for="filter-text-box">Search Here : </span>
+            <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
+            <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
+            <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+          </div>
+      </div>
+      <div class="card-body">
+        <div style="padding: 20px;">
+          <div class="example-wrapper">
+            <div style="height: 100%;">
+              <ag-grid-vue
+                v-if="hasSearched"
+                :dom-layout="domLayout"
+                class="ag-theme-alpine"
+                :column-defs="columnDefs"
+                :row-data="rowData"
+                :edit-type="editType"
+                :row-selection="rowSelection"
+                :default-col-def="defaultColDef"
+                :suppress-excel-export="true"
+                :popup-parent="popupParent"
+                cache-quick-filter="true"
+                :pagination="true"
+                :pagination-page-size="paginationPageSize"
+                is-loding="true"
+                @grid-ready="onGridReady"
+                @cell-value-changed="onCellValueChanged"
+                @row-clicked="onCellClicked">
+              </ag-grid-vue>
+            </div>
+          </div>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+            <el-dialog class="fdata" v-model="formVisible" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
+              <el-form :model="newBranch" ref="form" label-position="top" class="frm"> 
+                <p><b></b> {{ newBranch.id }}</p>
+                <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" required>
+                  <el-input v-model="newBranch.userCourseSubscriptionId"></el-input>
+                </el-form-item>
+                <el-form-item label="Facuilty CognitoId:" prop="facuiltyCognitoId" required>
+                  <el-input v-model="newBranch.facuiltyCognitoId"></el-input>
+                </el-form-item>
+                <el-form-item label="Payment Date:" prop="paymentDate" required>
+                  <el-date-picker v-model="newBranch.paymentDate" type="datetime"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="Amount Paid:" prop="amountPaid" required>
+                  <el-input v-model="newBranch.amountPaid"></el-input>
+                </el-form-item>
+                <el-form-item label="Balance Amount:" prop="balanceAmount" required>
+                  <el-input v-model="newBranch.balanceAmount"></el-input>
+                </el-form-item>
+                <el-form-item label="Mode Of Pay:" prop="modeofPay" required>
+                  <el-input v-model="newBranch.modeofPay"></el-input>
+                </el-form-item>
+                <el-form-item label="IsActive:" prop="isActive" required>
+                  <el-input v-model="newBranch.isActive"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button class="btn1" type="primary" @click="addBranch">Add Payment Data</el-button>
+                </el-form-item>
+              </el-form>
+            </el-dialog>
+      </div>
+  </div>
          <!-- <div v-if="showChildRow">
            <div
 class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
@@ -169,11 +152,12 @@ export default {
  },
  data: function () {
    return {
-     hasSearched: false,
-     gridApi: null, // Ensure gridApi is initialized to null
-     gridColumnApi: null,
-     filterText: '',
-     newBranch: {
+    showRequiredMessage: false,
+    hasSearched: false,
+    gridApi: null, // Ensure gridApi is initialized to null
+    gridColumnApi: null,
+    filterText: '',
+    newBranch: {
        userCourseSubscriptionId: '',
        facuiltyCognitoId: '',
        paymentDate: '',
@@ -181,8 +165,7 @@ export default {
        balanceAmount: '',
        modeofPay: '',
        isActive: '',
-
-     },
+      },
      formVisible: false,
      userName: '',
      ismodel: true,
@@ -193,7 +176,7 @@ export default {
      domLayout: null,
      Orders: [],
      req: [],
-     columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'  }, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }, { name: 'IsActive', field: 'isActive' }],
+     columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
      gridApi: null,
      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
      columnApi: null,
@@ -220,7 +203,7 @@ export default {
    this.isLoading = true;
    try {
 
-     const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment`);
+     const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
      let req = res.data;
      this.Orders = req;
 
@@ -255,21 +238,33 @@ export default {
  methods: {
 
    onFilterButtonClick() {
-   this.filterText = document.getElementById('filter-text-box').value;
-   this.hasSearched = true;
+    this.filterText = this.filterText.trim();
+    
+    if (this.filterText === '') {
+      this.showRequiredMessage = true;
+      this.hasSearched = false;
+      this.rowData = []; // or reset to the initial state
+      console.log('Input field is required.');
+    } else {
+      this.showRequiredMessage = false;
+      this.hasSearched = true;
 
 
    this.rowData = this.Orders.filter(order => {
  const lowerCaseFilter = this.filterText.toLowerCase();
- const includesFacuiltyCognitoId = order.facuiltyCognitoId.toLowerCase().includes(lowerCaseFilter);
+ const includesuserName = order.userName.toLowerCase().includes(lowerCaseFilter);
  const includesModeofPay = order.modeofPay.toLowerCase() === lowerCaseFilter;
+ const includesuserEmail = order.userEmail.toLowerCase().includes(lowerCaseFilter);
+ const includesphone_Number = order.phone_Number;
 
  // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
- return includesFacuiltyCognitoId || includesModeofPay;
+ return includesuserName || includesModeofPay || includesuserEmail || includesphone_Number;
 });
 
 
- },
+   console.log('Filtered Data:', this.rowData);
+ }
+},
    
    toggleForm() {
      // Toggle the visibility of the form modal
@@ -374,20 +369,21 @@ export default {
      try {
        const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
        this.ismodel = true;
-       if (response.status === 200) {
+         console.log(" added successfully");
          await this.getdata();
-         this.gridApi.refreshCells({ force: true });
+        //  this.gridApi.refreshCells({ force: true });
          this.toggleForm();
          this.$refs.Confirmation.open("Payment Details Added successfully.");
-       }
+       
    } catch (error) {
        this.isLoading = false;
        console.error("Error adding branch:", error);
        this.$refs.Confirmation.open("Error Adding Payment Details.");
-
-     }
+    }
      finally {
        this.isLoading = false;
+       this.formVisible = false;
+
      }
    },
 
@@ -400,7 +396,7 @@ export default {
            );
 
            if (!confirmed) {
-               return; // If the user cancels, do nothing
+               return; 
            }
 
            const id = this.childPara.id;
@@ -592,6 +588,7 @@ export default {
  max-width: 400px;
  margin: 0 auto;
  margin-bottom: 80px;
+ height: 690px;
 }
 
 label {
@@ -634,7 +631,7 @@ button {
  color: #fff;
  background-color: #007bff;
  border-color: #007bff;
- padding: 12px 23px;
+ padding: 22px 23px;
  border: none;
  border-radius: 4px;
  cursor: pointer;

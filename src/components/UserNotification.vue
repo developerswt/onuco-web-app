@@ -1,21 +1,32 @@
 <template>
     <div class="container-fluid header_padding">
+        <p>Home>Profile>Notification</p>
+        <div class="row">
+        <div class="col-lg-8 col-8 col-sm-8">
         <h2 class="pp"><b>Maths 1</b> (NEP Series)</h2>
         <h4>Dr. Ashoka P R</h4>
+        </div>
+        <div class="text-right col-lg-4 col-4 col-sm-4 top">
+            <p style="color: #AEAEAE;">2 min ago</p>
+        </div>
+        </div>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <p>Course Description Course Description Course...</p>
                 <p style="color: #8A8A8A;"><img src="../assets/images/Iconionic-ios-timer@2x.png" class="icon">&nbsp; 03h
-                    32min &nbsp;&nbsp;<img src="../assets/images/Iconmap-school@2x.png" class="icon">&nbsp; 8 Modules</p>
+                    32min &nbsp;&nbsp;</p>
+                    <p class="space"><img src="../assets/images/Iconmap-school@2x.png" class="icon">&nbsp; 8 Modules</p>
+                   
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="review_details">
-                    <p style="color: #AEAEAE;">2 min ago<br>
-                        <el-rate v-model="value2" :colors="colors" />(23 reviews)
+                        <p class="review"><el-rate v-model="value2" :colors="colors" /><br>
+                            (23 reviews)
                     </p>
                 </div>
             </div>
         </div>
+        <div style="position: relative; bottom: 65px;">
         <hr>
         <h3><b>Course</b> Details</h3>
         <p>Course is expiring in 2 days Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -25,6 +36,7 @@
             Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
             type and scrambled it to make a type specimen book.</p>
         <hr>
+        </div>
         <div class="row mb-5">
             <div class="col-sm-12">
                 <div class="card">
@@ -290,6 +302,19 @@ h3 {
     .card {
         padding-bottom: 70px !important;
     }
+    .top{
+        position: relative;
+        top:35px;
+    }
+    .space{
+        position: relative;
+    bottom: 0px !important;
+    left: 0px !important;
+    }
+    .review{
+        position: relative;
+    bottom: 80px;
+    }
 }
 
 @media (max-width:280px) {
@@ -301,5 +326,15 @@ h3 {
     .card {
         padding-bottom: 70px !important;
     }
+    .space{
+        position: relative;
+    bottom: 0px !important;
+    left: 0px !important;
+    }
 }
+.space{
+        position: relative;
+    bottom: 40px;
+    left: 130px;
+    }
 </style>

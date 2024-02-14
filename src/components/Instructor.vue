@@ -83,7 +83,7 @@
                     <div id="app" class="row professor-details">
                         <div class="col-sm-12 col-lg-12">
                             <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
-                                faculty.description.slice(0, 168) : '' }}
+                                faculty.description.slice(0, 184) : '' }}
                                 <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
                                         more</span></span>
                             </p>
@@ -98,25 +98,25 @@
         </div>
 
     </div>
-    <section id="Course_section">
+    <section id="Course_section" v-if="persons.length > 0">
         <div class="container">
-            <h5 class="course_text"><span id="course_text">Courses</span>({{ persons.length }})</h5>
+            <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="person in persons" :key="person.id">
                         <div id="instructor_card" class="card">
                             <div class="card-title">
-                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="color: white; text-decoration: none;">
+                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
 
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <div class="card_top_text">
                                             <div class="row">
                                                 <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft" data-placement="top" :title="person.name"> {{
-                                                        person.name.slice(0, 18) }}...</p>
+                                                    <p class="ft" data-placement="top" :title="person.title"> {{
+                                                        person.title.slice(0, 18) }}...</p>
                                                 </div>
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img @click.prevent="showShareCourseUrlOption(person.courseName)" src="../assets/images/Union193.png"
+                                                    <img @click.prevent="showShareCourseUrlOption(person.courseRouteName)" src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -127,7 +127,7 @@
                                                         hrs</p>
                                                 </div>
                                                 <div class="col-lg-9 col-9 col-sm-9">
-                                                    <p class="ft">{{ person.description.slice(0, 50) }}...</p>
+                                                    <p class="ft">{{ person.courseDescription.slice(0, 50) }}...</p>
                                                 </div>
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
@@ -179,6 +179,11 @@
 
         </div>
     </section>
+    <section v-else>
+        <div class="container" style="position: relative; left:8px">
+    <!-- <p>No courses available.</p> -->
+</div>
+</section>
     <section id="non_course_section">
         <div class="container">
             <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
@@ -381,12 +386,11 @@ export default {
             this.faculty = res.data;
             console.log(this.faculty);
             this.activeName = this.faculty.attributue[0].heading;
-            if (this.faculty) {
-                const res = await this.getByRatings(this.faculty.id);
-                this.ratings = res.averageRating;
-                this.ratingCount = res.ratingCount;
-            }
-            const results = await AxiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
+            const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
+            this.ratings = result.data.averageRating;
+            this.ratingCount = result.data.ratingCount;
+            console.log(this.ratings);
+            const results = await AxiosInstance.get(`/Coursedetails/GetItemByFacultyCourse?FacultyDyanamicRouting=` + this.faculty.facultyDyanamicRouting);
             this.persons = results.data;
           
           
@@ -435,9 +439,8 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
-        async submitRating() {
-            try {
-                await AxiosInstance.post('/Ratings', {
+        submitRating() {
+            AxiosInstance.post('/Ratings', {
                 userId: this.isuser['cognito:username'],
                 objectId: this.faculty.id,
                 objectTypeId: 4,
@@ -649,7 +652,7 @@ export default {
 
 ::v-deep #Sub_text {
     color: #9E9E9E;
-    padding-right: 20px;
+    /* padding-right: 20px; */
 }
 
 
@@ -785,7 +788,7 @@ export default {
     .instructor_head_text {
         font-size: 18px;
 
-        text-align: center;
+        text-align: left;
     }
 
     .professor-details_text {
@@ -889,7 +892,7 @@ export default {
 }
 
 .professor-details_text {
-    margin: 25px;
+    margin: 15px;
     font-size: 14px;
     letter-spacing: 1px;
     line-height: 1.2;
@@ -1194,5 +1197,8 @@ input[type=submit] {
   right: 0;
   bottom: 0;
   z-index: 999;
+}
+p .details{
+    padding-left:0px !important;
 }
 </style>

@@ -4,10 +4,13 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Semester Name :</label>
-        <el-select v-model="selectedSem" @change="emitSelectedType" style="padding: 4px;">
-    <el-option :value="null" label="Please Select" disabled></el-option>
-    <el-option v-for="product in products" :key="product.id" :value="product.id" :label="product.name"></el-option>
-  </el-select>
+        <el-select v-model="selectedSem" @change="emitSelectedType" placeholder="Please Select" style="padding: 4px;">
+    <el-option
+      v-for="product in products"
+      :key="product.id"
+      :value="product.id"
+      :label="product.name"
+    ></el-option>  </el-select>
       </div>
       <div  class="table-responsive" style="background-color: white;">
         <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
@@ -364,14 +367,14 @@ input {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
-      padding: 7px 15px;
+      padding: 18px 17px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 80px; 
       position: relative;
-      top: 68px;
-      left: 73px;
+      top: 63px;
+      left: -20px;
 
   }
 }

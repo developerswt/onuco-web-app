@@ -50,7 +50,7 @@
         </div>
          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
  
-         <el-dialog v-model="formVisible" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
+         <el-dialog class="fdata" v-model="formVisible" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
             <el-form :model="newBranch" ref="form" label-position="top" class="frm">
               <el-form-item label="Course Type Name" prop="name">
                 <el-input v-model="newBranch.name" required @input="validateFirstLetterCapital"></el-input>
@@ -341,14 +341,14 @@
          color: #fff;
      background-color: #007bff;
      border-color: #007bff;
-       padding: 8px 15px;
+     padding: 18px 17px;
        border: none;
        border-radius: 4px;
        cursor: pointer;
        margin-bottom: 80px; 
        position: relative;
-       top: 67px;
-     left: 2px;
+       top: 110px;
+     left: -15px;
  
      }
  }

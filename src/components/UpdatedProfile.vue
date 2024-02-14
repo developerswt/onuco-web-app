@@ -94,7 +94,7 @@
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
                                 <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text"
+                                <input v-else v-model="this.userEmail" placeholder="userName@email.com" type="text"
                                     style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
@@ -233,11 +233,14 @@ export default {
                 // Authorization:  this.authorizationHeader,
                 'Content-Type': 'multipart/form-data'
             };
+            console.log(this.userEmail);
             const formData = new FormData();
-
+            
             formData.append('Email', this.userEmail);
             formData.append('Name', this.userName);
             formData.append('file', this.selectedFile);
+            console.log(this.userEmail);
+            console.log(formData.Email);
 
             try {
                 const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
@@ -249,7 +252,7 @@ export default {
                 this.userEmail = '';
                 this.userName = '';
                 this.selectedFile = null;
-                this.$refs.fileInput.value = ''; // Clear the file input
+                // this.$refs.fileInput.value = ''; 
 
             } catch (error) {
                 // Handle errors
