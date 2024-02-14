@@ -2,11 +2,23 @@
   <div class="container-fluid carousel_header">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
       <ol class="carousel-indicators">
-        <li v-for="(img, index) in bannerImg" :key="index" :data-target="'#myCarousel'" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
+        <li v-for="(item, index) in getLinks()" :key="index" :data-target="'#myCarousel'" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
       </ol>
       <div class="carousel-inner">
-        <div v-for="(img, index) in bannerImg" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
-          <img :src="img" :alt="'Banner ' + (index + 1)" class="d-block w-100 img-fluid">
+        <div v-for="(item, index) in getLinks()" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
+          <img 
+            :src="item.bannerlink" 
+            :alt="'Banner ' + (index + 1)" 
+            class="d-block w-100 img-fluid"
+            v-if="item.hyperlink"
+            @click="redirectToLink(item.hyperlink)"
+          >
+          <img 
+            :src="item.bannerlink" 
+            :alt="'Banner ' + (index + 1)" 
+            class="d-block w-100 img-fluid1"
+            v-else
+          >
         </div>
       </div>
     </div>
@@ -14,21 +26,34 @@
 </template>
 
 <script>
+import axiosInstance from '../config/axiosInstance'
+
 export default {
   name: 'CarouselView',
   data() {
     return {
-      bannerImg: [
-        'https://dev.skillmeridiandev.tech/assets/images/B_1.png',
-        'https://dev.skillmeridiandev.tech/assets/images/B_2.png',
-        'https://dev.skillmeridiandev.tech/assets/images/B_3.png',
-        'https://dev.skillmeridiandev.tech/assets/images/B_4.png',
-        'https://dev.skillmeridiandev.tech/assets/images/B_5.png',
-      ]
+      bannerImg: []
     }
-  }
+  },
+  async created() {
+    try {
+      const res = await axiosInstance.get(`/Bannerimages`);
+      this.bannerImg = res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {
+    getLinks() {
+      return this.bannerImg[0] && this.bannerImg[0].links || [];
+    },
+    redirectToLink(link) {
+      window.location.href = link;
+    }
+  },
 }
 </script>
+
 
 <style scoped>
 .carousel_header {
@@ -43,6 +68,10 @@ export default {
   border-radius: 100%;
 }
 .img-fluid {
+  height: 250px;
+  cursor: pointer;
+}
+.img-fluid1 {
   height: 250px;
 }
 

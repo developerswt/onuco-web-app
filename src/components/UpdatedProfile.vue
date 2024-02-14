@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid jk mt-5">
+    <div class="container-fluid jk">
         <div class="container">
             <div class="learning_block">
 
@@ -186,7 +186,6 @@ export default {
     },
     computed: {
         authorizationHeader() {
-            console.log(this.isuser);
             if (this.isLoggedIn) {
                 return `Bearer ${this.isuser}`;
             } else {
@@ -197,7 +196,6 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken;
         },
         visibleLoginDetails() {
@@ -247,7 +245,6 @@ export default {
                 });
 
                 // Handle the API response as needed
-                console.log('Response from API:', response.data);
                 await this.update();
                 this.userEmail = '';
                 this.userName = '';
@@ -264,7 +261,6 @@ export default {
             try {
                 const res = await axiosInstance.get('/UploadS3Files/profile');
                 this.updatedAttribute = res.data;
-                console.log(this.updatedAttribute);
             } catch (error) {
                 console.log(error);
                 this.isLoading = false;
@@ -277,7 +273,6 @@ export default {
             try {
                 const res = await axiosInstance.get('/UserLoginHistory/history');
                 this.loginHistorys = res.data;
-                console.log(this.loginHistorys);
             } catch (error) {
                 console.log(error);
                 this.isLoading = false;
@@ -302,9 +297,7 @@ export default {
 </script>
 
 <style scoped>
-.learning_block {
-    padding-top: 100px;
-}
+
 
 .purple_block {
     background: transparent url('../assets/images/Untitled.png') 30% 0% no-repeat padding-box !important;

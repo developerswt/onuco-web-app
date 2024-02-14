@@ -1,6 +1,6 @@
 <template>
     <div class="container jk">
-        <Breadcrumbs class="container" />
+        <!-- <Breadcrumbs class="container" /> -->
         <div class="container">
             <p class="desc" style="color: #777777;" v-html="branches[0]?.description"></p>
             </div>
@@ -71,11 +71,9 @@ export default {
         try {
             const result = await AxiosInstance.get(`/University/GetBranchListByName/` + this.$route.params.name);
             this.university = result.data;
-            console.log(this.university);
-
+        
             const res = await AxiosInstance.get(`/Branches/GetBranchByName/` + this.$route.params.name);
             this.branches = res.data;
-            console.log(this.branches);
         } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -100,7 +98,7 @@ export default {
 }
 
 .jk {
-    padding-top: 70px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

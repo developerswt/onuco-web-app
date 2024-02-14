@@ -236,7 +236,6 @@ export default {
    }
    this.rowData = this.Orders;
    this.rowSelection = 'single';
-   console.log(this.rowData);
    this.popupParent = document.body;
    this.paginationPageSize = 10;
 
@@ -259,7 +258,6 @@ export default {
    this.filterText = document.getElementById('filter-text-box').value;
    this.hasSearched = true;
 
-   console.log('Filter Text:', this.filterText);
 
    this.rowData = this.Orders.filter(order => {
  const lowerCaseFilter = this.filterText.toLowerCase();
@@ -271,7 +269,6 @@ export default {
 });
 
 
-   console.log('Filtered Data:', this.rowData);
  },
    
    toggleForm() {
@@ -298,14 +295,12 @@ export default {
    },
    dateFormat(params) {
      let value = params.data.paymentDate;
-     console.log(value);
      if (value) {
        return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
      }
    },
    onCellClicked(params) {
      this.childPara = params.node.data
-     console.log(this.childPara);
      this.showChildRow = true;
      this.edit()
 
@@ -317,7 +312,6 @@ export default {
    },
 
    onCellValueChanged(event) {
-     console.log('Data after change is', event.data);
    },
    onGridReady(params) {
      this.gridApi = params.api;
@@ -359,7 +353,6 @@ export default {
      this.showDialog = false;
      try {
        const res = await AxiosInstance.put(`/FacultyCourseSubscriptionPayment` + '?' + 'id=' + id + '&amountpaid=' + this.childPara.amountPaid + '&balanceamount=' + this.childPara.balanceAmount + '&mode=' + this.childPara.modeofPay + '&isActive=' + this.childPara.isActive);
-       console.log(res);
       
        if (res.status === 200) {
          await this.getdata();
@@ -382,7 +375,6 @@ export default {
        const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
        this.ismodel = true;
        if (response.status === 200) {
-         console.log(" added successfully");
          await this.getdata();
          this.gridApi.refreshCells({ force: true });
          this.toggleForm();
@@ -450,7 +442,6 @@ export default {
      }
      this.rowData = this.Orders;
      this.rowSelection = 'single';
-     console.log(this.rowData);
      this.popupParent = document.body;
      this.paginationPageSize = 10;
 

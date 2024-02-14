@@ -103,8 +103,7 @@ export default {
 
       const result = await AxiosInstance.get(`/UserCourseSubscription/GetInactiveStudentsCount`);
       this.student = result.data;
-      console.log(this.student);
-
+     
     } catch (error) {
       this.isLoading = false;
       console.log(error);
@@ -116,7 +115,6 @@ export default {
       this.isLoading = false;
     }
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
 

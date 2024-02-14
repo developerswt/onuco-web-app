@@ -151,7 +151,6 @@ export default {
     }
     this.rowData = this.Orders;
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
 
@@ -171,9 +170,6 @@ export default {
     onFilterButtonClick() {
    this.filterText = document.getElementById('filter-text-box').value;
    this.hasSearched = true;
-
-   console.log('Filter Text:', this.filterText);
-
    this.rowData = this.Orders.filter(order => {
  const lowerCaseFilter = this.filterText.toLowerCase();
  const includesname = order.name.toLowerCase().includes(lowerCaseFilter);
@@ -183,7 +179,6 @@ export default {
 });
 
 
-   console.log('Filtered Data:', this.rowData);
  },
 
     toggleForm() {
@@ -212,7 +207,6 @@ export default {
 
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
 
     },
@@ -256,7 +250,6 @@ export default {
         const response = await AxiosInstance.post(`/Bestfaculty/AddBestFaculty`, this.newBranch);
         this.ismodel = true;
         if (response.status === 200) {
-          console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
           this.toggleForm();

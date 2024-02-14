@@ -86,7 +86,6 @@ export default {
     },
     computed: {
         authorizationHeader() {
-            console.log(this.isuser);
             if (this.isLoggedIn) {
                 return `Bearer ${this.isuser}`;
             } else {
@@ -97,7 +96,6 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
           isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
@@ -113,27 +111,23 @@ export default {
   this.isLoading = true;
   try {
     if (!this.fileInput) {
-      console.error('No file chosen');
       return;
     }
 
     const formData = new FormData();
     formData.append('file', this.fileInput.files[0]);
 
-    console.log('Form Data:', formData);
-
+    
     const headers = {
       'Content-Type': 'multipart/form-data',
     };
 
-    console.log('Request Headers:', headers);
-
+    
     const res = await AxiosInstance.put('/ImageUrl', formData, {
       headers,
     });
 
     this.updatedAttribute = res.data;
-    console.log('Response:', this.updatedAttribute);
   } catch (error) {
     console.error('Error:', error);
   } finally {

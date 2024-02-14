@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     isuser() {
-      console.log(this.$store.state.user);
+
       return this.$store.state.user.signInUserSession.idToken.payload;
     },
   },

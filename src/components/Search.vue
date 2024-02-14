@@ -110,8 +110,10 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <button id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
+                                                                        <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
+                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                            now</button></a>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
@@ -253,8 +255,10 @@
                                                                     <p id="amount_text"><span id="strike_text"> &#8377;{{
                                                                         result.actualPrice }}</span>
                                                                         &#8377;{{ result.discountedPrice }}</p>
-                                                                    <button id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
+                                                                    <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
+                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                            now</button></a>
                                                                     <div class="icon_blck">
                                                                         <i class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
@@ -399,6 +403,13 @@ export default {
 
         }
     },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+
+    },
+
     async created() {
         this.isLoading = true;
         try {
@@ -414,6 +425,10 @@ export default {
         }
     },
     methods: {
+        redirectToLogin() {
+            // Programmatically navigate to the /Login route
+            this.$router.push('/Login');
+        },
 
         performSearch() {
             this.isLoading = true;
@@ -451,16 +466,12 @@ export default {
         },
 
         querySearch(queryString, cb) {
-            console.log(queryString)
             let results = queryString ? this.createFilter(queryString) : this.dataarray;
-            console.log(results);
-            cb(results);
+             cb(results);
         },
         createFilter(queryString) {
-            console.log("queryString", queryString)
             axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
                 .then((res) => (this.dataarray = res.data));
-            console.log(this.dataarray);
             return this.dataarray;
 
         },
@@ -493,8 +504,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+       
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
@@ -523,12 +533,11 @@ export default {
 
 <style scoped>
 #search_block {
-    margin-top: 70px;
+    margin-top: 0px;
 }
 
 .academic_head_text {
     color: #006acd;
-    padding-top: 40px;
     font-size: 22px;
 
 }

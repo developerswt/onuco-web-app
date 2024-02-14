@@ -175,8 +175,7 @@
            return; 
          }
          const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-         console.log(res);
- 
+         
          if (res.status === 200) {
            await this.loadData();
            this.editMode = false; 
@@ -212,7 +211,6 @@
          const response = await AxiosInstance.post(`/Types`, this.newBranch);
          this.ismodel = true; 
          if (response.status === 200) {
-           console.log("Added successfully");
            await this.loadData();
            this.loadProductDetails();
  
@@ -250,9 +248,6 @@
          const res = await AxiosInstance.put(`/Types/SoftUpdateTypes` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
         //  const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
 
-         console.log(res);
- 
-           console.log("deleted successfully");
            await this.loadData();
            this.loadProductDetails();
  

@@ -109,6 +109,7 @@ export default {
     },
     data() {
       return {
+        sidebarMargin: 0,
         isSidebarCollapsed: true,
         selectedContent: 'dashboard',
       };

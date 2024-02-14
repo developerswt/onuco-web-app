@@ -41,8 +41,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,12 +139,15 @@ export default {
             },
         }
     },
-
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+    },
     async created() {
         try {
             const res = await AxiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
-            console.log(this.courses);
             for (const course of this.courses) {
                 const res = await this.getByRatings(course.id);
                 course.starRating = res.averageRating;
@@ -151,6 +157,10 @@ export default {
         }
     },
     methods: {
+        redirectToLogin() {
+        // Programmatically navigate to the /Login route
+        this.$router.push('/Login');
+    },
 
         calculateDiscountPercentage(actualPrice, discountPrice) {
       if (actualPrice === 0) {
@@ -196,8 +206,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+    
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";

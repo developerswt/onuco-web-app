@@ -1,7 +1,7 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container" style="margin-top: 70px;">
-            <Breadcrumbs />
+        <div class="container" >
+            <!-- <Breadcrumbs /> -->
             <h4 class="academic_head_text pt-4">
                 <span id="aca_text">Top</span>Rated Courses
             </h4>
@@ -39,8 +39,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click="makePayment(course.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +106,11 @@
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="person.starRating || 0" :max-rating="5" />
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" v-if="isLoggedIn">
                                         <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div class="col-sm-6" v-else>
+                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                     </div>
                                 </div>
                     </div>
@@ -188,20 +194,23 @@ data() {
             },
         }
     },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
 
+    },
 
     async created() {
         try {
             const res = await AxiosInstance.get(`/TopRatedCourses`);
             this.courses = res.data;
-            console.log(this.courses);
             for (const course of this.courses) {
                 const res = await this.getByRatings(course.id);
                 course.starRating = res.averageRating;
             }
             const result = await AxiosInstance.get(`/Course`);
             this.allCourses = result.data;
-            console.log(this.allCourses);
             for (const allcourse of this.allCourses.courses) {
                 const resu = await this.getByRatings(allcourse.id);
                 allcourse.starRating = resu.averageRating;
@@ -212,6 +221,10 @@ data() {
         }
     },
     methods: {
+        redirectToLogin() {
+        // Programmatically navigate to the /Login route
+        this.$router.push('/Login');
+    },
     async getByRatings(courseId) {
             try {
                 const result = await AxiosInstance.get(`/Ratings?id=${courseId}&objectTypeId=5`);
@@ -255,8 +268,7 @@ data() {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+       
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";

@@ -219,7 +219,7 @@ async loadProductDetails() {
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/Semester` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-    console.log(res);
+    
 
       await this.loadData();
       this.editMode = false; 
@@ -239,7 +239,6 @@ async addBranch() {
   try {
     const response = await AxiosInstance.post(`/Semester`, this.newBranch);
     this.ismodel = true; 
-    console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
       this.$refs.Confirmation.open("Semester Added successfully.");
@@ -274,9 +273,7 @@ async deleteProduct(id) {
       }
       this.editedProduct.isActive = '0';
       const res = await AxiosInstance.put(`/Semester/SoftUpdateSemester`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-      console.log(res);
-
-        console.log("Semester deleted successfully");
+    
         await this.loadData();
         this.loadProductDetails();
 

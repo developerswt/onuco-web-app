@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     toggleMenu() {
-      console.log('toggleMenu called');
 
       this.isMenuActive = !this.isMenuActive;
       document.querySelector('html').classList.toggle('menu-active');

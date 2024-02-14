@@ -1,74 +1,9 @@
 [
-  {
-    "id": 1,
-    "UserId": "0d779166-7391-4042-9bf6-634046e7142a",
-    "CourseId": 1,
-    "WatchTimeData": [
-      {
+    {
         "id": 1,
-        "videoId": 1,
-        "WatchTime": 100
-      },
-      {
-        "id": 2,
-        "videoId": 2,
-        "WatchTime": 100
-      },
-      {
-        "id": 3,
-        "videoId": 3,
-        "WatchTime": 100
-      },
-      {
-        "videoId": 4,
-        "WatchTime": 0
-      },
-      {
-        "videoId": 5,
-        "WatchTime": 0
-      },
-      {
-        "videoId": 6,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 7,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 8,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 9,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 10,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 11,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 12,
-        "WatchTime": 0
-      },
-      {
-        "videoId": 13,
-        "WatchTime": 0
-      },
-            {
-        "videoId": 14,
-        "WatchTime": 0
-      }
-
-
-
-
-
-
-    ]
-  }
+        "UserId": "2345676",
+        "CourseId": 1,
+        "TransactionId": "tr-7333",
+        "NumberOfMonth": 30
+    }
 ]

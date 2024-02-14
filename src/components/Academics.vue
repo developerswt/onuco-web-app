@@ -107,7 +107,6 @@ export default defineComponent({
             const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
         } catch (error) {
-            console.log(error);
             this.isLoading = false;
         }
         finally {

@@ -1,7 +1,6 @@
 <template>
     <div class="category-test pt-3">
-        <div class="container" style="margin-top: 60px;">
-            <Breadcrumbs class="pl-2" />
+        <div class="container">
             <h4 class="academic_head_text pt-1">
                 <span id="aca_text">Best</span>Lecturers
             </h4>
