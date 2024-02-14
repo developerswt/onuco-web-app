@@ -1,6 +1,5 @@
 <template>
     <div class="container jk">
-        <!-- <Breadcrumbs class="container" /> -->
         <div class="container">
             <p class="desc" style="color: #777777;" v-html="branches[0]?.description"></p>
             </div>
@@ -98,7 +97,7 @@ export default {
 }
 
 .jk {
-    padding-top: 90px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

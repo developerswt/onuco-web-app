@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid header_padding">
-        <p>Home>Profile>Notification</p>
         <div class="row">
         <div class="col-lg-8 col-8 col-sm-8">
         <h2 class="pp"><b>Maths 1</b> (NEP Series)</h2>

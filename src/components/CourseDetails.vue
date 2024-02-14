@@ -55,7 +55,7 @@
 
 
                                 <div class="icon_blck">
-                                    <StarRatings :rating="ratings" :max-rating="5" />
+                                    <StarRatings :rating="rating" :max-rating="5" />
 
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
@@ -370,7 +370,7 @@ export default {
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
-            this.ratings = resul.data.averageRating;
+            this.rating = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
             if (this.courseDetails === true) {
                 this.userIsSubscribed = true;

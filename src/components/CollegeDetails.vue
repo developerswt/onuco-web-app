@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid jk">
-        <Breadcrumbs class="container" />
         <div class="container">
             <p class="desc" style="color: #777777;" v-html="university[0]?.description"></p>
         </div>

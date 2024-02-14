@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid jk">
-        <!-- <Breadcrumbs class="container" /> -->
         <div class="container">
             <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
                 <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>

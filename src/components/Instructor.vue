@@ -23,7 +23,7 @@
                                             <div class="col-lg-12 mn1">
                                                 <div class="row aa">
                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                        <StarRatings :rating="ratings || 0" :max-rating="5" />
+                                                        <StarRatings :rating="rating || 0" :max-rating="5" />
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
@@ -387,7 +387,7 @@ export default {
             console.log(this.faculty);
             this.activeName = this.faculty.attributue[0].heading;
             const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
-            this.ratings = result.data.averageRating;
+            this.rating = result.data.averageRating;
             this.ratingCount = result.data.ratingCount;
             console.log(this.ratings);
             const results = await AxiosInstance.get(`/Coursedetails/GetItemByFacultyCourse?FacultyDyanamicRouting=` + this.faculty.facultyDyanamicRouting);
@@ -445,24 +445,17 @@ export default {
                 objectId: this.faculty.id,
                 objectTypeId: 4,
                 ratingScore: this.rating
-            });
-
-                // Clear the rating value
-                this.rating = null;
-
-                // Close the popup (if needed)
-                this.closePopup();
-
-                // Retrieve updated ratings
-                const result = await AxiosInstance.get(`/Ratings?id=${this.faculty.id}&objectTypeId=4`);
-                this.ratings = result.data.averageRating;
-                this.ratingCount = result.data.ratingCount;
-
+            })
+            .then(response => {
                 // Handle success (if needed)
-            } catch (error) {
+                console.log(response.data);
+                this.rating = '';
+                this.closePopup();
+            })
+            .catch(error => {
                 // Handle error (if needed)
                 console.error(error);
-            }
+            });
         }
 
     }
