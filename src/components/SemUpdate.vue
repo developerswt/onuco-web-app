@@ -175,7 +175,6 @@ export default {
     },
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
 
     },
@@ -222,7 +221,6 @@ export default {
       this.showDialog = false;
       try {
         const res = await AxiosInstance.put(`/Semester` + '?' + 'id=' + id + '&name=' + encodeURIComponent(this.childPara.name) + '&desc=' + encodeURIComponent(this.childPara.description));
-        console.log(res);
         this.ismodel = true;
 
         if (res.status === 200) {
@@ -241,7 +239,6 @@ export default {
         this.ismodel = true;
 
         if (response.status === 200) {
-          console.log("Branch added successfully");
           await this.getdata();
           this.gridApi.refreshCells({ force: true });
 

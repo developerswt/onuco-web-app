@@ -7,13 +7,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <Breadcrumbs />
+                                    <!-- <Breadcrumbs /> -->
                                 </div>
                             </div>
                         </div>
                         <div v-if="isMobile" class="container-fluid">
                             <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                <video-player ref="videoPlayer" class="mobileVideo" :options="videoOptions"
+                                <video-player v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOptions"
                                     :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
                                     :is-subscribed="userIsSubscribed" />
                             </div>
@@ -55,14 +55,18 @@
 
 
                                 <div class="icon_blck">
-                                    <StarRatings :rating="ratings !== undefined ? ratings : 0" :max-rating="5" />
+                                    <StarRatings :rating="ratings" :max-rating="5" />
 
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
 
-                                <p id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                <p v-if="isLoggedIn" id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
                                     &#8377;{{ book.discountedPrice }}  <button
                                             id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
+                                <p v-else id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                    &#8377;{{ book.discountedPrice }} <a href="/Login"><button
+                                            id="search_button">buy now</button></a></p>
+
                             </div>
                         </div>
                         <div class="app1">
@@ -154,10 +158,12 @@
                                                                         :class="{ 'playing-subject': playingSubject === subject }">
                                                                         <div class="col-lg-1 col-1 col-sm-1">
                                                                             <i class="fa" aria-hidden="true" :class="{
-                                                                                'fa-check': isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                'fa-circle-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                'fa-circle': playingSubject === subject
-                                                                            }" style="margin-top: 6px;"></i>
+                                                                                'fa-check': isProgressBarComplete(subject.id),
+                                                                                'fa-circle-o': !isProgressBarComplete(subject.id) && !isProgressBarHalfComplete(subject.id) && playingSubject !== subject,
+                                                                                'fa-circle': (!isProgressBarComplete(subject.id) && isProgressBarHalfComplete(subject.id)) || playingSubject === subject
+                                                                            }" :style="{ color: (playingSubject === subject) ? 'orange' : '' }" style="margin-top: 6px;"></i>
+
+
                                                                         </div>
                                                                         <div class="col-lg-7 col-10 col-sm-10"
                                                                             style="cursor: pointer;"
@@ -206,8 +212,8 @@
                                                                                 </div>
 
                                                                                 <i class="fa" aria-hidden="true" :class="{
-                                                                                    'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject,
-                                                                                    'fa-bookmark': isProgressBarComplete(subject.id) || playingSubject === subject,
+                                                                                    'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject && !isProgressBarHalfComplete(subject.id),
+                                                                                    'fa-bookmark': isProgressBarHalfComplete(subject.id) || isProgressBarComplete(subject.id) || playingSubject === subject,
                                                                                 }" style=" font-size: 26px;"></i>
                                                                             </div>
                                                                         </div>
@@ -223,7 +229,7 @@
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
                                                     <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :course-id="courseId" :watch-time="watchTime" />
+                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" />
                                                 </div>
                                             </div>
                                         </div>
@@ -232,8 +238,16 @@
                                         <div class="" v-html="book.courseDescription"></div>
                                     </el-tab-pane>
                                     <el-tab-pane label="Question Bank" name="third">
-                                        <div class="" v-html="book.questionBank"></div>
-                                        <PdfViewer />
+                                        <div class="questin-bank">
+                                            <h3>PDF Details</h3>
+                                        </div>
+                                        <el-tabs v-model="activeInnerTab" class="demo-tabs" @tab-click="handleInnerTabClick">
+                                            <div v-for="book in book.questionBank" :key="book.id">
+                                                <el-tab-pane :label="book.name" :name="book.name">
+                                                    <PdfViewer :url="book.url" />
+                                                </el-tab-pane>
+                                            </div>
+                                        </el-tabs>
                                     </el-tab-pane>
                                     <el-tab-pane label="Quiz" name="fourth">
                                         <div class="" v-html="book.quiz"></div>
@@ -279,6 +293,7 @@ export default {
     },
     data() {
         return {
+            courseDisPrice: '',
             watchTime: null,
             ratingCount: '',
             isMobile: window.innerWidth <= 767,
@@ -314,11 +329,9 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isusers() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user;
         },
         videoType() {
@@ -354,15 +367,11 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
-            console.log(this.book);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
-            console.log(this.courseDetails);
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
             this.ratings = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
-            console.log(this.ratings);
-            // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
                 this.userIsSubscribed = true;
             } else {
@@ -372,10 +381,8 @@ export default {
                 try {
                     const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
                     this.watchTimeDatas = result.data;
-                    console.log(this.watchTimeDatas);
                 } catch {
                     this.watchTimeDatas = { "id": 0, "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08", "courseId": 0, "watchTimeData": [] };
-                    console.log(this.watchTimeDatas);
                 }
             }
 
@@ -388,8 +395,7 @@ export default {
             ]
             this.courseId = this.book.id;
 
-            console.log(this.book.id);
-            console.log(this.videoOptions);
+        
         } catch (err) {
             console.error(err);
             this.isLoading = false;
@@ -401,10 +407,15 @@ export default {
     methods: {
 
         formatDuration(duration) {
-        // Assuming the input is in hh:mm:ss format
-        const [hours, minutes, seconds] = duration.split(':');
-        return `${hours}h ${minutes}min`;
-    },
+            // Check if duration is undefined or null
+            if (!duration) {
+                return 'N/A'; // or any default value you prefer
+            }
+
+            // Assuming the input is in hh:mm:ss format
+            const [hours, minutes, seconds] = duration.split(':');
+            return `${hours}h ${minutes}min`;
+        },
 
         showPopup() {
             this.isPopupVisible = true;
@@ -441,8 +452,9 @@ export default {
             const watchTime = this.getWatchTime(subjectId);
 
             if (totalTime && watchTime) {
-                console.log((watchTime / totalTime) * 100);
-                return (watchTime / totalTime) * 100;
+                const rawPercentage = (watchTime / totalTime) * 100;
+                const roundedPercentage = Math.floor(rawPercentage); // rounding down to the nearest integer
+                return roundedPercentage;
             } else {
                 return 0;
             }
@@ -533,6 +545,20 @@ export default {
                 this.makeVideoFullscreen();
             }
         },
+        makeVideoFullscreen() {
+            const videoPlayer = this.$refs.videoPlayer;
+
+            // Check if Fullscreen API is supported
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen();
+            } else if (videoPlayer.mozRequestFullScreen) {
+                videoPlayer.mozRequestFullScreen();
+            } else if (videoPlayer.webkitRequestFullscreen) {
+                videoPlayer.webkitRequestFullscreen();
+            } else if (videoPlayer.msRequestFullscreen) {
+                videoPlayer.msRequestFullscreen();
+            }
+        },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
@@ -555,15 +581,13 @@ export default {
 
             if (this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
-
+                
                 this.videoId = subject.id;
-                console.log(this.videoId);
+                this.courseDisPrice = this.book.discountedPrice;
                 player.pause();
-                console.log('Player paused.');
-
+          
 
                 this.renderComponent = false;
-                console.log(this.renderComponent);
                 await this.$nextTick();
                 this.renderComponent = true;
 
@@ -576,11 +600,9 @@ export default {
                 ];
 
                 this.playingSubject = subject;
-                console.log('Video source updated.');
-
+          
                 this.watchTime = this.getWatchTime(subject.id);
-                console.log(this.watchTime);
-
+          
                 player.src(this.videoOptions.sources);
             }
         },
@@ -596,6 +618,17 @@ export default {
 
             return false;
         },
+        isProgressBarHalfComplete(subjectId) {
+            const totalTime = parseFloat(this.findSubjectById(subjectId).time);
+            const watchTime = this.getWatchTime(subjectId);
+
+            if (totalTime && watchTime) {
+                const percentage = Math.round((watchTime / totalTime) * 100);
+                return percentage > 0;
+            }
+    
+            return false;
+        },        
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -608,7 +641,6 @@ export default {
             })
                 .then(response => {
                     // Handle success (if needed)
-                    console.log(response.data);
                     this.rating = '';
                     this.closePopup();
                 })
@@ -643,8 +675,7 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+          
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
@@ -718,7 +749,7 @@ progress::-webkit-progress-value {
 }
 
 .jk {
-    padding-top: 68px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -763,7 +794,11 @@ ol {
 .icon_blck i {
     margin: 10px;
 }
-
+.questin-bank h3 {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 1%;
+}
 .search_right_block {
     padding-left: 0px;
 }

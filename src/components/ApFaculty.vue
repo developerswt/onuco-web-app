@@ -44,7 +44,6 @@ export default {
 
     computed: {
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user.signInUserSession.idToken.payload;
         }
     },
@@ -57,7 +56,6 @@ export default {
             try {
                 const res = await AxiosInstance.get(`/UserCourseSubscription/facultyTotalAmountCollectedPerSubject?UcognitoId=` + this.isuser.sub);
                 this.product = res.data;
-                console.log(this.product);
             } catch (error) {
                 this.isLoading = false;
                 console.log(error);

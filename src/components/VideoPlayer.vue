@@ -2,10 +2,14 @@
   <div class="video-container">
     <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered"></video>
   </div>
+  
 </template>
 
 
 <script>
+import sha256 from "crypto-js/sha256";
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 import AxiosInstance from '../config/axiosInstance'
 import videojs from 'video.js';
 import qualityLevels from "videojs-contrib-quality-levels";
@@ -24,6 +28,7 @@ export default {
     isSubscribed: Boolean,
     videoId: Number,
     courseId: Number,
+    courseDisPrice: Number,
     watchTime: String,
   },
   data() {
@@ -57,7 +62,6 @@ export default {
       this.player.log('onPlayerReady', this);
       this.player.currentTime(this.watchTime || 0);
       this.player.qualityLevels();
-      console.log(this.player);
       this.player.hlsQualitySelector({ displayCurrentQuality: true });
 
       this.player.on('pause', this.pauseVideo);
@@ -65,7 +69,6 @@ export default {
     this.initVideoPlayer();
 
     this.player.on('timeupdate', () => {
-      console.log(this.player.currentTime());
       if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
         this.showPosterOverlay();
@@ -99,32 +102,41 @@ export default {
         customElement.style.display = 'flex';
         customElement.style.justifyContent = 'center';
         customElement.style.alignItems = 'center';
-        customElement.style.zIndex = '1000'; // Set a higher z-index to ensure it's above the video
+        customElement.style.zIndex = '1000';
 
-        if (this.isLoggedIn) {
-          customElement.innerHTML = `
+        const innerHTML = this.isLoggedIn
+          ? `
             <div class="overlay-content">
               <p style="font-size: 16px;color: white;">Please subscribe to watch the full video</p>
               <div style="margin-left: 70px;">
-                <a href="/Razorpay"><button style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button></a>
+                <button id="subscribeButton" style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button>
               </div>
             </div>
-          `;
-        } else {
-          customElement.innerHTML = `
+          `
+          : `
             <div class="overlay-content">
               <p style="font-size: 16px;color: white;">Please subscribe to watch the full video</p>
               <div style="margin-left: 70px;">
-                <a href="/login"><button style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button></a>
+                <a href="/login"><button id="subscribeButton" style="color: #ffff;background-color: red;font-size: 15px;">SUBSCRIBE</button></a>
               </div>
             </div>
           `;
-        }
+
+        customElement.innerHTML = innerHTML;
 
         // Append the custom element to the video container
         this.$refs.videoPlayer.parentNode.appendChild(customElement);
+
+        // Add click event to the dynamically created button
+        const subscribeButton = document.getElementById('subscribeButton');
+        if (subscribeButton) {
+          subscribeButton.addEventListener('click', () => {
+            this.makePayment(this.courseDisPrice);
+          });
+        }
       }
     },
+
     initVideoPlayer() {
       if (this.isSubscribed) {
         this.enableProgressBar();
@@ -173,7 +185,6 @@ export default {
 
           const response = await AxiosInstance.put('/StateManagement', requestBody);
 
-          console.log('Update successful:', response.data);
           this.prevCourseId = courseId;
           this.prevVideoId = videoId;
         } catch (error) {
@@ -187,6 +198,55 @@ export default {
       // localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
 
     },
+    generateUUID() {
+            return uuidv4().toString(36).slice(-6);
+        },
+        async makePayment(amount) {
+            const transactionId = "Tr-" + this.generateUUID();
+            const merchantId = "PGTESTPAYUAT";
+
+            const payload = {
+                merchantId: merchantId,
+                merchantTransactionId: transactionId,
+                merchantUserId: 'MUID-' + this.generateUUID(),
+                amount: amount * 100,
+                redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
+                redirectMode: "POST",
+                callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
+                mobileNumber: '9999999999',
+                paymentInstrument: {
+                    type: "PAY_PAGE"
+                },
+                message: "Introduction Computer Sciensce",
+                shortName: "Vijay",
+                instrumentType: 'web'
+            };
+
+            const dataPayload = JSON.stringify(payload);
+            const dataBase64 = btoa(dataPayload);
+    
+            const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+            const dataSha256 = sha256(dataBase64 + fullURL);
+            const checksum = dataSha256 + "###" + "1";
+            const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+
+            try {
+                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-VERIFY": checksum,
+                    },
+                });
+
+                const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
+                window.location.href = redirectURL;
+
+            } catch (error) {
+                console.error("Error making payment:", error);
+                // Handle payment processing errors here
+            }
+        },
   }
 };
 </script>

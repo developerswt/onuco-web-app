@@ -180,11 +180,10 @@ methods: {
       try {
         const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
         this.products = res.data;
-        console.log('Data loaded:', this.products);
+
       } 
       catch(error){
         this.isLoading = false;
-        console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
       } 
       finally {
@@ -205,7 +204,6 @@ enableEditMode() {
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-      console.log(res);
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
@@ -236,7 +234,6 @@ async updateProduct(id) {
   this.isLoading = true;
   try {
     const response = await AxiosInstance.post(`/Academia`, this.newBranch);
-      console.log(response);
       await this.loadData();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Course Added successfully.");
@@ -275,9 +272,6 @@ async deleteProduct(id) {
 
       this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Academia/SoftUpdateAcademia` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-        console.log(res);
-
-        console.log("Course deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 

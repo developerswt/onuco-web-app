@@ -137,7 +137,6 @@ export default {
     }
     this.rowData = this.Orders;
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
 
@@ -177,7 +176,6 @@ export default {
 
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
 
     },

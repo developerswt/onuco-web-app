@@ -105,7 +105,6 @@ export default {
         try {
             const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
             this.item = result.data;
-            console.log(this.item);
             this.processChartData();
         } catch (error) {
             console.log(error);

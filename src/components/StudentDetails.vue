@@ -155,7 +155,6 @@ export default {
     }
     this.rowData = this.Orders;
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
 
@@ -210,7 +209,6 @@ export default {
     },
     dateFormat(params) {
       let value = params.data.startdate;
-      console.log(value);
       if (value) {
         return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
       }
@@ -218,15 +216,13 @@ export default {
     dateFormats(params) {
 
       let value2 = params.data.enddate;
-      console.log(value2);
-
+  
       if (value2) {
         return moment(String(value2)).format('DD/MM/YYYY T HH:mm:ss');
       }
     },
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
       this.edit()
     },
@@ -281,8 +277,7 @@ export default {
         // const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
         const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
         const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newEndDate=' + encodeURIComponent(formattedEndDate));
-        console.log(res);
-
+  
         // this.gridApi.refreshCells({force : true});
         if (res.status === 200) {
           const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);

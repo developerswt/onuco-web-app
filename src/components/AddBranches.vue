@@ -212,7 +212,6 @@ this.selectedProduct = { ...selectedProduct };
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-    console.log(res);
 
       await this.loadData();
       this.editMode = false; 
@@ -234,7 +233,6 @@ try {
   const response = await AxiosInstance.post(`/Branches`, this.newBranch);
   this.ismodel = true;
 
-    console.log(response);
     await this.loadData();
     this.loadProductDetails();
     this.$refs.Confirmation.open("Branch Added successfully.");
@@ -268,9 +266,6 @@ async deleteProduct(id) {
       }
       this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Branches/SoftUpdateBranches` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-        console.log(res);
-
-        console.log("Branch deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 

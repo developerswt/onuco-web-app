@@ -1,6 +1,5 @@
 <template>
     <div class="container jk">
-        <Breadcrumbs class="pl-2" />
         <div class="Instructor_parent_block">
             <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
             <div v-if="showShareButton">
@@ -24,7 +23,7 @@
                                             <div class="col-lg-12 mn1">
                                                 <div class="row aa">
                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                        <StarRatings :rating="ratings" :max-rating="5" />
+                                                        <StarRatings :rating="ratings || 0" :max-rating="5" />
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
@@ -140,7 +139,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 col-6">
                                                             <p class="rating_icons">
-                                                                <StarRatings :rating="ratings" :max-rating="5" />
+                                                                <i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star-o"></i>
+                                                                
                                                             </p>
                                                         </div>
                                                         <div class="col-lg-6 col-6"
@@ -373,7 +376,6 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isuser() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
     },
@@ -382,6 +384,7 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
+            console.log(this.faculty);
             this.activeName = this.faculty.attributue[0].heading;
             const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
             this.ratings = result.data.averageRating;
@@ -389,8 +392,8 @@ export default {
             console.log(this.ratings);
             const results = await AxiosInstance.get(`/Coursedetails/GetItemByFacultyCourse?FacultyDyanamicRouting=` + this.faculty.facultyDyanamicRouting);
             this.persons = results.data;
-            console.log(this.persons);
-
+          
+          
 
 
         } catch (error) {
@@ -402,6 +405,15 @@ export default {
         }
     },
     methods: {
+        async getByRatings(facultyId) {
+            try {
+                const result = await AxiosInstance.get(`/Ratings?id=${facultyId}&objectTypeId=4`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
         showShareCourseUrlOption(courseName) {
             this.showShareButton = true;
             this.currentRoute = `https://dev.skillmeridiandev.tech/CourseDetails/${courseName}`;
@@ -433,18 +445,26 @@ export default {
                 objectId: this.faculty.id,
                 objectTypeId: 4,
                 ratingScore: this.rating
-            })
-                .then(response => {
-                    // Handle success (if needed)
-                    console.log(response.data);
-                    this.rating = '';
-                    this.closePopup();
-                })
-                .catch(error => {
-                    // Handle error (if needed)
-                    console.error(error);
-                });
+            });
+
+                // Clear the rating value
+                this.rating = null;
+
+                // Close the popup (if needed)
+                this.closePopup();
+
+                // Retrieve updated ratings
+                const result = await AxiosInstance.get(`/Ratings?id=${this.faculty.id}&objectTypeId=4`);
+                this.ratings = result.data.averageRating;
+                this.ratingCount = result.data.ratingCount;
+
+                // Handle success (if needed)
+            } catch (error) {
+                // Handle error (if needed)
+                console.error(error);
+            }
         }
+
     }
 }
 </script>
@@ -453,7 +473,7 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top: 5%;
+    padding-top: 0%;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }

@@ -1,7 +1,7 @@
 <template>
     <div id="academy_container" class="container">
         <div class="category-test pt-4">
-            <Breadcrumbs class="pt-5 pl-3" />
+
             <div class="container" style="margin-top: 10px;">
                 <h4 class="academic_head_text">
                     <span id="aca_text">Available</span>Academics
@@ -57,7 +57,6 @@ export default {
         try {
             const res = await axiosInstance.get(`/Academia`);
             this.academia = res.data;
-            console.log(this.academia);
         } catch (error) {
             console.log(error);
             this.isLoading = false;

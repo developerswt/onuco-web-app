@@ -136,7 +136,6 @@
       }
       this.rowData = this.Orders;
       this.rowSelection = 'single';
-      console.log(this.rowData);
       this.popupParent = document.body;
       this.paginationPageSize = 10;
   
@@ -170,7 +169,6 @@
   
       onCellClicked(params) {
         this.childPara = params.node.data
-        console.log(this.childPara);
         this.showChildRow = true;
   
       },
@@ -181,7 +179,6 @@
       },
   
       onCellValueChanged(event) {
-        console.log('Data after change is', event.data);
       },
       onGridReady(params) {
         this.gridApi = params.api;
@@ -213,7 +210,6 @@
     this.ismodel = true;
 
     if (response.status === 200) {
-      console.log("Branch added successfully");
       await this.getdata();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Top Course Added successfully.");
@@ -256,7 +252,7 @@
       }
       this.rowData = this.Orders;
       this.rowSelection = 'single';
-      console.log(this.rowData);
+
       this.popupParent = document.body;
       this.paginationPageSize = 10;
   

@@ -61,13 +61,19 @@
 <script>
 
 export default {
-    name: 'UserNotification'
+    name: 'UserNotification',
+    data() {
+        return {
+            value2: 0, // Define the value2 property and set its initial value
+            colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
+        }
+    }
 }
 </script>
 
 <style scoped>
 .header_padding {
-    padding-top: 7%;
+    padding-top: 0%;
     padding-left: 10%;
     padding-right: 10%;
 }

@@ -98,7 +98,6 @@ export default {
       }
       const result = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
       this.person = result.data;
-      console.log(this.person);
     } catch (error) {
       this.isLoading = false;
       console.log(error);
@@ -110,21 +109,18 @@ export default {
       this.isLoading = false;
     }
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
   },
   methods: {
     dateFormat(params) {
       let value = params.data.startdate;
-      console.log(value);
       if (value) {
         return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
       }
     },
     dateFormats(params) {
       let value2 = params.data.enddate;
-      console.log(value2);
       if (value2) {
         return moment(String(value2)).format('DD/MM/YYYY T HH:mm:ss');
       }

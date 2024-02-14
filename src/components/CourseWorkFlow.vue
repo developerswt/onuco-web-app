@@ -151,7 +151,6 @@ export default {
       this.isLoading = false;
     }
     this.rowSelection = 'single';
-    console.log(this.rowData);
     this.popupParent = document.body;
     this.paginationPageSize = 10;
   },
@@ -160,7 +159,6 @@ export default {
 
     onCellClicked(params) {
       this.childPara = params.node.data
-      console.log(this.childPara);
       this.showChildRow = true;
 
     },
@@ -197,13 +195,11 @@ export default {
       this.showDialog = false;
       try {
         const res = axios.put(this.status + '?id=' + params.id + '&status=' + this.updateStatus);
-        console.log(res);
         this.showDialog = true;
         this.dialogTitle = "Success";
         this.dialogMessage = "Successfully Update The Status";
 
       } catch (error) {
-        console.log(error);
         this.showDialog = true;
         this.dialogTitle = "Error";
         this.dialogMessage = "Not get data";
@@ -212,11 +208,8 @@ export default {
     statusEditor(params) {
       this.showDialog = false;
       try {
-        console.log(params);
-        console.log(this.updateStatus);
         this.showDialog = false;
         const res = axios.put(this.status + '?id=' + params.id + '&status=' + this.updateStatus);
-        console.log(res);
         // this.showDialog = true;  
         this.dialogTitle = "Success";
         this.dialogMessage = "Successfully Update The Status";
@@ -238,7 +231,6 @@ export default {
       this.showDialog = false;
       try {
         const res = AxiosInstance.put(`/Course/UpdateWorkflow/` + id + '/' + this.childPara.workFlowStatement);
-        console.log(res);
         this.ismodel = true;
         this.gridApi.refreshCells({ force: true });
 

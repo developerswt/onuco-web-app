@@ -265,7 +265,6 @@ async loadProductDetails() {
 
 
   enableEditMode() {
-  console.log(this.selectedProduct);
   this.editMode = true;
   this.editedProduct.id = this.selectedProduct.id;
   this.editedProduct.name = this.selectedProduct.name;
@@ -291,7 +290,6 @@ async updateProduct(id) {
         },
       }
     );
-    console.log(res);
 
       await this.loadData();
       this.editMode = false; 
@@ -301,7 +299,6 @@ async updateProduct(id) {
 
     } catch (error) {
         this.isLoading = false;
-        console.log(error);
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
  
@@ -322,10 +319,8 @@ async addBranch() {
         },
       }
     );
-    console.log(response)
     this.ismodel = true; 
 
-    console.log("Branch added successfully");
     await this.loadData();
     this.loadProductDetails();
     this.$refs.Confirmation.open("Subject Added successfully.");
@@ -345,7 +340,6 @@ async addBranch() {
     
 }  catch(error){
         this.isLoading = false;
-        console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
       } 
   finally {
@@ -364,10 +358,8 @@ async deleteProduct(id) {
       }
         this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Branches/SoftUpdateCourse` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-        console.log(res);
 
       if (res.status === 200) {
-        console.log("Subject deleted successfully");
         await this.loadData();
         this.loadProductDetails();
 

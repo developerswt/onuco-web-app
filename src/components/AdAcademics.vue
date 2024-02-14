@@ -84,7 +84,6 @@ export default {
       this.Orders = dataArray.map(item => item.academia);
       this.rowData = this.Orders;
       this.rowSelection = 'single';
-      console.log(this.rowData);
     }
     catch (error) {
       this.isLoading = false;
