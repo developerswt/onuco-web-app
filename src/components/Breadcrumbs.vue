@@ -26,16 +26,23 @@ export default {
     updateBreadcrumbs(toRoute, fromRoute) {
       if (this.$route.name !== 'Home') {
         if (toRoute.matched.some(route => route.path.includes('/:'))) {
-          this.updateDynamicBreadcrumbs(toRoute);
+          const isPageRefresh = !fromRoute || !fromRoute.name;
+
+          if (isPageRefresh) {
+            // Reset breadcrumbs when refreshing the page
+            this.breadcrumbs = [];
+          }
+
+          this.updateDynamicBreadcrumbs(toRoute, isPageRefresh);
         } else {
           this.updateNonDynamicBreadcrumbs(toRoute, fromRoute);
         }
       }
     },
 
-    updateDynamicBreadcrumbs(toRoute) {
+    updateDynamicBreadcrumbs(toRoute, isPageRefresh) {
       const dynamicValue = this.updateDynamicValue();
-  
+
       // Create dynamic breadcrumbs
       const dynamicBreadcrumbs = toRoute.matched.map((route) => ({
         to: route.path.includes('/:') ? `${dynamicValue}` : route.path,
@@ -43,44 +50,47 @@ export default {
       }));
 
       // Check if navigating back within dynamic route
-      const navigatingBackDynamic = this.breadcrumbs.some(
-        (crumb) => dynamicBreadcrumbs.findIndex((db) => db.to === crumb.to) === -1
-      );
-  
-      if (navigatingBackDynamic) {
-        // Remove breadcrumbs after the current dynamic breadcrumb
-        const indexOfCurrentBreadcrumb = this.breadcrumbs.findIndex(
-          (crumb) => crumb.to === dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].to
-        );
-        if (indexOfCurrentBreadcrumb !== -1) {
-          this.breadcrumbs.splice(indexOfCurrentBreadcrumb + 1);
-        }
-      }
+      // const navigatingBackDynamic = this.breadcrumbs.some(
+      //   (crumb) => dynamicBreadcrumbs.findIndex((db) => db.to === crumb.to) === -1
+      // );
 
-      // Avoid duplicate "Home" entries in dynamic breadcrumbs
-      if (this.breadcrumbs.length === 0 || this.breadcrumbs[0].label !== 'Home') {
-        this.breadcrumbs = [
-          {
-            to: '/',
-            label: 'Home',
-          },
-          ...this.breadcrumbs,
-        ];
-      }
+      // if (navigatingBackDynamic) {
+      //   // Remove breadcrumbs after the current dynamic breadcrumb
+      //   const indexOfCurrentBreadcrumb = this.breadcrumbs.findIndex(
+      //     (crumb) => crumb.to === dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].to
+      //   );
+      //   if (indexOfCurrentBreadcrumb !== -1) {
+      //     this.breadcrumbs.splice(indexOfCurrentBreadcrumb + 1);
+      //   }
+      // }
 
       // Check if navigating to a non-dynamic page from a dynamic page
       if (toRoute.matched.every(route => !route.path.includes('/:'))) {
+        // Check if the first breadcrumb is "Home" and remove it
+        if (this.breadcrumbs.length > 0 && this.breadcrumbs[0].label === 'Home') {
+          this.breadcrumbs.shift();
+        }
+
         this.breadcrumbs = [
-          {
-            to: '/',
-            label: 'Home',
-          },
+          ...this.breadcrumbs,
           {
             to: toRoute.path,
             label: this.getBreadcrumbLabel(toRoute),
           },
         ];
       } else {
+        // Avoid duplicate "Home" entries in dynamic breadcrumbs
+        const hasHomeBreadcrumb = this.breadcrumbs.some((crumb) => crumb.label === 'Home');
+        if (!hasHomeBreadcrumb || isPageRefresh) {
+          this.breadcrumbs = [
+            {
+              to: '/',
+              label: 'Home',
+            },
+            ...this.breadcrumbs,
+          ];
+        }
+
         // Set dynamic breadcrumbs
         this.breadcrumbs = [
           ...this.breadcrumbs,
@@ -150,7 +160,7 @@ export default {
     },
 
 
-    
+
 
     getBreadcrumbLabel(route) {
       if (route.path.includes('/:')) {
@@ -213,6 +223,7 @@ export default {
 <style scoped>
 .breadcrumb {
   margin-top: 7%;
+  margin-left: -1.5%;
   background-color: transparent;
 }
 

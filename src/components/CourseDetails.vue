@@ -238,8 +238,16 @@
                                         <div class="" v-html="book.courseDescription"></div>
                                     </el-tab-pane>
                                     <el-tab-pane label="Question Bank" name="third">
-                                        <div class="" v-html="book.questionBank"></div>
-                                        <PdfViewer />
+                                        <div class="questin-bank">
+                                            <h3>PDF Details</h3>
+                                        </div>
+                                        <el-tabs v-model="activeInnerTab" class="demo-tabs" @tab-click="handleInnerTabClick">
+                                            <div v-for="book in book.questionBank" :key="book.id">
+                                                <el-tab-pane :label="book.name" :name="book.name">
+                                                    <PdfViewer :url="book.url" />
+                                                </el-tab-pane>
+                                            </div>
+                                        </el-tabs>
                                     </el-tab-pane>
                                     <el-tab-pane label="Quiz" name="fourth">
                                         <div class="" v-html="book.quiz"></div>
@@ -786,7 +794,11 @@ ol {
 .icon_blck i {
     margin: 10px;
 }
-
+.questin-bank h3 {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 1%;
+}
 .search_right_block {
     padding-left: 0px;
 }

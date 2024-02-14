@@ -533,12 +533,11 @@ export default {
 
 <style scoped>
 #search_block {
-    margin-top: 70px;
+    margin-top: 0px;
 }
 
 .academic_head_text {
     color: #006acd;
-    padding-top: 40px;
     font-size: 22px;
 
 }

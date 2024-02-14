@@ -23,7 +23,7 @@
                                             <div class="col-lg-12 mn1">
                                                 <div class="row aa">
                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                        <StarRatings :rating="ratings" :max-rating="5" />
+                                                        <StarRatings :rating="ratings || 0" :max-rating="5" />
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
@@ -139,7 +139,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 col-6">
                                                             <p class="rating_icons">
-                                                                <StarRatings :rating="ratings" :max-rating="5" />
+                                                                <i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star-o"></i>
+                                                                
                                                             </p>
                                                         </div>
                                                         <div class="col-lg-6 col-6"
@@ -375,10 +379,13 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Faculty/` + this.$route.params.name);
             this.faculty = res.data;
+            console.log(this.faculty);
             this.activeName = this.faculty.attributue[0].heading;
-            const result = await AxiosInstance.get(`/Ratings?id=` + this.faculty.id + "&objectTypeId=4");
-            this.ratings = result.data.averageRating;
-            this.ratingCount = result.data.ratingCount;
+            if (this.faculty) {
+                const res = await this.getByRatings(this.faculty.id);
+                this.ratings = res.averageRating;
+                this.ratingCount = res.ratingCount;
+            }
             const results = await AxiosInstance.get(`/Bestfaculty/BestCoursesByFaculty/` + this.faculty.id);
             this.persons = results.data;
           
@@ -394,6 +401,15 @@ export default {
         }
     },
     methods: {
+        async getByRatings(facultyId) {
+            try {
+                const result = await AxiosInstance.get(`/Ratings?id=${facultyId}&objectTypeId=4`);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return 0; // or handle error accordingly
+            }
+        },
         showShareCourseUrlOption(courseName) {
             this.showShareButton = true;
             this.currentRoute = `https://dev.skillmeridiandev.tech/CourseDetails/${courseName}`;

@@ -128,7 +128,7 @@ const routes = [
   },
   {
     path: "/Mylearnings",
-    name: "Mylearnings",
+    name: "Mylearning",
     component: Mylearnings,
     meta: {
       title: 'Unoco Application',
@@ -267,7 +267,7 @@ const routes = [
   },
   {
     path: "/UpdatedProfile",
-    name: "UpdatedProfile",
+    name: "Profile",
     component: UpdatedProfile,
     meta: {
         title: 'Picture Page',
@@ -291,7 +291,7 @@ const routes = [
   },
   {
     path:"/UserNotification",
-    name: "UserNotification",
+    name: "Notification",
     component: UserNotification,
     meta: {
         title: 'Notification Page',

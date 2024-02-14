@@ -48,9 +48,15 @@ export default {
 <script>
 export default {
   name: "PdfViewer",
+  props: {
+    url: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      pdfUrl: "/test.pdf",
+      pdfUrl: this.url,
     };
   },
   mounted() {
