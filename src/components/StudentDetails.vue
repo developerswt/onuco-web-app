@@ -7,7 +7,7 @@
             <header>Student Info Details</header>
             <div class="filter-box">
               <span for="filter-text-box">Search Here : </span>
-              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Name/E-mail Id/Phone_Number" />
+              <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Name/E-mail Id/Phone_Number" />
               <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
               <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
             </div>
@@ -137,6 +137,17 @@ export default {
       return this.$store.state.IsLoggedIn;
     },
   },
+  watch: {
+  filterText: {
+    handler: function (newFilterText) {
+      // Ensure gridApi is available before setting quick filter
+      if (this.gridApi) {
+        this.gridApi.setQuickFilter(newFilterText);
+      }
+    },
+    deep: true, // Watch changes deeply
+  },
+},
 
   async created() {
     this.domLayout = 'autoHeight';
@@ -159,17 +170,6 @@ export default {
     this.paginationPageSize = 10;
 
   },
-  watch: {
-  filterText: {
-    handler: function (newFilterText) {
-      // Ensure gridApi is available before setting quick filter
-      if (this.gridApi) {
-        this.gridApi.setQuickFilter(newFilterText);
-      }
-    },
-    deep: true, // Watch changes deeply
-  },
-},
 
   methods: {
 

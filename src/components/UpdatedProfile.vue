@@ -20,7 +20,8 @@
                                         <div class="left_block">
                                             <p>5 Modules <span id="span_text">32 Topics</span></p>
 
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i
+class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -68,7 +69,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input id="input_file" type="file" class="input_file"
+                                            <input
+id="input_file" type="file" class="input_file"
                                                 @change="handleFileChange">
                                         </div>
                                     </div>
@@ -94,7 +96,8 @@
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
                                 <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input v-else v-model="this.userEmail" placeholder="userName@email.com" type="text"
+                                <input
+v-else v-model="userEmail" placeholder="userName@email.com" type="text"
                                     style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
@@ -139,7 +142,8 @@
                                     <p>{{ formatCreationDate(login.creationDate) }}</p>
                                 </div>
                                 <p v-if="shouldShowViewAll">
-                                    <router-link class="va" to="" style="text-decoration: underline;"
+                                    <router-link
+class="va" to="" style="text-decoration: underline;"
                                         @click="toggleViewAll">
                                         View all
                                     </router-link>

@@ -36,8 +36,8 @@
                                     <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click="makePayment(course.discountPrice)">Buy Now</a>
                                     </div>
-                                    <div class="col-sm-6" v-else>
-                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
+                                    <div v-else class="col-sm-6">
+                                        <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
             <span id="aca_text">All</span>Courses
         </h4>
         <div class="row align" >
-            <div class="col-sm-4" v-for="person in allCourses.courses" :key="person.id" >
+            <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4" >
                 <div class="box ">
                     <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
                         <div class="wer">

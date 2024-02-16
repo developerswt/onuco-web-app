@@ -14,7 +14,8 @@
                 <slide v-for="course in courses" :key="course.id">
 
                     <div class="box">
-                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
+                        <router-link
+:to="{ name: 'CourseDetails', params: { name: course.courseName } }"
                             style="text-decoration: none;">
                             <div class="wer">
                                 <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
@@ -43,8 +44,8 @@
                                     <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
                                     </div>
-                                    <div class="col-sm-6" v-else>
-                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
+                                    <div v-else class="col-sm-6">
+                                        <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
                                     </div>
                                 </div>
                             </div>

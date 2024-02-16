@@ -19,14 +19,10 @@ export default createStore ({
     selectedSem: null,
     selectedCourse: null,
     selectedAcademics: null,
-    dynamicRoutes: {},
         // isCourseActive: false,
     },
     
     mutations: {
-      setDynamicRoutes(state, { path, dynamicRoutes }) {
-        Vue.set(state.dynamicRoutes, path, dynamicRoutes);
-      },
         isLoggedIn(state, status) {
             state.IsLoggedIn = status;
             

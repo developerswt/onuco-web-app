@@ -10,7 +10,8 @@
                     </h4>
                 </div>
 
-                <el-autocomplete v-model="searchQuery" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                <el-autocomplete
+v-model="searchQuery" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                     value-key="title" size="large" class="inline-input w-100" placeholder="Search..."
                     @keyup.enter="performSearch" @select="handleSelect">
                     <template #prefix>
@@ -21,7 +22,8 @@
                     </template>
                     <template #suffix>
 
-                        <el-icon v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer"
+                        <el-icon
+v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer"
                             @click="clearInput()">
                             <CircleClose />
                         </el-icon>
@@ -54,7 +56,8 @@
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select id="label-select" class="form-select"
+                                            <select
+id="label-select" class="form-select"
                                                 aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
@@ -70,7 +73,8 @@
                                     <div v-for="result in searchResults" :key="result.id" class="tab_inner_block">
                                         <div class="row no-gutters">
                                             <div class="col-lg-3 col-md-3">
-                                                <img id="sub_image" src="../assets/images/java.jpg"
+                                                <img
+id="sub_image" src="../assets/images/java.jpg"
                                                     style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
@@ -101,7 +105,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <p id="desc_text">
-                                                                    <span class="desc"
+                                                                    <span
+class="desc"
                                                                         v-html="result.description.slice(0, 58)"></span>
                                                                 </p>
                                                             </div>
@@ -112,18 +117,23 @@
                                                                         &#8377;{{ result.discountedPrice }}</p>
                                                                         <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
-                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                        <a v-else href="#"><button id="buy_button" @click.prevent="redirectToLogin">Buy
                                                                             now</button></a>
                                                                     <div class="icon_blck">
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
                                                                     </div>
                                                                 </div>
@@ -135,7 +145,8 @@
                                             </div>
                                         </div>
 
-                                        <div v-for="instruct in result.instructorName" :key="instruct.id"
+                                        <div
+v-for="instruct in result.instructorName" :key="instruct.id"
                                             class="row mb-2 pt-4">
                                             <div class="col-sm-12">
                                                 <router-link
@@ -146,14 +157,17 @@
                                                             <div class="row">
                                                                 <div class="col-sm-8 user_details">
 
-                                                                    <img v-if="instruct.imageUrl != ''"
+                                                                    <img
+v-if="instruct.imageUrl != ''"
                                                                         :src="instruct.imageUrl" class="user-icon">
-                                                                    <img v-else src="../assets/images/Image21.png"
+                                                                    <img
+v-else src="../assets/images/Image21.png"
                                                                         class="user-icon">
                                                                     <div class="user_details_name">
                                                                         <h2>{{ instruct.name }}</h2>
                                                                         <p id="desc_text">
-                                                                            <span class="desc"
+                                                                            <span
+class="desc"
                                                                                 v-html="instruct.description.slice(0, 55)"></span>
                                                                         </p>
                                                                     </div>
@@ -163,15 +177,20 @@
                                                                     <div class="reviews_details">
                                                                         <p>(23 reviews) <br></p>
                                                                         <div class="icon">
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
                                                                         </div>
                                                                     </div>
@@ -199,7 +218,8 @@
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select id="label-select" class="form-select"
+                                            <select
+id="label-select" class="form-select"
                                                 aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
@@ -215,7 +235,8 @@
                                     <div v-for="result in searchResults" :key="result.id" class="tab_inner_block">
                                         <div class="row no-gutters">
                                             <div class="col-lg-3 col-md-3">
-                                                <img id="sub_image" src="../assets/images/java.jpg"
+                                                <img
+id="sub_image" src="../assets/images/java.jpg"
                                                     style="width: 100%; height: auto;" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-9 col-md-9">
@@ -246,7 +267,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <p id="desc_text">
-                                                                    <span class="desc"
+                                                                    <span
+class="desc"
                                                                         v-html="result.description.slice(0, 58)"></span>
                                                                 </p>
                                                             </div>
@@ -257,18 +279,23 @@
                                                                         &#8377;{{ result.discountedPrice }}</p>
                                                                     <button v-if="isLoggedIn" id="buy_button" @click.prevent="makePayment(result.discountedPrice)">Buy
                                                                             now</button>
-                                                                        <a v-else href="#"><button @click.prevent="redirectToLogin" id="buy_button">Buy
+                                                                        <a v-else href="#"><button id="buy_button" @click.prevent="redirectToLogin">Buy
                                                                             now</button></a>
                                                                     <div class="icon_blck">
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
-                                                                        <i class="fa-solid fa-star"
+                                                                        <i
+class="fa-solid fa-star"
                                                                             style="color: #ff9900;"></i>
                                                                     </div>
                                                                 </div>
@@ -297,7 +324,8 @@
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
-                                            <select id="label-select" class="form-select"
+                                            <select
+id="label-select" class="form-select"
                                                 aria-label="Default select example">
                                                 <option selected>Popular</option>
                                                 <option value="1">One</option>
@@ -321,14 +349,17 @@
                                                             <div class="row">
                                                                 <div class="col-sm-8 user_details">
 
-                                                                    <img v-if="person.imageUrl != ''" :src="person.imageUrl"
+                                                                    <img
+v-if="person.imageUrl != ''" :src="person.imageUrl"
                                                                         class="user-icon">
-                                                                    <img v-else src="../assets/images/Image21.png"
+                                                                    <img
+v-else src="../assets/images/Image21.png"
                                                                         class="user-icon">
                                                                     <div class="user_details_name">
                                                                         <h2>{{ person.name }}</h2>
                                                                         <p id="desc_text">
-                                                                            <span class="desc"
+                                                                            <span
+class="desc"
                                                                                 v-html="person.description.slice(0, 55)"></span>
                                                                         </p>
                                                                     </div>
@@ -338,15 +369,20 @@
                                                                     <div class="reviews_details">
                                                                         <p>(23 reviews) <br></p>
                                                                         <div class="icon">
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
-                                                                            <i class="fa-solid fa-star"
+                                                                            <i
+class="fa-solid fa-star"
                                                                                 style="color: #ff9900;"></i>
                                                                         </div>
                                                                     </div>

@@ -27,7 +27,8 @@
                                                     </div>
                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                         <p id="review_text">
-                                                            <a class="rating_icons" style="cursor: pointer;"
+                                                            <a
+class="rating_icons" style="cursor: pointer;"
                                                                 @click="showPopup()">({{ ratingCount || 0 }}
                                                                 reviews)</a>
                                                         </p>
@@ -48,7 +49,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="share_icon_block" style="color: aliceblue;">
-                                            <img style="cursor: pointer;" @click="showShareOption" src="../assets/images/Union193.png" class="share-icon">
+                                            <img style="cursor: pointer;" src="../assets/images/Union193.png" class="share-icon" @click="showShareOption">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -98,7 +99,7 @@
         </div>
 
     </div>
-    <section id="Course_section" v-if="persons.length > 0">
+    <section v-if="persons.length > 0" id="Course_section">
         <div class="container">
             <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
             <carousel :settings="settings" :breakpoints="breakpoints">
@@ -116,8 +117,9 @@
                                                         person.title.slice(0, 18) }}...</p>
                                                 </div>
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img @click.prevent="showShareCourseUrlOption(person.courseRouteName)" src="../assets/images/Union193.png"
-                                                        style="width: 16px; height: 20px;" class="icon">
+                                                    <img
+src="../assets/images/Union193.png" style="width: 16px; height: 20px;"
+                                                        class="icon" @click.prevent="showShareCourseUrlOption(person.courseRouteName)">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
                                                     <p class="ft"> 18CS81</p>
@@ -131,7 +133,8 @@
                                                 </div>
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
+                                                        <img
+src="../assets/images/Path4025.png"
                                                             style="width: 30px; height:30px;" class="video">
                                                     </div>
                                                 </div>
@@ -146,7 +149,8 @@
                                                                 
                                                             </p>
                                                         </div>
-                                                        <div class="col-lg-6 col-6"
+                                                        <div
+class="col-lg-6 col-6"
                                                             style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
                                                             <p> (23 reviews) </p>
                                                         </div>
@@ -205,7 +209,8 @@
                                                 </div>
 
                                                 <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img src="../assets/images/Union193.png"
+                                                    <img
+src="../assets/images/Union193.png"
                                                         style="width: 16px; height: 20px;" class="icon">
                                                 </div>
                                                 <div class="col-lg-6 col-6 col-sm-6">
@@ -225,7 +230,8 @@
 
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
+                                                        <img
+src="../assets/images/Path4025.png"
                                                             style="width: 30px; height:30px;" class="video">
                                                     </div>
                                                 </div>

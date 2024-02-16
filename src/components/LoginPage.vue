@@ -106,7 +106,8 @@ export default {
 
 <template>
   <div class="login_class">
-    <authenticator class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms="['username']"
+    <authenticator
+class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms="['username']"
       :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
 
       <template #icon-facebook>

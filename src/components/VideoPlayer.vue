@@ -69,10 +69,12 @@ export default {
     this.initVideoPlayer();
 
     this.player.on('timeupdate', () => {
-      if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
+      if (this.player.currentTime() >= 5 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
+        this.player.controlBar.playToggle.disable();
         this.showPosterOverlay();
         this.player.pause();
+        this.setMediaSessionHandlers();
       }
     });
     this.player.on('ended', () => {
@@ -87,6 +89,21 @@ export default {
     }
   },
   methods: {
+    setMediaSessionHandlers() {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => {
+          // Do nothing or handle as needed
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+          // Do nothing or handle as needed
+        });
+
+        navigator.mediaSession.setActionHandler('stop', () => {
+          // Do nothing or handle as needed
+        });
+      }
+    },
 
     showPosterOverlay() {
       if (!this.isSubscribed && this.showPoster) {

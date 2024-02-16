@@ -11,7 +11,8 @@
             <div class=" parent_blocks">
                 <div class="row pt-4">
                     <div v-for="college in university" :key="college.id" class="box">
-                        <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
+                        <router-link
+:to="{ name: 'Semester', params: { name: college.universityName } }"
                             style="text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
@@ -19,7 +20,8 @@
                                 </div>
                                 <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 12px;">
                                     <h5 data-placement="top" :title="college.name">{{ college.name }}</h5>
-                                    <p style="margin-top: -8px;" :title="college.description"
+                                    <p
+style="margin-top: -8px;" :title="college.description"
                                         v-html="college.description.slice(0, 60)"></p>
                                 </div>
                                 <div class="col-md-2 col-2 col-sm-2">
