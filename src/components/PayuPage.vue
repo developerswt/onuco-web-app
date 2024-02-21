@@ -334,6 +334,8 @@ type="submit"
           </button>
         </div>
       </form>
+      <button @click="increment">Click</button>
+      <button>{{ count }}</button>
     </div>
   </div>
 </template>
@@ -355,7 +357,15 @@ export default {
       },
     };
   },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    }
+  },
   methods: {
+    increment() {
+        this.$store.dispatch('incrementCount');
+    },
     generateUUID() {
       return uuidv4().toString(36).slice(-6);
     },
@@ -384,7 +394,7 @@ export default {
 
   // Filter out undefined values before sending the request
   const filteredPayload = Object.fromEntries(
-    Object.entries(payload).filter(([_, value]) => value !== undefined)
+    Object.entries(payload).filter(([value]) => value !== undefined)
   );
 
   const dataPayload = JSON.stringify(filteredPayload);

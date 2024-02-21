@@ -7,14 +7,15 @@
               <header>Student Subscribed By Course</header>
                 <div class="filter-box">
                     <span for="filter-text-box">Search Here : </span>
-                    <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Course Name" />
+                    <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Course Name" />
                     <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
                     <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
                 </div>
               <div class="card-body " style="padding: 0px 30px 30px 30px;">
                   <div class="example-wrapper">
                     <div style="height: 100%;">
-                      <ag-grid-vue v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                      <ag-grid-vue
+v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                         :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                         :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                         cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -64,7 +65,6 @@
         Orders: [],
         req: [],
         columnDefs: [{ name: 'courseId', field: 'courseId', suppressSizeToFit: true }, { name: 'courseName', field: 'courseName' },{ name: 'subscribed_students', field: 'subscribed_students' }, { name: 'active_Students', field: 'active_Students' }, { name: 'inActive_Students', field: 'inActive_Students' }],
-        gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,
@@ -84,6 +84,17 @@
         return this.$store.state.IsLoggedIn;
       },
     },
+    watch: {
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
   
     async created() {
       this.domLayout = 'autoHeight';
@@ -110,17 +121,6 @@
       this.paginationPageSize = 10;
   
     },
-    watch: {
- filterText: {
-   handler: function (newFilterText) {
-     // Ensure gridApi is available before setting quick filter
-     if (this.gridApi) {
-       this.gridApi.setQuickFilter(newFilterText);
-     }
-   },
-   deep: true, // Watch changes deeply
- },
-},
 
  methods: {
 

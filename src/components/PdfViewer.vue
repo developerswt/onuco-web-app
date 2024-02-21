@@ -1,5 +1,5 @@
 <template>
-  <vue-pdf-app style="height: 120vh" :pdf="url" :print_progress_percent="progress"></vue-pdf-app>
+  <vue-pdf-app style="height: 120vh" :pdf="url" :config="config" :print_progress_percent="progress"></vue-pdf-app>
 </template>
 
 <script>
@@ -20,12 +20,21 @@ export default {
   data() {
     return {
       progress: 0,
+      config: {
+        toolbar: {
+          toolbarViewerRight: {
+            print: false,
+            download: false,
+          }
+        }
+      },
     };
   },
   watch: {
     url: {
       immediate: true,
       handler(newUrl) {
+        console.log(newUrl);
         // Reset progress when the URL changes
         this.progress = 0;
       },

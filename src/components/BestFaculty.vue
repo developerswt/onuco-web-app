@@ -10,7 +10,8 @@
     <div class="container">
         <div class="row pt-3" style="margin-bottom: -38px;">
             <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
-                <router-link :to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
+                <router-link
+:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
                     style="cursor: pointer; text-decoration: none;">
                     <div class="card mt-5">
                         <div class="user-follower">
@@ -44,7 +45,6 @@
 
 <script>
 import axiosInstance from '../config/axiosInstance'
-import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import StarRatings from './StarRatings.vue'
@@ -53,7 +53,6 @@ import StarRatings from './StarRatings.vue'
 export default {
     name: 'BestLecture',
     components: {
-        Breadcrumbs,
         Loading,
         StarRatings
     },

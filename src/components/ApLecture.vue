@@ -5,7 +5,7 @@
         <header>Faculty Payment Info</header>
           <div class="filter-box">
             <span for="filter-text-box">Search Here : </span>
-            <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
+            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
             <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
             <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
           </div>
@@ -36,8 +36,8 @@
             </div>
           </div>
           <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
-            <el-dialog class="fdata" v-model="formVisible" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
-              <el-form :model="newBranch" ref="form" label-position="top" class="frm"> 
+            <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
+              <el-form ref="form" :model="newBranch" label-position="top" class="frm"> 
                 <p><b></b> {{ newBranch.id }}</p>
                 <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" required>
                   <el-input v-model="newBranch.userCourseSubscriptionId"></el-input>
@@ -139,7 +139,7 @@ import { AgGridVue } from "ag-grid-vue3";
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Datepicker from '@vuepic/vue-datepicker';
+// import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
@@ -148,7 +148,6 @@ export default {
    AgGridVue,
    Loading,
    Confirmation,
-   Datepicker,
  },
  data: function () {
    return {
@@ -177,7 +176,6 @@ export default {
      Orders: [],
      req: [],
      columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
-     gridApi: null,
      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
      columnApi: null,
      editType: null,
@@ -197,6 +195,17 @@ export default {
      return this.$store.state.IsLoggedIn;
    },
  },
+ watch: {
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
 
  async created() {
    this.domLayout = 'autoHeight';
@@ -223,17 +232,6 @@ export default {
    this.paginationPageSize = 10;
 
  },
- watch: {
- filterText: {
-   handler: function (newFilterText) {
-     // Ensure gridApi is available before setting quick filter
-     if (this.gridApi) {
-       this.gridApi.setQuickFilter(newFilterText);
-     }
-   },
-   deep: true, // Watch changes deeply
- },
-},
 
  methods: {
 
@@ -307,6 +305,7 @@ export default {
    },
 
    onCellValueChanged(event) {
+    console.log(event);
    },
    onGridReady(params) {
      this.gridApi = params.api;
@@ -368,6 +367,7 @@ export default {
      this.isLoading = true;
      try {
        const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
+       console.log(response);
        this.ismodel = true;
          console.log(" added successfully");
          await this.getdata();

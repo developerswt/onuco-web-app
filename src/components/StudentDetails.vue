@@ -86,7 +86,7 @@ import Confirmation from './Confirmation.vue';
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Datepicker from '@vuepic/vue-datepicker';
+// import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 
@@ -96,7 +96,7 @@ export default {
     AgGridVue,
     Loading,
     Confirmation,
-    Datepicker,
+    // Datepicker,
 
   },
   data: function () {
@@ -116,7 +116,6 @@ export default {
       Orders: [],
       req: [],
       columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'name',field:'userName'},{name:'e_mailId', field:'e_mailId'},{name:'phone_Number', field:'phone_Number'},{ name: 'Course Name', field: 'courseName' }, { name: 'Price', field: 'price' },{ name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
-      gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
       editType: null,

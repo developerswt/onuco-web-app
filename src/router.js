@@ -103,6 +103,7 @@ Hub.listen("auth", async data => {
     store.commit('isLoggedIn', true); 
     // Access the entire user attribute details
     const attributes = user.attributes;
+    console.log(attributes);
 
     // Store the user data in your state, for example:
     store.commit('setUser', user); // Commit user data to the store

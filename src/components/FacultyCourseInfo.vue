@@ -65,7 +65,6 @@ v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs=
         Orders: [],
         req: [],
         columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
-        gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,

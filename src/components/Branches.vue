@@ -13,7 +13,8 @@
             <div class="parent_blocks">
                 <div class="row ">
                     <div v-for="branch in branches" :key="branch.id" class="box">
-                        <router-link :to="{ name: 'Universities', params: { name: branch.branchName } }"
+                        <router-link
+:to="{ name: 'Universities', params: { name: branch.branchName } }"
                             style="cursor: pointer; color: white; text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
@@ -53,14 +54,12 @@ import AxiosInstance from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Breadcrumbs from './Breadcrumbs.vue';
 
 export default {
     name: 'BranchesView',
     components: {
         Offer,
         Loading,
-        Breadcrumbs
     },
     data() {
         return {

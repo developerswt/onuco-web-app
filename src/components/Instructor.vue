@@ -289,7 +289,6 @@ src="../assets/images/Path4025.png"
 <script>
 import ShareButton from './ShareButton.vue'
 import AxiosInstance from '../config/axiosInstance'
-import Breadcrumbs from "./Breadcrumbs.vue"
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
@@ -301,7 +300,6 @@ export default {
     components: {
         Offer,
         Loading,
-        Breadcrumbs,
         Carousel,
         Slide,
         StarRatings,

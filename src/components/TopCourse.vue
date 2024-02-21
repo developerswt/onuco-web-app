@@ -95,7 +95,6 @@
 import sha256 from "crypto-js/sha256";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
-import Breadcrumbs from './Breadcrumbs.vue'
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
@@ -109,7 +108,6 @@ Carousel,
 Slide,
 StarRatings,
 Navigation,
-Breadcrumbs
 },
 data() {
         return {

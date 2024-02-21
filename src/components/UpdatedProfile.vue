@@ -250,6 +250,7 @@ export default {
                 const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
                     headers
                 });
+                console.log(response);
 
                 // Handle the API response as needed
                 await this.update();

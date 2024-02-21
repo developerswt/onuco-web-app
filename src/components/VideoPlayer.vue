@@ -24,12 +24,30 @@ export default {
         return {};
       }
     },
-    limitTime: Number,
-    isSubscribed: Boolean,
-    videoId: Number,
-    courseId: Number,
-    courseDisPrice: Number,
-    watchTime: String,
+    limitTime: {
+      type: Number,
+      default: undefined // Set default value to undefined
+    },
+    isSubscribed: {
+      type: Boolean,
+      default: undefined
+    },
+    videoId: {
+      type: Number,
+      default: undefined
+    },
+    courseId: {
+      type: Number,
+      default: undefined
+    },
+    courseDisPrice: {
+      type: Number,
+      default: undefined
+    },
+    watchTime: {
+      type: String,
+      default: undefined
+    },
   },
   data() {
     return {
@@ -69,7 +87,7 @@ export default {
     this.initVideoPlayer();
 
     this.player.on('timeupdate', () => {
-      if (this.player.currentTime() >= 5 && !this.showPoster && !this.isSubscribed) {
+      if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
         this.player.controlBar.playToggle.disable();
         this.showPosterOverlay();
@@ -201,7 +219,7 @@ export default {
           };
 
           const response = await AxiosInstance.put('/StateManagement', requestBody);
-
+          console.log(response);
           this.prevCourseId = courseId;
           this.prevVideoId = videoId;
         } catch (error) {

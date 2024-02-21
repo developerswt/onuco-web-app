@@ -22,6 +22,18 @@ export default {
       dynamicValue: '',
     };
   },
+  watch: {
+    $route(to, from) {
+      this.updateBreadcrumbs(to, from);
+    },
+  },
+  created() {
+    if (this.$route.matched.some(route => route.path.includes('/:'))) {
+      this.updateDynamicBreadcrumbs(this.$route);
+    } else {
+      this.updateNonDynamicBreadcrumbs(this.$route);
+    }
+  },
   methods: {
     updateBreadcrumbs(toRoute, fromRoute) {
       if (this.$route.name !== 'Home') {
@@ -204,18 +216,6 @@ export default {
 
       return removeDynamicParamsAndWildcards(crumbRoute) !== removeDynamicParamsAndWildcards(currentRoutePath);
     },
-  },
-  watch: {
-    $route(to, from) {
-      this.updateBreadcrumbs(to, from);
-    },
-  },
-  created() {
-    if (this.$route.matched.some(route => route.path.includes('/:'))) {
-      this.updateDynamicBreadcrumbs(this.$route);
-    } else {
-      this.updateNonDynamicBreadcrumbs(this.$route);
-    }
   },
 };
 </script>

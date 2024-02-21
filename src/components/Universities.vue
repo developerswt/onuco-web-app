@@ -51,14 +51,12 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Offer from './Offer.vue'
 import AxiosInstance from '../config/axiosInstance'
-import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
     name: 'UniversitiesView',
     components: {
         Offer,
         Loading,
-        Breadcrumbs
     },
     data() {
         return {

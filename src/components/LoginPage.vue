@@ -192,7 +192,7 @@ class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms
 }
 
 .login_class {
-  padding-top: 0%;
+  padding-top: 5%;
   z-index: 1;
 }
 

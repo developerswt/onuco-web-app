@@ -77,10 +77,12 @@ export default {
   //     return this.$route.name === 'Home' || this.$route.name == 'AdminPage';
   //   },
   // },
+
   watch: {
     $route(to, from) {
-      // Check if the current route is the home route
-      this.isHomeRoute = to.name === 'Home' || to.name === 'AdminPage';
+      console.log(from);
+      // // Check if the current route is the home route
+      this.isHomeRoute = to.name === 'Home' || to.name === 'AdminPage' || to.name === 'Login / Sign Up';
 
       // Check if the current route is the course details route
       this.isCourseDetailsRoute = to.name === 'CourseDetails';

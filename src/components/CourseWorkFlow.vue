@@ -6,7 +6,8 @@
       <div class="example-wrapper">
 
         <div style="height: 100%;">
-          <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+          <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
             :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
             :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
             :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -17,7 +18,8 @@
     </div>
 
     <div v-if="showChildRow">
-      <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+      <div
+class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
         aria-modal="true" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content mc">
@@ -62,7 +64,8 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
                 @click="update(childPara.id)">Update</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
             </div>
@@ -195,6 +198,7 @@ export default {
       this.showDialog = false;
       try {
         const res = axios.put(this.status + '?id=' + params.id + '&status=' + this.updateStatus);
+        console.log(res);
         this.showDialog = true;
         this.dialogTitle = "Success";
         this.dialogMessage = "Successfully Update The Status";
@@ -210,6 +214,7 @@ export default {
       try {
         this.showDialog = false;
         const res = axios.put(this.status + '?id=' + params.id + '&status=' + this.updateStatus);
+        console.log(res);
         // this.showDialog = true;  
         this.dialogTitle = "Success";
         this.dialogMessage = "Successfully Update The Status";
@@ -231,6 +236,7 @@ export default {
       this.showDialog = false;
       try {
         const res = AxiosInstance.put(`/Course/UpdateWorkflow/` + id + '/' + this.childPara.workFlowStatement);
+        console.log(res);
         this.ismodel = true;
         this.gridApi.refreshCells({ force: true });
 

@@ -255,7 +255,6 @@ id="home" class="tab-pane fade show active" role="tabpanel"
 </template>
 
 <script>
-import Breadcrumbs from './Breadcrumbs.vue';
 import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -265,7 +264,6 @@ import VideoPlayer from './VideoPlayer.vue';
 export default {
     name: 'MylearningsView',
     components: {
-        Breadcrumbs,
         Loading,
         VideoPlayer
     },

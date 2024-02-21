@@ -506,6 +506,7 @@ export default {
              cb(results);
         },
         createFilter(queryString) {
+            console.log(queryString);
             axiosInstance.get(`/GlobalSearch?searchTerm=${this.searchQuery}`)
                 .then((res) => (this.dataarray = res.data));
             return this.dataarray;

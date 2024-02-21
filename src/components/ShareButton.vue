@@ -43,6 +43,7 @@
         required: true,
       },
     },
+    emits: ['close'],
     data() {
       return {
         networks: [
