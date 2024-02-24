@@ -9,7 +9,8 @@
               <div style="padding: 20px;">
                 <div class="example-wrapper">
                   <div style="height: 100%;width: 100%;">
-                    <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                    <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"

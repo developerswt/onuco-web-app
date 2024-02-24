@@ -436,7 +436,7 @@ export default {
                 },
             ],
             // No Of Active Courses
-            lectureSubject: [],
+            // lectureSubject: [],
             activeCoursesOptions: {
                 chart: {
                     id: 'vuechart-example'
@@ -492,7 +492,7 @@ export default {
                 },
             ],
             // No Of Courses Subscribed
-            lectureSubject: [],
+            // lectureSubject: [],
             coursesSubscribedOptions: {
                 chart: {
                     id: 'vuechart-example'
@@ -549,7 +549,7 @@ export default {
             ],
             //  Course Details :
             // No Of Courses Subscribed Every Year
-            lectureSubject: [],
+            // lectureSubject: [],
             couSubEveryYearOptions: {
                 chart: {
                     id: 'vuechart-example'
@@ -605,7 +605,7 @@ export default {
                 },
             ],
             // No Of Active In Active Courses
-            lectureSubject: [],
+            // lectureSubject: [],
             actInactCouOptions: {
                 chart: {
                     id: 'vuechart-example'

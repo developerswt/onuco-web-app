@@ -31,7 +31,8 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <div v-for="item in myLearning" :key="item.id" class="radio-item"
+                            <div
+v-for="item in myLearning" :key="item.id" class="radio-item"
                                 :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
                                 <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
@@ -113,7 +114,8 @@
                         <el-tab-pane label="LIVE" name="third">
                             <div v-if="!selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
+                                    <div
+id="home" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="home-tab">
                                         <span id="aca_text">Live</span> Courses
                                         <div class="row mt-4 ">
@@ -125,13 +127,15 @@
                                                         <p>{{ selectedItem.instructorName[0].name }}</p>
                                                     </div>
                                                     <div class="asset_image info1">
-                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png"
+                                                        <img
+src="../assets/images/Iconionic-ios-timer@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 17px;">
                                                         {{ calculateTime(selectedItem).timeInHours }}:{{
                                                             calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
                                                     </div>
                                                     <div class="asset_image info2">
-                                                        <img src="../assets/images/Iconmap-school@2x.png"
+                                                        <img
+src="../assets/images/Iconmap-school@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 18px;">
                                                         {{ selectedItem.modules }}<br>
                                                     </div>
@@ -143,7 +147,8 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
-                                                    <video-player v-if="renderComponent" ref="videoPlayer"
+                                                    <video-player
+v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
@@ -168,7 +173,8 @@
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
                                                     <div class="progress_block">
                                                         <div>
-                                                            <progress :value="calculatePercentage(selectedItem)"
+                                                            <progress
+:value="calculatePercentage(selectedItem)"
                                                                 max="100">{{ getWatchTime(selectedItem) }}</progress>
                                                         </div>
                                                     </div>
@@ -187,7 +193,8 @@
                         <el-tab-pane label="COMPLETED" name="fourth">
                             <div v-if="selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
+                                    <div
+id="home" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="home-tab">
                                         <div class="">
                                             <div class="row mt-3">
@@ -208,7 +215,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                        <router-link
+:to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
                                                             style="text-decoration: none;">
                                                             <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                         </router-link>
@@ -217,7 +225,8 @@
                                                             <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                                                 <div class="progress_block">
                                                                     <div>
-                                                                        <progress :value="calculatePercentage(selectedItem)"
+                                                                        <progress
+:value="calculatePercentage(selectedItem)"
                                                                             max="100">{{ getWatchTime(selectedItem)
                                                                             }}</progress>
                                                                     </div>
@@ -246,7 +255,6 @@
 </template>
 
 <script>
-import Breadcrumbs from './Breadcrumbs.vue';
 import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -256,7 +264,6 @@ import VideoPlayer from './VideoPlayer.vue';
 export default {
     name: 'MylearningsView',
     components: {
-        Breadcrumbs,
         Loading,
         VideoPlayer
     },

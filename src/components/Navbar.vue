@@ -47,10 +47,12 @@
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
+                    <el-row
+v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
                         style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
-                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                            <el-autocomplete
+v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: color: blue; font-size: 12px;"
                                 class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter.prevent="handleKeyEnter(searchTerm)">

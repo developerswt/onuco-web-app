@@ -7,17 +7,17 @@
       <div class="carousel-inner">
         <div v-for="(item, index) in getLinks()" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
           <img 
+            v-if="item.hyperlink" 
             :src="item.bannerlink" 
-            :alt="'Banner ' + (index + 1)" 
+            :alt="'Banner ' + (index + 1)"
             class="d-block w-100 img-fluid"
-            v-if="item.hyperlink"
             @click="redirectToLink(item.hyperlink)"
           >
           <img 
+            v-else 
             :src="item.bannerlink" 
-            :alt="'Banner ' + (index + 1)" 
+            :alt="'Banner ' + (index + 1)"
             class="d-block w-100 img-fluid1"
-            v-else
           >
         </div>
       </div>

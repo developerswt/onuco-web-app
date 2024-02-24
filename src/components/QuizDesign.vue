@@ -121,12 +121,12 @@
           </div>
           <div class="row">
             <el-col v-for="i in 6" :key="i" :span="2">
-              <el-input class="mn" v-model="values[i - 1]" placeholder="value"></el-input>
+              <el-input v-model="values[i - 1]" class="mn" placeholder="value"></el-input>
             </el-col>
           </div>
           <div class="row">
             <el-col v-for="i in 6" :key="i" :span="2">
-              <el-input  class="mn" v-model="values[i + 4]" placeholder="value"></el-input>
+              <el-input  v-model="values[i + 4]" class="mn" placeholder="value"></el-input>
             </el-col>
           </div>
         </div>

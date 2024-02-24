@@ -69,7 +69,8 @@
               <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
               </span>
-              <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+              <span
+class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
                 aria-controls="collapseExample">
                 Course Details&nbsp;&nbsp;
                 <span class="action course"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>

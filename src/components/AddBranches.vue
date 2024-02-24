@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Branch Name :</label>
-        <el-select v-model="selectedbranch" @change="emitSelectedType" placeholder="Please Select" style="padding: 4px;">
+        <el-select v-model="selectedbranch" placeholder="Please Select" style="padding: 4px;" @change="emitSelectedType">
           <el-option v-for="product in products" :key="product.id" :value="product.id" :label="product.name"></el-option>
         </el-select>
       </div>
@@ -37,7 +37,7 @@
                 <td>{{ selectedProduct.isActive }}</td>
                 <td>
               <div class="button-row">
-                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button v-if="!editMode" class="bn" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -48,11 +48,11 @@
       </div>
           <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
           <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
-            <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+            <el-form ref="form" :model="newBranch" label-position="top" class="frm">
               <el-form-item>{{ newBranch.id }}</el-form-item>
 
       <el-form-item label="Branch Name" prop="name">
-        <el-input v-model="newBranch.name"  @input="validateFirstLetterCapital" type="text" required></el-input>
+        <el-input v-model="newBranch.name"  type="text" required @input="validateFirstLetterCapital"></el-input>
       </el-form-item>
 
       <el-form-item label="Description" prop="description">
@@ -60,7 +60,7 @@
       </el-form-item>
 
       <el-form-item label="Course ID" prop="academiaId">
-        <el-input v-model="this.selectedacademic" readonly></el-input>
+        <el-input :value="localSelectedAcademic" readonly></el-input>
       </el-form-item>
 
       <el-form-item label="Branch Rout Name" prop="branchName">
@@ -110,6 +110,7 @@ emits: ['selected-branches-changed'],
 
 data() {
   return {
+    localSelectedAcademic: this.selectedacademic,
     formVisible: false,
     products: [],
     selectedbranch:'',
@@ -164,7 +165,7 @@ methods: {
   },
 
   emitSelectedType() {
-    this.$emit('selected-branches-changed', this.selectedbranch);
+    this.$emit('selected-branches-changed', this.localSelectedAcademic);
     this.loadData(); 
     this.loadProductDetails();
 
@@ -212,7 +213,7 @@ this.selectedProduct = { ...selectedProduct };
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-
+console.log(res);
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
@@ -231,6 +232,7 @@ this.isLoading = true;
 try {
 
   const response = await AxiosInstance.post(`/Branches`, this.newBranch);
+  console.log(response);
   this.ismodel = true;
 
     await this.loadData();
@@ -266,6 +268,7 @@ async deleteProduct(id) {
       }
       this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Branches/SoftUpdateBranches` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+         console.log(res);
         await this.loadData();
         this.loadProductDetails();
 

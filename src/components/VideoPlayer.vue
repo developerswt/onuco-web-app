@@ -24,12 +24,30 @@ export default {
         return {};
       }
     },
-    limitTime: Number,
-    isSubscribed: Boolean,
-    videoId: Number,
-    courseId: Number,
-    courseDisPrice: Number,
-    watchTime: String,
+    limitTime: {
+      type: Number,
+      default: undefined // Set default value to undefined
+    },
+    isSubscribed: {
+      type: Boolean,
+      default: undefined
+    },
+    videoId: {
+      type: Number,
+      default: undefined
+    },
+    courseId: {
+      type: Number,
+      default: undefined
+    },
+    courseDisPrice: {
+      type: Number,
+      default: undefined
+    },
+    watchTime: {
+      type: String,
+      default: undefined
+    },
   },
   data() {
     return {
@@ -71,8 +89,10 @@ export default {
     this.player.on('timeupdate', () => {
       if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
         this.showPoster = true;
+        this.player.controlBar.playToggle.disable();
         this.showPosterOverlay();
         this.player.pause();
+        this.setMediaSessionHandlers();
       }
     });
     this.player.on('ended', () => {
@@ -87,6 +107,21 @@ export default {
     }
   },
   methods: {
+    setMediaSessionHandlers() {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => {
+          // Do nothing or handle as needed
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+          // Do nothing or handle as needed
+        });
+
+        navigator.mediaSession.setActionHandler('stop', () => {
+          // Do nothing or handle as needed
+        });
+      }
+    },
 
     showPosterOverlay() {
       if (!this.isSubscribed && this.showPoster) {
@@ -184,7 +219,7 @@ export default {
           };
 
           const response = await AxiosInstance.put('/StateManagement', requestBody);
-
+          console.log(response);
           this.prevCourseId = courseId;
           this.prevVideoId = videoId;
         } catch (error) {

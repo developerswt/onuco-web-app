@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" id="offer_block">
+    <div id="offer_block" class="container-fluid">
         <div v-if="showShareButton">
             <ShareButton :url="currentRoute" @close="closeShareOption"  />
         </div>

@@ -6,7 +6,8 @@
         <div style="padding: 20px;">
           <div class="example-wrapper">
             <div style="height: 100%;">
-              <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -33,7 +34,8 @@
       </div>
     </div>
     <div v-if="showChildRow">
-      <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+      <div
+class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
         aria-modal="true" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content mc">
@@ -63,7 +65,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
                 @click="update(childPara.id)">Update</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
             </div>
@@ -162,7 +165,7 @@ export default {
       this.ismodel = true;
     },
     onCellValueChanged(event) {
-
+      console.log(event);
     },
     onGridReady(params) {
       this.gridApi = params.api;
@@ -178,7 +181,8 @@ export default {
     },
     onPrintQuickFilterTexts() {
       this.gridApi.forEachNode(function (rowNode, index) {
-        
+        console.log(rowNode);
+        console.log(index);
       });
     },
     edit() {

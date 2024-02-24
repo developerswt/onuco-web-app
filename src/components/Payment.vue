@@ -7,7 +7,8 @@
                     <div class="card-body" style="font-size: 12px;">
                         <label style="color: #AEAEAE;">Your Active Mobile/Email ID <lable style="color: #FF0000;">*</lable>
                         </label><br>
-                        <input style="width: 100%; height: 30px; color: #AEAEAE;  border:1px solid #FF0000" type="text"
+                        <input
+style="width: 100%; height: 30px; color: #AEAEAE;  border:1px solid #FF0000" type="text"
                             placeholder="9089098765" />
                         <p style="color:#FF0000">Invalid mobile number / email id</p>
                         <div class="row" style=" border-top: 1px solid #E9EDF5;">
@@ -20,7 +21,8 @@
                         </div>
                         <p style="color: #AEAEAE;">Select your UPI app</p>
                         <div class="">
-                            <input style="width: 100%;  height: 30px; border:1px solid #E9EDF5;" type="text"
+                            <input
+style="width: 100%;  height: 30px; border:1px solid #E9EDF5;" type="text"
                                 placeholder="" />
                         </div>
                         <div class="row">
@@ -31,9 +33,11 @@
                                 <p style="color: #AEAEAE;">How to find UPI ID ?</p>
                             </div>
                         </div>
-                        <input style="width: 85%; height: 30px; color: #AEAEAE;  border:1px solid #E9EDF5;" type="text"
+                        <input
+style="width: 85%; height: 30px; color: #AEAEAE;  border:1px solid #E9EDF5;" type="text"
                             placeholder=" abc" />
-                        <input style="width: 15%; height: 30px; color: #AEAEAE;  border:1px solid #E9EDF5;" type="text"
+                        <input
+style="width: 15%; height: 30px; color: #AEAEAE;  border:1px solid #E9EDF5;" type="text"
                             placeholder=" @upi" />
                         <button class="btn mt-3" style="width: 100%;">Verify & Pay</button>
                         <p style="color: #AEAEAE;">How to pay using UPI ?</p>

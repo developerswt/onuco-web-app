@@ -22,6 +22,18 @@ export default {
       dynamicValue: '',
     };
   },
+  watch: {
+    $route(to, from) {
+      this.updateBreadcrumbs(to, from);
+    },
+  },
+  created() {
+    if (this.$route.matched.some(route => route.path.includes('/:'))) {
+      this.updateDynamicBreadcrumbs(this.$route);
+    } else {
+      this.updateNonDynamicBreadcrumbs(this.$route);
+    }
+  },
   methods: {
     updateBreadcrumbs(toRoute, fromRoute) {
       if (this.$route.name !== 'Home') {
@@ -167,14 +179,16 @@ export default {
         const urlPath = window.location.pathname;
         const pathAfterPort = urlPath.replace(/.*:\d+/, '');
         const dynamicParam = pathAfterPort.split('/').pop(); // Extract the last segment after the last '/'
-        return this.processLabel(dynamicParam);
+        const segments = dynamicParam.split('-');
+        const firstIndex = segments[0];
+        return this.processLabel(firstIndex);
       } else {
         return route.name;
       }
     },
 
     processLabel(label) {
-      const formattedLabel = label.replace(/-/g, ' ').replace(/\b\w/, c => c.toUpperCase());
+      const formattedLabel = label.replace(/\b\w/g, c => c.toUpperCase());
       return formattedLabel;
     },
 
@@ -204,18 +218,6 @@ export default {
 
       return removeDynamicParamsAndWildcards(crumbRoute) !== removeDynamicParamsAndWildcards(currentRoutePath);
     },
-  },
-  watch: {
-    $route(to, from) {
-      this.updateBreadcrumbs(to, from);
-    },
-  },
-  created() {
-    if (this.$route.matched.some(route => route.path.includes('/:'))) {
-      this.updateDynamicBreadcrumbs(this.$route);
-    } else {
-      this.updateNonDynamicBreadcrumbs(this.$route);
-    }
   },
 };
 </script>

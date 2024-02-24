@@ -12,7 +12,8 @@
             <div class="row mt-4">
                 <div v-for="item in academia" :key="item.id">
                     <div class="box1">
-                        <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        <router-link
+:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
                             style="color: white;text-decoration: none;">
                             <div class="box">
                                 <img src="../assets/images/book.png" class="icon">
@@ -36,14 +37,12 @@
 </template>
 <script>
 import axiosInstance from '../config/axiosInstance'
-import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
     name: 'AcademiNewView',
     components: {
-        Breadcrumbs,
         Loading
     },
     data() {
