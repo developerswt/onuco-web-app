@@ -65,19 +65,14 @@ class="fa-solid fa-play"
                                         <div class="choose_file">
                                             <div class="icon_bg_colors">
                                                 <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
-
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input
-id="input_file" type="file" class="input_file"
-                                                @change="handleFileChange">
+                                            <input id="input_file" type="file" class="input_file" @change="handleFileChange">
                                         </div>
                                     </div>
                                     <!-- </div> -->
                                 </div>
-
-
                             </div>
                         </div>
                         <div class="esdit_profile">
@@ -86,6 +81,10 @@ id="input_file" type="file" class="input_file"
                             <button v-else class="buttons button2" @click="saveProfile">SAVE</button>
 
                         </div>
+                        <div class="pt-4">
+                            <router-link to="/Deactivation"><button class="delete_profile_request">Delete Profile Request</button></router-link>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row mb-2  mm">
@@ -215,6 +214,14 @@ export default {
         this.loginHistory();
     },
     methods: {
+        async deleteProfile() {
+            try {
+                const response = await axiosInstance.post('/DeleteProfile');
+                console.log(response);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        },
         editProfile() {
             this.editing = true;
         },
@@ -355,6 +362,24 @@ export default {
     margin-left: 16px;
     background-color: white;
 }
+.delete_profile_request {
+    border: 1px solid #0177FB;
+    border-radius: 4px;
+    opacity: 1;
+    margin-left: 16px;
+    background-color: white;
+}
+.delete_profile_request {
+    color: blue;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 18px 0px;
+    cursor: pointer;
+}
+
 
 .button2 {
     /* border: 1px solid var(--unnamed-color-0177fb); */

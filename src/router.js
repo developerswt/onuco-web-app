@@ -75,6 +75,7 @@ import FacultyCourseInfo from './components/FacultyCourseInfo.vue'
 import CourseInfo from './components/CourseInfo.vue'
 import FacultySubStudents from './components/FacultySubStudents.vue'
 import StudentSubDetails from './components/StudentSubDetails.vue'
+import DeactivationRequest from './components/DeactivationRequest.vue'
 
 let user = null; // Initialize user as null
 
@@ -643,6 +644,16 @@ const routes = [
     },
 
   },
+  {
+    path: "/Deactivation",
+    name: "DeactivationRequest",
+    component: DeactivationRequest,
+    meta: {
+        title: 'Deactivation request page',
+    },
+
+  },
+
 
 ];
 

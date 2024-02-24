@@ -179,14 +179,16 @@ export default {
         const urlPath = window.location.pathname;
         const pathAfterPort = urlPath.replace(/.*:\d+/, '');
         const dynamicParam = pathAfterPort.split('/').pop(); // Extract the last segment after the last '/'
-        return this.processLabel(dynamicParam);
+        const segments = dynamicParam.split('-');
+        const firstIndex = segments[0];
+        return this.processLabel(firstIndex);
       } else {
         return route.name;
       }
     },
 
     processLabel(label) {
-      const formattedLabel = label.replace(/-/g, ' ').replace(/\b\w/, c => c.toUpperCase());
+      const formattedLabel = label.replace(/\b\w/g, c => c.toUpperCase());
       return formattedLabel;
     },
 

@@ -410,7 +410,7 @@ export default {
                 }
             ]
             this.courseId = this.book.id;
-            this.activeInnerTab = this.book.questionBank.length > 0 ? this.book.questionBank[0].name : '';
+            this.activeInnerTab = this.book.questionBank?.length > 0 ? this.book.questionBank[0].name : '';
         
         } catch (err) {
             console.error(err);
@@ -712,7 +712,20 @@ export default {
                 });
 
                 const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-                window.location.href = redirectURL;
+
+                if(response.status === 200) {
+
+                    const jsonData = {
+                        UserId: this.isuser.sub,
+                        CourseId: this.book.id,
+                        TransactionId: transactionId,
+                        NumberOfMonth: 30
+                    };
+                    const SubscriptionApi = await axios.post("http://localhost:5000/StateManagement",jsonData);
+                    if(SubscriptionApi.status === 201) {
+                        window.location.href = redirectURL;
+                    }
+                }
 
             } catch (error) {
                 console.error("Error making payment:", error);

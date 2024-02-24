@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Subject Name :</label>
-        <el-select v-model="selectedCourse" @change="loadProductDetails" style="padding: 4px;">
+        <el-select v-model="selectedCourse" style="padding: 4px;" @change="loadProductDetails">
   <el-option :label="''" :value="null" disabled selected hidden>Please Select</el-option>
   <el-option v-for="product in products" :key="product.id" :label="product.name" :value="product.id">
     {{ product.name }}
@@ -64,11 +64,11 @@
               <td>{{ selectedProduct.isActive }}</td>
               <td v-if="!editMode">{{ selectedProduct.imageUrl }}</td>
               <td v-if="editMode">
-                <input type="file" accept="image/*" @change="handleFileChange" required>
+                <input type="file" accept="image/*" required @change="handleFileChange">
               </td>
               <td>
               <div class="button-row">
-                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button v-if="!editMode" class="bn" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -80,10 +80,10 @@
         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
 <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '965px' }">
-    <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+    <el-form ref="form" :model="newBranch" label-position="top" class="frm">
         <el-form-item>{{ newBranch.id }}</el-form-item>
         <el-form-item label="Subject Name:" prop="name">
-          <el-input v-model="newBranch.name" @input="validateFirstLetterCapital"  required></el-input>
+          <el-input v-model="newBranch.name" required  @input="validateFirstLetterCapital"></el-input>
         </el-form-item>
 
         <el-form-item label="Description:" prop="desc">
@@ -99,7 +99,7 @@
         </el-form-item>
 
         <el-form-item label="Semester Id:" prop="SemesterId">
-          <el-input v-model="this.selectedsemester" readonly required></el-input>
+          <el-input :value="localSelectedSemester" readonly required></el-input>
         </el-form-item>
 
         <el-form-item label="Subject Rout Name:" prop="CourseName">
@@ -164,6 +164,7 @@ export default {
 },
   data() {
     return {
+      localSelectedSemester: this.selectedsemester,
       selectedFile: null,
       formVisible: false,
       products: [],
@@ -290,7 +291,7 @@ async updateProduct(id) {
         },
       }
     );
-
+console.log(res);
       await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
@@ -319,6 +320,7 @@ async addBranch() {
         },
       }
     );
+    console.log(response);
     this.ismodel = true; 
 
     await this.loadData();

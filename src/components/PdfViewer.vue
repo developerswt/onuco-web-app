@@ -1,5 +1,5 @@
-<template>
-  <vue-pdf-app style="height: 120vh" :pdf="url" :config="config" :print_progress_percent="progress"></vue-pdf-app>
+<template #print_progress_percent="{ progress }">
+  <vue-pdf-app style="height: 1200px; overflow: scroll;" :pdf="url" :config="config"></vue-pdf-app>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ import VuePdfApp from "vue3-pdf-app";
 import "vue3-pdf-app/dist/icons/main.css";
 
 export default {
-  name: "App",
+  name: "PdfViewer",
   components: {
     VuePdfApp,
   },
@@ -29,6 +29,11 @@ export default {
         }
       },
     };
+  },
+  methods: {
+    handleProgress(value) {
+      this.progress = value;
+    },
   },
   watch: {
     url: {

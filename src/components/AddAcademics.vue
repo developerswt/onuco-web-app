@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 72px;">
       <div>
         <label for="productDropdown">Course Name :</label>
-        <el-select v-model="selectedAcademics" @change="emitSelectedType" style="padding: 4px;">
+        <el-select v-model="selectedAcademics" style="padding: 4px;" @change="emitSelectedType">
               <el-option 
                   v-for="product in products"
                   :key="product.id"
@@ -46,7 +46,7 @@
 
                 <td>
               <div class="button-row">
-                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
+                <button v-if="!editMode" class="bn" @click="enableEditMode()">Edit</button>
                 <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                 <button @click="deleteProduct(selectedProduct.id)">Delete</button>
               </div>
@@ -59,16 +59,16 @@
         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
         <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
-    <el-form :model="newBranch" ref="form" label-position="top" class="frm">
+    <el-form ref="form" :model="newBranch" label-position="top" class="frm">
       <el-form-item>{{ newBranch.id }}</el-form-item>
       <el-form-item label="Course Name" prop="name">
-        <el-input v-model="newBranch.name" @input="validateFirstLetterCapital" type="text" required></el-input>
+        <el-input v-model="newBranch.name" type="text" required @input="validateFirstLetterCapital"></el-input>
       </el-form-item>
       <el-form-item label="Description" prop="description">
-        <el-input type="textarea" v-model="newBranch.description" class="size" required></el-input>
+        <el-input v-model="newBranch.description" type="textarea" class="size" required></el-input>
       </el-form-item>
       <el-form-item label="TypeId">
-        <el-input v-model="this.selectedtype" readonly required></el-input>
+        <el-input :value="localSelectedType" readonly required></el-input>
       </el-form-item>
       <el-form-item label="Course Rout Name" prop="academiaName">
         <el-input v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
@@ -116,6 +116,7 @@ emits: ['selected-academic-changed'],
 
   data() {
     return {
+      localSelectedType: this.selectedtype,
       products: [],
       selectedAcademics: '',
       formVisible: false,
@@ -171,7 +172,7 @@ methods: {
   },
 
   emitSelectedType() {
-    this.$emit('selected-academic-changed', this.selectedAcademics);
+    this.$emit('selected-academic-changed', this.localSelectedType);
     this.loadData(); 
     this.loadProductDetails();
   },
@@ -204,7 +205,8 @@ enableEditMode() {
 async updateProduct(id) {
   try {
     const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-      await this.loadData();
+    console.log(res);  
+    await this.loadData();
       this.editMode = false; 
       this.ismodel = true; 
       this.loadProductDetails();
@@ -234,7 +236,8 @@ async updateProduct(id) {
   this.isLoading = true;
   try {
     const response = await AxiosInstance.post(`/Academia`, this.newBranch);
-      await this.loadData();
+    console.log(response);  
+    await this.loadData();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Course Added successfully.");
 
@@ -272,7 +275,8 @@ async deleteProduct(id) {
 
       this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Academia/SoftUpdateAcademia` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-        await this.loadData();
+        console.log(res);
+         await this.loadData();
         this.loadProductDetails();
 
         this.selectedAcademics = '';
