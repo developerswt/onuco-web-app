@@ -92,7 +92,15 @@ export default {
       Orders: [],
       req: [],
       Products: [],
-      columnDefs: [{ name: 'Faculty Id', field: 'facultyId', suppressSizeToFit: true }, { name: 'Faculty Name', field: 'name' }, { name: 'Course Name', field: 'courseName' },  { name: 'facultyDynamicRouting', field: 'facultyDynamicRouting' },{ name: 'Description', field: 'description' },],
+      // columnDefs: [{ name: 'Faculty Id', field: 'facultyId', suppressSizeToFit: true }, { name: 'Faculty Name', field: 'name' }, { name: 'Course Name', field: 'courseName' },  { name: 'facultyDynamicRouting', field: 'facultyDynamicRouting' },{ name: 'Description', field: 'description' },],
+      columnDefs: [
+  { headerName: 'Faculty Id', field: 'facultyId', suppressSizeToFit: true },
+  { headerName: 'Faculty Name', field: 'name' },
+  { headerName: 'Subject Name', field: 'courseName' },
+  { headerName: 'Faculty Dynamic Routing', field: 'facultyDynamicRouting' },
+  { headerName: 'Description', field: 'description' }
+],
+
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

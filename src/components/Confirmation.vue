@@ -27,11 +27,11 @@ export default {
       show: false,
       resolve: null,
       reject: null,
-      message: "Are you sure?",
+      message: "Error",
     };
   },
   methods: {
-    open(message = "Are you sure?") {
+    open(message = "Error") {
       this.show = true;
       this.message = message;
       return new Promise((resolve, reject) => {

@@ -91,7 +91,17 @@
         Orders: [],
         Products:[],
         req: [],
-        columnDefs: [{ name: 'Faculty Id', field: 'id', suppressSizeToFit: true }, { name: 'Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'ActualPrice', field: 'actualPrice' }, { name: 'DiscountPrice', field: 'discountPrice' },{ name: 'courseName', field: 'courseName' } ,{ name: 'Is Active', field: 'isActive' }],
+        // columnDefs: [{ name: 'Faculty Id', field: 'id', suppressSizeToFit: true }, { name: 'Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'ActualPrice', field: 'actualPrice' }, { name: 'DiscountPrice', field: 'discountPrice' },{ name: 'courseName', field: 'courseName' } ,{ name: 'Is Active', field: 'isActive' }],
+        columnDefs: [
+  { headerName: 'Subject Id', field: 'id', suppressSizeToFit: true },
+  { headerName: 'Subject Name', field: 'name' },
+  { headerName: 'Description', field: 'description' },
+  { headerName: 'Actual Price', field: 'actualPrice' },
+  { headerName: 'Discount Price', field: 'discountPrice' },
+  { headerName: 'Subject Rout Name', field: 'courseName' },
+  { headerName: 'Is Active', field: 'isActive' }
+],
+
         gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
@@ -120,7 +130,7 @@
         const res = await AxiosInstance.get(`/TopRatedCourses`);
         let req = res.data;
         this.Orders = req;
-
+console.log(res)
         const response = await AxiosInstance.get('/Course');
         this.Products = response.data;
   

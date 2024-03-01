@@ -1,141 +1,141 @@
 <template>
-    <h2 class="page_title">For Students</h2>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Register User Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="registerUserOptions" :series="registerUserSeries"></apexchart>
-                    </div>
-                </div>
+<h2 class="page_title">For Students</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Register User Survey</header>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Subscribed Students Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="subScribedStdOptions" :series="subScribedStdSeries"></apexchart>
-                    </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="registerUserOptions" :series="registerUserSeries"></apexchart>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of ActiveSubscription Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="activeSubscriptionOptions" :series="activeSubscriptionSeries">
-                        </apexchart>
-                    </div>
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Subscribed Students Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="subScribedStdOptions" :series="subScribedStdSeries"></apexchart>
                 </div>
             </div>
         </div>
     </div>
-    <h2 class="page_title">For Faculty</h2>
-    <div class="row">    
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of faculties entrolled Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="facultiesEntrolledOptions" :series="facultiesEntrolledSeries"></apexchart>
-                    </div>
-                </div>
+</div>
+<!-- <div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of ActiveSubscription Survey</header>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Active Faculties Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="activeFacultiesOptions" :series="activeFacultiesSeries"></apexchart>
-                    </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="activeSubscriptionOptions" :series="activeSubscriptionSeries">
+                    </apexchart>
                 </div>
             </div>
         </div>
     </div>
-    <h2 class="page_title">For Courses</h2>
-    <div class="row">    
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Courses Available In System Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="coursesAvailableOptions" :series="coursesAvailableSeries"></apexchart>
-                    </div>
-                </div>
+</div> -->
+<h2 class="page_title">For Faculty</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of faculties entrolled Survey</header>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Active Courses Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="activeCoursesOptions" :series="activeCoursesSeries"></apexchart>
-                    </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="facultiesEntrolledOptions" :series="facultiesEntrolledSeries"></apexchart>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">    
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Courses Subscribed Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="coursesSubscribedOptions" :series="coursesSubscribedSeries"></apexchart>
-                    </div>
+    <!-- <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Active Faculties Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="activeFacultiesOptions" :series="activeFacultiesSeries"></apexchart>
                 </div>
             </div>
         </div>
-    </div>    
-    <h2 class="page_title">Course Details</h2>
-    <div class="row">    
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Courses Subscribed Every Year Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="couSubEveryYearOptions" :series="couSubEveryYearSeries"></apexchart>
-                    </div>
-                </div>
+    </div> -->
+</div>
+<h2 class="page_title">For Courses</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Courses Available In System Survey</header>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header>No Of Active/In Active Courses Survey</header>
-                </div>
-                <div class="card-body">
-                    <div class="recent-report__chart">
-                        <apexchart class="pt-5" :options="actInactCouOptions" :series="actInactCouSeries"></apexchart>
-                    </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="coursesAvailableOptions" :series="coursesAvailableSeries"></apexchart>
                 </div>
             </div>
         </div>
     </div>
+    <!-- <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Active Courses Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="activeCoursesOptions" :series="activeCoursesSeries"></apexchart>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<!-- <div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Courses Subscribed Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="coursesSubscribedOptions" :series="coursesSubscribedSeries"></apexchart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- <h2 class="page_title">Course Details</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Courses Subscribed Every Year Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="couSubEveryYearOptions" :series="couSubEveryYearSeries"></apexchart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>No Of Active/In Active Courses Survey</header>
+            </div>
+            <div class="card-body">
+                <div class="recent-report__chart">
+                    <apexchart class="pt-5" :options="actInactCouOptions" :series="actInactCouSeries"></apexchart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 </template>
 
 <script>
@@ -150,6 +150,7 @@ export default {
     data() {
         return {
             // For Students :
+            coursesAvailable: [],
             registerUserOptions: {
                 chart: {
                     id: 'vuechart-example',
@@ -171,18 +172,12 @@ export default {
                         text: "No Of Register User",
                     },
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Active Students",
                         },
                     },
-                    {
-                        opposite: true,
-                        title: {
-                            text: "Total Price",
-                        },
-                    },
+
                 ],
                 dataLabels: {
                     enabled: true,
@@ -191,15 +186,11 @@ export default {
 
             },
             registerUserSeries: [{
-                name: 'ActiveUser',
-                data: [],
-                type: 'bar',
-            },
-            {
-                name: 'Price',
-                data: [],
-                type: 'line',
-            },
+                    name: 'ActiveUser',
+                    data: [],
+                    type: 'bar',
+                },
+
             ],
             // No Of Subscribed Students Survey
             subscribedStd: [],
@@ -225,21 +216,17 @@ export default {
                         text: "No Of Subscribed Students",
                     },
                 },
-                yaxis: [
-                    {
-                        title: {
-                            text: "Subscribed Students",
-                        },
+                yaxis: [{
+                    title: {
+                        text: "Subscribed Students",
                     },
-                ],
+                }, ],
             },
-            subScribedStdSeries: [
-                {
-                    name: 'Subscribed Students',
-                    type: 'bar',
-                    data: [],
-                },
-            ],
+            subScribedStdSeries: [{
+                name: 'Subscribed Students',
+                type: 'bar',
+                data: [],
+            }, ],
             // No Of ActiveSubscription Survey
             course: [],
             activeSubscriptionOptions: {
@@ -264,8 +251,7 @@ export default {
                         text: "No Of ActiveSubscription",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "Subscribed Students",
                         },
@@ -284,8 +270,7 @@ export default {
 
                 },
             },
-            activeSubscriptionSeries: [
-                {
+            activeSubscriptionSeries: [{
                     name: 'Subscribed Students',
                     type: 'bar',
                     data: [],
@@ -321,24 +306,20 @@ export default {
                         text: "No Of Faculties Entrolled"
                     }
                 },
-                yaxis: [
-                    {
-                        title: {
-                            text: "No Of Students Subscribed",
-                        },
+                yaxis: [{
+                    title: {
+                        text: "No Of Faculties",
                     },
-                ],
+                }, ],
                 dataLabels: {
                     enabled: true,
                 },
             },
-            facultiesEntrolledSeries: [
-                {
-                    name: 'Lecture VS Students',
-                    type: 'bar',
-                    data: [],
-                },
-            ],
+            facultiesEntrolledSeries: [{
+                name: 'Lecture',
+                type: 'bar',
+                data: [],
+            }, ],
             // No Of Active Faculties
             lectureSubject: [],
             activeFacultiesOptions: {
@@ -363,8 +344,7 @@ export default {
                         text: "No Of Active Faculties",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Course",
                         },
@@ -383,8 +363,7 @@ export default {
 
                 },
             },
-            activeFacultiesSeries: [
-                {
+            activeFacultiesSeries: [{
                     name: 'Lecture Subjects',
                     type: 'bar',
                     data: [],
@@ -397,7 +376,7 @@ export default {
             ],
             // For Courses
             // No Of Courses Available In System
-            coursesAvailable: [],
+            courseSubscription: [],
             coursesAvailableOptions: {
                 chart: {
                     id: 'vuechart-example'
@@ -420,21 +399,31 @@ export default {
                         text: "No Of Courses Available In System",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
+                    title: {
+                        text: "No Of Course",
+                    },
+                },
+                {
+                        opposite: true,
                         title: {
-                            text: "No Of Course",
+                            text: "Course Name",
                         },
                     },
-                ],
+             ],
             },
-            coursesAvailableSeries: [
-                {
-                    name: 'Course available',
-                    type: 'bar',
+            coursesAvailableSeries: [{
+                name: 'Course available',
+                type: 'bar',
+                data: [],
+            }, 
+            {
+                    name: 'Course Name',
+                    type: 'line',
                     data: [],
                 },
-            ],
+        ],
+            
             // No Of Active Courses
             lectureSubject: [],
             activeCoursesOptions: {
@@ -459,8 +448,7 @@ export default {
                         text: "No Of Active Courses",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Course",
                         },
@@ -479,8 +467,7 @@ export default {
 
                 },
             },
-            activeCoursesSeries: [
-                {
+            activeCoursesSeries: [{
                     name: 'Lecture Subjects',
                     type: 'bar',
                     data: [],
@@ -515,8 +502,7 @@ export default {
                         text: "No Of Courses Subscribed",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Course",
                         },
@@ -535,8 +521,7 @@ export default {
 
                 },
             },
-            coursesSubscribedSeries: [
-                {
+            coursesSubscribedSeries: [{
                     name: 'Lecture Subjects',
                     type: 'bar',
                     data: [],
@@ -572,8 +557,7 @@ export default {
                         text: "No Of Courses Subscribed Every Year",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Course",
                         },
@@ -592,8 +576,7 @@ export default {
 
                 },
             },
-            couSubEveryYearSeries: [
-                {
+            couSubEveryYearSeries: [{
                     name: 'Lecture Subjects',
                     type: 'bar',
                     data: [],
@@ -628,8 +611,7 @@ export default {
                         text: "No Of Active In Active Courses",
                     }
                 },
-                yaxis: [
-                    {
+                yaxis: [{
                         title: {
                             text: "No Of Course",
                         },
@@ -648,8 +630,7 @@ export default {
 
                 },
             },
-            actInactCouSeries: [
-                {
+            actInactCouSeries: [{
                     name: 'Lecture Subjects',
                     type: 'bar',
                     data: [],
@@ -666,13 +647,19 @@ export default {
         try {
             const res = await AxiosInstance.get(`/UserCourseSubscription/GetCompletedStudentsCount`);
             this.subscribedStd = res.data;
-            const result = await AxiosInstance.get(`/Course`);
+            console.log(res);
+            const result = await AxiosInstance.get(`/CognitoUsers`);
             this.coursesAvailable = result.data;
-            const resu = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
+            console.log(result);
+            const resu = await AxiosInstance.get(`/CognitoUserGroupsj`);
             this.lectureStudent = resu.data;
-            const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
-            this.lectureSubject = resul.data;
+            const resul = await AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
+            this.courseSubscription = resul.data;
+            console.log(resul);
             this.subscribedStdChartData();
+            this.generateChartData();
+            this.FacultyChartData() ;
+            this.coursesSubChartData(); 
             this.subjectChartData();
             this.lectureStudentChartData();
             this.lectureSubjectChartData();
@@ -682,48 +669,180 @@ export default {
     },
     methods: {
         subscribedStdChartData() {
-  if (this.subscribedStd) {
-    const yearCounts = {};
+            if (this.subscribedStd) {
+                const yearCounts = {};
 
-    this.subscribedStd.completedStudents.forEach((order, index) => {
-      const year = new Date(order.startdate).getFullYear();
-      const monthYear = this.getMonthYear(order.startdate);
+                this.subscribedStd.completedStudents.forEach((order, index) => {
+                    const year = new Date(order.startdate).getFullYear();
+                    const monthYear = this.getMonthYear(order.startdate);
 
-      if (index > 0) {
-        const prevOrder = this.subscribedStd.completedStudents[index - 1];
-        const prevYear = new Date(prevOrder.startdate).getFullYear();
+                    if (index > 0) {
+                        const prevOrder = this.subscribedStd.completedStudents[index - 1];
+                        const prevYear = new Date(prevOrder.startdate).getFullYear();
 
-        if (prevYear === year) {
-          // If the current year is the same as the previous, increment the count
-          const dataIndex = yearCounts[prevYear].index;
-          yearCounts[prevYear].count++;
-          this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
-          return; // Skip adding a new data point for the current order
-        }
-      }
+                        if (prevYear === year) {
+                            // If the current year is the same as the previous, increment the count
+                            const dataIndex = yearCounts[prevYear].index;
+                            yearCounts[prevYear].count++;
+                            this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
+                            return; // Skip adding a new data point for the current order
+                        }
+                    }
 
-      if (!yearCounts[year]) {
-        yearCounts[year] = {
-          count: 1,
-          index: this.subScribedStdOptions.xaxis.categories.length,
-        };
-        this.subScribedStdOptions.xaxis.categories.push(monthYear);
-      } else {
-        // If the year already exists, increment the count and update the corresponding y-axis value
-        yearCounts[year].count++;
-        const dataIndex = yearCounts[year].index;
-        this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[year].count;
-      }
+                    if (!yearCounts[year]) {
+                        yearCounts[year] = {
+                            count: 1,
+                            index: this.subScribedStdOptions.xaxis.categories.length,
+                        };
+                        this.subScribedStdOptions.xaxis.categories.push(monthYear);
+                    } else {
+                        // If the year already exists, increment the count and update the corresponding y-axis value
+                        yearCounts[year].count++;
+                        const dataIndex = yearCounts[year].index;
+                        this.subScribedStdSeries[0].data[dataIndex].y = yearCounts[year].count;
+                    }
 
-      const dataPoint = {
-        x: monthYear,
-        y: yearCounts[year].count,
-      };
+                    const dataPoint = {
+                        x: monthYear,
+                        y: yearCounts[year].count,
+                    };
 
-      this.subScribedStdSeries[0].data.push(dataPoint);
-    });
-  }
+                    this.subScribedStdSeries[0].data.push(dataPoint);
+                });
+            }
+        },
+        generateChartData() {
+            if (this.coursesAvailable) {
+                const yearCounts = {};
+
+                this.coursesAvailable.forEach((item, index) => {
+                    const year = new Date(item.userCreateDate).getFullYear();
+                    const monthYear = this.getMonthYear(item.userCreateDate);
+
+                    if (index > 0) {
+                        const prevItem = this.coursesAvailable[index - 1];
+                        const prevYear = new Date(prevItem.userCreateDate).getFullYear();
+
+                        if (prevYear === year) {
+                            // If the current year is the same as the previous, increment the count
+                            const dataIndex = yearCounts[prevYear].index;
+                            yearCounts[prevYear].count++;
+                            this.registerUserSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
+                            return; // Skip adding a new data point for the current item
+                        }
+                    }
+
+                    if (!yearCounts[year]) {
+                        yearCounts[year] = {
+                            count: 1,
+                            index: this.registerUserOptions.xaxis.categories.length,
+                        };
+                        this.registerUserOptions.xaxis.categories.push(monthYear);
+                    } else {
+                        // If the year already exists, increment the count and update the corresponding y-axis value
+                        yearCounts[year].count++;
+                        const dataIndex = yearCounts[year].index;
+                        this.registerUserSeries[0].data[dataIndex].y = yearCounts[year].count;
+                    }
+
+                    const dataPoint = {
+                        x: monthYear,
+                        y: yearCounts[year].count,
+                    };
+
+                    this.registerUserSeries[0].data.push(dataPoint);
+                });
+            }
+        },
+
+        FacultyChartData() {
+    if (this.lectureStudent) {
+        const yearCounts = {};
+
+        this.lectureStudent.forEach((person, index) => {
+            const year = new Date(person.userCreateDate).getFullYear();
+            const monthYear = this.getMonthYear(person.userCreateDate);
+
+            if (index > 0) {
+                const prevPerson = this.lectureStudent[index - 1];
+                const prevYear = new Date(prevPerson.userCreateDate).getFullYear();
+
+                if (prevYear === year) {
+                    // If the current year is the same as the previous, increment the count
+                    const dataIndex = yearCounts[prevYear].index;
+                    yearCounts[prevYear].count++;
+                    this.facultiesEntrolledSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
+                    return; // Skip adding a new data point for the current item
+                }
+            }
+
+            if (!yearCounts[year]) {
+                yearCounts[year] = {
+                    count: 1,
+                    index: this.facultiesEntrolledSeries[0].data.length, // Store the index of the next data point
+                };
+                this.facultiesEntrolledOptions.xaxis.categories.push(monthYear);
+            } else {
+                // If the year already exists, increment the count and update the corresponding y-axis value
+                yearCounts[year].count++;
+                const dataIndex = yearCounts[year].index;
+                this.facultiesEntrolledSeries[0].data[dataIndex].y = yearCounts[year].count;
+            }
+
+            const dataPoint = {
+                x: monthYear,
+                y: yearCounts[year].count,
+            };
+
+            this.facultiesEntrolledSeries[0].data.push(dataPoint);
+        });
+    }
 },
+
+coursesSubChartData() {
+    if (this.courseSubscription) {
+        const yearCounts = {};
+
+        this.courseSubscription.forEach((course, index) => {
+            const year = new Date(course.startdate).getFullYear();
+            const monthYear = this.getMonthYear(course.startdate);
+
+            if (index > 0) {
+                const prevcourse = this.courseSubscription[index - 1];
+                const prevYear = new Date(prevcourse.startdate).getFullYear();
+
+                if (prevYear === year) {
+                    // If the current year is the same as the previous, increment the count
+                    const dataIndex = yearCounts[prevYear].index;
+                    yearCounts[prevYear].count++;
+                    this.coursesAvailableSeries[0].data[dataIndex].y = yearCounts[prevYear].count;
+                    return; // Skip adding a new data point for the current item
+                }
+            }
+
+            if (!yearCounts[year]) {
+                yearCounts[year] = {
+                    count: 1,
+                    index: this.coursesAvailableSeries[0].data.length, // Store the index of the next data point
+                };
+                this.coursesAvailableOptions.xaxis.categories.push(monthYear);
+            } else {
+                // If the year already exists, increment the count and update the corresponding y-axis value
+                yearCounts[year].count++;
+                const dataIndex = yearCounts[year].index;
+                this.coursesAvailableSeries[0].data[dataIndex].y = yearCounts[year].count;
+            }
+
+            const dataPoint = {
+                x: monthYear,
+                y: yearCounts[year].count,
+            };
+
+            this.coursesAvailableSeries[0].data.push(dataPoint);
+        });
+    }
+},
+
 
 
         subjectChartData() {
@@ -771,16 +890,21 @@ export default {
                 })
             }
         },
+        // getMonthYear(date) {
+        //     const d = new Date(date);
+        //     const month = d.toLocaleString("en-US", { month: "short" });
+        //     const year = d.getFullYear();
+        //     return `${month} ${year}`;
+        // }
         getMonthYear(date) {
             const d = new Date(date);
-            const month = d.toLocaleString("en-US", { month: "short" });
             const year = d.getFullYear();
-            return `${month} ${year}`;
+            return year.toString();
         }
+
     },
 }
 </script>
-
 
 <style scoped>
 .page_title {
@@ -788,10 +912,12 @@ export default {
     font-size: 24px;
     font-weight: bold;
 }
+
 .col-12 {
     flex: 0 0 auto;
     width: 100%;
 }
+
 .card-box {
     background-color: #fff;
     border-radius: 10px;
@@ -800,6 +926,7 @@ export default {
     border: 1px solid #deebfd;
     box-shadow: -8px 12px 18px 0 #dadee8;
 }
+
 .card-head {
     border-radius: 2px 2px 0 0;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
@@ -810,6 +937,7 @@ export default {
     line-height: 40px;
     min-height: 40px;
 }
+
 .card-head header {
     display: inline-block;
     padding: 11px 20px;
@@ -818,6 +946,7 @@ export default {
     font-size: 17px;
     letter-spacing: 1px;
 }
+
 .card-body {
     padding: 10px 24px 14px 24px;
     position: relative;

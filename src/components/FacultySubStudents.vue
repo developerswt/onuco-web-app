@@ -57,15 +57,16 @@
       Orders: [],
       req: [],
       columnDefs: [
-        { name: 'userName', field: 'userName' },
-        { name: 'courseName', field: 'courseName' },
-        { name: 'totalAmount', field: 'totalAmount' },
-        { name: 'total_subscribed', field: 'total_subscribed' },
-        { name: 'active_studentsCount', field: 'active_studentsCount' },
-        { name: 'inActive_StudentCount', field: 'inActive_StudentCount' },
-        { name: 'userEmail', field: 'userEmail' },
-        { name: 'phone_number', field: 'phone_number' }
-      ],
+  { headerName: 'Faculty Name', field: 'userName' },
+  { headerName: 'Subject Name', field: 'courseName' },
+  { headerName: 'Total Amount', field: 'totalAmount' },
+  { headerName: 'Total Subscribed', field: 'total_subscribed' },
+  { headerName: 'Active Students Count', field: 'active_studentsCount' },
+  { headerName: 'Inactive Student Count', field: 'inActive_StudentCount' },
+  { headerName: 'Email', field: 'userEmail' },
+  { headerName: 'Phone Number', field: 'phone_number' }
+],
+
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

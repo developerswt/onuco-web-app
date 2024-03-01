@@ -1,77 +1,193 @@
 <template>
-    <div class="container-fluid jk">
-        <div class="container jk">
-            <div class="learning_block">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div>
-                            <div class="purple_block">
-                                <p id="new_text">NEW</p>
-                                <div v-if="selectedItem !== null" class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="right_block">
-                                            <p id="subject_text">{{ selectedItem.title }}</p>
-                                            <p class="mb-0">{{ selectedItem.videoDemand }} Video Course</p>
-                                            <p>2 Quiz and 3 Question Banks</p>
-                                        </div>
+<div class="container-fluid jk">
+    <div class="container jk">
+        <div class="learning_block">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <div class="purple_block">
+                            <p id="new_text">NEW</p>
+                            <div v-if="selectedItem !== null" class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="right_block">
+                                        <p id="subject_text">{{ selectedItem.title }}</p>
+                                        <p class="mb-0">{{ selectedItem.videoDemand }} Video Course</p>
+                                        <p>{{ selectedItem.questionBank && selectedItem.questionBank.length ? selectedItem.questionBank.length + ' Question Banks' : '' }}</p>
                                     </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="left_block">
-                                            <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount}} Topics</span></p>
-                                            <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }">
-                                                <button id="course_button">Start Course <i class="fa-solid fa-play" style="color: #ffffff;"></i></button>
-                                            </router-link>
-                                        </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="left_block">
+                                        <p>{{ selectedItem.modules }} <span id="span_text">{{ selectedItem.topicsCount}} Topics</span></p>
+                                        <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }">
+                                            <button id="course_button">Start Course <i class="fa-solid fa-play" style="color: #ffffff;"></i></button>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-sm-12 justify-content-center">
-                        <div class="radio_checkbox" style="text-align: center;">
-                            <div v-for="item in myLearning" :key="item.id" class="radio-item"
-                                :class="{ 'active': item === selectedItem }">
-                                <div class="dot" @click="handleItemChange(item)"></div>
-                                <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
-                            </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 justify-content-center">
+                    <div class="radio_checkbox" style="text-align: center;">
+                        <div v-for="item in myLearning" :key="item.id" class="radio-item" :class="{ 'active': item === selectedItem }">
+                            <div class="dot" @click="handleItemChange(item)"></div>
+                            <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab_block mt-3">
-                <section id="tab_block">
-                    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                        <el-tab-pane label="MY COURSES" name="first">
+        </div>
+        <div class="tab_block mt-3">
+            <section id="tab_block">
+                <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+                    <el-tab-pane label="MY COURSES" name="first">
 
+                        <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                            <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="">
+                                    <div class="row mt-3">
+                                        <div class="col-lg-6 col-8 col-sm-8 col-md-6">
+                                            <h4 class="academic_head_text">
+
+                                                <span id="aca_text">interested</span> Courses
+
+                                            </h4>
+                                        </div>
+                                        <!-- <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
+                                                <router-link id="see_text" to="#">See all</router-link>
+                                            </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="notify_block">
+
+                                                <i class="fa-solid fa-triangle-exclamation" style="color: #ff9900;"></i>
+                                                <p class="pt"> Please
+                                                    subscribe the subjects to
+                                                    get more details</p>
+                                                <button id="course_list_button">Course List</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inner_block">
+                                        <div class="row">
+                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                <div id="asset_image">
+                                                    <img src="../assets/images/book1.png" class="img-fluid">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }" style="text-decoration: none;">
+                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                </router-link>
+                                                <p id="text_two">stacks</p>
+                                            </div>
+                                        </div>
+                                        <div class="row line">
+                                            <div class="col-lg-4 col-sm-4 col-6">
+                                                <div class="progress_block">
+                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{
+                                                            getWatchTime(selectedItem) }}</progress>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 col-6 text">
+                                                <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                            </div>
+                                            <!-- <button class="bt">BUY NOW</button> -->
+                                        </div>
+
+                                    </div>
+                                    <!-- </div>
+                                            </div>
+                                        </div>             -->
+                                </div>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="LIVE" name="third">
+                        <div v-if="!selectedItem?.videoCompleted" class="">
+                            <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
+                                <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                    <span id="aca_text">Live</span> Courses
+                                    <div class="row mt-4 ">
+                                        <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
+                                            <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}</h6>
+                                            <p class="text_line">{{ selectedItem.title }}</p>
+                                            <div class="row ml-0">
+                                                <div class=" info">
+                                                    <p>{{ selectedItem.instructorName[0].name }}</p>
+                                                </div>
+                                                <div class="asset_image info1">
+                                                    <img src="../assets/images/Iconionic-ios-timer@2x.png" class="img-fluid ml-2" style="width: 17px; height: 17px;">
+                                                    {{ calculateTime(selectedItem).timeInHours }}:{{
+                                                            calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
+                                                </div>
+                                                <div class="asset_image info2">
+                                                    <img src="../assets/images/Iconmap-school@2x.png" class="img-fluid ml-2" style="width: 17px; height: 18px;">
+                                                    {{ selectedItem.modules }}<br>
+                                                </div>
+                                                <div>
+                                                    <p class="pp" style="color: #666666; font-size: 12px; float: left;">
+                                                        {{ selectedItem.courseDescription }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
+                                                <video-player v-if="renderComponent" ref="videoPlayer" :options="videoOptions" :is-subscribed="userIsSubscribed" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inner_block">
+                                        <div class="row">
+                                            <div class="col-lg-1 col-4 col-sm-4 col-md-2">
+                                                <div id="asset_image">
+                                                    <img src="../assets/images/book1.png" class="img-fluid">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-8 col-sm-8 col-md-8">
+                                                <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }" style="text-decoration: none;">
+                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                </router-link>
+                                                <p id="text_two">stacks</p>
+                                            </div>
+                                        </div>
+                                        <div class="row line">
+                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
+                                                <div class="progress_block">
+                                                    <div>
+                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4 time">
+                                                <p class="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                            </div>
+                                            <!-- <button class="bt">BUY NOW</button> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="COMPLETED" name="fourth">
+                        <div v-if="selectedItem?.videoCompleted" class="">
                             <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
                                 <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="">
                                         <div class="row mt-3">
                                             <div class="col-lg-6 col-8 col-sm-8 col-md-6">
                                                 <h4 class="academic_head_text">
-
                                                     <span id="aca_text">interested</span> Courses
-
                                                 </h4>
                                             </div>
                                             <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
                                                 <router-link id="see_text" to="#">See all</router-link>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="notify_block">
-
-                                                    <i class="fa-solid fa-triangle-exclamation" style="color: #ff9900;"></i>
-                                                    <p class="pt"> Please
-                                                        subscribe the subjects to
-                                                        get more details</p>
-                                                    <button id="course_list_button">Course List</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="inner_block">
                                             <div class="row">
                                                 <div class="col-lg-1 col-4 col-sm-4 col-md-2">
@@ -80,155 +196,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                    <router-link
-                                                        :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
-                                                        style="text-decoration: none;">
+                                                    <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }" style="text-decoration: none;">
                                                         <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
                                                     </router-link>
                                                     <p id="text_two">stacks</p>
-                                                </div>
-                                            </div>
-                                            <div class="row line">
-                                                <div class="col-lg-4 col-sm-4 col-6">
-                                                    <div class="progress_block">
-                                                        <progress :value="calculatePercentage(selectedItem)" max="100">{{
-                                                            getWatchTime(selectedItem) }}</progress>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8 col-sm-8 col-6 text">
-                                                    <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                </div>
-                                                <!-- <button class="bt">BUY NOW</button> -->
-                                            </div>
-
-
-                                        </div>
-                                        <!-- </div>
-                                            </div>
-                                        </div>             -->
-                                    </div>
-                                </div>
-                            </div>
-                        </el-tab-pane>
-                        <el-tab-pane label="LIVE" name="third">
-                            <div v-if="!selectedItem?.videoCompleted" class="">
-                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
-                                        aria-labelledby="home-tab">
-                                        <span id="aca_text">Live</span> Courses
-                                        <div class="row mt-4 ">
-                                            <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}</h6>
-                                                <p class="text_line">{{ selectedItem.title }}</p>
-                                                <div class="row ml-0">
-                                                    <div class=" info">
-                                                        <p>{{ selectedItem.instructorName[0].name }}</p>
-                                                    </div>
-                                                    <div class="asset_image info1">
-                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png"
-                                                            class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                        {{ calculateTime(selectedItem).timeInHours }}:{{
-                                                            calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
-                                                    </div>
-                                                    <div class="asset_image info2">
-                                                        <img src="../assets/images/Iconmap-school@2x.png"
-                                                            class="img-fluid ml-2" style="width: 17px; height: 18px;">
-                                                        {{ selectedItem.modules }}<br>
-                                                    </div>
-                                                    <div>
-                                                        <p class="pp" style="color: #666666; font-size: 12px; float: left;">
-                                                        {{ selectedItem.courseDescription }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
-                                                    <video-player v-if="renderComponent" ref="videoPlayer"
-                                                        :options="videoOptions" :is-subscribed="userIsSubscribed" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="inner_block">
-                                            <div class="row">
-                                                <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                    <div id="asset_image">
-                                                        <img src="../assets/images/book1.png" class="img-fluid">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                    <router-link
-                                                        :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
-                                                        style="text-decoration: none;">
-                                                        <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
-                                                    </router-link>
-                                                    <p id="text_two">stacks</p>
-                                                </div>
-                                            </div>
-                                            <div class="row line">
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
-                                                    <div class="progress_block">
-                                                        <div>
-                                                            <progress :value="calculatePercentage(selectedItem)"
-                                                                max="100">{{ getWatchTime(selectedItem) }}</progress>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-12 col-sm-12 col-md-4 time">
-                                                    <p class="text_three">{{ remainingTimes(selectedItem) }} left</p>
-                                                </div>
-                                                <!-- <button class="bt">BUY NOW</button> -->
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </el-tab-pane>
-                        <el-tab-pane label="COMPLETED" name="fourth">
-                            <div v-if="selectedItem?.videoCompleted" class="">
-                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
-                                        aria-labelledby="home-tab">
-                                        <div class="">
-                                            <div class="row mt-3">
-                                                <div class="col-lg-6 col-8 col-sm-8 col-md-6">
-                                                    <h4 class="academic_head_text">
-                                                        <span id="aca_text">interested</span> Courses
-                                                    </h4>
-                                                </div>
-                                                <div class="col-lg-6 text-right col-4 col-sm-4 col-md-6">
-                                                    <router-link id="see_text" to="#">See all</router-link>
-                                                </div>
-                                            </div>
-                                            <div class="inner_block">
-                                                <div class="row">
-                                                    <div class="col-lg-1 col-4 col-sm-4 col-md-2">
-                                                        <div id="asset_image">
-                                                            <img src="../assets/images/book1.png" class="img-fluid">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                        <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
-                                                            style="text-decoration: none;">
-                                                            <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
-                                                        </router-link>
-                                                        <p id="text_two">stacks</p>
-                                                        <div class="row line">
-                                                            <div class="col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <div class="progress_block">
-                                                                    <div>
-                                                                        <progress :value="calculatePercentage(selectedItem)"
-                                                                            max="100">{{ getWatchTime(selectedItem)
+                                                    <div class="row line">
+                                                        <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <div class="progress_block">
+                                                                <div>
+                                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{ getWatchTime(selectedItem)
                                                                             }}</progress>
-                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="comp col-lg-4 col-12 col-sm-12 col-md-4">
-                                                                <p class="text_three">{{ remainingTimes(selectedItem) }}
-                                                                    Completed</p>
-                                                            </div>
-                                                            <!-- <button class="bt">BUY NOW</button> -->
                                                         </div>
+                                                        <div class="comp col-lg-4 col-12 col-sm-12 col-md-4">
+                                                            <p class="text_three">{{ remainingTimes(selectedItem) }}
+                                                                Completed</p>
+                                                        </div>
+                                                        <!-- <button class="bt">BUY NOW</button> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,13 +221,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </el-tab-pane>
-                    </el-tabs>
-                </section>
-            </div>
+                        </div>
+                    </el-tab-pane>
+                </el-tabs>
+            </section>
         </div>
     </div>
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+</div>
+<Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
 <script>
@@ -251,7 +237,6 @@ import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VideoPlayer from './VideoPlayer.vue';
-
 
 export default {
     name: 'MylearningsView',
@@ -315,22 +300,20 @@ export default {
         try {
             const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
             this.myLearning = res.data;
+            console.log(res);
             if (this.myLearning.length > 0) {
                 // Set the default selected item to the first item in myLearnin
                 this.selectedItem = this.myLearning[0];
             }
-            this.videoOptions.sources = [
-                {
-                    src: this.selectedItem.videoUrl,
-                    type: this.videoType,
-                    withCredentials: false,
-                }
-            ];
+            this.videoOptions.sources = [{
+                src: this.selectedItem.videoUrl,
+                type: this.videoType,
+                withCredentials: false,
+            }];
         } catch (error) {
             console.log(error);
             this.isLoading = false;
-        }
-        finally {
+        } finally {
             this.isLoading = false;
         }
     },
@@ -347,21 +330,18 @@ export default {
 
                 // Pause the current video
                 player.pause();
-              
+
                 this.renderComponent = false;
                 await this.$nextTick();
                 this.renderComponent = true;
 
                 // Change the video source to the new URL
-                this.videoOptions.sources = [
-                    {
-                        src: this.selectedItem.videoUrl,
-                        type: this.videoType,
-                        withCredentials: false,
-                    }
-                ];
+                this.videoOptions.sources = [{
+                    src: this.selectedItem.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }];
 
-              
                 // Set the new sources
                 player.src(this.videoOptions.sources);
             }
@@ -427,13 +407,12 @@ export default {
             if (this.myLearning && Array.isArray(this.myLearning)) {
                 for (const topic of this.myLearning) {
                     if (topic && topic.id && topic.id === selectedItem.id) {
-                        return topic;  // If you want to return the matching topic
+                        return topic; // If you want to return the matching topic
                     }
                 }
             }
             return null;
         },
-
 
         getWatchTime(selectedItem) {
             const watchData = this.findSubjectById(selectedItem);
@@ -465,7 +444,7 @@ progress::-webkit-progress-bar {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
     border-radius: 6px;
     height: 4px;
-    width: 170px; 
+    width: 170px;
 }
 
 progress::-webkit-progress-value {
@@ -516,7 +495,6 @@ progress::-moz-progress-bar {
     /* Color for active item */
 }
 
-
 /* Style your radio buttons as needed */
 .learning_block {
     padding-top: 0px;
@@ -540,7 +518,6 @@ progress::-moz-progress-bar {
 
 }
 
-
 #aca_text {
     color: #006acd;
     font-weight: bold;
@@ -556,7 +533,6 @@ progress::-moz-progress-bar {
     background: radial-gradient(circle at 18.7% 37.8%, rgb(225, 234, 250) 0%, rgb(225, 234, 238) 90%);
 
 }
-
 
 #course_button {
     width: 139px;
@@ -590,7 +566,6 @@ progress::-moz-progress-bar {
     width: 30px;
     height: 55px;
 }
-
 
 .left_block {
     text-align: right;
@@ -631,13 +606,14 @@ progress::-moz-progress-bar {
     font-size: 12px;
     position: relative;
     top: 11px;
-    right: 141px; 
+    right: 141px;
 }
+
 #text_three {
     font-size: 12px;
     position: relative;
     bottom: 8px;
-    
+
 }
 
 #text_one {
@@ -754,30 +730,29 @@ progress::-moz-progress-bar {
     }
 
     #text_one,
-    #text_two
-     {
+    #text_two {
         font-size: 12px;
         color: #000000;
         font-weight: 400;
     }
 
-    #text_three{
+    #text_three {
         font-size: 12px;
-    position: relative;
-    bottom: 8px !important;
-    right: 20px !important; 
+        position: relative;
+        bottom: 8px !important;
+        right: 20px !important;
     }
 
-    .text_three{
+    .text_three {
         font-size: 12px;
-    position: relative;
-    bottom: 13px !important;
-    left: 106px !important; 
+        position: relative;
+        bottom: 13px !important;
+        left: 106px !important;
     }
 
     .inner_block {
         height: 90px;
-        
+
     }
 
 }
@@ -874,36 +849,38 @@ input[type="radio"]:checked {
     .pp {
         position: relative;
         top: 10px;
-        width:176%;
+        width: 176%;
     }
 
     progress::-webkit-progress-bar {
-    background: #CCCCCC;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
-    border-radius: 6px;
-    height: 4px !important;
-    width: 50% !important; 
-}
-#text_three{
-        font-size: 12px;
-    position: relative;
-    bottom: 8px !important;
-    right: 20px !important; 
+        background: #CCCCCC;
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+        border-radius: 6px;
+        height: 4px !important;
+        width: 50% !important;
     }
-    .text_three{
+
+    #text_three {
         font-size: 12px;
-    position: relative;
-    bottom: 13px !important;
-    left: 106px !important; 
-    top:0px !important
+        position: relative;
+        bottom: 8px !important;
+        right: 20px !important;
     }
-    
+
+    .text_three {
+        font-size: 12px;
+        position: relative;
+        bottom: 13px !important;
+        left: 106px !important;
+        top: 0px !important
+    }
+
     .line {
         position: relative !important;
-    left: 110px !important;
-    bottom: 15px !important;
+        left: 110px !important;
+        bottom: 15px !important;
     }
-    
+
     .jk {
         padding-bottom: 45px !important;
         padding-top: 20px;
@@ -929,6 +906,7 @@ input[type="radio"]:checked {
         vertical-align: baseline;
         width: 100%;
     }
+
     .text {
         position: relative;
         right: 23px !important;
@@ -954,20 +932,23 @@ input[type="radio"]:checked {
     left: 90px;
     bottom: 15px;
 }
+
 /* .prog{
     position: relative;
     left: 90px;
     bottom: 10px;
 } */
-.time{
+.time {
     position: relative;
     bottom: 20px;
 }
+
 .text {
     position: relative;
     right: 160px;
 }
-.comp{
+
+.comp {
     height: 500px;
 }
 </style>

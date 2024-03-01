@@ -129,7 +129,18 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
+        // columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
+        columnDefs: [
+  { headerName: 'Faculty Name', field: 'userName' },
+  { headerName: 'Email', field: 'userEmail' },
+  { headerName: 'Phone Number', field: 'phone_Number' },
+  { headerName: 'Facuilty CognitoId', field: 'facuiltyCognitoId' },
+  { headerName: 'Payment Date', field: 'paymentDate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' },
+  { headerName: 'Amount Paid', field: 'amountPaid' },
+  { headerName: 'Balance Amount', field: 'balanceAmount' },
+  { headerName: 'Mode of Pay', field: 'modeofPay' }
+],
+
         gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,

@@ -7,7 +7,7 @@
               <header>Student Subscribed By Course</header>
                 <div class="filter-box">
                     <span for="filter-text-box">Search Here : </span>
-                    <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Course Name" />
+                    <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Subject Name" />
                     <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
                     <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
                 </div>
@@ -63,7 +63,15 @@
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'courseId', field: 'courseId', suppressSizeToFit: true }, { name: 'courseName', field: 'courseName' },{ name: 'subscribed_students', field: 'subscribed_students' }, { name: 'active_Students', field: 'active_Students' }, { name: 'inActive_Students', field: 'inActive_Students' }],
+        // columnDefs: [{ name: 'courseId', field: 'courseId', suppressSizeToFit: true }, { name: 'courseName', field: 'courseName' },{ name: 'subscribed_students', field: 'subscribed_students' }, { name: 'active_Students', field: 'active_Students' }, { name: 'inActive_Students', field: 'inActive_Students' }],
+        columnDefs: [
+  { headerName: 'Subject Id', field: 'courseId', suppressSizeToFit: true },
+  { headerName: 'Subject Name', field: 'courseName' },
+  { headerName: 'Subscribed Students', field: 'subscribed_students' },
+  { headerName: 'Active Students', field: 'active_Students' },
+  { headerName: 'Inactive Students', field: 'inActive_Students' }
+],
+
         gridApi: null,
         defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,

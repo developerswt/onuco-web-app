@@ -25,7 +25,7 @@
                             <p class="text-right"><small>1200 Followers</small></p>
                         </div>
                         <div class="card-body " style="margin-top: -7%; ">
-                            <div class="card-title">{{ facult.name }}</div>
+                            <div class="card-title" :title="(facult.name)">{{ shortenText(facult.name,22)}}</div>
                             <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
 
                             <div class="mn text-left">
@@ -132,6 +132,10 @@ export default defineComponent({
                 return 0; // or handle error accordingly
             }
         },
+        shortenText(text, maxLength) {
+      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    },
+
     }
 })
 </script>
@@ -241,9 +245,9 @@ export default defineComponent({
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 4px;
     opacity: 1;
-    width: 94%;
+    width: 91%;
     padding: 0px;
-    margin: 0px 9px 23px;
+    margin: 0px 15px 23px;
 }
 
 .academic_head_text {
@@ -414,9 +418,9 @@ export default defineComponent({
     bottom: 11px;
 }
 
-@media only screen and (min-width: 280px) {
+/* @media only screen and (min-width: 280px) {
     .container-fluid {
         padding-left: 0px;
     }
-}
+} */
 </style>

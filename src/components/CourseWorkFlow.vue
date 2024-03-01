@@ -31,7 +31,7 @@
                   <div class="col-sm-12">
                     <p><b> ID: </b> {{ childPara.id }}</p>
                     <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                    <p><b>Course Name:</b>{{ childPara.name }}</p>
+                    <p><b>Subject Name:</b>{{ childPara.name }}</p>
                     <p><b>Price:</b> {{ childPara.actualPrice }}</p>
                     <p><b>Work Flow:</b> {{ childPara.workFlowStatement }}</p>
 
@@ -44,7 +44,7 @@
                   <div class="col-sm-4">
                     <p><b>ID: </b> {{ childPara.id }}</p>
                     <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                    <p><b>Course Name:</b>{{ childPara.name }}</p>
+                    <p><b>Subject Name:</b>{{ childPara.name }}</p>
                     <p><b>Price:</b> {{ childPara.actualPrice }}</p>
                     <div>
                       <label><b>Work Flow:</b></label><br>
@@ -106,7 +106,7 @@ export default {
       Orders: [],
       req: [],
       showAllTechnicians: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Course Name', field: 'name' }, { name: 'Price', field: 'actualPrice' }, { name: 'Work Flow', field: 'workFlowStatement' }],
+      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Subject Name', field: 'name' }, { name: 'Price', field: 'actualPrice' }, { name: 'Work Flow', field: 'workFlowStatement' }],
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

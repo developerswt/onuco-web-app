@@ -2,7 +2,8 @@
   <div class="admin-page">
     <div class="app" :class="{ 'sidebar-collapse': isSidebarCollapsed }">
       <SideNavBar :is-collapsed="isSidebarCollapsed" @select-content="selectContent"  />
-      <div class="main-container" :style="{ 'margin-left': sidebarMargin }">
+      <!-- <div class="main-container" :style="{ 'margin-left': sidebarMargin }"> -->
+        <div class="main-container" >
         <div v-if="selectedContent === 'dashboard'" class="content-container">
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Dashboard</span>
           <SuperAdmin v-if="isUserSuperadmin" />
@@ -68,8 +69,12 @@
           <FacultyCourseInfo />
           </div>
           <div v-if="selectedContent === 'CourseInfo'" class="content-container">
-        <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Course Info</span>
+          <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Course Info</span>
           <CourseInfo />
+        </div>
+        <div v-if="selectedContent === 'DeleteFun'" class="content-container">
+          <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Delete Profile</span>
+          <FacultyDelete />
         </div>
       </div>
     </div>
@@ -97,7 +102,7 @@ import ApBestCourse from './ApBestCourse.vue';
 import FacultyCourseInfo from './FacultyCourseInfo.vue'
 import CourseInfo from './CourseInfo.vue'
 import FacultyPayment from './FacultyPayment.vue';
-
+import FacultyDelete from './FacultyDelete.vue';
 
 export default {
     name: 'AdminPage',
@@ -122,6 +127,7 @@ export default {
         FacultyCourseInfo,
         CourseInfo,
         FacultyPayment,
+        FacultyDelete,
     },
     data() {
       return {

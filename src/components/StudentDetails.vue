@@ -7,7 +7,7 @@
             <header>Student Info Details</header>
             <div class="filter-box">
               <span for="filter-text-box">Search Here : </span>
-              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Name/E-mail Id/Phone_Number" />
+              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Name/Email/Phone Number" />
               <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
               <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
             </div>
@@ -115,7 +115,18 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'name',field:'userName'},{name:'e_mailId', field:'e_mailId'},{name:'phone_Number', field:'phone_Number'},{ name: 'Course Name', field: 'courseName' }, { name: 'Price', field: 'price' },{ name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
+      // columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true },{name:'Student Name',field:'userName'},{name:'e_mailId', field:'e_mailId'},{name:'phone_Number', field:'phone_Number'},{ name: 'Course Name', field: 'courseName' }, { name: 'Price', field: 'price' },{ name: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' }, { name: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' }],
+      columnDefs: [
+  { headerName: 'Student Id', field: 'id', suppressSizeToFit: true },
+  { headerName: 'Student Name', field: 'userName' },
+  { headerName: 'Email', field: 'e_mailId' }, // Adjusted to 'E-mail Id'
+  { headerName: 'Phone Number', field: 'phone_Number' }, // Adjusted to 'Phone Number'
+  { headerName: 'Subject Name', field: 'courseName' },
+  { headerName: 'Price', field: 'price' },
+  { headerName: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' },
+  { headerName: 'End Date', field: 'enddate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' } // Adjusted to use the same date format function for both 'Start Date' and 'End Date'
+],
+
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

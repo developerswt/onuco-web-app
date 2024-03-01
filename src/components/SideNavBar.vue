@@ -45,10 +45,11 @@
           </li>
           <li>
             <div id="collapseExample2" class="collapse pl-3">
-              <span class="subtitle" @click="selectContent('facultyInfo')">Payment Info</span>
               <span class="subtitle" @click="selectContent('facultyCourse')">Course Info</span>
+              <span class="subtitle" @click="selectContent('facultyInfo')">Payment Info</span>
             </div>
           </li>
+              <span class="subtitle" @click="selectContent('DeleteFun')">Delete Profile</span>
               <span class="subtitle" @click="selectContent('studentInfo')">Student Info</span>
               <span class="subtitle" @click="selectContent('bestFaculty')">Add Best Faculty</span>
               <span class="subtitle" @click="selectContent('bestCourse')">Add Best Course</span>
@@ -78,12 +79,12 @@
           </li>
           <li>
             <div id="collapseExample" class="collapse hj">
+              <span class="subtitle" @click="selectContent('types')">Course Types</span>
+              <span class="subtitle" @click="selectContent('academics')">Academics</span>
               <span class="subtitle" @click="selectContent('branches')">Branches</span>
               <span class="subtitle" @click="selectContent('university')">University</span>
               <span class="subtitle" @click="selectContent('semester')">Semester</span>
-              <span class="subtitle" @click="selectContent('academics')">Academics</span>
-              <span class="subtitle" @click="selectContent('types')">Types</span>
-              <span class="subtitle" @click="selectContent('courses')">Courses</span>
+              <span class="subtitle" @click="selectContent('courses')">Subjects</span>
             </div>
           </li>
         </ul>

@@ -1,80 +1,81 @@
 <template>
-    <div class="container-fluid category-test pt-3" style="padding-left: 0px;">
-        <div class="container" style="padding-left: 0px;">
-            <h4 class="academic_head_text">
+<div class="container-fluid category-test pt-3" style="padding-left: 0px;">
+    <div class="container" style="padding-left: 0px;">
+        <h4 class="academic_head_text">
 
-                <span id="aca_text">Top</span>Rated Courses
-                <router-link to="/TopCourse">See all</router-link>
-            </h4>
-        </div>
+            <span id="aca_text">Top</span>Rated Courses
+            <router-link to="/TopCourse">See all</router-link>
+        </h4>
     </div>
-    <section id="Course_section">
-        <div class="container-fluid mb">
-            <carousel :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="course in courses" :key="course.id">
+</div>
+<section id="Course_section">
+    <div class="container-fluid mb">
+        <carousel :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="course in courses" :key="course.id">
 
-                    <div class="box">
-                        <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }"
-                            style="text-decoration: none;">
-                            <div class="wer">
-                                <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
-                                <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
-                            <br>
-                            <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;" >{{ course.name}}</p>
-                        </div>
-                                <div class="offer">
-                                    <img class="card-img-top" src="../assets/images/offer.png">
-                                </div>
-                                <div class="offer-details">
-                                    <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
-                                </div>
+                <div class="box">
+                    <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }" style="text-decoration: none;">
+                        <div class="wer">
+                            <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
+                            <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
+                                <br>
+                                <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;">{{ course.name}}</p>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
-                                <div class="text-left price" style="float: right;">
-                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
+                            <div class="offer">
+                                <img class="card-img-top" src="../assets/images/offer.png">
+                            </div>
+                            <div class="offer-details">
+                                <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
+                            <div class="text-left price" style="float: right;">
+                                <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
                                         course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
 
-                                </div> <br>
-                                <div class="row">
-                                    <div class="col-sm-6  star">
-                                        <StarRatings :rating="course.starRating || 0" :max-rating="5" />
-                                    </div>
-                                    <div v-if="isLoggedIn" class="col-sm-6">
-                                        <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
-                                    </div>
-                                    <div class="col-sm-6" v-else>
-                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
-                                    </div>
+                            </div> <br>
+                            <div class="row">
+                                <div class="col-sm-6  star">
+                                    <StarRatings :rating="course.starRating || 0" :max-rating="5" />
+                                </div>
+                                <div v-if="isLoggedIn" class="col-sm-6">
+                                    <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
+                                </div>
+                                <div class="col-sm-6" v-else>
+                                    <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
                                 </div>
                             </div>
+                        </div>
 
+                    </router-link>
+                </div>
 
-                        </router-link>
-                    </div>
+            </slide>
+            <template #addons>
+                <navigation>
+                </navigation>
 
+            </template>
+        </carousel>
+    </div>
 
-                </slide>
-                <template #addons>
-                    <navigation>
-                    </navigation>
-
-                </template>
-            </carousel>
-        </div>
-
-
-    </section>
+</section>
 </template>
-
 
 <script>
 import sha256 from "crypto-js/sha256";
-import { v4 as uuidv4 } from 'uuid';
+import {
+    v4 as uuidv4
+} from 'uuid';
 import axios from "axios";
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import {
+    Carousel,
+    Slide,
+    Navigation
+} from 'vue3-carousel'
 import StarRatings from './StarRatings.vue';
 
 export default {
@@ -142,6 +143,10 @@ export default {
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
+
+        isuser() {
+            return this.$store.state.user.signInUserSession.idToken.payload;
+        }
     },
     async created() {
         try {
@@ -157,18 +162,18 @@ export default {
     },
     methods: {
         redirectToLogin() {
-        // Programmatically navigate to the /Login route
-        this.$router.push('/Login');
-    },
+            // Programmatically navigate to the /Login route
+            this.$router.push('/Login');
+        },
 
         calculateDiscountPercentage(actualPrice, discountPrice) {
-      if (actualPrice === 0) {
-        return 0;
-      }
+            if (actualPrice === 0) {
+                return 0;
+            }
 
-      const discountPercentage = ((actualPrice - discountPrice) / actualPrice) * 100;
-      return Math.round(discountPercentage);
-    },
+            const discountPercentage = ((actualPrice - discountPrice) / actualPrice) * 100;
+            return Math.round(discountPercentage);
+        },
 
         async getByRatings(courseId) {
             try {
@@ -205,14 +210,16 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-    
+
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
             const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
 
             try {
-                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
+                const response = await axios.post(UAT_PAY_API_URL, {
+                    request: dataBase64
+                }, {
                     headers: {
                         accept: "application/json",
                         "Content-Type": "application/json",
@@ -221,18 +228,26 @@ export default {
                 });
 
                 const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-                window.location.href = redirectURL;
+                if (response.status === 200) {
 
+                    const jsonData = {
+                        UserId: this.isuser.sub,
+                        CourseId: this.courses.id,
+                        TransactionId: transactionId,
+                        NumberOfMonth: this.courses.numberOfMonths,
+                    };
+                    const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData);
+                    if (SubscriptionApi.status === 201) {
+                        window.location.href = redirectURL;
+                    }
+                }
             } catch (error) {
                 console.error("Error making payment:", error);
-                // Handle payment processing errors here
             }
         },
     }
 }
 </script>
-
-
 
 <style scoped>
 .category-test a {
@@ -390,7 +405,6 @@ export default {
 
 }
 
-
 #aca_text {
     color: #006acd;
     font-weight: bold;
@@ -445,7 +459,6 @@ export default {
         margin-left: 118px;
         margin-top: -30px;
 
-
     }
 }
 
@@ -474,7 +487,7 @@ export default {
 
     .btn {
         margin-left: 72px;
-    margin-top: -46px;
+        margin-top: -46px;
     }
 
     .fa {

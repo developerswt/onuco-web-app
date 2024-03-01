@@ -1,45 +1,43 @@
 <template>
-    <div class="category-test pt-3">
-        <div class="container">
-            <h4 class="academic_head_text pt-1">
-                <span id="aca_text">Best</span>Lecturers
-            </h4>
-        </div>
-    </div>
-
+<div class="category-test pt-3">
     <div class="container">
-        <div class="row pt-3" style="margin-bottom: -38px;">
-            <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
-                <router-link :to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
-                    style="cursor: pointer; text-decoration: none;">
-                    <div class="card mt-5">
-                        <div class="user-follower">
-                            <img v-if="facult.imageUrl !== ''" :src="facult.imageUrl" class="user-icon">
-                            <img v-else src="../assets/images/Image21.png" class="user-icon">
-                        </div>
-                        <div class="user-following">
-                            <p class="text-right"><small>13 Following</small></p>
-                            <p class="text-right"><small>1200 Followers</small></p>
-                        </div>
-                        <div class="card-body" style="margin-top: -7%;">
-                            <div class="card-title" data-placement="top" :title="facult.name">{{ shortenText(facult.name, 20)}}</div>
-                            <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
+        <h4 class="academic_head_text pt-1">
+            <span id="aca_text">Best</span>Lecturers
+        </h4>
+    </div>
+</div>
 
-                            <div class="mn text-left">
-                                <p>
-                                    ({{ facult.ratingCount || 0 }} Reviews)
-                                    <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
-                                </p>
+<div class="container">
+    <div class="row pt-3" style="margin-bottom: -38px;">
+        <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
+            <router-link :to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
+                <div class="card mt-5">
+                    <div class="user-follower">
+                        <img v-if="facult.imageUrl !== ''" :src="facult.imageUrl" class="user-icon">
+                        <img v-else src="../assets/images/Image21.png" class="user-icon">
+                    </div>
+                    <div class="user-following">
+                        <p class="text-right"><small>13 Following</small></p>
+                        <p class="text-right"><small>1200 Followers</small></p>
+                    </div>
+                    <div class="card-body" style="margin-top: -7%;">
+                        <div class="card-title" data-placement="top" :title="facult.name">{{ shortenText(facult.name, 20)}}</div>
+                        <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
 
+                        <div class="mn text-left">
+                            <p>
+                                ({{ facult.ratingCount || 0 }} Reviews)
+                                <StarRatings :rating="facult.starRating || 0" :max-rating="5" />
+                            </p>
 
-                            </div>
                         </div>
                     </div>
-                </router-link>
-            </div>
+                </div>
+            </router-link>
         </div>
     </div>
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+</div>
+<Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
 <script>
@@ -48,7 +46,6 @@ import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import StarRatings from './StarRatings.vue'
-
 
 export default {
     name: 'BestLecture',
@@ -91,10 +88,10 @@ export default {
                 return 0; // or handle error accordingly
             }
         },
-        
+
         shortenText(text, maxLength) {
-      return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-    },
+            return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+        },
     }
 }
 </script>
@@ -129,7 +126,6 @@ export default {
     position: absolute;
     top: -35px;
 }
-
 
 .user-following p {
     position: relative;
@@ -217,7 +213,6 @@ export default {
 
 }
 
-
 #aca_text {
     color: #006acd;
     font-weight: bold;
@@ -269,7 +264,6 @@ export default {
     width: 0.5em;
 }
 
-
 * {
     scrollbar-width: none;
 }
@@ -289,5 +283,3 @@ export default {
     }
 }
 </style>
-
-

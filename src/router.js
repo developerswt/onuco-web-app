@@ -75,6 +75,10 @@ import FacultyCourseInfo from './components/FacultyCourseInfo.vue'
 import CourseInfo from './components/CourseInfo.vue'
 import FacultySubStudents from './components/FacultySubStudents.vue'
 import StudentSubDetails from './components/StudentSubDetails.vue'
+import FacultyDelete from './components/FacultyDelete.vue'
+import ActiveStudents from './components/ActiveStudents.vue';
+
+
 
 let user = null; // Initialize user as null
 
@@ -639,6 +643,25 @@ const routes = [
     component: StudentSubDetails,
     meta: {
         title: 'StudentSubDetails',
+    },
+
+  },
+  {
+    path: "/FacultyDelete",
+    name: "FacultyDelete",
+    component: FacultyDelete,
+    meta: {
+        title: 'FacultyDelete',
+    },
+
+  },
+  
+  {
+    path: "/ActiveStudents",
+    name: "ActiveStudents",
+    component: ActiveStudents,
+    meta: {
+        title: 'ActiveStudents',
     },
 
   },

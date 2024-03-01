@@ -1,283 +1,267 @@
 <template>
-    <div class="container jk">
-        <div class="Instructor_parent_block">
-            <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
-            <div v-if="showShareButton">
-                <ShareButton :url="currentRoute" @close="closeShareOption"  />
-            </div>
-            <section>
-                <div class="instructor-details">
-                    <div class="professor-block">
-                        <div class="row">
-                            <div class="col-md-5 col-lg-5">
-                                <div class="row">
-                                    <div class="col-lg-4 col-4 col-sm-4">
-                                        <div class="professor_image_block">
-                                            <img v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl" class="img-fluid">
-                                            <img v-else src="../assets/images/Image21.png" class="img-fluid">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-8 col-sm-8">
-                                        <h5 id="prof_text">{{ faculty.name }}</h5>
-                                        <div class="row">
-                                            <div class="col-lg-12 mn1">
-                                                <div class="row aa">
-                                                    <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                        <StarRatings :rating="rating || 0" :max-rating="5" />
-                                                    </div>
-                                                    <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                        <p id="review_text">
-                                                            <a class="rating_icons" style="cursor: pointer;"
-                                                                @click="showPopup()">({{ ratingCount || 0 }}
-                                                                reviews)</a>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
-                                        <div class="social-icons">
-                                            <a :href="faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
-                                            <a :href="faculty.twitter" target="blank" class="fa fa-twitter"></a>
-                                            <a :href="faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
-                                        </div>
+<div class="container jk">
+    <div class="Instructor_parent_block">
+        <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
+        <div v-if="showShareButton">
+            <ShareButton :url="currentRoute" @close="closeShareOption" />
+        </div>
+        <section>
+            <div class="instructor-details">
+                <div class="professor-block">
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5">
+                            <div class="row">
+                                <div class="col-lg-4 col-4 col-sm-4">
+                                    <div class="professor_image_block">
+                                        <img v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl" class="img-fluid">
+                                        <img v-else src="../assets/images/Image21.png" class="img-fluid">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7 col-lg-7">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="share_icon_block" style="color: aliceblue;">
-                                            <img style="cursor: pointer;" @click="showShareOption" src="../assets/images/Union193.png" class="share-icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="btn-group">
-                                            <button id="left_button" type="button" class="btn" style="color: #b1afaf;">13
-                                                Following</button>
-                                            <button id="right_button" type="button" class="btn" style="color: #b1afaf;">1200
-                                                Follwers</button>
-                                        </div>
-                                    </div>
-                                    <div class="app1">
-                                        <div v-if="isPopupVisible" class="popup">
-                                            <div class="popup-content">
-                                                <div class="">
-                                                    <span class="close" @click="closePopup">&times;</span>
-                                                    <h5>Ratings System</h5>
+                                <div class="col-lg-8 col-8 col-sm-8">
+                                    <h5 id="prof_text">{{ faculty.name }}</h5>
+                                    <div class="row">
+                                        <div class="col-lg-12 mn1">
+                                            <div class="row aa">
+                                                <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                    <StarRatings :rating="rating || 0" :max-rating="5" />
                                                 </div>
-                                                <hr>
-                                                <form @submit.prevent="submitRating">
-                                                    <label for="rating">Rate the faculty :</label><br>
-                                                    <el-rate v-model="rating" size="large" allow-half /><br>
-                                                    <input type="submit" value="Submit">
-                                                </form>
-                                                <!-- Add your popup content here -->
+                                                <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                    <p id="review_text">
+                                                        <a class="rating_icons" style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }}
+                                                            reviews)</a>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
+                                    <div class="social-icons">
+                                        <a :href="faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
+                                        <a :href="faculty.twitter" target="blank" class="fa fa-twitter"></a>
+                                        <a :href="faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="app" class="row professor-details">
-                        <div class="col-sm-12 col-lg-12">
-                            <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
-                                faculty.description.slice(0, 184) : '' }}
-                                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
-                                        more</span></span>
-                            </p>
-                            <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
-                                <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read
-                                        less</span></span>
-                            </p>
+                        <div class="col-md-7 col-lg-7">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="share_icon_block" style="color: aliceblue;">
+                                        <img style="cursor: pointer;" @click="showShareOption" src="../assets/images/Union193.png" class="share-icon">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="btn-group">
+                                        <button id="left_button" type="button" class="btn" style="color: #b1afaf;">13
+                                            Following</button>
+                                        <button id="right_button" type="button" class="btn" style="color: #b1afaf;">1200
+                                            Follwers</button>
+                                    </div>
+                                </div>
+                                <div class="app1">
+                                    <div v-if="isPopupVisible" class="popup">
+                                        <div class="popup-content">
+                                            <div class="">
+                                                <span class="close" @click="closePopup">&times;</span>
+                                                <h5>Ratings System</h5>
+                                            </div>
+                                            <hr>
+                                            <form @submit.prevent="submitRating">
+                                                <label for="rating">Rate the faculty :</label><br>
+                                                <el-rate v-model="rating" size="large" allow-half /><br>
+                                                <input type="submit" value="Submit">
+                                            </form>
+                                            <!-- Add your popup content here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div id="app" class="row professor-details">
+                    <div class="col-sm-12 col-lg-12">
+                        <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
+                                faculty.description.slice(0, 184) : '' }}
+                            <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
+                                    more</span></span>
+                        </p>
+                        <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
+                            <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read
+                                    less</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+<section id="Course_section" v-if="persons.length > 0">
+    <div class="container">
+        <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
+        <carousel :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="person in persons" :key="person.id">
+                <div id="instructor_card" class="card">
+                    <div class="card-title">
+                        <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
+
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="card_top_text">
+                                        <div class="row">
+                                            <div class="col-lg-10 col-9 col-sm-9">
+                                                <p class="ft" data-placement="top" :title="person.title"> {{
+                                                        person.title.slice(0, 18) }}...</p>
+                                            </div>
+                                            <div class="col-lg-2 col-3 col-sm-3">
+                                                <img @click.prevent="showShareCourseUrlOption(person.courseRouteName)" src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
+                                            </div>
+                                            <div class="col-lg-6 col-6 col-sm-6">
+                                                <p class="ft"> 18CS81</p>
+                                            </div>
+                                            <div class="col-lg-6 col-6 col-sm-6">
+                                                <p id="small_text" class="ft">240
+                                                    hrs</p>
+                                            </div>
+                                            <div class="col-lg-9 col-9 col-sm-9">
+                                                <p class="ft">{{ person.courseDescription.slice(0, 50) }}...</p>
+                                            </div>
+                                            <div class="col-lg-3 col-3 col-sm-3">
+                                                <div class="video_logo">
+                                                    <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-6">
+                                                        <p class="rating_icons">
+                                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-lg-6 col-6" style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
+                                                        <p> (23 reviews) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div>
+                </div>
+
+            </slide>
+            <template #addons>
+
+                <navigation>
+                    <template #next>
+                        <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                    <template #prev>
+                        <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                </navigation>
+
+            </template>
+        </carousel>
 
     </div>
-    <section id="Course_section" v-if="persons.length > 0">
-        <div class="container">
-            <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
-            <carousel :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="person in persons" :key="person.id">
-                        <div id="instructor_card" class="card">
-                            <div class="card-title">
-                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
-
-                                <div class="row">
-                                    <div class="col-md-12 ">
-                                        <div class="card_top_text">
-                                            <div class="row">
-                                                <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft" data-placement="top" :title="person.title"> {{
-                                                        person.title.slice(0, 18) }}...</p>
-                                                </div>
-                                                <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img @click.prevent="showShareCourseUrlOption(person.courseRouteName)" src="../assets/images/Union193.png"
-                                                        style="width: 16px; height: 20px;" class="icon">
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p class="ft"> 18CS81</p>
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p id="small_text" class="ft">240
-                                                        hrs</p>
-                                                </div>
-                                                <div class="col-lg-9 col-9 col-sm-9">
-                                                    <p class="ft">{{ person.courseDescription.slice(0, 50) }}...</p>
-                                                </div>
-                                                <div class="col-lg-3 col-3 col-sm-3">
-                                                    <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
-                                                            style="width: 30px; height:30px;" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-6">
-                                                            <p class="rating_icons">
-                                                                <i
-                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                                    class="fa fa-star-o"></i>
-                                                                
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-lg-6 col-6"
-                                                            style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
-                                                            <p> (23 reviews) </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </router-link>
-                            </div>
-                        </div>
-                
-                </slide>
-                <template #addons>
-
-                    <navigation>
-                        <template #next>
-                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                        <template #prev>
-                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                    </navigation>
-
-                </template>
-            </carousel>
-
-
-
-        </div>
-    </section>
-    <section v-else>
-        <div class="container" style="position: relative; left:8px">
-    <!-- <p>No courses available.</p> -->
-</div>
 </section>
-    <section id="non_course_section">
-        <div class="container">
-            <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
-            <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="slide in 5" :key="slide">
+<section v-else>
+    <div class="container" style="position: relative; left:8px">
+        <!-- <p>No courses available.</p> -->
+    </div>
+</section>
+<!-- <section id="non_course_section">
+    <div class="container">
+        <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
+        <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="slide in 5" :key="slide">
 
-                    <router-link to="/SemesterDetails">
+                <router-link to="/SemesterDetails">
 
-                        <div id="instructor_card" class="card">
-                            <div class="card-title">
-                                <div class="row">
-                                    <div class="col-md-12 ">
+                    <div id="instructor_card" class="card">
+                        <div class="card-title">
+                            <div class="row">
+                                <div class="col-md-12 ">
 
-                                        <div class="card_top_text">
-                                            <div class="row">
+                                    <div class="card_top_text">
+                                        <div class="row">
 
-                                                <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft"> Math 1 (NEP Series)</p>
+                                            <div class="col-lg-10 col-9 col-sm-9">
+                                                <p class="ft"> Math 1 (NEP Series)</p>
+                                            </div>
+
+                                            <div class="col-lg-2 col-3 col-sm-3">
+                                                <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
+                                            </div>
+                                            <div class="col-lg-6 col-6 col-sm-6">
+                                                <p class="ft"> 18CS81</p>
+                                            </div>
+                                            <div class="col-lg-6 col-6 col-sm-6">
+                                                <p id="small_text" class="ft">240
+                                                    hrs</p>
+                                            </div>
+
+                                            <div class="col-lg-9 col-9 col-sm-9">
+
+                                                <p class="ft">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                                    Esse,
+                                                    excepturi.</p>
+                                            </div>
+
+                                            <div class="col-lg-3 col-3 col-sm-3">
+                                                <div class="video_logo">
+                                                    <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                 </div>
-
-                                                <div class="col-lg-2 col-3 col-sm-3">
-                                                    <img src="../assets/images/Union193.png"
-                                                        style="width: 16px; height: 20px;" class="icon">
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p class="ft"> 18CS81</p>
-                                                </div>
-                                                <div class="col-lg-6 col-6 col-sm-6">
-                                                    <p id="small_text" class="ft">240
-                                                        hrs</p>
-                                                </div>
-
-                                                <div class="col-lg-9 col-9 col-sm-9">
-
-                                                    <p class="ft">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Esse,
-                                                        excepturi.</p>
-                                                </div>
-
-                                                <div class="col-lg-3 col-3 col-sm-3">
-                                                    <div class="video_logo">
-                                                        <img src="../assets/images/Path4025.png"
-                                                            style="width: 30px; height:30px;" class="video">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <p style="color: #707070;" class="sub_icons mb-0"><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star-o"></i>
-                                                        (23
-                                                        reviews) </p>
-                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                                    (23
+                                                    reviews) </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </router-link>
+                    </div>
+                </router-link>
 
+            </slide>
+            <template #addons>
 
-                </slide>
-                <template #addons>
+                <navigation>
+                    <template #next>
+                        <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                    <template #prev>
+                        <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                </navigation>
 
-                    <navigation>
-                        <template #next>
-                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                        <template #prev>
-                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                    </navigation>
+            </template>
+        </carousel>
 
-                </template>
-            </carousel>
+    </div>
+</section> -->
 
-        </div>
-    </section>
+<section id="tab_block">
+    <div class="container">
+        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+            <el-tab-pane v-for="att in faculty.attributue" :key="att.heading" :label="att.heading" :name="att.heading">
+                <div class="" v-html="att.values"></div>
+            </el-tab-pane>
 
-    <section id="tab_block">
-        <div class="container">
-            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                <el-tab-pane v-for="att in faculty.attributue" :key="att.heading" :label="att.heading" :name="att.heading">
-                    <div class="" v-html="att.values"></div>
-                </el-tab-pane>
+        </el-tabs>
+    </div>
+</section>
 
-            </el-tabs>
-        </div>
-    </section>
-
-
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
-    <Offer />
+<Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+<Offer />
 </template>
 
 <script>
@@ -287,7 +271,11 @@ import Breadcrumbs from "./Breadcrumbs.vue"
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import {
+    Carousel,
+    Slide,
+    Navigation
+} from 'vue3-carousel'
 import StarRatings from './StarRatings.vue'
 import Offer from './Offer.vue'
 export default {
@@ -361,13 +349,20 @@ export default {
                     snapAlign: 'center',
                 }
 
-
             },
             activeName: 'first',
-            attribute: [
-                { key: "Name", value: "Arun" },
-                { key: "Age", value: 30 },
-                { key: "Location", value: "India" },
+            attribute: [{
+                    key: "Name",
+                    value: "Arun"
+                },
+                {
+                    key: "Age",
+                    value: 30
+                },
+                {
+                    key: "Location",
+                    value: "India"
+                },
             ],
         }
     },
@@ -392,15 +387,11 @@ export default {
             console.log(this.ratings);
             const results = await AxiosInstance.get(`/Coursedetails/GetItemByFacultyCourse?FacultyDyanamicRouting=` + this.faculty.facultyDyanamicRouting);
             this.persons = results.data;
-          
-          
-
 
         } catch (error) {
             console.log(error);
             this.isLoading = false;
-        }
-        finally {
+        } finally {
             this.isLoading = false;
         }
     },
@@ -426,7 +417,7 @@ export default {
         closeShareOption() {
             this.showShareButton = false;
 
-        },       
+        },
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -441,28 +432,26 @@ export default {
         },
         submitRating() {
             AxiosInstance.post('/Ratings', {
-                userId: this.isuser['cognito:username'],
-                objectId: this.faculty.id,
-                objectTypeId: 4,
-                ratingScore: this.rating
-            })
-            .then(response => {
-                // Handle success (if needed)
-                console.log(response.data);
-                this.rating = '';
-                this.closePopup();
-            })
-            .catch(error => {
-                // Handle error (if needed)
-                console.error(error);
-            });
+                    userId: this.isuser['cognito:username'],
+                    objectId: this.faculty.id,
+                    objectTypeId: 4,
+                    ratingScore: this.rating
+                })
+                .then(response => {
+                    // Handle success (if needed)
+                    console.log(response.data);
+                    this.rating = '';
+                    this.closePopup();
+                })
+                .catch(error => {
+                    // Handle error (if needed)
+                    console.error(error);
+                });
         }
 
     }
 }
 </script>
-
-
 
 <style scoped>
 .jk {
@@ -491,7 +480,6 @@ export default {
     }
 
 }
-
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
     .jk {
@@ -579,7 +567,6 @@ export default {
 .video {
     width: 50px;
 
-
 }
 
 ::v-deep .fa-circle {
@@ -621,7 +608,6 @@ export default {
     text-align: right;
 }
 
-
 ::v-deep .Object_text {
     color: #006acd;
     font-weight: bold;
@@ -647,7 +633,6 @@ export default {
     color: #9E9E9E;
     /* padding-right: 20px; */
 }
-
 
 ::v-deep .Sub_paragraph {
     color: #61646B;
@@ -681,7 +666,6 @@ export default {
     margin-bottom: 18px;
 
 }
-
 
 ::v-deep #row_block {
     padding-left: 15px;
@@ -748,8 +732,6 @@ export default {
     padding-left: 20px;
 }
 
-
-
 .ptext {
     margin-bottom: 15px;
 }
@@ -793,8 +775,6 @@ export default {
     ::v-deep .Object_text {
         font-size: 14px !important;
     }
-
-
 
     ::v-deep #education_text,
     #institute_text {
@@ -844,7 +824,6 @@ export default {
         text-align: left !important;
     }
 
-
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -871,12 +850,10 @@ export default {
     margin-top: -15px;
 }
 
-
 @media (max-width: 600px) {
     #sub_text {
         text-align: left;
     }
-
 
 }
 
@@ -1046,7 +1023,6 @@ input[type=submit] {
     cursor: pointer;
 }
 
-
 #app1 {
     position: relative;
     height: 100vh;
@@ -1183,15 +1159,17 @@ input[type=submit] {
         right: 20px;
     }
 }
+
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
 }
-p .details{
-    padding-left:0px !important;
+
+p .details {
+    padding-left: 0px !important;
 }
 </style>
