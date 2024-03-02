@@ -11,15 +11,15 @@
           <div class="network-icons">
             <ShareNetwork
               v-for="network in networks"
-              :network="network.network"
               :key="network.network"
+              :network="network.network"
               :url="url"
               :title="network.title"
               :description="network.description"
               :quote="network.quote"
               :hashtags="network.hashtags"
-              :titleClass="network.titleClass"  
-              :descriptionClass="network.descriptionClass" 
+              :title-class="network.titleClass"  
+              :description-class="network.descriptionClass" 
               style="text-decoration: none; display: inline-block; margin-right: 5px;"
             >
               <i :class="network.icon" class="share-icon"></i>&nbsp;&nbsp;
@@ -27,7 +27,7 @@
           </div>
           <div class="url-container">
             <input ref="urlInput" type="text" readonly :value="url" class="url-input">
-            <button @click="copyUrl" class="copy-button">Copy Url</button>
+            <button class="copy-button" @click="copyUrl">Copy Url</button>
         </div>
         </div>
       </div>
@@ -43,6 +43,7 @@
         required: true,
       },
     },
+    emits: ['close'],
     data() {
       return {
         networks: [

@@ -7,22 +7,24 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row pt-3" style="margin-bottom: -38px;">
-        <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
-            <router-link :to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }" style="cursor: pointer; text-decoration: none;">
-                <div class="card mt-5">
-                    <div class="user-follower">
-                        <img v-if="facult.imageUrl !== ''" :src="facult.imageUrl" class="user-icon">
-                        <img v-else src="../assets/images/Image21.png" class="user-icon">
-                    </div>
-                    <div class="user-following">
-                        <p class="text-right"><small>13 Following</small></p>
-                        <p class="text-right"><small>1200 Followers</small></p>
-                    </div>
-                    <div class="card-body" style="margin-top: -7%;">
-                        <div class="card-title" data-placement="top" :title="facult.name">{{ shortenText(facult.name, 20)}}</div>
-                        <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
+    <div class="container">
+        <div class="row pt-3" style="margin-bottom: -38px;">
+            <div v-for="facult in faculty" :key="facult.id" class="col-md-6 col-lg-3">
+                <router-link
+:to="{ name: 'Instructor', params: { name: facult.facultyDyanamicRouting } }"
+                    style="cursor: pointer; text-decoration: none;">
+                    <div class="card mt-5">
+                        <div class="user-follower">
+                            <img v-if="facult.imageUrl !== ''" :src="facult.imageUrl" class="user-icon">
+                            <img v-else src="../assets/images/Image21.png" class="user-icon">
+                        </div>
+                        <div class="user-following">
+                            <p class="text-right"><small>13 Following</small></p>
+                            <p class="text-right"><small>1200 Followers</small></p>
+                        </div>
+                        <div class="card-body" style="margin-top: -7%;">
+                            <div class="card-title" data-placement="top" :title="facult.name">{{ shortenText(facult.name, 20)}}</div>
+                            <div class="card-text"> {{ facult.description.slice(0, 50) }}...</div>
 
                         <div class="mn text-left">
                             <p>
@@ -42,7 +44,6 @@
 
 <script>
 import axiosInstance from '../config/axiosInstance'
-import Breadcrumbs from './Breadcrumbs.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import StarRatings from './StarRatings.vue'
@@ -50,7 +51,6 @@ import StarRatings from './StarRatings.vue'
 export default {
     name: 'BestLecture',
     components: {
-        Breadcrumbs,
         Loading,
         StarRatings
     },

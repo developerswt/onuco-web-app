@@ -10,7 +10,8 @@
           <div class="example-wrapper">
 
             <div style="height: 100%;">
-              <ag-grid-vue :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+              <ag-grid-vue
+:dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                 :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                 :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                 :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -34,7 +35,7 @@
       <el-form ref="form" @submit.prevent="addBranch"> 
             <div>
               <label for="productDropdown">Faculty Name :</label>
-              <el-select v-model="selectedOption" @change="loadProductDetails" placeholder="Please Select">
+              <el-select v-model="selectedOption" placeholder="Please Select" @change="loadProductDetails">
                   <el-option
                       v-for="product in Products"
                       :key="product.id"
@@ -178,9 +179,9 @@ export default {
       name: '',
      };
    },
-    toggleForm() {
-      this.formVisible = !this.formVisible;
-    },
+    // toggleForm() {
+    //   this.formVisible = !this.formVisible;
+    // },
 
     onCellClicked(params) {
       this.childPara = params.node.data

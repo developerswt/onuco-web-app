@@ -16,36 +16,54 @@ import qualityLevels from "videojs-contrib-quality-levels";
 import videojsqualityselector from 'videojs-hls-quality-selector';
 
 export default {
-    name: 'VideoPlayer',
-    props: {
-        options: {
-            type: Object,
-            default () {
-                return {};
-            }
-        },
-        limitTime: Number,
-        isSubscribed: Boolean,
-        videoId: Number,
-        courseId: Number,
-        courseDisPrice: Number,
-        watchTime: String,
+  name: 'VideoPlayer',
+  props: {
+    options: {
+      type: Object,
+      default() {
+        return {};
+      }
     },
-    data() {
-        return {
-            player: null,
-            showPoster: false, // Initialize showPoster to false
-            enablePoster: false,
-        }
+    limitTime: {
+      type: Number,
+      default: undefined // Set default value to undefined
     },
-    computed: {
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-        isuser() {
-            return this.$store.state.user.signInUserSession.idToken.payload.sub;
-        },
+    isSubscribed: {
+      type: Boolean,
+      default: undefined
     },
+    videoId: {
+      type: Number,
+      default: undefined
+    },
+    courseId: {
+      type: Number,
+      default: undefined
+    },
+    courseDisPrice: {
+      type: Number,
+      default: undefined
+    },
+    watchTime: {
+      type: String,
+      default: undefined
+    },
+  },
+  data() {
+    return {
+      player: null,
+      showPoster: false, // Initialize showPoster to false
+      enablePoster: false,
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.IsLoggedIn;
+    },
+    isuser() {
+      return this.$store.state.user.signInUserSession.idToken.payload.sub;
+    },
+  },
 
     mounted() {
 
@@ -70,25 +88,42 @@ export default {
         });
         this.initVideoPlayer();
 
-        this.player.on('timeupdate', () => {
-            if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
-                this.showPoster = true;
-                this.showPosterOverlay();
-                this.player.pause();
-            }
+    this.player.on('timeupdate', () => {
+      if (this.player.currentTime() >= 30 && !this.showPoster && !this.isSubscribed) {
+        this.showPoster = true;
+        this.player.controlBar.playToggle.disable();
+        this.showPosterOverlay();
+        this.player.pause();
+        this.setMediaSessionHandlers();
+      }
+    });
+    this.player.on('ended', () => {
+      if (this.showPoster) {
+        this.showPoster = false;
+      }
+    });
+  },
+  beforeUnmount() {
+    if (this.player) {
+      this.player.dispose();
+    }
+  },
+  methods: {
+    setMediaSessionHandlers() {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => {
+          // Do nothing or handle as needed
         });
-        this.player.on('ended', () => {
-            if (this.showPoster) {
-                this.showPoster = false;
-            }
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+          // Do nothing or handle as needed
         });
+
+        navigator.mediaSession.setActionHandler('stop', () => {
+          // Do nothing or handle as needed
+        });
+      }
     },
-    beforeUnmount() {
-        if (this.player) {
-            this.player.dispose();
-        }
-    },
-    methods: {
 
         showPosterOverlay() {
             if (!this.isSubscribed && this.showPoster) {
@@ -183,19 +218,19 @@ export default {
                         }, ],
                     };
 
-                    const response = await AxiosInstance.put('/StateManagement', requestBody);
-
-                    this.prevCourseId = courseId;
-                    this.prevVideoId = videoId;
-                } catch (error) {
-                    console.error('Update failed:', error);
-                }
-            }
-        },
-        pauseVideo() {
-            this.player.pause();
-            this.sendWatchTimeToBackend();
-            // localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
+          const response = await AxiosInstance.put('/StateManagement', requestBody);
+          console.log(response);
+          this.prevCourseId = courseId;
+          this.prevVideoId = videoId;
+        } catch (error) {
+          console.error('Update failed:', error);
+        }
+      }
+    },
+    pauseVideo() {
+      this.player.pause();
+      this.sendWatchTimeToBackend();
+      // localStorage.setItem("videoCurrentTime", JSON.stringify(this.player.currentTime()));
 
         },
         generateUUID() {

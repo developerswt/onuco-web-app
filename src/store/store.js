@@ -8,6 +8,7 @@ export default createStore ({
         })
     ],
     state: {
+      count: 0,
         IsLoggedIn: false,
         user: null,
         token: null,
@@ -19,14 +20,10 @@ export default createStore ({
     selectedSem: null,
     selectedCourse: null,
     selectedAcademics: null,
-    dynamicRoutes: {},
         // isCourseActive: false,
     },
     
     mutations: {
-      setDynamicRoutes(state, { path, dynamicRoutes }) {
-        Vue.set(state.dynamicRoutes, path, dynamicRoutes);
-      },
         isLoggedIn(state, status) {
             state.IsLoggedIn = status;
             
@@ -37,6 +34,9 @@ export default createStore ({
         // setUser(state, users) {
         //     state.users = users;
         // },
+        changeCount(state) {
+            state.count++;
+        },
         setUser(state, user) {
             state.user = user;
         },
@@ -71,7 +71,11 @@ export default createStore ({
         logout({ commit }) {  
             commit('setUser', null);
           },
+          incrementCount({ commit }) {
+            commit('changeCount');
+          }
     }
 
     
 })       
+

@@ -13,40 +13,42 @@
         <carousel :settings="settings" :breakpoints="breakpoints">
             <slide v-for="course in courses" :key="course.id">
 
-                <div class="box">
-                    <router-link :to="{ name: 'CourseDetails', params: { name: course.courseName } }" style="text-decoration: none;">
-                        <div class="wer">
-                            <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
-                            <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
-                                <br>
-                                <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;">{{ course.name}}</p>
-                            </div>
-                            <div class="offer">
-                                <img class="card-img-top" src="../assets/images/offer.png">
-                            </div>
-                            <div class="offer-details">
-                                <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
-                            </div>
+                    <div class="box">
+                        <router-link
+:to="{ name: 'CourseDetails', params: { name: course.courseName } }"
+                            style="text-decoration: none;">
+                            <div class="wer">
+                                <!-- <img class="card-img-top offer1" src="../assets/images/java.jpg" alt="Card image cap" style="height: 155px !important;-->
+                                <div class="card-img-top offer1" :style="{ 'background-image': course.imageUrl ? 'url(' + course.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: course.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
+                            <br>
+                            <p data-placement="top" :title="course.name" style="position: absolute; left: 20px;" >{{ course.name}}</p>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
-                            <div class="text-left price" style="float: right;">
-                                <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
+                                <div class="offer">
+                                    <img class="card-img-top" src="../assets/images/offer.png">
+                                </div>
+                                <div class="offer-details">
+                                    <span class="card-image-top"><b>{{ calculateDiscountPercentage(course.actualPrice, course.discountPrice) }}% OFF</b></span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ course.description.slice(0, 65) }}...</p>
+                                <div class="text-left price" style="float: right;">
+                                    <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
                                         course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
 
-                            </div> <br>
-                            <div class="row">
-                                <div class="col-sm-6  star">
-                                    <StarRatings :rating="course.starRating || 0" :max-rating="5" />
-                                </div>
-                                <div v-if="isLoggedIn" class="col-sm-6">
-                                    <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
-                                </div>
-                                <div class="col-sm-6" v-else>
-                                    <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
+                                </div> <br>
+                                <div class="row">
+                                    <div class="col-sm-6  star">
+                                        <StarRatings :rating="course.starRating || 0" :max-rating="5" />
+                                    </div>
+                                    <div v-if="isLoggedIn" class="col-sm-6">
+                                        <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
+                                    </div>
+                                    <div v-else class="col-sm-6">
+                                        <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                     </router-link>
                 </div>

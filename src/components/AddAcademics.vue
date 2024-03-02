@@ -2,10 +2,15 @@
 <div class="container">
     <h5>Add & Update Course Name </h5>
     <div class="container" style="margin-top: 72px;">
-        <div>
-            <label for="productDropdown">Course Name :</label>
-            <el-select v-model="selectedAcademics" @change="emitSelectedType" style="padding: 4px;">
-                <el-option v-for="product in products" :key="product.id" :value="product.id" :label="product.name"></el-option>
+      <div>
+        <label for="productDropdown">Course Name :</label>
+        <el-select v-model="selectedAcademics" style="padding: 4px;" @change="emitSelectedType">
+              <el-option 
+                  v-for="product in products"
+                  :key="product.id"
+                  :value="product.id"
+                  :label="product.name"
+              ></el-option>
             </el-select>
         </div>
         <div class="table-responsive" style="background-color: white;">
@@ -39,47 +44,47 @@
 
                         <td>{{ selectedProduct.isActive }}</td>
 
-                        <td>
-                            <div class="button-row">
-                                <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
-                                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
-                                <button @click="deleteProduct(selectedProduct.id)">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <td>
+              <div class="button-row">
+                <button v-if="!editMode" class="bn" @click="enableEditMode()">Edit</button>
+                <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
+                <button @click="deleteProduct(selectedProduct.id)">Delete</button>
+              </div>
+            </td>
+              </tr>
+            </tbody>
 
             </table>
         </div>
         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
 
         <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
-            <el-form :model="newBranch" ref="form" label-position="top" class="frm">
-                <el-form-item>{{ newBranch.id }}</el-form-item>
-                <el-form-item label="Course Name" prop="name">
-                    <el-input v-model="newBranch.name" @input="validateFirstLetterCapital" type="text" required></el-input>
-                </el-form-item>
-                <el-form-item label="Description" prop="description">
-                    <el-input type="textarea" v-model="newBranch.description" class="size" required></el-input>
-                </el-form-item>
-                <el-form-item label="TypeId">
-                    <el-input v-model="this.selectedtype" readonly required></el-input>
-                </el-form-item>
-                <el-form-item label="Course Rout Name" prop="academiaName">
-                    <el-input v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
-                    </el-input>
-                    <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;">
-                        Please enter a valid Kebab Case.
-                    </span>
-                </el-form-item>
-                <el-form-item label="IsActive">
-                    <el-input v-model="newBranch.isActive" type="text" readonly required></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button class="btn2" type="submit" @click="addCourse">Add Course</el-button>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
+    <el-form ref="form" :model="newBranch" label-position="top" class="frm">
+      <el-form-item>{{ newBranch.id }}</el-form-item>
+      <el-form-item label="Course Name" prop="name">
+        <el-input v-model="newBranch.name" type="text" required @input="validateFirstLetterCapital"></el-input>
+      </el-form-item>
+      <el-form-item label="Description" prop="description">
+        <el-input v-model="newBranch.description" type="textarea" class="size" required></el-input>
+      </el-form-item>
+      <el-form-item label="TypeId">
+        <el-input :value="localSelectedType" readonly required></el-input>
+      </el-form-item>
+      <el-form-item label="Course Rout Name" prop="academiaName">
+        <el-input v-model="newBranch.academiaName" type="text" required pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Please enter a valid Kebab Case.">
+        </el-input>
+        <span v-if="!isKebabCase(newBranch.academiaName)" style="color: red;">
+          Please enter a valid Kebab Case.
+        </span>
+      </el-form-item>
+      <el-form-item label="IsActive">
+        <el-input v-model="newBranch.isActive" type="text" readonly required></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button class="btn2" type="submit" @click="addCourse">Add Course</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
     </div>
     <Confirmation ref="Confirmation" />
 </div>
@@ -118,33 +123,28 @@ export default {
     },
     emits: ['selected-academic-changed'],
 
-    data() {
-        return {
-            products: [],
-            selectedAcademics: '',
-            formVisible: false,
-            selectedProduct: {
-                id: null,
-                name: '',
-                description: '',
-                typeId: '',
-                isActive: ''
-            },
-            editMode: false,
-            editedProduct: {
-                id: null,
-                name: '',
-                description: '',
-                typeId: null,
-                academiaName: '',
-                isActive: '',
-            },
-            newBranch: {
-                name: '',
-                description: '',
-                typeId: this.selectedtype,
-                academiaName: '',
-                isActive: 1,
+  data() {
+    return {
+      localSelectedType: this.selectedtype,
+      products: [],
+      selectedAcademics: '',
+      formVisible: false,
+      selectedProduct: { id: null, name: '', description: '', typeId: '', isActive:''},
+      editMode: false,
+      editedProduct: {
+      id: null,
+      name: '',
+      description: '',
+      typeId: null,
+      academiaName: '',
+      isActive:'',
+    },
+      newBranch: {
+      name: '',
+      description: '',
+      typeId: this.selectedtype,
+      academiaName:'',
+      isActive:1,
 
             },
         };
@@ -180,16 +180,16 @@ export default {
             return kebabCaseRegex.test(input);
         },
 
-        emitSelectedType() {
-            this.$emit('selected-academic-changed', this.selectedAcademics);
-            this.loadData();
-            this.loadProductDetails();
-        },
-        async loadData() {
-            this.isLoading = true;
-            try {
-                const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
-                this.products = res.data;
+  emitSelectedType() {
+    this.$emit('selected-academic-changed', this.localSelectedType);
+    this.loadData(); 
+    this.loadProductDetails();
+  },
+  async loadData() {
+      this.isLoading = true;
+      try {
+        const res = await AxiosInstance.get(`Academia/GetAcademiaByTypeId/` + this.selectedtype);
+        this.products = res.data;
 
             } catch (error) {
                 this.isLoading = false;
@@ -209,44 +209,44 @@ export default {
             this.editedProduct.isActive = this.selectedProduct.isActive
         },
 
-        async updateProduct(id) {
-            try {
-                const res = await AxiosInstance.put(`/Academia` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive);
-                await this.loadData();
-                this.editMode = false;
-                this.ismodel = true;
-                this.loadProductDetails();
-                this.$refs.Confirmation.open("Course Updated successfully.");
-
-            } catch (error) {
-                this.isLoading = false;
-                console.log(error.response.data.Message);
-
-                this.$refs.Confirmation.open(error.response.data.Message);
-            }
-            this.editMode = false;
-        },
+async updateProduct(id) {
+  try {
+    const res = await AxiosInstance.put(`/Academia` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
+    console.log(res);  
+    await this.loadData();
+      this.editMode = false; 
+      this.ismodel = true; 
+      this.loadProductDetails();
+      this.$refs.Confirmation.open("Course Updated successfully.");
+    
+    }catch(error){
+    this.isLoading = false;
+    console.log(error.response.data.Message);
+    
+        this.$refs.Confirmation.open(error.response.data.Message);
+    }
+  this.editMode = false;
+},
 
         toggleForm() {
             this.formVisible = !this.formVisible;
         },
 
-        async loadProductDetails() {
-            const selectedProduct = this.products.find(product => product.id === this.selectedAcademics);
-
-            if (selectedProduct) {
-                this.selectedProduct = {
-                    ...selectedProduct
-                };
-            }
-        },
-        async addBranch() {
-            this.isLoading = true;
-            try {
-                const response = await AxiosInstance.post(`/Academia`, this.newBranch);
-                await this.loadData();
-                this.loadProductDetails();
-                this.$refs.Confirmation.open("Course Added successfully.");
+    async loadProductDetails() {
+    const selectedProduct = this.products.find(product => product.id === this.selectedAcademics);
+    
+    if (selectedProduct) {
+      this.selectedProduct = { ...selectedProduct };
+    }
+  },
+  async addBranch() {
+  this.isLoading = true;
+  try {
+    const response = await AxiosInstance.post(`/Academia`, this.newBranch);
+    console.log(response);  
+    await this.loadData();
+      this.loadProductDetails();
+      this.$refs.Confirmation.open("Course Added successfully.");
 
                 this.newBranch = {
                     name: '',
@@ -279,10 +279,11 @@ export default {
                     return; // If the user cancels, do nothing
                 }
 
-                this.editedProduct.isActive = '0';
-                const res = await AxiosInstance.put(`/Academia/SoftUpdateAcademia` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive);
-                await this.loadData();
-                this.loadProductDetails();
+      this.editedProduct.isActive = '0';
+         const res = await AxiosInstance.put(`/Academia/SoftUpdateAcademia` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+        console.log(res);
+         await this.loadData();
+        this.loadProductDetails();
 
                 this.selectedAcademics = '';
                 this.selectedProduct = {

@@ -14,7 +14,8 @@
 
               <div v-if="academi.academia.id == branch.academiaId" class="box">
 
-                <router-link :to="{ name: 'Universities', params: { name: branch.branchName }}"
+                <router-link
+:to="{ name: 'Universities', params: { name: branch.branchName }}"
                   style="color: white;text-decoration: none;">
 
                   <div class="row">
@@ -57,14 +58,12 @@ import Offer from './Offer.vue'
 import axiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Breadcrumbs from './Breadcrumbs.vue'
 
 export default {
   name: 'CoursesPage',
   components: {
     Offer,
     Loading,
-    Breadcrumbs
   },
   data() {
     return {

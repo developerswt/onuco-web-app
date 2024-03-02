@@ -36,7 +36,6 @@
   import { AgGridVue } from "ag-grid-vue3";
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  import moment from 'moment';
   
   export default {
   name: "FacultySubStudents",

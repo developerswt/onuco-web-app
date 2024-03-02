@@ -2,25 +2,31 @@
 <div class="container">
     <div class="row pt-2 ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card-box">
-                <div class="card-head">
-                    <header>Faculty Course Details</header>
-                    <div class="filter-box">
-                        <span for="filter-text-box">Search Here : </span>
-                        <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Subject Name/Faculty Name/Email" />
-                        <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
-                        <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
-                    </div>
-                    <div class="card-body " style="padding: 0px 30px 30px 30px;">
-                        <div class="example-wrapper">
-                            <div style="height: 100%;">
-                                <ag-grid-vue v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData" :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
-                                </ag-grid-vue>
-                            </div>
-                        </div>
-                    </div>
+          <div class="card-box">
+            <div class="card-head">
+              <header>Faculty Course Details</header>
+              <div class="filter-box">
+  <span for="filter-text-box">Search Here : </span>
+  <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/Course Name/E-mail Id" />
+  <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
+  <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+</div>
+<div class="card-body " style="padding: 0px 30px 30px 30px;">
+               <div class="example-wrapper">
+                    <div style="height: 100%;">
+                      <ag-grid-vue
+v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                        :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
+                        :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
+                        cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
+                        is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
+                        @row-clicked='onCellClicked'>
+                      </ag-grid-vue>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
     </div>
     <Loading v-model:active="isLoading"></Loading>
@@ -45,118 +51,78 @@ export default {
         Loading,
     },
     data: function () {
-        return {
-            showRequiredMessage: false,
-            hasSearched: false,
-            gridApi: null, // Ensure gridApi is initialized to null
-            gridColumnApi: null,
-            filterText: '',
-            formVisible: false,
-            userName: '',
-            ismodel: true,
-            isLoading: false,
-            showDialog: false,
-            dialogTitle: '',
-            dialogMessage: '',
-            domLayout: null,
-            Orders: [],
-            req: [],
-            // columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
-            columnDefs: [{
-                    headerName: 'Faculty Name',
-                    field: 'userName'
-                },
-                {
-                    headerName: 'Subject Name',
-                    field: 'courseName'
-                },
-                {
-                    headerName: 'Email',
-                    field: 'userEmail'
-                },
-                {
-                    headerName: 'Phone Number',
-                    field: 'phone_number'
-                }, // Adjusted to 'phone_number'
-                {
-                    headerName: 'Total Amount',
-                    field: 'totalAmount'
-                },
-                {
-                    headerName: 'Total Subscribed',
-                    field: 'total_subscribed'
-                },
-                {
-                    headerName: 'Active Students Count',
-                    field: 'active_studentsCount'
-                }, // Adjusted to 'active_studentsCount'
-                {
-                    headerName: 'Inactive Student Count',
-                    field: 'inActive_StudentCount'
-                } // Adjusted to 'inActive_StudentCount'
-            ],
-
-            gridApi: null,
-            defaultColDef: {
-                sortable: true,
-                filter: true,
-                width: 340,
-                resizable: true,
-                applyMiniFilterWhileTyping: true
-            },
-            columnApi: null,
-            editType: null,
-            showChildRow: false,
-            childPara: null,
-            rowData: null,
-            rowSelection: null,
-            paginationPageSize: null,
-            rightAligned: {
-                headerClass: 'ag-right-aligned-header',
-                cellClass: 'ag-right-aligned-cell'
-            },
-        };
+      return {
+        showRequiredMessage: false,
+     hasSearched: false,
+     gridApi: null, // Ensure gridApi is initialized to null
+     gridColumnApi: null,
+     filterText: '',
+        formVisible: false,
+        userName: '',
+        ismodel: true,
+        isLoading: false,
+        showDialog: false,
+        dialogTitle: '',
+        dialogMessage: '',
+        domLayout: null,
+        Orders: [],
+        req: [],
+        columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
+        defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
+        columnApi: null,
+        editType: null,
+        showChildRow: false,
+        childPara: null,
+        rowData: null,
+        rowSelection: null,
+        paginationPageSize: null,
+        rightAligned: {
+          headerClass: 'ag-right-aligned-header',
+          cellClass: 'ag-right-aligned-cell'
+        },
+      };
     },
     computed: {
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
-
-    async created() {
-        this.domLayout = 'autoHeight';
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/CoursesFacultyJ/Getfacultydetailcourse`);
-            let req = res.data;
-            this.Orders = req;
-
-        } catch (error) {
-            this.isLoading = false;
-            console.log(error);
-            this.showDialog = true;
-            this.dialogTitle = "Error";
-            this.dialogMessage = "Not get data";
-        } finally {
-            this.isLoading = false;
-        }
-        this.rowData = this.Orders;
-        this.rowSelection = 'single';
-        console.log(this.rowData);
-        this.popupParent = document.body;
-        this.paginationPageSize = 10;
-
+      isLoggedIn() {
+        return this.$store.state.IsLoggedIn;
+      },
     },
     watch: {
-        filterText: {
-            handler: function (newFilterText) {
-                // Ensure gridApi is available before setting quick filter
-                if (this.gridApi) {
-                    this.gridApi.setQuickFilter(newFilterText);
-                }
-            },
-            deep: true, // Watch changes deeply
-        },
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
+  
+    async created() {
+      this.domLayout = 'autoHeight';
+      this.isLoading = true;
+      try {
+        const res = await AxiosInstance.get(`/CoursesFacultyJ/Getfacultydetailcourse`);
+        let req = res.data;
+        this.Orders = req;
+  
+      } catch (error) {
+        this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;
+        this.dialogTitle = "Error";
+        this.dialogMessage = "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+      this.rowData = this.Orders;
+      this.rowSelection = 'single';
+      console.log(this.rowData);
+      this.popupParent = document.body;
+      this.paginationPageSize = 10;
+  
     },
 
     methods: {

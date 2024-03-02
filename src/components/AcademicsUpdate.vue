@@ -2,68 +2,77 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <div style="padding: 20px;">
-                <div class="example-wrapper">
-                    <div style="height: 100%;">
-                        <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData" :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
-                        </ag-grid-vue>
-                    </div>
-                </div>
+      <div class="col-lg-6 col-sm-12">
+        <div style="padding: 20px;">
+          <div class="example-wrapper">
+            <div style="height: 100%;">
+              <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+                :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
+                :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
+                :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
+                @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
+              </ag-grid-vue>
             </div>
-            <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+          </div>
         </div>
-        <div class="col-lg-6 col-sm-12">
-            <form v-show="formVisible" class="frm" style="margin-top:25px" @submit.prevent="addBranch">
-                <p><b></b> {{ newBranch.id }}</p>
-                <label for="branchName"> Name:</label>
-                <input id="branchName" v-model="newBranch.name" type="text" required><br>
-                <label for="description">Description:</label>
-                <input id="description" v-model="newBranch.description" type="text" required><br>
-                <label for="typeId">TypeId:</label>
-                <input id="typeId" v-model="newBranch.typeId" type="text" required><br>
-                <label for="academiaName"><b>Academia Name:</b></label>
-                <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
-                <button class="btn2" type="submit">Add Academics</button>
-            </form>
-        </div>
+        <button class="btn1" @click="toggleForm">{{ formVisible ? 'CLOSE' : 'POST DATA' }}</button>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <form v-show="formVisible" class="frm" style="margin-top:25px" @submit.prevent="addBranch">
+          <p><b></b> {{ newBranch.id }}</p>
+          <label for="branchName"> Name:</label>
+          <input id="branchName" v-model="newBranch.name" type="text" required><br>
+          <label for="description">Description:</label>
+          <input id="description" v-model="newBranch.description" type="text" required><br>
+          <label for="typeId">TypeId:</label>
+          <input id="typeId" v-model="newBranch.typeId" type="text" required><br>
+          <label for="academiaName"><b>Academia Name:</b></label>
+          <input id="academiaName" v-model="newBranch.academiaName" type="text" required>
+          <button class="btn2" type="submit">Add Academics</button>
+        </form>
+      </div>
     </div>
     <div v-if="showChildRow">
-        <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;" aria-modal="true" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content mc">
-                    <div class="modal-body" style="overflow: auto !important;">
-                        <div class="container bg-light">
-                            <div v-if="ismodel" class="row">
-                                <div class="col-sm-12">
-                                    <p><b>ID: </b> {{ childPara.id }}</p>
-                                    <p><b>Academia Name:</b>{{ childPara.name }}</p>
-                                    <p><b>Description:</b> {{ childPara.description }}</p>
-                                </div>
-                            </div>
-                            <div v-else class="row">
-                                <div class="col-sm-12">
-                                    <p><b>ID: </b>{{ childPara.id }}</p>
-                                    <div class="">
-                                        <label><b>Academia Name:</b></label><br>
-                                        <input v-model="childPara.name" type="text" />
-                                    </div>
-                                    <div class="">
-                                        <label><b>Description:</b></label><br>
-                                        <input v-model="childPara.description" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="update(childPara.id)">Update</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
-                    </div>
+      <div
+class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content mc">
+            <div class="modal-body" style="overflow: auto !important;">
+              <div class="container bg-light">
+                <div v-if="ismodel" class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b> {{ childPara.id }}</p>
+                    <p><b>Academia Name:</b>{{ childPara.name }}</p>
+                    <p><b>Description:</b> {{ childPara.description }}</p>
+                  </div>
                 </div>
+                <div v-else class="row">
+                  <div class="col-sm-12">
+                    <p><b>ID: </b>{{ childPara.id }}</p>
+                    <div class="">
+                      <label><b>Academia Name:</b></label><br>
+                      <input v-model="childPara.name" type="text" />
+                    </div>
+                    <div class="">
+                      <label><b>Description:</b></label><br>
+                      <input v-model="childPara.description" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="edit()">Edit</button>
+              <button
+type="button" class="btn btn-secondary" data-dismiss="modal"
+                @click="update(childPara.id)">Update</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="OpenCloseFun()">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <Loading v-model:active="isLoading"></Loading>
 </div>
@@ -150,110 +159,112 @@ export default {
             this.rowData = this.Orders;
             this.rowSelection = 'single';
 
-        } catch (error) {
-            this.isLoading = false;
-            this.showDialog = true;
-            this.dialogTitle = "Error";
-            this.dialogMessage = "Not get data";
-        } finally {
-            this.isLoading = false;
-        }
+    }
+    catch (error) {
+      this.isLoading = false;
+      this.showDialog = true;
+      this.dialogTitle = "Error";
+      this.dialogMessage = "Not get data";
+    }
+    finally {
+      this.isLoading = false;
+    }
+  },
+  methods: {
+    toggleForm() {
+      this.formVisible = !this.formVisible;
     },
-    methods: {
-        toggleForm() {
-            this.formVisible = !this.formVisible;
-        },
-        onCellClicked(params) {
-            this.childPara = params.node.data
-            this.showChildRow = true;
-        },
-        OpenCloseFun() {
-            this.showChildRow = false;
-            this.ismodel = true;
-        },
-        onCellValueChanged(event) {
-
-        },
-        onGridReady(params) {
-            this.gridApi = params.api;
-            this.gridColumnApi = params.columnApi;
-        },
-        onBtnExport() {
-            this.gridApi.exportDataAsCsv();
-        },
-        onFilterTextBoxChanged() {
-            this.gridApi.setQuickFilter(
-                document.getElementById('filter-text-box').value
-            );
-        },
-        onPrintQuickFilterTexts() {
-            this.gridApi.forEachNode(function (rowNode, index) {
-
-            });
-        },
-        edit() {
-            this.ismodel = false;
-        },
-        async update(id) {
-            this.showDialog = false;
-            try {
-                const res = await AxiosInstance.put(`/Academia` + '?' + 'id=' + id + '&name=' + this.childPara.name + '&desc=' + this.childPara.description);
-                this.ismodel = true;
-                if (res.status === 200) {
-                    await this.getdata();
-                    this.gridApi.refreshCells({
-                        force: true
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        async addBranch() {
-            this.isLoading = true;
-            try {
-                const res = await AxiosInstance.post(`/Academia`, this.newBranch);
-                this.ismodel = true;
-                if (res.status === 200) {
-                    await this.getdata();
-                    this.gridApi.refreshCells({
-                        force: true
-                    });
-                    alert("Insert Successful");
-                } else {
-                    alert("Insert Fail");
-                }
-            } catch (error) {
-                this.isLoading = false;
-                console.error("Error adding branch:", error);
-            } finally {
-                this.isLoading = false;
-            }
-        },
-        onLogOut() {
-            this.$store.commit('isLoggedIn', false);
-            this.$router.push('/Loginpage');
-        },
-        async getdata() {
-            this.domLayout = 'autoHeight';
-            this.isLoading = true;
-            try {
-                const response = await AxiosInstance.get(`/Academia`);
-                const dataArray = Object.values(response.data);
-                this.Orders = dataArray.map(item => item.academia);
-                this.rowData = this.Orders;
-                this.rowSelection = 'single';
-            } catch (error) {
-                this.isLoading = false;
-                console.log(error);
-                this.showDialog = true;
-                this.dialogTitle = "Error";
-                this.dialogMessage = "Not get data";
-            } finally {
-                this.isLoading = false;
-            }
-        }
+    onCellClicked(params) {
+      this.childPara = params.node.data
+      this.showChildRow = true;
     },
+    OpenCloseFun() {
+      this.showChildRow = false;
+      this.ismodel = true;
+    },
+    onCellValueChanged(event) {
+      console.log(event);
+    },
+    onGridReady(params) {
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+    },
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
+    onFilterTextBoxChanged() {
+      this.gridApi.setQuickFilter(
+        document.getElementById('filter-text-box').value
+      );
+    },
+    onPrintQuickFilterTexts() {
+      this.gridApi.forEachNode(function (rowNode, index) {
+        console.log(rowNode);
+        console.log(index);
+      });
+    },
+    edit() {
+      this.ismodel = false;
+    },
+    async update(id) {
+      this.showDialog = false;
+      try {
+        const res = await AxiosInstance.put(`/Academia` + '?' + 'id=' + id + '&name=' + this.childPara.name + '&desc=' + this.childPara.description);
+        this.ismodel = true;
+        if (res.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addBranch() {
+      this.isLoading = true;
+      try {
+        const res = await AxiosInstance.post(`/Academia`, this.newBranch);
+        this.ismodel = true;
+        if (res.status === 200) {
+          await this.getdata();
+          this.gridApi.refreshCells({ force: true });
+          alert("Insert Successful");
+        } else {
+          alert("Insert Fail");
+        }
+      } catch (error) {
+        this.isLoading = false;
+        console.error("Error adding branch:", error);
+      }
+      finally {
+        this.isLoading = false;
+      }
+    },
+    onLogOut() {
+      this.$store.commit('isLoggedIn', false);
+      this.$router.push('/Loginpage');
+    },
+    async getdata() {
+      this.domLayout = 'autoHeight';
+      this.isLoading = true;
+      try {
+        const response = await AxiosInstance.get(`/Academia`);
+        const dataArray = Object.values(response.data);
+        this.Orders = dataArray.map(item => item.academia);
+        this.rowData = this.Orders;
+        this.rowSelection = 'single';
+      }
+      catch (error) {
+        this.isLoading = false;
+        console.log(error);
+        this.showDialog = true;
+        this.dialogTitle = "Error";
+        this.dialogMessage = "Not get data";
+      }
+      finally {
+        this.isLoading = false;
+      }
+    }
+  },
 };
 </script>
 

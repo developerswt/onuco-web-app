@@ -1,23 +1,29 @@
 <template>
 <div class="container">
     <div class="row pt-2">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card-box">
-                <div class="card-head">
-                    <header>Total Semester details</header>
-                    <div class="card-body ">
-                        <div style="padding: 20px;">
-                            <div class="example-wrapper">
-                                <div style="height: 100%;">
-                                    <ag-grid-vue :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData" :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged" @row-clicked='onCellClicked'>
-                                    </ag-grid-vue>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card-box">
+          <div class="card-head">
+            <header>Total Semester details</header>
+            <div class="card-body ">
+              <div style="padding: 20px;">
+                <div class="example-wrapper">
+                  <div style="height: 100%;">
+                    <ag-grid-vue
+:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                      :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
+                      :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
+                      cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
+                      is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
+                      @row-clicked='onCellClicked'>
+                    </ag-grid-vue>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <Loading v-model:active="isLoading"></Loading>
 </div>

@@ -1,27 +1,29 @@
 <template>
-<div id="academy_container" class="container">
-    <div class="category-test pt-3 ">
-        <h4 class="academic_head_text">
-            <span id="aca_text">Available</span>Academics
-            <router-link to="/AcademiNew">See all</router-link>
-        </h4>
-    </div>
-    <carousel :settings="settings" :breakpoints="breakpoints">
-        <slide v-for="item in academia" :key="item.id">
-            <div class="box1">
-                <router-link :to="{ name: 'Branches', params: { name: item.academia.academiaName } }" style="color: white;text-decoration: none;">
-                    <div class="box">
-                        <img src="../assets/images/book.png" class="icon">
-                        <div class="top">
-                            <span class="wr">0{{ item.bCount }}</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <p class="ty1">COURSES</p>
+    <div id="academy_container" class="container">
+        <div class="category-test pt-3 ">
+            <h4 class="academic_head_text">
+                <span id="aca_text">Available</span>Academics
+                <router-link to="/AcademiNew">See all</router-link>
+            </h4>
+        </div>
+        <carousel :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="item in academia" :key="item.id">
+                <div class="box1">
+                    <router-link
+:to="{ name: 'Branches', params: { name: item.academia.academiaName } }"
+                        style="color: white;text-decoration: none;">
+                        <div class="box">
+                            <img src="../assets/images/book.png" class="icon">
+                            <div class="top">
+                                <span class="wr">0{{ item.bCount }}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <p class="ty1">COURSES</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <p class="ty">{{ item.academia.name }}</p>
+                        <p class="ty">{{ item.academia.name }}</p>
 
                 </router-link>
             </div>

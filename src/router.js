@@ -75,10 +75,7 @@ import FacultyCourseInfo from './components/FacultyCourseInfo.vue'
 import CourseInfo from './components/CourseInfo.vue'
 import FacultySubStudents from './components/FacultySubStudents.vue'
 import StudentSubDetails from './components/StudentSubDetails.vue'
-import FacultyDelete from './components/FacultyDelete.vue'
-import ActiveStudents from './components/ActiveStudents.vue';
-
-
+import DeactivationRequest from './components/DeactivationRequest.vue'
 
 let user = null; // Initialize user as null
 
@@ -107,6 +104,7 @@ Hub.listen("auth", async data => {
     store.commit('isLoggedIn', true); 
     // Access the entire user attribute details
     const attributes = user.attributes;
+    console.log(attributes);
 
     // Store the user data in your state, for example:
     store.commit('setUser', user); // Commit user data to the store
@@ -647,24 +645,15 @@ const routes = [
 
   },
   {
-    path: "/FacultyDelete",
-    name: "FacultyDelete",
-    component: FacultyDelete,
+    path: "/Deactivation",
+    name: "DeactivationRequest",
+    component: DeactivationRequest,
     meta: {
-        title: 'FacultyDelete',
+        title: 'Deactivation request page',
     },
 
   },
-  
-  {
-    path: "/ActiveStudents",
-    name: "ActiveStudents",
-    component: ActiveStudents,
-    meta: {
-        title: 'ActiveStudents',
-    },
 
-  },
 
 ];
 

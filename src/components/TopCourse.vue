@@ -36,8 +36,8 @@
                                     <div v-if="isLoggedIn" class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click="makePayment(course.discountPrice)">Buy Now</a>
                                     </div>
-                                    <div class="col-sm-6" v-else>
-                                        <a href="#" @click.prevent="redirectToLogin" class="btn btn-primary">Buy Now</a>
+                                    <div v-else class="col-sm-6">
+                                        <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
             <span id="aca_text">All</span>Courses
         </h4>
         <div class="row align" >
-            <div class="col-sm-4" v-for="person in allCourses.courses" :key="person.id" >
+            <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4" >
                 <div class="box ">
                     <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
                         <div class="wer">
@@ -95,7 +95,6 @@
 import sha256 from "crypto-js/sha256";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
-import Breadcrumbs from './Breadcrumbs.vue'
 import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
@@ -109,7 +108,6 @@ Carousel,
 Slide,
 StarRatings,
 Navigation,
-Breadcrumbs
 },
 data() {
         return {

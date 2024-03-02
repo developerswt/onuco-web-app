@@ -1,87 +1,89 @@
 <template>
-<div class="container jk">
-    <div class="Instructor_parent_block">
-        <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
-        <div v-if="showShareButton">
-            <ShareButton :url="currentRoute" @close="closeShareOption" />
-        </div>
-        <section>
-            <div class="instructor-details">
-                <div class="professor-block">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5">
-                            <div class="row">
-                                <div class="col-lg-4 col-4 col-sm-4">
-                                    <div class="professor_image_block">
-                                        <img v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl" class="img-fluid">
-                                        <img v-else src="../assets/images/Image21.png" class="img-fluid">
+    <div class="container jk">
+        <div class="Instructor_parent_block">
+            <h2 class="instructor_head_text mt-4"><span id="Meet_text">Meet</span> Instructor</h2>
+            <div v-if="showShareButton">
+                <ShareButton :url="currentRoute" @close="closeShareOption"  />
+            </div>
+            <section>
+                <div class="instructor-details">
+                    <div class="professor-block">
+                        <div class="row">
+                            <div class="col-md-5 col-lg-5">
+                                <div class="row">
+                                    <div class="col-lg-4 col-4 col-sm-4">
+                                        <div class="professor_image_block">
+                                            <img v-if="faculty.imageUrl !== ''" :src="faculty.imageUrl" class="img-fluid">
+                                            <img v-else src="../assets/images/Image21.png" class="img-fluid">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-8 col-8 col-sm-8">
-                                    <h5 id="prof_text">{{ faculty.name }}</h5>
-                                    <div class="row">
-                                        <div class="col-lg-12 mn1">
-                                            <div class="row aa">
-                                                <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                    <StarRatings :rating="rating || 0" :max-rating="5" />
-                                                </div>
-                                                <div class="col-lg-5 col-6 col-sm-6 col-md-6">
-                                                    <p id="review_text">
-                                                        <a class="rating_icons" style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }}
-                                                            reviews)</a>
-                                                    </p>
+                                    <div class="col-lg-8 col-8 col-sm-8">
+                                        <h5 id="prof_text">{{ faculty.name }}</h5>
+                                        <div class="row">
+                                            <div class="col-lg-12 mn1">
+                                                <div class="row aa">
+                                                    <div class="col-lg-7 col-6 col-sm-6 col-md-6">
+                                                        <StarRatings :rating="rating || 0" :max-rating="5" />
+                                                    </div>
+                                                    <div class="col-lg-5 col-6 col-sm-6 col-md-6">
+                                                        <p id="review_text">
+                                                            <a
+class="rating_icons" style="cursor: pointer;"
+                                                                @click="showPopup()">({{ ratingCount || 0 }}
+                                                                reviews)</a>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
-                                    <div class="social-icons">
-                                        <a :href="faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
-                                        <a :href="faculty.twitter" target="blank" class="fa fa-twitter"></a>
-                                        <a :href="faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
+                                        <!-- <p class="rating_icons"><StarRatings :rating="ratings" :max-rating="5" /> (23 reviews) </p> -->
+                                        <div class="social-icons">
+                                            <a :href="faculty.youTube" target="blank" class="fa fa-youtube-play"></a>
+                                            <a :href="faculty.twitter" target="blank" class="fa fa-twitter"></a>
+                                            <a :href="faculty.linkedin" target="blank" class="fa fa-linkedin"></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-7 col-lg-7">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="share_icon_block" style="color: aliceblue;">
-                                        <img style="cursor: pointer;" @click="showShareOption" src="../assets/images/Union193.png" class="share-icon">
+                            <div class="col-md-7 col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="share_icon_block" style="color: aliceblue;">
+                                            <img style="cursor: pointer;" src="../assets/images/Union193.png" class="share-icon" @click="showShareOption">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="btn-group">
-                                        <button id="left_button" type="button" class="btn" style="color: #b1afaf;">13
-                                            Following</button>
-                                        <button id="right_button" type="button" class="btn" style="color: #b1afaf;">1200
-                                            Follwers</button>
+                                    <div class="col-lg-12">
+                                        <div class="btn-group">
+                                            <button id="left_button" type="button" class="btn" style="color: #b1afaf;">13
+                                                Following</button>
+                                            <button id="right_button" type="button" class="btn" style="color: #b1afaf;">1200
+                                                Follwers</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="app1">
-                                    <div v-if="isPopupVisible" class="popup">
-                                        <div class="popup-content">
-                                            <div class="">
-                                                <span class="close" @click="closePopup">&times;</span>
-                                                <h5>Ratings System</h5>
+                                    <div class="app1">
+                                        <div v-if="isPopupVisible" class="popup">
+                                            <div class="popup-content">
+                                                <div class="">
+                                                    <span class="close" @click="closePopup">&times;</span>
+                                                    <h5>Ratings System</h5>
+                                                </div>
+                                                <hr>
+                                                <form @submit.prevent="submitRating">
+                                                    <label for="rating">Rate the faculty :</label><br>
+                                                    <el-rate v-model="rating" size="large" allow-half /><br>
+                                                    <input type="submit" value="Submit">
+                                                </form>
+                                                <!-- Add your popup content here -->
                                             </div>
-                                            <hr>
-                                            <form @submit.prevent="submitRating">
-                                                <label for="rating">Rate the faculty :</label><br>
-                                                <el-rate v-model="rating" size="large" allow-half /><br>
-                                                <input type="submit" value="Submit">
-                                            </form>
-                                            <!-- Add your popup content here -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="app" class="row professor-details">
-                    <div class="col-sm-12 col-lg-12">
-                        <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
+                    <div id="app" class="row professor-details">
+                        <div class="col-sm-12 col-lg-12">
+                            <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
                                 faculty.description.slice(0, 184) : '' }}
                             <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
                                     more</span></span>
@@ -96,15 +98,15 @@
         </section>
     </div>
 
-</div>
-<section id="Course_section" v-if="persons.length > 0">
-    <div class="container">
-        <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
-        <carousel :settings="settings" :breakpoints="breakpoints">
-            <slide v-for="person in persons" :key="person.id">
-                <div id="instructor_card" class="card">
-                    <div class="card-title">
-                        <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
+    </div>
+    <section v-if="persons.length > 0" id="Course_section">
+        <div class="container">
+            <h5 class="course_text"><span id="course_text">Courses </span>({{ persons.length }})</h5>
+            <carousel :settings="settings" :breakpoints="breakpoints">
+                <slide v-for="person in persons" :key="person.id">
+                        <div id="instructor_card" class="card">
+                            <div class="card-title">
+                                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
 
                             <div class="row">
                                 <div class="col-md-12 ">
@@ -113,48 +115,57 @@
                                             <div class="col-lg-10 col-9 col-sm-9">
                                                 <p class="ft" data-placement="top" :title="person.title"> {{
                                                         person.title.slice(0, 18) }}...</p>
-                                            </div>
-                                            <div class="col-lg-2 col-3 col-sm-3">
-                                                <img @click.prevent="showShareCourseUrlOption(person.courseRouteName)" src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
-                                            </div>
-                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                <p class="ft"> 18CS81</p>
-                                            </div>
-                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                <p id="small_text" class="ft">240
-                                                    hrs</p>
-                                            </div>
-                                            <div class="col-lg-9 col-9 col-sm-9">
-                                                <p class="ft">{{ person.courseDescription.slice(0, 50) }}...</p>
-                                            </div>
-                                            <div class="col-lg-3 col-3 col-sm-3">
-                                                <div class="video_logo">
-                                                    <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-6">
-                                                        <p class="rating_icons">
-                                                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-
-                                                        </p>
+                                                <div class="col-lg-2 col-3 col-sm-3">
+                                                    <img
+src="../assets/images/Union193.png" style="width: 16px; height: 20px;"
+                                                        class="icon" @click.prevent="showShareCourseUrlOption(person.courseRouteName)">
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p class="ft"> 18CS81</p>
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p id="small_text" class="ft">240
+                                                        hrs</p>
+                                                </div>
+                                                <div class="col-lg-9 col-9 col-sm-9">
+                                                    <p class="ft">{{ person.courseDescription.slice(0, 50) }}...</p>
+                                                </div>
+                                                <div class="col-lg-3 col-3 col-sm-3">
+                                                    <div class="video_logo">
+                                                        <img
+src="../assets/images/Path4025.png"
+                                                            style="width: 30px; height:30px;" class="video">
                                                     </div>
-                                                    <div class="col-lg-6 col-6" style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
-                                                        <p> (23 reviews) </p>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-6">
+                                                            <p class="rating_icons">
+                                                                <i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                                    class="fa fa-star-o"></i>
+                                                                
+                                                            </p>
+                                                        </div>
+                                                        <div
+class="col-lg-6 col-6"
+                                                            style="position: relative; top: 8px;left: 20px; font-size: 15px; color:rgb(112, 112, 112)">
+                                                            <p> (23 reviews) </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </router-link>
                             </div>
-                        </router-link>
-                    </div>
-                </div>
-
-            </slide>
-            <template #addons>
+                        </div>
+                
+                </slide>
+                <template #addons>
 
                 <navigation>
                     <template #next>
@@ -195,16 +206,18 @@
                                                 <p class="ft"> Math 1 (NEP Series)</p>
                                             </div>
 
-                                            <div class="col-lg-2 col-3 col-sm-3">
-                                                <img src="../assets/images/Union193.png" style="width: 16px; height: 20px;" class="icon">
-                                            </div>
-                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                <p class="ft"> 18CS81</p>
-                                            </div>
-                                            <div class="col-lg-6 col-6 col-sm-6">
-                                                <p id="small_text" class="ft">240
-                                                    hrs</p>
-                                            </div>
+                                                <div class="col-lg-2 col-3 col-sm-3">
+                                                    <img
+src="../assets/images/Union193.png"
+                                                        style="width: 16px; height: 20px;" class="icon">
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p class="ft"> 18CS81</p>
+                                                </div>
+                                                <div class="col-lg-6 col-6 col-sm-6">
+                                                    <p id="small_text" class="ft">240
+                                                        hrs</p>
+                                                </div>
 
                                             <div class="col-lg-9 col-9 col-sm-9">
 
@@ -213,23 +226,28 @@
                                                     excepturi.</p>
                                             </div>
 
-                                            <div class="col-lg-3 col-3 col-sm-3">
-                                                <div class="video_logo">
-                                                    <img src="../assets/images/Path4025.png" style="width: 30px; height:30px;" class="video">
+                                                <div class="col-lg-3 col-3 col-sm-3">
+                                                    <div class="video_logo">
+                                                        <img
+src="../assets/images/Path4025.png"
+                                                            style="width: 30px; height:30px;" class="video">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <p style="color: #707070;" class="sub_icons mb-0"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                                    (23
-                                                    reviews) </p>
+                                                <div class="col-lg-12">
+                                                    <p style="color: #707070;" class="sub_icons mb-0"><i
+                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                            class="fa fa-star-o"></i>
+                                                        (23
+                                                        reviews) </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </router-link>
+                    </router-link>
 
             </slide>
             <template #addons>
@@ -267,7 +285,6 @@
 <script>
 import ShareButton from './ShareButton.vue'
 import AxiosInstance from '../config/axiosInstance'
-import Breadcrumbs from "./Breadcrumbs.vue"
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
@@ -283,7 +300,6 @@ export default {
     components: {
         Offer,
         Loading,
-        Breadcrumbs,
         Carousel,
         Slide,
         StarRatings,

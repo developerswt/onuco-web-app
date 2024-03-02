@@ -20,7 +20,8 @@
                                         <div class="left_block">
                                             <p>5 Modules <span id="span_text">32 Topics</span></p>
 
-                                            <button id="course_button">Start Course <i class="fa-solid fa-play"
+                                            <button id="course_button">Start Course <i
+class="fa-solid fa-play"
                                                     style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
@@ -64,18 +65,14 @@
                                         <div class="choose_file">
                                             <div class="icon_bg_colors">
                                                 <i class="fa-solid fa-user-astronaut" style="color: #fff;"></i>
-
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input id="input_file" type="file" class="input_file"
-                                                @change="handleFileChange">
+                                            <input id="input_file" type="file" class="input_file" @change="handleFileChange">
                                         </div>
                                     </div>
                                     <!-- </div> -->
                                 </div>
-
-
                             </div>
                         </div>
                         <div class="esdit_profile">
@@ -84,6 +81,10 @@
                             <button v-else class="buttons button2" @click="saveProfile">SAVE</button>
 
                         </div>
+                        <div class="pt-4">
+                            <router-link to="/Deactivation"><button class="delete_profile_request">Delete Profile Request</button></router-link>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row mb-2  mm">
@@ -94,7 +95,8 @@
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
                                 <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input v-else v-model="this.userEmail" placeholder="userName@email.com" type="text"
+                                <input
+v-else v-model="userEmail" placeholder="userName@email.com" type="text"
                                     style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
@@ -139,7 +141,8 @@
                                     <p>{{ formatCreationDate(login.creationDate) }}</p>
                                 </div>
                                 <p v-if="shouldShowViewAll">
-                                    <router-link class="va" to="" style="text-decoration: underline;"
+                                    <router-link
+class="va" to="" style="text-decoration: underline;"
                                         @click="toggleViewAll">
                                         View all
                                     </router-link>
@@ -211,6 +214,14 @@ export default {
         this.loginHistory();
     },
     methods: {
+        async deleteProfile() {
+            try {
+                const response = await axiosInstance.post('/DeleteProfile');
+                console.log(response);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        },
         editProfile() {
             this.editing = true;
         },
@@ -246,6 +257,7 @@ export default {
                 const response = await axiosInstance.post('/UploadS3Files/upload', formData, {
                     headers
                 });
+                console.log(response);
 
                 // Handle the API response as needed
                 await this.update();
@@ -350,6 +362,24 @@ export default {
     margin-left: 16px;
     background-color: white;
 }
+.delete_profile_request {
+    border: 1px solid #0177FB;
+    border-radius: 4px;
+    opacity: 1;
+    margin-left: 16px;
+    background-color: white;
+}
+.delete_profile_request {
+    color: blue;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 18px 0px;
+    cursor: pointer;
+}
+
 
 .button2 {
     /* border: 1px solid var(--unnamed-color-0177fb); */

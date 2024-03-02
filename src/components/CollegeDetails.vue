@@ -16,7 +16,8 @@
                 <div v-for="(sem, index) in semester" :key="index" class="row">
                     <div id="main_card" class="card">
                         <h5 class="card-header">
-                            <div id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
+                            <div
+id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
                                 data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true"
                                 aria-controls="collapse-example">
                                 <span class="action"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
@@ -24,7 +25,8 @@
                                 <p id="sem_description">{{ sem.description }}</p>
                             </div>
                         </h5>
-                        <div v-if="filteredCourses(sem.id).length > 0" :id="'collapse-example' + index"
+                        <div
+v-if="filteredCourses(sem.id).length > 0" :id="'collapse-example' + index"
                             :class="index == 0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
                             <div class="card-body pt-0">
                                 <div class="">
@@ -39,7 +41,8 @@
                                                                     <router-link :to="{ name: 'CourseDetails', params: { name: cou.courseName } }" style="color: white; text-decoration: none;">
                                                                         <div class="row">
                                                                             <div class="col-lg-12 col-9 col-sm-9 col-md-9">
-                                                                                <p id="sub_text" class="mb-0"
+                                                                                <p
+id="sub_text" class="mb-0"
                                                                                     data-placement="top" :title="cou.name">
                                                                                     {{ cou.name.slice(0, 18) }}...</p>
 
@@ -54,8 +57,9 @@
                                                                     </router-link>
                                                                 </div>
                                                                 <div class="col-lg-4 col-3 col-sm-3 col-md-3">
-                                                                    <img @click.stop="showShareOption(cou.courseName)" src="../assets/images/Union193.png"
-                                                                        style="width: 16px; height: 20px;" class="icon">
+                                                                    <img
+src="../assets/images/Union193.png" style="width: 16px; height: 20px;"
+                                                                        class="icon" @click.stop="showShareOption(cou.courseName)">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -65,11 +69,13 @@
                                                             <div class="col-lg-12 mn">
                                                                 <div class="row">
                                                                     <div class="col-lg-9 col-9 col-sm-9 col-md-9">
-                                                                        <p id="desc_text" style="padding-top:10px;"
+                                                                        <p
+id="desc_text" style="padding-top:10px;"
                                                                             v-html="cou.description.slice(0, 49)"></p>
                                                                     </div>
                                                                     <div class="col-lg-3 col-3 col-sm-3 col-md-3">
-                                                                        <img src="../assets/images/Path4025.png"
+                                                                        <img
+src="../assets/images/Path4025.png"
                                                                             style="width: 30px; height:30px;" class="video">
                                                                     </div>
                                                                 </div>
@@ -79,7 +85,8 @@
                                                             <div class="col-lg-12 mn1">
                                                                 <div class="row aa">
                                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                                        <StarRatings :rating="cou.starRating || 0"
+                                                                        <StarRatings
+:rating="cou.starRating || 0"
                                                                             :max-rating="5" />
                                                                     </div>
                                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
@@ -98,7 +105,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
+                        <div
+v-else :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
                             aria-labelledby="heading-collapse" style="background-color: #EFF5FC;">
                             <div v-if="!isLoading" class="">
                                 <h2 class="comming_soons">Comming Soon ...</h2>
@@ -123,7 +131,6 @@ import AxiosInstance from '../config/axiosInstance';
 import Offer from './Offer.vue'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Breadcrumbs from './Breadcrumbs.vue';
 import StarRatings from './StarRatings.vue';
 import ShareButton from './ShareButton.vue';
 
@@ -132,7 +139,6 @@ export default {
     components: {
         Offer,
         Loading,
-        Breadcrumbs,
         StarRatings,
         ShareButton
     },

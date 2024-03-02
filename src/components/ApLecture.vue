@@ -1,56 +1,73 @@
 <template>
 <div class="container">
     <div class="card-box">
-        <div class="card-head">
-            <header>Faculty Payment Info</header>
-            <div class="filter-box">
-                <span for="filter-text-box">Search Here : </span>
-                <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
-                <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
-                <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+      <div class="card-head">
+        <header>Faculty Payment Info</header>
+          <div class="filter-box">
+            <span for="filter-text-box">Search Here : </span>
+            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
+            <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
+            <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+          </div>
+      </div>
+      <div class="card-body">
+        <div style="padding: 20px;">
+          <div class="example-wrapper">
+            <div style="height: 100%;">
+              <ag-grid-vue
+                v-if="hasSearched"
+                :dom-layout="domLayout"
+                class="ag-theme-alpine"
+                :column-defs="columnDefs"
+                :row-data="rowData"
+                :edit-type="editType"
+                :row-selection="rowSelection"
+                :default-col-def="defaultColDef"
+                :suppress-excel-export="true"
+                :popup-parent="popupParent"
+                cache-quick-filter="true"
+                :pagination="true"
+                :pagination-page-size="paginationPageSize"
+                is-loding="true"
+                @grid-ready="onGridReady"
+                @cell-value-changed="onCellValueChanged"
+                @row-clicked="onCellClicked">
+              </ag-grid-vue>
             </div>
-        </div>
-        <div class="card-body">
-            <div style="padding: 20px;">
-                <div class="example-wrapper">
-                    <div style="height: 100%;">
-                        <ag-grid-vue v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData" :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter="true" :pagination="true" :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged" @row-clicked="onCellClicked">
-                        </ag-grid-vue>
-                    </div>
-                </div>
-                <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
-                <el-dialog class="fdata" v-model="formVisible" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
-                    <el-form :model="newBranch" ref="form" label-position="top" class="frm">
-                        <p><b></b> {{ newBranch.id }}</p>
-                        <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" required>
-                            <el-input v-model="newBranch.userCourseSubscriptionId"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Facuilty CognitoId:" prop="facuiltyCognitoId" required>
-                            <el-input v-model="newBranch.facuiltyCognitoId"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Payment Date:" prop="paymentDate" required>
-                            <el-date-picker v-model="newBranch.paymentDate" type="datetime"></el-date-picker>
-                        </el-form-item>
-                        <el-form-item label="Amount Paid:" prop="amountPaid" required>
-                            <el-input v-model="newBranch.amountPaid"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Balance Amount:" prop="balanceAmount" required>
-                            <el-input v-model="newBranch.balanceAmount"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Mode Of Pay:" prop="modeofPay" required>
-                            <el-input v-model="newBranch.modeofPay"></el-input>
-                        </el-form-item>
-                        <el-form-item label="IsActive:" prop="isActive" required>
-                            <el-input v-model="newBranch.isActive"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button class="btn1" type="primary" @click="addBranch">Add Payment Data</el-button>
-                        </el-form-item>
-                    </el-form>
-                </el-dialog>
-            </div>
-        </div>
-        <!-- <div v-if="showChildRow">
+          </div>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+            <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
+              <el-form ref="form" :model="newBranch" label-position="top" class="frm"> 
+                <p><b></b> {{ newBranch.id }}</p>
+                <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" required>
+                  <el-input v-model="newBranch.userCourseSubscriptionId"></el-input>
+                </el-form-item>
+                <el-form-item label="Facuilty CognitoId:" prop="facuiltyCognitoId" required>
+                  <el-input v-model="newBranch.facuiltyCognitoId"></el-input>
+                </el-form-item>
+                <el-form-item label="Payment Date:" prop="paymentDate" required>
+                  <el-date-picker v-model="newBranch.paymentDate" type="datetime"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="Amount Paid:" prop="amountPaid" required>
+                  <el-input v-model="newBranch.amountPaid"></el-input>
+                </el-form-item>
+                <el-form-item label="Balance Amount:" prop="balanceAmount" required>
+                  <el-input v-model="newBranch.balanceAmount"></el-input>
+                </el-form-item>
+                <el-form-item label="Mode Of Pay:" prop="modeofPay" required>
+                  <el-input v-model="newBranch.modeofPay"></el-input>
+                </el-form-item>
+                <el-form-item label="IsActive:" prop="isActive" required>
+                  <el-input v-model="newBranch.isActive"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button class="btn1" type="primary" @click="addBranch">Add Payment Data</el-button>
+                </el-form-item>
+              </el-form>
+            </el-dialog>
+      </div>
+  </div>
+         <!-- <div v-if="showChildRow">
            <div
 class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style="display:block;"
              aria-modal="true" role="dialog">
@@ -123,106 +140,73 @@ import {
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Datepicker from '@vuepic/vue-datepicker';
+// import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
-    name: "OrdersPage",
-    components: {
-        AgGridVue,
-        Loading,
-        Confirmation,
-        Datepicker,
-    },
-    data: function () {
-        return {
-            showRequiredMessage: false,
-            hasSearched: false,
-            gridApi: null, // Ensure gridApi is initialized to null
-            gridColumnApi: null,
-            filterText: '',
-            hasSearched: false, // Assuming you have this boolean property
-            domLayout: null,
-            newBranch: {
-                userCourseSubscriptionId: '',
-                facuiltyCognitoId: '',
-                paymentDate: '',
-                amountPaid: '',
-                balanceAmount: '',
-                modeofPay: '',
-                isActive: '',
-            },
-            userName: '',
-            ismodel: true,
-            isLoading: false,
-            showDialog: false,
-            dialogTitle: '',
-            dialogMessage: '',
-            domLayout: null,
-            Orders: [],
-            req: [],
-            //columnDefs: [{ name: 'Faculty Name', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
-            columnDefs: [{
-                    headerName: 'Faculty Name',
-                    field: 'userName'
-                },
-                {
-                    headerName: 'Email',
-                    field: 'userEmail'
-                },
-                {
-                    headerName: 'Phone Number',
-                    field: 'phone_Number'
-                },
-                {
-                    headerName: 'Facuilty CognitoId',
-                    field: 'facuiltyCognitoId'
-                },
-                {
-                    headerName: 'Payment Date',
-                    field: 'paymentDate',
-                    valueFormatter: this.dateFormat.bind(this),
-                    filterType: 'date'
-                },
-                {
-                    headerName: 'Amount Paid',
-                    field: 'amountPaid'
-                },
-                {
-                    headerName: 'Balance Amount',
-                    field: 'balanceAmount'
-                },
-                {
-                    headerName: 'Mode of Pay',
-                    field: 'modeofPay'
-                }
-            ],
-            gridApi: null,
-            defaultColDef: {
-                sortable: true,
-                filter: true,
-                width: 150,
-                resizable: true,
-                applyMiniFilterWhileTyping: true
-            },
-            columnApi: null,
-            editType: null,
-            showChildRow: false,
-            childPara: null,
-            rowData: null,
-            rowSelection: null,
-            paginationPageSize: null,
-            rightAligned: {
-                headerClass: 'ag-right-aligned-header',
-                cellClass: 'ag-right-aligned-cell'
-            },
-        };
-    },
-    computed: {
-        isLoggedIn() {
-            return this.$store.state.IsLoggedIn;
-        },
-    },
+ name: "OrdersPage",
+ components: {
+   AgGridVue,
+   Loading,
+   Confirmation,
+ },
+ data: function () {
+   return {
+    showRequiredMessage: false,
+    hasSearched: false,
+    gridApi: null, // Ensure gridApi is initialized to null
+    gridColumnApi: null,
+    filterText: '',
+    newBranch: {
+       userCourseSubscriptionId: '',
+       facuiltyCognitoId: '',
+       paymentDate: '',
+       amountPaid: '',
+       balanceAmount: '',
+       modeofPay: '',
+       isActive: '',
+      },
+     formVisible: false,
+     userName: '',
+     ismodel: true,
+     isLoading: false,
+     showDialog: false,
+     dialogTitle: '',
+     dialogMessage: '',
+     domLayout: null,
+     Orders: [],
+     req: [],
+     columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
+     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+     columnApi: null,
+     editType: null,
+     showChildRow: false,
+     childPara: null,
+     rowData: null,
+     rowSelection: null,
+     paginationPageSize: null,
+     rightAligned: {
+       headerClass: 'ag-right-aligned-header',
+       cellClass: 'ag-right-aligned-cell'
+     },
+   };
+ },
+ computed: {
+   isLoggedIn() {
+     return this.$store.state.IsLoggedIn;
+   },
+ },
+ watch: {
+ filterText: {
+   handler: function (newFilterText) {
+     // Ensure gridApi is available before setting quick filter
+     if (this.gridApi) {
+       this.gridApi.setQuickFilter(newFilterText);
+     }
+   },
+   deep: true, // Watch changes deeply
+ },
+},
 
     async created() {
         this.domLayout = 'autoHeight';
@@ -247,18 +231,7 @@ export default {
         this.popupParent = document.body;
         this.paginationPageSize = 10;
 
-    },
-    watch: {
-        filterText: {
-            handler: function (newFilterText) {
-                // Ensure gridApi is available before setting quick filter
-                if (this.gridApi) {
-                    this.gridApi.setQuickFilter(newFilterText);
-                }
-            },
-            deep: true, // Watch changes deeply
-        },
-    },
+ },
 
     methods: {
 
@@ -327,11 +300,13 @@ export default {
             this.ismodel = true;
         },
 
-        onCellValueChanged(event) {},
-        onGridReady(params) {
-            this.gridApi = params.api;
-            this.gridColumnApi = params.columnApi;
-        },
+   onCellValueChanged(event) {
+    console.log(event);
+   },
+   onGridReady(params) {
+     this.gridApi = params.api;
+     this.gridColumnApi = params.columnApi;
+   },
 
         onBtnExport() {
             this.gridApi.exportDataAsCsv();
@@ -386,24 +361,26 @@ export default {
             }
         },
 
-        async addBranch() {
-            this.isLoading = true;
-            try {
-                const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
-                this.ismodel = true;
-                console.log(" added successfully");
-                await this.getdata();
-                //  this.gridApi.refreshCells({ force: true });
-                this.toggleForm();
-                this.$refs.Confirmation.open("Payment Details Added successfully.");
-
-            } catch (error) {
-                this.isLoading = false;
-                console.error("Error adding branch:", error);
-                this.$refs.Confirmation.open("Error Adding Payment Details.");
-            } finally {
-                this.isLoading = false;
-                this.formVisible = false;
+   async addBranch() {
+     this.isLoading = true;
+     try {
+       const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
+       console.log(response);
+       this.ismodel = true;
+         console.log(" added successfully");
+         await this.getdata();
+        //  this.gridApi.refreshCells({ force: true });
+         this.toggleForm();
+         this.$refs.Confirmation.open("Payment Details Added successfully.");
+       
+   } catch (error) {
+       this.isLoading = false;
+       console.error("Error adding branch:", error);
+       this.$refs.Confirmation.open("Error Adding Payment Details.");
+    }
+     finally {
+       this.isLoading = false;
+       this.formVisible = false;
 
             }
         },

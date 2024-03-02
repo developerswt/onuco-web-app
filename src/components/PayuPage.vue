@@ -290,7 +290,8 @@ export default {
             Name
           </label>
           <div class="mt-2">
-            <input id="name" name="name" v-model="data.name" type="name" autoComplete="name" required
+            <input
+id="name" v-model="data.name" name="name" type="name" autoComplete="name" required
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
@@ -299,7 +300,8 @@ export default {
             Mobile
           </label>
           <div class="mt-2">
-            <input id="Mobile" name="mobile" v-model="data.mobile" autoComplete="Mobile" required
+            <input
+id="Mobile" v-model="data.mobile" name="mobile" autoComplete="Mobile" required
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
@@ -308,7 +310,8 @@ export default {
             Amount
           </label>
           <div class="mt-2">
-            <input id="Amount" name="amount" v-model="data.amount" autoComplete="Amount" required
+            <input
+id="Amount" v-model="data.amount" name="amount" autoComplete="Amount" required
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
@@ -317,18 +320,22 @@ export default {
             MUID
           </label>
           <div class="mt-2">
-            <input id="MUID" name="muid" v-model="data.muid" autoComplete="MUID" required
+            <input
+id="MUID" v-model="data.muid" name="muid" autoComplete="MUID" required
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
         <div></div>
         <div>
-          <button type="submit"
+          <button
+type="submit"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Pay
           </button>
         </div>
       </form>
+      <button @click="increment">Click</button>
+      <button>{{ count }}</button>
     </div>
   </div>
 </template>
@@ -350,7 +357,15 @@ export default {
       },
     };
   },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    }
+  },
   methods: {
+    increment() {
+        this.$store.dispatch('incrementCount');
+    },
     generateUUID() {
       return uuidv4().toString(36).slice(-6);
     },
@@ -379,7 +394,7 @@ export default {
 
   // Filter out undefined values before sending the request
   const filteredPayload = Object.fromEntries(
-    Object.entries(payload).filter(([_, value]) => value !== undefined)
+    Object.entries(payload).filter(([value]) => value !== undefined)
   );
 
   const dataPayload = JSON.stringify(filteredPayload);
