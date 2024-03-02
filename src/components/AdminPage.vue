@@ -76,6 +76,10 @@
           <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Delete Profile</span>
           <FacultyDelete />
         </div>
+        <div v-if="selectedContent === 'SecurityKey'" class="content-container">
+          <i class="fa fa-bars bars_icon" @click="toggleSidebar"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="page_title">Video Security Key</span>
+          <AddVideoKey />
+        </div>
       </div>
     </div>
   </div>  
@@ -103,7 +107,7 @@ import FacultyCourseInfo from './FacultyCourseInfo.vue'
 import CourseInfo from './CourseInfo.vue'
 import FacultyPayment from './FacultyPayment.vue';
 import FacultyDelete from './FacultyDelete.vue';
-
+import AddVideoKey from './AddVideoKey.vue';
 export default {
     name: 'AdminPage',
     components: {
@@ -128,6 +132,7 @@ export default {
         CourseInfo,
         FacultyPayment,
         FacultyDelete,
+        AddVideoKey,
     },
     data() {
       return {

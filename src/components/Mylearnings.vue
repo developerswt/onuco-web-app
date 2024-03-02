@@ -12,7 +12,7 @@
                                         <div class="right_block">
                                             <p id="subject_text">{{ selectedItem.title }}</p>
                                             <p class="mb-0">{{ selectedItem.videoDemand }} Video Course</p>
-                                            <p>2 Quiz and 3 Question Banks</p>
+                                            <p>{{ selectedItem.questionBank && selectedItem.questionBank.length ? selectedItem.questionBank.length + ' Question Banks' : '' }}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">

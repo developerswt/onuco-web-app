@@ -7,7 +7,7 @@
               <header>Faculty Course Details</header>
               <div class="filter-box">
   <span for="filter-text-box">Search Here : </span>
-  <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/Course Name/E-mail Id" />
+  <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Subject Name/Faculty Name/Email" />
   <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
   <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
 </div>
@@ -67,7 +67,40 @@ export default {
         domLayout: null,
         Orders: [],
         req: [],
-        columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
+        // columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'courseName', field: 'courseName' }, { name: 'userEmail', field: 'userEmail' }, { name: 'phone_number', field: 'phone_number' },{ name: 'totalAmount', field: 'totalAmount' },{ name: 'total_subscribed', field: 'total_subscribed' },{ name: 'active_studentsCount', field: 'active_studentsCount' },{ name: 'inActive_StudentCount', field: 'inActive_StudentCount' },],
+        columnDefs: [{
+                    headerName: 'Faculty Name',
+                    field: 'userName'
+                },
+                {
+                    headerName: 'Subject Name',
+                    field: 'courseName'
+                },
+                {
+                    headerName: 'Email',
+                    field: 'userEmail'
+                },
+                {
+                    headerName: 'Phone Number',
+                    field: 'phone_number'
+                }, // Adjusted to 'phone_number'
+                {
+                    headerName: 'Total Amount',
+                    field: 'totalAmount'
+                },
+                {
+                    headerName: 'Total Subscribed',
+                    field: 'total_subscribed'
+                },
+                {
+                    headerName: 'Active Students Count',
+                    field: 'active_studentsCount'
+                }, // Adjusted to 'active_studentsCount'
+                {
+                    headerName: 'Inactive Student Count',
+                    field: 'inActive_StudentCount'
+                } // Adjusted to 'inActive_StudentCount'
+            ],
         defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,

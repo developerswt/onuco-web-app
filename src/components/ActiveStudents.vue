@@ -404,12 +404,12 @@ export default {
                         text: "No Of Course",
                     },
                 },
-                {
-                        opposite: true,
-                        title: {
-                            text: "Course Name",
-                        },
-                    },
+                // {
+                //         opposite: true,
+                //         title: {
+                //             text: "Course Name",
+                //         },
+                //     },
              ],
             },
             coursesAvailableSeries: [{
@@ -417,11 +417,11 @@ export default {
                 type: 'bar',
                 data: [],
             }, 
-            {
-                    name: 'Course Name',
-                    type: 'line',
-                    data: [],
-                },
+            // {
+            //         name: 'Course Name',
+            //         type: 'line',
+            //         data: [],
+            //     },
         ],
             
             // No Of Active Courses

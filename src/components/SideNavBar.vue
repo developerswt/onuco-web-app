@@ -64,6 +64,14 @@
             </div>
             </div>
           </li>
+          <li>
+            <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
+            <div class="sidebar-item" @click="selectContent('SecurityKey')">
+              <span class="icon"><i class="fa fa-key"></i></span>
+              <span class="title">Video Security Key</span>
+            </div>
+            </div>
+          </li>
 
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">

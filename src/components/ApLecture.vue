@@ -5,7 +5,7 @@
         <header>Faculty Payment Info</header>
           <div class="filter-box">
             <span for="filter-text-box">Search Here : </span>
-            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
+            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/Email/Phone Number" />
             <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
             <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
           </div>
@@ -140,7 +140,7 @@ import {
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-// import Datepicker from '@vuepic/vue-datepicker';
+import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
@@ -149,6 +149,7 @@ export default {
    AgGridVue,
    Loading,
    Confirmation,
+   Datepicker,
  },
  data: function () {
    return {
@@ -176,8 +177,41 @@ export default {
      domLayout: null,
      Orders: [],
      req: [],
-     columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
-     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+     columnDefs: [{
+                    headerName: 'Faculty Name',
+                    field: 'userName'
+                },
+                {
+                    headerName: 'Email',
+                    field: 'userEmail'
+                },
+                {
+                    headerName: 'Phone Number',
+                    field: 'phone_Number'
+                },
+                {
+                    headerName: 'Facuilty CognitoId',
+                    field: 'facuiltyCognitoId'
+                },
+                {
+                    headerName: 'Payment Date',
+                    field: 'paymentDate',
+                    valueFormatter: this.dateFormat.bind(this),
+                    filterType: 'date'
+                },
+                {
+                    headerName: 'Amount Paid',
+                    field: 'amountPaid'
+                },
+                {
+                    headerName: 'Balance Amount',
+                    field: 'balanceAmount'
+                },
+                {
+                    headerName: 'Mode of Pay',
+                    field: 'modeofPay'
+                }
+            ],     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
      columnApi: null,
      editType: null,
      showChildRow: false,

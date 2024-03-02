@@ -24,63 +24,71 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                 <div class="search_right_block">
                                     <h4 class="academic_head_text mt-2">
 
-                                    <span id="aca_text">{{ book.title }} </span>
+                                        <span id="aca_text">{{ book.title }} </span>
 
-                                </h4>
-                                <!-- <div class="">
+                                    </h4>
+                                    <!-- <div class="">
                                         <p v-for="instructor in book.instructorName" id="professor_text"
                                             :key="instructor.id"> {{ instructor.name }}</p>
                                     </div> -->
-                                <div class="">
-                                    <router-link v-for="instructor in book.instructorName" :key="instructor.id" :to="{ name: 'Instructor', params: { name: instructor.facultyDyanamicRouting } }" style="color: white; text-decoration: none;">
-                                        <p id="professor_text">{{ instructor.name }}</p>
-                                    </router-link>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
-                                        <p id="duration_text" class="mb-2"><img src="../assets/images/Iconionic-ios-timer@2x.png">
-                                            {{ formatDuration(book.videoDemand) }}
-                                        </p>
+                                    <div class="">
+                                        <router-link v-for="instructor in book.instructorName" :key="instructor.id" :to="{ name: 'Instructor', params: { name: instructor.facultyDyanamicRouting } }" style="color: white; text-decoration: none;">
+                                            <p id="professor_text">{{ instructor.name }}</p>
+                                        </router-link>
                                     </div>
-                                    <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
-                                        <p id="module_text" class="mb-2"><img src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
-                                        </p>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
+                                            <p id="duration_text" class="mb-2"><img
+                                                    src="../assets/images/Iconionic-ios-timer@2x.png">    
+                                                     {{ formatDuration(book.videoDemand) }}
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
+                                            <p id="module_text" class="mb-2"><img
+                                                    src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+                            <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+
 
                                 <div class="icon_blck">
                                     <StarRatings :rating="rating || 0" :max-rating="5" />
 
-                                <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
-                            </div>
-
-                            <p id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
-                                &#8377;{{ book.discountedPrice }} <button id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
-                        </div>
-                    </div>
-                    <div class="app1">
-                        <div v-if="isPopupVisible" class="popup">
-                            <div class="popup-content">
-                                <div class="">
-                                    <span class="close" @click="closePopup">&times;</span>
-                                    <h5>Ratings System</h5>
+                                    <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
-                                <hr>
-                                <form @submit.prevent="submitRating">
-                                    <label for="rating">Rate the faculty :</label><br>
-                                    <el-rate v-model="rating" size="large" allow-half /><br>
-                                    <input type="submit" value="Submit">
-                                </form>
+
+                                <p v-if="isLoggedIn" id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                    &#8377;{{ book.discountedPrice }}  <button
+                                            id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
+                                <p v-else id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
+                                    &#8377;{{ book.discountedPrice }} <a href="/Login"><button
+                                            id="search_button">buy now</button></a></p>
+
+                            </div>
+                        </div>
+                        <div class="app1">
+                            <div v-if="isPopupVisible" class="popup">
+                                <div class="popup-content">
+                                    <div class="">
+                                        <span class="close" @click="closePopup">&times;</span>
+                                        <h5>Ratings System</h5>
+                                    </div>
+                                    <hr>
+                                    <form @submit.prevent="submitRating">
+                                        <label for="rating">Rate the faculty :</label><br>
+                                        <el-rate v-model="rating" size="large" allow-half /><br>
+                                        <input type="submit" value="Submit">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
 
 
             </div>
@@ -218,19 +226,19 @@ type="circle"
                                                                                             :stroke-width="2"></el-progress>
                                                                                     </div>
 
-                                                                            </div>
+                                                                                </div>
 
                                                                                 <i
 class="fa" aria-hidden="true" :class="{
                                                                                     'fa-bookmark-o': !isProgressBarComplete(subject.id) && playingSubject !== subject && !isProgressBarHalfComplete(subject.id),
                                                                                     'fa-bookmark': isProgressBarHalfComplete(subject.id) || isProgressBarComplete(subject.id) || playingSubject === subject,
                                                                                 }" style=" font-size: 26px;"></i>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
                                                     </div>
                                                 </div>
@@ -280,9 +288,7 @@ v-if="renderComponent" ref="videoPlayer"
 
 <script>
 import sha256 from "crypto-js/sha256";
-import {
-    v4 as uuidv4
-} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 import VideoPlayer from './VideoPlayer.vue';
 // import Offer from './Offer.vue'
@@ -302,6 +308,7 @@ export default {
     },
     data() {
         return {
+            courseDisPrice: '',
             watchTime: null,
             ratingCount: '',
             isMobile: window.innerWidth <= 767,
@@ -338,11 +345,9 @@ export default {
             return this.$store.state.IsLoggedIn;
         },
         isusers() {
-            console.log(this.$store.state.user.signInUserSession.idToken.payload);
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
         isuser() {
-            console.log(this.$store.state.user);
             return this.$store.state.user;
         },
         videoType() {
@@ -378,15 +383,11 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
-            console.log(this.book);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
-            console.log(this.courseDetails);
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
-            this.ratings = resul.data.averageRating;
+            this.rating = resul.data.averageRating;
             this.ratingCount = resul.data.ratingCount;
-            console.log(this.ratings);
-            // console.log(this.courseDetails.userCognitoId);
             if (this.courseDetails === true) {
                 this.userIsSubscribed = true;
             } else {
@@ -396,37 +397,37 @@ export default {
                 try {
                     const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
                     this.watchTimeDatas = result.data;
-                    console.log(this.watchTimeDatas);
                 } catch {
-                    this.watchTimeDatas = {
-                        "id": 0,
-                        "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08",
-                        "courseId": 0,
-                        "watchTimeData": []
-                    };
-                    console.log(this.watchTimeDatas);
+                    this.watchTimeDatas = { "id": 0, "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08", "courseId": 0, "watchTimeData": [] };
                 }
             }
-            // this.vy= this.decrypt(this.book.videoUrl, this.decryptionKey);
 
-            this.videoOptions.sources = [{
-                src: this.book.videoUrl,
-                type: this.videoType,
-                withCredentials: false,
-            }]
+            this.videoOptions.sources = [
+                {
+                    src:  this.book.videoUrl,
+                    type: this.videoType,
+                    withCredentials: false,
+                }
+            ]
             this.courseId = this.book.id;
             this.activeInnerTab = this.book.questionBank?.length > 0 ? this.book.questionBank[0].name : '';
         
         } catch (err) {
             console.error(err);
             this.isLoading = false;
-        } finally {
+        }
+        finally {
             this.isLoading = false;
         }
     },
     methods: {
 
         formatDuration(duration) {
+            // Check if duration is undefined or null
+            if (!duration) {
+                return 'N/A'; // or any default value you prefer
+            }
+
             // Assuming the input is in hh:mm:ss format
             const [hours, minutes] = duration.split(':');
             return `${hours}h ${minutes}min`;
@@ -467,8 +468,9 @@ export default {
             const watchTime = this.getWatchTime(subjectId);
 
             if (totalTime && watchTime) {
-                console.log((watchTime / totalTime) * 100);
-                return (watchTime / totalTime) * 100;
+                const rawPercentage = (watchTime / totalTime) * 100;
+                const roundedPercentage = Math.floor(rawPercentage); // rounding down to the nearest integer
+                return roundedPercentage;
             } else {
                 return 0;
             }
@@ -494,26 +496,27 @@ export default {
             }
         },
 
+
         calculateRemainingTime(subjectId) {
-            const totalTime = this.getTotalTime(subjectId);
-            const watchTime = this.getWatchTime(subjectId);
+        const totalTime = this.getTotalTime(subjectId);
+        const watchTime = this.getWatchTime(subjectId);
 
-            if (totalTime && watchTime != 0) {
+        if (totalTime && watchTime != 0) {
 
-                const remainingTimeInMinutes = Math.floor(watchTime / 60);
-                const remainingSeconds = Math.floor(watchTime % 60);
+            const remainingTimeInMinutes = Math.floor(watchTime / 60);
+            const remainingSeconds = Math.floor(watchTime % 60);
 
-                return {
-                    timeInMinutes: remainingTimeInMinutes,
-                    remainingSeconds: remainingSeconds,
-                };
-            } else {
-                return {
-                    timeInMinutes: 0,
-                    remainingSeconds: 0,
-                };
-            }
-        },
+            return {
+                timeInMinutes: remainingTimeInMinutes,
+                remainingSeconds: remainingSeconds,
+            };
+        } else {
+            return {
+                timeInMinutes: 0,
+                remainingSeconds: 0,
+            };
+        }
+    },
 
         getTotalTime(subjectId) {
             const subject = this.findSubjectById(subjectId);
@@ -558,6 +561,20 @@ export default {
                 this.makeVideoFullscreen();
             }
         },
+        makeVideoFullscreen() {
+            const videoPlayer = this.$refs.videoPlayer;
+
+            // Check if Fullscreen API is supported
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen();
+            } else if (videoPlayer.mozRequestFullScreen) {
+                videoPlayer.mozRequestFullScreen();
+            } else if (videoPlayer.webkitRequestFullscreen) {
+                videoPlayer.webkitRequestFullscreen();
+            } else if (videoPlayer.msRequestFullscreen) {
+                videoPlayer.msRequestFullscreen();
+            }
+        },
         getCurrentUserCognitoId() {
             const jwtToken = localStorage.getItem('username');
             if (!jwtToken) {
@@ -580,29 +597,28 @@ export default {
 
             if (this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
                 const player = this.$refs.videoPlayer.player;
-
+                
                 this.videoId = subject.id;
-                console.log(this.videoId);
+                this.courseDisPrice = this.book.discountedPrice;
                 player.pause();
-                console.log('Player paused.');
+          
 
                 this.renderComponent = false;
-                console.log(this.renderComponent);
                 await this.$nextTick();
                 this.renderComponent = true;
 
-                this.videoOptions.sources = [{
-                    src: newVideoUrl,
-                    type: this.videoType,
-                    withCredentials: false,
-                }];
+                this.videoOptions.sources = [
+                    {
+                        src: newVideoUrl,
+                        type: this.videoType,
+                        withCredentials: false,
+                    }
+                ];
 
                 this.playingSubject = subject;
-                console.log('Video source updated.');
-
+          
                 this.watchTime = this.getWatchTime(subject.id);
-                console.log(this.watchTime);
-
+          
                 player.src(this.videoOptions.sources);
             }
         },
@@ -618,6 +634,17 @@ export default {
 
             return false;
         },
+        isProgressBarHalfComplete(subjectId) {
+            const totalTime = parseFloat(this.findSubjectById(subjectId).time);
+            const watchTime = this.getWatchTime(subjectId);
+
+            if (totalTime && watchTime) {
+                const percentage = Math.round((watchTime / totalTime) * 100);
+                return percentage > 0;
+            }
+    
+            return false;
+        },        
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -626,15 +653,14 @@ export default {
         },        
         submitRating() {
             AxiosInstance.post('/Ratings', {
-                    userId: this.isusers['cognito:username'],
-                    objectId: this.book.id,
-                    objectTypeId: 5,
-                    ratingScore: this.rating
-                })
+                userId: this.isusers['cognito:username'],
+                objectId: this.book.id,
+                objectTypeId: 5,
+                ratingScore: this.rating
+            })
                 .then(response => {
                     if(response.status === 200) {
                     // Handle success (if needed)
-                    console.log(response.data);
                     this.rating = '';
                     this.closePopup();
                     }
@@ -670,17 +696,14 @@ export default {
 
             const dataPayload = JSON.stringify(payload);
             const dataBase64 = btoa(dataPayload);
-            console.log("Request Payload:", dataBase64);
-
+          
             const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
             const dataSha256 = sha256(dataBase64 + fullURL);
             const checksum = dataSha256 + "###" + "1";
             const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
 
             try {
-                const response = await axios.post(UAT_PAY_API_URL, {
-                    request: dataBase64
-                }, {
+                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
                     headers: {
                         accept: "application/json",
                         "Content-Type": "application/json",
@@ -690,16 +713,23 @@ export default {
 
                 const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
 
-                if(response.status === 200) {
+                if (response.status === 200) {
 
                     const jsonData = {
-                        UserId: this.isuser.sub,
+                        userCognitoId: this.isusers.sub,
                         CourseId: this.book.id,
-                        TransactionId: transactionId,
-                        NumberOfMonth: 30
+                        merchantId: merchantId,
+                        amount: this.book.discountedPrice,
+                        transactionId: transactionId,
+                        numberOfMonths: 6,
                     };
-                    const SubscriptionApi = await axios.post("http://localhost:5000/StateManagement",jsonData);
-                    if(SubscriptionApi.status === 201) {
+                    const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    if (SubscriptionApi.status === 200) {
                         window.location.href = redirectURL;
                     }
                 }
@@ -760,7 +790,7 @@ progress::-webkit-progress-value {
 }
 
 .jk {
-    padding-top: 68px;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
@@ -805,7 +835,11 @@ ol {
 .icon_blck i {
     margin: 10px;
 }
-
+.questin-bank h3 {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 1%;
+}
 .search_right_block {
     padding-left: 0px;
 }
@@ -816,6 +850,7 @@ ol {
     margin-top: 20px;
     margin-left: 9px;
 }
+
 
 #aca_text {
     color: #006acd;
@@ -905,6 +940,7 @@ ol {
     margin-right: 3px;
     cursor: pointer;
 
+
 }
 
 .kj {
@@ -941,6 +977,7 @@ ol {
     color: #0066CC;
 }
 
+
 #check_text {
     font-size: 16px;
     padding-left: 10px;
@@ -962,6 +999,8 @@ ol {
     padding: 10px;
     justify-content: end;
 }
+
+
 
 .card-body {
     padding: 5px;
@@ -1087,6 +1126,10 @@ ol {
         padding: 0;
     }
 
+
+
+
+
     .inside_block {
         margin-left: 0;
         justify-content: end;
@@ -1096,6 +1139,7 @@ ol {
         padding-left: 15px;
     }
 }
+
 
 @media (max-width:1024px) {
     #aca_text {
@@ -1117,6 +1161,7 @@ ol {
 
     #amount_text {
         font-size: 15px;
+
 
     }
 
@@ -1154,6 +1199,8 @@ ol {
     }
 
 }
+
+
 
 progress {
     border: none;
@@ -1238,6 +1285,7 @@ progress::-moz-progress-bar {
 .fa-bookmark-o {
     color: #0066CC;
 }
+
 
 .fa-bookmark {
     color: #0066CC;
@@ -1419,7 +1467,6 @@ input[type=submit] {
     }
 
 }
-
 .courseDetails-else-part {
     font: normal normal 600 22px/30px Segoe UI;
     letter-spacing: 0px;
