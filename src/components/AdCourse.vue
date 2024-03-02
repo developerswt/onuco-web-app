@@ -55,7 +55,16 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Semester Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'Actual Price', field: 'actualPrice' }, { name: 'Discount Price', field: 'discountPrice' }, { name: 'WorkFlow Statement', field: 'workFlowStatement' }],
+      // columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Semester Name', field: 'name' }, { name: 'Description', field: 'description' }, { name: 'Actual Price', field: 'actualPrice' }, { name: 'Discount Price', field: 'discountPrice' }, { name: 'WorkFlow Statement', field: 'workFlowStatement' }],
+      columnDefs: [
+  { headerName: 'Id', field: 'id', suppressSizeToFit: true },
+  { headerName: 'Sbject Name', field: 'name' },
+  { headerName: 'Description', field: 'description' },
+  { headerName: 'Actual Price', field: 'actualPrice' },
+  { headerName: 'Discount Price', field: 'discountPrice' },
+  { headerName: 'WorkFlow Statement', field: 'workFlowStatement' }
+],
+
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 170, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

@@ -85,18 +85,18 @@ class="rating_icons" style="cursor: pointer;"
                         <div class="col-sm-12 col-lg-12">
                             <p v-if="!faculty.readMore" class="professor-details_text">{{ faculty && faculty.description ?
                                 faculty.description.slice(0, 184) : '' }}
-                                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
-                                        more</span></span>
-                            </p>
-                            <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
-                                <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read
-                                        less</span></span>
-                            </p>
-                        </div>
+                            <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read
+                                    more</span></span>
+                        </p>
+                        <p v-if="faculty.readMore" class="professor-details_text">{{ faculty.description }}
+                            <span @click="toggleReadMore"><br><span style="color:blue;cursor: pointer;">Read
+                                    less</span></span>
+                        </p>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+    </div>
 
     </div>
     <section v-if="persons.length > 0" id="Course_section">
@@ -108,12 +108,12 @@ class="rating_icons" style="cursor: pointer;"
                             <div class="card-title">
                                 <router-link :to="{ name: 'CourseDetails', params: { name: person.courseRouteName } }" style="color: white; text-decoration: none;">
 
-                                <div class="row">
-                                    <div class="col-md-12 ">
-                                        <div class="card_top_text">
-                                            <div class="row">
-                                                <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft" data-placement="top" :title="person.title"> {{
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="card_top_text">
+                                        <div class="row">
+                                            <div class="col-lg-10 col-9 col-sm-9">
+                                                <p class="ft" data-placement="top" :title="person.title"> {{
                                                         person.title.slice(0, 18) }}...</p>
                                                 </div>
                                                 <div class="col-lg-2 col-3 col-sm-3">
@@ -167,46 +167,44 @@ class="col-lg-6 col-6"
                 </slide>
                 <template #addons>
 
-                    <navigation>
-                        <template #next>
-                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                        <template #prev>
-                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                    </navigation>
+                <navigation>
+                    <template #next>
+                        <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                    <template #prev>
+                        <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                </navigation>
 
-                </template>
-            </carousel>
+            </template>
+        </carousel>
 
-
-
-        </div>
-    </section>
-    <section v-else>
-        <div class="container" style="position: relative; left:8px">
-    <!-- <p>No courses available.</p> -->
-</div>
+    </div>
 </section>
-    <section id="non_course_section">
-        <div class="container">
-            <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
-            <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
-                <slide v-for="slide in 5" :key="slide">
+<section v-else>
+    <div class="container" style="position: relative; left:8px">
+        <!-- <p>No courses available.</p> -->
+    </div>
+</section>
+<!-- <section id="non_course_section">
+    <div class="container">
+        <h5 class="course_text"><span id="course_text">Non-Academic </span> Courses (4)</h5>
+        <carousel :items-to-show="3" class="courosel1" :settings="settings" :breakpoints="breakpoints">
+            <slide v-for="slide in 5" :key="slide">
 
-                    <router-link to="/SemesterDetails">
+                <router-link to="/SemesterDetails">
 
-                        <div id="instructor_card" class="card">
-                            <div class="card-title">
-                                <div class="row">
-                                    <div class="col-md-12 ">
+                    <div id="instructor_card" class="card">
+                        <div class="card-title">
+                            <div class="row">
+                                <div class="col-md-12 ">
 
-                                        <div class="card_top_text">
-                                            <div class="row">
+                                    <div class="card_top_text">
+                                        <div class="row">
 
-                                                <div class="col-lg-10 col-9 col-sm-9">
-                                                    <p class="ft"> Math 1 (NEP Series)</p>
-                                                </div>
+                                            <div class="col-lg-10 col-9 col-sm-9">
+                                                <p class="ft"> Math 1 (NEP Series)</p>
+                                            </div>
 
                                                 <div class="col-lg-2 col-3 col-sm-3">
                                                     <img
@@ -221,12 +219,12 @@ src="../assets/images/Union193.png"
                                                         hrs</p>
                                                 </div>
 
-                                                <div class="col-lg-9 col-9 col-sm-9">
+                                            <div class="col-lg-9 col-9 col-sm-9">
 
-                                                    <p class="ft">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Esse,
-                                                        excepturi.</p>
-                                                </div>
+                                                <p class="ft">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                                    Esse,
+                                                    excepturi.</p>
+                                            </div>
 
                                                 <div class="col-lg-3 col-3 col-sm-3">
                                                     <div class="video_logo">
@@ -251,39 +249,37 @@ src="../assets/images/Path4025.png"
                         </div>
                     </router-link>
 
+            </slide>
+            <template #addons>
 
-                </slide>
-                <template #addons>
+                <navigation>
+                    <template #next>
+                        <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                    <template #prev>
+                        <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
+                    </template>
+                </navigation>
 
-                    <navigation>
-                        <template #next>
-                            <i class="fa fa-chevron-right" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                        <template #prev>
-                            <i class="fa fa-chevron-left" style="--fa-secondary-color: #0400e0;"></i>
-                        </template>
-                    </navigation>
+            </template>
+        </carousel>
 
-                </template>
-            </carousel>
+    </div>
+</section> -->
 
-        </div>
-    </section>
+<section id="tab_block">
+    <div class="container">
+        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+            <el-tab-pane v-for="att in faculty.attributue" :key="att.heading" :label="att.heading" :name="att.heading">
+                <div class="" v-html="att.values"></div>
+            </el-tab-pane>
 
-    <section id="tab_block">
-        <div class="container">
-            <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                <el-tab-pane v-for="att in faculty.attributue" :key="att.heading" :label="att.heading" :name="att.heading">
-                    <div class="" v-html="att.values"></div>
-                </el-tab-pane>
+        </el-tabs>
+    </div>
+</section>
 
-            </el-tabs>
-        </div>
-    </section>
-
-
-    <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
-    <Offer />
+<Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+<Offer />
 </template>
 
 <script>
@@ -292,7 +288,11 @@ import AxiosInstance from '../config/axiosInstance'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import {
+    Carousel,
+    Slide,
+    Navigation
+} from 'vue3-carousel'
 import StarRatings from './StarRatings.vue'
 import Offer from './Offer.vue'
 export default {
@@ -365,13 +365,20 @@ export default {
                     snapAlign: 'center',
                 }
 
-
             },
             activeName: 'first',
-            attribute: [
-                { key: "Name", value: "Arun" },
-                { key: "Age", value: 30 },
-                { key: "Location", value: "India" },
+            attribute: [{
+                    key: "Name",
+                    value: "Arun"
+                },
+                {
+                    key: "Age",
+                    value: 30
+                },
+                {
+                    key: "Location",
+                    value: "India"
+                },
             ],
         }
     },
@@ -396,15 +403,11 @@ export default {
             console.log(this.ratings);
             const results = await AxiosInstance.get(`/Coursedetails/GetItemByFacultyCourse?FacultyDyanamicRouting=` + this.faculty.facultyDyanamicRouting);
             this.persons = results.data;
-          
-          
-
 
         } catch (error) {
             console.log(error);
             this.isLoading = false;
-        }
-        finally {
+        } finally {
             this.isLoading = false;
         }
     },
@@ -430,7 +433,7 @@ export default {
         closeShareOption() {
             this.showShareButton = false;
 
-        },       
+        },
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -445,28 +448,26 @@ export default {
         },
         submitRating() {
             AxiosInstance.post('/Ratings', {
-                userId: this.isuser['cognito:username'],
-                objectId: this.faculty.id,
-                objectTypeId: 4,
-                ratingScore: this.rating
-            })
-            .then(response => {
-                // Handle success (if needed)
-                console.log(response.data);
-                this.rating = '';
-                this.closePopup();
-            })
-            .catch(error => {
-                // Handle error (if needed)
-                console.error(error);
-            });
+                    userId: this.isuser['cognito:username'],
+                    objectId: this.faculty.id,
+                    objectTypeId: 4,
+                    ratingScore: this.rating
+                })
+                .then(response => {
+                    // Handle success (if needed)
+                    console.log(response.data);
+                    this.rating = '';
+                    this.closePopup();
+                })
+                .catch(error => {
+                    // Handle error (if needed)
+                    console.error(error);
+                });
         }
 
     }
 }
 </script>
-
-
 
 <style scoped>
 .jk {
@@ -495,7 +496,6 @@ export default {
     }
 
 }
-
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
     .jk {
@@ -583,7 +583,6 @@ export default {
 .video {
     width: 50px;
 
-
 }
 
 ::v-deep .fa-circle {
@@ -625,7 +624,6 @@ export default {
     text-align: right;
 }
 
-
 ::v-deep .Object_text {
     color: #006acd;
     font-weight: bold;
@@ -651,7 +649,6 @@ export default {
     color: #9E9E9E;
     /* padding-right: 20px; */
 }
-
 
 ::v-deep .Sub_paragraph {
     color: #61646B;
@@ -685,7 +682,6 @@ export default {
     margin-bottom: 18px;
 
 }
-
 
 ::v-deep #row_block {
     padding-left: 15px;
@@ -752,8 +748,6 @@ export default {
     padding-left: 20px;
 }
 
-
-
 .ptext {
     margin-bottom: 15px;
 }
@@ -797,8 +791,6 @@ export default {
     ::v-deep .Object_text {
         font-size: 14px !important;
     }
-
-
 
     ::v-deep #education_text,
     #institute_text {
@@ -848,7 +840,6 @@ export default {
         text-align: left !important;
     }
 
-
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -875,12 +866,10 @@ export default {
     margin-top: -15px;
 }
 
-
 @media (max-width: 600px) {
     #sub_text {
         text-align: left;
     }
-
 
 }
 
@@ -1050,7 +1039,6 @@ input[type=submit] {
     cursor: pointer;
 }
 
-
 #app1 {
     position: relative;
     height: 100vh;
@@ -1187,15 +1175,17 @@ input[type=submit] {
         right: 20px;
     }
 }
+
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
 }
-p .details{
-    padding-left:0px !important;
+
+p .details {
+    padding-left: 0px !important;
 }
 </style>

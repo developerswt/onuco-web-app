@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+<div class="container">
     <div class="card-box">
       <div class="card-head">
         <header>Faculty Payment Info</header>
           <div class="filter-box">
             <span for="filter-text-box">Search Here : </span>
-            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/E-mail Id/Phone Number" />
+            <input id="filter-text-box" v-model="filterText" class="search-box" type="text" placeholder="Search By Faculty Name/Email/Phone Number" />
             <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
             <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
           </div>
@@ -120,14 +120,13 @@ class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style=
 
                </div>
 
-
              </div>
            </div>
          </div> -->
-         <Loading v-model:active="isLoading"></Loading>
-       </div>
-       <Confirmation ref="Confirmation" />    
- </div>      
+        <Loading v-model:active="isLoading"></Loading>
+    </div>
+    <Confirmation ref="Confirmation" />
+</div>
 </template>
 
 <script>
@@ -135,11 +134,13 @@ import Confirmation from './Confirmation.vue';
 import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { AgGridVue } from "ag-grid-vue3";
+import {
+    AgGridVue
+} from "ag-grid-vue3";
 import moment from 'moment';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-// import Datepicker from '@vuepic/vue-datepicker';
+import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
@@ -148,6 +149,7 @@ export default {
    AgGridVue,
    Loading,
    Confirmation,
+   Datepicker,
  },
  data: function () {
    return {
@@ -175,8 +177,41 @@ export default {
      domLayout: null,
      Orders: [],
      req: [],
-     columnDefs: [{ name: 'userName', field: 'userName'},{ name: 'userEmail', field: 'userEmail'},{ name: 'phone_Number', field: 'phone_Number'}, { name: 'Facuilty CognitoId', field: 'facuiltyCognitoId' }, { name: 'Payment Date', field: 'paymentDate',valueFormatter: this.dateFormat.bind(this), filterType: 'date'}, { name: 'Amount Paid', field: 'amountPaid' }, { name: 'Balance Amount', field: 'balanceAmount' }, { name: 'Modeof Pay', field: 'modeofPay' }],
-     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+     columnDefs: [{
+                    headerName: 'Faculty Name',
+                    field: 'userName'
+                },
+                {
+                    headerName: 'Email',
+                    field: 'userEmail'
+                },
+                {
+                    headerName: 'Phone Number',
+                    field: 'phone_Number'
+                },
+                {
+                    headerName: 'Facuilty CognitoId',
+                    field: 'facuiltyCognitoId'
+                },
+                {
+                    headerName: 'Payment Date',
+                    field: 'paymentDate',
+                    valueFormatter: this.dateFormat.bind(this),
+                    filterType: 'date'
+                },
+                {
+                    headerName: 'Amount Paid',
+                    field: 'amountPaid'
+                },
+                {
+                    headerName: 'Balance Amount',
+                    field: 'balanceAmount'
+                },
+                {
+                    headerName: 'Mode of Pay',
+                    field: 'modeofPay'
+                }
+            ],     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
      columnApi: null,
      editType: null,
      showChildRow: false,
@@ -207,102 +242,97 @@ export default {
  },
 },
 
- async created() {
-   this.domLayout = 'autoHeight';
-   this.isLoading = true;
-   try {
+    async created() {
+        this.domLayout = 'autoHeight';
+        this.isLoading = true;
+        try {
 
-     const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
-     let req = res.data;
-     this.Orders = req;
+            const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
+            let req = res.data;
+            this.Orders = req;
 
-   } catch (error) {
-     this.isLoading = false;
-     console.log(error);
-     this.showDialog = true;
-     this.dialogTitle = "Error";
-     this.dialogMessage = "Not get data";
-   }
-   finally {
-     this.isLoading = false;
-   }
-   this.rowData = this.Orders;
-   this.rowSelection = 'single';
-   this.popupParent = document.body;
-   this.paginationPageSize = 10;
+        } catch (error) {
+            this.isLoading = false;
+            console.log(error);
+            this.showDialog = true;
+            this.dialogTitle = "Error";
+            this.dialogMessage = "Not get data";
+        } finally {
+            this.isLoading = false;
+        }
+        this.rowData = this.Orders;
+        this.rowSelection = 'single';
+        this.popupParent = document.body;
+        this.paginationPageSize = 10;
 
  },
 
- methods: {
+    methods: {
 
-   onFilterButtonClick() {
-    this.filterText = this.filterText.trim();
-    
-    if (this.filterText === '') {
-      this.showRequiredMessage = true;
-      this.hasSearched = false;
-      this.rowData = []; // or reset to the initial state
-      console.log('Input field is required.');
-    } else {
-      this.showRequiredMessage = false;
-      this.hasSearched = true;
+        onFilterButtonClick() {
+            this.filterText = this.filterText.trim();
 
+            if (this.filterText === '') {
+                this.showRequiredMessage = true;
+                this.hasSearched = false;
+                this.rowData = []; // or reset to the initial state
+                console.log('Input field is required.');
+            } else {
+                this.showRequiredMessage = false;
+                this.hasSearched = true;
 
-   this.rowData = this.Orders.filter(order => {
- const lowerCaseFilter = this.filterText.toLowerCase();
- const includesuserName = order.userName.toLowerCase().includes(lowerCaseFilter);
- const includesModeofPay = order.modeofPay.toLowerCase() === lowerCaseFilter;
- const includesuserEmail = order.userEmail.toLowerCase().includes(lowerCaseFilter);
- const includesphone_Number = order.phone_Number;
+                this.rowData = this.Orders.filter(order => {
+                    const lowerCaseFilter = this.filterText.toLowerCase();
+                    const includesuserName = order.userName.toLowerCase().includes(lowerCaseFilter);
+                    const includesModeofPay = order.modeofPay.toLowerCase() === lowerCaseFilter;
+                    const includesuserEmail = order.userEmail.toLowerCase().includes(lowerCaseFilter);
+                    const includesphone_Number = order.phone_Number;
 
- // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
- return includesuserName || includesModeofPay || includesuserEmail || includesphone_Number;
-});
+                    // You can adjust the logic based on your requirements, for example, using OR (||) or AND (&&) conditions
+                    return includesuserName || includesModeofPay || includesuserEmail || includesphone_Number;
+                });
 
+                console.log('Filtered Data:', this.rowData);
+            }
+        },
 
-   console.log('Filtered Data:', this.rowData);
- }
-},
-   
-   toggleForm() {
-     // Toggle the visibility of the form modal
-     this.formVisible = !this.formVisible;
+        toggleForm() {
+            this.formVisible = !this.formVisible;
 
-     // If the form is being closed, reset the newBranch data
-     if (!this.formVisible) {
-       this.resetForm();
-     }
-   },
+            if (!this.formVisible) {
+                this.resetForm();
+            }
+        },
 
-   resetForm() {
-     // Reset the newBranch data to clear the form fields
-     this.newBranch = {
-       userCourseSubscriptionId: '',
-       facuiltyCognitoId: '',
-       paymentDate: '',
-       amountPaid: '',
-       balanceAmount: '',
-       modeofPay: '',
-       isActive: '',
-     };
-   },
-   dateFormat(params) {
-     let value = params.data.paymentDate;
-     if (value) {
-       return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
-     }
-   },
-   onCellClicked(params) {
-     this.childPara = params.node.data
-     this.showChildRow = true;
-     this.edit()
+        resetForm() {
+            // Reset the newBranch data to clear the form fields
+            this.newBranch = {
+                userCourseSubscriptionId: '',
+                facuiltyCognitoId: '',
+                paymentDate: '',
+                amountPaid: '',
+                balanceAmount: '',
+                modeofPay: '',
+                isActive: '',
+            };
+        },
+        dateFormat(params) {
+            let value = params.data.paymentDate;
+            if (value) {
+                return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+            }
+        },
+        onCellClicked(params) {
+            this.childPara = params.node.data
+            this.showChildRow = true;
+            this.edit()
 
-   },
+        },
 
-   OpenCloseFun() {
-     this.showChildRow = false;
-     this.ismodel = true;
-   },
+        OpenCloseFun() {
+            this.showChildRow = false;
+            this.ismodel = true;
+        },
 
    onCellValueChanged(event) {
     console.log(event);
@@ -312,56 +342,58 @@ export default {
      this.gridColumnApi = params.columnApi;
    },
 
-   onBtnExport() {
-     this.gridApi.exportDataAsCsv();
-   },
-   onFilterTextBoxChanged() {
-     this.gridApi.setQuickFilter(
-       document.getElementById('filter-text-box').value
-     );
-   },
-   onPrintQuickFilterTexts() {
-     this.gridApi.forEachNode(function (rowNode, index) {
-       console.log(
-         'Row ' +
-         index +
-         ' quick filter text is ' +
-         rowNode.quickFilterAggregateText
-       );
-     });
-   },
+        onBtnExport() {
+            this.gridApi.exportDataAsCsv();
+        },
+        onFilterTextBoxChanged() {
+            this.gridApi.setQuickFilter(
+                document.getElementById('filter-text-box').value
+            );
+        },
+        onPrintQuickFilterTexts() {
+            this.gridApi.forEachNode(function (rowNode, index) {
+                console.log(
+                    'Row ' +
+                    index +
+                    ' quick filter text is ' +
+                    rowNode.quickFilterAggregateText
+                );
+            });
+        },
 
-   edit() {
-     this.ismodel = false;
-   },
-   editUpdateAction() {
-     if (this.ismodel) {
-       // If in edit mode, switch to update mode
-       this.ismodel = false;
-     } else {
-       // If in update mode, perform the update logic
-       this.update(this.childPara.id);
-     }
-   },
-   async update(id) {
-     this.showDialog = false;
-     try {
-       const res = await AxiosInstance.put(`/FacultyCourseSubscriptionPayment` + '?' + 'id=' + id + '&amountpaid=' + this.childPara.amountPaid + '&balanceamount=' + this.childPara.balanceAmount + '&mode=' + this.childPara.modeofPay + '&isActive=' + this.childPara.isActive);
-      
-       if (res.status === 200) {
-         await this.getdata();
-       }
-       this.ismodel = true;
-       this.gridApi.refreshCells({ force: true });
-       this.OpenCloseFun();
-       this.$refs.Confirmation.open("Updated successfully.");
-     } catch (error) {
-       console.log(error);
-       this.OpenCloseFun();
-       this.$refs.Confirmation.open(" Updating Error");
+        edit() {
+            this.ismodel = false;
+        },
+        editUpdateAction() {
+            if (this.ismodel) {
+                // If in edit mode, switch to update mode
+                this.ismodel = false;
+            } else {
+                // If in update mode, perform the update logic
+                this.update(this.childPara.id);
+            }
+        },
+        async update(id) {
+            this.showDialog = false;
+            try {
+                const res = await AxiosInstance.put(`/FacultyCourseSubscriptionPayment` + '?' + 'id=' + id + '&amountpaid=' + this.childPara.amountPaid + '&balanceamount=' + this.childPara.balanceAmount + '&mode=' + this.childPara.modeofPay + '&isActive=' + this.childPara.isActive);
 
-     }
-   },
+                if (res.status === 200) {
+                    await this.getdata();
+                }
+                this.ismodel = true;
+                this.gridApi.refreshCells({
+                    force: true
+                });
+                this.OpenCloseFun();
+                this.$refs.Confirmation.open("Updated successfully.");
+            } catch (error) {
+                console.log(error);
+                this.OpenCloseFun();
+                this.$refs.Confirmation.open(" Updating Error");
+
+            }
+        },
 
    async addBranch() {
      this.isLoading = true;
@@ -384,364 +416,372 @@ export default {
        this.isLoading = false;
        this.formVisible = false;
 
-     }
-   },
+            }
+        },
 
-   async deleteUserSubscription() {
-       try {
-         this.OpenCloseFun();
+        async deleteUserSubscription() {
+            try {
+                this.OpenCloseFun();
 
-           const confirmed = await this.$refs.Confirmation.open(
-               "Are you sure you want to delete this Payment Details?"
-           );
+                const confirmed = await this.$refs.Confirmation.open(
+                    "Are you sure you want to delete this Payment Details?"
+                );
 
-           if (!confirmed) {
-               return; 
-           }
+                if (!confirmed) {
+                    return;
+                }
 
-           const id = this.childPara.id;
+                const id = this.childPara.id;
 
-           const res = await AxiosInstance.delete(`/FacultyCourseSubscriptionPayment?id=${id}`);
+                const res = await AxiosInstance.delete(`/FacultyCourseSubscriptionPayment?id=${id}`);
 
-           if (res.status === 200) {
-               this.ismodel = true;
-               this.gridApi.refreshCells({ force: true });
-               this.OpenCloseFun();
-               this.$refs.Confirmation.open(" Payment Details deleted successfully.");
-               await this.getdata() ;
-           } else {
-               console.error('Failed to delete Payment Details ');
-               this.$refs.Confirmation.open("Error deleting");
-           }
-       } catch (error) {
-           console.error("Error deleting Payment Details:", error);
-           this.$refs.Confirmation.open("Error deleting Payment Details.");
-       }
-   },
+                if (res.status === 200) {
+                    this.ismodel = true;
+                    this.gridApi.refreshCells({
+                        force: true
+                    });
+                    this.OpenCloseFun();
+                    this.$refs.Confirmation.open(" Payment Details deleted successfully.");
+                    await this.getdata();
+                } else {
+                    console.error('Failed to delete Payment Details ');
+                    this.$refs.Confirmation.open("Error deleting");
+                }
+            } catch (error) {
+                console.error("Error deleting Payment Details:", error);
+                this.$refs.Confirmation.open("Error deleting Payment Details.");
+            }
+        },
 
+        async getdata() {
+            this.domLayout = 'autoHeight';
+            this.isLoading = true;
+            try {
+                const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment`);
+                let req = res.data;
+                this.Orders = req;
 
-   async getdata() {
-     this.domLayout = 'autoHeight';
-     this.isLoading = true;
-     try {
-       const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment`);
-       let req = res.data;
-       this.Orders = req;
+            } catch (error) {
+                this.isLoading = false;
+                console.log(error);
 
-     } catch (error) {
-       this.isLoading = false;
-       console.log(error);
-       
-     }
-     finally {
-       this.isLoading = false;
-     }
-     this.rowData = this.Orders;
-     this.rowSelection = 'single';
-     this.popupParent = document.body;
-     this.paginationPageSize = 10;
+            } finally {
+                this.isLoading = false;
+            }
+            this.rowData = this.Orders;
+            this.rowSelection = 'single';
+            this.popupParent = document.body;
+            this.paginationPageSize = 10;
 
-   }
- },
+        }
+    },
 
 };
-
-
 </script>
+
 <style scoped>
 .example-wrapper {
- display: flex;
- flex-direction: column;
- height: 100%;
- width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 #myGrid {
- flex: 1 1 0px;
- width: 100%;
+    flex: 1 1 0px;
+    width: 100%;
 }
 
 .example-header {
- font-family: Verdana, Geneva, Tahoma, sans-serif;
- font-size: 13px;
- margin-bottom: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    margin-bottom: 5px;
 }
 
 .ag-theme-alpine {
- --ag-header-height: 30px;
- --ag-header-foreground-color: black;
- --ag-header-background-color: white;
- /* --ag-header-cell-hover-background-color: #0d4b7e;
+    --ag-header-height: 30px;
+    --ag-header-foreground-color: black;
+    --ag-header-background-color: white;
+    /* --ag-header-cell-hover-background-color: #0d4b7e;
   --ag-header-cell-moving-background-color: #0d4b7e; */
 
- --ag-font-size: 15px;
- --ag-font-family: 'Times New Roman';
+    --ag-font-size: 15px;
+    --ag-font-family: 'Times New Roman';
 
 }
 
 .ag-theme-alpine .ag-header {
- font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
- font-size: 14px;
+    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
 }
 
 .ag-theme-alpine .ag-header-group-cell {
- font-weight: normal;
- font-size: 22px;
+    font-weight: normal;
+    font-size: 22px;
 }
 
 .ag-theme-alpine .ag-header-cell {
- font-size: 16px;
- text-align: center;
+    font-size: 16px;
+    text-align: center;
 }
 
 .ag-header-cell-label {
- justify-content: center;
+    justify-content: center;
 }
 
 @media (max-width: 912px) {
- .ag-grid-vue {
-   height: 20%;
- }
+    .ag-grid-vue {
+        height: 20%;
+    }
 }
 
 .ag-grid-vue {
- width: 100%;
- height: 80%;
+    width: 100%;
+    height: 80%;
 }
 
 .kl {
- text-align: center;
+    text-align: center;
 }
 
 .sd {
- width: 15%;
- font-size: 1em;
+    width: 15%;
+    font-size: 1em;
 }
 
 .sd1 {
- width: 15%;
- font-size: 1em;
+    width: 15%;
+    font-size: 1em;
 }
 
 @media screen and (max-width: 600px) {
- .kl {
-   text-align: left;
- }
+    .kl {
+        text-align: left;
+    }
 
- .sd {
-   width: 55%;
-   font-size: 1em;
- }
+    .sd {
+        width: 55%;
+        font-size: 1em;
+    }
 
- .sd1 {
-   width: 42%;
-   font-size: 1em;
- }
+    .sd1 {
+        width: 42%;
+        font-size: 1em;
+    }
 }
 
 .modal-dialog {
- max-width: 900px;
+    max-width: 900px;
 
- margin: 1.75rem auto;
+    margin: 1.75rem auto;
 }
 
 .modal-dialog {
- max-width: 900px;
- margin: 1.75rem auto;
- height: 630px;
- /* Set the height as needed */
- overflow-y: auto;
+    max-width: 900px;
+    margin: 1.75rem auto;
+    height: 630px;
+    /* Set the height as needed */
+    overflow-y: auto;
 }
 
 .mc {
- height: 500px;
- width: 750px;
- overflow: hidden;
+    height: 500px;
+    width: 750px;
+    overflow: hidden;
 }
 
 .modal-body {
- max-height: 400px;
- /* Adjust the max-height as needed */
- overflow-y: auto;
+    max-height: 400px;
+    /* Adjust the max-height as needed */
+    overflow-y: auto;
 }
 
 @media (max-width:520px) {
 
- /* .mc{
+    /* .mc{
       height: 0px;
       width: 0px;
     } */
- .example-wrapper {
-   width: 100%;
- }
+    .example-wrapper {
+        width: 100%;
+    }
 }
 
 .frm {
- padding: 20px;
- border: 1px solid black;
- width: 90%;
- background-color: #fff;
+    padding: 20px;
+    border: 1px solid black;
+    width: 90%;
+    background-color: #fff;
 }
 
-
 .frm {
- max-width: 400px;
- margin: 0 auto;
- margin-bottom: 80px;
- height: 690px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
+    height: 690px;
 }
 
 label {
- display: block;
- margin-bottom: 5px;
- font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input {
- width:100%;
- padding: 2px;
- margin-bottom: 20px;
- box-sizing: border-box;
+    width: 100%;
+    padding: 2px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 button {
- color: #fff;
- background-color: #007bff;
- border-color: #007bff;
- padding: 11px 25px;
- border: none;
- border-radius: 4px;
- cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 11px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 
 }
 
 .btn2 {
- color: #fff;
- background-color: #007bff;
- border-color: #007bff;
- padding: 12px 15px;
- border: none;
- border-radius: 4px;
- cursor: pointer;
- font-weight: 600;
- font-size: 15px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .btn1 {
- color: #fff;
- background-color: #007bff;
- border-color: #007bff;
- padding: 22px 23px;
- border: none;
- border-radius: 4px;
- cursor: pointer;
- margin-bottom: 80px;
- font-weight: 600;
- font-size: 15px;
- position: relative;
- top: 15px;
- left: 2px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 22px 23px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px;
+    font-weight: 600;
+    font-size: 15px;
+    position: relative;
+    top: 15px;
+    left: 2px;
 }
+
 button:hover {
- background-color: #007bff;
+    background-color: #007bff;
 }
+
 .card-box {
-   background-color: #fff;
-   border-radius: 10px;
-   position: relative;
-   margin-bottom: 20px;
-   border: 1px solid #deebfd;
-   box-shadow: -8px 12px 18px 0 #dadee8;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
 }
 
 .card-head {
-   border-radius: 2px 2px 0 0;
-   border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-   padding: 2px;
-   /* text-transform: uppercase; */
-   color: #3a405b;
-   font-size: 14px;
-   font-weight: 600;
-   line-height: 40px;
-   min-height: 40px;
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
 }
+
 .card-head header {
-   display: inline-block;
-   padding: 11px 20px;
-   vertical-align: middle;
-   line-height: 17px;
-   font-size: 17px;
-   letter-spacing: 1px;
-}.card-box {
-   background-color: #fff;
-   border-radius: 10px;
-   position: relative;
-   margin-bottom: 20px;
-   border: 1px solid #deebfd;
-   box-shadow: -8px 12px 18px 0 #dadee8;
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.card-box {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #deebfd;
+    box-shadow: -8px 12px 18px 0 #dadee8;
 }
 
 .card-head {
-   border-radius: 2px 2px 0 0;
-   border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-   padding: 2px;
-   /* text-transform: uppercase; */
-   color: #3a405b;
-   font-size: 14px;
-   font-weight: 600;
-   line-height: 40px;
-   min-height: 40px;
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    /* text-transform: uppercase; */
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 40px;
 }
+
 .card-head header {
-   display: inline-block;
-   padding: 11px 20px;
-   vertical-align: middle;
-   line-height: 17px;
-   font-size: 17px;
-   letter-spacing: 1px;
+    display: inline-block;
+    padding: 11px 20px;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
 }
+
 .modal {
-   display: none;
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5);
- }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 .modal-dialog {
- position: relative;
- margin: 10% auto;
+    position: relative;
+    margin: 10% auto;
 }
 
 .modal-content {
- position: relative;
- background-color: #fff;
- border: 1px solid #ccc;
- border-radius: 5px;
- box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .modal-header {
- padding: 15px;
- border-bottom: 1px solid #ccc;
- background-color: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f9fa;
 }
 
- .modal-body {
-   padding: 15px;
- }
- .button-row button {
- margin-right: 10px; 
+.modal-body {
+    padding: 15px;
 }
-.search-box{
- width:70%;
- padding: 0px;
+
+.button-row button {
+    margin-right: 10px;
 }
-.filter-box{
- position: relative;
-   left: 22px;
-   top: 20px;
+
+.search-box {
+    width: 70%;
+    padding: 0px;
+}
+
+.filter-box {
+    position: relative;
+    left: 22px;
+    top: 20px;
 }
 </style>

@@ -4,7 +4,7 @@
      <div class="container" style="margin-top: 72px;">
           <div>
               <label for="productDropdown">Course Type :</label>
-              <el-select v-model="selectedTypes" placeholder="Please Select" @change="emitSelectedType">
+              <el-select v-model="selectedTypes" @change="emitSelectedType" placeholder="Please Select">
                   <el-option
                       v-for="product in products"
                       :key="product.id"
@@ -39,7 +39,7 @@
               
                <td>
                  <div class="button-row">
-                   <button v-if="!editMode" class="bn" @click="enableEditMode()">Edit</button>
+                   <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                    <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                    <button @click="deleteProduct(selectedProduct.id)">Delete</button>
                  </div>
@@ -50,14 +50,14 @@
         </div>
          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
  
-         <el-dialog v-model="formVisible" class="fdata" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
-            <el-form ref="form" :model="newBranch" label-position="top" class="frm">
+         <el-dialog class="fdata" v-model="formVisible" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
+            <el-form :model="newBranch" ref="form" label-position="top" class="frm">
               <el-form-item label="Course Type Name" prop="name">
                 <el-input v-model="newBranch.name" required @input="validateFirstLetterCapital"></el-input>
               </el-form-item>
 
               <el-form-item label="Description" prop="description">
-                <el-input v-model="newBranch.description" type="textarea" required></el-input>
+                <el-input type="textarea" v-model="newBranch.description" required></el-input>
               </el-form-item>
   
               <el-form-item label="Is Active" prop="isActive">
@@ -246,7 +246,6 @@
          }
          this.editedProduct.isActive = '0';
          const res = await AxiosInstance.put(`/Types/SoftUpdateTypes` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
-         console.log(res);
         //  const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
 
            await this.loadData();

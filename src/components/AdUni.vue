@@ -56,7 +56,13 @@ export default {
       domLayout: null,
       Orders: [],
       req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'University Name', field: 'name' }, { name: 'Description', field: 'description' }],
+      // columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'University Name', field: 'name' }, { name: 'Description', field: 'description' }],
+      columnDefs: [
+  { headerName: 'Id', field: 'id', suppressSizeToFit: true },
+  { headerName: 'University Name', field: 'name' },
+  { headerName: 'Description', field: 'description' }
+],
+
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,

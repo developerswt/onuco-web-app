@@ -6,7 +6,7 @@
         <div v-if="semester.length > 0" class="container">
             <h4 class="academic_head_text mt-4">
                 <span id="aca_text"><b>Available</b></span>Semesters ({{ semester.length }})
-            <router-link to="/Announcement"> <button class="bt">BUY NOW</button></router-link>
+            <!-- <router-link to="/Announcement"> <button class="bt">BUY NOW</button></router-link> -->
             </h4>
 
             <div v-if="showShareButton"  class="overlay">

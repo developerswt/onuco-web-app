@@ -713,16 +713,23 @@ export default {
 
                 const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
 
-                if(response.status === 200) {
+                if (response.status === 200) {
 
                     const jsonData = {
-                        UserId: this.isuser.sub,
+                        userCognitoId: this.isusers.sub,
                         CourseId: this.book.id,
-                        TransactionId: transactionId,
-                        NumberOfMonth: 30
+                        merchantId: merchantId,
+                        amount: this.book.discountedPrice,
+                        transactionId: transactionId,
+                        numberOfMonths: 6,
                     };
-                    const SubscriptionApi = await axios.post("http://localhost:5000/StateManagement",jsonData);
-                    if(SubscriptionApi.status === 201) {
+                    const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    if (SubscriptionApi.status === 200) {
                         window.location.href = redirectURL;
                     }
                 }

@@ -1,22 +1,19 @@
 <template>
   <div class="ll">
     <div class="container">
-      <div class="kk">
-        <p class="clr" style="color: #0066CC;"><b>Course</b> Payment</p>
-        <div class="card" style="margin-top: 20px;">
-          <div class="card-body">
-
-            <div class="circle"> <img src="../assets/images/Tick.png" style="width: 160px; height: 160px;"></div>
+      <p class="clr" style="color: #0066CC;"><b>Course</b> Payment</p>
+      <div class="card" >
+        <div class="card-body">
+          <div class="circle"> <img src="../assets/images/Tick.png" style="width: 160px; height: 160px;"></div>
             <p class="head text-center mt-4"> <i class="bi bi-check"></i>Successfully subscribed the subjects</p>
             <div>
               <button class="bt text-center mt-4">Download Payment Details</button>
             </div>
             <div class="mt-2">
-              <button class="bt1 text-center"> <img src="../assets/images/logout.png"> Your Subscribed Subjects</button>
+              <router-link to="/Mylearnings"><button class="bt1 text-center"> <img src="../assets/images/logout.png"> Your Subscribed Subjects</button></router-link>
             </div>
           </div>
         </div>
-      </div>
     </div>
     <div class="container-fluid"></div>
   </div>
@@ -55,9 +52,7 @@
   left: 394px;
 }
 
-.ll {
-  padding-top: 8%;
-}
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .bt {
@@ -71,7 +66,7 @@
   }
 
   .ll {
-    padding-top: 20%;
+    padding-top: 5%;
   }
 }
 
@@ -87,7 +82,7 @@
   }
 
   .ll {
-    padding-top: 20%;
+    padding-top: 2%;
   }
 }
 

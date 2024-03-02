@@ -38,7 +38,7 @@
           <label for="semesterId"><b>Semester Id:</b></label>
           <input id="semesterId" v-model="newBranch.semesterId" type="text" required><br>
 
-          <label for="courseName"><b>Course Name:</b></label>
+          <label for="courseName"><b>Subject Name:</b></label>
           <input id="courseName" v-model="newBranch.courseName" type="text" required><br>
 
           <label for="workFlowStatement"><b>WorkFlow Statement:</b></label>
@@ -65,7 +65,7 @@ class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style=
                   <div class="col-sm-12">
                     <p><b>ID: </b> {{ childPara.id }}</p>
                     <!-- <p>Customer Details:{{ childPara.customerDetails }} </p> -->
-                    <p><b>Course Name:</b>{{ childPara.name }}</p>
+                    <p><b>Subject Name:</b>{{ childPara.name }}</p>
                     <p><b>Description:</b> {{ childPara.description }}</p>
                     <p><b>Actual Price:</b> {{ childPara.actualPrice }}</p>
                     <p><b>Discount Price:</b> {{ childPara.discountPrice }}</p>
@@ -77,7 +77,7 @@ class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" style=
                   <div class="col-sm-12">
                     <p><b>ID: </b> {{ childPara.id }}</p>
                     <div class="">
-                      <label><b>Course Name:</b></label><br>
+                      <label><b>Subject Name:</b></label><br>
                       <input v-model="childPara.name" type="text" />
                     </div>
                     <div class="">

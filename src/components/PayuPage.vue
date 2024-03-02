@@ -343,7 +343,7 @@ type="submit"
 <script>
 import sha256 from "crypto-js/sha256";
 import { v4 as uuidv4 } from 'uuid';
-import axios from "axios";
+import AxiosInstance from '../config/axiosInstance';
 
 export default {
   name: 'PayuPage',
@@ -414,17 +414,28 @@ export default {
         "X-VERIFY": checksum,
       },
     });
+
+
+
     const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
+
+
+    //Call First API
+    //Post API
 
     if(response.status === 200) {
 
       const jsonData = {
-        UserId: "2345676",
+        userCognitoId: "2345676",
         CourseId: 1,
+        merchantId:'',
+        amount: '',
         TransactionId: transactionId,
         NumberOfMonth: 30
       };
-      const SubscriptionApi = await axios.post("http://localhost:5000/StateManagement",jsonData);
+      
+      const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment",jsonData);
+
       if(SubscriptionApi.status === 201) {
         window.location.href = redirectURL;
       }

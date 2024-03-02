@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+<div class="container">
 
     <div class="row">
       <div class="col-lg-6 col-sm-12">
@@ -75,71 +75,89 @@ type="button" class="btn btn-secondary" data-dismiss="modal"
       </div>
     </div>
     <Loading v-model:active="isLoading"></Loading>
-  </div>
+</div>
 </template>
-   
+
 <script>
 import AxiosInstance from '../config/axiosInstance';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { AgGridVue } from "ag-grid-vue3";
+import {
+    AgGridVue
+} from "ag-grid-vue3";
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default {
-  name: "OrdersPage",
-  components: {
-    AgGridVue,
-    Loading,
-  },
-  data: function () {
-    return {
-      newBranch: {
-        name: '',
-        description: '',
-        typeId: '',
-        academiaName: '',
-      },
-      formVisible: false,
-      userName: '',
-      ismodel: true,
-      isLoading: false,
-      showDialog: false,
-      dialogTitle: '',
-      dialogMessage: '',
-      domLayout: null,
-      Orders: [],
-      req: [],
-      columnDefs: [{ name: 'SL.No', field: 'id', suppressSizeToFit: true }, { name: 'Academia Name', field: 'name' }, { name: 'Description', field: 'description' }],
-      gridApi: null,
-      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
-      columnApi: null,
-      editType: null,
-      showChildRow: false,
-      childPara: null,
-      rowData: null,
-      rowSelection: null,
-      paginationPageSize: null,
-      rightAligned: {
-        headerClass: 'ag-right-aligned-header',
-        cellClass: 'ag-right-aligned-cell'
-      },
-    };
-  },
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.IsLoggedIn;
+    name: "OrdersPage",
+    components: {
+        AgGridVue,
+        Loading,
     },
-  },
-  async created() {
-    this.domLayout = 'autoHeight';
-    this.isLoading = true;
-    try {
-      const response = await AxiosInstance.get(`/Academia`);
-      const dataArray = Object.values(response.data);
-      this.Orders = dataArray.map(item => item.academia);
-      this.rowData = this.Orders;
-      this.rowSelection = 'single';
+    data: function () {
+        return {
+            newBranch: {
+                name: '',
+                description: '',
+                typeId: '',
+                academiaName: '',
+            },
+            formVisible: false,
+            userName: '',
+            ismodel: true,
+            isLoading: false,
+            showDialog: false,
+            dialogTitle: '',
+            dialogMessage: '',
+            domLayout: null,
+            Orders: [],
+            req: [],
+            columnDefs: [{
+                name: 'SL.No',
+                field: 'id',
+                suppressSizeToFit: true
+            }, {
+                name: 'Academia Name',
+                field: 'name'
+            }, {
+                name: 'Description',
+                field: 'description'
+            }],
+            gridApi: null,
+            defaultColDef: {
+                sortable: true,
+                filter: true,
+                width: 150,
+                resizable: true,
+                applyMiniFilterWhileTyping: true
+            },
+            columnApi: null,
+            editType: null,
+            showChildRow: false,
+            childPara: null,
+            rowData: null,
+            rowSelection: null,
+            paginationPageSize: null,
+            rightAligned: {
+                headerClass: 'ag-right-aligned-header',
+                cellClass: 'ag-right-aligned-cell'
+            },
+        };
+    },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.IsLoggedIn;
+        },
+    },
+    async created() {
+        this.domLayout = 'autoHeight';
+        this.isLoading = true;
+        try {
+            const response = await AxiosInstance.get(`/Academia`);
+            const dataArray = Object.values(response.data);
+            this.Orders = dataArray.map(item => item.academia);
+            this.rowData = this.Orders;
+            this.rowSelection = 'single';
 
     }
     catch (error) {
@@ -252,159 +270,178 @@ export default {
 
 <style scoped>
 .example-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
+
 #myGrid {
-  flex: 1 1 0px;
-  width: 100%;
+    flex: 1 1 0px;
+    width: 100%;
 }
+
 .example-header {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 13px;
-  margin-bottom: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    margin-bottom: 5px;
 }
+
 .ag-theme-alpine {
-  --ag-header-height: 30px;
-  --ag-header-foreground-color: black;
-  --ag-header-background-color: white;
-  --ag-font-size: 15px;
-  --ag-font-family: 'Times New Roman';
+    --ag-header-height: 30px;
+    --ag-header-foreground-color: black;
+    --ag-header-background-color: white;
+    --ag-font-size: 15px;
+    --ag-font-family: 'Times New Roman';
 }
+
 .ag-theme-alpine .ag-header {
-  font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 14px;
+    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
 }
+
 .ag-theme-alpine .ag-header-group-cell {
-  font-weight: normal;
-  font-size: 22px;
+    font-weight: normal;
+    font-size: 22px;
 }
+
 .ag-theme-alpine .ag-header-cell {
-  font-size: 16px;
-  text-align: center;
+    font-size: 16px;
+    text-align: center;
 }
+
 .ag-header-cell-label {
-  justify-content: center;
+    justify-content: center;
 }
+
 @media (max-width: 912px) {
-  .ag-grid-vue {
-    height: 20%;
-  }
+    .ag-grid-vue {
+        height: 20%;
+    }
 }
 
 .ag-grid-vue {
-  width: 100%;
-  height: 80%;
+    width: 100%;
+    height: 80%;
 }
 
 .kl {
-  text-align: center;
+    text-align: center;
 }
+
 .sd {
-  width: 15%;
-  font-size: 1em;
+    width: 15%;
+    font-size: 1em;
 }
+
 .sd1 {
-  width: 15%;
-  font-size: 1em;
+    width: 15%;
+    font-size: 1em;
 }
+
 @media screen and (max-width: 600px) {
-  .kl {
-    text-align: left;
-  }
-  .sd {
-    width: 55%;
-    font-size: 1em;
-  }
-  .sd1 {
-    width: 42%;
-    font-size: 1em;
-  }
+    .kl {
+        text-align: left;
+    }
+
+    .sd {
+        width: 55%;
+        font-size: 1em;
+    }
+
+    .sd1 {
+        width: 42%;
+        font-size: 1em;
+    }
 }
+
 .modal-dialog {
-  max-width: 900px;
-  margin: 1.75rem auto;
+    max-width: 900px;
+    margin: 1.75rem auto;
 }
+
 .modal-dialog {
-  max-width: 900px;
-  margin: 1.75rem auto;
-  height: 630px;
-  overflow-y: auto;
+    max-width: 900px;
+    margin: 1.75rem auto;
+    height: 630px;
+    overflow-y: auto;
 }
+
 .mc {
-  height: 300px;
-  width: 550px;
-  overflow: hidden;
+    height: 300px;
+    width: 550px;
+    overflow: hidden;
 }
+
 .modal-body {
-  max-height: 400px;
-  overflow-y: auto;
+    max-height: 400px;
+    overflow-y: auto;
 }
+
 @media (max-width:520px) {
-  .example-wrapper {
-    width: 100%;
-  }
+    .example-wrapper {
+        width: 100%;
+    }
 }
+
 .frm {
-  padding: 20px;
-  border: 1px solid black;
-  width: 90%;
-  background-color: #fff;
+    padding: 20px;
+    border: 1px solid black;
+    width: 90%;
+    background-color: #fff;
 }
+
 .frm {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-bottom: 80px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 80px;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input {
-  width: 100%;
-  padding: 1px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 1px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 button {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .btn2 {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .btn1 {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 80px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 80px;
 }
 
-
 button:hover {
-  background-color: #007bff;
+    background-color: #007bff;
 }
 </style>

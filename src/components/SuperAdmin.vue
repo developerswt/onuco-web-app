@@ -3,8 +3,7 @@
         <div class="row pt-5">
             <div class="col-xl-3 col-md-6 col-12">
                 <div class="info-box bg-b-green">
-                    <span class="info-box-icon push-bottom"><svg
-xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-users">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -19,44 +18,43 @@ xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-12">
+                <div class="info-box bg-b-pink">
+                    <span class="info-box-icon push-bottom"><i class="material-icons"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">InActive Students</span>
+                        <span class="info-box-number">{{ lectureSubject.inactiveStudentsCount}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-12">
                 <div class="info-box bg-b-yellow">
-                    <span class="info-box-icon push-bottom"><svg
-xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-user">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Course vs Students</span>
-                        <span class="info-box-number">{{ subject.length || 0 }}</span>
+                        <span class="info-box-text">Courses</span>
+                        <span class="info-box-number">{{ subject.totalCount }}</span>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 col-12">
                 <div class="info-box bg-b-blue">
-                    <span class="info-box-icon push-bottom"><svg
-xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-book">
                             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                         </svg></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Faculty vs Students</span>
+                        <span class="info-box-text">Facultys</span>
                         <span class="info-box-number">{{ lectureStudent.length || 0 }}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 col-12">
-                <div class="info-box bg-b-pink">
-                    <span class="info-box-icon push-bottom"><i class="material-icons"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Faculty vs Subjects</span>
-                        <span class="info-box-number">{{ lectureSubject.length || 0 }}</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <ActiveStudents />
     </div>
@@ -83,11 +81,11 @@ export default {
         try {
             const res = await AxiosInstance.get(`/UserCourseSubscription/GetActiveStudentsCount`);
             this.activeStudents = res.data;
-            const result = await AxiosInstance.get(`/UserCourseSubscription/TotalAmountCollectedPerSubject`);
+            const result = await AxiosInstance.get(`/Course`);
             this.subject = result.data;
-            const resu = await AxiosInstance.get(`/CoursesFacultyJ/GetAllCourseview`);
+            const resu = await AxiosInstance.get(`/CognitoUserGroupsj`);
             this.lectureStudent = resu.data;
-            const resul = await AxiosInstance.get(`CoursesFacultyJ/GetAllCourseDetails`);
+            const resul = await AxiosInstance.get(`/UserCourseSubscription/GetInactiveStudentsCount`);
             this.lectureSubject = resul.data;
         } catch (error) {
             console.log(error);
