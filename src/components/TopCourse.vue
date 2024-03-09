@@ -1,13 +1,10 @@
 <template>
-    <div class="category-test pt-3">
+    <div class="category-test ">
         <div class="container" >
-            <!-- <Breadcrumbs /> -->
-            <h4 class="academic_head_text pt-4">
-                <span id="aca_text">Top</span>Rated Courses
-            </h4>
+            <TopRatedCourses />
         </div>
     </div>
-    <section id="Course_section">
+    <!-- <section id="Course_section">
         <div class="container mb">
             <carousel :settings="settings" :breakpoints="breakpoints">
                 <slide v-for="course in courses" :key="course.id">
@@ -48,47 +45,50 @@
                     <navigation>
                     </navigation>
                 </template>
-            </carousel>
+            </carousel> 
+           
         </div>
-    </section>
-    <div class="container mb ">
-        <h4 class="academic_head_text pt-4">
-            <span id="aca_text">All</span>Courses
-        </h4>
-        <div class="row align" >
-            <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4" >
-                <div class="box ">
-                    <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
-                        <div class="wer">
-                            <div class="card-img-top offer1" :style="{ 'background-image': person.imageUrl ? 'url(' + person.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: person.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }"> <br>
-                                <p data-placement="top" :title="person.name" style="position: absolute; left: 20px;">{{ person.name}}</p>
-                            </div>
-                            <div class="offer">
-                                <img class="card-img-top" src="../assets/images/offer.png">
-                            </div>
-                            <div class="offer-details">
-                                <span class="card-image-top"><b>{{ calculateDiscountPercentage(person.actualPrice, person.discountPrice) }}% OFF</b></span>
-                            </div>
+    </section> -->
+    
+    <div class="container mb">
+    <h4 class="academic_head_text pt-4">
+        <span id="aca_text">All</span>Courses
+    </h4>
+    <div class="row align mt-3">
+        <div v-for="person in allCourses.courses" :key="person.id" class="col-sm-4">
+            <div class="box">
+                <router-link :to="{ name: 'CourseDetails', params: { name: person.courseName } }" style="text-decoration: none;">
+                    <div class="wer">
+                        <div class="card-img-top offer1" :style="{ 'background-image': person.imageUrl ? 'url(' + person.imageUrl + ')' : 'none', height: '155px', color: 'black', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat', backgroundColor: person.imageUrl ? 'transparent' : 'rgb(75, 130, 146)' }">
+                            <p class="place" data-placement="top" :title="person.name" >{{ person.name }}</p>
                         </div>
-                        <div class="card-body" >
-                            <p class="card-text">{{ person.description.slice(0, 65) }}...</p>
-                            <div class="text-left price" style="float: right;">
-                                <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{person.actualPrice}}</del><b style="margin-right: 2px; color:black">&#8377;{{ person.discountPrice}}</b></p>
-                            </div> <br>
-                            <div class="row">
-                                <div class="col-sm-6  star">
-                                    <StarRatings :rating="person.starRating || 0" :max-rating="5" />
-                                </div>
-                                <div class="col-sm-6">
-                                    <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice)">Buy Now</a>
-                                </div>
-                            </div>
+                        <div class="offer">
+                            <img class="card-img-top" src="../assets/images/offer.png">
                         </div>
-                    </router-link>
+                        <div class="offer-details">
+                            <span class="card-image-top"><b>{{ calculateDiscountPercentage(person.actualPrice, person.discountPrice) }}% OFF</b></span>
+                        </div>
+                    </div>
+                    <div class="card-body" style="min-height: 150px;">
+                        <p class="card-text">{{ person.description.slice(0, 65) }}...</p>
+                        <div class="text-left price " style="float: right;">
+                            <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{ person.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ person.discountPrice }}</b></p>
+                        </div>
+                    </div>
+                </router-link>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-sm-6 star">
+                        <StarRatings :rating="person.starRating || 0" :max-rating="5" />
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice, person.id )">Buy Now</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </template>
 
 <script>
@@ -99,17 +99,17 @@ import AxiosInstance from '../config/axiosInstance';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import StarRatings from './StarRatings.vue';
-
+import TopRatedCourses from './TopRatedCourses.vue'
 export default {
     name: 'TopRatedCourse',
     components: {
-
-Carousel,
-Slide,
-StarRatings,
-Navigation,
-},
-data() {
+        TopRatedCourses,
+        Carousel,
+        Slide,
+        StarRatings,
+        Navigation,
+    },
+    data() {
         return {
             ratings: [],
             allCourses: [],
@@ -166,17 +166,21 @@ data() {
         isLoggedIn() {
             return this.$store.state.IsLoggedIn;
         },
+        
+        isuser() {
+            return this.$store.state.user.signInUserSession.idToken.payload;
+        }
 
     },
 
     async created() {
         try {
-            const res = await AxiosInstance.get(`/TopRatedCourses`);
-            this.courses = res.data;
-            for (const course of this.courses) {
-                const res = await this.getByRatings(course.id);
-                course.starRating = res.averageRating;
-            }
+            // const res = await AxiosInstance.get(`/TopRatedCourses`);
+            // this.courses = res.data;
+            // for (const course of this.courses) {
+            //     const res = await this.getByRatings(course.id);
+            //     course.starRating = res.averageRating;
+            // }
             const result = await AxiosInstance.get(`/Course`);
             this.allCourses = result.data;
             for (const allcourse of this.allCourses.courses) {
@@ -213,11 +217,12 @@ data() {
     generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount) {
+        async makePayment(amount , id) {
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
 
             const payload = {
+                courseId:id,
                 merchantId: merchantId,
                 merchantTransactionId: transactionId,
                 merchantUserId: 'MUID-' + this.generateUUID(),
@@ -252,11 +257,29 @@ data() {
                 });
 
                 const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-                window.location.href = redirectURL;
+                if (response.status === 200) {
 
+                    const jsonData = {
+    userCognitoId: this.isuser.sub,
+    courseId: id, // Assuming course ID is stored in the 'id' property
+    merchantId: merchantId,
+    amount: amount, // Access discountPrice from the 'course' object
+    transactionId: transactionId,
+    numberOfMonths: 6,
+};
+
+const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
+{
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+if (SubscriptionApi.status === 200) {
+    window.location.href = redirectURL;
+}
+}
             } catch (error) {
                 console.error("Error making payment:", error);
-                // Handle payment processing errors here
             }
         },
     }
@@ -316,7 +339,10 @@ data() {
 }
 
 .box .row {
-    padding: 12px 30px;
+    position: relative;
+    bottom: 38px;
+    padding-left: 52px;
+    padding-right: 118px;
 }
 
 @media screen and (max-width: 400px) {
@@ -512,6 +538,11 @@ data() {
     .fa {
         font-size: 16px;
     }
+    .place{
+    position: relative; 
+    left: 9px !important; 
+    top:18px !important;
+  }
 
 }
 
@@ -544,6 +575,11 @@ data() {
 
   .align{
     padding-left: 20px;
-    margin: -14px;
+    margin: 2px;
+  }
+  .place{
+    position: relative; 
+    left: 20px; 
+    top:30px;
   }
 </style>

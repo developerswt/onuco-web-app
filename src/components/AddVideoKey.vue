@@ -13,7 +13,7 @@
                             <th>Course Id</th>
                             <th>Security Key</th>
                             <th>IsActive</th>
-                            <th>Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,14 +24,14 @@
                             </td>
                             <td v-if="!editMode">{{ selectedProduct.securityKey}}</td>
                             <td v-if="editMode">
-                                <input v-model="editedProduct.SecurityKey" class="size" type="text" required/>
+                                <input v-model="editedProduct.SecurityKey"  type="text" required/>
                             </td>
                             <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
                             <td v-if="editMode">
-                                <input v-model="editedProduct.isActive" class="size" type="text" required/>
+                                <input v-model="editedProduct.isActive" type="text" required/>
                             </td>
                             <td>
-                                <div class="button-row">
+                                <div class="button-row" style="justify-content: center;">
                                     <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                                     <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
                                     <button @click="deleteProduct(selectedProduct.courseId)">Delete</button>
@@ -48,7 +48,7 @@
                         <el-input v-model="newBranch.CourseId" type="text" required></el-input>
                     </el-form-item>
                     <el-form-item label="SecurityKey" prop="SecurityKey">
-                        <el-input type="text" v-model="newBranch.SecurityKey" class="size" required></el-input>
+                        <el-input type="text" v-model="newBranch.SecurityKey" required></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button class="btn2" type="submit" @click="addBranch">Add Security Key</el-button>
@@ -113,6 +113,9 @@
     toggleForm() {
         this.formVisible = !this.formVisible;
       },
+      
+
+
   
       async fetchData(courseId) {
             // If courseId is provided, use it, otherwise use this.courseId
@@ -143,12 +146,15 @@
   
   async updateProduct(id) {
     try {
+     
       const res = await AxiosInstance.put(`/VideoSecurity` + '?' +'&CourseId='+ this.editedProduct.CourseId + '&SecurityKey=' + this.editedProduct.SecurityKey + '&isActive=' + this.editedProduct.isActive );
         await this.fetchData();
         this.editMode = false; 
         this.ismodel = true; 
         // this.loadProductDetails();
-        this.$refs.Confirmation.open("Course Updated successfully.");
+        this.$refs.Confirmation.open("Updated successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
       
       }catch(error){
       this.isLoading = false;
@@ -163,18 +169,20 @@
     try {
       const response = await AxiosInstance.post(`/VideoSecurity?`+ '&CourseId='+ this.newBranch.CourseId + '&SecurityKey=' + this.newBranch.SecurityKey );
       await this.fetchData();
-        this.$refs.Confirmation.open("Course Added successfully.");
-  
-        this.newBranch = {
-            CourseId: '',
-            SecurityKey: '',
-        };
-        this.$refs.form.reset(); 
+        this.$refs.Confirmation.open("Security Key Added successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+        this.newBranch.CourseId = '';
+        this.newBranch.SecurityKey = '';
       
     } catch(error){
       this.isLoading = false;
       console.log(error.response.data.Message);
       this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+      this.newBranch.CourseId = '';
+      this.newBranch.SecurityKey = '';
   
     } finally {
       this.isLoading = false;
@@ -183,34 +191,29 @@
     }
   },
   
-  
-  async deleteProduct(CourseId) {
-      try {
-        const confirmed = await this.$refs.Confirmation.open(
-          "Are you sure?"
-        );
-        if (!confirmed) {
-          return; 
-        }
-  
-        this.editedProduct.isActive = '0';
-           const res = await AxiosInstance.put(`/VideoSecurity/SoftUpdateCourses` + '?' + 'CourseId=' + CourseId + '&isActive=' + this.editedProduct.isActive );
-            await this.fetchData();
-            this.editMode = false; 
-
-        //   this.selectedProduct = { courseId: '', securityKey: '', isActive:''};
-          this.$refs.Confirmation.open("Course deleted successfully.");
-
-      } catch(error){
-          this.isLoading = false;
-          console.log(error.response.data.Message);
-      
-          this.$refs.Confirmation.open(error.response.data.Message);
-    
-      } finally {
-        this.isLoading = false;
-      }
-    },
+    async deleteProduct(CourseId) {
+        try {
+          const confirmed = await this.$refs.Confirmation.open(
+            "Are you sure?"
+          );
+          if (!confirmed) {
+            return; 
+          }
+          this.editedProduct.isActive = '0';
+            const res = await AxiosInstance.put(`/VideoSecurity/SoftUpdateCourses` + '?' + 'CourseId=' + CourseId + '&isActive=' + this.editedProduct.isActive );
+              await this.fetchData();
+              this.editMode = false; 
+              this.$refs.Confirmation.open( "Deleted successfully.");
+              this.$refs.Confirmation.showOKButton = true;
+              this.$refs.Confirmation.showCancelButton = false;
+            } catch(error){
+                this.isLoading = false;
+                console.log(error.response.data.Message);
+                this.$refs.Confirmation.open(error.response.data.Message);
+              } finally {
+                  this.isLoading = false;
+                }
+        },
   },
   
   };
@@ -331,7 +334,7 @@
     padding: 15px;
   }
   .size{
-    width: 470px;
+    width: 270px;
   }
   .button-row {
   display: flex;

@@ -73,7 +73,7 @@ v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs=
   { headerName: 'Inactive Students', field: 'inActive_Students' }
 ],
 
-        defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
+        defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,
         showChildRow: false,
@@ -178,38 +178,41 @@ v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs=
   }
   
   .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 13px;
     margin-bottom: 5px;
-  }
-  
-  .ag-theme-alpine {
+}
+
+.ag-theme-alpine {
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
-  
-  }
-  
-  .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    /* --ag-header-cell-hover-background-color: #0d4b7e;
+  --ag-header-cell-moving-background-color: #0d4b7e; */
+  --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
+
+}
+
+.ag-theme-alpine .ag-header {
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
-  }
-  
-  .ag-theme-alpine .ag-header-group-cell {
+}
+
+.ag-theme-alpine .ag-header-group-cell {
     font-weight: normal;
     font-size: 22px;
-  }
-  
-  .ag-theme-alpine .ag-header-cell {
+}
+
+.ag-theme-alpine .ag-header-cell {
     font-size: 16px;
     text-align: center;
-  }
-  
-  .ag-header-cell-label {
+}
+
+.ag-header-cell-label {
     justify-content: center;
-  }
+}
   
   @media (max-width: 912px) {
     .ag-grid-vue {

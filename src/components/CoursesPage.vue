@@ -4,7 +4,7 @@
     <div v-for="academi in academia" :key="academi.id" class="container ">
       <!-- Use v-if to conditionally render the <div> when bCount is greater than zero -->
       <div>
-        <h2 id="available_text" style="margin-top: 30px;font-size: 18px;"><b>Available</b> {{ academi.academia.name }}
+        <h2 id="available_text" style="font-size: 18px;"><b>Available</b> {{ academi.academia.name }}
           Courses ({{ academi.bCount }})</h2>
         {{ academi.id }}
         <div class="parent_blocks">
@@ -14,8 +14,7 @@
 
               <div v-if="academi.academia.id == branch.academiaId" class="box">
 
-                <router-link
-:to="{ name: 'Universities', params: { name: branch.branchName }}"
+                <router-link :to="{ name: 'Universities', params: { name: branch.branchName }}"
                   style="color: white;text-decoration: none;">
 
                   <div class="row">

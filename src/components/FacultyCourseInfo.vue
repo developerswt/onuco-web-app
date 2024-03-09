@@ -2,31 +2,31 @@
 <div class="container">
     <div class="row pt-2 ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="card-box">
-            <div class="card-head">
-              <header>Faculty Course Details</header>
-              <div class="filter-box">
-  <span for="filter-text-box">Search Here : </span>
-  <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Subject Name/Faculty Name/Email" />
-  <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
-  <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
-</div>
-<div class="card-body " style="padding: 0px 30px 30px 30px;">
-               <div class="example-wrapper">
-                    <div style="height: 100%;">
-                      <ag-grid-vue
-v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
-                        :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
-                        :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
-                        cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
-                        is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
-                        @row-clicked='onCellClicked'>
-                      </ag-grid-vue>
-                  </div>
+            <div class="card-box">
+                <div class="card-head">
+                    <header>Faculty Course Details</header>
+                    <div class="filter-box">
+                        <span for="filter-text-box">Search Here : </span>
+                        <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Subject Name/Faculty Name/Email" />
+                        <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
+                        <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
+                    </div>
+                    <div class="card-body " style="padding: 0px 30px 30px 30px;">
+                        <div class="example-wrapper">
+                            <div style="height: 100%;">
+                                <ag-grid-vue
+                                    v-if="hasSearched" :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                                    :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
+                                    :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
+                                    cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
+                                    is-loding="true" @grid-ready="onGridReady" @cell-value-changed="onCellValueChanged"
+                                    @row-clicked='onCellClicked'>
+                                </ag-grid-vue>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
     </div>
     <Loading v-model:active="isLoading"></Loading>
@@ -53,10 +53,10 @@ export default {
     data: function () {
       return {
         showRequiredMessage: false,
-     hasSearched: false,
-     gridApi: null, // Ensure gridApi is initialized to null
-     gridColumnApi: null,
-     filterText: '',
+        hasSearched: false,
+        gridApi: null, // Ensure gridApi is initialized to null
+        gridColumnApi: null,
+        filterText: '',
         formVisible: false,
         userName: '',
         ismodel: true,
@@ -101,7 +101,7 @@ export default {
                     field: 'inActive_StudentCount'
                 } // Adjusted to 'inActive_StudentCount'
             ],
-        defaultColDef: { sortable: true, filter: true, width: 340, resizable: true, applyMiniFilterWhileTyping: true },
+        defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,
         showChildRow: false,
@@ -206,7 +206,7 @@ export default {
 }
 
 .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 13px;
     margin-bottom: 5px;
 }
@@ -215,13 +215,14 @@ export default {
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
+    --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
 
 }
 
 .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
 }
 

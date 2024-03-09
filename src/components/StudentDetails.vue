@@ -124,10 +124,10 @@ export default {
   { headerName: 'Subject Name', field: 'courseName' },
   { headerName: 'Price', field: 'price' },
   { headerName: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' },
-  { headerName: 'End Date', field: 'enddate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' } // Adjusted to use the same date format function for both 'Start Date' and 'End Date'
+  { headerName: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' } // Adjusted to use the same date format function for both 'Start Date' and 'End Date'
 ],
       gridApi: null,
-      defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+      defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
       editType: null,
       showChildRow: false,
@@ -288,7 +288,7 @@ export default {
         const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
         const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newEndDate=' + encodeURIComponent(formattedEndDate));
   
-        // this.gridApi.refreshCells({force : true});
+        this.gridApi.refreshCells({force : true});
         if (res.status === 200) {
           const newData = AxiosInstance.get(`/UserCourseSubscription/GetUserSubscription`);
           this.rowData = newData.data;
@@ -297,12 +297,14 @@ export default {
         this.gridApi.refreshCells({ force: true });
         this.OpenCloseFun();
         this.$refs.Confirmation.open("Updated successfully.");
-
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
 
       } catch (error) {
         console.log(error);
-        this.$refs.Confirmation.open(" Updating Error");
-
+        this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
       }
     },
 
@@ -382,7 +384,7 @@ export default {
 }
 
 .example-header {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 13px;
   margin-bottom: 5px;
 }
@@ -391,13 +393,14 @@ export default {
   --ag-header-height: 30px;
   --ag-header-foreground-color: black;
   --ag-header-background-color: white;
-  --ag-font-size: 15px;
-  --ag-font-family: 'Times New Roman';
+  --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
 
 }
 
 .ag-theme-alpine .ag-header {
-  font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 14px;
 }
 

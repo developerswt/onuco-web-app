@@ -142,7 +142,7 @@
 ],
 
         gridApi: null,
-        defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+        defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,
         showChildRow: false,
@@ -214,7 +214,7 @@
   }
   
   .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 13px;
     margin-bottom: 5px;
   }
@@ -226,13 +226,14 @@
     /* --ag-header-cell-hover-background-color: #0d4b7e;
      --ag-header-cell-moving-background-color: #0d4b7e; */
   
-    --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
+     --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
   
   }
   
   .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
   }
   

@@ -62,7 +62,7 @@ export default {
 }
 
 .error_parent_block {
-    padding-top: 150px;
+    padding-top: 100px;
 }
 
 @media screen and (max-width: 1024px) {

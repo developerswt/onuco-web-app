@@ -9,10 +9,9 @@
             </h4> 
             
             <div class=" parent_blocks">
-                <div class="row pt-4">
+                <div class="row ">
                     <div v-for="college in university" :key="college.id" class="box">
-                        <router-link
-:to="{ name: 'Semester', params: { name: college.universityName } }"
+                        <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
                             style="text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">

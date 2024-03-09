@@ -1,7 +1,7 @@
 <template>
-<div class="category-test pt-3">
+<div class="category-test">
     <div class="container">
-        <h4 class="academic_head_text pt-1">
+        <h4 class="academic_head_text">
             <span id="aca_text">Best</span>Lecturers
         </h4>
     </div>

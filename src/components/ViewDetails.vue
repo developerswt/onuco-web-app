@@ -10,7 +10,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
+                                        <th>StudentName</th>
+                                        <th>Cours Name</th>
                                         <th>StartDate</th>
                                         <th>EndDate</th>
                                         <th>ActualPrice</th>
@@ -20,6 +21,7 @@
                                 <tbody>
                                     <tr v-for="Student in activeStudents.activeStudents" :key="Student.id">
                                         <td>{{ Student.id }}</td>
+                                        <td>{{ Student.userName}}</td>
                                         <td>{{ Student.name }}</td>
                                         <td>{{ Student.startdate }}</td>
                                         <td>{{ Student.enddate }}</td>
@@ -38,8 +40,8 @@
                 <div class="card-head">
                     <header>Active Student Result</header>
                     <div class="card-body ">
-                        <div class="h6">ActiveStudentsCount</div><b> {{ activeStudents.activeStudentsCount }}</b>
-                        <div class="h6">DiscountedAmount</div><b>{{ activeStudents.discountedAmount }}</b>
+                        <div class="h6">Active Students Count</div><b> {{ activeStudents.activeStudentsCount }}</b>
+                        <div class="h6">Discounted Amount</div><b>{{ activeStudents.discountedAmount }}</b>
                         <div class="h6">Total Amount</div><b>{{ activeStudents.totalAmount }}</b>
                     </div>
                 </div>

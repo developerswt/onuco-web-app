@@ -35,22 +35,21 @@
                                 <div class="text-left price" style="float: right;">
                                     <p style=" color:#707070 !important;">&#8377;<del style="margin-right: 5px;">{{
                                         course.actualPrice }}</del><b style="margin-right: 2px; color:black">&#8377;{{ course.discountPrice }}</b></p>
-
-                                </div> <br>
-                                <div class="row">
+                                    </div> <br>
+                               
+                            </div>
+                        </router-link>
+                    <div class="row">
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
                                     <div v-if="isLoggedIn" class="col-sm-6">
-                                        <a href="#" class="btn btn-primary" @click.prevent="makePayment(course.discountPrice)">Buy Now</a>
+                                        <button class="btn btn-primary" @click="makePayment(course.discountPrice, course.id)">Buy Now</button>
                                     </div>
                                     <div v-else class="col-sm-6">
                                         <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
                                     </div>
                                 </div>
-                            </div>
-
-                    </router-link>
                 </div>
 
             </slide>
@@ -189,15 +188,16 @@ export default {
         generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount) {
+        async makePayment(amount, courseId) {
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
 
             const payload = {
+                courseId:courseId,
                 merchantId: merchantId,
                 merchantTransactionId: transactionId,
                 merchantUserId: 'MUID-' + this.generateUUID(),
-                amount: amount * 100,
+                amount: amount * 100 ,
                 redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
                 redirectMode: "POST",
                 callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
@@ -219,9 +219,7 @@ export default {
             const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
 
             try {
-                const response = await axios.post(UAT_PAY_API_URL, {
-                    request: dataBase64
-                }, {
+                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
                     headers: {
                         accept: "application/json",
                         "Content-Type": "application/json",
@@ -233,16 +231,24 @@ export default {
                 if (response.status === 200) {
 
                     const jsonData = {
-                        UserId: this.isuser.sub,
-                        CourseId: this.courses.id,
-                        TransactionId: transactionId,
-                        NumberOfMonth: this.courses.numberOfMonths,
-                    };
-                    const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData);
-                    if (SubscriptionApi.status === 201) {
-                        window.location.href = redirectURL;
-                    }
-                }
+            userCognitoId: this.isuser.sub,
+            courseId: courseId, 
+            merchantId: merchantId,
+            amount: amount, 
+            transactionId: transactionId,
+            numberOfMonths: 6,
+        };
+
+const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
+{
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+if (SubscriptionApi.status === 200) {
+    window.location.href = redirectURL;
+}
+}
             } catch (error) {
                 console.error("Error making payment:", error);
             }
@@ -278,12 +284,14 @@ export default {
 }
 
 .mb .row {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 15px;
+    margin-right: 80px;
+    bottom: 15px;
 }
 
 .box {

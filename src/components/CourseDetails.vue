@@ -62,8 +62,8 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                 </div>
 
                                 <p v-if="isLoggedIn" id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
-                                    &#8377;{{ book.discountedPrice }}  <button
-                                            id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
+                                    &#8377;{{ book.discountedPrice }}  
+                                    <button id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
                                 <p v-else id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
                                     &#8377;{{ book.discountedPrice }} <a href="/Login"><button
                                             id="search_button">buy now</button></a></p>
@@ -915,7 +915,7 @@ ol {
 }
 
 .search_inner_block {
-    padding: 10px 10px 20px 10px;
+    padding: 0px 10px 20px 10px;
 }
 
 #course_text {

@@ -26,7 +26,7 @@
                 <th>Work Flow</th>
                 <!-- <th>Faculty Id</th> -->
                 <th>IsActive</th>
-                <th>ImageFile.................</th>
+                <th>ImageFile</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -59,9 +59,11 @@
                         <option value="Release">Release</option>
                     </select>
                   </td>
-  
                 <!-- <td>{{ selectedProduct.facultyId }}</td> -->
-                <td>{{ selectedProduct.isActive }}</td>
+                <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.isActive" type="text" required>
+               </td>
                 <td v-if="!editMode">{{ selectedProduct.imageUrl }}</td>
                 <td v-if="editMode">
                   <input type="file" accept="image/*" @change="handleFileChange" required>
@@ -77,7 +79,7 @@
             </tbody>
         </table>
       </div>
-          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
   
   <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '965px' }">
       <el-form :model="newBranch" ref="form" label-position="top" class="frm">
@@ -180,7 +182,7 @@
         semesterId:null, 
         courseName:'',
         workFlowStatement:'',
-        isActive: 1,
+        isActive: '',
         imageUrl:'',
       },
         newBranch: {
@@ -249,6 +251,8 @@
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false; 
         } 
          finally {
          this.isLoading = false;
@@ -274,7 +278,7 @@
     this.editedProduct.semesterId = this.selectedProduct.semesterId;
     this.editedProduct.courseName = this.selectedProduct.courseName;
     this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
-    // this.editedProduct.facultyId = this.selectedProduct.facultyId;
+    this.editedProduct.isActive = this.selectedProduct.isActive;
     this.editedProduct.imageUrl = this.selectedProduct.imageUrl;
   },
   async updateProduct(id) {
@@ -282,7 +286,7 @@
       let formData = new FormData();
       formData.append('ImageUrl', this.editedProduct.imageUrl);
   
-      const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&Name='+ this.editedProduct.name + '&Description=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement ,
+      const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&Name='+ this.editedProduct.name + '&Description=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement  + '&isActive=' + this.editedProduct.isActive ,
       formData,
         {
           headers: {
@@ -296,11 +300,15 @@
         this.ismodel = true; 
         this.loadProductDetails();
         this.$refs.Confirmation.open("Subject Updated successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
   
       } catch (error) {
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false; 
    
          }
     },
@@ -324,7 +332,8 @@
       await this.loadData();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Subject Added successfully.");
-  
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false; 
       this.newBranch = {
         name: '',
         desc: '',
@@ -341,11 +350,23 @@
   }  catch(error){
           this.isLoading = false;
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
+          this.newBranch = {
+            name: '',
+            desc: '',
+            ActualPrice:'',
+            DiscountedPrice:'',
+            SemesterId: this.selectedsemester, 
+            CourseName:'',
+            WorkFlowStatement:'',
+            IsActive: 1,
+            ImageUrl: '',
+          }; 
         } 
     finally {
            this.isLoading = false;
            this.formVisible = false;
-  
     }
   },
   async deleteProduct(id) {
@@ -357,7 +378,7 @@
           return; // If the user cancels, do nothing
         }
           this.editedProduct.isActive = '0';
-           const res = await AxiosInstance.put(`/Branches/SoftUpdateCourse` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+           const res = await AxiosInstance.put(`/Course/SoftUpdateCourses` + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
   
         if (res.status === 200) {
           await this.loadData();
@@ -368,12 +389,14 @@
   
           // Show success dialog
           this.$refs.Confirmation.open("Subject deleted successfully.");
+          this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
         }
       } catch (error) {
         console.error("Error deleting Subject:", error);
-  
-        // Show error dialog
         this.$refs.Confirmation.open("Error deleting Subject.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
       } finally {
         this.isLoading = false;
       }

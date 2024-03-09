@@ -16,6 +16,7 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>User CognitoId</th>
+                            <th>Action</th>
     
                         </tr>
                     </thead>
@@ -154,11 +155,15 @@
                     this.selectedTypes = '';
     
                     this.$refs.Confirmation.open("deleted successfully.");
+                    this.$refs.Confirmation.showOKButton = true;
+                    this.$refs.Confirmation.showCancelButton = false;
                 } catch (error) {
                     this.isLoading = false;
                     if (error.response && error.response.data && error.response.data.message) {
                         console.log("Error message:", error.response.data.message);
                         this.$refs.Confirmation.open(error.response.data.message);
+                        this.$refs.Confirmation.showOKButton = true;
+                        this.$refs.Confirmation.showCancelButton = false;
                     }
                 } finally {
                     this.isLoading = false;

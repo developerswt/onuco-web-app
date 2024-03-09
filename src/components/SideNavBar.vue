@@ -17,12 +17,12 @@
               <span class="title">Add / Update</span>
             </div>
           </li>
-          <li>
+          <!-- <li>
             <div class="sidebar-item" @click="selectContent('viewDetails')">
               <span class="icon"><i class="fa fa-eye"></i></span>
               <span class="title">View Details</span>
             </div>
-          </li>
+          </li> -->
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
               <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
@@ -73,20 +73,19 @@
             </div>
           </li>
 
-          <li>
+          <!-- <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
               <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
               </span>
-              <span
-class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+              <span class="title course collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
                 aria-controls="collapseExample">
                 Course Details&nbsp;&nbsp;
                 <span class="action course"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
               </span>
             </div>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <div id="collapseExample" class="collapse hj">
               <span class="subtitle" @click="selectContent('types')">Course Types</span>
               <span class="subtitle" @click="selectContent('academics')">Academics</span>
@@ -95,7 +94,7 @@ class="title course collapsed" data-toggle="collapse" href="#collapseExample" ar
               <span class="subtitle" @click="selectContent('semester')">Semester</span>
               <span class="subtitle" @click="selectContent('courses')">Subjects</span>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>

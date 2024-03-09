@@ -39,8 +39,10 @@
                 </td>
                 <td>{{ selectedProduct.universityName }}</td>
                 <td>{{ selectedProduct.branchesId }}</td>
-                <td>{{ selectedProduct.isActive }}</td>
-
+                <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.isActive" type="text" required>
+               </td>
                 <td>
               <div class="button-row">
                 <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -52,7 +54,7 @@
             </tbody>
         </table>
       </div> 
-          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
 
           <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
               <el-form :model="newBranch" ref="form" label-position="top" class="frm">
@@ -79,7 +81,7 @@
                       </el-form-item>
 
                       <el-form-item>
-                          <el-button type="primary" @click="addUniversity">Add University</el-button>
+                        <el-button type="primary" class="btn2" @click="addBranch">Add University</el-button>
                       </el-form-item>
                     </el-form>
                   </el-dialog>
@@ -189,6 +191,8 @@ methods: {
         this.isLoading = false;
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+         this.$refs.Confirmation.showCancelButton = false; 
       }  
       finally {
       this.isLoading = false;
@@ -222,11 +226,15 @@ async updateProduct(id) {
       this.ismodel = true; 
       this.loadProductDetails();
       this.$refs.Confirmation.open("University Updated successfully.");
+      this.$refs.Confirmation.showOKButton = true;
+         this.$refs.Confirmation.showCancelButton = false; 
 
  } catch(error){
         this.isLoading = false;
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+         this.$refs.Confirmation.showCancelButton = false; 
 
     }
   },
@@ -239,9 +247,9 @@ async addBranch() {
   
     await this.loadData();
     this.loadProductDetails();
-
-      this.$refs.Confirmation.open("University Added successfully.");
-
+    this.$refs.Confirmation.open("University Added successfully.");
+    this.$refs.Confirmation.showOKButton = true;
+    this.$refs.Confirmation.showCancelButton = false; 
     this.newBranch = {
     name: '',
     description: '',
@@ -255,6 +263,15 @@ async addBranch() {
         this.isLoading = false;
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
+        this.newBranch = {
+          name: '',
+          description: '',
+          branchesId: this.selectedbranch,
+          universityName: '',
+          isActive: 1,
+        };
     } 
   finally {
          this.isLoading = false;
@@ -264,34 +281,35 @@ async addBranch() {
 async deleteProduct(id) {
     try {
       const confirmed = await this.$refs.Confirmation.open(
-        "Are you sure you want to delete this University ?"
+        "Are you sure ?"
       );
       if (!confirmed) {
         return; // If the user cancels, do nothing
       }
 
       this.editedProduct.isActive = '0';
-      const res = await AxiosInstance.put(`/Semester/SoftUpdateUniversity`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
+      const res = await AxiosInstance.put(`/University/SoftUpdateUniversity`  + '?' + 'id=' + id + '&isActive=' + this.editedProduct.isActive );
 
         await this.loadData();
         this.loadProductDetails();
 
         this.selectedUni = '';
-      this.selectedProduct = { id:'', name: '', description: '' , branchesId:'',isActive:''};
-
-        // Show success dialog
+        this.selectedProduct = { id:'', name: '', description: '' , branchesId:'',isActive:''};
         this.$refs.Confirmation.open("University deleted successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
      
     } catch(error){
         this.isLoading = false;
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false; 
     } 
   finally {
       this.isLoading = false;
     }
   },
-
 },
 };
 </script>

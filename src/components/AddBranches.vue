@@ -34,8 +34,11 @@
                   </td>
                   <td>{{selectedProduct.branchName }}</td>
                   <td>{{ selectedProduct.id }}</td>
-                  <td>{{ selectedProduct.isActive }}</td>
-                  <td>
+                  <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.isActive" type="text" required>
+               </td>
+                <td>
                 <div class="button-row">
                   <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
                   <button v-if="editMode" @click="updateProduct(editedProduct.id)">Update</button>
@@ -46,7 +49,7 @@
               </tbody>
           </table>
         </div>
-            <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+            <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
             <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
               <el-form :model="newBranch" ref="form" label-position="top" class="frm">
                 <el-form-item>{{ newBranch.id }}</el-form-item>
@@ -73,7 +76,7 @@
         </el-form-item>
   
         <el-form-item>
-          <el-button class="btn2" type="primary" native-type="submit">Add Branch</el-button>
+          <el-button type="primary" class="btn2" @click="addBranch">Add Branch</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -185,6 +188,8 @@
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
         } 
          finally {
       this.isLoading = false;
@@ -218,11 +223,15 @@
         this.ismodel = true; 
         this.loadProductDetails();
         this.$refs.Confirmation.open("Branch Updated successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
       }   
       catch(error){
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
       }
     },
   
@@ -236,6 +245,8 @@
       await this.loadData();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Branch Added successfully.");
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
       this.newBranch = {
         name: '',
         description: '',
@@ -249,6 +260,15 @@
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
+          this.newBranch = {
+        name: '',
+        description: '',
+        academiaId: this.selectedacademic,
+        branchName: '',
+        isActive: 1,
+     };
   
   } finally {
     this.isLoading = false;
@@ -273,12 +293,15 @@
           this.selectedProduct = { id: '', name: '', description: '',academiaId:'' ,isActive:''};
   
           this.$refs.Confirmation.open("Branch deleted successfully.");
-        
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
       }  
       catch(error){
           this.isLoading = false;
           console.log(error.response.data.Message);
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
       } 
       finally {
         this.isLoading = false;

@@ -95,6 +95,8 @@ export default {
         if (confirmationRef && confirmationRef.open) {
           if (this.validateForm()) {
             const result = await confirmationRef.open("Course Create successfully.");
+            this.$refs.Confirmation.showOKButton = true;
+            this.$refs.Confirmation.showCancelButton = false;
             
             if (result) {
               this.$emit('toggle-favorite', 'dashboard');

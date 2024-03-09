@@ -73,7 +73,7 @@
     <div class="col-sm-6">
         <div class="card card-box">
             <div class="card-head">
-                <header>No Of Courses Available In System Survey</header>
+                <header>No Of Users Course Subscription In System Survey</header>
             </div>
             <div class="card-body">
                 <div class="recent-report__chart">
@@ -396,12 +396,12 @@ export default {
                         rotate: 0,
                     },
                     title: {
-                        text: "No Of Courses Available In System",
+                        text: "Subscription Year In System",
                     }
                 },
                 yaxis: [{
                     title: {
-                        text: "No Of Course",
+                        text: "Total No Of Subscription Users",
                     },
                 },
                 // {
@@ -413,7 +413,7 @@ export default {
              ],
             },
             coursesAvailableSeries: [{
-                name: 'Course available',
+                name: 'Subscription Users',
                 type: 'bar',
                 data: [],
             }, 
@@ -715,6 +715,9 @@ export default {
             if (this.coursesAvailable) {
                 const yearCounts = {};
 
+                this.coursesAvailable.sort((a, b) => new Date(b.userCreateDate) - new Date(a.userCreateDate));
+
+
                 this.coursesAvailable.forEach((item, index) => {
                     const year = new Date(item.userCreateDate).getFullYear();
                     const monthYear = this.getMonthYear(item.userCreateDate);
@@ -759,7 +762,9 @@ export default {
     if (this.lectureStudent) {
         const yearCounts = {};
 
-        this.lectureStudent.forEach((person, index) => {
+        this.lectureStudent.sort((a, b) => new Date(b.userCreateDate) - new Date(a.userCreateDate));
+
+            this.lectureStudent.forEach((person, index) => {
             const year = new Date(person.userCreateDate).getFullYear();
             const monthYear = this.getMonthYear(person.userCreateDate);
 
@@ -802,6 +807,8 @@ export default {
 coursesSubChartData() {
     if (this.courseSubscription) {
         const yearCounts = {};
+
+        this.courseSubscription.sort((a, b) => new Date(b.startdate) - new Date(a.startdate));
 
         this.courseSubscription.forEach((course, index) => {
             const year = new Date(course.startdate).getFullYear();
