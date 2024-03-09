@@ -19,7 +19,14 @@
             </div>
             <div class="col-xl-3 col-md-6 col-12">
                 <div class="info-box bg-b-pink">
-                    <span class="info-box-icon push-bottom"><i class="material-icons"></i></span>
+                    <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-users">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">InActive Students</span>
                         <span class="info-box-number">{{ lectureSubject.inactiveStudentsCount}}</span>
@@ -30,9 +37,9 @@
                 <div class="info-box bg-b-yellow">
                     <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-user">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
+                            stroke-linejoin="round" class="feather feather-book">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                         </svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Courses</span>
@@ -42,11 +49,11 @@
             </div>
             <div class="col-xl-3 col-md-6 col-12">
                 <div class="info-box bg-b-blue">
-                    <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <span class="info-box-icon push-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-book">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            stroke-linejoin="round" class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
                         </svg></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Facultys</span>

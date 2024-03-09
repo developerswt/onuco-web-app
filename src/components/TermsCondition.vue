@@ -22,9 +22,11 @@ export default {
 }
 </script>
 
-<style scoped>.jk {
+<style scoped>
+/* .jk {
     position: relative;
     top: 81px;
     margin-bottom: 100px;
 
-}</style>
+} */
+</style>

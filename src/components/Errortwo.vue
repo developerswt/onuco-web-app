@@ -53,7 +53,7 @@ export default {
 .error_parent_block {
     margin-top: -250px;
     position: relative;
-    top: 401px;
+    top: 340px;
 
 }
 

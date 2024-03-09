@@ -1,6 +1,6 @@
 <template>
     <div id="academy_container" class="container">
-        <div class="category-test pt-4">
+        <div class="category-test">
 
             <div class="container" style="margin-top: 10px;">
                 <h4 class="academic_head_text">

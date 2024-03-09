@@ -35,29 +35,29 @@
               </ag-grid-vue>
             </div>
           </div>
-          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
             <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
               <el-form ref="form" :model="newBranch" label-position="top" class="frm"> 
                 <p><b></b> {{ newBranch.id }}</p>
-                <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" required>
+                <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" >
                   <el-input v-model="newBranch.userCourseSubscriptionId"></el-input>
                 </el-form-item>
-                <el-form-item label="Facuilty CognitoId:" prop="facuiltyCognitoId" required>
+                <el-form-item label="Facuilty CognitoId:" prop="facuiltyCognitoId" >
                   <el-input v-model="newBranch.facuiltyCognitoId"></el-input>
                 </el-form-item>
-                <el-form-item label="Payment Date:" prop="paymentDate" required>
+                <el-form-item label="Payment Date:" prop="paymentDate" >
                   <el-date-picker v-model="newBranch.paymentDate" type="datetime"></el-date-picker>
                 </el-form-item>
-                <el-form-item label="Amount Paid:" prop="amountPaid" required>
+                <el-form-item label="Amount Paid:" prop="amountPaid" >
                   <el-input v-model="newBranch.amountPaid"></el-input>
                 </el-form-item>
-                <el-form-item label="Balance Amount:" prop="balanceAmount" required>
+                <el-form-item label="Balance Amount:" prop="balanceAmount" >
                   <el-input v-model="newBranch.balanceAmount"></el-input>
                 </el-form-item>
-                <el-form-item label="Mode Of Pay:" prop="modeofPay" required>
+                <el-form-item label="Mode Of Pay:" prop="modeofPay" >
                   <el-input v-model="newBranch.modeofPay"></el-input>
                 </el-form-item>
-                <el-form-item label="IsActive:" prop="isActive" required>
+                <el-form-item label="IsActive:" prop="isActive" >
                   <el-input v-model="newBranch.isActive"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -211,7 +211,7 @@ export default {
                     headerName: 'Mode of Pay',
                     field: 'modeofPay'
                 }
-            ],     defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+            ],     defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
      columnApi: null,
      editType: null,
      showChildRow: false,
@@ -246,11 +246,10 @@ export default {
         this.domLayout = 'autoHeight';
         this.isLoading = true;
         try {
-
             const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
             let req = res.data;
             this.Orders = req;
-
+            console.log(req);
         } catch (error) {
             this.isLoading = false;
             console.log(error);
@@ -406,11 +405,29 @@ export default {
         //  this.gridApi.refreshCells({ force: true });
          this.toggleForm();
          this.$refs.Confirmation.open("Payment Details Added successfully.");
+         this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+         this.newBranch.userCourseSubscriptionId='';
+         this.newBranch.facuiltyCognitoId= '';
+         this.newBranch.paymentDate= '';
+         this.newBranch.amountPaid= '';
+         this.newBranch.balanceAmount= '';
+         this.newBranch.modeofPay= '';
+         this.newBranch.isActive= '';
        
    } catch (error) {
        this.isLoading = false;
        console.error("Error adding branch:", error);
        this.$refs.Confirmation.open("Error Adding Payment Details.");
+       this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+       this.newBranch.userCourseSubscriptionId='';
+         this.newBranch.facuiltyCognitoId= '';
+         this.newBranch.paymentDate= '';
+         this.newBranch.amountPaid= '';
+         this.newBranch.balanceAmount= '';
+         this.newBranch.modeofPay= '';
+         this.newBranch.isActive= '';
     }
      finally {
        this.isLoading = false;
@@ -493,7 +510,7 @@ export default {
 }
 
 .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 13px;
     margin-bottom: 5px;
 }
@@ -504,14 +521,14 @@ export default {
     --ag-header-background-color: white;
     /* --ag-header-cell-hover-background-color: #0d4b7e;
   --ag-header-cell-moving-background-color: #0d4b7e; */
-
-    --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
+  --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
 
 }
 
 .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
 }
 
@@ -669,7 +686,7 @@ button {
     font-weight: 600;
     font-size: 15px;
     position: relative;
-    top: 15px;
+    top: 45px;
     left: 2px;
 }
 

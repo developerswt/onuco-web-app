@@ -11,7 +11,7 @@
   
               <div style="height: 100%;">
                 <ag-grid-vue
-:dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+                  :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                   :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                   :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                   :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</button>
+          <button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</button>
   
   <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': formVisible }">
    <div class="modal-dialog" role="document">
@@ -104,7 +104,7 @@
 ],
 
         gridApi: null,
-        defaultColDef: { sortable: true, filter: true, width: 150, resizable: true, applyMiniFilterWhileTyping: true },
+        defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
         columnApi: null,
         editType: null,
         showChildRow: false,
@@ -225,15 +225,17 @@
       await this.getdata();
       this.loadProductDetails();
       this.$refs.Confirmation.open("Top Course Added successfully.");
-      this.newBranch = {
-        name: '',
-      };
-      this.$refs.form.reset(); 
+      this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+      this.selectedOption ='';      
     }
   } catch(error){
         this.isLoading = false;
         console.log(error.response.data.Message);
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+        this.selectedOption ='';      
 
   } finally {
     this.isLoading = false;
@@ -289,7 +291,7 @@
   }
   
   .example-header {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 13px;
     margin-bottom: 5px;
   }
@@ -298,13 +300,14 @@
     --ag-header-height: 30px;
     --ag-header-foreground-color: black;
     --ag-header-background-color: white;
-    --ag-font-size: 15px;
-    --ag-font-family: 'Times New Roman';
+    --ag-font-size: 14px;
+  --ag-font-family: 'Noto Sans', sans-serif;
+  font-weight: initial !important;
   
   }
   
   .ag-theme-alpine .ag-header {
-    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
   }
   
@@ -512,26 +515,6 @@
      margin-bottom: 20px;
      border: 1px solid #deebfd;
      box-shadow: -8px 12px 18px 0 #dadee8;
-  }
-  
-  .card-head {
-     border-radius: 2px 2px 0 0;
-     border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
-     padding: 2px;
-     /* text-transform: uppercase; */
-     color: #3a405b;
-     font-size: 14px;
-     font-weight: 600;
-     line-height: 40px;
-     min-height: 40px;
-  }
-  .card-head header {
-     display: inline-block;
-     padding: 11px 20px;
-     vertical-align: middle;
-     line-height: 17px;
-     font-size: 17px;
-     letter-spacing: 1px;
   }
    .search-box{
     width:70%;

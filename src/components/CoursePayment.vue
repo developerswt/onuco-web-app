@@ -6,9 +6,12 @@
         <div class="card-body">
           <div class="circle"> <img src="../assets/images/Tick.png" style="width: 160px; height: 160px;"></div>
             <p class="head text-center mt-4"> <i class="bi bi-check"></i>Successfully subscribed the subjects</p>
-            <div>
-              <button class="bt text-center mt-4">Download Payment Details</button>
+            <div >
+              <p class="file">
+                <button class="bt text-center mt-4" @click="onClick">Download Payment Details</button>
+              </p>
             </div>
+
             <div class="mt-2">
               <router-link to="/Mylearnings"><button class="bt1 text-center"> <img src="../assets/images/logout.png"> Your Subscribed Subjects</button></router-link>
             </div>
@@ -17,10 +20,50 @@
     </div>
     <div class="container-fluid"></div>
   </div>
+  <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
+
 </template>
 <script>
+import AxiosInstance from '../config/axiosInstance';
+import Loading from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
+export default {
+  name: "AddTypes",
+  components: {
+    Loading,
+  },
+
+  data() {
+    return {
+      isLoading: false 
+    };
+  },
+  
+  methods: {
+    onClick() {
+      this.isLoading = true; 
+      AxiosInstance({
+        url: '/Invoice',
+        method: 'GET',
+        responseType: 'blob',
+      }).then((response) => {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', 'Invoice.pdf');
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      }).finally(() => {
+        this.isLoading = false; // Set loading state back to false when request is complete
+      });
+    }
+  }
+};
 </script>
+
 <style scoped>
 .circle {
 

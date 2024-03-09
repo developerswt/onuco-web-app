@@ -1,11 +1,17 @@
 <template>
     <div class="container-fluid jk">
         <div class="container">
-            <p v-if="!academia.readMore" class="professor-details_text">{{academia && academia.description ? academia.description.slice(0, 136) : '' }}
-                <span class="read" @click="toggleReadMore">...<span style="color:blue;cursor: pointer;">Read more</span></span>
+            <p v-if="!academia.readMore || academia.description.length <= 136" class="professor-details_text">
+                {{ academia && academia.description ? academia.description.slice(0, 136) : '' }}
+                <span v-if="academia.description.length > 136" class="read" @click="toggleReadMore">...
+                    <span style="color:blue;cursor: pointer;">Read more</span>
+                </span>
             </p>
-            <p v-if="academia.readMore" class="professor-details_text">{{ academia.description }}
-                <span @click="toggleReadMore"><span style="color:blue;cursor: pointer;">Read less</span></span>
+            <p v-if="academia.readMore && academia.description.length > 136" class="professor-details_text">
+                {{ academia.description }}
+                <span @click="toggleReadMore">
+                    <span style="color:blue;cursor: pointer;">Read less</span>
+                </span>
             </p>
         </div>
         <div v-if="branches.length > 0 || academia.length > 0" class="container pb-3">
@@ -13,8 +19,7 @@
             <div class="parent_blocks">
                 <div class="row ">
                     <div v-for="branch in branches" :key="branch.id" class="box">
-                        <router-link
-:to="{ name: 'Universities', params: { name: branch.branchName } }"
+                        <router-link :to="{ name: 'Universities', params: { name: branch.branchName } }"
                             style="cursor: pointer; color: white; text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;left: 17px;">
@@ -91,7 +96,7 @@ export default {
         }
     },
     methods: {
-    toggleReadMore() {
+        toggleReadMore() {
         this.academia.readMore = !this.academia.readMore;
     },
     shortenText(text, maxLength) {

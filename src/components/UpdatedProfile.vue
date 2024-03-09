@@ -2,7 +2,6 @@
     <div class="container-fluid jk">
         <div class="container">
             <div class="learning_block">
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div>
@@ -19,10 +18,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="left_block">
                                             <p>5 Modules <span id="span_text">32 Topics</span></p>
-
-                                            <button id="course_button">Start Course <i
-class="fa-solid fa-play"
-                                                    style="color: #ffffff;"></i></button>
+                                            <button id="course_button">Start Course <i class="fa-solid fa-play" style="color: #ffffff;"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -95,8 +91,7 @@ class="fa-solid fa-play"
                                 <h3>Email address</h3>
                                 <!-- <p>userName@email.com</p> -->
                                 <p v-if="!editing">{{ updatedAttribute.email }}</p>
-                                <input
-v-else v-model="userEmail" placeholder="userName@email.com" type="text"
+                                <input v-else v-model="userEmail" placeholder="userName@email.com" type="text"
                                     style="border: 1px solid #DEDEDE;font-size: 14px;color: #707070;">
                             </div>
                         </div>
@@ -141,23 +136,14 @@ v-else v-model="userEmail" placeholder="userName@email.com" type="text"
                                     <p>{{ formatCreationDate(login.creationDate) }}</p>
                                 </div>
                                 <p v-if="shouldShowViewAll">
-                                    <router-link
-class="va" to="" style="text-decoration: underline;"
-                                        @click="toggleViewAll">
-                                        View all
-                                    </router-link>
+                                    <router-link class="va" to="" style="text-decoration: underline;" @click="toggleViewAll"> View all </router-link>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
-
     </div>
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
@@ -371,7 +357,7 @@ export default {
 }
 .delete_profile_request {
     color: blue;
-    padding: 6px 10px;
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -379,8 +365,6 @@ export default {
     margin: 18px 0px;
     cursor: pointer;
 }
-
-
 .button2 {
     /* border: 1px solid var(--unnamed-color-0177fb); */
     border: 1px solid #0177FB;
@@ -390,10 +374,6 @@ export default {
     background-color: white;
 
 }
-
-
-
-
 .icon_bg_colors {
     float: right;
     width: 36px;
@@ -722,6 +702,18 @@ input[type="radio"]:checked {
         margin-right: 116px; */
         padding-top: 12px;
     }
+    .delete_profile_request {
+    color: blue;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 18px 3px;
+    cursor: pointer;
+    position: relative;
+    bottom: 76px;
+}
 
 }
 
@@ -939,12 +931,12 @@ input[type="text"] {
     }
 
     .mm {
-        margin-top: -54px;
+        margin-top: -74px;
     }
 
-    .learning_block {
+    /* .learning_block {
         padding-top: 70px;
-    }
+    } */
 
     .va {
         display: none;
@@ -961,12 +953,9 @@ input[type="text"] {
     .users .esdit_profile .buttons {
         float: right;
         position: relative;
-        /* bottom: 63px; */
         position: relative;
         bottom: 160px;
-
     }
-
     .icon_bg_colors {
         position: relative;
         right: 263px;

@@ -89,9 +89,9 @@ export default {
 </script>
 
 <style scoped>
-.jk {
+/* .jk {
     position: relative;
     top: 81px;
     margin-bottom: 100px;
-}
+} */
 </style>

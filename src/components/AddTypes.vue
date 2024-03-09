@@ -35,8 +35,10 @@
                <td v-if="editMode">
                  <textarea v-model="editedProduct.description" class="size" type="text" required></textarea>
                </td>
-               <td >{{ selectedProduct.isActive }}</td>
-              
+               <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.isActive" type="text" required>
+               </td>
                <td>
                  <div class="button-row">
                    <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -48,20 +50,20 @@
            </tbody>
          </table>
         </div>
-         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+         <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
  
          <el-dialog class="fdata" v-model="formVisible" title="Add New Course Type" :width="'470px'" :style="{ 'height': '460px' }">
             <el-form :model="newBranch" ref="form" label-position="top" class="frm">
               <el-form-item label="Course Type Name" prop="name">
-                <el-input v-model="newBranch.name" required @input="validateFirstLetterCapital"></el-input>
+                <el-input v-model="newBranch.name" @input="validateFirstLetterCapital"></el-input>
               </el-form-item>
 
               <el-form-item label="Description" prop="description">
-                <el-input type="textarea" v-model="newBranch.description" required></el-input>
+                <el-input type="textarea" v-model="newBranch.description" ></el-input>
               </el-form-item>
   
               <el-form-item label="Is Active" prop="isActive">
-                <el-input v-model="newBranch.isActive" readonly></el-input>
+                <el-input v-model="newBranch.isActive" readonly ></el-input>
               </el-form-item>
   
               <el-form-item>
@@ -158,6 +160,8 @@
         console.log(error.response.data.Message);
     
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
   
     }
      },
@@ -170,10 +174,10 @@
      },
      async updateProduct(id) {
        try {
-        const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
-         if (!confirmed) {
-           return; 
-         }
+        // const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+        //  if (!confirmed) {
+        //    return; 
+        //  }
          const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
          
          if (res.status === 200) {
@@ -182,7 +186,8 @@
            this.ismodel = true;
            this.loadProductDetails();
            this.$refs.Confirmation.open("Updated successfully.");
- 
+           this.$refs.Confirmation.showOKButton = true;
+            this.$refs.Confirmation.showCancelButton = false;
          }
        } catch (error) {
         //  console.error(error);
@@ -191,6 +196,8 @@
         console.log(error.response.data.Message);
     
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
  
        }
      },
@@ -215,19 +222,19 @@
            this.loadProductDetails();
  
          this.$refs.Confirmation.open("Added successfully.");
- 
-         this.newBranch = {
-         name: '',
-         description: '',
-       };
-       this.$refs.form.reset(); 
-     } 
- 
+         this.$refs.Confirmation.showOKButton = true;
+         this.$refs.Confirmation.showCancelButton = false; 
+         this.newBranch.name ='';
+         this.newBranch.description = '';
+     }
          } catch (error) {
           this.isLoading = false;
         console.log(error.response.data.Message);
-    
         this.$refs.Confirmation.open(error.response.data.Message);
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
+        this.newBranch.name ='';
+        this.newBranch.description = '';
  
        }
        finally {
@@ -256,13 +263,14 @@
  
            // Show success dialog
            this.$refs.Confirmation.open("deleted successfully.");
-         
+           this.$refs.Confirmation.showOKButton = true;
+            this.$refs.Confirmation.showCancelButton = false;
        } catch (error) {
         this.isLoading = false;
         console.log(error.response.data.Message);
-    
         this.$refs.Confirmation.open(error.response.data.Message);
-  
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
        } finally {
          this.isLoading = false;
        }

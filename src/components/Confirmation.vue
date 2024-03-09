@@ -6,8 +6,8 @@
         <slot></slot>
       </div>
       <div class="button-row">
-        <button class="bn1" @click="confirm">OK</button>
-        <button  class="bn2" @click="cancel">Cancel</button>
+        <button v-if="showOKButton" class="bn1" @click="confirm">OK</button>
+        <button v-if="showCancelButton" class="bn2" @click="cancel">Cancel</button>
       </div>
     </div>
   </div>
@@ -28,12 +28,16 @@ export default {
       resolve: null,
       reject: null,
       message: "Error",
+      showOKButton: true,
+      showCancelButton: true,
     };
   },
   methods: {
     open(message = "Error") {
       this.show = true;
       this.message = message;
+      this.showOKButton = true; // Reset to default state
+      this.showCancelButton = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
         this.reject = reject;
@@ -46,6 +50,11 @@ export default {
     cancel() {
       this.show = false;
       this.reject(false);
+    },
+    showOKOnly(message = "Error") {
+      this.showOKButton = true;
+      this.showCancelButton = false;
+      this.message = message;
     },
   },
 };
@@ -69,7 +78,8 @@ export default {
   border: 1px solid black;
   padding: 40px;
   text-align: center;
-  max-width: 500px;
+  width: 375px; /* Adjust the width as needed */
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
   border-radius: 10px;
 }
 
@@ -92,9 +102,9 @@ button {
   margin: 15px 25px 2px 25px;
 }
 .bn1 {
-  padding: 0px 33px;
+  padding: 10px 33px;
   position: relative;
-  left: 76px;
+  left: 86px;
   font-weight: 600;
   font-size: 15px;
 }

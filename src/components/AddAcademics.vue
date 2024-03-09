@@ -42,8 +42,10 @@
                  
                   <td>{{ selectedProduct.typeId }}</td>
   
-                  <td>{{ selectedProduct.isActive }}</td>
-  
+                  <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.isActive" type="text" required>
+               </td>  
                   <td>
                 <div class="button-row">
                   <button class="bn" v-if="!editMode" @click="enableEditMode()">Edit</button>
@@ -56,7 +58,7 @@
   
           </table>
         </div>
-          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Close' : 'Add New' }}</el-button>
+          <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
   
           <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '670px' }">
       <el-form :model="newBranch" ref="form" label-position="top" class="frm">
@@ -81,7 +83,7 @@
           <el-input v-model="newBranch.isActive" type="text" readonly required></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="btn2" type="submit" @click="addCourse">Add Course</el-button>
+          <el-button class="btn2" type="submit" @click="addBranch">Add Course</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -185,6 +187,8 @@
         catch(error){
           this.isLoading = false;
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
         } 
         finally {
           this.isLoading = false;
@@ -209,12 +213,15 @@
         this.ismodel = true; 
         this.loadProductDetails();
         this.$refs.Confirmation.open("Course Updated successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
       
       }catch(error){
       this.isLoading = false;
       console.log(error.response.data.Message);
-      
-          this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
       }
     this.editMode = false;
   },
@@ -237,6 +244,8 @@
         await this.loadData();
         this.loadProductDetails();
         this.$refs.Confirmation.open("Course Added successfully.");
+        this.$refs.Confirmation.showOKButton = true;
+        this.$refs.Confirmation.showCancelButton = false;
   
         this.newBranch = {
           name: '',
@@ -250,9 +259,16 @@
     } catch(error){
       this.isLoading = false;
       console.log(error.response.data.Message);
-      
-          this.$refs.Confirmation.open(error.response.data.Message);
-  
+      this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
+      this.newBranch = {
+          name: '',
+          description: '',
+          typeId: this.selectedtype,
+          academiaName: '',
+          isActive:1,
+        };
     } finally {
       this.isLoading = false;
       this.formVisible = false;
@@ -279,12 +295,15 @@
           this.selectedProduct = { id:'', name: '', description: '' ,typeId:'', isActive:''};
   
           this.$refs.Confirmation.open("Course deleted successfully.");
+          this.$refs.Confirmation.showOKButton = true;
+            this.$refs.Confirmation.showCancelButton = false;
   
       } catch(error){
           this.isLoading = false;
           console.log(error.response.data.Message);
-      
           this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.showCancelButton = false;
     
       } finally {
         this.isLoading = false;
