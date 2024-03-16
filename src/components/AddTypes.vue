@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-     <h5>Add & Update Course Type </h5>
+     <h5>Add/Update Course Type </h5>
      <div class="container" style="margin-top: 72px;">
           <div>
               <label for="productDropdown">Course Type :</label>
@@ -126,13 +126,22 @@
        immediate: true,
        handler() {
          this.loadData();
+         this.clearTableData();
        },
      },
    },
    created() {
      this.loadData();
+     this.clearTableData();
+
    },
    methods: {
+    
+    clearTableData() {
+      this.selectedTypes = '';
+      this.selectedProduct = { id:'', name: '', description: '', isActive: '' };
+      // this.editMode = false;
+    },
 
     validateFirstLetterCapital() {
       if (/^[a-z]/.test(this.newBranch.name)) {
@@ -144,6 +153,7 @@
        this.$emit('selected-type-changed', this.selectedTypes);
        this.loadData();
        this.loadProductDetails();
+
      },
      async loadData() {
        try {
@@ -153,16 +163,12 @@
          console.log(this.products);
  
        } catch (error) {
-      //    console.log("hi");
-      //    console.error(error);
-      //  }
-      this.isLoading = false;
-        console.log(error.response.data.Message);
+          this.isLoading = false;
+          console.log(error.response.data.Message);
     
-        this.$refs.Confirmation.open(error.response.data.Message);
-        this.$refs.Confirmation.showOKButton = true;
+          this.$refs.Confirmation.open(error.response.data.Message);
+          this.$refs.Confirmation.showOKButton = true;
           this.$refs.Confirmation.showCancelButton = false;
-  
     }
      },
      enableEditMode() {
@@ -173,37 +179,40 @@
        this.editedProduct.isActive = this.selectedProduct.isActive
      },
      async updateProduct(id) {
-       try {
-        // const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
-        //  if (!confirmed) {
-        //    return; 
-        //  }
-         const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
-         
-         if (res.status === 200) {
-           await this.loadData();
-           this.editMode = false; 
-           this.ismodel = true;
-           this.loadProductDetails();
-           this.$refs.Confirmation.open("Updated successfully.");
-           this.$refs.Confirmation.showOKButton = true;
-            this.$refs.Confirmation.showCancelButton = false;
-         }
-       } catch (error) {
-        //  console.error(error);
-        //  this.$refs.Confirmation.open("Error Updating.");
-        this.isLoading = false;
-        console.log(error.response.data.Message);
+   try {
+    const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+    if (!confirmed) {
+       this.editMode = false; // Set editMode to false if the user cancels
+       return;
+    }
+    const res = await AxiosInstance.put(`/Types` + '?' + 'id=' + id + '&name=' + this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
     
-        this.$refs.Confirmation.open(error.response.data.Message);
-        this.$refs.Confirmation.showOKButton = true;
-          this.$refs.Confirmation.showCancelButton = false;
- 
-       }
-     },
+    if (res.status === 200) {
+       await this.loadData();
+       this.editMode = false; 
+       this.ismodel = true;
+       this.loadProductDetails();
+       this.$refs.Confirmation.open("Updated successfully.");
+       this.$refs.Confirmation.showOKButton = true;
+       this.$refs.Confirmation.showCancelButton = false;
+    }
+   } catch (error) {
+      this.isLoading = false;
+      console.log(error.response.data.Message);
+      this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
+
+   } finally {
+      this.editMode = false; 
+   }
+ },
+
      toggleForm() {
        this.formVisible = !this.formVisible;
+       this.selectedTypes = '';
      },
+     
      async loadProductDetails() {
        const selectedProduct = this.products.find(product => product.id === this.selectedTypes);
        if (selectedProduct) {

@@ -181,7 +181,7 @@ export default {
         const dynamicParam = pathAfterPort.split('/').pop(); // Extract the last segment after the last '/'
         const segments = dynamicParam.split('-');
         const firstIndex = segments[0];
-        return this.processLabel(firstIndex);
+        return this.processLabel(firstIndex.replace(/_/g, ' ')); 
       } else {
         return route.name;
       }

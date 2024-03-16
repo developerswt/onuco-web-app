@@ -672,6 +672,8 @@ export default {
             if (this.subscribedStd) {
                 const yearCounts = {};
 
+                this.subscribedStd.completedStudents.sort((a, b) => new Date(b.startdate) - new Date(a.startdate));
+
                 this.subscribedStd.completedStudents.forEach((order, index) => {
                     const year = new Date(order.startdate).getFullYear();
                     const monthYear = this.getMonthYear(order.startdate);
