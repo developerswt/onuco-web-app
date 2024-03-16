@@ -16,8 +16,7 @@
                 <div v-for="(sem, index) in semester" :key="index" class="row">
                     <div id="main_card" class="card">
                         <h5 class="card-header">
-                            <div
-id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
+                            <div id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
                                 data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true"
                                 aria-controls="collapse-example">
                                 <span class="action"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
@@ -25,8 +24,7 @@ id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
                                 <p id="sem_description">{{ sem.description }}</p>
                             </div>
                         </h5>
-                        <div
-v-if="filteredCourses(sem.id).length > 0" :id="'collapse-example' + index"
+                        <div v-if="filteredCourses(sem.id).length > 0" :id="'collapse-example' + index"
                             :class="index == 0 ? 'collapse show' : 'collapse'" aria-labelledby="heading-collapse">
                             <div class="card-body pt-0">
                                 <div class="">
@@ -85,9 +83,7 @@ src="../assets/images/Path4025.png"
                                                             <div class="col-lg-12 mn1">
                                                                 <div class="row aa">
                                                                     <div class="col-lg-7 col-6 col-sm-6 col-md-6">
-                                                                        <StarRatings
-:rating="cou.starRating || 0"
-                                                                            :max-rating="5" />
+                                                                        <StarRatings :rating="cou.starRating || 0" :max-rating="5" />
                                                                     </div>
                                                                     <div class="col-lg-5 col-6 col-sm-6 col-md-6">
                                                                         <p id="review_text" style="color: #828282;">({{
@@ -105,8 +101,7 @@ src="../assets/images/Path4025.png"
                                 </div>
                             </div>
                         </div>
-                        <div
-v-else :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
+                        <div v-else :id="'collapse-example' + index" :class="index == 0 ? 'collapse show' : 'collapse'"
                             aria-labelledby="heading-collapse" style="background-color: #EFF5FC;">
                             <div v-if="!isLoading" class="">
                                 <h2 class="comming_soons">Comming Soon ...</h2>
@@ -151,6 +146,12 @@ export default {
             semester: [],
             course: {},
             university: [],
+        }
+    },
+    computed: {
+        semester() {
+            // Filter semesters based on availability of courses
+            return this.semester.filter(sem => this.filteredCourses(sem.id).length > 0);
         }
     },
     async created() {

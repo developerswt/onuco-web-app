@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Add & Update Branch</h5>
+      <h5>Add/Update Branch</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Branch Name :</label>
@@ -146,13 +146,21 @@
     immediate: true,
     handler() {
       this.loadData();
+      this.clearTableData();
+
     },
   },
   },
   created() {
     this.loadData();
+    this.clearTableData();
   },
   methods: {
+    clearTableData() {
+      this.selectedbranch = '';
+      this.selectedProduct = { id: '', name: '', description: '',academiaId:'', isActive:'' };
+      this.editMode = false;
+    },
   
     validateFirstLetterCapital() {
         if (/^[a-z]/.test(this.newBranch.name)) {
@@ -216,6 +224,11 @@
   
   async updateProduct(id) {
     try {
+      const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+    if (!confirmed) {
+       this.editMode = false; // Set editMode to false if the user cancels
+       return;
+    }
       const res = await AxiosInstance.put(`/Branches` + '?' +'id='+ id + '&name='+ this.editedProduct.name + '&desc=' + this.editedProduct.description + '&isActive=' + this.editedProduct.isActive );
   
         await this.loadData();
@@ -225,15 +238,17 @@
         this.$refs.Confirmation.open("Branch Updated successfully.");
         this.$refs.Confirmation.showOKButton = true;
         this.$refs.Confirmation.showCancelButton = false;
-      }   
-      catch(error){
-          this.isLoading = false;
-          console.log(error.response.data.Message);
-          this.$refs.Confirmation.open(error.response.data.Message);
-          this.$refs.Confirmation.showOKButton = true;
-          this.$refs.Confirmation.showCancelButton = false;
-      }
-    },
+      } catch (error) {
+      this.isLoading = false;
+      console.log(error.response.data.Message);
+      this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
+
+   } finally {
+      this.editMode = false; 
+   }
+ },
   
     async addBranch() {
   this.isLoading = true;

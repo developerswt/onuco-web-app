@@ -48,6 +48,10 @@
         type: String,
         default: undefined
       },
+      numberOfMonths:{
+        type: Number,
+        default: undefined
+      },
     },
     data() {
       return {
@@ -234,48 +238,68 @@
   
       },
       generateUUID() {
-              return uuidv4().toString(36).slice(-6);
-          },
-          async makePayment(amount) {
-              const transactionId = "Tr-" + this.generateUUID();
-              const merchantId = "PGTESTPAYUAT";
-  
-              const payload = {
-                  merchantId: merchantId,
-                  merchantTransactionId: transactionId,
-                  merchantUserId: 'MUID-' + this.generateUUID(),
-                  amount: amount * 100,
-                  redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
-                  redirectMode: "POST",
-                  callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
-                  mobileNumber: '9999999999',
-                  paymentInstrument: {
-                      type: "PAY_PAGE"
-                  },
-                  message: "Introduction Computer Sciensce",
-                  shortName: "Vijay",
-                  instrumentType: 'web'
-              };
-  
-              const dataPayload = JSON.stringify(payload);
-              const dataBase64 = btoa(dataPayload);
-      
-              const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
-              const dataSha256 = sha256(dataBase64 + fullURL);
-              const checksum = dataSha256 + "###" + "1";
-              const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
-  
-              try {
-                  const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
-                      headers: {
-                          accept: "application/json",
-                          "Content-Type": "application/json",
-                          "X-VERIFY": checksum,
-                      },
-                  });
+            return uuidv4().toString(36).slice(-6);
+        },
+        async makePayment(amount) {
+            const transactionId = "Tr-" + this.generateUUID();
+            const merchantId = "PGTESTPAYUAT";
+
+            const payload = {
+                merchantId: merchantId,
+                merchantTransactionId: transactionId,
+                merchantUserId: 'MUID-' + this.generateUUID(),
+                amount: amount * 100,
+                redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
+                redirectMode: "POST",
+                callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
+                mobileNumber: '9999999999',
+                paymentInstrument: {
+                    type: "PAY_PAGE"
+                },
+                message: "Introduction Computer Sciensce",
+                shortName: "Vijay",
+                instrumentType: 'web'
+            };
+
+            const dataPayload = JSON.stringify(payload);
+            const dataBase64 = btoa(dataPayload);
+          
+            const fullURL = "/pg/v1/pay" + "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+            const dataSha256 = sha256(dataBase64 + fullURL);
+            const checksum = dataSha256 + "###" + "1";
+            const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+
+            try {
+                const response = await axios.post(UAT_PAY_API_URL, { request: dataBase64 }, {
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-VERIFY": checksum,
+                    },
+                });
   
                   const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-                  window.location.href = redirectURL;
+                    if (response.status === 200) {
+
+                      const jsonData = {
+                        userCognitoId: this.isuser.sub,
+                        CourseId: this.courseId,
+                        merchantId: merchantId,
+                        amount: this.courseDisPrice,
+                        transactionId: transactionId,
+                        numberOfMonths: this.numberOfMonths,
+                      };
+                      const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
+                      {
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                      });
+                      if (SubscriptionApi.status === 200) {
+                        window.location.href = redirectURL;
+                      }
+                    }
+
   
               } catch (error) {
                   console.error("Error making payment:", error);

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h5>Add & Update Subject</h5>
+      <h5>Add/Update Subject</h5>
       <div class="container" style="margin-top: 72px;">
         <div>
           <label for="productDropdown">Subject Name :</label>
@@ -13,7 +13,7 @@
   
         </div>
         <div class="table-responsive" style="background-color: white;">
-          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+          <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="181%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -24,7 +24,7 @@
                 <th>Subject Rout Name</th>
                 <th>Semester Id</th>
                 <th>Work Flow</th>
-                <!-- <th>Faculty Id</th> -->
+                <th>Number Of Months</th>
                 <th>IsActive</th>
                 <th>ImageFile</th>
                 <th>Action</th>
@@ -59,11 +59,16 @@
                         <option value="Release">Release</option>
                     </select>
                   </td>
-                <!-- <td>{{ selectedProduct.facultyId }}</td> -->
-                <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
+                  <td v-if="!editMode">{{ selectedProduct.numberOfMonths }}</td>
+               <td v-if="editMode">
+                 <input v-model="editedProduct.Numberofmonths" type="text" required>
+               </td>
+               <td>{{ selectedProduct.isActive }}</td>
+
+              <!-- <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
                <td v-if="editMode">
                  <input v-model="editedProduct.isActive" type="text" required>
-               </td>
+               </td> -->
                 <td v-if="!editMode">{{ selectedProduct.imageUrl }}</td>
                 <td v-if="editMode">
                   <input type="file" accept="image/*" @change="handleFileChange" required>
@@ -81,7 +86,7 @@
       </div>
           <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
   
-  <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '965px' }">
+  <el-dialog v-model="formVisible" title="Add New Course" :width="'470px'" :style="{ 'height': '1045px' }">
       <el-form :model="newBranch" ref="form" label-position="top" class="frm">
           <el-form-item>{{ newBranch.id }}</el-form-item>
           <el-form-item label="Subject Name:" prop="name">
@@ -117,9 +122,9 @@
             </el-select>
           </el-form-item>
   
-          <!-- <el-form-item label="FacultyId:" prop="FacultyId">
-            <el-input v-model="newBranch.FacultyId" required></el-input>
-          </el-form-item> -->
+          <el-form-item label="Number Of Months:" prop="Numberofmonths">
+            <el-input v-model="newBranch.Numberofmonths" required></el-input>
+          </el-form-item>
   
           <el-form-item label="IsActive:" prop="IsActive">
             <el-input v-model="newBranch.IsActive" readonly required></el-input>
@@ -170,7 +175,7 @@
         formVisible: false,
         products: [],
         selectedCourse: '',
-        selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',imageUrl: '' },
+        selectedProduct: { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',imageUrl: '',numberOfMonths:'' },
         isLoading: false,
         editMode: false,
         editedProduct: {
@@ -184,6 +189,7 @@
         workFlowStatement:'',
         isActive: '',
         imageUrl:'',
+        Numberofmonths:'',
       },
         newBranch: {
         name: '',
@@ -194,6 +200,7 @@
         CourseName:'',
         WorkFlowStatement:'',
         IsActive: 1,
+        Numberofmonths:'',
        },
       };
     },
@@ -207,13 +214,20 @@
       immediate: true,
       handler() {
         this.loadData();
+        this.clearTableData();
       },
     },
   },
     created() {
       this.loadData();
+      this.clearTableData();
     },
     methods: {
+      clearTableData() {
+      this.selectedCourse = '';
+      this.selectedProduct =  { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',imageUrl: '',numberOfMonths:'' };
+      this.editMode = false;
+    },
       handleFileChange(event) {
         const file = event.target.files[0];
         this.editedProduct.imageUrl = file;
@@ -280,13 +294,19 @@
     this.editedProduct.workFlowStatement = this.selectedProduct.workFlowStatement;
     this.editedProduct.isActive = this.selectedProduct.isActive;
     this.editedProduct.imageUrl = this.selectedProduct.imageUrl;
+    this.editedProduct.Numberofmonths = this.selectedProduct.numberOfMonths;
   },
   async updateProduct(id) {
     try {
+      const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+    if (!confirmed) {
+       this.editMode = false; // Set editMode to false if the user cancels
+       return;
+    }
       let formData = new FormData();
       formData.append('ImageUrl', this.editedProduct.imageUrl);
   
-      const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&Name='+ this.editedProduct.name + '&Description=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement  + '&isActive=' + this.editedProduct.isActive ,
+      const res = await AxiosInstance.put(`/Course` + '?' +'id='+ id + '&Name='+ this.editedProduct.name + '&Description=' + this.editedProduct.description + '&ActualPrice=' + this.editedProduct.actualPrice + '&DiscountPrice=' + this.editedProduct.discountPrice  + '&WorkFlowStatement=' + this.editedProduct.workFlowStatement  + '&isActive=' + this.editedProduct.isActive + '&Numberofmonths=' + this.editedProduct.Numberofmonths ,
       formData,
         {
           headers: {
@@ -304,14 +324,16 @@
         this.$refs.Confirmation.showCancelButton = false; 
   
       } catch (error) {
-          this.isLoading = false;
-          console.log(error.response.data.Message);
-          this.$refs.Confirmation.open(error.response.data.Message);
-          this.$refs.Confirmation.showOKButton = true;
-          this.$refs.Confirmation.showCancelButton = false; 
-   
-         }
-    },
+      this.isLoading = false;
+      console.log(error.response.data.Message);
+      this.$refs.Confirmation.open(error.response.data.Message);
+      this.$refs.Confirmation.showOKButton = true;
+      this.$refs.Confirmation.showCancelButton = false;
+
+   } finally {
+      this.editMode = false; 
+   }
+ },
   
   async addBranch() {
     this.isLoading = true;
@@ -319,7 +341,7 @@
       let formData = new FormData();
       formData.append('ImageUrl', this.selectedFile);
   
-      const response = await AxiosInstance.post(`/Course` + '?' + 'name=' + encodeURIComponent(this.newBranch.name) + '&desc=' + encodeURIComponent(this.newBranch.desc) + '&ActualPrice=' + this.newBranch.ActualPrice + '&DiscountedPrice=' + this.newBranch.DiscountedPrice + '&SemesterId=' + this.newBranch.SemesterId + '&CourseName=' + encodeURIComponent(this.newBranch.CourseName) + '&WorkFlowStatement=' + encodeURIComponent(this.newBranch.WorkFlowStatement) + '&IsActive=' + this.newBranch.IsActive,
+      const response = await AxiosInstance.post(`/Course` + '?' + 'name=' + encodeURIComponent(this.newBranch.name) + '&desc=' + encodeURIComponent(this.newBranch.desc) + '&ActualPrice=' + this.newBranch.ActualPrice + '&DiscountedPrice=' + this.newBranch.DiscountedPrice + '&SemesterId=' + this.newBranch.SemesterId + '&CourseName=' + encodeURIComponent(this.newBranch.CourseName) + '&WorkFlowStatement=' + encodeURIComponent(this.newBranch.WorkFlowStatement) + '&IsActive=' + this.newBranch.IsActive + '&Numberofmonths=' + this.newBranch.Numberofmonths ,
       formData,
         {
           headers: {
@@ -344,6 +366,7 @@
         WorkFlowStatement:'',
         IsActive: 1,
         ImageUrl: '',
+        Numberofmonths:'',
        };
        this.$refs.form.reset();
       
@@ -362,6 +385,7 @@
             WorkFlowStatement:'',
             IsActive: 1,
             ImageUrl: '',
+            Numberofmonths: '',
           }; 
         } 
     finally {
@@ -385,7 +409,7 @@
           this.loadProductDetails();
   
           this.selectedCourse = '';
-        this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '' };
+        this.selectedProduct = { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',numberOfMonths:''};
   
           // Show success dialog
           this.$refs.Confirmation.open("Subject deleted successfully.");

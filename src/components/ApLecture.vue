@@ -46,7 +46,7 @@
                   <el-input v-model="newBranch.facuiltyCognitoId"></el-input>
                 </el-form-item>
                 <el-form-item label="Payment Date:" prop="paymentDate" >
-                  <el-date-picker v-model="newBranch.paymentDate" type="datetime"></el-date-picker>
+                  <datepicker v-model="newBranch.paymentDate" type="datetime"></datepicker>
                 </el-form-item>
                 <el-form-item label="Amount Paid:" prop="amountPaid" >
                   <el-input v-model="newBranch.amountPaid"></el-input>

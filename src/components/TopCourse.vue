@@ -1,7 +1,7 @@
 <template>
     <div class="category-test ">
         <div class="container" >
-            <TopRatedCourses />
+            <TopRatedCourses :showSeeAll="false" />
         </div>
     </div>
     <!-- <section id="Course_section">
@@ -80,8 +80,11 @@
                     <div class="col-sm-6 star">
                         <StarRatings :rating="person.starRating || 0" :max-rating="5" />
                     </div>
-                    <div class="col-sm-6">
-                        <a href="#" class="btn btn-primary" @click="makePayment(person.discountPrice, person.id )">Buy Now</a>
+                    <div v-if="isLoggedIn" class="col-sm-6">
+                        <button class="btn btn-primary" @click="makePayment(person.discountPrice, person.id )">Buy Now</button>
+                    </div>
+                    <div v-else class="col-sm-6">
+                    <a href="#" class="btn btn-primary" @click.prevent="redirectToLogin">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -338,6 +341,7 @@ if (SubscriptionApi.status === 200) {
 
 }
 
+
 .box .row {
     position: relative;
     bottom: 38px;
@@ -581,5 +585,8 @@ if (SubscriptionApi.status === 200) {
     position: relative; 
     left: 20px; 
     top:30px;
+  }
+  .sa{
+    display: none;
   }
 </style>

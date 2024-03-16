@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <form-wizard
-      back-button-text="Go Back!"
-      next-button-text="Go Next!"
+      back-button-text="<Back"
+      next-button-text="Next>"
       finish-button-text="Finish"
       color="#007bff"
       @on-complete="onComplete"

@@ -52,7 +52,7 @@ v-if="searchQuery !== ''" style="position: relative;right: 5px; cursor: pointer"
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
                                             techniques...</p>
                                     </div>
-                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                    <!-- <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
@@ -66,7 +66,7 @@ id="label-select" class="form-select"
                                             </select>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">
@@ -214,7 +214,7 @@ class="fa-solid fa-star"
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
                                             techniques...</p>
                                     </div>
-                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                    <!-- <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
@@ -228,7 +228,7 @@ id="label-select" class="form-select"
                                             </select>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">
@@ -320,7 +320,7 @@ class="fa-solid fa-star"
                                         <p id="tab_text">Mathematics and its formulas: Courses, trainings, and advanced
                                             techniques...</p>
                                     </div>
-                                    <div class="col-lg-4 col-12 col-sm-12 col-md-4">
+                                    <!-- <div class="col-lg-4 col-12 col-sm-12 col-md-4">
                                         <div class="select_block">
                                             <label id="sort_label" for="label-select"> Sort by:</label>
 
@@ -334,7 +334,7 @@ id="label-select" class="form-select"
                                             </select>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div v-if="searchResults.length > 0" class="">

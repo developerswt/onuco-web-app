@@ -16,7 +16,7 @@
                                 <video-player
 v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOptions"
                                     :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
-                                    :is-subscribed="userIsSubscribed" />
+                                    :is-subscribed="userIsSubscribed" :number-Of-Months="numberOfMonths" :discounted-Price="discountedPrice"/>
                             </div>
                         </div>
                         <div class="row">
@@ -61,12 +61,13 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
 
-                                <p v-if="isLoggedIn" id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
-                                    &#8377;{{ book.discountedPrice }}  
-                                    <button id="search_button" @click="makePayment(book.discountedPrice)">buy now</button></p>
-                                <p v-else id="amount_text"><span id="strike_text"> &#8377;{{ book.actualPrice }}</span>
-                                    &#8377;{{ book.discountedPrice }} <a href="/Login"><button
-                                            id="search_button">buy now</button></a></p>
+                                <p v-if="isLoggedIn" id="amount_text">
+                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }}  ]
+                                    <button v-if="!userIsSubscribed" id="search_button" @click="makePayment(book.discountedPrice)" :disabled="userIsSubscribed">buy now</button>
+                                </p>
+                                <p v-else id="amount_text">
+                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }} <a href="/Login"><button id="search_button">buy now</button></a>
+                                </p>
 
                             </div>
                         </div>
@@ -248,7 +249,8 @@ class="fa" aria-hidden="true" :class="{
                                                     <video-player
 v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" />
+                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" :number-Of-Months="numberOfMonths"/>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -421,7 +423,9 @@ export default {
         }
     },
     methods: {
-
+        toggleSubscription() {
+      this.userIsSubscribed = !this.userIsSubscribed;
+    },
         formatDuration(duration) {
             // Check if duration is undefined or null
             if (!duration) {
@@ -721,7 +725,7 @@ export default {
                         merchantId: merchantId,
                         amount: this.book.discountedPrice,
                         transactionId: transactionId,
-                        numberOfMonths: 6,
+                        numberOfMonths: this.book.numberOfMonths,
                     };
                     const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
                     {

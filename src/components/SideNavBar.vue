@@ -73,7 +73,7 @@
             </div>
           </li>
 
-          <!-- <li>
+          <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
               <span id="dropdownMenuButton" class="icon course" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa fa-file"></i>
@@ -84,8 +84,8 @@
                 <span class="action course"><i id="sem_icon" class="fa fa-chevron-right rotate-icon"></i></span>
               </span>
             </div>
-          </li> -->
-          <!-- <li>
+          </li>
+          <li>
             <div id="collapseExample" class="collapse hj">
               <span class="subtitle" @click="selectContent('types')">Course Types</span>
               <span class="subtitle" @click="selectContent('academics')">Academics</span>
@@ -94,7 +94,7 @@
               <span class="subtitle" @click="selectContent('semester')">Semester</span>
               <span class="subtitle" @click="selectContent('courses')">Subjects</span>
             </div>
-          </li> -->
+          </li>
         </ul>
       </div>
     </nav>

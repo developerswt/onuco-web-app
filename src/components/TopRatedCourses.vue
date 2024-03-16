@@ -4,7 +4,7 @@
         <h4 class="academic_head_text">
 
             <span id="aca_text">Top</span>Rated Courses
-            <router-link to="/TopCourse">See all</router-link>
+            <router-link v-if="showSeeAll" to="/TopCourse">See all</router-link>
         </h4>
     </div>
 </div>
@@ -39,7 +39,7 @@
                                
                             </div>
                         </router-link>
-                    <div class="row">
+                        <div class="row " style=" position: absolute;">
                                     <div class="col-sm-6  star">
                                         <StarRatings :rating="course.starRating || 0" :max-rating="5" />
                                     </div>
@@ -81,6 +81,12 @@ import StarRatings from './StarRatings.vue';
 
 export default {
     name: 'TopRatedCourses',
+    props: {
+    showSeeAll: {
+      type: Boolean,
+      default: true // Default to true if prop not provided
+    }
+  },
     components: {
 
         Carousel,
@@ -291,7 +297,7 @@ if (SubscriptionApi.status === 200) {
     flex-wrap: wrap;
     margin-left: 15px;
     margin-right: 80px;
-    bottom: 15px;
+    bottom: 30px;
 }
 
 .box {
