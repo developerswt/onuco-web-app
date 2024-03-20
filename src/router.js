@@ -323,7 +323,7 @@ const routes = [
     name: "Course",
     component: Course,
     meta: {
-        title: 'Course Page',
+        title: 'Course ',
     },
   },
   

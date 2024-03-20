@@ -1,5 +1,5 @@
-<template #print_progress_percent="{ progress }">
-  <vue-pdf-app style="height: 1200px; overflow: scroll;" :pdf="url" :config="config"></vue-pdf-app>
+<template print_progress_percent="{ progress }">
+  <vue-pdf-app style="height: 1200px; overflow: scroll;z-index: 999;position: relative;" :pdf="url" :config="config"></vue-pdf-app>
 </template>
 
 <script>
@@ -47,3 +47,5 @@ export default {
   },
 };
 </script>
+
+

@@ -20,17 +20,14 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+                            <div class="col-lg-6 col-sm-12 col-md-6">
                                 <div class="search_right_block">
                                     <h4 class="academic_head_text mt-2">
 
                                         <span id="aca_text">{{ book.title }} </span>
 
                                     </h4>
-                                    <!-- <div class="">
-                                        <p v-for="instructor in book.instructorName" id="professor_text"
-                                            :key="instructor.id"> {{ instructor.name }}</p>
-                                    </div> -->
+                        
                                     <div class="">
                                         <router-link v-for="instructor in book.instructorName" :key="instructor.id" :to="{ name: 'Instructor', params: { name: instructor.facultyDyanamicRouting } }" style="color: white; text-decoration: none;">
                                             <p id="professor_text">{{ instructor.name }}</p>
@@ -38,38 +35,43 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
+                                        <div class="col-lg-4 col-4 col-sm-4 col-md-4">
                                             <p id="duration_text" class="mb-2"><img
                                                     src="../assets/images/Iconionic-ios-timer@2x.png">    
                                                      {{ formatDuration(book.videoDemand) }}
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
+                                        <div class="col-lg-4 col-4 col-sm-4 col-md-4">
                                             <p id="module_text" class="mb-2"><img
                                                     src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
                                             </p>
                                         </div>
+                                        <div class="col-lg-4 col-4 col-md-4 col-sm-4">
+                                           <p id="module_text" class="mb-2" style="color:#707070;"><img src="../assets/images/uil--calender.png">
+                                            {{ price[0].numberOfMonths }} Months
+                                           </p>
+                                        </div>                                   
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12 col-sm-12 col-md-6">
-
-
                                 <div class="icon_blck">
                                     <StarRatings :rating="rating || 0" :max-rating="5" />
 
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
-
-                                <p v-if="isLoggedIn" id="amount_text">
-                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }}  ]
-                                    <button v-if="!userIsSubscribed" id="search_button" @click="makePayment(book.discountedPrice)" :disabled="userIsSubscribed">buy now</button>
-                                </p>
-                                <p v-else id="amount_text">
-                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }} <a href="/Login"><button id="search_button">buy now</button></a>
-                                </p>
-
+                          
+                                <div v-if="price.length > 0">
+                                    <p v-if="isLoggedIn" id="amount_text">
+                                        <span  id="strike_text">&#8377;{{ price[0].actualPrice }}</span>&#8377;{{ price[0].discountPrice }}
+                                        <button v-if="!userIsSubscribed" id="search_button" @click="makePayment(price[0].discountPrice)" :disabled="userIsSubscribed">buy now</button>
+                                    </p>
+                                    <p v-else id="amount_text">
+                                        <span id="strike_text">&#8377;{{ price[0].actualPrice }}</span> &#8377;{{ price[0].discountPrice }} <a href="/Login"><button id="search_button">buy now</button></a>
+                                    </p>                                   
+                                </div>
                             </div>
+                         
                         </div>
                         <div class="app1">
                             <div v-if="isPopupVisible" class="popup">
@@ -91,7 +93,6 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
 
                 </div>
 
-
             </div>
             <div id="inner_container" class="container">
                 <h4 class="academic_head_text_one">
@@ -103,7 +104,7 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                         <section id="tab_block">
                             <div class="pt-4 topic-card" style="padding-right: 14px;">
                                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                                    <el-tab-pane label="Subject" name="first" class="rt">
+                                    <el-tab-pane label="Subject" name="first" class="tabs" >
                                         <div class="row box mb-5">
                                             <div class="col-sm-6">
                                                 <div v-for="(topic, index) in book.subject" :key="topic.id" class="card">
@@ -255,20 +256,20 @@ v-if="renderComponent" ref="videoPlayer"
                                             </div>
                                         </div>
                                     </el-tab-pane>
-                                    <el-tab-pane label="Description " name="second">
+                                    <el-tab-pane label="Description " name="second" class="tabs">
                                         <div class="" v-html="book.courseDescription"></div>
                                     </el-tab-pane>
-                                    <el-tab-pane label="Question Bank" name="third">
+                                    <el-tab-pane label="Question Bank" name="third" class="tabs">
                                         <el-tabs v-if="userIsSubscribed" v-model="activeInnerTab" class="demo-tabs" @tab-click="tabHandleClick">
                                             <el-tab-pane v-for="innerBook in book.questionBank" :key="innerBook.id" :label="innerBook.name" :name="innerBook.name">
-                                                <PdfViewer v-if="activeInnerTab === innerBook.name" :url="innerBook.url" />
+                                                <PdfViewer class="pdf" v-if="activeInnerTab === innerBook.name" :url="innerBook.url" />
                                             </el-tab-pane>
                                         </el-tabs>
                                         <div v-else class="question_bank_not">
                                             <p>Question Bank Not available for Unsubscribed User</p>
                                         </div>
                                     </el-tab-pane>
-                                    <el-tab-pane label="Quiz" name="fourth">
+                                    <el-tab-pane label="Quiz" name="fourth" class="tabs">
                                         <div class="" v-html="book.quiz"></div>
                                     </el-tab-pane>
                                 </el-tabs>
@@ -280,7 +281,7 @@ v-if="renderComponent" ref="videoPlayer"
         </div>
         <div v-else class="">
             <div v-if="!isLoading" class="">
-                <h2 class="courseDetails-else-part">Comming Soon ...</h2>
+                <h2 class="courseDetails-else-part">Coming Soon ...</h2>
             </div>
         </div>
     </div>    
@@ -328,7 +329,12 @@ export default {
             watchTimeDatas: [],
             activeName: 'first',
             activeInnerTab: '',
+            price:[],
             book: [],
+            selectedProduct:{
+                actualPrice:'',
+                discountedPrice:'',
+            },
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
@@ -385,6 +391,10 @@ export default {
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
+
+            const amount = await AxiosInstance.get(`/Course/GetCourseByName/`+ this.$route.params.name);
+            this.price = amount.data;
+        
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
@@ -1478,4 +1488,21 @@ input[type=submit] {
     text-align: center;
     padding-top: 19%;
 }
+
+/* .el-tabs__item.is-active[name="first"] .el-tabs__item-inner,
+.el-tabs__item.is-active[name="second"] .el-tabs__item-inner,
+.el-tabs__item.is-active[name="third"] .el-tabs__item-inner,
+.el-tabs__item.is-active[name="fourth"] .el-tabs__item-inner {
+    background: linear-gradient(to bottom, #ffffff, #0056b3);
+    color: white; 
+}
+
+
+.el-tabs__item[name="first"] .el-tabs__item-inner,
+.el-tabs__item[name="second"] .el-tabs__item-inner,
+.el-tabs__item[name="third"] .el-tabs__item-inner,
+.el-tabs__item[name="fourth"] .el-tabs__item-inner {
+    background: transparent; 
+} */
+
 </style>

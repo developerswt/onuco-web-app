@@ -6,7 +6,7 @@
         <div  class="container-fluid cont">
             <div class="container">
                 <h4 class="academic_head_text">
-                    <span id="aca_text">Refer</span>And Learn Free
+                    <span id="aca_text">Refer</span>and learn free
                 </h4>
             </div>
             <div class="container">

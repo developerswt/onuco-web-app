@@ -104,13 +104,25 @@
           this.showPoster = false;
         }
       });
+
+      document.addEventListener('visibilitychange', this.handleVisibilityChange);
     },
+
     beforeUnmount() {
       if (this.player) {
         this.player.dispose();
       }
+
+      document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     },
     methods: {
+
+      handleVisibilityChange() {
+        if (document.hidden && this.player && !this.isSubscribed) {
+            // Pause the video if the tab becomes hidden and the user is not subscribed
+            this.player.pause();
+        }
+    },
       setMediaSessionHandlers() {
         if ('mediaSession' in navigator) {
           navigator.mediaSession.setActionHandler('play', () => {
@@ -398,6 +410,7 @@
       pointer-events: none;
     }
   }
-  
-  /* Add your other styles here */
+
+
+
   </style>

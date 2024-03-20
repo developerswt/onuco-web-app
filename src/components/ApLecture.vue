@@ -57,9 +57,9 @@
                 <el-form-item label="Mode Of Pay:" prop="modeofPay" >
                   <el-input v-model="newBranch.modeofPay"></el-input>
                 </el-form-item>
-                <el-form-item label="IsActive:" prop="isActive" >
+                <!-- <el-form-item label="IsActive:" prop="isActive" >
                   <el-input v-model="newBranch.isActive"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item>
                   <el-button class="btn1" type="primary" @click="addBranch">Add Payment Data</el-button>
                 </el-form-item>
