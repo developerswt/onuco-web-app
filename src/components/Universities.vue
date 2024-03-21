@@ -11,7 +11,7 @@
             <div class=" parent_blocks">
                 <div class="row ">
                     <div v-for="college in university" :key="college.id" class="box">
-                        <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
+                                                <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
                             style="text-decoration: none;">
                             <div class="row">
                                 <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
@@ -30,6 +30,7 @@ style="margin-top: -8px;" :title="college.description"
                                 </div>
                             </div>
                         </router-link>
+                   
                     </div>
                 </div>
             </div>
@@ -152,7 +153,7 @@ export default {
 
     .box h5,
     .box p {
-        padding-left: 10px;
+        padding-left:10px;
     }
 }
 
@@ -163,7 +164,7 @@ export default {
     cursor: pointer;
     margin-bottom: 1%;
     margin: 10px;
-    padding: 18px;
+    padding: 15px 0px 0px 15px;
     background: url('../assets/images/Path 4814@2x.png');
     background-position: center;
     background-size: cover;
@@ -173,7 +174,7 @@ export default {
 }
 
 .box img {
-    padding: 5px 0px 75px 10px;
+    padding: 0px 0px 0px 15px;
 
 }
 
