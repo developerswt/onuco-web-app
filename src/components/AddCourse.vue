@@ -228,11 +228,18 @@
     },
     methods: {
       validateDiscountPrice() {
-    this.discountPriceError = parseFloat(this.editedProduct.discountPrice) > parseFloat(this.editedProduct.actualPrice);
-  },
-  validateDiscount() {
-    this.discountError = parseFloat(this.newBranch.DiscountedPrice) > parseFloat(this.newBranch.ActualPrice);
-  },
+  const discountPrice = parseFloat(this.editedProduct.discountPrice);
+  const actualPrice = parseFloat(this.editedProduct.actualPrice);
+  
+  this.discountPriceError = discountPrice < 0 || discountPrice > actualPrice;
+},
+
+validateDiscount() {
+  const discountedPrice = parseFloat(this.newBranch.DiscountedPrice);
+  const actualPrice = parseFloat(this.newBranch.ActualPrice);
+  
+  this.discountError = discountedPrice < 0 || actualPrice < 0 || discountedPrice > actualPrice;
+},
 
       clearTableData() {
       this.selectedCourse = '';

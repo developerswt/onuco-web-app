@@ -36,7 +36,7 @@
             </div>
           </div>
           <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
-            <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '810px' }">
+            <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '740px' }">
               <el-form ref="form" :model="newBranch" label-position="top" class="frm"> 
                 <p><b></b> {{ newBranch.id }}</p>
                 <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" >
@@ -619,7 +619,7 @@ export default {
     max-width: 400px;
     margin: 0 auto;
     margin-bottom: 80px;
-    height: 690px;
+    height: 609px;
 }
 
 label {
@@ -670,8 +670,8 @@ button {
     font-weight: 600;
     font-size: 15px;
     position: relative;
-    top: 45px;
-    left: 2px;
+    top: 11px;
+    left: 0px;
 }
 
 button:hover {
