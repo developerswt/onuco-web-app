@@ -28,11 +28,13 @@
                     <li class="nav-item" :class="{ 'active': isActive('/Mylearnings') }">
                         <router-link v-if="isLoggedIn" class="nav-link" to="/Mylearnings">My Learning</router-link>
                     </li>
-                    <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActive('/AcademiNew') || isActive('/TopCourse')|| isActive('/BestFaculty')|| isActiveAcademia() }">
-                        <router-link class="nav-link" to="/Courses">Courses</router-link>
-                    </li>
-                    <li class="nav-item" :class="{ 'active': isActive('/Announcement') }">
 
+                    <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia()}">
+                        <router-link class="nav-link" to="/Courses">Courses</router-link>
+
+                    </li>
+
+                    <li class="nav-item" :class="{ 'active': isActive('/Announcement') }">
                         <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Contact') }">
@@ -48,8 +50,9 @@
                     <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
                         style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
-                            <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
-                                value-key="title" size="large" style="background-color:blue; font-size: 12px;"
+                            <el-autocomplete
+v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
+                                value-key="title" size="large" style="background-color: blue; font-size: 12px;"
                                 class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter.prevent="handleKeyEnter(searchTerm)">
                                 <template #suffix>
@@ -217,10 +220,15 @@ export default {
             return this.$route.path === route;
         },
         isActiveAcademia() {
-    // Check if the current route starts with "/Academia/" or "/AcademiNew/" and has a parameter
-    return (this.$route.path.startsWith('/Academia/') || this.$route.path.startsWith('/AcademiNew')) && this.$route.params.name;
-},
 
+            // return this.$route.path.startsWith('/Academia/') && this.$route.params.name;
+
+            const academicaRoutes = ['/Academia/', '/Courses/', '/CollegeDetails/', '/CourseDetails/', '/Universities/','/AcademiNew','/TopCourse','/BestFaculty','/Instructor/'];
+            const currentPath = this.$route.path;
+        
+            return academicaRoutes.some(route => currentPath.includes(route));
+            
+        },
 
         clearInput() {
             this.searchTerm = '';
