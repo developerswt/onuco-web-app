@@ -2,22 +2,15 @@
   <div class="container-fluid carousel_header">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
       <ol class="carousel-indicators">
-        <li v-for="(item, index) in getLinks()" :key="index" :data-target="'#myCarousel'" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
+        <li v-for="(item, index) in bannerImg" :key="index" :data-target="'#myCarousel'" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
       </ol>
       <div class="carousel-inner">
-        <div v-for="(item, index) in getLinks()" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
+        <div v-for="(item, index) in bannerImg" :key="index" class="carousel-item" :class="{ 'active': index === 0 }">
           <img 
-            v-if="item.hyperlink" 
             :src="item.bannerlink" 
             :alt="'Banner ' + (index + 1)"
             class="d-block w-100 img-fluid"
             @click="redirectToLink(item.hyperlink)"
-          >
-          <img 
-            v-else 
-            :src="item.bannerlink" 
-            :alt="'Banner ' + (index + 1)"
-            class="d-block w-100 img-fluid1"
           >
         </div>
       </div>
@@ -37,27 +30,27 @@ export default {
   },
   async created() {
     try {
-      const res = await axiosInstance.get(`/Bannerimages`);
-      this.bannerImg = res.data;
+      const response = await axiosInstance.get(`/Bannerimages`);
+      this.bannerImg = response.data[0].page.home.links;
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching banner images:', error);
     }
   },
   methods: {
-    getLinks() {
-      return this.bannerImg[0] && this.bannerImg[0].links || [];
-    },
     redirectToLink(link) {
-      window.location.href = link;
+      if (link) {
+        window.location.href = link;
+      }
     }
-  },
+  }
 }
 </script>
 
 
+
 <style scoped>
 .carousel_header {
-  padding-top: 4%;
+  padding-top: 70px;
 }
 
 .carousel-indicators li {

@@ -16,7 +16,7 @@
                                 <video-player
 v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOptions"
                                     :video-id="videoId" :course-id="courseId" :watch-time="watchTime"
-                                    :is-subscribed="userIsSubscribed" :number-Of-Months="numberOfMonths" :discounted-Price="discountedPrice"/>
+                                    :is-subscribed="userIsSubscribed"  :discounted-Price="discountedPrice"/>
                             </div>
                         </div>
                         <div class="row">
@@ -39,15 +39,16 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
 
                                     <div class="row">
                                         <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
-                                            <p id="duration_text" class="mb-2"><img
-                                                    src="../assets/images/Iconionic-ios-timer@2x.png">    
-                                                     {{ formatDuration(book.videoDemand) }}
+                                            <p id="duration_text" class="mb-2"><img src="../assets/images/Iconionic-ios-timer@2x.png"> {{ formatDuration(book.videoDemand) }}
                                             </p>
                                         </div>
                                         <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
-                                            <p id="module_text" class="mb-2"><img
-                                                    src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
+                                            <p id="module_text" class="mb-2"><img src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
                                             </p>
+                                        </div>
+                                        <div class="col-lg-4 col-4 col-md-4 col-sm-4">
+                                           <p id="module_text" class="mb-2" style="color:#707070;"><img src="../assets/images/uil--calender.png"> {{ price[0].numberOfMonths }} Months
+                                           </p>
                                         </div>
                                     </div>
                                 </div>
@@ -61,14 +62,17 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                     <p style="cursor: pointer;" @click="showPopup()">({{ ratingCount || 0 }} Reviews)</p>
                                 </div>
 
-                                <p v-if="isLoggedIn" id="amount_text">
-                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }}  ]
-                                    <button v-if="!userIsSubscribed" id="search_button" @click="makePayment(book.discountedPrice)" :disabled="userIsSubscribed">buy now</button>
-                                </p>
-                                <p v-else id="amount_text">
-                                    <span id="strike_text">&#8377;{{ book.actualPrice }}</span> &#8377;{{ book.discountedPrice }} <a href="/Login"><button id="search_button">buy now</button></a>
-                                </p>
-
+                                <div v-if="price.length > 0">
+                                    <p v-if="isLoggedIn" id="amount_text">
+                                        <span v-if="!userIsSubscribed">
+                                            <span id="strike_text">&#8377;{{ price[0].actualPrice }}</span>&#8377;{{ price[0].discountPrice }}
+                                            <button id="search_button" @click="makePayment(price[0].discountPrice, price[0].numberOfMonths)" :disabled="userIsSubscribed">buy now</button>
+                                        </span>
+                                    </p>
+                                    <p v-else id="amount_text">
+                                        <span id="strike_text">&#8377;{{ price[0].actualPrice }}</span> &#8377;{{ price[0].discountPrice }} <a href="/Login"><button id="search_button">buy now</button></a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="app1">
@@ -246,10 +250,9 @@ class="fa" aria-hidden="true" :class="{
                                             </div>
                                             <div v-if="!isMobile" class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4">
-                                                    <video-player
-v-if="renderComponent" ref="videoPlayer"
+                                                    <video-player v-if="renderComponent" ref="videoPlayer"
                                                         :options="videoOptions" :is-subscribed="userIsSubscribed"
-                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" :number-Of-Months="numberOfMonths"/>
+                                                        :video-id="videoId" :course-discount-price="parseFloat(courseDisPrice)" :course-id="courseId" :watch-time="watchTime" :number-Of-Months="numberOfMonths" :discount-Price="discountPrice"/>
 
                                                 </div>
                                             </div>
@@ -319,6 +322,8 @@ export default {
             rating: '',
             readMore: false,
             courseId: null,
+            numberOfMonths:null,
+            discountPrice:null,
             videoId: null,
             isLoading: false,
             userIsSubscribed: false,
@@ -329,6 +334,7 @@ export default {
             activeName: 'first',
             activeInnerTab: '',
             book: [],
+            price:[],
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
@@ -381,10 +387,20 @@ export default {
         window.removeEventListener('resize', this.handleWindowResize);
     },
     async created() {
-        this.isLoading = true;
+        this.loadData();
+    },
+    methods: {
+        async loadData() {
+            this.isLoading = true;
         try {
             const res = await AxiosInstance.get(`/Coursedetails/` + this.$route.params.name);
             this.book = res.data;
+            // console.log(res);
+            const amount = await AxiosInstance.get(`/Course/GetCourseByName/`+ this.$route.params.name);
+            this.price = amount.data;
+            this.discountPrice = this.price[0].discountPrice;
+            this.numberOfMonths = this.price[0].numberOfMonths;
+            console.log(amount);
             const subscription = await AxiosInstance.get(`/UserCourseSubscription?` + "courseName=" + this.$route.params.name);
             this.courseDetails = subscription.data;
             const resul = await AxiosInstance.get(`/Ratings?id=` + this.book.id + "&objectTypeId=5");
@@ -399,6 +415,8 @@ export default {
                 try {
                     const result = await AxiosInstance.get('/StateManagement/' + this.book.id);
                     this.watchTimeDatas = result.data;
+                    // this.loadData();
+
                 } catch {
                     this.watchTimeDatas = { "id": 0, "userId": "dbae6829-8b5e-4f31-9c79-9d3b0c0aec08", "courseId": 0, "watchTimeData": [] };
                 }
@@ -421,11 +439,11 @@ export default {
         finally {
             this.isLoading = false;
         }
-    },
-    methods: {
-        toggleSubscription() {
-      this.userIsSubscribed = !this.userIsSubscribed;
-    },
+        },
+
+    //     toggleSubscription() {
+    //   this.userIsSubscribed = !this.userIsSubscribed;
+    // },
         formatDuration(duration) {
             // Check if duration is undefined or null
             if (!duration) {
@@ -668,6 +686,7 @@ export default {
                     this.rating = '';
                     this.closePopup();
                     }
+                    this.loadData();
                 })
                 .catch(error => {
                     // Handle error (if needed)
@@ -677,11 +696,12 @@ export default {
         generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount) {
+        async makePayment(amount,numberOfMonths) {
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
 
             const payload = {
+                numberOfMonths: numberOfMonths,
                 merchantId: merchantId,
                 merchantTransactionId: transactionId,
                 merchantUserId: 'MUID-' + this.generateUUID(),
@@ -723,9 +743,9 @@ export default {
                         userCognitoId: this.isusers.sub,
                         CourseId: this.book.id,
                         merchantId: merchantId,
-                        amount: this.book.discountedPrice,
+                        amount: amount,
                         transactionId: transactionId,
-                        numberOfMonths: this.book.numberOfMonths,
+                        numberOfMonths: numberOfMonths,
                     };
                     const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
                     {
