@@ -1,7 +1,8 @@
 <template>
+   <MyCarousel />
     <div class="container-fluid jk">
         <div class="container jk">
-            <div class="learning_block">
+            <!-- <div class="learning_block">
                 <div class="row">
                     <div class="col-lg-12">
                         <div>
@@ -31,17 +32,15 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 justify-content-center">
                         <div class="radio_checkbox" style="text-align: center;">
-                            <div
-v-for="item in myLearning" :key="item.id" class="radio-item"
+                            <div v-for="item in myLearning" :key="item.id" class="radio-item"
                                 :class="{ 'active': item === selectedItem }">
                                 <div class="dot" @click="handleItemChange(item)"></div>
-                                <!-- <label :for="'radio' + item.id">{{ item.title }}</label> -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab_block mt-3">
+            </div> -->
+            <div class="tab_block">
                 <section id="tab_block">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
                         <el-tab-pane label="MY COURSES" name="first">
@@ -73,16 +72,16 @@ v-for="item in myLearning" :key="item.id" class="radio-item"
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="inner_block">
-                                        <div class="row">
+                                    <div class="inner_block" v-for="select in myLearning" :key="select.id">
+                                        <div class="row" >
                                             <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                                 <div id="asset_image">
                                                     <img src="../assets/images/book1.png" class="img-fluid">
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-8 col-sm-8 col-md-8">
-                                                <router-link :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }" style="text-decoration: none;">
-                                                    <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                <router-link :to="{ name: 'CourseDetails', params: { name: select.courseRouteName } }" style="text-decoration: none;">
+                                                    <p id="text_one" class="mb-0">{{ select.title }}</p>
                                                 </router-link>
                                                 <p id="text_two">stacks</p>
                                             </div>
@@ -90,12 +89,12 @@ v-for="item in myLearning" :key="item.id" class="radio-item"
                                         <div class="row line">
                                             <div class="col-lg-4 col-sm-4 col-6">
                                                 <div class="progress_block">
-                                                    <progress :value="calculatePercentage(selectedItem)" max="100">{{
-                                                            getWatchTime(selectedItem) }}</progress>
+                                                    <progress :value="calculatePercentage(select)" max="100">{{
+                                                            getWatchTime(select) }}</progress>
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-sm-8 col-6 text">
-                                                <p id="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                <p id="text_three">{{ remainingTimes(select) }} left</p>
                                             </div>
                                             <!-- <button class="bt">BUY NOW</button> -->
                                         </div>
@@ -109,44 +108,38 @@ v-for="item in myLearning" :key="item.id" class="radio-item"
                             </div>
                         </el-tab-pane>
                         <el-tab-pane label="LIVE" name="third">
+                            <span id="aca_text">Live</span> Courses
                             <div v-if="!selectedItem?.videoCompleted" class="">
-                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div
-id="home" class="tab-pane fade show active" role="tabpanel"
-                                        aria-labelledby="home-tab">
-                                        <span id="aca_text">Live</span> Courses
+                                <div v-if="selectedItem !== null" id="myTabContent" class="tab-content" >
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab"  v-for="item in myLearning" :key="item.id" >
                                         <div class="row mt-4 ">
                                             <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ selectedItem.university }}</h6>
-                                                <p class="text_line">{{ selectedItem.title }}</p>
+                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ item.university }}</h6>
+                                                <p class="text_line">{{ item.title }}</p>
                                                 <div class="row ml-0">
                                                     <div class=" info">
-                                                        <p>{{ selectedItem.instructorName[0].name }}</p>
+                                                        <p>{{ item.instructorName[0].name }}</p>
                                                     </div>
                                                     <div class="asset_image info1">
-                                                        <img
-src="../assets/images/Iconionic-ios-timer@2x.png"
+                                                        <img src="../assets/images/Iconionic-ios-timer@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 17px;">
-                                                        {{ calculateTime(selectedItem).timeInHours }}:{{
-                                                            calculateTime(selectedItem).timeInMinutes }}:{{ calculateTime(selectedItem).remainingSeconds }}
+                                                        {{ calculateTime(item).timeInHours }}:{{
+                                                            calculateTime(item).timeInMinutes }}:{{ calculateTime(item).remainingSeconds }}
                                                     </div>
                                                     <div class="asset_image info2">
-                                                        <img
-src="../assets/images/Iconmap-school@2x.png"
+                                                        <img src="../assets/images/Iconmap-school@2x.png"
                                                             class="img-fluid ml-2" style="width: 17px; height: 18px;">
-                                                        {{ selectedItem.modules }}<br>
+                                                        {{ item.modules }}<br>
                                                     </div>
                                                     <div>
                                                         <p class="pp" style="color: #666666; font-size: 12px; float: left;">
-                                                        {{ selectedItem.courseDescription }}</p>
+                                                        {{ item.courseDescription }}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
-                                                    <video-player
-v-if="renderComponent" ref="videoPlayer"
-                                                        :options="videoOptions" :is-subscribed="userIsSubscribed" />
+                                                    <video-player v-if="renderComponent" ref="videoPlayer" :options="videoOptions" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
                                         </div>
@@ -159,9 +152,9 @@ v-if="renderComponent" ref="videoPlayer"
                                                 </div>
                                                 <div class="col-lg-8 col-8 col-sm-8 col-md-8">
                                                     <router-link
-                                                        :to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+                                                        :to="{ name: 'CourseDetails', params: { name: item.courseRouteName } }"
                                                         style="text-decoration: none;">
-                                                        <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                        <p id="text_one" class="mb-0">{{ item.title }}</p>
                                                     </router-link>
                                                     <p id="text_two">stacks</p>
                                                 </div>
@@ -170,14 +163,13 @@ v-if="renderComponent" ref="videoPlayer"
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4 prog">
                                                     <div class="progress_block">
                                                         <div>
-                                                            <progress
-:value="calculatePercentage(selectedItem)"
-                                                                max="100">{{ getWatchTime(selectedItem) }}</progress>
+                                                            <progress :value="calculatePercentage(item)"
+                                                                max="100">{{ getWatchTime(item) }}</progress>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-12 col-sm-12 col-md-4 time">
-                                                    <p class="text_three">{{ remainingTimes(selectedItem) }} left</p>
+                                                    <p class="text_three">{{ remainingTimes(item) }} left</p>
                                                 </div>
                                                 <!-- <button class="bt">BUY NOW</button> -->
                                             </div>
@@ -190,8 +182,7 @@ v-if="renderComponent" ref="videoPlayer"
                         <el-tab-pane label="COMPLETED" name="fourth">
                             <div v-if="selectedItem?.videoCompleted" class="">
                                 <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
-                                    <div
-id="home" class="tab-pane fade show active" role="tabpanel"
+                                    <div id="home" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="home-tab">
                                         <div class="">
                                             <div class="row mt-3">
@@ -204,7 +195,7 @@ id="home" class="tab-pane fade show active" role="tabpanel"
                                                     <router-link id="see_text" to="#">See all</router-link>
                                                 </div>
                                             </div>
-                                            <div class="inner_block">
+                                            <div class="inner_block"  v-for="page in myLearning" :key="page.id">
                                                 <div class="row">
                                                     <div class="col-lg-1 col-4 col-sm-4 col-md-2">
                                                         <div id="asset_image">
@@ -213,9 +204,9 @@ id="home" class="tab-pane fade show active" role="tabpanel"
                                                     </div>
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
                                                         <router-link
-:to="{ name: 'CourseDetails', params: { name: selectedItem.courseRouteName } }"
+:to="{ name: 'CourseDetails', params: { name: page.courseRouteName } }"
                                                             style="text-decoration: none;">
-                                                            <p id="text_one" class="mb-0">{{ selectedItem.title }}</p>
+                                                            <p id="text_one" class="mb-0">{{ page.title }}</p>
                                                         </router-link>
                                                         <p id="text_two">stacks</p>
                                                         <div class="row line">
@@ -223,14 +214,14 @@ id="home" class="tab-pane fade show active" role="tabpanel"
                                                                 <div class="progress_block">
                                                                     <div>
                                                                         <progress
-:value="calculatePercentage(selectedItem)"
-                                                                            max="100">{{ getWatchTime(selectedItem)
+:value="calculatePercentage(page)"
+                                                                            max="100">{{ getWatchTime(page)
                                                                             }}</progress>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="comp col-lg-4 col-12 col-sm-12 col-md-4">
-                                                            <p class="text_three">{{ remainingTimes(selectedItem) }}
+                                                            <p class="text_three">{{ remainingTimes(page) }}
                                                                 Completed</p>
                                                         </div>
                                                         <!-- <button class="bt">BUY NOW</button> -->
@@ -256,12 +247,14 @@ import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import VideoPlayer from './VideoPlayer.vue';
+import MyCarousel from "./MyCarousel.vue"
 
 export default {
     name: 'MylearningsView',
     components: {
         Loading,
-        VideoPlayer
+        VideoPlayer,
+        MyCarousel
     },
     data() {
         return {
@@ -271,8 +264,6 @@ export default {
             activeName: 'first',
             myLearning: [],
             selectedItem: null,
-            Learning: [],
-            selectedproduct: null,
 
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
@@ -313,29 +304,33 @@ export default {
         },
     },
     async created() {
-
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
-            this.myLearning = res.data;
-            console.log(res);
-            if (this.myLearning.length > 0) {
-                // Set the default selected item to the first item in myLearnin
-                this.selectedItem = this.myLearning[0];
-            }
-            this.videoOptions.sources = [{
-                src: this.selectedItem.videoUrl,
-                type: this.videoType,
-                withCredentials: false,
-            }];
-        } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-        } finally {
-            this.isLoading = false;
+    this.isLoading = true;
+    try {
+        const res = await AxiosInstance.get(`/MyLearnings?CognitoId=` + this.isuser.sub);
+        this.myLearning = res.data;
+        console.log(res);
+        if (this.myLearning.length > 0) {
+            this.selectedItem = this.myLearning[0];
+            
+            this.updateVideoSources(); // Update video sources initially
         }
-    },
+        this.renderComponent = false;
+        await this.$nextTick();
+        this.renderComponent = true;
+    } catch (error) {
+        console.log(error);
+    } finally {
+        this.isLoading = false;
+    }
+},
     methods: {
+        updateVideoSources() {
+        this.videoOptions.sources = this.myLearning.map(item => ({
+            src: item.videoUrl,
+            type: this.videoType,
+            withCredentials: false,
+        }));
+    },
         handleClick(tab, event) {
             console.log(tab, event);
         },
@@ -446,6 +441,10 @@ export default {
 </script>
 
 <style scoped>
+.pk{
+    position: relative;
+    bottom: 60px;
+}
 progress {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -899,10 +898,10 @@ input[type="radio"]:checked {
         bottom: 15px !important;
     }
 
-    .jk {
+    /* .jk {
         padding-bottom: 45px !important;
         padding-top: 20px;
-    }
+    } */
 
     .inner_block {
         height: 90px;

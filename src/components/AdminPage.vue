@@ -196,12 +196,12 @@ export default {
   .main-container {
     flex: 1;
     transition: margin-left 0.3s ease;
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #EFF5FC; /* Set the background color */
   }
   
   .content-container {
-    padding: 20px;
+    padding: 20px 20px 0px 6px;
     width: 100%;
   }
   

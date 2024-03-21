@@ -47,7 +47,8 @@
                   </td>
                   <td v-if="!editMode">{{ selectedProduct.discountPrice }}</td>
                   <td v-if="editMode">
-                    <input v-model="editedProduct.discountPrice" type="text" required>
+                    <input v-model="editedProduct.discountPrice" type="text" required  @input="validateDiscountPrice">
+                    <span v-if="discountPriceError" style="color: red;">Discount price cannot be greater than actual price.</span>
                   </td>
                   <td>{{ selectedProduct.courseName }}</td>
                   <td>{{ selectedProduct.semesterId }}</td>
@@ -102,7 +103,8 @@
           </el-form-item>
   
           <el-form-item label="Discount Price:" prop="DiscountedPrice">
-            <el-input v-model="newBranch.DiscountedPrice" required></el-input>
+            <el-input v-model="newBranch.DiscountedPrice" required  @input="validateDiscount"></el-input>
+            <span v-if="discountError" style="color: red;">Discount price cannot be greater than actual price.</span>
           </el-form-item>
   
           <el-form-item label="Semester Id:" prop="SemesterId">
@@ -171,6 +173,8 @@
   },
     data() {
       return {
+        discountPriceError: false,
+        discountError:false,
         selectedFile: null,
         formVisible: false,
         products: [],
@@ -223,6 +227,13 @@
       this.clearTableData();
     },
     methods: {
+      validateDiscountPrice() {
+    this.discountPriceError = parseFloat(this.editedProduct.discountPrice) > parseFloat(this.editedProduct.actualPrice);
+  },
+  validateDiscount() {
+    this.discountError = parseFloat(this.newBranch.DiscountedPrice) > parseFloat(this.newBranch.ActualPrice);
+  },
+
       clearTableData() {
       this.selectedCourse = '';
       this.selectedProduct =  { id:'', name: '', description: '',actualPrice:'',discountPrice:'', semesterId:'', courseName:'',workFlowStatement:'',isActive: '',imageUrl: '',numberOfMonths:'' };
@@ -298,6 +309,8 @@
   },
   async updateProduct(id) {
     try {
+      if (parseFloat(this.editedProduct.actualPrice) >= parseFloat(this.editedProduct.discountPrice)) {
+
       const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
     if (!confirmed) {
        this.editMode = false; // Set editMode to false if the user cancels
@@ -323,7 +336,8 @@
         this.$refs.Confirmation.showOKButton = true;
         this.$refs.Confirmation.showCancelButton = false; 
   
-      } catch (error) {
+      } 
+    }catch (error) {
       this.isLoading = false;
       console.log(error.response.data.Message);
       this.$refs.Confirmation.open(error.response.data.Message);
@@ -335,9 +349,12 @@
    }
  },
   
+  
   async addBranch() {
     this.isLoading = true;
     try {
+      if (parseFloat(this.newBranch.ActualPrice) >= parseFloat(this.newBranch.DiscountedPrice)) {
+
       let formData = new FormData();
       formData.append('ImageUrl', this.selectedFile);
   
@@ -356,43 +373,35 @@
       this.$refs.Confirmation.open("Subject Added successfully.");
       this.$refs.Confirmation.showOKButton = true;
       this.$refs.Confirmation.showCancelButton = false; 
-      this.newBranch = {
-        name: '',
-        desc: '',
-        ActualPrice:'',
-        DiscountedPrice:'',
-        SemesterId: this.selectedsemester, 
-        CourseName:'',
-        WorkFlowStatement:'',
-        IsActive: 1,
-        ImageUrl: '',
-        Numberofmonths:'',
-       };
-       this.$refs.form.reset();
+      this.clearFormFields(); 
       
-  }  catch(error){
+  }  }catch(error){
           this.isLoading = false;
           this.$refs.Confirmation.open(error.response.data.Message);
           this.$refs.Confirmation.showOKButton = true;
           this.$refs.Confirmation.showCancelButton = false;
-          this.newBranch = {
-            name: '',
-            desc: '',
-            ActualPrice:'',
-            DiscountedPrice:'',
-            SemesterId: this.selectedsemester, 
-            CourseName:'',
-            WorkFlowStatement:'',
-            IsActive: 1,
-            ImageUrl: '',
-            Numberofmonths: '',
-          }; 
+          this.clearFormFields(); 
         } 
     finally {
            this.isLoading = false;
            this.formVisible = false;
     }
   },
+  clearFormFields() {
+  this.newBranch = {
+    name: '',
+    desc: '',
+    ActualPrice: '',
+    DiscountedPrice: '',
+    SemesterId: this.selectedsemester,
+    CourseName: '',
+    WorkFlowStatement: '',
+    IsActive: 1,
+    ImageUrl: '',
+    Numberofmonths: '',
+  };
+  this.$refs.form.reset();
+},
   async deleteProduct(id) {
       try {
         const confirmed = await this.$refs.Confirmation.open(
