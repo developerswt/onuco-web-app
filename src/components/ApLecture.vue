@@ -243,27 +243,7 @@ export default {
 },
 
     async created() {
-        this.domLayout = 'autoHeight';
-        this.isLoading = true;
-        try {
-            const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
-            let req = res.data;
-            this.Orders = req;
-            console.log(req);
-        } catch (error) {
-            this.isLoading = false;
-            console.log(error);
-            this.showDialog = true;
-            this.dialogTitle = "Error";
-            this.dialogMessage = "Not get data";
-        } finally {
-            this.isLoading = false;
-        }
-        this.rowData = this.Orders;
-        this.rowSelection = 'single';
-        this.popupParent = document.body;
-        this.paginationPageSize = 10;
-
+      this.getdata();  
  },
 
     methods: {
@@ -318,7 +298,9 @@ export default {
         dateFormat(params) {
             let value = params.data.paymentDate;
             if (value) {
-                return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+                // return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+                return moment(String(value)).format('DD/MM/YYYY');
+
             }
         },
         onCellClicked(params) {
@@ -400,13 +382,14 @@ export default {
        const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
        console.log(response);
        this.ismodel = true;
+       await this.getdata();
          console.log(" added successfully");
-         await this.getdata();
+        
         //  this.gridApi.refreshCells({ force: true });
          this.toggleForm();
          this.$refs.Confirmation.open("Payment Details Added successfully.");
          this.$refs.Confirmation.showOKButton = true;
-        this.$refs.Confirmation.showCancelButton = false;
+         this.$refs.Confirmation.showCancelButton = false;
          this.newBranch.userCourseSubscriptionId='';
          this.newBranch.facuiltyCognitoId= '';
          this.newBranch.paymentDate= '';
@@ -472,25 +455,26 @@ export default {
 
         async getdata() {
             this.domLayout = 'autoHeight';
-            this.isLoading = true;
-            try {
-                const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment`);
-                let req = res.data;
-                this.Orders = req;
-
-            } catch (error) {
-                this.isLoading = false;
-                console.log(error);
-
-            } finally {
-                this.isLoading = false;
-            }
-            this.rowData = this.Orders;
-            this.rowSelection = 'single';
-            this.popupParent = document.body;
-            this.paginationPageSize = 10;
-
+        this.isLoading = true;
+        try {
+            const res = await AxiosInstance.get(`/FacultyCourseSubscriptionPayment/GetFacultyPaymentDetails`);
+            let req = res.data;
+            this.Orders = req;
+            console.log(req);
+        } catch (error) {
+            this.isLoading = false;
+            console.log(error);
+            this.showDialog = true;
+            this.dialogTitle = "Error";
+            this.dialogMessage = "Not get data";
+        } finally {
+            this.isLoading = false;
         }
+        this.rowData = this.Orders;
+        this.rowSelection = 'single';
+        this.popupParent = document.body;
+        this.paginationPageSize = 10;
+    }
     },
 
 };

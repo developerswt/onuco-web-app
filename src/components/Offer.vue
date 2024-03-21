@@ -12,11 +12,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-lg-7 design">
-                        <div class="box mt-3">
-                            <h2>Refer A Friend</h2>
-                            <p>Get 20% OFF on all Courses</p>
-                            <div class="offer_inside_block">
-                                <p>Offers Ends on<br>June 30 2023</p>
+                        <div class="box mt-3" v-if="product">
+                            <h2>{{product.name}}</h2>
+                            <p>{{product.description}}</p>
+                            <div class="offer_inside_block mt-4">
+                                <p>{{product.offrends}}</p>
                                 <button class="btn btn-primary" @click="showShareOption">Refer now</button>
                             </div>
                         </div>
@@ -38,6 +38,8 @@
 
 <script>
 import ShareButton from './ShareButton.vue'
+import AxiosInstance from '../config/axiosInstance';
+
 
 export default {
     name: 'OfferView',
@@ -47,9 +49,30 @@ export default {
     data() {
         return {
             showShareButton: false,
+            product:[],
         }
     },
+    async created() {
+       this.loadData();
+    },
     methods: {
+
+        async loadData() {
+    this.isLoading = true;
+    try {
+        const res = await AxiosInstance.get(`/ReferAndLearn`);
+        // Assuming the response data is an array and you want the first item
+        if (res.data && res.data.length > 0) {
+            this.product = res.data[0];
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        this.isLoading = false;
+    }
+},
+
+
         showShareOption() {
             const referPath = this.$route.path;
             this.showShareButton = true;
@@ -200,7 +223,9 @@ h2 {
 }
 
 .add {
-
+position: relative;
+right: 60px;
+bottom: 20px;
     text-align: right;
 }
 
@@ -265,5 +290,9 @@ h2 {
 }
 .container{
     padding : 0px;
+}
+.design{
+    position: relative;
+    left:40px
 }
 </style>

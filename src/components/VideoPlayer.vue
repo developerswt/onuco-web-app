@@ -44,6 +44,10 @@
         type: Number,
         default: undefined
       },
+      discountPrice: {
+        type: Number, // Assuming discountPrice is a number
+        default: undefined // Set default value as per your requirement
+    },
       watchTime: {
         type: String,
         default: undefined
@@ -173,7 +177,7 @@
               </div>
             `;
   
-          customElement.innerHTML = innerHTML;
+          customElement.innerHTML = innerHTML;         
   
           // Append the custom element to the video container
           this.$refs.videoPlayer.parentNode.appendChild(customElement);
@@ -182,7 +186,7 @@
           const subscribeButton = document.getElementById('subscribeButton');
           if (subscribeButton) {
             subscribeButton.addEventListener('click', () => {
-              this.makePayment(this.courseDisPrice);
+              this.makePayment(this.discountPrice, this.courseId, this.numberOfMonths);
             });
           }
         }
@@ -252,15 +256,19 @@
       generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount) {
+        async makePayment(amount,courseId,numberOfMonths) {
+          
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
+            
 
             const payload = {
+              courseId:courseId,
+              numberOfMonths:numberOfMonths,
                 merchantId: merchantId,
                 merchantTransactionId: transactionId,
                 merchantUserId: 'MUID-' + this.generateUUID(),
-                amount: amount * 100,
+                amount: amount*100,
                 redirectUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
                 redirectMode: "POST",
                 callbackUrl: `https://bbjh9acpfc.ap-southeast-1.awsapprunner.com/api/PhonePayRespons`,
@@ -289,17 +297,18 @@
                         "X-VERIFY": checksum,
                     },
                 });
-  
-                  const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
-                    if (response.status === 200) {
+
+                const redirectURL = response.data.data.instrumentResponse.redirectInfo.url;
+
+                if (response.status === 200) {
 
                       const jsonData = {
                         userCognitoId: this.isuser.sub,
-                        CourseId: this.courseId,
-                        merchantId: merchantId,
-                        amount: this.courseDisPrice,
-                        transactionId: transactionId,
-                        numberOfMonths: this.numberOfMonths,
+            CourseId: this.courseId,
+            merchantId: merchantId,
+            amount: amount,
+            transactionId: transactionId,
+            numberOfMonths: this.numberOfMonths,
                       };
                       const SubscriptionApi = await AxiosInstance.post("/PhonePayRespons/RequestPayment", jsonData,
                       {

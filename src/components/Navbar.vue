@@ -12,6 +12,7 @@
             <el-row v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;">
                 <el-col :span="23">
                     <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false" value-key="title" size="large" style="background-color: blue; font-size: 12px; position: relative;left: 52px;" class="w-100 search" clearable placeholder="Search..." @select="handleSelect" @keydown.enter="handleKeyEnter(searchTerm)">
+                    <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false" value-key="title" size="large" style="background-color: blue; font-size: 12px; position: relative;left: 52px;" class="w-100 search" clearable placeholder="Search..." @select="handleSelect" @keydown.enter="handleKeyEnter(searchTerm)">
                         <template #suffix>
                             <el-icon class="el-input__icon" style="color: blue; cursor: pointer;" @click="handleKeyEnter(searchTerm)">
                                 <Search />
@@ -33,7 +34,6 @@
                         <router-link class="nav-link" to="/Courses">Courses</router-link>
 
                     </li>
-
                     <li class="nav-item" :class="{ 'active': isActive('/Announcement') }">
                         <router-link class="nav-link" to="/Announcement">Announcement</router-link>
                     </li>
@@ -47,8 +47,7 @@
 
 
                 <ul class="navbar-nav ml-auto">
-                    <el-row
-v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
+                    <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
                         style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
                             <el-autocomplete

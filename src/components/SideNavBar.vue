@@ -45,8 +45,8 @@
           </li>
           <li>
             <div id="collapseExample2" class="collapse pl-3">
-              <span class="subtitle" @click="selectContent('facultyCourse')">Course Info</span>
-              <span class="subtitle" @click="selectContent('facultyInfo')">Payment Info</span>
+              <span class="subtitle" @click="selectContent('facultyCourse')">Courses</span>
+              <span class="subtitle" @click="selectContent('facultyInfo')">Payment</span>
             </div>
           </li>
               <span class="subtitle" @click="selectContent('DeleteFun')">Delete Profile</span>
