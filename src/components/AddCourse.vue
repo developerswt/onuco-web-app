@@ -61,10 +61,11 @@
                   </select>
                 </td>
                 <td v-if="!editMode">{{ selectedProduct.numberOfMonths }}</td>
-             <td v-if="editMode">
-               <input v-model="editedProduct.Numberofmonths" type="text" required>
-             </td>
-             <td>{{ selectedProduct.isActive }}</td>
+                <td v-if="editMode">
+                  <input v-model="editedProduct.Numberofmonths" type="text" required  @input="validatemonths" >
+                  <span v-if="monthsError" style="color: red;">Number of months must be between 1 and 12</span>
+                </td>
+                <td>{{ selectedProduct.isActive }}</td>
 
             <!-- <td v-if="!editMode">{{ selectedProduct.isActive }}</td>
              <td v-if="editMode">
@@ -125,8 +126,9 @@
         </el-form-item>
 
         <el-form-item label="Number Of Months:" prop="Numberofmonths">
-          <el-input v-model="newBranch.Numberofmonths" required></el-input>
-        </el-form-item>
+        <el-input v-model="newBranch.Numberofmonths" @input="validateNumberofmonths"></el-input>
+        <span v-if="numberofmonthsError" style="color: red;">Number of months must be between 1 and 12</span>
+      </el-form-item>
 
         <el-form-item label="IsActive:" prop="IsActive">
           <el-input v-model="newBranch.IsActive" readonly required></el-input>
@@ -173,6 +175,8 @@ export default {
 },
   data() {
     return {
+      monthsError: '',
+      numberofmonthsError: '',
       discountPriceError: false,
       discountError:false,
       selectedFile: null,
@@ -227,6 +231,15 @@ watch: {
     this.clearTableData();
   },
   methods: {
+    validatemonths() {
+      const numberOfMonths = parseInt(this.editedProduct.Numberofmonths);
+      this.monthsError = numberOfMonths < 1 || numberOfMonths > 12 ;
+    },
+    validateNumberofmonths() {
+      const numberOfMonths = parseInt(this.newBranch.Numberofmonths);
+      this.numberofmonthsError = numberOfMonths < 1 || numberOfMonths > 12 ;
+    },
+
     validateDiscountPrice() {
 const discountPrice = parseFloat(this.editedProduct.discountPrice);
 const actualPrice = parseFloat(this.editedProduct.actualPrice);
@@ -316,8 +329,18 @@ async loadProductDetails() {
 },
 async updateProduct(id) {
   try {
-    if (parseFloat(this.editedProduct.actualPrice) >= parseFloat(this.editedProduct.discountPrice)) {
-
+    if (
+      parseFloat(this.editedProduct.actualPrice) >= parseFloat( this.editedProduct.discountPrice )
+    ) {
+      // Validate Numberofmonths
+      const numberOfMonths = parseInt(this.editedProduct.Numberofmonths);
+      if (isNaN(numberOfMonths) || numberOfMonths < 1 || numberOfMonths > 12) {
+        // Show error message
+        this.$refs.Confirmation.open(
+          "Number of months must be between 1 and 12."
+        );
+        return;
+      }
     const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
   if (!confirmed) {
      this.editMode = false; // Set editMode to false if the user cancels
@@ -360,7 +383,23 @@ async updateProduct(id) {
 async addBranch() {
   this.isLoading = true;
   try {
+    if (!this.isKebabCase(this.newBranch.CourseName)) {
+        // Show error message
+        this.$refs.Confirmation.open(
+          "Course Route Name must be in kebab case."
+        );
+        return;
+      }
     if (parseFloat(this.newBranch.ActualPrice) >= parseFloat(this.newBranch.DiscountedPrice)) {
+     
+      const numberOfMonths = parseInt(this.newBranch.Numberofmonths);
+      if (isNaN(numberOfMonths) || numberOfMonths < 1 || numberOfMonths > 12) {
+        // Show error message
+        this.$refs.Confirmation.open(
+          "Number of months must be between 1 and 12."
+        );
+        return;
+      }
 
     let formData = new FormData();
     formData.append('ImageUrl', this.selectedFile);

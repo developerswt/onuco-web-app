@@ -25,13 +25,14 @@ export default {
   name: 'CarouselView',
   data() {
     return {
-      bannerImg: []
+      bannerImg: [],
+      home:'Home',
     }
   },
   async created() {
     try {
-      const response = await axiosInstance.get(`/Bannerimages`);
-      this.bannerImg = response.data[0].page.home.links;
+      const response = await axiosInstance.get(`/Bannerimages/Page?page=` + this.home);
+      this.bannerImg = response.data.links;;
     } catch (error) {
       console.error('Error fetching banner images:', error);
     }

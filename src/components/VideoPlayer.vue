@@ -186,7 +186,7 @@
           const subscribeButton = document.getElementById('subscribeButton');
           if (subscribeButton) {
             subscribeButton.addEventListener('click', () => {
-              this.makePayment(this.discountPrice, this.courseId, this.numberOfMonths);
+              this.makePayment(this.discountPrice, this.courseId, this.numberOfMonths ,this.isuser);
             });
           }
         }
@@ -256,13 +256,14 @@
       generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount,courseId,numberOfMonths) {
+        async makePayment(amount,courseId,numberOfMonths,isuser) {
           
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
             
 
             const payload = {
+              isuser:isuser,
               courseId:courseId,
               numberOfMonths:numberOfMonths,
                 merchantId: merchantId,
@@ -303,7 +304,7 @@
                 if (response.status === 200) {
 
                       const jsonData = {
-                        userCognitoId: this.isuser.sub,
+                        userCognitoId: this.isuser,
             CourseId: this.courseId,
             merchantId: merchantId,
             amount: amount,
