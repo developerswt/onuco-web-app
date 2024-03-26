@@ -4,7 +4,7 @@
         <div class="container" style="margin-top: 72px;">
             <div>
     <label for="productDropdown">Course Id :</label>
-    <el-input class="size" v-model="courseId"></el-input>
+    <el-input class="size" v-model="courseId" placeholder="Search By Course Id "></el-input>
   </div>
             <div class="table-responsive" style="background-color: white;">
                 <table v-if="isTableVisible" id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
@@ -146,7 +146,11 @@
   
   async updateProduct(id) {
     try {
-     
+      const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+    if (!confirmed) {
+       this.editMode = false; // Set editMode to false if the user cancels
+       return;
+    }
       const res = await AxiosInstance.put(`/VideoSecurity` + '?' +'&CourseId='+ this.editedProduct.CourseId + '&SecurityKey=' + this.editedProduct.SecurityKey + '&isActive=' + this.editedProduct.isActive );
         await this.fetchData();
         this.editMode = false; 
@@ -161,7 +165,9 @@
       console.log(error.response.data.Message);
       this.$refs.Confirmation.open(error.response.data.Message);
       }
-    this.editMode = false;
+      finally {
+      this.editMode = false; 
+   }
   },
   
     async addBranch() {

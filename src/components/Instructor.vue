@@ -391,6 +391,10 @@ export default {
         },
     },
     async created() {
+       this.loadData();
+    },
+    methods: {
+        async loadData() {
         this.isLoading = true;
         try {
             const res = await AxiosInstance.get(`/Faculty/` + this.$route.params.name);
@@ -411,7 +415,6 @@ export default {
             this.isLoading = false;
         }
     },
-    methods: {
         async getByRatings(facultyId) {
             try {
                 const result = await AxiosInstance.get(`/Ratings?id=${facultyId}&objectTypeId=4`);
@@ -456,8 +459,12 @@ export default {
                 .then(response => {
                     // Handle success (if needed)
                     console.log(response.data);
+                    if(response.status === 200) {
                     this.rating = '';
                     this.closePopup();
+                    }
+                    this.loadData();
+
                 })
                 .catch(error => {
                     // Handle error (if needed)

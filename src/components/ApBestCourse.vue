@@ -4,6 +4,9 @@
        <div class="card-head">
          <header>Add Best Course</header>
        </div>
+       <div class="file text-right">
+        <button v-on:click="onBtnExport()">Download Excel File</button>
+      </div>
        <div class="card-body">
           <div style="padding: 20px;">
   
@@ -11,7 +14,7 @@
   
               <div style="height: 100%;">
                 <ag-grid-vue
-                  :dom-layout="domLayout"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
+                  :dom-layout="domLayout"  :suppressExcelExport="true" :excelStyles="excelStyles"  class="ag-theme-alpine" :column-defs="columnDefs" :row-data="rowData"
                   :edit-type="editType" :row-selection="rowSelection" :default-col-def="defaultColDef"
                   :suppress-excel-export="true" :popup-parent="popupParent" cache-quick-filter=true :pagination="true"
                   :pagination-page-size="paginationPageSize" is-loding="true" @grid-ready="onGridReady"
@@ -67,7 +70,15 @@
   import Confirmation from './Confirmation.vue';
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-  
+  import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { CsvExportModule } from "@ag-grid-community/csv-export";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { ModuleRegistry } from "@ag-grid-community/core";
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  CsvExportModule,
+  MenuModule,
+]);
   export default {
     name: "OrdersPage",
     components: {
@@ -177,6 +188,9 @@
       // toggleForm() {
       //   this.formVisible = !this.formVisible;
       // },
+      onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
   
       onCellClicked(params) {
         this.childPara = params.node.data
@@ -197,9 +211,6 @@
         this.gridColumnApi = params.columnApi;
       },
     
-      onBtnExport() {
-        this.gridApi.exportDataAsCsv();
-      },
       onFilterTextBoxChanged() {
         this.gridApi.setQuickFilter(
           document.getElementById('filter-text-box').value
@@ -430,7 +441,7 @@
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
-    padding: 10px 25px;
+    padding: 11px 23px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -524,5 +535,10 @@
      position: relative;
      left: 22px;
      top: 11px;
+  }
+  .file{
+  position: relative;
+    right: 40px;
+    top: 30px;
   }
   </style>

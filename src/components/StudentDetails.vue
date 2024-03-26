@@ -11,13 +11,16 @@
               <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
               <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
             </div>
+            <div class="file text-right">
+        <button  v-if="hasSearched" class="btn3" v-on:click="onBtnExport()">Download Excel File</button>
+      </div>
             <div class="card-body ">
               <div style="padding: 20px;">
                 <div class="example-wrapper">
                   <div style="height: 100%;">
                     <ag-grid-vue
                       v-if="hasSearched"
-                      :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                      :dom-layout="domLayout"  :suppressExcelExport="true" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -72,8 +75,9 @@
         </div>
       </div>
     </div>    
-    <Confirmation ref="Confirmation" />    
+       
   </div>  
+  <Confirmation ref="Confirmation" /> 
 </template>
   
 <script>
@@ -88,7 +92,15 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { CsvExportModule } from "@ag-grid-community/csv-export";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { ModuleRegistry } from "@ag-grid-community/core";
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  CsvExportModule,
+  MenuModule,
+]);
 
 export default {
   name: "StudentDetails",
@@ -210,9 +222,9 @@ export default {
     }
   },
 
-    getUserLink(userName) {
-      return `/user-profile/${userName}`;
-    },
+    // getUserLink(userName) {
+    //   return `/user-profile/${userName}`;
+    // },
 
     formatDate(date) {
       return moment(date).format('DD-MM-YYYY T HH:mm:ss');
@@ -281,9 +293,14 @@ export default {
         this.update(this.childPara.id);
       }
     },
-    update(id) {
-      this.showDialog = false;
+   async update(id) {
       try {
+        const confirmed = await this.$refs.Confirmation.open("Are You Sure Update this?");
+    if (!confirmed) {
+      //  this.editMode = false; // Set editMode to false if the user cancels
+       this.OpenCloseFun();
+       return;
+    }
         // const formattedStartDate = moment(this.childPara.startdate).format('YYYY-MM-DDTHH:mm:ss');
         const formattedEndDate = moment(this.childPara.enddate).format('YYYY-MM-DDTHH:mm:ss');
         const res = AxiosInstance.put(`/UserCourseSubscription/ChangeCourseDuration` + '?' + 'id=' + id + '&courseId=' + this.childPara.courseId + '&newEndDate=' + encodeURIComponent(formattedEndDate));
@@ -306,6 +323,9 @@ export default {
         this.$refs.Confirmation.showOKButton = true;
         this.$refs.Confirmation.showCancelButton = false;
       }
+      finally {
+      this.editMode = false; 
+   }
     },
 
   //   async deleteUserSubscription() {
@@ -577,4 +597,18 @@ button:hover {
     left: 22px;
     top: 20px;
 }
+.file{
+  position: relative;
+    right: 40px;
+    top: 30px;
+  }
+  .btn3{
+    color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 3px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  }
 </style>

@@ -10,6 +10,10 @@
     "format": "prettier .  --write"
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^31.2.0",
+    "@ag-grid-community/core": "^31.2.0",
+    "@ag-grid-community/csv-export": "^31.2.0",
+    "@ag-grid-enterprise/menu": "^31.2.0",
     "@aws-amplify/auth": "^5.6.0",
     "@aws-amplify/ui-vue": "^3.1.22",
     "@aws-sdk/client-s3": "^3.347.0",

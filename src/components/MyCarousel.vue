@@ -25,13 +25,14 @@
     name: 'CarouselView',
     data() {
       return {
-        bannerImg: []
+        bannerImg: [],
+        MyLearning:'MyLearning',
       }
     },
     async created() {
       try {
-        const response = await axiosInstance.get(`/Bannerimages/myLearning`);
-        this.bannerImg = response.data[0].page.myLearning.links;
+        const response = await axiosInstance.get(`Bannerimages/Page?page=` + this.MyLearning);
+        this.bannerImg = response.data.links;
       } catch (error) {
         console.error('Error fetching banner images:', error);
       }
