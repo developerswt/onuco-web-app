@@ -1,7 +1,7 @@
 <template>
    <MyCarousel />
-    <div class="container-fluid jk">
-        <div class="container jk">
+    <div v-if="userIsSubscribed" class="container-fluid jk mb-5">
+        <div class="container jk mb-4">
             <!-- <div class="learning_block">
                 <div class="row">
                     <div class="col-lg-12">
@@ -41,9 +41,9 @@
                 </div>
             </div> -->
             <div class="tab_block">
-                <section id="tab_block">
+                <section id="tab_block" >
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                        <el-tab-pane label="MY COURSES" name="first">
+                        <el-tab-pane label="MY COURSES" name="first" >
 
                         <div v-if="selectedItem !== null" id="myTabContent" class="tab-content">
                             <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
@@ -115,7 +115,7 @@
                                     <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab"  v-for="item in myLearning" :key="item.id" >
                                         <div class="row mt-4 ">
                                             <div class="col-lg-6 text-left col-8 col-sm-8 col-md-6 ">
-                                                <h6 style="color:#B4B4B4;margin-top: -5px;">{{ item.university }}</h6>
+                                                <h6 style="color:#B4B4B4;">{{ item.university }}</h6>
                                                 <p class="text_line">{{ item.title }}</p>
                                                 <div class="row ml-0">
                                                     <div class=" info">
@@ -205,7 +205,7 @@
                                                     </div>
                                                     <div class="col-lg-8 col-8 col-sm-8 col-md-8">
                                                         <router-link
-:to="{ name: 'CourseDetails', params: { name: page.courseRouteName } }"
+                                                            :to="{ name: 'CourseDetails', params: { name: page.courseRouteName } }"
                                                             style="text-decoration: none;">
                                                             <p id="text_one" class="mb-0">{{ page.title }}</p>
                                                         </router-link>
@@ -240,6 +240,14 @@
         </div>
     </div>
 </div>
+<div v-else class="else mb-4 mt-0">
+        <p style="text-align:center;color:#0177FB;" class="msz mb-4">You are not subscribed to any courses at the moment. Please subscribe to a course to access my learning</p>
+
+        <img src="../assets/images/error1.png" class="img-fluid  mx-auto d-block mb-5">
+        <!-- <div class="button_block mx-auto text-center">
+            <router-link to="/Login"> <button class="btn btn-primary " style=" width: 80px;padding: 10px;">Login</button></router-link>
+        </div> -->
+    </div>
 <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
@@ -265,6 +273,7 @@ export default {
             activeName: 'first',
             myLearning: [],
             selectedItem: null,
+            userSubscribed:false,
 
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
@@ -281,6 +290,26 @@ export default {
         }
     },
     computed: {
+        // authorizationHeader() {
+        //     if (this.isLoggedIn) {
+        //         return `Bearer ${this.isuser}`;
+        //     } else {
+        //         return ''; 
+        //     }
+        // },
+
+        authorizationHeader() {
+    if (this.isLoggedIn && this.$store.state.user && this.$store.state.user.signInUserSession) {
+        return `Bearer ${this.$store.state.user.signInUserSession.idToken.payload}`;
+    } else {
+        return ''; // Set your dummy value here
+    }
+},
+        isLoggedIn()
+        {
+            return this.$store.state.isLoggedIn;
+        },
+
         isuser() {
             return this.$store.state.user.signInUserSession.idToken.payload;
         },
@@ -562,7 +591,7 @@ progress::-moz-progress-bar {
     font-size: 12px;
     text-transform: uppercase;
     position: absolute;
-    bottom: -11px;
+  
     right: 12px;
     color: White;
 }
@@ -570,9 +599,9 @@ progress::-moz-progress-bar {
 #course_button i {
     padding-left: 10px;
 
-}
+} 
 
-#tab_section {
+ #tab_section {
     margin-top: 25px;
 }
 
@@ -601,8 +630,8 @@ progress::-moz-progress-bar {
 
 #new_text {
     position: relative;
-    left: -5px;
-    top: -12px;
+    /* left: -5px;
+    top: -12px; */
 }
 
 .el-tabs__nav .is-top {
@@ -662,10 +691,11 @@ progress::-moz-progress-bar {
     border: 1px solid #0177FB;
     border-radius: 10px;
     opacity: 1;
-    font-size: 12px;
+    font-size: 9px;
     float: right;
     background: transparent;
     color: #0177FB;
+    white-space: nowrap;
 }
 
 .el-tabs__item {
@@ -712,7 +742,7 @@ progress::-moz-progress-bar {
     #course_button {
         /* bottom: 0; */
         position: absolute;
-        bottom: -6px;
+        /* bottom: -6px; */
         /* right: 12px; */
         color: White;
         left: 10px;
@@ -785,14 +815,14 @@ progress::-moz-progress-bar {
     }
 }
 
-.bt {
+/* .bt {
     background-color: #0177FB;
     color: white;
     position: relative;
     left: 407px;
     bottom: 30px;
     font-size: 12px;
-}
+} */
 
 input[type="radio"] {
     appearance: none;
@@ -824,26 +854,26 @@ input[type="radio"]:checked {
     letter-spacing: 0px;
     color: #444444;
     opacity: 1;
-    margin-top: -7px;
+
 }
 
 .info {
     font-size: 13px;
     color: #666666;
-    margin-top: -14px;
+    /* margin-top: -14px; */
 }
 
 .info1 {
     font-size: 11px;
     color: #666666;
-    margin-top: -14px;
+    /* margin-top: -14px; */
 
 }
 
 .info2 {
     font-size: 11px;
     color: #666666;
-    margin-top: -14px;
+    /* margin-top: -14px; */
 }
 
 @media (max-width:520px) {
@@ -867,7 +897,7 @@ input[type="radio"]:checked {
     .pp {
         position: relative;
         top: 10px;
-        width: 176%;
+        width: 100%;
     }
 
     progress::-webkit-progress-bar {
@@ -939,7 +969,7 @@ input[type="radio"]:checked {
     }
 
     .video_block {
-        width: 328px !important;
+        width: 100% !important;
         position: relative;
         left: 199px;
     }
@@ -968,5 +998,12 @@ input[type="radio"]:checked {
 
 .comp {
     height: 500px;
+}
+
+@media only screen and (min-width:280px) and (max-width:1280px)
+{
+    .inner_block{
+        margin-bottom:15px;
+    }
 }
 </style>

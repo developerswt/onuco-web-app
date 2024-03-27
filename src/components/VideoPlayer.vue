@@ -1,6 +1,6 @@
 <template>
-    <div class="video-container">
-      <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered"></video>
+  <div class="video-container" @contextmenu.prevent="handleContextMenu">
+    <video ref="videoPlayer" preload="none" class="video-js vjs-big-play-centered mx-auto" disablePictureInPicture></video>
     </div>
     
   </template>
@@ -120,6 +120,24 @@
       document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     },
     methods: {
+      handleContextMenu(event) {
+      // Prevent the default context menu behavior
+      event.preventDefault();
+
+      // Get the target element of the context menu event
+      const targetElement = event.target;
+
+      // Check if the target element is a video element
+      if (targetElement instanceof HTMLVideoElement) {
+        // Modify or hide specific context menu items
+        // For example, you can hide the Picture-in-Picture and Show Controls options
+        const contextMenu = targetElement.contextMenu;
+        if (contextMenu) {
+          contextMenu.showControls = false; // Hide Show Controls option
+          contextMenu.togglePictureInPicture = false; // Hide Picture-in-Picture option
+        }
+      }
+    },
 
       handleVisibilityChange() {
         if (document.hidden && this.player && !this.isSubscribed) {
@@ -186,7 +204,7 @@
           const subscribeButton = document.getElementById('subscribeButton');
           if (subscribeButton) {
             subscribeButton.addEventListener('click', () => {
-              this.makePayment(this.discountPrice, this.courseId, this.numberOfMonths);
+              this.makePayment(this.discountPrice, this.courseId, this.numberOfMonths ,this.isuser);
             });
           }
         }
@@ -256,13 +274,14 @@
       generateUUID() {
             return uuidv4().toString(36).slice(-6);
         },
-        async makePayment(amount,courseId,numberOfMonths) {
+        async makePayment(amount,courseId,numberOfMonths,isuser) {
           
             const transactionId = "Tr-" + this.generateUUID();
             const merchantId = "PGTESTPAYUAT";
             
 
             const payload = {
+              isuser:isuser,
               courseId:courseId,
               numberOfMonths:numberOfMonths,
                 merchantId: merchantId,
@@ -303,7 +322,7 @@
                 if (response.status === 200) {
 
                       const jsonData = {
-                        userCognitoId: this.isuser.sub,
+                        userCognitoId: this.isuser,
             CourseId: this.courseId,
             merchantId: merchantId,
             amount: amount,
@@ -419,7 +438,12 @@
       pointer-events: none;
     }
   }
-
+/* Hide Picture-in-Picture and Show Controls context menu items */
+video::-moz-context-menu-item[pictureinpicture="true"],
+video::-moz-context-menu-item[controlslist="nodownload nofullscreen"],
+video::-webkit-media-controls-picture-in-picture-button {
+    display: none !important;
+}
 
 
   </style>

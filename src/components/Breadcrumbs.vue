@@ -1,7 +1,7 @@
 <!-- BreadcrumbsView.vue -->
 <template>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mt-4">
       <li v-for="(crumb, index) in breadcrumbs" :key="index" class="breadcrumb-item">
         <router-link v-if="shouldRenderLink(crumb)" :to="crumb.to" class="breadcrumb-link">
           {{ crumb.label }}
@@ -225,7 +225,7 @@ export default {
 <style scoped>
 .breadcrumb {
   margin-top: 7%;
-  margin-left: -1.5%;
+  /* margin-left: -1.5%; */
   background-color: transparent;
 }
 

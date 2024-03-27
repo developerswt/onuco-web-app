@@ -15,7 +15,7 @@
             </p>
         </div>
         <div v-if="branches.length > 0 || academia.length > 0" class="container pb-3">
-            <h2 id="available_text" style="margin-top: -25px;"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
+            <h2 id="available_text"><b>Available</b> {{ academia.name }} Courses ({{ branches.length }})</h2>
             <div class="parent_blocks">
                 <div class="row ">
                     <div v-for="branch in branches" :key="branch.id" class="box">
@@ -30,7 +30,7 @@
                                 <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 10px;">
                                     <div class="course_block_one mt-2">
                                         <h5 :title="(branch.name)">{{ shortenText(branch.name, 18) }}</h5>
-                                        <p style="margin-top: -8px;" :title="(branch.description)">{{ shortenText(branch.description, 20) }}</p>
+                                        <p :title="(branch.description)">{{ shortenText(branch.description, 20) }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-2 col-sm-2">
@@ -132,7 +132,7 @@ export default {
     }
 
     .jk {
-        padding-top: 65px;
+        padding-top: 0px;
     }
 
     #available_text {

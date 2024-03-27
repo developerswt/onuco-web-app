@@ -293,6 +293,12 @@ bottom: 20px;
 }
 .design{
     position: relative;
-    left:40px
+    left:0px;
+}
+@media only screen and (min-width:280px) and (max-width:500px)
+{
+    .btn{
+        font-size:10px;
+    }
 }
 </style>

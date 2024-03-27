@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid jk">
 
-        <div class="error_parent_block">
+        <div class="error_parent_block" pt-4>
             <div class="row">
                 <div class="col-lg-12">
                     <h2 id="top_text"> Get Support </h2>
@@ -21,63 +21,66 @@
                                 <p>Mail Us - somename@Onuco.com</p> -->
 
                                 <div class="card contact-box mb-4" style="width:100%;">
-                    <div class="row swap">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="card contact-info" style="border-right:2px soild black;" >
-                                <h4 class="contact mt-4 ml-4" style="color:#0177FB;"><b>Contact Information</b></h4><br><br>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="border-right:1px solid gray">
+                            <div class="card contact-info" style="border:none" >
+                             <div class="heading">
+                                <h4 class="contact mt-4 mb-5" style="color:#0177FB;font-size:20px;"><b>Contact Information</b></h4>
+                             </div>
+
 
                             <div class="contact-information">
-                                <div class="row">
-                                    <div class="col-6">
-                                    <p  class="contact ml-4" style="Color:#0177FB;">Call Us
-                                        <!-- <img src="../assets/bxs_phone-call.png" alt="phone"> -->
-                                    </p>
+                                <div class="row mx-auto">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <p  class="contact" style="color:#0177FB;">Call Us
+                                        </p>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
                                         <a href="tel:+919998887776" style="text-decoration: none;">
-                                        <p class="contact1" style="text-align: left;">+91 9998887776</p>
+                                        <p class="contact" >+91 9998887776</p>
                                     </a>
                                     </div>
                                 </div>
                             
-                                <div class="row">
-                                    <div class="col-6">
-                                    <p class="contact ml-4" style="color:#0177FB;">Mail Us
-                                        <!-- <img src="../assets/ic_sharp-email.png" alt="phone"> -->
-                                    </p>
+                                <div class="row mx-auto">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <p class="contact" style="color:#0177FB;">Mail Us
+                                            <!-- <img src="../assets/ic_sharp-email.png" alt="phone"> -->
+                                        </p>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
                                         <a href="mailto:example@onuco.com" class="contact " style="text-decoration: none;">
-                                        <p class="contact1" style="text-align:left">example@onuco.com</p>
+                                        <p >example@onuco.com</p>
                                         </a>
                                     </div>
-                                </div>
-                            <br>
-                     
-                    </div>
+                                </div>                     
+                          </div>
                   
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 ">
-                <div class="card get-in-touch p-3 mb-4" style="border:none;" >
-                    <h4 style="color:#0177FB;"><b>Get In Touch</b></h4>
+                <div class="card get-in-touch mb-4" style="border:none;" >
+                    <h4 style="color:#0177FB;font-size:20px;" class="h4 mt-4 mb-2"><b>Get In Touch</b></h4>
                     <!-- <p style="color:#7855A5">We're always excited to explore new opportunities and challenges. Whether you're a startup or an established enterprise, we'd love to hear from you. Contact us to discuss how we can help you achieve your digital goals.</p> -->
-                    <form @submit.prevent="sendMsz" style="margin-top: 60px;">
-                        <input type="text" v-model="name"  class="input mb-2" placeholder="Name"  required>
+                    
+                    <div class="form p-4 mb-4">
+                        <form @submit.prevent="sendMsz">
+                        <input type="text" v-model="name"  class="input mb-3" placeholder="Name"  required>
                         <!-- <p v-if="nameError" class="error">{{ nameError }}</p> -->
 
-                        <input type="text" v-model="email" class="input mb-2" placeholder="Email" required>
+                        <input type="text" v-model="email" class="input mb-3" placeholder="Email" required>
                         <!-- <p v-if="emailError" class="error">{{ emailError }}</p> -->
 
-                        <input type="tel" v-model="number" class="input mb-2" placeholder="Phone number">
+                        <input type="tel" v-model="number" class="input mb-3" placeholder="Phone number">
                         <!-- <p v-if="phoneError" class="error">{{ phoneError }}</p> -->
 
-                        <input type="text" v-model="how_found" class="input mb-2" placeholder="How did you find us?">
+                        <input type="text" v-model="how_found" class="input " placeholder="How did you find us?">
                         <div class="submit" >
-                        <button class="btn btn-outline-info mb-4" type="submit">Send Message</button>
+                        <button class="btn btn-outline-info p-3 m-4" type="submit">Send Message</button>
                         </div>                       
                         <p v-if="isSentMsz" style="color:green;margin:auto;">Message sent successfully</p>
                     </form>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -104,6 +107,9 @@ export default {
 </script>
 
 <style scoped>
+.jk{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 #below_text {
 
     font-size: 22px;
@@ -125,15 +131,12 @@ export default {
     margin-bottom: 0;
 }
 
-.error_parent_block {
-    padding-top: 100px;
-}
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
     .error_parent_block {
         padding-top: 90px;
     }
-}
+} */
 
 #group_image {
     background: transparent url('../assets/images/Group 246.png') 30% 0% no-repeat padding-box !important;
@@ -225,11 +228,11 @@ export default {
     }
 }
 
-.cf {
+/* .cf {
     width: 100%;
     height: 520px;
     background-image: url('../assets/images/Group 246.png');
-}
+} */
 
 
 
@@ -248,16 +251,12 @@ height: 400px;
 border-radius: 3px;
 /* background: linear-gradient(to right, #61408D, #B64797); */
 width:100%;
-height: 500px;
- }
- .contact-information {
-    padding:0;
-    margin:0;
- 
 
  }
+
 .contact {
     color:rgb(0, 0, 0);
+
 }
 .contact1 {
 
@@ -313,10 +312,10 @@ height: 500px;
    
     .contact {
         width:100%;
-        margin-left:50px;
+        /* margin-left:50px; */
     }
     .contact1 {
-        margin-left:50px;
+        /* margin-left:50px; */
     }
 }
 </style>

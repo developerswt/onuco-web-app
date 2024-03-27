@@ -46,11 +46,11 @@
                 </ul>
 
 
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" >
                     <el-row v-if="showSearchBoxOnNavbar" class="demo-autocomplete search1"
                         style="width: 250px;  margin-right: 25px; ">
                         <el-col :span="23">
-                            <el-autocomplete
+                            <el-autocomplete   v-if="showSearchBar"
 v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
                                 value-key="title" size="large" style="background-color: blue; font-size: 12px;"
                                 class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
@@ -105,7 +105,8 @@ export default {
             name: '',
             // username: localStorage.getItem("username")
             showSearchBox: false,
-            showSearchBoxes: true
+            showSearchBoxes: true,
+            showSearchBar: true
 
         }
     },
@@ -167,6 +168,12 @@ export default {
         }
     },
     methods: {
+        beforeRouteLeave(to, from, next) {
+      // Hide the search bar before leaving the page
+      this.showSearchBar = false;
+      next(); // Continue with the navigation
+        },
+
         toggleSearchBoxVisibility() {
             this.showSearchBox = !this.showSearchBox;
         },
@@ -404,7 +411,7 @@ li>a:before {
     width: 25px;
     color: #fff;
     position: relative;
-    left: -10px;
+    /* left: -10px; */
     bottom: 30%;
 }
 
@@ -460,7 +467,7 @@ li>a:before {
 
 .nav-item.active {
     border-bottom: 2px solid blue;
-    margin-bottom: -16px;
+    /* margin-bottom: -16px; */
     margin-left: 0px;
 }
 
@@ -486,7 +493,7 @@ li>a:before {
         display: block;
         font-size: 20px;
         position: relative;
-        right: -6px;
+        /* right: -6px; */
     }
 }
 

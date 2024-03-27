@@ -27,7 +27,7 @@
                     <div class="col-md-7 col-7 col-sm-7" style="position: relative; right: 10px;">
                       <div class="course_block_one">
                         <h5 :title="shortenText(branch.name)">{{ shortenText(branch.name, 18) }}</h5>
-                        <p style="margin-top: -8px;" :title="shortenText(branch.description)">
+                        <p :title="shortenText(branch.description)">
                           {{ shortenText(branch.description, 20) }}
                         </p>
                       </div>
@@ -112,7 +112,7 @@ export default {
   opacity: 1;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 300px) {
+@media only screen and (max-width: 768px) and (min-width: 280px) {
 
   .parent_blocks {
     justify-content: center !important;
@@ -131,7 +131,7 @@ export default {
   }
 
   .jk {
-    padding-top: 65px !important;
+    padding-top: 0px !important;
   }
 
 }

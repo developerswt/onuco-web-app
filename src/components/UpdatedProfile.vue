@@ -1,7 +1,7 @@
 <template>
-    <div class="container-fluid jk">
+    <div v-if="isLoggedIn" class="container-fluid jk">
         <div class="container">
-            <div class="learning_block">
+            <div class="learning_block pb-4" >
                 <div class="row">
                     <div class="col-lg-12">
                         <div>
@@ -145,6 +145,14 @@
             </div>
         </div>
     </div>
+    <div v-if="!isLoggedIn">
+        <p style="margin:auto;text-align:center;color:#0177FB;" class="msz mb-4">Please log in to access and update your profile</p>
+
+        <img src="../assets/images/error1.png" class="img-fluid  mx-auto d-block mb-4">
+        <div class="button_block mx-auto text-center">
+            <router-link to="/Login"> <button class="btn btn-primary mb-4" style=" width: 80px;padding: 10px;">Login</button></router-link>
+        </div>
+    </div>
     <Loading v-model:active="isLoading" loader="dots" :color="'#0066CC'" :width="100" :height="100"></Loading>
 </template>
 
@@ -170,6 +178,7 @@ export default {
             userName: '',
             userEmail: '',
             selectedFile: null,
+            
             // isuser: localStorage.getItem("username"),
         }
     },
@@ -473,7 +482,7 @@ input[type="radio"]:checked {
     text-transform: uppercase;
     /* bottom: 0; */
     position: absolute;
-    bottom: -11px;
+    /* bottom: -11px; */
     right: 12px;
     color: White;
 }
@@ -499,8 +508,8 @@ input[type="radio"]:checked {
 
 #new_text {
     position: relative;
-    left: -5px;
-    top: -12px;
+    /* left: -5px;
+    top: -12px; */
 }
 
 .user_profile_details {
@@ -644,7 +653,7 @@ input[type="radio"]:checked {
     #course_button {
         /* bottom: 0; */
         position: absolute;
-        bottom: -6px;
+        /* bottom: -6px; */
         /* right: 12px; */
         color: White;
         left: 10px;
@@ -724,7 +733,7 @@ input[type="radio"]:checked {
     }
 
     .input_file {
-        margin-top: -34px;
+        /* margin-top: -34px; */
         margin-left: 53px;
     }
 }
@@ -926,13 +935,13 @@ input[type="text"] {
 }
 
 @media (max-width:520px) {
-    .learning_block {
+    /* .learning_block {
         padding-bottom: 100px;
-    }
+    } */
 
-    .mm {
+    /* .mm {
         margin-top: -74px;
-    }
+    } */
 
     /* .learning_block {
         padding-top: 70px;
@@ -964,7 +973,7 @@ input[type="text"] {
 
     .input_file {
         position: relative;
-        top: -22px;
+        /* top: -22px; */
         width: 273px;
         left: 40px;
     }

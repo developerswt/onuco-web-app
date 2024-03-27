@@ -105,7 +105,7 @@ export default {
 
 
 <template>
-  <div class="login_class">
+  <div class="login_class pb-4 ">
     <authenticator
 class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms="['username']"
       :form-fields="formFields" :sign-up-attributes="['name',]" :social-providers="['facebook', 'google']">
@@ -192,7 +192,8 @@ class="custom-sign-in jp" :auth-state="authState" :theme=theme :login-mechanisms
 }
 
 .login_class {
-  padding-top: 5%;
+  /* padding-top: 5%; */
+  /* padding-bottom:150px; */
   z-index: 1;
 }
 
