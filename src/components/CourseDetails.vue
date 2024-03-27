@@ -35,11 +35,11 @@ v-if="renderComponent" ref="videoPlayer" class="mobileVideo" :options="videoOpti
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-3 col-6 col-sm-6 col-md-6">
+                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 ">
                                             <p id="duration_text" class="mb-2"><img src="../assets/images/Iconionic-ios-timer@2x.png"> {{ formatDuration(book.videoDemand) }}
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-md-3  col-6 col-sm-6 col-md-6">
+                                        <div class="col-lg-4 col-md-4  col-4 col-sm-4 ">
                                             <p id="module_text" class="mb-2"><img src="../assets/images/Iconmap-school@2x.png">{{ book.modules }}
                                             </p>
                                         </div>
@@ -328,8 +328,7 @@ export default {
             activeName: 'first',
             activeInnerTab: '',
             price:[],
-            book: [],
-            price:[],
+            book: [],    
             videoOptions: {
                 playbackRates: [0.5, 1, 1.5, 2],
                 autoplay: false,
@@ -837,7 +836,7 @@ progress::-webkit-progress-value {
 
 ol {
     margin-top: 0;
-    margin-left: -17px;
+    /* margin-left: -17px; */
     margin-bottom: 1rem;
 }
 
@@ -1226,36 +1225,36 @@ progress {
     width: 171px;
     height: 10px;
     /* background: #fff; */
-    margin-left: -60px;
+    /* margin-left: -60px; */
 }
 
 @media screen and (min-width: 760px) and (max-width: 915px) {
     progress {
-        margin-left: -70px;
+        /* margin-left: -70px; */
     }
 }
 
 @media only screen and (max-width: 550px) {
     progress {
-        margin-left: -120px;
+        /* margin-left: -120px; */
     }
 }
 
 @media only screen and (max-width: 499px) {
     progress {
-        margin-left: -69px;
+        /* margin-left: -69px; */
     }
 }
 
 @media only screen and (max-width: 280px) {
     progress {
-        margin-left: -29px;
+        /* margin-left: -29px; */
     }
 }
 
 @media only screen and (max-width: 1024px) {
     progress {
-        margin-left: -55px;
+        /* margin-left: -55px; */
     }
 }
 
@@ -1472,8 +1471,8 @@ input[type=submit] {
 @media (max-width: 767px) {
 
     .mobileVideo {
-        width: 335px;
-        margin-left: -6%;
+        width: 100%;
+
     }
 
 }
@@ -1481,8 +1480,7 @@ input[type=submit] {
 @media (max-width: 360px) {
 
     .mobileVideo {
-        width: 330px;
-        margin-left: -7%;
+        width: 100%;
     }
 
 }

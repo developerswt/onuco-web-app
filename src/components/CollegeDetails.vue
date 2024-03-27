@@ -15,7 +15,7 @@
             <div class="pt-2">
                 <div v-for="(sem, index) in semester" :key="index" class="row">
                     <div id="main_card" class="card">
-                        <h5 class="card-header">
+                        <h5 class="card-header p-3">
                             <div id="heading-example" :class="index == 0 ? 'd-block kj' : 'collapsed d-block kj'"
                                 data-toggle="collapse" :href="'#collapse-example' + index" aria-expanded="true"
                                 aria-controls="collapse-example">
@@ -254,13 +254,13 @@ export default {
 
 #sem_text {
     color: #707070;
-    margin: 14px -2px;
+    /* margin: 14px -2px; */
 }
 
 #sem_description {
     color: #777777;
     font-size: 13px;
-    margin-top: -11px;
+    /* margin-top: -11px; */
 }
 
 #sem_icon {
@@ -355,7 +355,7 @@ export default {
     }
 
     .jk {
-        padding-top: 82px !important;
+        padding-top: 0px !important;
     }
 
     .kj .action[data-v-723afcf3] {
@@ -365,7 +365,7 @@ export default {
         color: darkblue;
         opacity: 1;
         position: relative;
-        bottom: -11px;
+        /* bottom: -11px; */
     }
 
     #sem_card {
@@ -377,14 +377,14 @@ export default {
     }
 
     #review_text {
-        margin: -3px -2px;
+        /* margin: -3px -2px; */
         color: #828282;
     }
 }
 
 @media only screen and (max-width: 400px) and (min-width: 100px) {
     .row .aa {
-        margin-top: -18px;
+        /* margin-top: -18px; */
     }
 
 }
@@ -430,16 +430,16 @@ export default {
         color: darkblue;
         opacity: 1;
         position: relative;
-        bottom: -11px;
+        /* bottom: -11px; */
     }
 
     #review_text {
-        margin: -3px -2px;
+        /* margin: -3px -2px; */
         color: #828282;
     }
 
     .row .aa {
-        margin-top: -20px;
+        /* margin-top: -20px; */
     }
 
     #sem_card[data-v-723afcf3] {
@@ -465,7 +465,7 @@ export default {
         }
 
         .aa .row {
-            margin-top: -20px;
+            /* margin-top: -20px; */
         }
     }
 
@@ -512,8 +512,8 @@ border-radius: 3%;
 .card-header {
     height: 65px;
     border-bottom: none;
-    padding-left: 15px;
-    padding-top: 2px;
+    /* padding-left: 15px;
+    padding-top: 2px; */
 }
 
 .icon {
@@ -590,7 +590,7 @@ border-radius: 3%;
     bottom: 0px;
     padding: 7px;
     width: 100px;
-    border-radius: -1%;
+    /* border-radius: -1%; */
     font-size: 12px;
 }
 
@@ -603,15 +603,14 @@ border-radius: 3%;
         height: 180px;
         opacity: 1;
         padding: 7%;
-        margin: -17px;
+        /* margin: -17px; */
     }
 
-    .card-header[data-v-723afcf3] {
-        width: 232px;
+    .card-header{
+        width: 100%;
         height: 75px;
         border-bottom: none;
-        padding-left: 15px;
-        padding-top: 2px;
+      
     }
 
     .star-rating span {

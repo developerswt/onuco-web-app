@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="container-fluid footer">
         <div class="container">
             <div class="row">
@@ -53,7 +53,7 @@ src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
                 </router-link>
                 <h2 class="txt" style=" position: relative; right: 0px;">NOTIFICATION</h2>
             </div>
-            <div class="col-md-3" style="color: white;">
+            <div  v-if="userIsSubscribed" class="col-md-3" style="color: white;">
                 <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
                     <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
                         <div class="box">
@@ -81,7 +81,117 @@ src="../assets/images/Icon-awesome-user.png" class="icon"
             </div>
         </div>
     </div>
-</template>
+</template> -->
+
+
+<template>
+    <div class="container-fluid footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <img src="../assets/images/UNUCO_LOGO.png" class="footer-logo">
+            <p style="color:white; padding-top: 5%;">&#169; 2023 onuco.com All rights reserved.</p>
+          </div>
+          <div class="col-md-7 social-link text-right text-white mt-4">
+            <!-- Social links and other info -->
+                   <p style="color:white;">Communities | Courses | Trainers | FAQs | Blog |<router-link
+                            style="text-decoration: none; color: white;" to="/Privacy"> Privacy </router-link> |
+                        <router-link style="text-decoration: none; color: white;" to="/Terms"> Terms and Condition
+                        </router-link>
+                    </p>
+                    <p  style="color:white;">Email: name@example.com Call: 9845098450</p>
+                    <p  style="color:white;">Connect with Us:
+                        <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>&nbsp;
+                        <i class="fa-brands fa-twitter" style="color: #ffffff;"></i>&nbsp;
+                        <i class="fa-brands fa-google" style="color: #ffffff;"></i>
+                    </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid enqiury">
+      <div class="row">
+          
+        <!-- Adjusted alignment for other tabs -->
+        <!-- <div  class="userIsSubscribed ? 'col-md-3' : 'col-md-4'"> -->
+            <div class="col-md-3" style="color:white;">
+                <router-link to="/" exact-active-class="activeButton" @click="setActiveButton('home')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'home' }">
+                        <div class="box">
+                            <img
+                                 src="../assets/images/home.png" class="icon"
+                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                        </div>
+                    </button>
+                </router-link>
+                <h2 class="txt">HOME</h2>
+      
+
+        </div>
+
+        <!-- <div class="userIsSubscribed ? 'col-md-3' : 'col-md-4'"> -->
+            <div class="col-md-3">
+          <!-- "NOTIFICATION" tab content -->
+        
+                <router-link
+                to="/UserNotification" exact-active-class="activeButton"
+                    @click="setActiveButton('UserNotification')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
+                        <div class="box"> 
+                            <img
+                               src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
+                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                        </div>
+                    </button>
+                </router-link>
+                <h2 class="txt" style="position: relative; right: 0px;">NOTIFICATION</h2>
+
+        </div>
+
+
+                           <!-- Render "MY_LEARNING" tab if user is subscribed -->
+        <div class="col-md-3" style="color: white;">
+          <!-- "MY_LEARNING" tab content -->
+
+                <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
+                    <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
+                        <div class="box">
+                            <img
+                                 src="../assets/images/myLEarn.png" class="icon"
+                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                        </div>
+                    </button>
+                </router-link>
+                <h2 class="txt" style="  position: relative; left: 8px;">MY_LEARNING</h2>
+         
+
+        </div>
+
+       
+        <!-- <div class="userIsSubscribed ? 'col-md-3' : 'col-md-4'" style="color: white;" > -->
+        <div class="col-md-3" style="color:white;">
+          <!-- "PROFILE" tab content -->
+  
+                <router-link
+                      to="/UpdatedProfile" exact-active-class="activeButton"
+                    @click="setActiveButton('UpdatedProfile')">
+                    <button class="btn button" :class="{ activeButton: activeButton === 'UpdatedProfile' }">
+                        <div class="box">
+                            <img
+                                src="../assets/images/Icon-awesome-user.png" class="icon"
+                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                        </div>
+                    </button> 
+                </router-link>
+                <h2 class="txt" style="  position: relative; left: 3px;">PROFILE</h2>
+    
+
+        </div>
+      </div>
+    </div>
+  </template>
+  
 
 
 <script>
@@ -90,7 +200,15 @@ export default {
     data() {
         return {
             activeButton: 'home',
+            userIsSubscribed: false,
         };
+    },
+    computed:{
+        
+        isLoggedIn()
+        { 
+            return this.$store.state.isLoggedIn;
+        },
     },
     methods: {
         setActiveButton(button) {
@@ -129,45 +247,43 @@ export default {
     background: transparent 0% 0% no-repeat padding-box;
 }
 
-.footer .col-md-6 {
+/* .footer .col-md-6 {
     text-align: left;
-    padding-left: 10%;
+
 }
 
 .footer .col-md-6 p {
     text-align: left;
     margin-top: 2%;
     color: white;
-}
+} */
 
-.footer .social-link {
+/* .footer .social-link {
     margin-top: 3%;
-}
-
+} */
+/* 
 .footer .social-link p {
     text-align: right;
     color: white;
-}
+} */
 
-@media screen and (max-width: 912px) {
+/* @media screen and (max-width: 912px) {
     .footer .social-link p {
         text-align: left;
         color: white;
     }
-}
+} */
 
 .enqiury {
     background: #EEEAE4;
     background: radial-gradient(at right bottom, #0066CC -15%, #9CCEFF 80%);
     border: 1px solid #F0F6FC;
     display: none;
-    padding-top: 3px;
-    padding-bottom: 3px;
 }
 
 @media screen and (max-width: 520px) {
     .enqiury {
-        display: block;
+        display: block; 
         position: fixed;
         bottom: -1px;
         z-index: 999;
@@ -182,7 +298,7 @@ export default {
     border-radius: 50%;
     display: flex !important;
     position: relative;
-    left: 25px;
+    /* left: 25px; */
 }
 
 .button {
@@ -203,8 +319,8 @@ export default {
 .col-md-3 {
     position: relative;
     width: 23%;
-    padding-right: 15px;
-    padding-left: 15px;
+    /* padding-right: 15px;
+    padding-left: 15px; */
 }
 
 .row {
@@ -213,7 +329,7 @@ export default {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     /* margin-right: -15px; */
-    margin-left: -15px;
+    /* margin-left: -15px; */
 }
 
 @media (min-width:400px)and(max-width:450px) {

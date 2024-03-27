@@ -277,3 +277,10 @@ background-color: #00000029;
   color: #6c757d;
   content: ">";
 }
+
+/* Hide Picture-in-Picture and Show Controls context menu items */
+video::-moz-context-menu-item[pictureinpicture="true"],
+video::-moz-context-menu-item[controlslist="nodownload nofullscreen"],
+video::-webkit-media-controls-picture-in-picture-button {
+    display: none !important;
+}

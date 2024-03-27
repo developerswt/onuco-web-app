@@ -9,18 +9,18 @@
             </h4> 
             
             <div class=" parent_blocks">
-                <div class="row ">
-                    <div v-for="college in university" :key="college.id" class="box">
+                <div class="row ml-3 ">
+                    <div v-for="college in university" :key="college.id" class="box mb-4">
                                                 <router-link :to="{ name: 'Semester', params: { name: college.universityName } }"
                             style="text-decoration: none;">
                             <div class="row">
-                                <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;right: 1px;">
+                                <div class="col-md-3 col-3 col-sm-3" style="color: white; position: relative;" pl-4>
                                     <img class="cb" src="../assets/images/university.png">
                                 </div>
                                 <div class="col-md-7 col-7 col-sm-7" style="position: relative;right: 12px;">
                                     <h5 data-placement="top" :title="college.name">{{ college.name }}</h5>
                                     <p
-style="margin-top: -8px;" :title="college.description"
+ :title="college.description"
                                         v-html="college.description.slice(0, 60)"></p>
                                 </div>
                                 <div class="col-md-2 col-2 col-sm-2">
@@ -102,7 +102,7 @@ export default {
     opacity: 1;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 530px) {
+@media only screen and (max-width: 800px) and (min-width: 530px) {
     .academic_head_text {
         font-size: 16px !important;
         padding: 0 !important;
@@ -129,7 +129,7 @@ export default {
     }
 
     .jk {
-        padding-top: 90px !important;
+        /* padding-top: 90px !important; */
     }
 }
 
@@ -240,7 +240,7 @@ export default {
 }
 
 .parent_block {
-    max-width: 1300px;
+    max-width: 100%;
     /* margin-top: 30px; */
 
 }
@@ -249,16 +249,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-}
-
-.col-md-3 {
-    padding-left: 12px;
-
-}
-
-.col-md-9 {
-    padding-right: 5px;
-    padding-left: 1px;
 }
 
 @media screen and (min-width: 100px) and (max-width: 280px) {
@@ -275,8 +265,8 @@ export default {
 
     .box {
         height: 90px !important;
-        width: 265px !important;
-        padding: 15px !important;
+        width: 100% !important;
+        /* padding: 15px !important; */
 
     }
 
@@ -286,11 +276,6 @@ export default {
 
     .box p {
         font-size: 10px;
-    }
-
-    .col-md-9 {
-        padding-right: 0px !important;
-        padding-left: 0px !important;
     }
 
 }
@@ -315,13 +300,9 @@ export default {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -2px !important;
+
 }
 
-    /* .jk {
-        margin-bottom: 61px;
-    } */
 }
 .desc{
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-segoe-ui);
@@ -340,7 +321,13 @@ opacity: 1;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+}
+
+@media only screen and (min-width:280px) and (max-width:1280px)
+{
+    .cb1{
+        display:none;
+    }
+
 }
 </style>

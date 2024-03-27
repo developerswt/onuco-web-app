@@ -478,15 +478,15 @@ export default {
 
 <style scoped>
 .jk {
-    padding-top: 0%;
+    padding-top: 0px;
     background: #EFF5FC 0% 0% no-repeat padding-box;
     opacity: 1;
 }
 
-@media only screen and (max-width: 600px) and (min-width: 100px) {
-    .jk {
-        padding-top: 22%;
-    }
+@media only screen and (max-width: 600px) and (min-width: 280px) {
+    /* .jk {
+        padding-top: 0px;
+    } */
 
     ::v-deep #sub_text {
         text-align: left;
@@ -494,9 +494,9 @@ export default {
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
+    /* .jk {
         padding-top: 10%;
-    }
+    } */
 
     ::v-deep #sub_text {
         text-align: left;
@@ -505,9 +505,9 @@ export default {
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 650px) {
-    .jk {
+    /* .jk {
         padding-top: 10%;
-    }
+    } */
 
     ::v-deep #sub_text {
         text-align: left;
@@ -559,8 +559,8 @@ export default {
 
 .professor-name .btn-group {
     float: right;
-    margin-top: 10%;
-    margin-right: -5%;
+    /* margin-top: 10%; */
+
 }
 
 .professor-name .btn-group {
@@ -670,33 +670,33 @@ export default {
     text-align: left;
 }
 
-.round_class {
+/* .round_class {
     height: 20px;
     width: 20px;
     background: orange;
     border-radius: 50%;
     margin-left: 14px;
 
-}
+} */
 
-::v-deep .line_class {
+/* ::v-deep .line_class {
     width: 2px;
     height: auto;
     background: #0177FB;
     position: relative;
     top: 18px;
-    left: -16px;
+
     margin-bottom: 18px;
 
-}
+} */
 
-::v-deep #row_block {
+/* ::v-deep #row_block {
     padding-left: 15px;
-}
+} */
 
 ::v-deep .row_class {
     display: flex;
-    margin-top: -3px;
+    /* margin-top: -3px; */
 }
 
 ::v-deep #education_text {
@@ -821,7 +821,7 @@ export default {
 
     }
 
-    ::v-deep #row_block {
+    /* ::v-deep #row_block {
         margin-top: -30px;
         padding: 27px;
         text-align: left;
@@ -831,7 +831,7 @@ export default {
         margin-top: -30px;
         padding: 30px 15px;
         text-align: left;
-    }
+    } */
 
     .Sub_paragraph,
     .research_inner_block p,
@@ -859,9 +859,9 @@ export default {
         margin-bottom: 0;
     }
 
-    #row_block {
+    /* #row_block {
         margin-top: 15px;
-    }
+    } */
 
     ::v-deep #education_text {
         font-size: 18px;
@@ -870,7 +870,7 @@ export default {
 
 .course_text {
     font-size: 20px;
-    margin-top: -15px;
+ 
 }
 
 @media (max-width: 600px) {
@@ -940,7 +940,7 @@ export default {
 .carousel__slide {
     scroll-snap-stop: auto;
     flex-shrink: 0;
-    margin: -2px;
+   
     position: relative !important;
     display: flex;
     justify-content: center;
@@ -981,7 +981,7 @@ export default {
         border-radius: 4%;
         text-align: left;
         position: relative;
-        left: -31px !important;
+
     }
 }
 
@@ -1016,7 +1016,7 @@ export default {
 }
 
 .Ratings_button_block {
-    margin-left: 123%;
+    /* margin-left: 123%; */
     cursor: pointer;
 }
 
