@@ -318,14 +318,10 @@ export default {
     font-weight: bold;
 }
 
-#sem_description {
-    font-size: 12px;
-}
-
 @media only screen and (max-width: 600px) and (min-width: 100px) {
     #sem_text {
         font-size: 13px;
-        margin: 4px -2px 11px;
+        /* margin: 4px -2px 11px; */
     }
 
     #sem_description {
