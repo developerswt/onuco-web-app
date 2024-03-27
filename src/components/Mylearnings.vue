@@ -1,5 +1,8 @@
 <template>
-   <MyCarousel />
+    <div v-if="userIsSubscribed">
+        <MyCarousel />
+    </div>
+
     <div v-if="userIsSubscribed" class="container-fluid jk mb-5">
         <div class="container jk mb-4">
             <!-- <div class="learning_block">

@@ -149,6 +149,7 @@ export default {
         }
     },
     computed: {
+        // eslint-disable-next-line vue/no-dupe-keys
         semester() {
             // Filter semesters based on availability of courses
             return this.semester.filter(sem => this.filteredCourses(sem.id).length > 0);

@@ -111,27 +111,27 @@ src="../assets/images/Icon-awesome-user.png" class="icon"
     </div>
   
     <div class="container-fluid enqiury">
-      <div class="row">
+      <div class="row ">
           
         <!-- Adjusted alignment for other tabs -->
         <!-- <div  class="userIsSubscribed ? 'col-md-3' : 'col-md-4'"> -->
-            <div class="col-md-3" style="color:white;">
+            <div class="col-md-3 text-center" style="color:white;">
                 <router-link to="/" exact-active-class="activeButton" @click="setActiveButton('home')">
                     <button class="btn button" :class="{ activeButton: activeButton === 'home' }">
                         <div class="box">
                             <img
-                                 src="../assets/images/home.png" class="icon"
-                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                                 src="../assets/images/home.png" class="icon mx-auto"
+                                style="width: 15px; height: 15px; position: relative;">
                         </div>
                     </button>
                 </router-link>
-                <h2 class="txt">HOME</h2>
+                <h2 class="txt mx-auto" style="position: relative;">HOME</h2>
       
 
         </div>
 
         <!-- <div class="userIsSubscribed ? 'col-md-3' : 'col-md-4'"> -->
-            <div class="col-md-3">
+            <div class="col-md-3 text-center">
           <!-- "NOTIFICATION" tab content -->
         
                 <router-link
@@ -140,37 +140,37 @@ src="../assets/images/Icon-awesome-user.png" class="icon"
                     <button class="btn button" :class="{ activeButton: activeButton === 'UserNotification' }">
                         <div class="box"> 
                             <img
-                               src="../assets/images/Icon-ionic-ios-notifications.png" class="icon"
-                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                               src="../assets/images/Icon-ionic-ios-notifications.png" class="icon mx-auto"
+                                style="width: 15px; height: 15px; position: relative;">
                         </div>
                     </button>
                 </router-link>
-                <h2 class="txt" style="position: relative; right: 0px;">NOTIFICATION</h2>
+                <h2 class="txt mx-auto" style="position: relative;">NOTIFICATION</h2>
 
         </div>
 
 
                            <!-- Render "MY_LEARNING" tab if user is subscribed -->
-        <div class="col-md-3" style="color: white;">
+        <div class="col-md-3 text-center" style="color: white;">
           <!-- "MY_LEARNING" tab content -->
 
                 <router-link to="/Mylearnings" exact-active-class="activeButton" @click="setActiveButton('Mylearnings')">
                     <button class="btn button " :class="{ activeButton: activeButton === 'Mylearnings' }">
                         <div class="box">
                             <img
-                                 src="../assets/images/myLEarn.png" class="icon"
-                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                                 src="../assets/images/myLEarn.png" class="icon mx-auto"
+                                style="width: 15px; height: 15px; position: relative;">
                         </div>
                     </button>
                 </router-link>
-                <h2 class="txt" style="  position: relative; left: 8px;">MY_LEARNING</h2>
+                <h2 class="txt mx-auto" style="  position: relative;">MY_LEARNING</h2>
          
 
         </div>
 
        
         <!-- <div class="userIsSubscribed ? 'col-md-3' : 'col-md-4'" style="color: white;" > -->
-        <div class="col-md-3" style="color:white;">
+        <div class="col-md-3 text-center" style="color:white;">
           <!-- "PROFILE" tab content -->
   
                 <router-link
@@ -180,11 +180,11 @@ src="../assets/images/Icon-awesome-user.png" class="icon"
                         <div class="box">
                             <img
                                 src="../assets/images/Icon-awesome-user.png" class="icon"
-                                style="width: 15px; height: 15px; position: relative;bottom: 2px;">
+                                style="width: 15px; height: 15px; position: relative;">
                         </div>
                     </button> 
                 </router-link>
-                <h2 class="txt" style="  position: relative; left: 3px;">PROFILE</h2>
+                <h2 class="txt mx-auto" style="  position: relative;">PROFILE</h2>
     
 
         </div>
@@ -305,7 +305,7 @@ export default {
     /* padding: 6px; */
     text-decoration: none;
     display: flex !important;
-    margin: 1px 2px;
+    margin: 0px 20px;
     cursor: pointer;
 }
 
@@ -313,7 +313,7 @@ export default {
     font-family: Segoe UI;
     font-size: 11px;
     color: #FFFFFF;
-    text-align: right;
+    text-align: center;
 }
 
 .col-md-3 {
