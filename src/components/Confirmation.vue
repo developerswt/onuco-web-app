@@ -71,6 +71,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999; /* Ensure a high z-index value to appear above other elements */
+
 }
 
 .dialog {

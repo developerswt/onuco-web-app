@@ -17,12 +17,12 @@
               <span class="title">Add / Update</span>
             </div>
           </li>
-          <!-- <li>
-            <div class="sidebar-item" @click="selectContent('viewDetails')">
+          <li>
+            <div v-if="isUserfaculty" class="sidebar-item" @click="selectContent('viewDetails')">
               <span class="icon"><i class="fa fa-eye"></i></span>
               <span class="title">View Details</span>
             </div>
-          </li> -->
+          </li>
           <li>
             <div v-if="isUserAdmin || isUserSuperadmin" class="sidebar-item">
               <span id="dropdownMenuButton" class="icon user" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">

@@ -4,6 +4,9 @@
      <div class="card-head">
        <header>Add Best Faculty</header>
      </div>
+     <div class="file text-right">
+        <button v-on:click="onBtnExport()">Download Excel File</button>
+      </div>
      <div class="card-body">
         <div style="padding: 20px;">
 
@@ -67,6 +70,15 @@ import { AgGridVue } from "ag-grid-vue3";
 import Confirmation from './Confirmation.vue';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { CsvExportModule } from "@ag-grid-community/csv-export";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { ModuleRegistry } from "@ag-grid-community/core";
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  CsvExportModule,
+  MenuModule,
+]);
 
 export default {
   name: "OrdersPage",
@@ -204,6 +216,7 @@ export default {
     //  onRowDataA() {
     //    this.gridApi.setRowData(colors);
     //  },
+   
     onBtnExport() {
       this.gridApi.exportDataAsCsv();
     },
@@ -444,7 +457,7 @@ button {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 10px 25px;
+  padding: 11px 23px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -559,4 +572,9 @@ button:hover {
    left: 22px;
    top: 11px;
 }
+.file{
+  position: relative;
+    right: 40px;
+    top: 30px;
+  }
 </style>

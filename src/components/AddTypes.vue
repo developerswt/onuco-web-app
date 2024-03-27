@@ -224,6 +224,7 @@
        async addBranch() {
          this.isLoading = true;
        try {
+        
          const response = await AxiosInstance.post(`/Types`, this.newBranch);
          this.ismodel = true; 
          if (response.status === 200) {

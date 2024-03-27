@@ -263,6 +263,9 @@ async updateProduct(id) {
 async addBranch() {
   this.isLoading = true;
   try {
+    if (!this.isKebabCase(this.newBranch.semesterName)) {
+      throw new Error("Course Route Name must be in kebab case.");
+    }
     const response = await AxiosInstance.post(`/Semester`, this.newBranch);
     this.ismodel = true; 
     await this.loadData();

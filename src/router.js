@@ -115,7 +115,8 @@ Hub.listen("auth", async data => {
     localStorage.setItem("username", user.signInUserSession.idToken.jwtToken.payload); 
     const previousRoute = sessionStorage.getItem('previousRoute');
     if (previousRoute) {
-      router.push(previousRoute); // Navigate to the previously visited page
+     // router.push(previousRoute); // Navigate to the previously visited page
+     router.push({ path: '/' });
     } else {
       router.push({ path: '/' }); // Redirect to the home page
     }
@@ -138,7 +139,7 @@ const routes = [
   },
   {
     path: "/Mylearnings",
-    name: "Mylearning",
+    name: "My Learning",
     component: Mylearnings,
     meta: {
       title: 'Unoco Application',
@@ -185,6 +186,14 @@ const routes = [
         title: '',
     },
   },
+  // {
+  //   path: "/Announcement",
+  //   name: "Announcement",
+  //   component: Errortwo,
+  //   meta: {
+  //       title: '',
+  //   },
+  // },
   
   {
     path: "/Academia/:name",

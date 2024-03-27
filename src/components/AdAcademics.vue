@@ -5,12 +5,15 @@
         <div class="card-box">
           <div class="card-head">
             <header>Total Academics Details</header>
+            <div class="file text-right">
+                  <button v-on:click="onBtnExport()">Download Excel File</button>
+            </div>
             <div class="card-body ">
               <div style="padding: 20px;">
                 <div class="example-wrapper">
                   <div style="height: 100%;">
                     <ag-grid-vue
-:dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
+                      :dom-layout="domLayout" class="ag-theme-alpine" :column-defs="columnDefs"
                       :row-data="rowData" :edit-type="editType" :row-selection="rowSelection"
                       :default-col-def="defaultColDef" :suppress-excel-export="true" :popup-parent="popupParent"
                       cache-quick-filter=true :pagination="true" :pagination-page-size="paginationPageSize"
@@ -36,7 +39,15 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue3";
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { CsvExportModule } from "@ag-grid-community/csv-export";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { ModuleRegistry } from "@ag-grid-community/core";
+ModuleRegistry.registerModules([
+ClientSideRowModelModule,
+CsvExportModule,
+MenuModule,
+]);
 export default {
   name: "OrdersPage",
   components: {
@@ -103,12 +114,14 @@ export default {
       this.isLoading = false;
     }
   },
-  methods: {
-    onLogOut() {
-      this.$store.commit('isLoggedIn', false);
-      this.$router.push('/Loginpage');
+  methods:{
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
     },
-  },
+    onGridReady(params) {
+    this.gridApi = params.api;
+    },
+  }
 };
 </script>
 
@@ -248,4 +261,18 @@ button:hover {
   font-size: 17px;
   letter-spacing: 1px;
 }
+.file{
+  position: relative;
+    right: 40px;
+    top: 20px;
+  }
+  button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 3px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 </style>

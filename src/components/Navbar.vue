@@ -11,7 +11,7 @@
             </el-icon>
             <el-row v-if="showSearchBox && showSearchBoxOnNavbar" class="demo-autocomplete search2" style="width: 280px; position: relative; right: 9px;">
                 <el-col :span="23">
-                    <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false" value-key="title" size="large" style="background-color: blue; font-size: 12px; position: relative;left: 52px;" class="w-100 search" clearable placeholder="Search..." @select="handleSelect" @keydown.enter="handleKeyEnter(searchTerm)">
+                    <el-autocomplete v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false" value-key="title" size="large" style="background-color: blue; font-size: 12px; border-radius: 3px; position: relative;left: 52px;" class="w-100 search" clearable placeholder="Search..." @select="handleSelect" @keydown.enter="handleKeyEnter(searchTerm)">
                         <template #suffix>
                             <el-icon class="el-input__icon" style="color: blue; cursor: pointer;" @click="handleKeyEnter(searchTerm)">
                                 <Search />
@@ -27,8 +27,7 @@
                     </li>
                     <li class="nav-item" :class="{ 'active': isActive('/Mylearnings') }">
                         <router-link v-if="isLoggedIn" class="nav-link" to="/Mylearnings">My Learning</router-link>
-                    </li>
-
+                    </li>                   
                     <li class="nav-item" :class="{ 'active': isActive('/Courses') || isActiveAcademia()}">
                         <router-link class="nav-link" to="/Courses">Courses</router-link>
 
@@ -52,7 +51,7 @@
                         <el-col :span="23">
                             <el-autocomplete   v-if="showSearchBar"
 v-model="searchTerm" :fetch-suggestions="querySearch" :trigger-on-focus="false"
-                                value-key="title" size="large" style="background-color: blue; font-size: 12px;"
+                                value-key="title" size="large" style="background-color: blue; font-size: 12px; border-radius: 8px;"
                                 class=" w-100  search" clearable placeholder="Search..." @select="handleSelect"
                                 @keydown.enter.prevent="handleKeyEnter(searchTerm)">
                                 <template #suffix>

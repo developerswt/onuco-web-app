@@ -171,9 +171,6 @@ export default {
       this.breadcrumbKey += 1;
     },
 
-
-
-
     getBreadcrumbLabel(route) {
       if (route.path.includes('/:')) {
         const urlPath = window.location.pathname;

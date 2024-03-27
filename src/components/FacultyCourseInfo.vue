@@ -11,6 +11,9 @@
                         <button class="btn1 btn-primary" @click="onFilterButtonClick">Search</button>
                         <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
                     </div>
+                    <div class="file text-right">
+                        <button  v-if="hasSearched" class="btn3" v-on:click="onBtnExport()">Download Excel File</button>
+                    </div>
                     <div class="card-body " style="padding: 0px 30px 30px 30px;">
                         <div class="example-wrapper">
                             <div style="height: 100%;">
@@ -43,6 +46,15 @@ import {
 import AxiosInstance from '../config/axiosInstance';
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { CsvExportModule } from "@ag-grid-community/csv-export";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { ModuleRegistry } from "@ag-grid-community/core";
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  CsvExportModule,
+  MenuModule,
+]);
 
 export default {
     name: "AdSem",
@@ -159,6 +171,15 @@ export default {
     },
 
     methods: {
+
+        onGridReady(params) {
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+    },
+
+    onBtnExport() {
+      this.gridApi.exportDataAsCsv();
+    },
 
         onFilterButtonClick() {
             this.filterText = this.filterText.trim();
@@ -317,7 +338,7 @@ export default {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
-    padding: 3px 19px;
+    padding: 3px 22px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -372,4 +393,18 @@ button:hover {
     left: 22px;
     top: 25px;
 }
+.file{
+  position: relative;
+    right: 40px;
+    bottom: 20px;
+  }
+  .btn3{
+    color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 5px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  }
 </style>

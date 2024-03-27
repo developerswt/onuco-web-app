@@ -5,6 +5,9 @@
           <div class="card-box">
             <div class="card-head">
               <header>Faculty Payment Details</header>
+              <div class="file text-right">
+                  <button v-on:click="onBtnExport()">Download Excel File</button>
+            </div>
               <div class="card-body ">
                 <div style="padding: 20px;">
                   <div class="example-wrapper">
@@ -98,6 +101,15 @@
   import Loading from 'vue3-loading-overlay';
   import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
   import moment from 'moment';
+  import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+  import { CsvExportModule } from "@ag-grid-community/csv-export";
+  import { MenuModule } from "@ag-grid-enterprise/menu";
+  import { ModuleRegistry } from "@ag-grid-community/core";
+  ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  CsvExportModule,
+  MenuModule,
+  ]);
   
   export default {
     name: "OrdersPage",
@@ -188,14 +200,20 @@
   
     }, 
     methods:{
-      dateFormat(params) {
-     let value = params.data.paymentDate;
-     console.log(value);
-     if (value) {
-       return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
-     }
-   },
-    }
+        dateFormat(params) {
+          let value = params.data.paymentDate;
+          console.log(value);
+          if (value) {
+            return moment(String(value)).format('DD/MM/YYYY T HH:mm:ss');
+          }
+        },
+        onBtnExport() {
+          this.gridApi.exportDataAsCsv();
+        },
+        onGridReady(params) {
+          this.gridApi = params.api;
+        },
+      }
   };
   
   
@@ -445,5 +463,19 @@
       line-height: 17px;
       font-size: 17px;
       letter-spacing: 1px;
+  }
+  .file{
+  position: relative;
+    right: 42px;
+    top: 22px;
+  }
+  button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 3px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
   </style>

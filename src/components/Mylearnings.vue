@@ -140,7 +140,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div v-if="videoOptions.sources.length > 0" class="video_block mb-4 mt-2">
-                                                    <video-player v-if="renderComponent" ref="videoPlayer" :options="videoOptions" :is-subscribed="userIsSubscribed" />
+                                                    <video-player v-if="renderComponent" :options="getVideoOptions(item.videoUrl)" :is-subscribed="userIsSubscribed" />
                                                 </div>
                                             </div>
                                         </div>

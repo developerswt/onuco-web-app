@@ -11,12 +11,16 @@
                 <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
               </div>
           </div>
+            <div class="file text-right">
+                <button  v-if="hasSearched" v-on:click="onBtnExport()">Download Excel File</button>
+            </div>
           <div class="card-body">
             <div style="padding: 20px;">
               <div class="example-wrapper">
                 <div style="height: 100%;">
                   <ag-grid-vue
                     v-if="hasSearched"
+                    :suppressExcelExport="true"
                     :dom-layout="domLayout"
                     class="ag-theme-alpine"
                     :column-defs="columnDefs"
@@ -37,7 +41,7 @@
                 </div>
               </div>
               <el-button class="btn1" @click="toggleForm">{{ formVisible ? 'Add New' : 'Add New' }}</el-button>
-                <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '740px' }">
+                <el-dialog v-model="formVisible" class="fdata" title="Add Faculty Payment Details" :width="'470px'" :style="{ 'height': '775px' }">
                   <el-form ref="form" :model="newBranch" label-position="top" class="frm"> 
                     <p><b></b> {{ newBranch.id }}</p>
                     <el-form-item label="UserCourse Subscription Id:" prop="userCourseSubscriptionId" >
@@ -49,12 +53,16 @@
                     <el-form-item label="Payment Date:" prop="paymentDate" >
                       <datepicker v-model="newBranch.paymentDate" type="datetime"></datepicker>
                     </el-form-item>
-                    <el-form-item label="Amount Paid:" prop="amountPaid" >
-                      <el-input v-model="newBranch.amountPaid"></el-input>
+                    <el-form-item label="Amount Paid:" prop="amountPaid">
+                        <el-input v-model.number="newBranch.amountPaid" :min="0"></el-input>
+                        <span v-if="newBranch.amountPaid < 0" style="color: red;">Amount cannot be negative.</span>
                     </el-form-item>
-                    <el-form-item label="Balance Amount:" prop="balanceAmount" >
-                      <el-input v-model="newBranch.balanceAmount"></el-input>
+                    <el-form-item label="Balance Amount:" prop="balanceAmount">
+                        <el-input v-model.number="newBranch.balanceAmount" :min="0"></el-input>
+                        <span v-if="newBranch.balanceAmount < 0" style="color: red;">Amount cannot be negative.</span>
+                        <span v-else-if="newBranch.balanceAmount > newBranch.amountPaid" style="color: red;">Balance Amount can't be greater than Paid Amount.</span>
                     </el-form-item>
+
                     <el-form-item label="Mode Of Pay:" prop="modeofPay" >
                       <el-input v-model="newBranch.modeofPay"></el-input>
                     </el-form-item>
@@ -142,7 +150,16 @@
     import Loading from 'vue3-loading-overlay';
     import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
     import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css'
+    import '@vuepic/vue-datepicker/dist/main.css';
+    import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+    import { CsvExportModule } from "@ag-grid-community/csv-export";
+    import { MenuModule } from "@ag-grid-enterprise/menu";
+    import { ModuleRegistry } from "@ag-grid-community/core";
+    ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    CsvExportModule,
+    MenuModule,
+    ]);
     
     export default {
      name: "OrdersPage",
@@ -166,7 +183,7 @@
            amountPaid: '',
            balanceAmount: '',
            modeofPay: '',
-           isActive: '',
+           isActive: '1',
           },
          formVisible: false,
          userName: '',
@@ -316,21 +333,20 @@
                 this.ismodel = true;
             },
     
-       onCellValueChanged(event) {
-        console.log(event);
-       },
-       onGridReady(params) {
-         this.gridApi = params.api;
-         this.gridColumnApi = params.columnApi;
-       },
-    
+            onCellValueChanged(event) {
+                console.log(event);
+            },
+            onGridReady(params) {
+                this.gridApi = params.api;
+                this.gridColumnApi = params.columnApi;
+            },
+            
             onBtnExport() {
                 this.gridApi.exportDataAsCsv();
             },
             onFilterTextBoxChanged() {
                 this.gridApi.setQuickFilter(
-                    document.getElementById('filter-text-box').value
-                );
+                document.getElementById('filter-text-box').value );
             },
             onPrintQuickFilterTexts() {
                 this.gridApi.forEachNode(function (rowNode, index) {
@@ -380,45 +396,59 @@
        async addBranch() {
          this.isLoading = true;
          try {
-           const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
-           console.log(response);
-           this.ismodel = true;
-           await this.getdata();
-             console.log(" added successfully");
-            
-            //  this.gridApi.refreshCells({ force: true });
-             this.toggleForm();
-             this.$refs.Confirmation.open("Payment Details Added successfully.");
-             this.$refs.Confirmation.showOKButton = true;
-             this.$refs.Confirmation.showCancelButton = false;
-             this.newBranch.userCourseSubscriptionId='';
-             this.newBranch.facuiltyCognitoId= '';
-             this.newBranch.paymentDate= '';
-             this.newBranch.amountPaid= '';
-             this.newBranch.balanceAmount= '';
-             this.newBranch.modeofPay= '';
-             this.newBranch.isActive= '';
-           
-       } catch (error) {
-           this.isLoading = false;
-           console.error("Error adding branch:", error);
-           this.$refs.Confirmation.open("Error Adding Payment Details.");
-           this.$refs.Confirmation.showOKButton = true;
-            this.$refs.Confirmation.showCancelButton = false;
-           this.newBranch.userCourseSubscriptionId='';
-             this.newBranch.facuiltyCognitoId= '';
-             this.newBranch.paymentDate= '';
-             this.newBranch.amountPaid= '';
-             this.newBranch.balanceAmount= '';
-             this.newBranch.modeofPay= '';
-             this.newBranch.isActive= '';
-        }
-         finally {
-           this.isLoading = false;
-           this.formVisible = false;
-    
+                if (this.newBranch.amountPaid < 0) 
+                {
+                    this.$refs.Confirmation.open("Amount cannot be negative.");
+                    return;
                 }
-            },
+                if (this.newBranch.balanceAmount < 0) 
+                {
+                    this.$refs.Confirmation.open("Balance Amount cannot be negative.");
+                    return;
+                }
+                if (this.newBranch.balanceAmount > this.newBranch.amountPaid)
+                {
+                    this.$refs.Confirmation.open("Balance Amount cannot be greater than Amount Paid.");
+                    return;
+                }
+                const response = await AxiosInstance.post('/FacultyCourseSubscriptionPayment', this.newBranch);
+                console.log(response);
+                this.ismodel = true;
+                await this.getdata();
+                console.log(" added successfully");
+            
+                //  this.gridApi.refreshCells({ force: true });
+                this.toggleForm();
+                this.$refs.Confirmation.open("Payment Details Added successfully.");
+                this.$refs.Confirmation.showOKButton = true;
+                this.$refs.Confirmation.showCancelButton = false;
+                this.newBranch.userCourseSubscriptionId='';
+                this.newBranch.facuiltyCognitoId= '';
+                this.newBranch.paymentDate= '';
+                this.newBranch.amountPaid= '';
+                this.newBranch.balanceAmount= '';
+                this.newBranch.modeofPay= '';
+                this.newBranch.isActive= '1';
+           
+            } catch (error) {
+                this.isLoading = false;
+                console.error("Error adding branch:", error);
+                this.$refs.Confirmation.open("Error Adding Payment Details.");
+                this.$refs.Confirmation.showOKButton = true;
+                this.$refs.Confirmation.showCancelButton = false;
+                this.newBranch.userCourseSubscriptionId='';
+                this.newBranch.facuiltyCognitoId= '';
+                this.newBranch.paymentDate= '';
+                this.newBranch.amountPaid= '';
+                this.newBranch.balanceAmount= '';
+                this.newBranch.modeofPay= '';
+                this.newBranch.isActive= '1';
+            }
+            finally {
+                this.isLoading = false;
+                this.formVisible = false;
+            }
+        },
     
             async deleteUserSubscription() {
                 try {
@@ -620,7 +650,7 @@
         max-width: 400px;
         margin: 0 auto;
         margin-bottom: 80px;
-        height: 609px;
+        height: 650px;
     }
     
     label {
@@ -640,7 +670,7 @@
         color: #fff;
         background-color: #007bff;
         border-color: #007bff;
-        padding: 11px 25px;
+        padding: 10px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -785,5 +815,10 @@
         position: relative;
         left: 22px;
         top: 20px;
+    }
+    .file{
+        position: relative;
+        right: 41px;
+        top: 22px;
     }
     </style>
