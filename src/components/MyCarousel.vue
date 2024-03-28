@@ -75,9 +75,9 @@
   }
   
   @media (max-width: 540px) {
-    .carousel_header {
+    /* .carousel_header {
       padding-top: 20%;
-    }
+    } */
     .img-fluid {
       height: 150px; /* Adjust the height as needed */
     }

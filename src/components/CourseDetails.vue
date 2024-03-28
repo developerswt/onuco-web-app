@@ -770,7 +770,7 @@ progress {
     appearance: none;
 
     width: 200px;
-    height: 20px;
+    height: 8px;
     border-radius: 20px;
     border: 1px solid #434343;
 }
@@ -1223,7 +1223,7 @@ ol {
 progress {
     border: none;
     width: 171px;
-    height: 10px;
+    height: 7px;
     /* background: #fff; */
     /* margin-left: -60px; */
 }

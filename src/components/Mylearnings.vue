@@ -484,7 +484,7 @@ progress {
     appearance: none;
 
     width: 200px !important;
-    height: 20px;
+    height: 8px;
     border-radius: 20px;
 
 }

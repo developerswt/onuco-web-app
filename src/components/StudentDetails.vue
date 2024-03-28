@@ -7,7 +7,7 @@
             <header>Student Info Details</header>
             <div class="filter-box">
               <span for="filter-text-box">Search Here : </span>
-              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Name/E-mail Id/Phone Number" />
+              <input class="search-box" id="filter-text-box" v-model="filterText" type="text" placeholder="Search By Student Name/E-mail/Phone Number/Course Name" />
               <button class="btn btn-primary" @click="onFilterButtonClick">Search</button>
               <p v-if="showRequiredMessage" style="color: red;">Input field is required.</p>
             </div>
@@ -108,6 +108,7 @@ export default {
     AgGridVue,
     Loading,
     Confirmation,
+    // eslint-disable-next-line vue/no-unused-components
     Datepicker,
 
   },
@@ -138,6 +139,7 @@ export default {
   { headerName: 'Start Date', field: 'startdate', valueFormatter: this.dateFormat.bind(this), filterType: 'date' },
   { headerName: 'End Date', field: 'enddate', valueFormatter: this.dateFormats.bind(this), filterType: 'date' } // Adjusted to use the same date format function for both 'Start Date' and 'End Date'
 ],
+      // eslint-disable-next-line no-dupe-keys
       gridApi: null,
       defaultColDef: { sortable: true, filter: true, width: 200, resizable: true, applyMiniFilterWhileTyping: true },
       columnApi: null,
@@ -211,8 +213,8 @@ export default {
       this.rowData = this.Orders.filter(order => {
         const lowerCaseFilter = this.filterText.toLowerCase();
         const includescourseName = order.courseName.toLowerCase().includes(lowerCaseFilter);
-        const includesuserName = order.userName.toLowerCase() === lowerCaseFilter;
-        const includese_mailId = order.e_mailId.toLowerCase() === lowerCaseFilter;
+        const includesuserName = order.userName.toLowerCase().includes(lowerCaseFilter);
+        const includese_mailId = order.e_mailId.toLowerCase().includes(lowerCaseFilter);
         const includesphone_Number = order.phone_Number;
 
         return includescourseName || includesuserName || includese_mailId || includesphone_Number ;
